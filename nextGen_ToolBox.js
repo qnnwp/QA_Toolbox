@@ -1,19 +1,4 @@
 /*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, window, document */
-/*----------------------------------------
-version: 3.1.6
-----------------------------------------
-CHANGE LOG
-2/7/2017
-- Created "Advanced Settings" for WebPageTest Settings
-- Updated name of toolbar to "NextGen Migration Toolbar"
-2/6/2017
-- Removed Core Page highlight from Navigation Checker Tool
-- Updated "Opens in a new window" code
-    a. Site links now use a custom name to open in a new window
-2/2/2017
-- Removed mobile from web page test tool
-- Updated core.txt file to only inlcude a select few pages
-----------------------------------------*/
 
 var cm = unsafeWindow.ContextManager,
     em = unsafeWindow.editMode,
@@ -294,6 +279,43 @@ if (!em && sv && !pw) {
             jQuery(this).remove();
         }
     });
+
+    // ---------------------------------------- old page checker ----------------------------------------
+
+//    var $opc_butt = jQuery('<button>').attr({
+//        class: 'myEDOBut',
+//        id: 'oldPageChecker',
+//        title: 'Old Page Checker'
+//    }).text('Old Page Checker');
+//
+//    // read data from file
+//    jQuery.get("https://media-dmg.assets-cdk.com/teams/repository/export/166/c0290a0c2100582d00050568ba825/166c0290a0c2100582d00050568ba825.txt", function (data) {
+//        // create array seperating each 'page' by the '-=-='
+//        data = data.replace(/\r?\n|\r/g, '');
+//        corePages = data.split('-=-=');
+//
+//        /* ----------------------------------------
+//        // loop through each subnav item and compare href to core page value
+//        $subNavMenuItems.each(function (index, subnavItem) {
+//            var z = 0,
+//                cpLength = corePages.length,
+//                subNavLink = jQuery(subnavItem).find('a'),
+//                href = jQuery(subnavItem).find('a').attr('href');
+//
+//
+//            for (z; z < cpLength; z++) {
+//                href = href.toLowerCase();
+//                var corePage = corePages[z].toLowerCase();
+//
+//                // if match is found highlight sub nav item
+//                if (href.indexOf(corePage) >= 0) {
+//                    jQuery(subNavLink).addClass('corePage');
+//                    continue;
+//                }
+//            }
+//        });
+//        ---------------------------------------- */
+//    });
 
     // ---------------------------------------- image checker ----------------------------------------
 
@@ -1077,6 +1099,7 @@ if (!em && sv && !pw) {
         .append($sn_butt)
         .append($ic_butt)
         .append($lc_butt)
+        .append($opc_butt)
         .append($af_butt)
         .append($sc_butt)
         .append($404checker_butt)
