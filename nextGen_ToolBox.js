@@ -9,7 +9,7 @@ var cm = unsafeWindow.ContextManager,
     pw = ispw();
 
 function ispw() {
-    "use strict";
+    'use strict';
     if (jQuery('body .phone-wrapper').length > 0) {
         return true;
     } else {
@@ -18,7 +18,7 @@ function ispw() {
 }
 
 function applyParameters(isNextGen) {
-    "use strict";
+    'use strict';
     console.log('inside applyParameters');
     console.log(isNextGen);
     if ((isNextGen) && (cmv !== 'LIVE')) {
@@ -110,19 +110,19 @@ if (!em && sv && !pw) {
         padding: '5px 0',
         color: '#000000'
     }).text(wID).hover(function () {
-        "use strict";
+        'use strict';
         jQuery(this).css({
             background: '#f4f4f4'
         });
     }, function () {
-        "use strict";
+        'use strict';
         jQuery(this).css({
             'background': '#ffffff'
         });
     });
 
     jQuery($wid).click(function () {
-        "use strict";
+        'use strict';
         var webID = jQuery(this).html();
         new GM_setClipboard(webID, 'text');
     });
@@ -137,19 +137,19 @@ if (!em && sv && !pw) {
         padding: '5px 0',
         color: '#000000'
     }).text(pn).hover(function () {
-        "use strict";
+        'use strict';
         jQuery(this).css({
             background: '#f4f4f4'
         });
     }, function () {
-        "use strict";
+        'use strict';
         jQuery(this).css({
             'background': '#ffffff'
         });
     });
 
     jQuery($pn).click(function () {
-        "use strict";
+        'use strict';
         var pi = jQuery(this).html();
         new GM_setClipboard(pi, 'text');
     });
@@ -162,7 +162,7 @@ if (!em && sv && !pw) {
             'padding': '7px 0 0 0'
         }),
         isNextGenSite = GM_getValue('isNextGen', false),
-        $isNextGenLabel = jQuery("<label>").attr({
+        $isNextGenLabel = jQuery('<label>').attr({
             for: 'isNextGenCheckbox'
         }).text('is a Next Gen Site?').css({
             display: 'inline-block',
@@ -268,7 +268,7 @@ if (!em && sv && !pw) {
             .append($snrb)
             .append($snhint);
 
-        jQuery("#legendContainer").append($snl);
+        jQuery('#legendContainer').append($snl);
 
         function removeFeatures() {
             jQuery('.checked').removeClass();
@@ -282,40 +282,147 @@ if (!em && sv && !pw) {
 
     // ---------------------------------------- old page checker ----------------------------------------
 
-//    var $opc_butt = jQuery('<button>').attr({
-//        class: 'myEDOBut',
-//        id: 'oldPageChecker',
-//        title: 'Old Page Checker'
-//    }).text('Old Page Checker');
-//
-//    // read data from file
-//    jQuery.get("https://media-dmg.assets-cdk.com/teams/repository/export/166/c0290a0c2100582d00050568ba825/166c0290a0c2100582d00050568ba825.txt", function (data) {
-//        // create array seperating each 'page' by the '-=-='
-//        data = data.replace(/\r?\n|\r/g, '');
-//        corePages = data.split('-=-=');
-//
-//        /* ----------------------------------------
-//        // loop through each subnav item and compare href to core page value
-//        $subNavMenuItems.each(function (index, subnavItem) {
-//            var z = 0,
-//                cpLength = corePages.length,
-//                subNavLink = jQuery(subnavItem).find('a'),
-//                href = jQuery(subnavItem).find('a').attr('href');
-//
-//
-//            for (z; z < cpLength; z++) {
-//                href = href.toLowerCase();
-//                var corePage = corePages[z].toLowerCase();
-//
-//                // if match is found highlight sub nav item
-//                if (href.indexOf(corePage) >= 0) {
-//                    jQuery(subNavLink).addClass('corePage');
-//                    continue;
-//                }
-//            }
-//        });
-//        ---------------------------------------- */
-//    });
+    var $opc_butt = jQuery('<button>').attr({
+        class: 'myEDOBut',
+        id: 'oldPageChecker',
+        title: 'Old Page Checker'
+    }).text('Old Page Checker');
+
+    // read data from file
+    jQuery.get('https://cdn.rawgit.com/cirept/NextGen/v3.1.7/resources/dated_pages.txt', function (data) {
+        // create array seperating each 'page' by the '-=-='
+        data = data.replace(/\r?\n|\r/g, '');
+        var datedPages = data.split('-=-='),
+            datedPagesLength = datedPages.length,
+            pageLinks = jQuery('body a'),
+            pageLinksLength = pageLinks.length,
+            b = 0, // pageLinks links for loop counter
+            z = 0; // datedPage links for loop counter
+
+        // ----------------------------------------
+        // loop through each link on the page and highlight date pages
+        // ----------------------------------------
+
+        //        pageLinks.each(function (index, currLink) {
+        //            // variables
+        //            var z = 0,
+        //                datedPagesLength = datedPages.length,
+        //                subNavLink = jQuery(currLink).find('a'),
+        //                href = jQuery(currLink).find('a').attr('href');
+        //
+        //            // loop start
+        //            for (z; z < datedPagesLength; z++) {
+        //                href = href.toLowerCase();
+        //                var datedPage = datedPages[z].toLowerCase();
+        //
+        //                // if match is found highlight sub nav item
+        //                if (href.indexOf(datedPage) >= 0) {
+        //                    jQuery(subNavLink).addClass('datedPage');
+        //                    continue;
+        //                }
+        //            }
+        //        });
+
+        // looping through all links on the page
+        for (b; b < pageLinksLength; b++) {
+            var isImageLink = false,
+                currLink = pageLinks[b],
+                $currLink = jQuery(currLink),
+                href = $currLink.find('a').attr('href');
+
+            // determine if link is an image link
+            if (($currLink.has('img').length)) {
+                // grab width and height of image
+                var w = $currLink.has('img').width(),
+                    h = $currLink.height();
+                // create a div overlay with the same height and width of the image
+                addLinkDiv(currLink, w, h);
+                isImageLink = true;
+            }
+
+            // lower case
+            href = href.toLowerCase();
+
+            // loop through dated pages
+            for (z; z < datedPagesLength; z++) {
+                var datedPage = datedPages[z],
+                    $datedPage = jQuery(datedPage);
+
+                if (href.indexOf(datedPage) >= 0) {
+                    // if link URL Contains the DATED page
+                    // add class to link
+                    $currLink.addClass('datedPage');
+                }
+            }
+
+            // ---------------------------------------- probably not needed
+            // binds click event to links
+            //            $currLink.click(bindClickAction(isImageLink));
+            // adds class to site link
+            //            $currLink.addClass('siteLink');
+            // ---------------------------------------- probably not needed ^^^
+
+            if (($currLink.attr('href'))) {
+                if (checkHref(currLink)) {
+                    if (isImageLink) {
+                        $currLink
+                            .find('.linkOverlay')
+                            .addClass('urlIssue');
+                    } else {
+                        $currLink.addClass('urlIssue');
+                    }
+                }
+            } else {
+                if (isImageLink) {
+                    $currLink
+                        .find('.linkOverlay')
+                        .addClass('brokenURL');
+                } else {
+                    $currLink.addClass('brokenURL');
+                }
+            }
+        }
+
+        // ----------------------------------------
+        function addLinkDiv(elem, width, height) {
+            var $linkOverlay = jQuery('<div>').attr({
+                class: 'siteLink linkOverlay'
+            }).css({
+                width: width + 'px',
+                height: height + 'px',
+                'text-align': 'center',
+                'vertical-align': 'middle',
+                'line-height': height + 'px',
+                'z-index': '2',
+                color: '#000000 !important',
+                'font-weight': 'bold'
+            });
+            jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
+        }
+
+        //        function bindClickAction(isImage) {
+        //            return function () {
+        //                if (isImage) {
+        //                    jQuery(this).find('.linkOverlay')
+        //                        .addClass('linkChecked')
+        //                        .append($lcc);
+        //                } else {
+        //                    jQuery(this).addClass('linkChecked');
+        //                }
+        //            };
+        //        }
+
+        function checkHref(elem) {
+            if ((jQuery(elem).attr('href').indexOf('#') === 0) ||
+                (jQuery(elem).attr('href').indexOf('f_') === 0) ||
+                (jQuery(elem).attr('href').indexOf('www') >= 0) ||
+                (jQuery(elem).attr('href').indexOf('http') >= 0)) {
+                return true;
+            }
+        }
+        // ----------------------------------------
+
+    });
 
     // ---------------------------------------- image checker ----------------------------------------
 
@@ -349,7 +456,7 @@ if (!em && sv && !pw) {
 
         $icrb.click(removeFeatures);
 
-        var $ia = jQuery("body img"),
+        var $ia = jQuery('body img'),
             iaLength = $ia.length,
             a = 0;
         for (a; a < iaLength; a++) {
@@ -358,35 +465,35 @@ if (!em && sv && !pw) {
                 h = jQuery($ia[a]).height();
             addDivOverlay($ia[a], w, h);
 
-            if (jQuery($ia[a]).attr("alt") !== undefined) {
-                if (jQuery($ia[a]).attr("alt") === '') {
+            if (jQuery($ia[a]).attr('alt') !== undefined) {
+                if (jQuery($ia[a]).attr('alt') === '') {
                     if (isImageLink) {
                         jQuery($ia[a])
-                            .siblings(".imgOverlay")
-                            .addClass("emptyAlt");
+                            .siblings('.imgOverlay')
+                            .addClass('emptyAlt');
                     } else {
-                        jQuery($ia[a]).addClass("emptyAlt");
+                        jQuery($ia[a]).addClass('emptyAlt');
                     }
                 } else {
                     if (isImageLink) {
                         jQuery($ia[a])
-                            .siblings(".imgOverlay")
-                            .addClass("hasAlt");
+                            .siblings('.imgOverlay')
+                            .addClass('hasAlt');
                         jQuery($ia[a])
-                            .siblings(".imgOverlay")
-                            .attr("title", jQuery($ia[a])
-                                .attr("alt"));
+                            .siblings('.imgOverlay')
+                            .attr('title', jQuery($ia[a])
+                                .attr('alt'));
                     } else {
-                        jQuery($ia[a]).addClass("hasAlt");
+                        jQuery($ia[a]).addClass('hasAlt');
                     }
                 }
             } else {
                 if (isImageLink) {
                     jQuery($ia[a])
-                        .siblings(".imgOverlay")
-                        .addClass("noAlt");
+                        .siblings('.imgOverlay')
+                        .addClass('noAlt');
                 } else {
-                    jQuery($ia[a]).addClass("noAlt");
+                    jQuery($ia[a]).addClass('noAlt');
                 }
             }
         }
@@ -397,21 +504,21 @@ if (!em && sv && !pw) {
             .append($iclha)
             .append($icrb);
 
-        jQuery("#legendContainer").append($icl);
+        jQuery('#legendContainer').append($icl);
 
         function removeFeatures() {
-            $ia = jQuery("body img");
+            $ia = jQuery('body img');
             iaLength = $ia.length;
             a = 0;
             for (a; a < iaLength; a++) {
                 jQuery($ia[a])
-                    .removeClass("opensWindow")
-                    .removeClass("emptyAlt")
-                    .removeClass("hasAlt")
-                    .removeClass("noAlt")
+                    .removeClass('opensWindow')
+                    .removeClass('emptyAlt')
+                    .removeClass('hasAlt')
+                    .removeClass('noAlt')
                     .removeClass('overlayDiv');
             }
-            jQuery("body").find(".imgOverlay").remove();
+            jQuery('body').find('.imgOverlay').remove();
             $icl.remove();
             jQuery(this).remove();
         }
@@ -489,17 +596,17 @@ if (!em && sv && !pw) {
             b = 0;
             for (b; b < laLength; b++) {
                 jQuery($la[b])
-                    .removeClass("siteLink")
-                    .removeClass("opensWindow")
-                    .removeClass("emptyTitle")
-                    .removeClass("hasTitle")
-                    .removeClass("noTitle")
-                    .removeClass("brokenURL")
+                    .removeClass('siteLink')
+                    .removeClass('opensWindow')
+                    .removeClass('emptyTitle')
+                    .removeClass('hasTitle')
+                    .removeClass('noTitle')
+                    .removeClass('brokenURL')
                     .removeClass('urlIssue')
-                    .removeClass("linkChecked")
+                    .removeClass('linkChecked')
                     .removeClass('overlayDiv');
             }
-            jQuery("body").find(".linkOverlay").remove();
+            jQuery('body').find('.linkOverlay').remove();
             $lcl.remove();
             jQuery(this).remove();
         }
@@ -535,7 +642,7 @@ if (!em && sv && !pw) {
         }
 
         function checkTarget(elem) {
-            if ((jQuery(elem).attr("target") === "_blank") || (jQuery(elem).attr("target") === "_new") || (jQuery(elem).attr("target") === "custom")) {
+            if ((jQuery(elem).attr('target') === '_blank') || (jQuery(elem).attr('target') === '_new') || (jQuery(elem).attr('target') === 'custom')) {
                 return true;
             }
         }
@@ -560,15 +667,15 @@ if (!em && sv && !pw) {
             .append($lclui)
             .append($icr_butt);
 
-        jQuery("#legendContainer").append($lcl);
+        jQuery('#legendContainer').append($lcl);
 
-        var $la = jQuery("body a"),
+        var $la = jQuery('body a'),
             laLength = $la.length,
             b = 0;
         for (b; b < laLength; b++) {
             var isImageLink = false;
-            if ((jQuery($la[b]).has("img").length)) {
-                var w = jQuery($la[b]).has("img").width(),
+            if ((jQuery($la[b]).has('img').length)) {
+                var w = jQuery($la[b]).has('img').width(),
                     h = jQuery($la[b]).height();
                 addLinkDiv($la[b], w, h);
                 isImageLink = true;
@@ -578,58 +685,58 @@ if (!em && sv && !pw) {
             if (checkTarget($la[b])) {
                 if (isImageLink) {
                     jQuery($la[b])
-                        .find(".linkOverlay")
-                        .addClass("opensWindow");
+                        .find('.linkOverlay')
+                        .addClass('opensWindow');
                 } else {
-                    jQuery($la[b]).addClass("opensWindow");
+                    jQuery($la[b]).addClass('opensWindow');
                 }
             }
 
-            if ((jQuery($la[b]).attr("href"))) {
+            if ((jQuery($la[b]).attr('href'))) {
                 if (checkHref($la[b])) {
                     if (isImageLink) {
                         jQuery($la[b])
-                            .find(".linkOverlay")
-                            .addClass("urlIssue");
+                            .find('.linkOverlay')
+                            .addClass('urlIssue');
                     } else {
-                        jQuery($la[b]).addClass("urlIssue");
+                        jQuery($la[b]).addClass('urlIssue');
                     }
                 }
             } else {
                 if (isImageLink) {
                     jQuery($la[b])
-                        .find(".linkOverlay")
-                        .addClass("brokenURL");
+                        .find('.linkOverlay')
+                        .addClass('brokenURL');
                 } else {
-                    jQuery($la[b]).addClass("brokenURL");
+                    jQuery($la[b]).addClass('brokenURL');
                 }
             }
 
-            if (jQuery($la[b]).attr("title") !== undefined) {
-                if (jQuery($la[b]).attr("title") === '') {
+            if (jQuery($la[b]).attr('title') !== undefined) {
+                if (jQuery($la[b]).attr('title') === '') {
                     if (isImageLink) {
                         jQuery($la[b])
-                            .find(".linkOverlay")
-                            .addClass("emptyTitle");
+                            .find('.linkOverlay')
+                            .addClass('emptyTitle');
                     } else {
-                        jQuery($la[b]).addClass("emptyTitle");
+                        jQuery($la[b]).addClass('emptyTitle');
                     }
                 } else {
                     if (isImageLink) {
                         jQuery($la[b])
-                            .find(".linkOverlay")
-                            .addClass("hasTitle");
+                            .find('.linkOverlay')
+                            .addClass('hasTitle');
                     } else {
-                        jQuery($la[b]).addClass("hasTitle");
+                        jQuery($la[b]).addClass('hasTitle');
                     }
                 }
             } else {
                 if (isImageLink) {
                     jQuery($la[b])
-                        .find(".linkOverlay")
-                        .addClass("noTitle");
+                        .find('.linkOverlay')
+                        .addClass('noTitle');
                 } else {
-                    jQuery($la[b]).addClass("noTitle");
+                    jQuery($la[b]).addClass('noTitle');
                 }
             }
         }
@@ -644,8 +751,8 @@ if (!em && sv && !pw) {
     }).text('Show Autofill Tags');
 
     $af_butt.click(function () {
-        "use strict";
-        var x = "?disableAutofill=true",
+        'use strict';
+        var x = '?disableAutofill=true',
             z = cm.getUrl(),
             newTab;
         newTab = new GM_openInTab(z + pn + x, 'active');
@@ -725,15 +832,15 @@ if (!em && sv && !pw) {
     }).text('Spellcheck Page');
 
     $sc_butt.click(function () {
-        "use strict";
-        var scSite = "https://www.w3.org/2002/01/spellchecker?",
+        'use strict';
+        var scSite = 'https://www.w3.org/2002/01/spellchecker?',
             param = {
                 uri: encodeURIComponent(cm.getUrl() + pn),
-                lang: "en_US"
+                lang: 'en_US'
             },
             newTab;
         jQuery.each(param, function (index, value) {
-            scSite += index + '=' + value + "&";
+            scSite += index + '=' + value + '&';
         });
         newTab = new GM_openInTab(scSite, 'insert');
     });
@@ -809,7 +916,7 @@ if (!em && sv && !pw) {
             .append($404legendSuccess)
             .append($404legendError);
 
-        jQuery("#legendContainer").append($404legend);
+        jQuery('#legendContainer').append($404legend);
 
         // split web-id
         function z(webID) {
@@ -892,7 +999,7 @@ if (!em && sv && !pw) {
                     // if is an image link add class to div overlay
                     // else add class to a tag
                     if (isImageLink) {
-                        var $img = $this.find("img"),
+                        var $img = $this.find('img'),
                             w = $img.width(),
                             h = $img.height(),
                             $linkOverlay = jQuery('<div>').attr({
@@ -1054,22 +1161,22 @@ if (!em && sv && !pw) {
             siteURL = cm.getUrl(),
             isNextGen = '?%26nextGen=true',
             pageName = cm.getPageName(),
-            testURL = "http://www.webpagetest.org/runtest.php?",
+            testURL = 'http://www.webpagetest.org/runtest.php?',
             params = {
-                k: "A.1b40e6dc41916bd77b0541187ac9e74b",
-                runs: "3",
-                fvonly: "1",
+                k: 'A.1b40e6dc41916bd77b0541187ac9e74b',
+                runs: '3',
+                fvonly: '1',
                 notify: email,
-                location: "Dulles" + browser
+                location: 'Dulles' + browser
             },
             newTab, dURL;
 
         // build urls
         jQuery.each(params, function (index, value) {
-            testURL += index + "=" + value + "&";
+            testURL += index + '=' + value + '&';
         });
 
-        dURL = testURL + "url=" + siteURL + pageName + isNextGen + "&device=immobile";
+        dURL = testURL + 'url=' + siteURL + pageName + isNextGen + '&device=immobile';
 
         if (confirm('----------------------------------------\n' +
                 'Test the Desktop site?\n' +
