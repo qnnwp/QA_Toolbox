@@ -10,6 +10,6 @@ ExtendedProtection
 -=-=
 ExtendedProtectionDetails
 -=-=
-Affiliate_D
+Affiliate
 -=-=
-AboutSpecials_D
+AboutSpecials
