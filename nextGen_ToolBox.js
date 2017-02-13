@@ -19,8 +19,8 @@ function ispw() {
 
 function applyParameters(isNextGen) {
     'use strict';
-    console.log('inside applyParameters');
-    console.log(isNextGen);
+    //    console.log('inside applyParameters');
+    //    console.log(isNextGen);
     if ((isNextGen) && (cmv !== 'LIVE')) {
         if (window.location.href.indexOf('nextGen=true') === -1) {
             window.location.search += '&nextGen=true';
@@ -182,7 +182,7 @@ if (!em && sv && !pw) {
     applyParameters(isNextGenSite);
     jQuery($isNextGenCheckbox).click(function () {
         var $checked = jQuery('#isNextGenCheckbox').prop('checked');
-        console.log('checkbox checke, new value : ', $checked);
+        console.log('checkbox checked, new value : ', $checked);
 
         if ($checked) {
             console.log('checked value is true');
@@ -288,141 +288,94 @@ if (!em && sv && !pw) {
         title: 'Old Page Checker'
     }).text('Old Page Checker');
 
-    // read data from file
-    jQuery.get('https://cdn.rawgit.com/cirept/NextGen/v3.1.7/resources/dated_pages.txt', function (data) {
-        // create array seperating each 'page' by the '-=-='
-        data = data.replace(/\r?\n|\r/g, '');
-        var datedPages = data.split('-=-='),
-            datedPagesLength = datedPages.length,
-            pageLinks = jQuery('body a'),
-            pageLinksLength = pageLinks.length,
-            b = 0, // pageLinks links for loop counter
-            z = 0; // datedPage links for loop counter
+    $opc_butt.on('click', checkPage); // read data from file
 
-        // ----------------------------------------
-        // loop through each link on the page and highlight date pages
-        // ----------------------------------------
+    this.$toolbarStyles = jQuery('#qa_toolbox');
+    $tbs.append('.oldPage { background: orange !important; }');
 
-        //        pageLinks.each(function (index, currLink) {
-        //            // variables
-        //            var z = 0,
-        //                datedPagesLength = datedPages.length,
-        //                subNavLink = jQuery(currLink).find('a'),
-        //                href = jQuery(currLink).find('a').attr('href');
-        //
-        //            // loop start
-        //            for (z; z < datedPagesLength; z++) {
-        //                href = href.toLowerCase();
-        //                var datedPage = datedPages[z].toLowerCase();
-        //
-        //                // if match is found highlight sub nav item
-        //                if (href.indexOf(datedPage) >= 0) {
-        //                    jQuery(subNavLink).addClass('datedPage');
-        //                    continue;
-        //                }
-        //            }
-        //        });
+    function checkPage() {
+        jQuery.get('https://cdn.rawgit.com/cirept/NextGen/master/resources/dated_pages.txt', function (data) {
+            // create array seperating each 'page' by the '-=-='
+            data = data.replace(/\r?\n|\r/g, '');
+            var datedPages = data.split('-=-='),
+                datedPagesLength = datedPages.length,
+                z = 0; // datedPage links for loop counter
 
-        // looping through all links on the page
-        for (b; b < pageLinksLength; b++) {
-            var isImageLink = false,
-                currLink = pageLinks[b],
-                $currLink = jQuery(currLink),
-                href = $currLink.find('a').attr('href');
+            // ----------------------------------------
+            // loop through each link on the page and highlight date pages
+            // ----------------------------------------
 
-            // determine if link is an image link
-            if (($currLink.has('img').length)) {
-                // grab width and height of image
-                var w = $currLink.has('img').width(),
-                    h = $currLink.height();
-                // create a div overlay with the same height and width of the image
-                addLinkDiv(currLink, w, h);
-                isImageLink = true;
-            }
-
-            // lower case
-            href = href.toLowerCase();
-
-            // loop through dated pages
             for (z; z < datedPagesLength; z++) {
-                var datedPage = datedPages[z],
-                    $datedPage = jQuery(datedPage);
+                var currPage = datedPages[z];
 
-                if (href.indexOf(datedPage) >= 0) {
-                    // if link URL Contains the DATED page
-                    // add class to link
-                    $currLink.addClass('datedPage');
-                }
+                // check for this page
+                var count = highlightDatadPages(currPage);
+                console.log('matches found for ' + currPage + ' : ' + count);
             }
 
-            // ---------------------------------------- probably not needed
-            // binds click event to links
-            //            $currLink.click(bindClickAction(isImageLink));
-            // adds class to site link
-            //            $currLink.addClass('siteLink');
-            // ---------------------------------------- probably not needed ^^^
+            function highlightDatadPages(currPage) {
+                var pageLinks = jQuery('body a'),
+                    pageLinksLength = pageLinks.length,
+                    b = 0, // pageLinks links for loop counter;
+                    counter = 0;
 
-            if (($currLink.attr('href'))) {
-                if (checkHref(currLink)) {
-                    if (isImageLink) {
-                        $currLink
-                            .find('.linkOverlay')
-                            .addClass('urlIssue');
-                    } else {
-                        $currLink.addClass('urlIssue');
+                // looping through all links on the page
+                for (b; b < pageLinksLength; b++) {
+                    var isImageLink = false,
+                        currLink = pageLinks[b],
+                        $currLink = jQuery(currLink);
+
+                    if (($currLink.has('img').length)) {
+                        // grab width and height of image
+                        var w = $currLink.has('img').width(),
+                            h = $currLink.height();
+                        // create a div overlay with the same height and width of the image
+                        addLinkDiv(currLink, w, h);
+                        isImageLink = true;
+                    }
+
+                    if (($currLink.attr('href'))) {
+                        // if current link HAS an href
+
+                        var href = $currLink.attr('href').toLowerCase();
+
+                        if (href.indexOf(currPage) > 0) {
+                            // if MATCH IS FOUND
+                            if (isImageLink) {
+                                // if the link has an IMAGE apply class to div overlay
+                                $currLink
+                                    .find('.linkOverlay')
+                                    .addClass('.oldPage');
+                                counter++;
+                            } else {
+                                // if link does not have an image, apply directly to the link
+                                $currLink.addClass('.oldPage');
+                                counter++;
+                            }
+                        }
                     }
                 }
-            } else {
-                if (isImageLink) {
-                    $currLink
-                        .find('.linkOverlay')
-                        .addClass('brokenURL');
-                } else {
-                    $currLink.addClass('brokenURL');
-                }
+                return counter;
             }
-        }
 
-        // ----------------------------------------
-        function addLinkDiv(elem, width, height) {
-            var $linkOverlay = jQuery('<div>').attr({
-                class: 'siteLink linkOverlay'
-            }).css({
-                width: width + 'px',
-                height: height + 'px',
-                'text-align': 'center',
-                'vertical-align': 'middle',
-                'line-height': height + 'px',
-                'z-index': '2',
-                color: '#000000 !important',
-                'font-weight': 'bold'
-            });
-            jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
-        }
-
-        //        function bindClickAction(isImage) {
-        //            return function () {
-        //                if (isImage) {
-        //                    jQuery(this).find('.linkOverlay')
-        //                        .addClass('linkChecked')
-        //                        .append($lcc);
-        //                } else {
-        //                    jQuery(this).addClass('linkChecked');
-        //                }
-        //            };
-        //        }
-
-        function checkHref(elem) {
-            if ((jQuery(elem).attr('href').indexOf('#') === 0) ||
-                (jQuery(elem).attr('href').indexOf('f_') === 0) ||
-                (jQuery(elem).attr('href').indexOf('www') >= 0) ||
-                (jQuery(elem).attr('href').indexOf('http') >= 0)) {
-                return true;
+            function addLinkDiv(elem, width, height) {
+                var $linkOverlay = jQuery('<div>').attr({
+                    class: 'siteLink linkOverlay'
+                }).css({
+                    width: width + 'px',
+                    height: height + 'px',
+                    'text-align': 'center',
+                    'vertical-align': 'middle',
+                    'line-height': height + 'px',
+                    'z-index': '2',
+                    color: '#000000 !important',
+                    'font-weight': 'bold'
+                });
+                jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
             }
-        }
-        // ----------------------------------------
 
-    });
+        });
+    }
 
     // ---------------------------------------- image checker ----------------------------------------
 
