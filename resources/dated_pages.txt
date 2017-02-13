@@ -6,9 +6,9 @@ NewVehicleInfoForm
 -=-=
 PreOwnedVehicleInfoForm
 -=-=
-ExtendedProtection_D
+ExtendedProtection
 -=-=
-ExtendedProtectionDetails_D
+ExtendedProtectionDetails
 -=-=
 Affiliate_D
 -=-=
