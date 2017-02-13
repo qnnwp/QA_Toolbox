@@ -4,6 +4,7 @@
 // @version 3.1.7
 // @author Eric Tanaka
 // @description NextGen Migration Toolbar
+// @updateURL https://cdn.rawgit.com/cirept/NextGen/master/nextGen_meta.js
 // @downloadURL https://media-dmg.assets-cdk.com/teams/repository/export/1d6/e1310a29f100582550050568ba825/1d6e1310a29f100582550050568ba825.js
 // @include http:*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
@@ -19,9 +20,6 @@
 // @noframes
 // ==/UserScript==
 
-/* ---------------------------------------- */
-/* CHANGELOG
- - Added "Outdate Links" tool
- - Tool will highlight all dated links in Orange
- */
-/* ---------------------------------------- */
+// secondary file location
+// downloadURL https://cdn.rawgit.com/cirept/NextGen/master/nextGen_meta.js
+// @require https://cdn.rawgit.com/cirept/NextGen/v3.1.7/nextGen_ToolBox.js

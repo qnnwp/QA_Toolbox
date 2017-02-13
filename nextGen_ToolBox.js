@@ -280,20 +280,15 @@ if (!em && sv && !pw) {
         }
     });
 
-    // ---------------------------------------- old page checker ----------------------------------------
+    // ---------------------------------------- Outdated Link Checker ----------------------------------------
 
     var $opc_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
-        id: 'oldPageChecker',
-        title: 'Old Page Checker'
-    }).text('Old Page Checker');
+        id: 'outdatedLinkChecker',
+        title: 'Outdated Links'
+    }).text('Outdated Links');
 
-    $opc_butt.on('click', checkPage); // read data from file
-
-    this.$toolbarStyles = jQuery('#qa_toolbox');
-    $tbs.append('.oldPage { background: orange !important; }');
-
-    function checkPage() {
+    $opc_butt.on('click', function () {
         jQuery.get('https://cdn.rawgit.com/cirept/NextGen/master/resources/dated_pages.txt', function (data) {
             // create array seperating each 'page' by the '-=-='
             data = data.replace(/\r?\n|\r/g, '');
@@ -309,8 +304,10 @@ if (!em && sv && !pw) {
                 var currPage = datedPages[z];
 
                 // check for this page
+                //console.log('----------------------------------------');
                 var count = highlightDatadPages(currPage);
                 console.log('matches found for ' + currPage + ' : ' + count);
+                //console.log('----------------------------------------');
             }
 
             function highlightDatadPages(currPage) {
@@ -335,21 +332,22 @@ if (!em && sv && !pw) {
                     }
 
                     if (($currLink.attr('href'))) {
+                        var href = $currLink.attr('href').toLowerCase();
+                        var findThis = currPage.toLowerCase();
                         // if current link HAS an href
 
-                        var href = $currLink.attr('href').toLowerCase();
-
-                        if (href.indexOf(currPage) > 0) {
+                        if (href.indexOf(findThis) >= 0) {
                             // if MATCH IS FOUND
+                            //console.log($currLink);   // console log element that matched
                             if (isImageLink) {
                                 // if the link has an IMAGE apply class to div overlay
                                 $currLink
                                     .find('.linkOverlay')
-                                    .addClass('.oldPage');
+                                    .addClass('oldPage');
                                 counter++;
                             } else {
                                 // if link does not have an image, apply directly to the link
-                                $currLink.addClass('.oldPage');
+                                $currLink.addClass('oldPage');
                                 counter++;
                             }
                         }
@@ -375,7 +373,10 @@ if (!em && sv && !pw) {
             }
 
         });
-    }
+    }); // read data from file
+
+    this.$toolbarStyles = jQuery('#qa_toolbox');
+    $tbs.append('.oldPage { background: orange !important; }');
 
     // ---------------------------------------- image checker ----------------------------------------
 
@@ -973,7 +974,7 @@ if (!em && sv && !pw) {
                     }
 
                 },
-                error: function (jqXHR, status, er) {
+                error: function () {
                     //set link in red if there is any errors with link
                     error($this, isImageLink);
                 },
