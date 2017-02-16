@@ -289,6 +289,36 @@ if (!em && sv && !pw) {
     }).text('Outdated Links');
 
     $opc_butt.on('click', function () {
+
+        var $opcl = jQuery('<div>').attr({
+                class: 'linkLegend'
+            }),
+            $opct = jQuery('<div>').attr({
+                id: 'outdatedLinkTitle'
+            }).text('Outdated Link Checker Legend'),
+            $opcna = jQuery('<div>').attr({
+                class: 'legendContent oldPage'
+            }).text('Outdated'),
+            $opcha = jQuery('<div>').attr({
+                class: 'legendContent goodLink'
+            }).text('Good'),
+            $icrb = jQuery('<input>').attr({
+                type: 'button',
+                class: 'myButton',
+                value: 'Remove'
+            }).css({
+                width: '90%',
+                height: '50px'
+            });
+
+        jQuery($opcl)
+            .append($opct)
+            .append($opcna)
+            .append($opcha)
+            .append($icrb);
+
+        jQuery('#legendContainer').append($opcl);
+
         jQuery.get('https://cdn.rawgit.com/cirept/NextGen/master/resources/dated_pages.txt', function (data) {
             // create array seperating each 'page' by the '-=-='
             data = data.replace(/\r?\n|\r/g, '');
@@ -304,10 +334,8 @@ if (!em && sv && !pw) {
                 var currPage = datedPages[z];
 
                 // check for this page
-                //console.log('----------------------------------------');
                 var count = highlightDatadPages(currPage);
                 console.log('matches found for ' + currPage + ' : ' + count);
-                //console.log('----------------------------------------');
             }
 
             function highlightDatadPages(currPage) {
@@ -338,7 +366,6 @@ if (!em && sv && !pw) {
 
                         if (href.indexOf(findThis) >= 0) {
                             // if MATCH IS FOUND
-                            //console.log($currLink);   // console log element that matched
                             if (isImageLink) {
                                 // if the link has an IMAGE apply class to div overlay
                                 $currLink
@@ -350,7 +377,19 @@ if (!em && sv && !pw) {
                                 $currLink.addClass('oldPage');
                                 counter++;
                             }
+                            continue;
+                        } else {
+                            if (isImageLink) {
+                                // if the link has an IMAGE apply class to div overlay
+                                $currLink
+                                    .find('.linkOverlay')
+                                    .addClass('goodLink');
+                            } else {
+                                // if link does not have an image, apply directly to the link
+                                $currLink.addClass('goodLink');
+                            }
                         }
+
                     }
                 }
                 return counter;
@@ -372,11 +411,28 @@ if (!em && sv && !pw) {
                 jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
             }
 
-        });
+        }); // end file read
+
+        $icrb.click(removeFeatures);
+
+        function removeFeatures() {
+            var $pageLinks = jQuery('body a'),
+                iaLength = $pageLinks.length,
+                a = 0;
+            for (a; a < iaLength; a++) {
+                jQuery($pageLinks[a])
+                    .removeClass('oldPage')
+                    .removeClass('goodLink');
+            }
+            jQuery('body').find('.imgOverlay').remove();
+            $opcl.remove();
+            jQuery(this).remove();
+        }
     }); // read data from file
 
     this.$toolbarStyles = jQuery('#qa_toolbox');
-    $tbs.append('.oldPage { background: orange !important; }');
+    $tbs.append('.goodLink { background: rgba(146, 232, 66, .75) !important; color: white !important; }');
+    $tbs.append('.oldPage { background: rgba(255, 124, 216, .75) !important; }');
 
     // ---------------------------------------- image checker ----------------------------------------
 
