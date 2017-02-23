@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name NextGen Migration Toolbar
 // @namespace www.cobaltgroup.com/
-// @version 3.1.8
+// @version 3.1.9
 // @author Eric Tanaka
 // @description NextGen Migration Toolbar
 // @downloadURL https://media-dmg.assets-cdk.com/teams/repository/export/1d6/e1310a29f100582550050568ba825/1d6e1310a29f100582550050568ba825.js
@@ -21,13 +21,15 @@
 
 /* ---------------------------------------- */
 /* CHANGELOG
+2/23/2017
+- Added "show autofill tags?" toggle
+---- Removed autofill button
+
 2/16/2017
 - Added legend to Outdate links tool
 ---- Tool will highlight 'dated links' in pink
 ---- Tool will highlight 'good' links in green
 - Legend will show this information
-
-
  - Added "Outdate Links" tool
  - Tool will highlight all dated links in Orange
  */

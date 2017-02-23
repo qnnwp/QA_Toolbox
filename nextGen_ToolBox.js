@@ -753,20 +753,259 @@ if (!em && sv && !pw) {
     });
 
     // ---------------------------------------- Show Autofill Tags ----------------------------------------
+    /*
+        var $af_butt = jQuery('<button>').attr({
+            class: 'myEDOBut',
+            id: 'showAutofill',
+            title: 'Show Autofill Tags'
+        }).text('Show Autofill Tags');
 
-    var $af_butt = jQuery('<button>').attr({
-        class: 'myEDOBut',
-        id: 'showAutofill',
-        title: 'Show Autofill Tags'
-    }).text('Show Autofill Tags');
+        $af_butt.click(function () {
+            'use strict';
+            var x = '?disableAutofill=true',
+                z = cm.getUrl(),
+                newTab;
+            newTab = new GM_openInTab(z + pn + x, 'active');
+        });
+    */
 
-    $af_butt.click(function () {
-        'use strict';
-        var x = '?disableAutofill=true',
-            z = cm.getUrl(),
-            newTab;
-        newTab = new GM_openInTab(z + pn + x, 'active');
-    });
+    // ------------------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------- autofill toggle ----------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------
+    var autofillToggle = {
+        init: function () {
+            this.createElements();
+            this.buildTool();
+            this.cacheDOM();
+            this.setToggle();
+            this.addTool();
+            this.bindEvents();
+            //                this.hideFeature();
+            this.ifLive();
+        },
+        // ----------------------------------------
+        // tier 1 functions
+        // ----------------------------------------
+        createElements: function () {
+            autofillToggle.config = {
+                $autofillToggleContainer: jQuery('<div>').attr({
+                    id: 'autofillToggleInput',
+                    class: 'toggleTool',
+                    title: 'Show all autofill tags on page'
+                }).css({
+                    padding: '7px 0px 0px'
+                }),
+                $autofillToggleTitle: jQuery('<div>').css({
+                    color: 'black',
+                    'line-height': '15px'
+                }).text('show autofill tags?'),
+                $autofillToggleIcon: jQuery('<div>').attr({
+                    id: 'autofillToggleIcon'
+                }),
+                $FAtoggle: jQuery('<i class="fa fa-toggle-off fa-lg"></i>')
+            };
+        },
+        buildTool: function () {
+            autofillToggle.config.$autofillToggleIcon
+                .append(autofillToggle.config.$FAtoggle);
+            autofillToggle.config.$autofillToggleContainer
+                .append(autofillToggle.config.$autofillToggleTitle)
+                .append(autofillToggle.config.$autofillToggleIcon);
+        },
+        setToggle: function () {
+            // if 'site is not live'
+            if (!this.liveSite) {
+                // if 'nextGen is turned on'
+                if (this.getChecked()) {
+                    // set toggle and apply parameters
+                    this.toggleOn();
+                }
+                // if 'site is not live'
+                else {
+                    // set toggle and apply parameters
+                    this.toggleOff();
+                }
+                this.applyParameters();
+            }
+        },
+        cacheDOM: function () {
+            this.$toolsPanel = jQuery('#myToolbox');
+            this.cm = unsafeWindow.ContextManager;
+            this.liveSite = this.cm.isLive();
+        },
+        addTool: function () {
+            // add to main toolbox
+            //            this.$toolsPanel.append(autofillToggle.config.$autofillToggleContainer);
+            $tb.append(autofillToggle.config.$autofillToggleContainer);
+        },
+        bindEvents: function () {
+            // bind FA toggle with 'flipTheSwitch' action
+            autofillToggle.config.$autofillToggleContainer.on('click', this.flipTheSwitch.bind(this));
+        },
+        //            hideFeature: function () {
+        //                // hides feature if viewing live site
+        //                if (this.siteState() === 'LIVE') {
+        //                    autofillToggle.config.$autofillToggleContainer.toggle();
+        //                }
+        //            },
+        ifLive: function () {
+            // remove tool if the site is live
+            if (this.liveSite) {
+                jQuery(this).remove();
+            }
+        },
+        // ---------
+        //test
+        // -----------
+        returnParameters: function () {
+            if (this.getChecked()) {
+                return true;
+            }
+            return false;
+        },
+        // ----------------------------------------
+        // tier 2 functions
+        // ----------------------------------------
+        getChecked: function () {
+            // grabs applyAutofill value
+            var a = GM_getValue('applyAutofill', false);
+            return a;
+        },
+        toggleOn: function () {
+            // set toggle on image
+            var $toggle = autofillToggle.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-off');
+            $toggle.addClass('fa-toggle-on');
+        },
+        applyParameters: function () {
+            var hasParameters = this.hasParameters();
+            //                var siteState = this.siteState();
+            var applyAutofill = this.getChecked(),
+                url = window.location.href,
+                newURL;
+            // show autofill parameter
+            // if 'parameters not found in URL' AND 'applyAutofill toggle is turned on'
+            if (!hasParameters && applyAutofill) {
+                // if PARAMETER IS NOT in the URL, add &disableAutofill=true
+                //                    window.location.search += '&disableAutofill=true';
+                this.reloadPage('search', '&disableAutofill=true');
+                console.log('disableAutofill parameter not found, adding and turning on');
+            }
+            // if 'parameters found in URL' AND 'applyAutofill toggle is turned on'
+            else if (hasParameters && applyAutofill) {
+                // if 'the URL HAS nextGen=' BUT it isn't set to true
+                url = window.location.href;
+                if (url.indexOf('&disableAutofill=false') > 0) {
+                    // applyAutofill false parameter detected UPDATE to true
+                    newURL = url.replace('&disableAutofill=false', '&disableAutofill=true');
+                    console.log('disableAutofill parameter found, turning on');
+                    //                        window.location.href = newURL;
+                    this.reloadPage('reload', newURL);
+                } else if (url.indexOf('&disableAutofill=true') > 0) {
+                    // if disableAutofill = true, do nothing
+                    console.log('disableAutofill parameter found, do nothing');
+                }
+            }
+            // disable autofill parameter
+            // if 'parameters found in URL' AND 'applyAutofill toggle is turned off'
+            else if (hasParameters && !applyAutofill) {
+                // if 'disableAutofill FOUND IN URL' and 'applyAutofill turned off'
+                url = window.location.href;
+                // ----------------------------------------
+                // REMOVE PARAMETER FROM URL
+                // ----------------------------------------
+                if (url.indexOf('&disableAutofill=true') >= 0) {
+                    newURL = url.replace('&disableAutofill=true', '');
+                    console.log('disableAutofill TRUE parameter found, removing');
+                    //                        window.location.href = newURL;
+                    this.reloadPage('reload', newURL);
+                } else if (url.indexOf('&disableAutofill=false') >= 0) {
+                    newURL = url.replace('&disableAutofill=false', '');
+                    console.log('disableAutofill FALSE parameter found, removing');
+                    //                        window.location.href = newURL;
+                    this.reloadPage('reload', newURL);
+                }
+                /*
+                                            if (url.indexOf('disableAutofill=true') > 0) {
+                                                // disableAutofill parameter = TRUE
+                                                newURL = url.replace('disableAutofill=true', 'disableAutofill=false');
+                                                console.log('disableAutofill parameter found, turing off');
+                                                window.location.href = newURL;
+                                            } else if (url.indexOf('disableAutofill=false') > 0) {
+                                                // if disableAutofill = FALSE, do nothing
+                                                console.log('disableAutofill parameter found, do nothing');
+                                            }
+                */
+            }
+            // if 'parameters not found in URL' AND 'applyAutofill toggle is turned off'
+            else if (!hasParameters && !applyAutofill) {
+                // if disableAutofill IS NOT in the URL, add disableAutofill=false
+                console.log('disableAutofill parameter not found, do nothing');
+                //                    window.location.search += '&disableAutofill=false';
+                //                    this.reloadPage('search', '&disableAutofill=false');
+            }
+            // ----------------------------------------
+            // START WOKRING CODE
+            // ----------------------------------------
+            // apply parameters only if DOESN'T already have parameters &&
+            // site state IS NOT LIVE &&
+            // toggled ON
+            /*
+            if ((!hasParameters) && (siteState !== 'LIVE') && (applyAutofill)) {
+                window.location.search += '&disableAutofill=true';
+            }
+            */
+            // ----------------------------------------
+            // END WORKING CODE
+            // ----------------------------------------
+        },
+        reloadPage: function (type, newURL) {
+            if (type === 'reload') {
+                console.log('reload page');
+                window.location.href = newURL;
+            } else if (type === 'search') {
+                console.log('append then reload page');
+                window.location.search += newURL;
+            }
+        },
+        toggleOff: function () {
+            // set toggle off image
+            var $toggle = autofillToggle.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-on');
+            $toggle.addClass('fa-toggle-off');
+        },
+        flipTheSwitch: function () {
+            // set saved variable to opposite of current value
+            this.setChecked(!this.getChecked());
+            // set toggle
+            this.setToggle();
+        },
+        // ----------------------------------------
+        // tier 3 functions
+        // ----------------------------------------
+        hasParameters: function () {
+            // determine if site URL already has custom parameters
+            //                if (window.location.href.indexOf('&disableAutofill=false') >= 0) {
+            //                    return true;
+            //                } else {
+            //                    return false;
+            //                }
+            if (window.location.href.indexOf('disableAutofill=') >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        siteState: function () {
+            // return page variable
+            return unsafeWindow.ContextManager.getVersion();
+        },
+        setChecked: function (bool) {
+            // sets applyAutofill value
+            GM_setValue('applyAutofill', bool);
+        }
+    };
+
 
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -1211,22 +1450,27 @@ if (!em && sv && !pw) {
     jQuery($tb)
         .append($tbt)
         .append($wid)
-        .append($pn)
+        .append($pn);
+
+    //initialize autofill toggle
+    autofillToggle.init();
+
+    // initialize refresh button tool
+    refreshPage.init();
+
+    jQuery($tb)
         .append($nextGenCheck)
         .append($sn_butt)
         .append($ic_butt)
         .append($lc_butt)
         .append($opc_butt)
-        .append($af_butt)
+        //        .append($af_butt)
         .append($sc_butt)
         .append($404checker_butt)
         .append($wpt_butt)
         .append($toggleSettings) // new
         .append($wptInput)
         .append($version);
-
-    // initialize refresh button tool
-    refreshPage.init();
 
     jQuery($tb).children('.myEDOBut:even').css({
         background: 'linear-gradient(to left,#00d2ff 0,#3a7bd5 100%)'
