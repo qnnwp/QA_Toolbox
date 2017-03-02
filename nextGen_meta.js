@@ -5,7 +5,6 @@
 // @author Eric Tanaka
 // @description NextGen Migration Toolbar
 // @downloadURL https://cdn.rawgit.com/cirept/NextGen/master/nextGen_meta.js
-// @match http://*/*/?*nextGen=true*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://use.fontawesome.com/3953f47d82.js
 // @require https://cdn.rawgit.com/cirept/NextGen/v3.2/nextGen_ToolBox.js
@@ -16,34 +15,19 @@
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant GM_info
+// @grant GM_listValues
 // @noframes
 // ==/UserScript==
 
-
-//// // @include http:*
-//// // @downloadURL https://media-dmg.assets-cdk.com/teams/repository/export/1d6/e1310a29f100582550050568ba825/1d6e1310a29f100582550050568ba825.js
-//// // @require https://media-dmg.assets-cdk.com/teams/repository/export/1d6/dd878a29f100580880050568bfc31/1d6dd878a29f100580880050568bfc31.js
 // ----------------------------------------
 // CHANGELOG
 // ----------------------------------------
+
 /*
-v3.2 changes (2/28/2017)
+v3.2 change (3/2/2017)
 ----------------------------------------
-- Moved files over to github for easier editting
--- Prepped meta tag for gitHub migration
----- require URL updated for future release v3.2
----- updated download URL to master meta URL
-- Updated meta tag to only run toolbar on URL's that contain 'nextGen=true'
-
-2/23/2017
-- Added "show autofill tags?" toggle
----- Removed autofill button
-
-2/16/2017
-- Added legend to Outdate links tool
----- Tool will highlight 'dated links' in pink
----- Tool will highlight 'good' links in green
-- Legend will show this information
- - Added "Outdate Links" tool
- - Tool will highlight all dated links in Orange
+- Updated thickness of border around link checker "Verify URL"
+- Moved "show navigation" and "link checker" tools closer together for easier use.
+- Adjusted hints in the legends to mouse click
+- Adjusted location of reload button
  */
