@@ -1,5 +1,5 @@
 # Instructions
-[create an anchor](#Tampermonkey-Install-Instructions)
+[create an anchor](#tampermonkey-install-instructions)
 
 ## Tampermonkey Install Instructions
 
