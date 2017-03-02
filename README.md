@@ -44,7 +44,7 @@
 
 **6. Done.  The toolbar will show up on any Proof/Live CDK site**
 
-**If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
-Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.**
-
 ===
+
+> If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
+Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
