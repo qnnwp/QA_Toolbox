@@ -9,6 +9,7 @@
 [Tampermonkey for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
 
 [Tampermonkey for FireFox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
+
 ===
 ### 1. Click the add-on icon once you have installed it into your browser
 
