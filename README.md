@@ -1,4 +1,5 @@
 # Instructions
+---
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
 [Toolbar Instructions *coming soon*](#)
