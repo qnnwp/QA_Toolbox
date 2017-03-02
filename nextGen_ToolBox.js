@@ -1028,7 +1028,7 @@ if (!em && sv && !pw) {
                     id: 'refreshMe'
                 }).css({
                     position: 'fixed',
-                    left: '0px',
+                    right: '50%',
                     top: '0px',
                     'z-index': '1000000'
                 }),
@@ -1062,8 +1062,7 @@ if (!em && sv && !pw) {
             refreshPage.config.$activateButt.on('click', this.reloadPage);
         },
         addStyles: function () {
-            $tbs
-                .append('#refreshPage:hover { color: #ffffff !important; background: linear-gradient(to left, #f4c4f3 , #fc67fa) !important; }');
+            $tbs.append('#refreshPage:hover { color: #ffffff !important; background: linear-gradient(to left, #f4c4f3 , #fc67fa) !important; }');
         },
         // tier 2 functions
         // ----------------------------------------
@@ -1203,14 +1202,24 @@ if (!em && sv && !pw) {
                 // NEXT GEN SPECIFIC
                 // add complete URL for testing purposes
                 //                var findThis = '/' + wid + '/',
-                var findThis = '/' + siteID + '/',
-                    findThis2 = '/' + wid + '/',
-                    length = findThis.length + 1;
-                if ((linkURL.indexOf(findThis) >= 0) && (linkURL.indexOf(findThis) < length)) {
-                    linkURL = linkURL.replace(findThis, baseURL);
+                var siteID_mod = '/' + siteID + '/',
+                    wid_mod = '/' + wid + '/',
+                    length = siteID.length + 1,
+                    hostname = window.location.hostname;
+                console.log('siteID_mod : ' + siteID_mod);
+                console.log('wid_mod : ' + wid_mod);
+                console.log('linkURL : ' + linkURL);
+                console.log('baseURL : ' + baseURL);
+                console.log('hostname : ' + window.location.hostname);
+                if ((linkURL.indexOf(siteID_mod) >= 0) && (linkURL.indexOf(siteID_mod) < length)) {
+                    linkURL = linkURL.replace(siteID_mod, baseURL);
+                    console.log('linkURL 1 : ' + linkURL);
                 }
-                if ((linkURL.indexOf(findThis2) >= 0) && (linkURL.indexOf(findThis2) < length)) {
-                    linkURL = linkURL.replace(findThis, baseURL);
+                if ((linkURL.indexOf(wid_mod) >= 0) && (linkURL.indexOf(wid_mod) < length)) {
+                    //                if (linkURL.indexOf(wid_mod) >= 0) {
+                    //                    linkURL = linkURL.replace(siteID_mod, baseURL);
+                    linkURL = linkURL.replace(wid_mod, baseURL);
+                    console.log('linkURL 2 : ' + linkURL);
                 }
             } else {
                 // check URL if it begins with /, signifying the link is a relative path URL
@@ -1230,6 +1239,7 @@ if (!em && sv && !pw) {
                 return true;
             }
 
+            console.log('linkURL : ' + linkURL);
             // test each link
             jQuery.ajax({
                 url: linkURL, //be sure to check the right attribute
