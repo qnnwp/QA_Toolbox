@@ -5,7 +5,7 @@
 // @author Eric Tanaka
 // @include http:*
 // @description NextGen Migration Toolbar
-// @downloadURL https://cdn.rawgit.com/cirept/NextGen/master/nextGen_meta.js
+// @downloadURL https://rawgit.com/cirept/NextGen/master/nextGen_meta.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://use.fontawesome.com/3953f47d82.js
 // @require https://cdn.rawgit.com/cirept/NextGen/v3.2/nextGen_ToolBox.js
