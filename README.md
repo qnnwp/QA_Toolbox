@@ -3,7 +3,6 @@
 ## Tampermonkey Install Instructions
 
 ### 1. Click the add-on icon once you have installed it into your browser
-----------------------------------------
 
 ![Click Addon Icon](https://cdn.rawgit.com/cirept/NextGen/master/images/clickIcon.png)
 
