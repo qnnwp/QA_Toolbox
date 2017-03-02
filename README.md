@@ -1,5 +1,5 @@
 # Instructions
-[create an anchor](#1. Click the add-on icon once you have installed it into your browser)
+[create an anchor](#Tampermonkey-Install-Instructions)
 
 ## Tampermonkey Install Instructions
 
