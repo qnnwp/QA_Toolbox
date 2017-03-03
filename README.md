@@ -73,7 +73,7 @@
 
 Link to Latest Toolbar Code:<br>
 https://github.com/cirept/NextGen/blob/master/nextGen_meta.js<br>
-*mouse wheel click to open in a new tab*
+*'mouse wheel click' to open in a new tab*
 
 <br>
 
