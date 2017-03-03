@@ -267,7 +267,7 @@ Will send in a query to WebPageTest.org of the currently viewed page.
 
 A new tab will open with the page already queued up for speed testing.  Once the testing has been completed the results of the test will be displayed.
 
->The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.
+>The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
 >Benchmark for desktop site = load time < 10 sec.
 
 
@@ -278,3 +278,8 @@ In the "Advanced Settings" (below the button) you are able to enter an email add
 This email address will recieve an email once the testing has been completed with a link that leads to the results page.  Simply leave it blank if this feature isn't desired.
 
 By default the testing is set to IE11, please do not change this unless necessary.  IE11 would be the best test case as it is commonly the slowest amoungst all the 'popular' browsers.
+
+
+WebPageTest Settings | WebPageTest Prompt
+----------------------------- | ----------------------
+![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/webPageTestPrompt.png)
