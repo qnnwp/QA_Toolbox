@@ -1,9 +1,28 @@
+---
+---
 # Toolbar Information
+---
+---
+
+<br>
+<br>
+
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
 [Toolbar Instructions *coming soon*](#)
 
+<br>
+<br>
+
+---
+---
 ## Tampermonkey Install Instructions
+---
+---
+
+<br>
+<br>
+
 *Need Tampermonkey Extension/Add-on*
 
 [Tampermonkey for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
@@ -40,6 +59,7 @@
 
 ![Click New UserScript Icon](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickNewScript.png)
 
+
 <br>
 
 ===
@@ -74,6 +94,7 @@
 
 <br>
 
+#### TIP:<br>
 > If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
 Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 
@@ -108,7 +129,7 @@ Show Navigation Functionality | Show Navigation Legend
 
 
 #### TIP:<br>
-*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
+>*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
 <br>
@@ -153,7 +174,7 @@ Link Checker Functionality | Link Checker Legend
 ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
 
 #### TIP:<br>
-*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
+>*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
 <br>
