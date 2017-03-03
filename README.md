@@ -9,7 +9,7 @@
 
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
-[Toolbar Instructions *coming soon*](#)
+[Toolbar Instructions](#tool-descriptions)
 
 <br>
 <br>
@@ -87,10 +87,6 @@
 <br>
 
 **6. Done.  The toolbar will show up on any Proof/Live CDK site**
-
-<br>
-
-===
 
 <br>
 
