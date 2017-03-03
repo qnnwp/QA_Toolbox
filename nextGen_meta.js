@@ -1,14 +1,15 @@
 // ==UserScript==
 // @name NextGen QA Toolbar
 // @namespace www.cobaltgroup.com/
-// @version 3.2
+// @version 3.2.1
 // @author Eric Tanaka
 // @include http:*
+// @include https:*
 // @description NextGen Migration Toolbar
 // @downloadURL https://rawgit.com/cirept/NextGen/master/nextGen_meta.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://use.fontawesome.com/3953f47d82.js
-// @require https://cdn.rawgit.com/cirept/NextGen/v3.2/nextGen_ToolBox.js
+// @require https://cdn.rawgit.com/cirept/NextGen/v3.2.1/nextGen_ToolBox.js
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard
@@ -25,6 +26,14 @@
 // ----------------------------------------
 
 /*
+v3.2.1 change (3/3/2017)
+----------------------------------------
+- toolbar works on nextgen live sites
+- Refresh button placement issue
+- Re-worked NextGen toggle functionality
+- Hid the NextGen toggle on live sites, shouldn't be needed
+- Fixed 'autofill toggle' to work on live sites
+
 v3.2 change (3/2/2017)
 ----------------------------------------
 - Updated thickness of border around link checker "Verify URL"

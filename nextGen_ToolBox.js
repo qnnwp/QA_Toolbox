@@ -18,14 +18,28 @@ function ispw() {
 
 function applyParameters(isNextGen) {
     'use strict';
-    //    console.log('inside applyParameters');
-    //    console.log(isNextGen);
+
     if ((isNextGen) && (cmv !== 'LIVE')) {
-        if (window.location.href.indexOf('nextGen=true') === -1) {
+        if (window.location.href.indexOf('nextGen=') > -1) {
+            // if nextgen parameter is found in the URL
+            if (window.location.href.indexOf('nextGen=true') > -1) {
+                // if nextgen parameter is set to true
+                // do noting
+            } else if (window.location.href.indexOf('nextGen=false') > -1) {
+                // if nextgen parameter is set to false
+                // replace false with true then reload the page
+                var x = window.location.href;
+                x = x.replace('nextGen=false', 'nextGen=true');
+                window.location.href = x;
+            }
+        } else if (window.location.href.indexOf('nextGen=true') === -1) {
+            // if nextgen parameter does not contain the nextgen parameter
+            // add to URL = true
             window.location.search += '&nextGen=true';
         }
     }
 }
+
 if (!em && sv && !pw) {
     // build toolbox
     var $tb = jQuery('<div>').attr({
@@ -91,7 +105,9 @@ if (!em && sv && !pw) {
         .append('.overlayDiv { position: relative; }')
         .append('.tested { background: pink; }')
         .append('.linkLegend { background: white; border: 3px solid black; color: #000000; text-align: center; padding: 10px; }');
+
     // ---------------------------------------- web-id panel ----------------------------------------
+
     var $wid = jQuery('<div>').attr({
         title: 'Copy web-id'
     }).css({
@@ -143,7 +159,9 @@ if (!em && sv && !pw) {
         var pi = jQuery(this).html();
         new GM_setClipboard(pi, 'text');
     });
+
     // ---------------------------------------- nextGen checkbox ----------------------------------------
+
     var $nextGenCheck = jQuery('<div>').attr({
             id: 'nextGenCheck'
         }).css({
@@ -161,12 +179,13 @@ if (!em && sv && !pw) {
             id: 'isNextGenCheckbox',
             name: 'isNextGenCheckbox',
             checked: isNextGenSite
-                //            checked: isNextGenSite
         }).css({
             width: '20px',
             height: '20px'
         });
+
     applyParameters(isNextGenSite);
+
     jQuery($isNextGenCheckbox).click(function () {
         var $checked = jQuery('#isNextGenCheckbox').prop('checked');
         console.log('checkbox checked, new value : ', $checked);
@@ -182,16 +201,20 @@ if (!em && sv && !pw) {
         console.log('new value of saved variable :', x);
         applyParameters($checked);
     });
+
     $nextGenCheck.append($isNextGenLabel).append($isNextGenCheckbox);
+
     if (isNextGenSite === false) {
         if (window.location.href.indexOf('nextGen=true') >= 0) {
-            //            window.location.search += '&nextGen=true';
             var x = window.location.hostname;
             x += '&nextGen=false';
         }
     }
+
     $nextGenCheck.append($isNextGenLabel).append($isNextGenCheckbox);
+
     // ---------------------------------------- show nav ----------------------------------------
+
     var $sn_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'showNavigation',
@@ -248,7 +271,9 @@ if (!em && sv && !pw) {
             jQuery(this).remove();
         }
     });
+
     // ---------------------------------------- Outdated Link Checker ----------------------------------------
+
     var $opc_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'outdatedLinkChecker',
@@ -384,7 +409,9 @@ if (!em && sv && !pw) {
     this.$toolbarStyles = jQuery('#qa_toolbox');
     $tbs.append('.goodLink { background: rgba(146, 232, 66, .75) !important; color: white !important; }');
     $tbs.append('.oldPage { background: rgba(255, 124, 216, .75) !important; }');
+
     // ---------------------------------------- image checker ----------------------------------------
+
     var $ic_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'imageChecker',
@@ -495,7 +522,9 @@ if (!em && sv && !pw) {
                     .addClass('overlayDiv'));
         }
     });
+
     // ---------------------------------------- link checker ----------------------------------------
+
     var $lc_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'linkChecker',
@@ -689,24 +718,11 @@ if (!em && sv && !pw) {
             }
         }
     });
-    // ---------------------------------------- Show Autofill Tags ----------------------------------------
-    /*
-        var $af_butt = jQuery('<button>').attr({
-            class: 'myEDOBut',
-            id: 'showAutofill',
-            title: 'Show Autofill Tags'
-        }).text('Show Autofill Tags');
-        $af_butt.click(function () {
-            'use strict';
-            var x = '?disableAutofill=true',
-                z = cm.getUrl(),
-                newTab;
-            newTab = new GM_openInTab(z + pn + x, 'active');
-        });
-    */
+
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- autofill toggle ----------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------
+
     var autofillToggle = {
         init: function () {
             this.createElements();
@@ -715,8 +731,6 @@ if (!em && sv && !pw) {
             this.setToggle();
             this.addTool();
             this.bindEvents();
-            //                this.hideFeature();
-            this.ifLive();
         },
         // ----------------------------------------
         // tier 1 functions
@@ -748,20 +762,18 @@ if (!em && sv && !pw) {
                 .append(autofillToggle.config.$autofillToggleIcon);
         },
         setToggle: function () {
-            // if 'site is not live'
-            if (!this.liveSite) {
-                // if 'nextGen is turned on'
-                if (this.getChecked()) {
-                    // set toggle and apply parameters
-                    this.toggleOn();
-                }
-                // if 'site is not live'
-                else {
-                    // set toggle and apply parameters
-                    this.toggleOff();
-                }
-                this.applyParameters();
+            // if 'nextGen is turned on'
+            if (this.getChecked()) {
+                // set toggle and apply parameters
+                this.toggleOn();
             }
+            // if 'site is not live'
+            else {
+                // set toggle and apply parameters
+                this.toggleOff();
+            }
+            this.applyParameters();
+
         },
         cacheDOM: function () {
             this.$toolsPanel = jQuery('#myToolbox');
@@ -770,33 +782,11 @@ if (!em && sv && !pw) {
         },
         addTool: function () {
             // add to main toolbox
-            //            this.$toolsPanel.append(autofillToggle.config.$autofillToggleContainer);
             $tb.append(autofillToggle.config.$autofillToggleContainer);
         },
         bindEvents: function () {
             // bind FA toggle with 'flipTheSwitch' action
             autofillToggle.config.$autofillToggleContainer.on('click', this.flipTheSwitch.bind(this));
-        },
-        //            hideFeature: function () {
-        //                // hides feature if viewing live site
-        //                if (this.siteState() === 'LIVE') {
-        //                    autofillToggle.config.$autofillToggleContainer.toggle();
-        //                }
-        //            },
-        ifLive: function () {
-            // remove tool if the site is live
-            if (this.liveSite) {
-                jQuery(this).remove();
-            }
-        },
-        // ---------
-        //test
-        // -----------
-        returnParameters: function () {
-            if (this.getChecked()) {
-                return true;
-            }
-            return false;
         },
         // ----------------------------------------
         // tier 2 functions
@@ -852,47 +842,18 @@ if (!em && sv && !pw) {
                 if (url.indexOf('&disableAutofill=true') >= 0) {
                     newURL = url.replace('&disableAutofill=true', '');
                     console.log('disableAutofill TRUE parameter found, removing');
-                    //                        window.location.href = newURL;
                     this.reloadPage('reload', newURL);
                 } else if (url.indexOf('&disableAutofill=false') >= 0) {
                     newURL = url.replace('&disableAutofill=false', '');
                     console.log('disableAutofill FALSE parameter found, removing');
-                    //                        window.location.href = newURL;
                     this.reloadPage('reload', newURL);
                 }
-                /*
-                                            if (url.indexOf('disableAutofill=true') > 0) {
-                                                // disableAutofill parameter = TRUE
-                                                newURL = url.replace('disableAutofill=true', 'disableAutofill=false');
-                                                console.log('disableAutofill parameter found, turing off');
-                                                window.location.href = newURL;
-                                            } else if (url.indexOf('disableAutofill=false') > 0) {
-                                                // if disableAutofill = FALSE, do nothing
-                                                console.log('disableAutofill parameter found, do nothing');
-                                            }
-                */
             }
             // if 'parameters not found in URL' AND 'applyAutofill toggle is turned off'
             else if (!hasParameters && !applyAutofill) {
                 // if disableAutofill IS NOT in the URL, add disableAutofill=false
                 console.log('disableAutofill parameter not found, do nothing');
-                //                    window.location.search += '&disableAutofill=false';
-                //                    this.reloadPage('search', '&disableAutofill=false');
             }
-            // ----------------------------------------
-            // START WOKRING CODE
-            // ----------------------------------------
-            // apply parameters only if DOESN'T already have parameters &&
-            // site state IS NOT LIVE &&
-            // toggled ON
-            /*
-            if ((!hasParameters) && (siteState !== 'LIVE') && (applyAutofill)) {
-                window.location.search += '&disableAutofill=true';
-            }
-            */
-            // ----------------------------------------
-            // END WORKING CODE
-            // ----------------------------------------
         },
         reloadPage: function (type, newURL) {
             if (type === 'reload') {
@@ -919,12 +880,6 @@ if (!em && sv && !pw) {
         // tier 3 functions
         // ----------------------------------------
         hasParameters: function () {
-            // determine if site URL already has custom parameters
-            //                if (window.location.href.indexOf('&disableAutofill=false') >= 0) {
-            //                    return true;
-            //                } else {
-            //                    return false;
-            //                }
             if (window.location.href.indexOf('disableAutofill=') >= 0) {
                 return true;
             } else {
@@ -959,9 +914,9 @@ if (!em && sv && !pw) {
                 $refreshContainer: jQuery('<div>').attr({
                     id: 'refreshMe'
                 }).css({
-                    position: 'fixed',
+                    position: 'absolute',
                     right: '30px',
-                    top: '45%',
+                    top: '-50px',
                     'z-index': '1000000'
                 }),
                 $activateButt: jQuery('<button>').attr({
@@ -979,7 +934,6 @@ if (!em && sv && !pw) {
             };
         },
         cacheDOM: function () {
-            //            this.$otherToolsPanel = jQuery('#myToolbox');
             this.$toolbarStyles = jQuery('#qa_toolbox');
         },
         buildTool: function () {
@@ -987,7 +941,6 @@ if (!em && sv && !pw) {
             refreshPage.config.$refreshContainer.append(refreshPage.config.$activateButt);
         },
         addTool: function () {
-            //            this.$otherToolsPanel.append(refreshPage.config.$refreshContainer);
             $tb.append(refreshPage.config.$refreshContainer);
         },
         bindEvents: function () {
@@ -1002,7 +955,9 @@ if (!em && sv && !pw) {
             window.location.reload(true);
         }
     };
+
     // ---------------------------------------- Spell Check ----------------------------------------
+
     var $sc_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'spellCheck',
@@ -1021,6 +976,7 @@ if (!em && sv && !pw) {
         });
         newTab = new GM_openInTab(scSite, 'insert');
     });
+
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- 404 checker ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
@@ -1238,9 +1194,11 @@ if (!em && sv && !pw) {
             }
         }
     });
+
     // ----------------------------------------
     // Test WebPage
     // ----------------------------------------
+
     var $wpt_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'testPage',
@@ -1361,18 +1319,22 @@ if (!em && sv && !pw) {
     // initialize refresh button tool
     refreshPage.init();
     jQuery($tb)
-        .append($nextGenCheck)
         .append($sn_butt)
         .append($lc_butt)
         .append($ic_butt)
         .append($opc_butt)
-        //        .append($af_butt)
         .append($sc_butt)
         .append($404checker_butt)
         .append($wpt_butt)
         .append($toggleSettings) // new
         .append($wptInput)
         .append($version);
+
+    // hide nextgen checkbox if the site is live
+    if (cmv !== 'LIVE') {
+        jQuery($tb).append($nextGenCheck);
+    }
+
     jQuery($tb).children('.myEDOBut:even').css({
         background: 'linear-gradient(to left,#00d2ff 0,#3a7bd5 100%)'
     });
