@@ -72,7 +72,8 @@
 ![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
 
 Link to Latest Toolbar Code:<br>
-<a href="https://github.com/cirept/NextGen/blob/master/nextGen_meta.js" target="_blank">https://github.com/cirept/NextGen/blob/master/nextGen_meta.js *link will open in a new window*</a>
+https://github.com/cirept/NextGen/blob/master/nextGen_meta.js<br>
+*mouse wheel click to open in a new tab*
 
 <br>
 
