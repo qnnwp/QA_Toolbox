@@ -89,21 +89,17 @@ Show Navigation Functionality | Show Navigation Legend
 ===
 <br>
 <br>
-<br>
 ### Link checker<br>
 All links on the page will be highlighted with specific colors according to the validity of the link.
 <br>
 <br>
 **Features**
 <br>
-<br>
 *'HAS NO title text'*<br>
 >All links that DO NOT HAVE title text in the link will be flagged<br>
 <br>
-<br>
 *'HAS title text'*<br>
 >All links that HAVE title text in the html code will be flagged<br>
-<br>
 <br>
 *'OPENS IN A NEW WINDOW'*<br>
 >All links that have 'targets' with these values will be flagged<br>
@@ -111,10 +107,8 @@ All links on the page will be highlighted with specific colors according to the 
 >_new<br>
 >custom<br>
 <br>
-<br>
 *'EMPTY OR UNDEFINED URL'*<br>
 >All links that do not contain an href value will be flagged<br>
-<br>
 <br>
 *'VERIFY URL'*<br>
 >All links that have href these values will be flagged<br>
@@ -122,16 +116,16 @@ All links on the page will be highlighted with specific colors according to the 
 >f_<br>
 >www<br>
 >http<br>
-
-
+<br>
+<br>
 Link Checker Functionality | Link Checker Legend
 ----------------------------- | ----------------------
 ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
-
-
+<br>
+<br>
 #### TIP:<br>
 *Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
-
+<br>
 <br>
 ===
 ===
