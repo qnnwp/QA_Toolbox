@@ -25,8 +25,9 @@
 <br>
 <br>
 
-*Need Tampermonkey Extension/Add-on*
+*Tampermonkey is required for this, Please install*
 
+*Install instructions*
 [Tampermonkey for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
 
 [Tampermonkey for FireFox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
