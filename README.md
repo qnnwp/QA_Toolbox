@@ -282,4 +282,4 @@ By default the testing is set to IE11, please do not change this unless necessar
 
 WebPageTest Settings | WebPageTest Prompt
 ----------------------------- | ----------------------
-![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/webPageTestPrompt.png)
+![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestPrompt.png)
