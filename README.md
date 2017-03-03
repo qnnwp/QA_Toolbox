@@ -52,9 +52,9 @@ Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 <br>
 <br>
 
-----
-----
-----
+---
+---
+---
 
 <br>
 <br>
@@ -70,10 +70,18 @@ The navigation menu will display all all sub-navigation items.  This will allow 
 1. When clicking on any subnavigation item, it will turn the link a different color.<br>
    * Added to help keep track of what links you have already checked.
 
+
+Show Navigation Functionality | Show Navigation Legend
+----------------------------- | ----------------------
+![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
+
 #### TIP:<br>
 *Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
-----
+<br>
+===
+===
+<br>
 
 ### Link checker<br>
 All links on the page will be highlighted with specific colors according to the validity of the link.
@@ -100,17 +108,33 @@ All links on the page will be highlighted with specific colors according to the 
 >#<br>
 >f_<br>
 >www<br>
->http
+>http<br>
+
+
+Link Checker Functionality | Link Checker Legend
+----------------------------- | ----------------------
+![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
 
 #### TIP:<br>
 *Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
-----
+<br>
+===
+===
+<br>
 
 ### Image Checker<br>
 All images on the page will be highlighted in specific colors that tell the user, at a glance, what images have and do not have alt text
 
-----
+
+Image Checker Functionality | Image Checker Legend
+----------------------------- | ----------------------
+![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png)
+
+<br>
+===
+===
+<br>
 
 ### Spellcheck Page<br>
 This tool will send the current page to be spell checked via third party website.<br>
@@ -119,7 +143,10 @@ This tool will send the current page to be spell checked via third party website
 
 A new tab will open with the page already queued up for spell checking.  Once the spell checking is complete the page will autofill with all the ***possible*** miss-spelled words.
 
-----
+<br>
+===
+===
+<br>
 
 ### 404 Checker<br>
 All the links on the page will be tested for validity and highlight the links according to the result.
@@ -143,7 +170,15 @@ All the links on the page will be tested for validity and highlight the links ac
 >Links that are meant for mobile devices
 >e.g. tel:+18009098244
 
-----
+
+404 Checker Functionality | 404 Checker Legend
+----------------------------- | ----------------------
+![404 Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/link404checker.png) | ![404 Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/link404checkerLegend.png)
+
+<br>
+===
+===
+<br>
 
 ### Web Page Test<br>
 Will send in a query to WebPageTest.org of the currently viewed page.
