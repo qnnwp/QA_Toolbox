@@ -92,7 +92,7 @@ https://github.com/cirept/NextGen/blob/master/nextGen_meta.js<br>
 
 <br>
 
-**6. Done.  The toolbar will show up on any Proof/Live CDK site**
+**6. Done.  The toolbar will show up on any Proof/Live CDK site** :thumbsup:
 
 <br>
 
