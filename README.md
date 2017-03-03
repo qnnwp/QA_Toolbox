@@ -61,7 +61,6 @@
 
 ![Click New UserScript Icon](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickNewScript.png)
 
-
 <br>
 
 ===
@@ -71,6 +70,9 @@
 ### 4. Paste the toolbar code into the text area
 
 ![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
+
+Link to Latest Toolbar Code:
+https://github.com/cirept/NextGen/blob/master/nextGen_meta.js
 
 <br>
 
