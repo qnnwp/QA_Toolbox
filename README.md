@@ -7,6 +7,8 @@
 <br>
 <br>
 
+## Table of Contents
+
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
 [Toolbar Instructions](#tool-descriptions)
