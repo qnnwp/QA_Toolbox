@@ -11,7 +11,7 @@
 
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
-[Toolbar Instructions](#tool-descriptions)
+[Tool Descriptions](#tool-descriptions)
 
 <br>
 <br>
