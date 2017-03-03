@@ -210,6 +210,10 @@ This tool will send the current page to be spell checked via third party website
 
 A new tab will open with the page already queued up for spell checking.  Once the spell checking is complete the page will autofill with all the ***possible*** miss-spelled words.
 
+Spell Check Results Example |
+----------------------------- |
+![Spell Check Results](https://cdn.rawgit.com/cirept/NextGen/367ce2a9/images/spellCheck.png) |
+
 
 <br>
 <br>
