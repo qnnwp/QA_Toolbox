@@ -1,15 +1,16 @@
 // ==UserScript==
 // @name NextGen QA Toolbar
 // @namespace www.cobaltgroup.com/
-// @version 3.2.1
+// @version 3.2.2
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
 // @description NextGen Migration Toolbar
 // @downloadURL https://rawgit.com/cirept/NextGen/master/nextGen_meta.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
+// @require https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
 // @require https://use.fontawesome.com/3953f47d82.js
-// @require https://cdn.rawgit.com/cirept/NextGen/v3.2.1/nextGen_ToolBox.js
+// @require https://cdn.rawgit.com/cirept/NextGen/v3.2.2/nextGen_ToolBox.js
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard
@@ -26,6 +27,11 @@
 // ----------------------------------------
 
 /*
+v3.2.2 changes (3/7/2017)
+----------------------------------------
+- Added "Choose Key" option
+-- Will address the "The test request will exceed the daily test limit for the given API key" that is received.
+
 v3.2.1 change (3/3/2017)
 ----------------------------------------
 - toolbar works on nextgen live sites
