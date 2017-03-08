@@ -1,4 +1,7 @@
 /*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document */
+
+// added 7th key to web page test tool
+
 (function () {
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -1732,6 +1735,7 @@
                         key_5: 'A.50f3e84b941c37c0abf2132f3b989196',
                         key_6: 'A.d78638331b63ece0ee419964818f8e8d',
                         key_7: 'A.517503243d1253bf66ea52d153905c41',
+                        key_8: 'A.7987f0cf2ec2ac0dc644ec9e6b54f883',
                     },
                     $keyTitle: jQuery('<div>').text('Choose Key'),
                     testURL: 'http://www.webpagetest.org/runtest.php?',
