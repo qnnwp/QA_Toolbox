@@ -1,15 +1,4 @@
 /*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document */
-var nextGen = document.firstChild.data,
-    isNextGenPlatform;
-console.log(isNextGenPlatform);
-if (nextGen) {
-    isNextGenPlatform = nextGen.indexOf('Next Gen') === -1 ? false : true;
-    console.log(isNextGenPlatform);
-} else {
-    console.log(isNextGenPlatform);
-    isNextGenPlatform = false;
-}
-
 (function () {
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +102,7 @@ if (nextGen) {
             toolbarStyles: function () {
                 QAtoolbox.config.$toolbarStyles
                     // general toolbox styles
-                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; font-size: 9.5px; z-index: 100000; margin: 0 0 5px 0; }')
+                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; font-size: 9.5px; z-index: 50000; margin: 0 0 5px 0; }')
                     .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 9.5px; line-height: 20px; position: fixed; text-transform: lowercase; width: 120px; z-index: 99999999; }')
                     .append('.toolsPanel { display: none; }')
                     // panel title styles // padding: 5px;
@@ -133,7 +122,7 @@ if (nextGen) {
                     .append('.myEDOBut:hover { background: linear-gradient(to left, #141E30 , #243B55) !important; }')
                     // legend styles
                     .append('.legendTitle { font-weight: bold; }')
-                    .append('.legendContent { padding: 5px; }')
+                    .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
                     .append('#legendContainer { font-family: "Montserrat"; font-size: 12px; position: fixed; right: 115px; bottom: 20px; width: 260px; z-index: 99999999; }')
                     .append('.legend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
@@ -417,7 +406,7 @@ if (nextGen) {
                 hTags.config.$hTags.on('click', this.showPanel);
             },
             showPanel: function () {
-                return hTags.config.$hTagDetails.slideToggle('1000');
+                return hTags.config.$hTagDetails.slideToggle(500);
             },
             returnTool: function () {
                 var panel = hTags.config.$hTagsContainer;
@@ -530,7 +519,7 @@ if (nextGen) {
                 return varList;
             },
             toggleFeature: function () {
-                return pageInformation.config.$pageInfo.slideToggle('1000');
+                return pageInformation.config.$pageInfo.slideToggle(500);
             },
             saveState: function (event) {
                 // get current state
@@ -658,7 +647,7 @@ if (nextGen) {
                 return varList;
             },
             toggleFeature: function () {
-                return qaTools.config.$mainToolsPanel.slideToggle('1000');
+                return qaTools.config.$mainToolsPanel.slideToggle(500);
             },
             saveState: function (event) {
                 // get current state
@@ -783,7 +772,7 @@ if (nextGen) {
                 }
             },
             showLegend: function () {
-                imageChecker.config.$legend.slideToggle('1000');
+                imageChecker.config.$legend.slideToggle(500);
             },
             toggleDisable: function () {
                 imageChecker.config.$activateButt.prop('disabled', function (index, value) {
@@ -1018,7 +1007,7 @@ if (nextGen) {
                 }
             },
             showLegend: function () {
-                linkChecker.config.$legend.slideToggle('1000');
+                linkChecker.config.$legend.slideToggle(500);
             },
             toggleDisable: function () {
                 linkChecker.config.$activateButt.prop('disabled', function (index, value) {
@@ -1234,6 +1223,219 @@ if (nextGen) {
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------- Outdated Link Checker ----------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------
+        outdatedLinks = {
+            init: function () {
+                this.createElements();
+                this.cacheDOM();
+                this.buildLegend();
+                this.addTool();
+                this.bindEvents();
+                this.addStyles();
+            },
+            // ----------------------------------------
+            // tier 1 functions
+            // ----------------------------------------
+            createElements: function () {
+                outdatedLinks.config = {
+                    $activateButt: jQuery('<button>').attr({
+                        class: 'myEDOBut',
+                        id: 'outdatedLinks',
+                        title: 'Outdated Links'
+                    }).text('Outdated Links'),
+                    $offButt: jQuery('<input>').attr({
+                        type: 'button',
+                        class: 'myEDOBut offButt',
+                        value: 'Turn Off'
+                    }),
+                    $legend: jQuery('<div>').attr({
+                        class: 'legend',
+                        id: 'outdatedLinkLegend'
+                    }),
+                    $legendTitle: jQuery('<div>').attr({
+                        class: 'legendTitle'
+                    }).text('Outdated Link Checker Legend'),
+                    $legendList: jQuery('<ul>').attr({
+                        class: 'legendList'
+                    }),
+                    $legendContent: {
+                        'supportedPage': 'Supported Page',
+                        'oldPage': 'Old Page'
+                    }
+                };
+            },
+            cacheDOM: function () {
+                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$toolsPanel = jQuery('#mainTools');
+                this.$legendContainer = jQuery('#legendContainer');
+            },
+            buildLegend: function () {
+                outdatedLinks.config.$legend
+                    // attach legend title
+                    .append(outdatedLinks.config.$legendTitle)
+                    // attach list
+                    .append(outdatedLinks.config.$legendList)
+                    // attach turn off button
+                    .append(outdatedLinks.config.$offButt);
+                // fill list
+                this.buildLegendContent();
+            },
+            addTool: function () {
+                this.$toolsPanel.append(outdatedLinks.config.$activateButt);
+                this.$legendContainer.append(outdatedLinks.config.$legend);
+                this.datedPagesDoc = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/dated_pages.txt';
+            },
+            bindEvents: function () {
+                outdatedLinks.config.$activateButt.on('click', this.highlightLinks.bind(this));
+                outdatedLinks.config.$activateButt.on('click', this.toggleFeatures);
+                outdatedLinks.config.$offButt.on('click', this.toggleFeatures);
+                outdatedLinks.config.$offButt.on('click', this.removeDOMelements);
+            },
+            addStyles: function () {
+                this.$toolbarStyles
+                    .append('.supportedPage { background: rgba(146, 232, 66, .75) !important; color: black !important; }')
+                    .append('.oldPage { background: rgba(255, 124, 216, .75) !important; }');
+            },
+            highlightLinks: function () {
+                var self = this;
+                jQuery.get(this.datedPagesDoc, function (data) {
+                    self.searchLinks(data);
+                });
+            },
+            // ----------------------------------------
+            // tier 2 functions
+            // ----------------------------------------
+            buildLegendContent: function () {
+                var $contentArray = outdatedLinks.config.$legendContent,
+                    key;
+                // loop through Legend Content list
+                for (key in $contentArray) {
+                    var value = $contentArray[key];
+                    // build listing element
+                    this.$listItem = jQuery('<li>').attr({
+                        class: 'legendContent ' + key
+                    }).append(value);
+                    // attach to legend list
+                    outdatedLinks.config.$legendList.append(this.$listItem);
+                }
+            },
+            toggleFeatures: function () {
+                outdatedLinks.config.$activateButt.prop('disabled', function (index, value) {
+                    return !value;
+                });
+                outdatedLinks.config.$legend.slideToggle(500);
+            },
+            searchLinkReturn: function (data) {
+                this.searchLinks(data);
+            },
+            searchLinks: function (data) {
+                var datedPages,
+                    datedPagesLength,
+                    count,
+                    currPage,
+                    z = 0; // datedPage links for loop counter
+
+                datedPages = this.oldPages(data);
+                datedPagesLength = datedPages.length;
+
+                for (z; z < datedPagesLength; z += 1) {
+                    currPage = datedPages[z];
+                    count = this.highlightDatadPages(currPage);
+                    console.log('matches found for ' + currPage + ' : ' + count);
+                }
+            },
+            oldPages: function (data) {
+                var datedPages;
+                // create array seperating each 'page' by the '-=-='
+                data = data.replace(/\r?\n|\r/g, '');
+                datedPages = data.split('-=-=');
+                return datedPages;
+            },
+            highlightDatadPages: function (currPage) {
+                var pageLinks = jQuery('body a'),
+                    pageLinksLength = pageLinks.length,
+                    b = 0, // pageLinks links for loop counter;
+                    counter = 0,
+                    isImageLink, currLink, $currLink, h, w, href, findThis;
+
+                // looping through all links on the page
+                for (b; b < pageLinksLength; b += 1) {
+                    isImageLink = false;
+                    currLink = pageLinks[b];
+                    $currLink = jQuery(currLink);
+
+                    if (($currLink.has('img').length)) {
+                        // grab width and height of image
+                        w = $currLink.has('img').width();
+                        h = $currLink.height();
+                        // create a div overlay with the same height and width of the image
+                        this.addLinkDiv(currLink, w, h);
+                        isImageLink = true;
+                    }
+
+                    if (($currLink.attr('href'))) {
+                        href = $currLink.attr('href').toLowerCase();
+                        findThis = currPage.toLowerCase();
+                        // if current link HAS an href
+                        if (href.indexOf(findThis) >= 0) {
+                            // if MATCH IS FOUND
+                            if (isImageLink) {
+                                // if the link has an IMAGE apply class to div overlay
+                                $currLink
+                                    .find('.linkOverlay')
+                                    .addClass('oldPage');
+                                counter += 1;
+                            } else {
+                                // if link does not have an image, apply directly to the link
+                                $currLink.addClass('oldPage');
+                                counter += 1;
+                            }
+                            continue;
+                        } else {
+                            if (isImageLink) {
+                                // if the link has an IMAGE apply class to div overlay
+                                $currLink
+                                    .find('.linkOverlay')
+                                    .addClass('supportedPage');
+                            } else {
+                                // if link does not have an image, apply directly to the link
+                                $currLink.addClass('supportedPage');
+                            }
+                        }
+                    }
+                }
+                return counter;
+            },
+            addLinkDiv: function (elem, width, height) {
+                var $linkOverlay = jQuery('<div>').attr({
+                    class: 'siteLink linkOverlay'
+                }).css({
+                    width: width + 'px',
+                    height: height + 'px',
+                    'text-align': 'center',
+                    'vertical-align': 'middle',
+                    'line-height': height + 'px',
+                    'z-index': '2',
+                    color: '#000000 !important',
+                    'font-weight': 'bold'
+                });
+                jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
+            },
+            removeDOMelements: function () {
+                var $pageLinks = jQuery('body a'),
+                    iaLength = $pageLinks.length,
+                    a = 0;
+                for (a; a < iaLength; a += 1) {
+                    jQuery($pageLinks[a])
+                        .removeClass('oldPage')
+                        .removeClass('supportedPage');
+                }
+                jQuery('body').find('.imgOverlay').remove();
+            }
+        },
+
+        // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Show Navigation (highlight major pages) ----------------------------------------
         //------------------------------------------------------------------------------------------------------------------------
         showNavigation = {
@@ -1280,12 +1482,18 @@ if (nextGen) {
             },
             cacheDOM: function () {
                 this.$nav = jQuery('#pmenu');
-                this.$navTabs = jQuery(this.$nav).find('ul');
-                this.$navTabsLinks = jQuery(this.$navTabs).find('a[href]');
+                this.$navTabs = this.$nav.find('ul');
+                this.$navTabsLinks = this.$navTabs.find('a[href]');
                 this.nlLength = this.$navTabsLinks.length;
                 this.$toolbarStyles = jQuery('#qa_toolbox');
                 this.$toolsPanel = jQuery('#mainTools');
                 this.$legendContainer = jQuery('#legendContainer');
+                this.nextGen = document.firstChild.data;
+                this.isNextGenPlatform = this.nextGen.indexOf('Next Gen') === -1 ? false : true;
+                this.$navItems = jQuery('.header .menu nav ul li');
+                this.$navItemsLinks = this.$navItems.find('a');
+                this.navItemsLength = this.$navItemsLinks.length;
+                this.$subNavMenuContainer = this.$navItems.find('ul');
             },
             buildLegend: function () {
                 showNavigation.config.$legend
@@ -1319,7 +1527,9 @@ if (nextGen) {
                     .append('.subNav { background: linear-gradient(to left, #000000 , #434343) !important; color: #ffffff !important; }')
                     .append('.majorPage { color: #ffffff !important; background: linear-gradient(to left, #ffb347 , #ffcc33) !important; }')
                     .append('.showNav { display: block !important; }')
-                    .append('.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)), #ffffff !important; color: #999999 !important; }'); // end of addStyles
+                    .append('.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)), #ffffff !important; color: #999999 !important; }')
+                    .append('.showNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; }')
+                    .append('.showNavAdd { width: 150px !important; padding: 0 !important; font-size: 15px !important; }'); // end of addStyles
             },
             // ----------------------------------------
             // tier 2 functions
@@ -1339,10 +1549,18 @@ if (nextGen) {
                 }
             },
             toggleFeatures: function () {
-                this.$navTabsLinks.toggleClass('subNav');
-                this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
-                this.$navTabs.toggleClass('showNav');
-                showNavigation.config.$legend.slideToggle('1000');
+                var isNextGen = this.isNextGenPlatform;
+
+                if (isNextGen) {
+                    this.$navItems.addClass('showNavAdd');
+                    this.$subNavMenuContainer.addClass('showNav');
+                }
+                if (!isNextGen) {
+                    this.$navTabsLinks.toggleClass('subNav');
+                    this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
+                    this.$navTabs.toggleClass('showNav');
+                }
+                showNavigation.config.$legend.slideToggle(500);
             },
             toggleDisable: function () {
                 showNavigation.config.$activateButt.prop('disabled', function (index, value) {
@@ -1350,14 +1568,23 @@ if (nextGen) {
                 });
             },
             bindClicks: function () {
-                var i = 0;
-                for (i; i < this.nlLength; i++) {
-                    jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
+                var i = 0,
+                    isNextGen = this.isNextGenPlatform;
+
+                if (isNextGen) {
+                    for (i; i < this.navItemsLength; i += 1) {
+                        jQuery(this.$navItemsLinks[i]).on('mousedown', this.linkChecked(this.$navItemsLinks[i]));
+                    }
+                }
+                if (!isNextGen) {
+                    for (i; i < this.nlLength; i += 1) {
+                        jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
+                    }
                 }
             },
             unbindClicks: function () {
                 var i = 0;
-                for (i; i < this.nlLength; i++) {
+                for (i; i < this.nlLength; i += 1) {
                     jQuery(this.$navTabsLinks[i]).off('click');
                 }
                 // remove link checked class
@@ -1554,7 +1781,7 @@ if (nextGen) {
             // tier 2 functions
             // ----------------------------------------
             toggleFeature: function () {
-                speedtestPage.config.$panelContainer.slideToggle('1000');
+                speedtestPage.config.$panelContainer.slideToggle(500);
             },
             storeData: function () {
                 // save user input
@@ -1692,7 +1919,7 @@ if (nextGen) {
                 return varList;
             },
             toggleFeature: function () {
-                return otherTools.config.$otherToolsPanel.slideToggle('1000');
+                return otherTools.config.$otherToolsPanel.slideToggle(500);
             },
             saveState: function (event) {
                 // get current state
@@ -2194,13 +2421,13 @@ if (nextGen) {
                     i = 0,
                     x = 0;
                 if (mArr.length >= 3) {
-                    for (var b = 1; b < mArr.length; b++) {
+                    for (var b = 1; b < mArr.length; b += 1) {
                         model += mArr[b];
                     }
                 } else {
                     model = mArr[mArr.length - 1];
                 }
-                for (x; x < oLen; x++) {
+                for (x; x < oLen; x += 1) {
                     if (mArr[0].indexOf(ar[x]) >= 0) {
                         make = ar[x];
                         break;
@@ -2211,7 +2438,7 @@ if (nextGen) {
                 case "Chevrolet":
                     len = chevrolet.length;
                     i = 0;
-                    for (i; i < len; i++) {
+                    for (i; i < len; i += 1) {
                         if (chevrolet[i].url.indexOf(model) >= 0) {
                             modelURL = chevrolet[i].url;
                             break;
@@ -2221,7 +2448,7 @@ if (nextGen) {
                 case "GMC":
                     len = gmc.length;
                     i = 0;
-                    for (i; i < len; i++) {
+                    for (i; i < len; i += 1) {
                         if (gmc[i].url.indexOf(model) >= 0) {
                             modelURL = gmc[i].url;
                             break;
@@ -2231,7 +2458,7 @@ if (nextGen) {
                 case "Cadillac":
                     len = cadillac.length;
                     i = 0;
-                    for (i; i < len; i++) {
+                    for (i; i < len; i += 1) {
                         if (cadillac[i].url.indexOf(model) >= 0) {
                             modelURL = cadillac[i].url;
                             break;
@@ -2241,7 +2468,7 @@ if (nextGen) {
                 case "Hyundai":
                     len = hyundai.length;
                     i = 0;
-                    for (i; i < len; i++) {
+                    for (i; i < len; i += 1) {
                         if (hyundai[i].url.indexOf(model) >= 0) {
                             modelURL = hyundai[i].url;
                             break;
@@ -2251,7 +2478,7 @@ if (nextGen) {
                 case "Volkswagen":
                     len = volkswagen.length;
                     i = 0;
-                    for (i; i < len; i++) {
+                    for (i; i < len; i += 1) {
                         if (volkswagen[i].url.indexOf(model) >= 0) {
                             modelURL = volkswagen[i].url;
                             break;
@@ -2261,7 +2488,7 @@ if (nextGen) {
                 case "Buick":
                     len = buick.length;
                     i = 0;
-                    for (i; i < len; i++) {
+                    for (i; i < len; i += 1) {
                         if (buick[i].url.indexOf(model) >= 0) {
                             modelURL = buick[i].url;
                             break;
@@ -2317,8 +2544,8 @@ if (nextGen) {
                     nURL;
                 ezURL = ezURL.filter(Boolean);
                 nURL = ezURL[0].split('_');
-                for (var i = 0; i < nURL.length; i++) {
-                    for (var j = 0; j < removeThese.length; j++) {
+                for (var i = 0; i < nURL.length; i += 1) {
+                    for (var j = 0; j < removeThese.length; j += 1) {
                         if (nURL[i] === removeThese[j]) {
                             nURL.splice(i, 1);
                         }
@@ -2328,7 +2555,7 @@ if (nextGen) {
                     x = 0,
                     findThis = "ModelDetails",
                     actualURL;
-                for (x; x < len; x++) {
+                for (x; x < len; x += 1) {
                     if (nURL[x] === findThis) {
                         actualURL = getURL(nURL[len - 1]);
                         return actualURL;
@@ -2387,7 +2614,7 @@ if (nextGen) {
         var ar = jQuery("#inputDisplay a"),
             len = ar.length,
             i = 0;
-        for (i; i < len; i++) {
+        for (i; i < len; i += 1) {
             if (seoSimplify.isUndefined(ar[i]) || seoSimplify.titleEmpty(ar[i])) {
                 var titleText = jQuery(ar[i]).text().toString().trim();
                 jQuery(ar[i]).attr('title', titleText.substr(0, 1).toUpperCase() + titleText.substr(1));
@@ -2765,7 +2992,7 @@ if (nextGen) {
                 }
             },
             showLegend: function () {
-                checkLinks.config.$legend.slideToggle('1000');
+                checkLinks.config.$legend.slideToggle(500);
             },
             separateID: function (webID) {
                 var split = webID.split('-');
@@ -3097,7 +3324,7 @@ if (nextGen) {
                 this.setToggle();
             },
             toggleFeature: function () {
-                return urlModifiers.config.$urlModPanel.slideToggle('1000');
+                return urlModifiers.config.$urlModPanel.slideToggle(500);
             },
             saveState: function (event) {
                 // get current state
@@ -3626,7 +3853,7 @@ if (nextGen) {
                 return varList;
             },
             toggleFeature: function () {
-                return toggles.config.$togglesPanel.slideToggle('1000');
+                return toggles.config.$togglesPanel.slideToggle(500);
             },
             saveState: function (event) {
                 // get current state
@@ -3680,7 +3907,7 @@ if (nextGen) {
                         position: 'fixed',
                         left: '0px',
                         top: '60px',
-                        'z-index': '1000000',
+                        'z-index': '500000',
                         display: 'none'
                     }).draggable({
                         containment: "body",
@@ -3956,7 +4183,7 @@ if (nextGen) {
                         position: 'absolute',
                         right: '-25px',
                         top: '-20px',
-                        'z-index': '1000000'
+                        'z-index': '500000'
                     }), // font awesome icon
                     $minimizeIcon: jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse" style="color: #ffffff"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
                         title: 'Click to Hide Toolbox',
@@ -4022,7 +4249,7 @@ if (nextGen) {
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- initialize tetra toolbox ----------------------------------------
+        // ---------------------------------------- tetra toolbox ----------------------------------------
         // ------------------------------------------------------------------------------------------------------------------------
         tetraToolbar = {
             init: function () {
@@ -4084,9 +4311,8 @@ if (nextGen) {
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- initialize next gen toolbox ----------------------------------------
+        // ---------------------------------------- next gen toolbox ----------------------------------------
         // ------------------------------------------------------------------------------------------------------------------------
-
         nextgenToolbar = {
             init: function () {
                 //            if (!this.editMode() && this.isCDKsite() && !this.isMobile()) {
@@ -4096,18 +4322,19 @@ if (nextGen) {
 
                     // ----- main tools ----- //
                     qaTools.init(); // initialize main qa tools
-                    //                                    imageChecker.init(); // initialize image checker tool
-                    //                                    linkChecker.init(); // initialize link checker tool
-                    //                                    showNavigation.init(); // initialize show navigation tool
+                    imageChecker.init(); // initialize image checker tool
+                    linkChecker.init(); // initialize link checker tool
+                    outdatedLinks.init();
+                    showNavigation.init(); // initialize show navigation tool
                     spellCheck.init(); // initialize spell check tool
                     speedtestPage.init(); // initialize page test tool
                     checkLinks.init(); // initialize 404 checker / check links tool
                     //                    jQuery('#mainTools').append($404checker_butt); // 404 checker button
 
                     // ----- other tools ----- //
-                    //                    otherTools.init(); // initialize other tools
+                    otherTools.init(); // initialize other tools
                     //                viewMobile.init(); // initialize view mobile tool
-                    //                jQuery('#otherTools').append($seo_butt);
+                    jQuery('#otherTools').append($seo_butt);
                     //                jQuery('#otherTools').append($wo_butt);
 
                     // ----- toggle tools ----- //
@@ -4149,28 +4376,22 @@ if (nextGen) {
             }
         };
 
-    // -----------------------
-    // NEXTGEN TOOLBOX
-    // -----------------------
-    if (isNextGenPlatform) {
+    // ------------------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------- initialize toolbox ----------------------------------------
+    // ------------------------------------------------------------------------------------------------------------------------
+    var nextGen = document.firstChild.data,
+        isNextGenPlatform;
 
-        console.log('next gen toolbar');
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- START TETRA TOOLBOX PROGRAM ----------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------------
-        nextgenToolbar.init();
-
+    if (nextGen) {
+        isNextGenPlatform = nextGen.indexOf('Next Gen') === -1 ? false : true;
+    } else {
+        isNextGenPlatform = false;
     }
 
-    // -----------------------
-    // TETRA
-    // -----------------------
+    if (isNextGenPlatform) {
+        nextgenToolbar.init();
+    }
     if (!isNextGenPlatform) {
-
-        console.log('tetra toolbar');
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- START TETRA TOOLBOX PROGRAM ----------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------------
         tetraToolbar.init();
     }
 
