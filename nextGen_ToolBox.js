@@ -1489,11 +1489,18 @@
                 this.$toolsPanel = jQuery('#mainTools');
                 this.$legendContainer = jQuery('#legendContainer');
                 this.nextGen = document.firstChild.data;
-                this.isNextGenPlatform = this.nextGen.indexOf('Next Gen') === -1 ? false : true;
+                this.isNextGenPlatform = this.nextGenVar(this.nextGen);
                 this.$navItems = jQuery('.header .menu nav ul li');
                 this.$navItemsLinks = this.$navItems.find('a');
                 this.navItemsLength = this.$navItemsLinks.length;
                 this.$subNavMenuContainer = this.$navItems.find('ul');
+            },
+            nextGenVar: function (nextGen) {
+                if (nextGen) {
+                    return nextGen.indexOf('Next Gen') === -1 ? false : true;
+                } else {
+                    return false;
+                }
             },
             buildLegend: function () {
                 showNavigation.config.$legend
@@ -1552,8 +1559,8 @@
                 var isNextGen = this.isNextGenPlatform;
 
                 if (isNextGen) {
-                    this.$navItems.addClass('showNavAdd');
-                    this.$subNavMenuContainer.addClass('showNav');
+                    this.$navItems.toggleClass('showNavAdd');
+                    this.$subNavMenuContainer.toggleClass('showNav');
                 }
                 if (!isNextGen) {
                     this.$navTabsLinks.toggleClass('subNav');
@@ -3050,7 +3057,7 @@
                 this.addTool();
                 this.bindEvents();
                 this.displayPanel();
-                this.hidePanel();
+                //                this.hidePanel();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3114,12 +3121,15 @@
             },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
-                var currentToggle = getValue('autoApplyParameters', false);
+                //                var currentToggle = getValue('autoApplyParameters', false);
+                var currentToggle = getValue('autoApplyParameters');
 
-                if (currentToggle && !this.isLive) {
+                //                if (currentToggle && !this.isLive) {
+                if (currentToggle) {
                     this.toggleOn();
                     this.applyParameters();
-                } else if (!this.isLive) {
+                    //                } else if (!this.isLive) {
+                } else {
                     this.toggleOff();
                 }
             },
@@ -3192,8 +3202,8 @@
                     key = '',
                     matchesFound = [],
                     foundThis = false;
-                console.log(url);
-                console.log('----------------------------------------');
+                //                console.log(url);
+                //                console.log('----------------------------------------');
                 for (key in urlParameters2) {
                     findThis = key;
                     // this works with current URL
@@ -3390,7 +3400,7 @@
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                this.ifLive();
+                //                this.ifLive();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3425,17 +3435,17 @@
                 this.liveSite = this.cm.isLive();
             },
             setToggle: function () {
-                if (!this.liveSite) {
-                    if (this.getChecked()) { // if 'site is not live'
-                        // if 'nextGen is turned on'
-                        // set toggle and apply parameters
-                        this.toggleOn();
-                    } else {
-                        // if 'site is not live'
-                        // set toggle and apply parameters
-                        this.toggleOff();
-                    }
+                //                if (!this.liveSite) {
+                if (this.getChecked()) { // if 'site is not live'
+                    // if 'nextGen is turned on'
+                    // set toggle and apply parameters
+                    this.toggleOn();
+                } else {
+                    // if 'site is not live'
+                    // set toggle and apply parameters
+                    this.toggleOff();
                 }
+                //                }
             },
             addTool: function () {
                 // add to main toolbox
@@ -3515,7 +3525,7 @@
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                this.ifLive();
+                //                this.ifLive();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3545,15 +3555,15 @@
                     .append(m4Check.config.$m4Checkbox);
             },
             setToggle: function () {
-                if (!this.liveSite) { // if 'site is not live'
-                    if (this.getChecked()) { // if 'nextGen is turned on'
-                        // set toggle and apply parameters
-                        this.toggleOn();
-                    } else { // if 'site is not live'
-                        // set toggle and apply parameters
-                        this.toggleOff();
-                    }
+                //                if (!this.liveSite) { // if 'site is not live'
+                if (this.getChecked()) { // if 'nextGen is turned on'
+                    // set toggle and apply parameters
+                    this.toggleOn();
+                } else { // if 'site is not live'
+                    // set toggle and apply parameters
+                    this.toggleOff();
                 }
+                //                }
             },
             cacheDOM: function () {
                 this.$toolsPanel = jQuery('#urlModTools');
@@ -3637,7 +3647,7 @@
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                this.ifLive();
+                //                this.ifLive();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3667,15 +3677,15 @@
                     .append(autofillToggle.config.$autofillToggleIcon);
             },
             setToggle: function () {
-                if (!this.liveSite) { // if 'site is not live'
-                    if (this.getChecked()) { // if 'nextGen is turned on'
-                        // set toggle and apply parameters
-                        this.toggleOn();
-                    } else { // if 'site is not live'
-                        // set toggle and apply parameters
-                        this.toggleOff();
-                    }
+                //                if (!this.liveSite) { // if 'site is not live'
+                if (this.getChecked()) { // if 'nextGen is turned on'
+                    // set toggle and apply parameters
+                    this.toggleOn();
+                } else { // if 'site is not live'
+                    // set toggle and apply parameters
+                    this.toggleOff();
                 }
+                //                }
             },
             cacheDOM: function () {
                 this.$toolsPanel = jQuery('#urlModTools');
@@ -4265,7 +4275,6 @@
                     spellCheck.init(); // initialize spell check tool
                     speedtestPage.init(); // initialize page test tool
                     checkLinks.init(); // initialize 404 checker / check links tool
-                    //                    jQuery('#mainTools').append($404checker_butt); // 404 checker button
 
                     // ----- other tools ----- //
                     otherTools.init(); // initialize other tools
@@ -4283,6 +4292,8 @@
                     nextGenToggle.init(); // initialize nextGen toggle
                     m4Check.init(); // initialize milestone 4 module check box
                     autofillToggle.init(); // initialize autofill toggle
+
+                    // ----- added features ----- //
                     dynamicDisplay.init(); // initialize display information tool
 
                     // style buttons in toolbox
@@ -4324,17 +4335,16 @@
                     qaTools.init(); // initialize main qa tools
                     imageChecker.init(); // initialize image checker tool
                     linkChecker.init(); // initialize link checker tool
-                    outdatedLinks.init();
+                    outdatedLinks.init(); // initialize outdated link checker tool
                     showNavigation.init(); // initialize show navigation tool
                     spellCheck.init(); // initialize spell check tool
                     speedtestPage.init(); // initialize page test tool
                     checkLinks.init(); // initialize 404 checker / check links tool
-                    //                    jQuery('#mainTools').append($404checker_butt); // 404 checker button
 
                     // ----- other tools ----- //
                     otherTools.init(); // initialize other tools
                     //                viewMobile.init(); // initialize view mobile tool
-                    jQuery('#otherTools').append($seo_butt);
+                    //                                        jQuery('#otherTools').append($seo_butt);
                     //                jQuery('#otherTools').append($wo_butt);
 
                     // ----- toggle tools ----- //
@@ -4383,6 +4393,7 @@
         isNextGenPlatform;
 
     if (nextGen) {
+        console.log('next gen comment found');
         isNextGenPlatform = nextGen.indexOf('Next Gen') === -1 ? false : true;
     } else {
         isNextGenPlatform = false;
