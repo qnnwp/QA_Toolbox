@@ -104,7 +104,7 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
-### 5. Replace all text in textarea with the code you copied to your clipboard in the 1st step.
+### 5. Select all text in textarea and paste the code you copied in the 1st step.
 
 ![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
 
