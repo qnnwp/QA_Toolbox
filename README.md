@@ -1,9 +1,12 @@
 ---
 ---
 # Tool Descriptions
-[Tampermonkey Install Instructions](#tampermonkey-install-instructions)
-
-[Tool Descriptions](#tool-descriptions)
+[Show Navigation](#show-navigation)<br>
+[Link Checker](#show-navigation)<br>
+[Image Checker](#image-checker)<br>
+[Spell Checker](#spellcheck-page)<br>
+[404 Link Checker](#404-checker)<br>
+[WebPageTest](#web-page-test)
 ---
 ---
 
