@@ -102,6 +102,7 @@ Image Checker Functionality | Image Checker Legend
 ----------------------------- | ----------------------
 ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png)
 
+[Back to Top](#tool-descriptions)
 
 <br>
 <br>
