@@ -27,6 +27,9 @@
 
 Tampermonkey is a browser add-on that is used to run the toolbar on the webpage, please install the add-on
 
+<br>
+<br>
+
 ###Links to Browser Add-Ons<br>
 *Please middle wheel click on the mouse to open links in a new tab*<br>
 
@@ -45,13 +48,16 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 <br>
 <br>
 
+Once the Tampermonkey extension has been installed, please continue to the next set of instructions.
+
+<br>
+<br>
+
 ---
 ---
 ## UserScript Installation Instructions
 ---
 ---
-
-Once the Tampermonkey extension has been installed.
 
 <br>
 <br>
