@@ -1,112 +1,9 @@
 ---
 ---
-# Toolbar Information
----
----
-
-<br>
-<br>
-
-## Table of Contents
-
+# Tool Descriptions
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
 [Tool Descriptions](#tool-descriptions)
-
-<br>
-<br>
-
----
----
-## Tampermonkey Install Instructions
----
----
-
-<br>
-<br>
-
-*Tampermonkey is required for this*
-
-*Add on links*<br>
-[Tampermonkey for Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
-
-[Tampermonkey for FireFox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
-
-<br>
-
-====
-
-<br>
-
-### 1. Click the add-on icon once you have installed it into your browser
-
-![Click Addon Icon](https://cdn.rawgit.com/cirept/NextGen/master/images/clickIcon.png)
-
-<br>
-
-===
-
-<br>
-
-### 2. Click on 'Dashboard' to add a custom script
-
-![Click Dashboard](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickDashboard.png)
-
-<br>
-
-===
-
-<br>
-
-### 3. Click the icon to add a new userscript
-
-![Click New UserScript Icon](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickNewScript.png)
-
-<br>
-
-===
-
-<br>
-
-### 4. Paste the toolbar code into the text area
-
-![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
-
-Link to Latest Toolbar Code:<br>
-https://github.com/cirept/NextGen/blob/master/nextGen_meta.js<br>
-*'mouse wheel click' to open in a new tab*
-
-<br>
-
-===
-
-<br>
-
-### 5. Click the floppy disk to save your changes
-
-![Click Floppy Disk](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickSave.png)
-
-<br>
-
-===
-
-<br>
-
-**6. Done.  The toolbar will show up on any Proof/Live CDK site** :thumbsup:
-
-<br>
-
-#### TIP:<br>
-> If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
-Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
-
-
-<br>
-<br>
-
----
----
-## Tool Descriptions
 ---
 ---
 
@@ -114,7 +11,7 @@ Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 <br>
 
 
-### Show Navigation<br>
+## Show Navigation<br>
 
 
 The navigation menu will display all all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
@@ -130,7 +27,7 @@ Show Navigation Functionality | Show Navigation Legend
 ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
 
 
-#### TIP:<br>
+### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
@@ -144,7 +41,7 @@ Show Navigation Functionality | Show Navigation Legend
 <br>
 
 
-### Link checker<br>
+## Link checker<br>
 All links on the page will be highlighted with specific colors according to the validity of the link.
 
 **Features**
@@ -175,7 +72,7 @@ Link Checker Functionality | Link Checker Legend
 ----------------------------- | ----------------------
 ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
 
-#### TIP:<br>
+### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
@@ -189,7 +86,7 @@ Link Checker Functionality | Link Checker Legend
 <br>
 
 
-### Image Checker<br>
+## Image Checker<br>
 All images on the page will be highlighted in specific colors that tell the user, at a glance, what images have and do not have alt text
 
 Image Checker Functionality | Image Checker Legend
@@ -207,7 +104,7 @@ Image Checker Functionality | Image Checker Legend
 <br>
 
 
-### Spellcheck Page<br>
+## Spellcheck Page<br>
 This tool will send the current page to be spell checked via third party website.<br>
 
 
@@ -231,7 +128,7 @@ Spell Check Results Example |
 <br>
 
 
-### 404 Checker<br>
+## 404 Checker<br>
 All the links on the page will be tested for validity and highlight the links according to the result.
 
 
@@ -269,7 +166,7 @@ All the links on the page will be tested for validity and highlight the links ac
 <br>
 <br>
 
-### Web Page Test<br>
+## Web Page Test<br>
 Will send in a query to WebPageTest.org of the currently viewed page.
 
 
