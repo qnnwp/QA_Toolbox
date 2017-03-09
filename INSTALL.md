@@ -86,11 +86,19 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
-### 4. Open the link below in a new tab.  Copy the code and Paste the toolbar code into the text area
+### 4. Open the link below in a new tab.  Copy the code.
 
 Link to Latest Toolbar Code:<br>
-https://github.com/cirept/NextGen/blob/master/nextGen_meta.js<br>
+https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 *'mouse wheel click' to open in a new tab*
+
+<br>
+
+===
+
+<br>
+
+### 5. Replace all the text inside the textarea with the copied code.
 
 ![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
 
