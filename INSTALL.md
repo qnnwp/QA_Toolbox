@@ -72,7 +72,7 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 
 ===
 
-### 2. Once the extensions has been installed, Click the add-on icon in your browser
+### 2. Click the add-on icon in your browser
 
 ![Click Addon Icon](https://cdn.rawgit.com/cirept/NextGen/master/images/clickIcon.png)
 
