@@ -11,7 +11,7 @@
 
 [Tampermonkey Install Instructions](#tampermonkey-install-instructions)
 
-[Tool Descriptions](#tool-descriptions)
+[UserScript Installation Instructions](#userscript-installation-instructions)
 
 <br>
 <br>
@@ -41,10 +41,17 @@ For additional help installing Chrome Extensions, Please check out this guide : 
 For additiona help installing FireFox Extensions, Please check out this guide : [https://www.accessfirefox.org/Addons_Installation_Guide.php](https://www.accessfirefox.org/Addons_Installation_Guide.php)
 
 ####*ie11 does not support his extension*<br>
+
+<br>
 <br>
 
-====
+---
+---
+## UserScript Installation Instructions
+---
+---
 
+<br>
 <br>
 
 ### 1. Click the add-on icon once you have installed it into your browser
