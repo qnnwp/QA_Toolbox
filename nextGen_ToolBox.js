@@ -4624,10 +4624,10 @@
                 // hide / show main tool box
                 this.toggleBox();
                 // hide / show toggle button
-                dynamicDisplay.config.$showToolbox.toggle('slide', 500);
+                dynamicDisplay.config.$showToolbox.toggle('fade', 500);
             },
             toggleBox: function () {
-                this.$toolBoxContainer.toggle('slide', 500);
+                this.$toolBoxContainer.toggle('fade', 500);
             }
         },
 
