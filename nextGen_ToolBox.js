@@ -127,7 +127,7 @@
                     .append('.legendTitle { font-weight: bold; }')
                     .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
-                    .append('#legendContainer { font-family: "Montserrat"; font-size: 12px; position: fixed; right: 115px; bottom: 20px; width: 260px; z-index: 99999999; }')
+                    .append('#legendContainer { font-family: "Montserrat"; font-size: 12px; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }')
                     .append('.legend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
                     .append('.hint { font-size: 10px; font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
                     // toggle style
@@ -328,6 +328,7 @@
                 this.cacheDOM();
                 this.buildTool();
                 this.displayData();
+                this.highlightZero();
                 //                this.buildDetails();
                 //                this.bindEvents();
                 // return finished tool
@@ -347,7 +348,8 @@
                         id: 'hTags'
                     }).css({
                         background: 'white',
-                        'border-top': '1px solid #000000'
+                        'border-top': '1px solid #000000',
+                        'font-size': '15px'
                     }),
                     $hTagDetails: jQuery('<div>').attr({
                         class: 'tbInfo',
@@ -386,6 +388,14 @@
                     html += key + ' = ' + hTags.config.hTagsTotal[key] + '<br>';
                 }
                 hTags.config.$hTags.html(html);
+            },
+            // ----------------------------------------
+            // make each h tag display into its own div so that I can highlight the entire div and not just the number
+            // ----------------------------------------
+            highlightZero: function () {
+                var html = hTags.config.$hTags.html(),
+                    newHtml = html.replace('0', '<span style="background: orange;">0</span>');
+                hTags.config.$hTags.html(newHtml);
             },
             buildDetails: function () {
                 var html = '',
@@ -1064,7 +1074,7 @@
                     .append('.noTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
                     .append('.emptyTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
                     .append('.brokenURL { background: rgba(255, 55, 60, .75) !important; }')
-                    .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 1px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 1px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 1px rgb(255, 55, 60); }')
+                    .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
                     .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)) !important; color: #909090 !important; }'); // end of addStyles
             },
             isImageLink: function ($image) {
@@ -4541,10 +4551,12 @@
                     $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>').css({
                         'margin-left': '12px'
                     }),
-                    $hide: jQuery('<div>').css({
+                    $hide: jQuery('<div>').attr({
+                        id: 'hideContainer'
+                    }).css({
                         'font-size': '12px',
                         position: 'absolute',
-                        right: '-25px',
+                        //                        right: '-25px',
                         top: '-20px',
                         'z-index': '500000'
                     }), // font awesome icon
@@ -4582,8 +4594,16 @@
 
                 if (this.isNextGen === 'Tetra') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }'); // TETRA color
+                    QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px 10px; }'); // button position
+                    QAtoolbox.config.$toolbarStyles.append('#hideContainer { right: -25px; }'); // button position
+                    QAtoolbox.config.$toolbarStyles.append('#legendContainer  { right: 115px; }'); // legend position
                 } else if (this.isNextGen === 'Next Gen') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #02AAB0 , #00CDAC) }'); // NEXTGEN color
+                    QAtoolbox.config.$toolbarStyles.append('#toolboxContainer { right: 0%; }'); // toolbox location
+                    QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px -10px; }'); // button positions
+                    QAtoolbox.config.$toolbarStyles.append('#hideContainer { left: -25px; }'); // button positions
+                    QAtoolbox.config.$toolbarStyles.append('#legendContainer  { left: 115px; }'); // legend positions
+                    QAtoolbox.config.$toolbarStyles.append('#showToolbox  { right: 0%; }'); // hide/unhide button positions
                 }
             },
             bindEvents: function () {
