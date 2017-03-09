@@ -54,7 +54,7 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 <br>
 <br>
 
-### 1. Click the add-on icon once you have installed it into your browser
+### 1. Once the extensions has been installed, Click the add-on icon in your browser
 
 ![Click Addon Icon](https://cdn.rawgit.com/cirept/NextGen/master/images/clickIcon.png)
 
@@ -64,7 +64,8 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 
 <br>
 
-### 2. Click on 'Dashboard' to add a custom script
+### 2. Click on 'Dashboard' menu item<br>
+This will open a new tab with the extension dashboard displayed ***(seen in step 3)***
 
 ![Click Dashboard](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickDashboard.png)
 
@@ -74,7 +75,8 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 
 <br>
 
-### 3. Click the icon to add a new userscript
+### 3. Click the icon to add a new userscript<br>
+The icon is located next to "Install userscripts" tab.
 
 ![Click New UserScript Icon](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickNewScript.png)
 
@@ -84,13 +86,13 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 
 <br>
 
-### 4. Paste the toolbar code into the text area
-
-![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
+### 4. Open the link below in a new tab.  Copy the code and Paste the toolbar code into the text area
 
 Link to Latest Toolbar Code:<br>
 https://github.com/cirept/NextGen/blob/master/nextGen_meta.js<br>
 *'mouse wheel click' to open in a new tab*
+
+![Paste JS Code](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/pasteCode.png)
 
 <br>
 
