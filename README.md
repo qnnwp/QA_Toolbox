@@ -6,7 +6,7 @@
 [Image Checker](#image-checker)<br>
 [Spell Checker](#spellcheck-page)<br>
 [404 Link Checker](#404-checker)<br>
-[WebPageTest](#web-page-test)
+[WebPageTest](#web-page-test)<br>
 ---
 ---
 
