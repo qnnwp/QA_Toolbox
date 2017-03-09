@@ -10,6 +10,7 @@
 [404 Link Checker](#404-checker)<br>
 [WebPageTest](#web-page-test)<br>
 
+
 ---
 ---
 
@@ -36,6 +37,7 @@ Show Navigation Functionality | Show Navigation Legend
 ### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
+[Back to Top](#tool-descriptions)
 
 <br>
 <br>
@@ -81,6 +83,7 @@ Link Checker Functionality | Link Checker Legend
 ### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
+[Back to Top](#tool-descriptions)
 
 <br>
 <br>
@@ -123,6 +126,7 @@ Spell Check Results Example |
 ----------------------------- |
 ![Spell Check Results](https://cdn.rawgit.com/cirept/NextGen/367ce2a9/images/spellCheck.png) |
 
+[Back to Top](#tool-descriptions)
 
 <br>
 <br>
@@ -163,6 +167,8 @@ All the links on the page will be tested for validity and highlight the links ac
 ----------------------------- | ----------------------
 ![404 Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/link404checker.png) | ![404 Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/link404checkerLegend.png)
 
+[Back to Top](#tool-descriptions)
+
 <br>
 <br>
 
@@ -196,3 +202,5 @@ By default the testing is set to IE11, please do not change this unless necessar
 WebPageTest Settings | WebPageTest Prompt
 ----------------------------- | ----------------------
 ![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestPrompt.png)
+
+[Back to Top](#tool-descriptions)
