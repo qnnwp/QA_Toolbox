@@ -4,7 +4,7 @@
 # Tool Descriptions<br>
 **Quick Links**<br>
 [Show Navigation](#show-navigation)<br>
-[Link Checker](#show-navigation)<br>
+[Link Checker](#link-checker)<br>
 [Image Checker](#image-checker)<br>
 [Spell Checker](#spellcheck-page)<br>
 [404 Link Checker](#404-checker)<br>
