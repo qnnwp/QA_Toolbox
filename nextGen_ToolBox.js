@@ -1994,11 +1994,359 @@
                     openThis = this.siteURL + this.pageName + auto;
                 openNewTab(openThis);
             },
+        },
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------- SEO Simplify ----------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------------
+        seoSimplify = {
+            init: function () {
+                this.createElements();
+                this.buildElements();
+                this.getData();
+                this.cacheDOM();
+                this.addStyles();
+                this.addTool();
+                this.bindEvents();
+            },
+            // ----------------------------------------
+            // tier 1 functions
+            // ----------------------------------------
+            createElements: function () {
+                seoSimplify.config = {
+                    $activateButt: jQuery('<button>').attr({
+                        class: 'myEDOBut',
+                        id: 'simpleSEO',
+                        title: 'Simplify My SEO Text'
+                    }).text('SEO Simplify'),
+                    $removeBut: jQuery('<input>').attr({
+                        type: 'button',
+                        class: 'myEDOBut',
+                        value: 'REMOVE',
+                        id: 'removeDiv'
+                    }),
+                    $seoDisplay: jQuery('<div>').attr({
+                        class: 'inputDisplay'
+                    }),
+                    $seoContainer: jQuery('<div>').attr({
+                        id: 'inputContainer'
+                    }),
+                    oems: ['Chevrolet', 'Buick', 'Cadillac', 'GMC', 'Hyundai', 'Volkswagen'],
+                    vehicles: [],
+                    seoText: ''
+                };
+            },
+            buildElements: function () {
+                // attach seo display and remove button to container
+                seoSimplify.config.$seoContainer.append(seoSimplify.config.$seoDisplay);
+                seoSimplify.config.$seoContainer.append(seoSimplify.config.$removeBut);
+            },
+            getData: function () {
+                var filePath = '';
+                jQuery(seoSimplify.config.oems).each(function (index, model) {
+                    switch (model) {
+                    case 'Chevrolet':
+                        // vehicles/chevrolet.json
+                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/45858a25d100580860050568bfc31/e2e45858a25d100580860050568bfc31.json';
+                        seoSimplify.loadArray(filePath);
+                        break;
+                    case 'Buick':
+                        // vehicles/buick.json
+                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3cfa0a25d100581330050568b6442/e2e3cfa0a25d100581330050568b6442.json';
+                        seoSimplify.loadArray(filePath);
+                        break;
+                    case 'Cadillac':
+                        // vehicles/cadillac.json
+                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100582540050568ba825/e2e421a8a25d100582540050568ba825.json';
+                        seoSimplify.loadArray(filePath);
+                        break;
+                    case 'GMC':
+                        // vehicles/gmc.json
+                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3a4a8a25d100584040050568b5709/e2e3a4a8a25d100584040050568b5709.json';
+                        seoSimplify.loadArray(filePath);
+                        break;
+                    case 'Hyundai':
+                        // vehicles/hyundai.json
+                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/41208a25d100584040050568b5709/e2e41208a25d100584040050568b5709.json';
+                        seoSimplify.loadArray(filePath);
+                        break;
+                    case 'Volkswagen':
+                        // vehicles/volkswagen.json
+                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100584040050568b5709/e2e421a8a25d100584040050568b5709.json';
+                        seoSimplify.loadArray(filePath);
+                        break;
+                    }
+                });
+            },
+            cacheDOM: function () {
+                this.$otherToolsPanel = jQuery('#otherTools');
+                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.body = jQuery('body');
+            },
+            addStyles: function () {
+                // apply module styles to main tool bar style tag
+                this.$toolbarStyles
+                    // styles of colored overlay placed on images
+                    .append('.inputDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; background: rgb(180, 180, 180);}')
+                    .append('#inputContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
+                    .append('#removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}')
+                    // end of addStyles
+                ; // end
+            },
+            addTool: function () {
+                this.$otherToolsPanel.append(seoSimplify.config.$activateButt);
+            },
+            bindEvents: function () {
+                seoSimplify.config.$activateButt.on('click', this.simplifySEO.bind(this));
+                seoSimplify.config.$removeBut.on('click', this.removeDisplay.bind(this));
+                // add change to text area function
+                seoSimplify.config.$seoDisplay.on('click', this.changeToTextarea.bind(this));
+            },
+            // ----------------------------------------
+            // tier 2 functions
+            // ----------------------------------------
+            loadArray: function (filePath) {
+                jQuery.getJSON(filePath, function (data) {
+                    seoSimplify.config.vehicles.push(data);
+                });
+            },
+            simplifySEO: function () {
+                this.getInput();
+                this.cleanUpTags();
+                this.cleanUpLinks();
+                this.attachDisplayArea();
+                this.displayText();
+            },
+            removeDisplay: function () {
+                // remove display container
+                seoSimplify.config.$seoContainer.detach();
+                seoSimplify.config.$seoDisplay.empty();
+                //                seoSimplify.config.$removeBut.detach();
+            },
+            changeToTextarea: function (event) {
+                var $this = jQuery(event.currentTarget);
+                var input = seoSimplify.config.$seoDisplay.html(),
+                    $seoTextArea = jQuery('<textarea>').attr({
+                        class: 'inputDisplay'
+                    });
+                $seoTextArea.html(input);
+                jQuery($this).replaceWith($seoTextArea);
+                $seoTextArea.focus();
+                $seoTextArea.blur(this.revertDiv.bind(this));
+            },
+            // ----------------------------------------
+            // tier 3 functions
+            // ----------------------------------------
+            getInput: function () {
+                // clear data
+                seoSimplify.config.seoText = '';
+                //seoSimplify.config.seoText = "<div><style type='text/css'>span{font-size: bold;}</style><span title='' class='f-xx-small'>&nbsp;Welcome to %DEALER_NAME%, <i>you're one-stop-%CITY%-GM-shop!</i> We are proud to offer our <strong>huge</strong> selection of new and used vehicles to %CITY%, %STATE% and %DEALER_GEO_ONE% Chevrolet, Buick and GMC customers.<br> Laplante Auto also has GM-certified service, <a href='%LINKPAGENAME_PartsDepartment_LINKCONTEXTNAME_%'><u title=''>parts</u></a> and <a href='%LINKPAGENAME_Accessories_LINKCONTEXTNAME_%'><u>accessories</u></a>. Don't forget our financing options. We even sell tires to help you keep up with the changing seasons. Here at %DEALER_NAME% in %CITY% we are committed to helping you find the car of your dreams and keep it running for a long time. We also serve as a great dealer alternative for %DEALER_GEO_ONE% Chevrolet, Buick and GMC shoppers.&nbsp;</span></div>";
+                // prompt user for input
+                seoSimplify.config.seoText = jQuery.trim(prompt('Enter Your SEO Text - HTML format'));
+            },
+            cleanUpTags: function () { // get rid of repeat functionality
+                var input = seoSimplify.config.seoText,
+                    //                    $input = jQuery(input);
+                    $input = jQuery('<div>').empty();
+                $input.html(input);
+
+                // remove all empty elements
+                $input.find('*:empty').remove();
+                $input.find('*').each(function (index, value) {
+                    if (jQuery.trim(jQuery(value).html()) === '') {
+                        jQuery(value).remove();
+                    }
+                });
+                $input.find('style').remove();
+                // remove all style attributes
+                $input.find('*').removeAttr('style');
+                // remove all br elements
+                $input.find('br').remove();
+                // remove all font tags
+                $input.find('font').replaceWith(function () {
+                    return jQuery(this).html();
+                });
+                // remove all &nbsp; with ' '
+                //                $input.html($input.html().replace(/&nbsp;/gi, ' '));
+                // remove all span tags
+                $input.find('span').replaceWith(function () {
+                    return jQuery(this).html();
+                });
+                // remove all u tags
+                $input.find('u').replaceWith(function () {
+                    return jQuery(this).html();
+                });
+                // remove all b tags
+                $input.find('b').replaceWith(function () {
+                    return jQuery(this).html();
+                });
+                // remove all strong tags
+                $input.find('strong').replaceWith(function () {
+                    return jQuery(this).html();
+                });
+                // remove all i tags
+                $input.find('i').replaceWith(function () {
+                    return jQuery(this).html();
+                });
+                // replace all div tags with p tags
+                $input.find('center').replaceWith(function () {
+                    return jQuery('<p/>').append(jQuery(this).html());
+                });
+                // save cleaner input
+                seoSimplify.config.seoText = $input;
+            },
+            cleanUpLinks: function () {
+                var $input = seoSimplify.config.seoText,
+                    allLinks = $input.find('a'),
+                    len = allLinks.length,
+                    i = 0;
+
+                for (i; i < len; i++) {
+                    var $this = jQuery(allLinks[i]);
+                    // check if title is empty or undefined
+                    if (seoSimplify.isUndefined($this, 'title') || seoSimplify.isEmpty($this, 'title')) {
+                        // sets title to link text
+                        var titleText = $this.text().toString().trim();
+                        $this.attr('title', titleText.substr(0, 1).toUpperCase() + titleText.substr(1));
+                    }
+                    // check if href is empty or undefined
+                    if (seoSimplify.isUndefined($this, 'href') || seoSimplify.isEmpty($this, 'href')) {
+                        // sets href to # if none exists
+                        $this.attr('href', '#');
+                    }
+
+                    var linkURL = $this.attr('href');
+                    $this.attr('href', seoSimplify.refineURL(linkURL));
+                    seoSimplify.emptyTarget($this);
+                }
+                // save cleaner input
+                seoSimplify.config.seoText = $input;
+            },
+            attachDisplayArea: function () {
+                //                this.body.prepend(seoSimplify.config.$seoContainer);
+                this.body.append(seoSimplify.config.$seoContainer);
+            },
+            displayText: function () {
+                // attach input to display
+                seoSimplify.config.$seoDisplay.empty();
+                seoSimplify.config.$seoDisplay.append(seoSimplify.config.seoText);
+            },
+            revertDiv: function (event) {
+                var $this = jQuery(event.target),
+                    $thisText = jQuery(event.target).text(),
+                    //                 $replacementArea = jQuery('<div>').attr({
+                    //                    class: 'inputDisplay'
+                    //                }).text('');
+                    $replacementArea = seoSimplify.config.$seoDisplay;
+
+                $replacementArea.html($thisText);
+
+                jQuery($this).replaceWith($replacementArea);
+
+                $replacementArea.click(this.changeToTextarea.bind(this));
+            },
+            // ----------------------------------------
+            // tier 4 functions
+            // ----------------------------------------
+            isUndefined: function (elem, attr) {
+                if (jQuery(elem).attr(attr) !== undefined) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            isEmpty: function (elem, attr) {
+                if (jQuery(elem).attr(attr) === '') {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            refineURL: function (url) {
+                var ezURL = url.split('%'),
+                    removeThese = ['LINKCONTEXTNAME', 'LINKPAGENAME'],
+                    nURL;
+                ezURL = ezURL.filter(Boolean);
+                nURL = ezURL[0].split('_');
+                for (var i = 0; i < nURL.length; i++) {
+                    for (var j = 0; j < removeThese.length; j++) {
+                        if (nURL[i] === removeThese[j]) {
+                            nURL.splice(i, 1);
+                        }
+                    }
+                }
+                var len = nURL.length,
+                    x = 0,
+                    findThis = 'ModelDetails',
+                    actualURL;
+                for (x; x < len; x++) {
+                    if (nURL[x] === findThis) {
+                        actualURL = this.getURL(nURL[len - 1]);
+                        return actualURL;
+                    } else {
+                        actualURL = nURL[0];
+                        return actualURL;
+                    }
+                }
+            },
+            emptyTarget: function (elem) {
+                var $this = elem;
+                // if target is undefined or empty remove target attribute
+                if (seoSimplify.isUndefined($this, 'target') || seoSimplify.isEmpty($this, 'target')) {
+                    jQuery(elem).removeAttr('target');
+                }
+            },
+            // ----------------------------------------
+            // tier 5 functions
+            // ----------------------------------------
+            getURL: function (vehicle) {
+                var vehicleArray = vehicle.split(' ');
+                var make = 'no match found',
+                    model = '',
+                    oems = seoSimplify.config.oems,
+                    oemsLen = oems.length,
+                    x = 0;
+                if (vehicleArray.length >= 3) {
+                    for (var b = 1; b < vehicleArray.length; b++) {
+                        model += vehicleArray[b];
+                    }
+                } else {
+                    model = vehicleArray[vehicleArray.length - 1];
+                }
+                for (x; x < oemsLen; x++) {
+                    if (vehicleArray[0].indexOf(oems[x]) >= 0) {
+                        make = oems[x];
+                        break;
+                    }
+                }
+
+                model = model.trim();
+                make = make.toLowerCase();
+
+                var vehiclesArr = seoSimplify.config.vehicles,
+                    detailsURL = '';
+
+                // fix this if possible
+                jQuery.each(vehiclesArr, function (index, oemArray) {
+                    jQuery.each(oemArray, function (oem, vehiclesArray) {
+                        if (oem === make) {
+                            jQuery.each(vehiclesArray, function (index, vehicleArray) {
+                                if (model === vehicleArray.name) {
+                                    detailsURL = vehicleArray.url;
+                                    return false; // break out of loop
+                                }
+                            });
+                        }
+                    });
+                });
+                return detailsURL;
+            }
         };
 
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- SEO Simplify ----------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------
+    /*
     var $seo_butt = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'simpleSEO',
@@ -2666,7 +3014,7 @@
             jQuery("#inputContainer").remove();
         });
     });
-
+*/
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- add widget outlines ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
@@ -4189,7 +4537,8 @@
                         'z-index': '99999999'
                     }),
                     // font awesome icon
-                    $icon: jQuery('<i class="fa fa-fort-awesome fa-2x"></i>').css({
+                    //                    $icon: jQuery('<i class="fa fa-fort-awesome fa-2x"></i>').css({
+                    $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>').css({
                         'margin-left': '12px'
                     }),
                     $hide: jQuery('<div>').css({
@@ -4283,7 +4632,8 @@
                     // ----- other tools ----- //
                     otherTools.init(); // initialize other tools
                     viewMobile.init(); // initialize view mobile tool
-                    jQuery('#otherTools').append($seo_butt);
+                    seoSimplify.init();
+                    //                    jQuery('#otherTools').append($seo_butt);
                     jQuery('#otherTools').append($wo_butt);
 
                     // ----- toggle tools ----- //
@@ -4347,8 +4697,9 @@
 
                     // ----- other tools ----- //
                     otherTools.init(); // initialize other tools
-                    //                viewMobile.init(); // initialize view mobile tool
-                    //                                        jQuery('#otherTools').append($seo_butt);
+                    //                    viewMobile.init(); // initialize view mobile tool
+                    seoSimplify.init();
+                    //                    jQuery('#otherTools').append($seo_butt);
                     //                jQuery('#otherTools').append($wo_butt);
 
                     // ----- toggle tools ----- //
