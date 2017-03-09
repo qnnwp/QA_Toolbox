@@ -51,10 +51,22 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 ---
 ---
 
+Once the Tampermonkey extension has been installed.
+
 <br>
 <br>
 
-### 1. Once the extensions has been installed, Click the add-on icon in your browser
+### 1. Open the link below in a new tab.  Copy all of the code.
+
+Link to Latest Toolbar Code:<br>
+https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
+*'mouse wheel click' to open in a new tab*
+
+<br>
+
+===
+
+### 2. Once the extensions has been installed, Click the add-on icon in your browser
 
 ![Click Addon Icon](https://cdn.rawgit.com/cirept/NextGen/master/images/clickIcon.png)
 
@@ -64,7 +76,7 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 
 <br>
 
-### 2. Click on 'Dashboard' menu item<br>
+### 3. Click on 'Dashboard' menu item<br>
 This will open a new tab with the extension dashboard displayed ***(seen in step 3)***
 
 ![Click Dashboard](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickDashboard.png)
@@ -75,22 +87,10 @@ This will open a new tab with the extension dashboard displayed ***(seen in step
 
 <br>
 
-### 3. Click the icon to add a new userscript<br>
+### 4. Click the icon to add a new userscript<br>
 The icon is located next to "Install userscripts" tab.
 
 ![Click New UserScript Icon](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickNewScript.png)
-
-<br>
-
-===
-
-<br>
-
-### 4. Open the link below in a new tab.  Copy the code.
-
-Link to Latest Toolbar Code:<br>
-https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
-*'mouse wheel click' to open in a new tab*
 
 <br>
 
@@ -108,7 +108,7 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 
 <br>
 
-### 5. Click the floppy disk to save your changes
+### 6. Click the floppy disk to save your changes
 
 ![Click Floppy Disk](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickSave.png)
 
@@ -118,7 +118,7 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 
 <br>
 
-**6. Done.  The toolbar will show up on any Proof/Live CDK site** :thumbsup:
+**7. Done.  The toolbar will show up on any Proof/Live CDK site** :thumbsup:
 
 <br>
 
