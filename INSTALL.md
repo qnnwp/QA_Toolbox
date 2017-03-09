@@ -135,3 +135,4 @@ Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 
 <br>
 <br>
+For tool descriptions click [here](https://github.com/cirept/NextGen/blob/master/README.md)
