@@ -25,14 +25,14 @@
 <br>
 <br>
 
-*Tampermonkey is a browser add-on that is used to run the toolbar on the webpage, please install the add-on*
+Tampermonkey is a browser add-on that is used to run the toolbar on the webpage, please install the add-on
 
-*Links to Browser Add-Ons* (Please wheel click the link to open in a new tab)<br>
-<a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en" target="_blank">Tampermonkey for Chrome ***(open in Chrome browser)***</a>
+Links to Browser Add-Ons<br>
+***Please middle wheel click on the mouse to open links in a new tab***<br>
+[Tampermonkey for Chrome ***(open in Chrome browser)***](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
 
-![Tampermonkey for Chrome ***(open in Chrome browser)***](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
+[Tampermonkey for FireFox ***(open in FireFox browser)***](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/)
 
-<a href="https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/" target="_blank">Tampermonkey for FireFox ***(open in FireFox browser)***</a>
 
 <br>
 
