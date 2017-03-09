@@ -21,7 +21,7 @@
 ## Show Navigation<br>
 
 
-The navigation menu will display all all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
+The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
 
 **Features**
@@ -198,6 +198,9 @@ In the "Advanced Settings" (below the button) you are able to enter an email add
 This email address will recieve an email once the testing has been completed with a link that leads to the results page.  Simply leave it blank if this feature isn't desired.
 
 By default the testing is set to IE11, please do not change this unless necessary.  IE11 would be the best test case as it is commonly the slowest amoungst all the 'popular' browsers.
+
+****update****<br>
+Key Selection, if you ever recieve the error that is along the lines of "limit has been reached for day" please choose a different key and submit another test.
 
 
 WebPageTest Settings | WebPageTest Prompt
