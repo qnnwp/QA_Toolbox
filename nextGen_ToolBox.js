@@ -1167,9 +1167,10 @@
             },
             removeClass: function (array, removeClass) { // toggle custom class
                 var arrlength = array.length,
-                    a = 0;
+                    a = 0,
+                    $obj;
                 for (a; a < arrlength; a += 1) {
-                    var $obj = jQuery(array[a]);
+                    $obj = jQuery(array[a]);
                     $obj.removeClass(removeClass);
                 }
             },
@@ -1321,10 +1322,10 @@
             // ----------------------------------------
             buildLegendContent: function () {
                 var $contentArray = outdatedLinks.config.$legendContent,
-                    key;
+                    key, value;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    var value = $contentArray[key];
+                    value = $contentArray[key];
                     // build listing element
                     this.$listItem = jQuery('<li>').attr({
                         class: 'legendContent ' + key
@@ -1439,6 +1440,7 @@
                 var $pageLinks = jQuery('body a'),
                     iaLength = $pageLinks.length,
                     a = 0;
+
                 for (a; a < iaLength; a += 1) {
                     jQuery($pageLinks[a])
                         .removeClass('oldPage')
@@ -1556,10 +1558,10 @@
             // ----------------------------------------
             buildLegendContent: function () {
                 var $contentArray = showNavigation.config.$legendContent,
-                    key;
+                    key, value;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    var value = $contentArray[key];
+                    value = $contentArray[key];
                     // build listing element
                     this.$listItem = jQuery('<li>').attr({
                         class: 'legendContent ' + key
@@ -1766,13 +1768,15 @@
                 this.$toolsPanel = jQuery('#mainTools');
             },
             buildOptions: function () {
+                var $listItem;
+
                 jQuery.each(speedtestPage.config.browserOptions, function (key, text) {
-                    var $listItem = jQuery('<option>').val(key).html(text);
+                    $listItem = jQuery('<option>').val(key).html(text);
                     speedtestPage.config.$browserSelect.append($listItem);
                 });
 
                 jQuery.each(speedtestPage.config.keyOptions, function (key, text) {
-                    var $listItem = jQuery('<option>').val(text).html(key);
+                    $listItem = jQuery('<option>').val(text).html(key);
                     speedtestPage.config.$keySelect.append($listItem);
                 });
             },
@@ -1821,7 +1825,7 @@
                         notify: email,
                         location: 'Dulles' + browser
                     },
-                    newTab;
+                    newTab, desktopURL, mobileURL;
 
                 console.log(selectedKey);
 
@@ -1829,8 +1833,8 @@
                 jQuery.each(params, function (index, value) {
                     speedtestPage.config.testURL += index + '=' + value + '&';
                 });
-                var desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=immobile';
-                var mobileURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=mobile';
+                desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=immobile';
+                mobileURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=mobile';
                 // alert user
                 if (confirm('----------------------------------------\n' +
                         'Test the Desktop and Mobile site?\n' +
@@ -2034,6 +2038,8 @@
                         class: 'myEDOBut',
                         value: 'REMOVE',
                         id: 'removeDiv'
+                    }).css({
+                        background: 'inherit'
                     }),
                     $seoDisplay: jQuery('<div>').attr({
                         class: 'inputDisplay'
@@ -2042,8 +2048,7 @@
                         id: 'inputContainer'
                     }),
                     oems: ['Chevrolet', 'Buick', 'Cadillac', 'GMC', 'Hyundai', 'Volkswagen'],
-                    vehicles: [],
-                    seoText: ''
+                    vehicles: []
                 };
             },
             buildElements: function () {
@@ -2121,21 +2126,26 @@
                 });
             },
             simplifySEO: function () {
-                this.getInput();
-                this.cleanUpTags();
-                this.cleanUpLinks();
+                var $input = this.getInput();
+
+                // skip cleaning if input is empty
+                if ($input === null || $input === '') {
+                    return;
+                }
+
+                $input = this.cleanUpTags($input);
+                $input = this.cleanUpLinks($input);
                 this.attachDisplayArea();
-                this.displayText();
+                this.displayText($input);
             },
             removeDisplay: function () {
                 // remove display container
                 seoSimplify.config.$seoContainer.detach();
                 seoSimplify.config.$seoDisplay.empty();
-                //                seoSimplify.config.$removeBut.detach();
             },
             changeToTextarea: function (event) {
-                var $this = jQuery(event.currentTarget);
-                var input = seoSimplify.config.$seoDisplay.html(),
+                var $this = jQuery(event.currentTarget),
+                    input = seoSimplify.config.$seoDisplay.html(),
                     $seoTextArea = jQuery('<textarea>').attr({
                         class: 'inputDisplay'
                     });
@@ -2148,18 +2158,22 @@
             // tier 3 functions
             // ----------------------------------------
             getInput: function () {
-                // clear data
-                seoSimplify.config.seoText = '';
-                //seoSimplify.config.seoText = "<div><style type='text/css'>span{font-size: bold;}</style><span title='' class='f-xx-small'>&nbsp;Welcome to %DEALER_NAME%, <i>you're one-stop-%CITY%-GM-shop!</i> We are proud to offer our <strong>huge</strong> selection of new and used vehicles to %CITY%, %STATE% and %DEALER_GEO_ONE% Chevrolet, Buick and GMC customers.<br> Laplante Auto also has GM-certified service, <a href='%LINKPAGENAME_PartsDepartment_LINKCONTEXTNAME_%'><u title=''>parts</u></a> and <a href='%LINKPAGENAME_Accessories_LINKCONTEXTNAME_%'><u>accessories</u></a>. Don't forget our financing options. We even sell tires to help you keep up with the changing seasons. Here at %DEALER_NAME% in %CITY% we are committed to helping you find the car of your dreams and keep it running for a long time. We also serve as a great dealer alternative for %DEALER_GEO_ONE% Chevrolet, Buick and GMC shoppers.&nbsp;</span></div>";
-                // prompt user for input
-                seoSimplify.config.seoText = jQuery.trim(prompt('Enter Your SEO Text - HTML format'));
-            },
-            cleanUpTags: function () { // get rid of repeat functionality
-                var input = seoSimplify.config.seoText,
-                    //                    $input = jQuery(input);
-                    $input = jQuery('<div>').empty();
-                $input.html(input);
+                var input = jQuery.trim(prompt('Enter Your SEO Text - HTML format')),
+                    $input = jQuery('<div>');
 
+                // checks if input is empty
+                if (input === null || input === '') {
+                    return '';
+                }
+
+                if (input.indexOf('<') === 0) {
+                    $input = jQuery(input);
+                } else {
+                    $input.append(input);
+                }
+                return $input;
+            },
+            cleanUpTags: function ($input) { // get rid of repeat functionality
                 // remove all empty elements
                 $input.find('*:empty').remove();
                 $input.find('*').each(function (index, value) {
@@ -2177,7 +2191,7 @@
                     return jQuery(this).html();
                 });
                 // remove all &nbsp; with ' '
-                //                $input.html($input.html().replace(/&nbsp;/gi, ' '));
+                $input.html($input.html().replace(/&nbsp;/gi, ' '));
                 // remove all span tags
                 $input.find('span').replaceWith(function () {
                     return jQuery(this).html();
@@ -2202,21 +2216,22 @@
                 $input.find('center').replaceWith(function () {
                     return jQuery('<p/>').append(jQuery(this).html());
                 });
-                // save cleaner input
-                seoSimplify.config.seoText = $input;
-            },
-            cleanUpLinks: function () {
-                var $input = seoSimplify.config.seoText,
-                    allLinks = $input.find('a'),
-                    len = allLinks.length,
-                    i = 0;
+                // return cleaner input
+                return $input;
 
-                for (i; i < len; i++) {
-                    var $this = jQuery(allLinks[i]);
+            },
+            cleanUpLinks: function ($input) {
+                var allLinks = $input.find('a'),
+                    len = allLinks.length,
+                    i = 0,
+                    linkURL, $this, titleText;
+
+                for (i; i < len; i += 1) {
+                    $this = jQuery(allLinks[i]);
                     // check if title is empty or undefined
                     if (seoSimplify.isUndefined($this, 'title') || seoSimplify.isEmpty($this, 'title')) {
                         // sets title to link text
-                        var titleText = $this.text().toString().trim();
+                        titleText = $this.text().toString().trim();
                         $this.attr('title', titleText.substr(0, 1).toUpperCase() + titleText.substr(1));
                     }
                     // check if href is empty or undefined
@@ -2225,28 +2240,25 @@
                         $this.attr('href', '#');
                     }
 
-                    var linkURL = $this.attr('href');
+                    linkURL = $this.attr('href');
                     $this.attr('href', seoSimplify.refineURL(linkURL));
                     seoSimplify.emptyTarget($this);
                 }
-                // save cleaner input
-                seoSimplify.config.seoText = $input;
+                // return cleaner input
+                return $input;
             },
             attachDisplayArea: function () {
-                //                this.body.prepend(seoSimplify.config.$seoContainer);
                 this.body.append(seoSimplify.config.$seoContainer);
             },
-            displayText: function () {
+            displayText: function ($input) {
                 // attach input to display
                 seoSimplify.config.$seoDisplay.empty();
                 seoSimplify.config.$seoDisplay.append(seoSimplify.config.seoText);
+                seoSimplify.config.$seoDisplay.append($input);
             },
             revertDiv: function (event) {
                 var $this = jQuery(event.target),
                     $thisText = jQuery(event.target).text(),
-                    //                 $replacementArea = jQuery('<div>').attr({
-                    //                    class: 'inputDisplay'
-                    //                }).text('');
                     $replacementArea = seoSimplify.config.$seoDisplay;
 
                 $replacementArea.html($thisText);
@@ -2275,21 +2287,26 @@
             refineURL: function (url) {
                 var ezURL = url.split('%'),
                     removeThese = ['LINKCONTEXTNAME', 'LINKPAGENAME'],
-                    nURL;
+                    i = 0,
+                    j = 0,
+                    x = 0,
+                    findThis = 'ModelDetails',
+                    actualURL, nURL, len;
+
                 ezURL = ezURL.filter(Boolean);
                 nURL = ezURL[0].split('_');
-                for (var i = 0; i < nURL.length; i++) {
-                    for (var j = 0; j < removeThese.length; j++) {
+
+                for (i; i < nURL.length; i += 1) {
+                    for (j; j < removeThese.length; j += 1) {
                         if (nURL[i] === removeThese[j]) {
                             nURL.splice(i, 1);
                         }
                     }
                 }
-                var len = nURL.length,
-                    x = 0,
-                    findThis = 'ModelDetails',
-                    actualURL;
-                for (x; x < len; x++) {
+
+                len = nURL.length;
+
+                for (x; x < len; x += 1) {
                     if (nURL[x] === findThis) {
                         actualURL = this.getURL(nURL[len - 1]);
                         return actualURL;
@@ -2310,20 +2327,25 @@
             // tier 5 functions
             // ----------------------------------------
             getURL: function (vehicle) {
-                var vehicleArray = vehicle.split(' ');
-                var make = 'no match found',
+                var vehicleArray = vehicle.split(' '),
+                    make = 'no match found',
                     model = '',
                     oems = seoSimplify.config.oems,
                     oemsLen = oems.length,
-                    x = 0;
+                    x = 0,
+                    b = 1,
+                    detailsURL = '',
+                    vehiclesArr = seoSimplify.config.vehicles;
+
                 if (vehicleArray.length >= 3) {
-                    for (var b = 1; b < vehicleArray.length; b++) {
+                    for (b; b < vehicleArray.length; b += 1) {
                         model += vehicleArray[b];
                     }
                 } else {
                     model = vehicleArray[vehicleArray.length - 1];
                 }
-                for (x; x < oemsLen; x++) {
+
+                for (x; x < oemsLen; x += 1) {
                     if (vehicleArray[0].indexOf(oems[x]) >= 0) {
                         make = oems[x];
                         break;
@@ -2332,9 +2354,6 @@
 
                 model = model.trim();
                 make = make.toLowerCase();
-
-                var vehiclesArr = seoSimplify.config.vehicles,
-                    detailsURL = '';
 
                 // fix this if possible
                 jQuery.each(vehiclesArr, function (index, oemArray) {
@@ -2353,678 +2372,6 @@
             }
         };
 
-    // ------------------------------------------------------------------------------------------------------------------------
-    // ---------------------------------------- SEO Simplify ----------------------------------------
-    //-------------------------------------------------------------------------------------------------------------------------
-    /*
-    var $seo_butt = jQuery('<button>').attr({
-        class: 'myEDOBut',
-        id: 'simpleSEO',
-        title: 'Simplify My SEO Text'
-    }).text('SEO Simplify');
-    $seo_butt.click(function () {
-        var seoSimplify = (function () {
-            var oems = [
-                "Buick",
-                "Cadillac",
-                "Chevrolet",
-                "GMC",
-                "Hyundai",
-                "Volkswagen"
-            ];
-            var chevrolet = [];
-            var Camaro = {
-                name: "Camaro",
-                url: "models/chevrolet-camaro"
-            };
-            chevrolet.push(Camaro);
-            var SS = {
-                name: "SS",
-                url: "models/chevrolet-ss"
-            };
-            chevrolet.push(SS);
-            var City_Express_Cargo_Van = {
-                name: "City_Express_Cargo_Van",
-                url: "models/chevrolet-cityexpresscargovan"
-            };
-            chevrolet.push(City_Express_Cargo_Van);
-            var Colorado = {
-                name: "Colorado",
-                url: "models/chevrolet-colorado"
-            };
-            chevrolet.push(Colorado);
-            var Corvette = {
-                name: "Corvette",
-                url: "models/chevrolet-corvette"
-            };
-            chevrolet.push(Corvette);
-            var Cruze = {
-                name: "Cruze",
-                url: "models/chevrolet-cruze"
-            };
-            chevrolet.push(Cruze);
-            var Cruze_Limited = {
-                name: "Cruze_Limited",
-                url: "models/chevrolet-cruzelimited"
-            };
-            chevrolet.push(Cruze_Limited);
-            var Equinox = {
-                name: "Equinox",
-                url: "models/chevrolet-equinox"
-            };
-            chevrolet.push(Equinox);
-            var Express_Cargo_Van = {
-                name: "Express_Cargo_Van",
-                url: "models/chevrolet-expresscargovan"
-            };
-            chevrolet.push(Express_Cargo_Van);
-            var Express_Commercial_Cutaway = {
-                name: "Express_Commercial_Cutaway",
-                url: "models/chevrolet-expresscommercialcutaway"
-            };
-            chevrolet.push(Express_Commercial_Cutaway);
-            var Express_Passenger = {
-                name: "Express_Passenger",
-                url: "models/chevrolet-expresspassenger"
-            };
-            chevrolet.push(Express_Passenger);
-            var Impala = {
-                name: "Impala",
-                url: "models/chevrolet-impala"
-            };
-            chevrolet.push(Impala);
-            var Malibu = {
-                name: "Malibu",
-                url: "models/chevrolet-malibu"
-            };
-            chevrolet.push(Malibu);
-            var Malibu_Limited = {
-                name: "Malibu_Limited",
-                url: "models/chevrolet-malibulimited"
-            };
-            chevrolet.push(Malibu_Limited);
-            var Silverado_1500 = {
-                name: "Silverado_1500",
-                url: "models/chevrolet-silverado1500"
-            };
-            chevrolet.push(Silverado_1500);
-            var Silverado_2500HD = {
-                name: "Silverado_2500HD",
-                url: "models/chevrolet-silverado2500hd"
-            };
-            chevrolet.push(Silverado_2500HD);
-            var Silverado_3500HD = {
-                name: "Silverado_3500HD",
-                url: "models/chevrolet-silverado3500hd"
-            };
-            chevrolet.push(Silverado_3500HD);
-            var Sonic = {
-                name: "Sonic",
-                url: "models/chevrolet-sonic"
-            };
-            chevrolet.push(Sonic);
-            var Spark = {
-                name: "Spark",
-                url: "models/chevrolet-spark"
-            };
-            chevrolet.push(Spark);
-            var Suburban = {
-                name: "Suburban",
-                url: "models/chevrolet-suburban"
-            };
-            chevrolet.push(Suburban);
-            var Tahoe = {
-                name: "Tahoe",
-                url: "models/chevrolet-tahoe"
-            };
-            chevrolet.push(Tahoe);
-            var Traverse = {
-                name: "Traverse",
-                url: "models/chevrolet-traverse"
-            };
-            chevrolet.push(Traverse);
-            var Trax = {
-                name: "Trax",
-                url: "models/chevrolet-trax"
-            };
-            chevrolet.push(Trax);
-            var Volt = {
-                name: "Volt",
-                url: "models/chevrolet-volt"
-            };
-            chevrolet.push(Volt);
-            var volkswagen = [];
-            var Beetle_Convertible = {
-                name: "Beetle_Convertible",
-                url: "models/volkswagen-beetleconvertible"
-            };
-            volkswagen.push(Beetle_Convertible);
-            var Beetle_Coupe = {
-                name: "Beetle_Coupe",
-                url: "models/volkswagen-beetlecoupe"
-            };
-            volkswagen.push(Beetle_Coupe);
-            var CC = {
-                name: "CC",
-                url: "models/volkswagen-cc"
-            };
-            volkswagen.push(CC);
-            var Eos = {
-                name: "Eos",
-                url: "models/volkswagen-eos"
-            };
-            volkswagen.push(Eos);
-            var Golf = {
-                name: "Golf",
-                url: "models/volkswagen-golf"
-            };
-            volkswagen.push(Golf);
-            var Golf_GTI = {
-                name: "Golf_GTI",
-                url: "models/volkswagen-golfgti"
-            };
-            volkswagen.push(Golf_GTI);
-            var Golf_R = {
-                name: "Golf_R",
-                url: "models/volkswagen-golfr"
-            };
-            volkswagen.push(Golf_R);
-            var Jetta_Sedan = {
-                name: "Jetta_Sedan",
-                url: "models/volkswagen-jettasedan"
-            };
-            volkswagen.push(Jetta_Sedan);
-            var Passat = {
-                name: "Passat",
-                url: "models/volkswagen-passat"
-            };
-            volkswagen.push(Passat);
-            var e_Golf = {
-                name: "e_Golf",
-                url: "models/volkswagen-egolf"
-            };
-            volkswagen.push(e_Golf);
-            var Tiguan = {
-                name: "Tiguan",
-                url: "models/volkswagen-tiguan"
-            };
-            volkswagen.push(Tiguan);
-            var Touareg = {
-                name: "Touareg",
-                url: "models/volkswagen-touareg"
-            };
-            volkswagen.push(Touareg);
-            var Golf_SportWagen = {
-                name: "Golf_SportWagen",
-                url: "models/volkswagen-golfsportwagen"
-            };
-            volkswagen.push(Golf_SportWagen);
-            var cadillac = [];
-            var ATS_Coupe = {
-                name: "ATS_Coupe",
-                url: "models/cadillac-atscoupe"
-            };
-            cadillac.push(ATS_Coupe);
-            var ATS_Sedan = {
-                name: "ATS_Sedan",
-                url: "models/cadillac-atssedan"
-            };
-            cadillac.push(ATS_Sedan);
-            var ATS_V_Coupe = {
-                name: "ATS_V_Coupe",
-                url: "models/cadillac-atsvcoupe"
-            };
-            cadillac.push(ATS_V_Coupe);
-            var ATS_V_Sedan = {
-                name: "ATS_V_Sedan",
-                url: "models/cadillac-atsvsedan"
-            };
-            cadillac.push(ATS_V_Sedan);
-            var CT6_Sedan = {
-                name: "CT6_Sedan",
-                url: "models/cadillac-ct6sedan"
-            };
-            cadillac.push(CT6_Sedan);
-            var CTS_Sedan = {
-                name: "CTS_Sedan",
-                url: "models/cadillac-ctssedan"
-            };
-            cadillac.push(CTS_Sedan);
-            var CTS_V_Sedan = {
-                name: "CTS_V_Sedan",
-                url: "models/cadillac-ctsvsedan"
-            };
-            cadillac.push(CTS_V_Sedan);
-            var ELR = {
-                name: "ELR",
-                url: "models/cadillac-elr"
-            };
-            cadillac.push(ELR);
-            var Escalade = {
-                name: "Escalade",
-                url: "models/cadillac-escalade"
-            };
-            cadillac.push(Escalade);
-            var Escalade_ESV = {
-                name: "Escalade_ESV",
-                url: "models/cadillac-escaladeesv"
-            };
-            cadillac.push(Escalade_ESV);
-            var SRX = {
-                name: "SRX",
-                url: "models/cadillac-srx"
-            };
-            cadillac.push(SRX);
-            var XTS = {
-                name: "XTS",
-                url: "models/cadillac-xts"
-            };
-            cadillac.push(XTS);
-            var buick = [];
-            var Cascada = {
-                name: "Cascada",
-                url: "models/buick-cascada"
-            };
-            buick.push(Cascada);
-            var Enclave = {
-                name: "Enclave",
-                url: "models/buick-enclave"
-            };
-            buick.push(Enclave);
-            var Encore = {
-                name: "Encore",
-                url: "models/buick-encore"
-            };
-            buick.push(Encore);
-            var Envision = {
-                name: "Envision",
-                url: "models/buick-envision"
-            };
-            buick.push(Envision);
-            var LaCrosse = {
-                name: "LaCrosse",
-                url: "models/buick-lacrosse"
-            };
-            buick.push(LaCrosse);
-            var Regal = {
-                name: "Regal",
-                url: "models/buick-regal"
-            };
-            buick.push(Regal);
-            var Verano = {
-                name: "Verano",
-                url: "models/buick-verano"
-            };
-            buick.push(Verano);
-            var gmc = [];
-            var Acadia = {
-                name: "Acadia",
-                url: "models/gmc-acadia"
-            };
-            gmc.push(Acadia);
-            var Canyon = {
-                name: "Canyon",
-                url: "models/gmc-canyon"
-            };
-            gmc.push(Canyon);
-            var Savana_Cargo_Van = {
-                name: "Savana_Cargo_Van",
-                url: "models/gmc-savanacargovan"
-            };
-            gmc.push(Savana_Cargo_Van);
-            var Savana_Commercial_Cutaway = {
-                name: "Savana_Commercial_Cutaway",
-                url: "models/gmc-savanacommercialcutaway"
-            };
-            gmc.push(Savana_Commercial_Cutaway);
-            var Savana_Passenger = {
-                name: "Savana_Passenger",
-                url: "models/gmc-savanapassenger"
-            };
-            gmc.push(Savana_Passenger);
-            var Sierra_1500 = {
-                name: "Sierra_1500",
-                url: "models/gmc-sierra1500"
-            };
-            gmc.push(Sierra_1500);
-            var Sierra_2500HD = {
-                name: "Sierra_2500HD",
-                url: "models/gmc-sierra2500hd"
-            };
-            gmc.push(Sierra_2500HD);
-            var Sierra_3500HD = {
-                name: "Sierra_3500HD",
-                url: "models/gmc-sierra3500hd"
-            };
-            gmc.push(Sierra_3500HD);
-            var Terrain = {
-                name: "Terrain",
-                url: "models/gmc-terrain"
-            };
-            gmc.push(Terrain);
-            var Yukon = {
-                name: "Yukon",
-                url: "models/gmc-yukon"
-            };
-            gmc.push(Yukon);
-            var Yukon_XL = {
-                name: "Yukon_XL",
-                url: "models/gmc-yukonxl"
-            };
-            gmc.push(Yukon_XL);
-            var hyundai = [];
-            var Accent = {
-                name: "Accent",
-                url: "models/hyundai-accent"
-            };
-            hyundai.push(Accent);
-            var Azera = {
-                name: "Azera",
-                url: "models/hyundai-azera"
-            };
-            hyundai.push(Azera);
-            var Elantra = {
-                name: "Elantra",
-                url: "models/hyundai-elantra"
-            };
-            hyundai.push(Elantra);
-            var Elantra_GT = {
-                name: "Elantra_GT",
-                url: "models/hyundai-elantragt"
-            };
-            hyundai.push(Elantra_GT);
-            var Genesis = {
-                name: "Genesis",
-                url: "models/hyundai-genesis"
-            };
-            hyundai.push(Genesis);
-            var Genesis_Coupe = {
-                name: "Genesis_Coupe",
-                url: "models/hyundai-genesiscoupe"
-            };
-            hyundai.push(Genesis_Coupe);
-            var Sonata = {
-                name: "Sonata",
-                url: "models/hyundai-sonata"
-            };
-            hyundai.push(Sonata);
-            var Sonata_Hybrid = {
-                name: "Sonata_Hybrid",
-                url: "models/hyundai-sonatahybrid"
-            };
-            hyundai.push(Sonata_Hybrid);
-            var Sonata_Plug_In_Hybrid = {
-                name: "Sonata_Plug_In_Hybrid",
-                url: "models/hyundai-sonatapluginhybrid"
-            };
-            hyundai.push(Sonata_Plug_In_Hybrid);
-            var Veloster = {
-                name: "Veloster",
-                url: "models/hyundai-veloster"
-            };
-            hyundai.push(Veloster);
-            var Santa_Fe = {
-                name: "Santa_Fe",
-                url: "models/hyundai-santafe"
-            };
-            hyundai.push(Santa_Fe);
-            var Santa_Fe_Sport = {
-                name: "Santa_Fe_Sport",
-                url: "models/hyundai-santafesport"
-            };
-            hyundai.push(Santa_Fe_Sport);
-            var Tucson = {
-                name: "Tucson",
-                url: "models/hyundai-tucson"
-            };
-            hyundai.push(Tucson);
-
-            function getURL(makeModel) {
-                var mArr = makeModel.split(' ');
-                var make = "no match found",
-                    model = "",
-                    modelURL = "",
-                    len = "",
-                    ar = oems,
-                    oLen = oems.length,
-                    i = 0,
-                    x = 0;
-                if (mArr.length >= 3) {
-                    for (var b = 1; b < mArr.length; b += 1) {
-                        model += mArr[b];
-                    }
-                } else {
-                    model = mArr[mArr.length - 1];
-                }
-                for (x; x < oLen; x += 1) {
-                    if (mArr[0].indexOf(ar[x]) >= 0) {
-                        make = ar[x];
-                        break;
-                    }
-                }
-                model = model.trim().toLowerCase();
-                switch (make) {
-                case "Chevrolet":
-                    len = chevrolet.length;
-                    i = 0;
-                    for (i; i < len; i += 1) {
-                        if (chevrolet[i].url.indexOf(model) >= 0) {
-                            modelURL = chevrolet[i].url;
-                            break;
-                        }
-                    }
-                    return modelURL;
-                case "GMC":
-                    len = gmc.length;
-                    i = 0;
-                    for (i; i < len; i += 1) {
-                        if (gmc[i].url.indexOf(model) >= 0) {
-                            modelURL = gmc[i].url;
-                            break;
-                        }
-                    }
-                    return modelURL;
-                case "Cadillac":
-                    len = cadillac.length;
-                    i = 0;
-                    for (i; i < len; i += 1) {
-                        if (cadillac[i].url.indexOf(model) >= 0) {
-                            modelURL = cadillac[i].url;
-                            break;
-                        }
-                    }
-                    return modelURL;
-                case "Hyundai":
-                    len = hyundai.length;
-                    i = 0;
-                    for (i; i < len; i += 1) {
-                        if (hyundai[i].url.indexOf(model) >= 0) {
-                            modelURL = hyundai[i].url;
-                            break;
-                        }
-                    }
-                    return modelURL;
-                case "Volkswagen":
-                    len = volkswagen.length;
-                    i = 0;
-                    for (i; i < len; i += 1) {
-                        if (volkswagen[i].url.indexOf(model) >= 0) {
-                            modelURL = volkswagen[i].url;
-                            break;
-                        }
-                    }
-                    return modelURL;
-                case "Buick":
-                    len = buick.length;
-                    i = 0;
-                    for (i; i < len; i += 1) {
-                        if (buick[i].url.indexOf(model) >= 0) {
-                            modelURL = buick[i].url;
-                            break;
-                        }
-                    }
-                    return modelURL;
-                default:
-                }
-            }
-
-            function isUndefined(elem) {
-                if (jQuery(elem).attr("title") !== undefined) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            function titleEmpty(elem) {
-                if (jQuery(elem).attr("title") === "") {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            function isURLUndefined(elem) {
-                if (jQuery(elem).attr("href") !== undefined) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            function isURLEmpty(elem) {
-                if (jQuery(elem).attr("href") === "") {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            function emptyTarget(elem) {
-                if ((jQuery(elem).attr("target") !== undefined) ||
-                    (jQuery(elem).attr("target") === "")) {
-                    jQuery(elem).removeAttr("target");
-                }
-            }
-
-            function refineURL(url) {
-                var ezURL = url.split('%'),
-                    removeThese = ["LINKCONTEXTNAME", "LINKPAGENAME"],
-                    nURL;
-                ezURL = ezURL.filter(Boolean);
-                nURL = ezURL[0].split('_');
-                for (var i = 0; i < nURL.length; i += 1) {
-                    for (var j = 0; j < removeThese.length; j += 1) {
-                        if (nURL[i] === removeThese[j]) {
-                            nURL.splice(i, 1);
-                        }
-                    }
-                }
-                var len = nURL.length,
-                    x = 0,
-                    findThis = "ModelDetails",
-                    actualURL;
-                for (x; x < len; x += 1) {
-                    if (nURL[x] === findThis) {
-                        actualURL = getURL(nURL[len - 1]);
-                        return actualURL;
-                    } else {
-                        actualURL = nURL[0];
-                        return actualURL;
-                    }
-                }
-            }
-            return {
-                isUndefined: isUndefined,
-                titleEmpty: titleEmpty,
-                isURLUndefined: isURLUndefined,
-                isURLEmpty: isURLEmpty,
-                emptyTarget: emptyTarget,
-                refineURL: refineURL
-            };
-        })();
-        var ui = jQuery.trim(prompt('Enter Your SEO Text - HTML format')),
-            $removeBut = jQuery('<input>').attr({
-                type: 'button',
-                value: 'REMOVE',
-                id: 'removeDiv'
-            }),
-            $id = jQuery('<div>').attr({
-                id: 'inputDisplay'
-            }).css({
-                padding: '10px'
-            }),
-            $ic = jQuery('<div>').attr({
-                id: 'inputContainer'
-            }).css({
-                background: 'white',
-                color: 'black'
-            });
-        jQuery($id)
-            .append(ui)
-            .prependTo(jQuery($ic)
-                .prepend($removeBut)
-                .prependTo('#content'));
-        jQuery("#inputDisplay *").removeAttr("style");
-        jQuery("#inputDisplay br").remove();
-        jQuery("#inputDisplay").find("font").replaceWith(function () {
-            return jQuery(this).html();
-        });
-        jQuery("#inputDisplay").find("span").replaceWith(function () {
-            return jQuery(this).html();
-        });
-        jQuery("#inputDisplay").find("u").replaceWith(function () {
-            return jQuery(this).html();
-        });
-        jQuery("#inputDisplay").find("center").replaceWith(function () {
-            return jQuery("<p/>").append(jQuery(this).html());
-        });
-        jQuery("#inputDisplay *").find(":empty").remove();
-        var ar = jQuery("#inputDisplay a"),
-            len = ar.length,
-            i = 0;
-        for (i; i < len; i += 1) {
-            if (seoSimplify.isUndefined(ar[i]) || seoSimplify.titleEmpty(ar[i])) {
-                var titleText = jQuery(ar[i]).text().toString().trim();
-                jQuery(ar[i]).attr('title', titleText.substr(0, 1).toUpperCase() + titleText.substr(1));
-            }
-            if (seoSimplify.isURLUndefined(ar[i]) || seoSimplify.isURLEmpty(ar[i])) {
-                jQuery(ar[i]).attr('href', '#');
-            }
-            var tu = jQuery(ar[i]).attr('href');
-            jQuery(ar[i]).attr('href', seoSimplify.refineURL(tu));
-            seoSimplify.emptyTarget(ar[i]);
-        }
-
-        function changeToTextarea() {
-            var divHTML = jQuery(this).html(),
-                $et = jQuery('<textarea>').css({
-                    width: '100%',
-                    height: '300px'
-                });
-            $et.html(divHTML);
-            jQuery(this).replaceWith($et);
-            $et.focus();
-            $et.blur(revertDiv);
-        }
-
-        function revertDiv() {
-            var textareaHTML = jQuery(this).val(),
-                $vt = jQuery('<div>').attr({
-                    id: 'inputDisplay'
-                }).css({
-                    padding: '10px'
-                });
-            $vt.html(textareaHTML);
-            jQuery(this).replaceWith($vt);
-            $vt.click(changeToTextarea);
-        }
-        $id.click(changeToTextarea);
-        jQuery($removeBut).click(function () {
-            jQuery("#inputContainer").remove();
-        });
-    });
-*/
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- add widget outlines ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
@@ -3217,7 +2564,6 @@
                     $pageLinks = jQuery('a'),
                     pageLinksLength = $pageLinks.length;
 
-
                 for (j; j < pageLinksLength; j += 1) {
                     curLink = $pageLinks[j];
                     $curLink = jQuery(curLink);
@@ -3348,12 +2694,12 @@
             },
             buildLegendContent: function () {
                 var $contentArray = checkLinks.config.$legendContent,
-                    key;
+                    key, value, $listItem;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    var value = $contentArray[key];
+                    value = $contentArray[key];
                     // build listing element
-                    var $listItem = jQuery('<li>').attr({
+                    $listItem = jQuery('<li>').attr({
                         class: 'legendContent ' + key
                     }).append(value);
                     // attach to legend list
