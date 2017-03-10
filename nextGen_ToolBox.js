@@ -2112,7 +2112,7 @@
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
                     // styles of colored overlay placed on images
-                    .append('.inputDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; background: rgb(180, 180, 180);}')
+                    .append('.inputDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
                     .append('#inputContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
                     .append('#removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}')
                     // end of addStyles
@@ -2176,11 +2176,11 @@
                     return '';
                 }
 
-                if (input.indexOf('<') === 0) {
-                    $input = jQuery(input);
-                } else {
-                    $input.append(input);
-                }
+                //                if (input.indexOf('<') === 0) {
+                //                    $input = jQuery(input);
+                //                } else {
+                $input.append(input);
+                //                }
                 return $input;
             },
             cleanUpTags: function ($input) { // get rid of repeat functionality
@@ -2193,7 +2193,17 @@
                 });
                 $input.find('style').remove();
                 // remove all style attributes
+                var test = $input.find('*');
+                console.log(test);
                 $input.find('*').removeAttr('style');
+
+                // strip all attributes
+                //                $input.replaceWith(function () {
+                //                    console.log('fired');
+                //                    return jQuery('<' + this.nodeName + '>').append(jQuery(this).contents());
+                //                });
+                // ----------------------------------------
+
                 // remove all br elements
                 $input.find('br').remove();
                 // remove all font tags
@@ -2263,8 +2273,8 @@
             displayText: function ($input) {
                 // attach input to display
                 seoSimplify.config.$seoDisplay.empty();
-                seoSimplify.config.$seoDisplay.append(seoSimplify.config.seoText);
-                seoSimplify.config.$seoDisplay.append($input);
+                //                seoSimplify.config.$seoDisplay.append(seoSimplify.config.seoText);
+                seoSimplify.config.$seoDisplay.append($input.html());
             },
             revertDiv: function (event) {
                 var $this = jQuery(event.target),
@@ -2551,7 +2561,7 @@
             addStyles: function () {
                 this.$toolbarStyles
                     // styles of colored overlay placed on images
-                    .append('.otherDomain { background: linear-gradient(to left, #00C9FF , #92FE9D) !important; -moz-box-shadow: inset 0px 0px 0px 1px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 1px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 1px rgb(255, 55, 60); color: #000000 !important; }')
+                    .append('.otherDomain { background: linear-gradient(to left, #00C9FF , #92FE9D) !important; -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); color: #000000 !important; }')
                     .append('.framedIn { background: linear-gradient(to left, #F7971E , #FFD200) !important; color: #000000 !important; }')
                     .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
                     .append('.success { background: linear-gradient(to left, rgba(161, 255, 206, 0.75), rgba(250, 255, 209, 0.75)) !important; color: #000000 !important; }')
@@ -2618,6 +2628,12 @@
                         findThis = '/' + this.siteID + '/';
                         findThis2 = '/' + this.wid + '/';
                         len = findThis.length + 1;
+
+                        // ----------------------------------------
+                        // TEST FOR LINKS CREATED BY HAND
+                        // VehicleSearchResults?pageContext=VehicleSearch&search=new
+                        // /VehicleSearchResults?pageContext=VehicleSearch&search=new
+                        // ----------------------------------------
                         //                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < length)) {
                         //                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < len)) {
                         //                            curURL = curURL.replace(findThis, this.baseURL);
