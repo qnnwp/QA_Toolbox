@@ -31,39 +31,6 @@
         GM_openInTab(openThis);
     }
 
-    function ispw() {
-        'use strict';
-        if (jQuery('body .phone-wrapper').length > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function applyParameters(isNextGen) {
-        'use strict';
-
-        if ((isNextGen) && (cmv !== 'LIVE')) {
-            if (window.location.href.indexOf('nextGen=') > -1) {
-                // if nextgen parameter is found in the URL
-                if (window.location.href.indexOf('nextGen=true') > -1) {
-                    // if nextgen parameter is set to true
-                    // do noting
-                } else if (window.location.href.indexOf('nextGen=false') > -1) {
-                    // if nextgen parameter is set to false
-                    // replace false with true then reload the page
-                    var x = window.location.href;
-                    x = x.replace('nextGen=false', 'nextGen=true');
-                    window.location.href = x;
-                }
-            } else if (window.location.href.indexOf('nextGen=true') === -1) {
-                // if nextgen parameter does not contain the nextgen parameter
-                // add to URL = true
-                window.location.search += '&nextGen=true';
-            }
-        }
-    }
-
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- Build container for toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
@@ -382,15 +349,34 @@
             },
             displayData: function () {
                 var html = '',
-                    key;
+                    key,
+                    $hContainer = jQuery('<div>').attr({
+                        class: 'hCount'
+                    }).css({
+                        display: 'block'
+                    }),
+                    $hTag = jQuery('<span>'),
+                    $hCount = jQuery('<span>');
 
                 for (key in hTags.config.hTagsTotal) {
-                    html += key + ' = ' + hTags.config.hTagsTotal[key] + '<br>';
+                    $hTag.attr({
+                        class: key
+                    }).text(key + ' : ');
+
+                    $hCount.attr({
+                        class: key + 'count'
+                    }).text(hTags.config.hTagsTotal[key]);
+
+                    $hContainer.append($hTag);
+                    $hContainer.append($hCount);
+
+                    console.log($hContainer.prop('outerHTML'));
+                    html += $hContainer.prop('outerHTML');
                 }
                 hTags.config.$hTags.html(html);
             },
             // ----------------------------------------
-            // make each h tag display into its own div so that I can highlight the entire div and not just the number
+            // FIND COUNTS = 0 and highlight ORANGE
             // ----------------------------------------
             highlightZero: function () {
                 var html = hTags.config.$hTags.html(),
