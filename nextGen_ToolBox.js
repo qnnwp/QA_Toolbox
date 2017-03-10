@@ -3650,9 +3650,13 @@
                     }).css({
                         background: 'linear-gradient(to left, #FBD3E9 , #BB377D)',
                         width: '75px',
-                        position: 'fixed',
-                        left: '0px',
-                        top: '60px',
+                        //                        position: 'fixed',
+                        position: 'absolute',
+                        //                        position: 'relative',
+                        left: '35px',
+                        //                        left: '0px',
+                        top: '-45px',
+                        //                        top: '60px',
                         'z-index': '500000',
                         display: 'none'
                     }).draggable({
@@ -3675,7 +3679,8 @@
             },
             cacheDOM: function () {
                 this.$togglesPanel = jQuery('#toggleTools');
-                this.$togglesContainer = jQuery('#togglesContainer');
+                //                this.$togglesContainer = jQuery('#togglesContainer');
+                this.$togglesContainer = jQuery('#toolboxContainer');
                 this.$toolbarStyles = jQuery('#qa_toolbox');
             },
             buildTool: function () {
