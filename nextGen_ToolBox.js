@@ -1752,6 +1752,8 @@
                 this.siteURL = this.$cm.getUrl();
                 this.pageName = this.$cm.getPageName();
                 this.$toolsPanel = jQuery('#mainTools');
+                this.nextGen = document.firstChild.data;
+                this.isNextGenPlatform = this.nextGenVar(this.nextGen);
             },
             buildOptions: function () {
                 var $listItem;
@@ -1791,6 +1793,13 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
+            nextGenVar: function (nextGen) {
+                if (nextGen) {
+                    return nextGen.indexOf('Next Gen') === -1 ? false : true;
+                } else {
+                    return false;
+                }
+            },
             toggleFeature: function () {
                 speedtestPage.config.$panelContainer.slideToggle(500);
             },
@@ -1819,17 +1828,32 @@
                 jQuery.each(params, function (index, value) {
                     speedtestPage.config.testURL += index + '=' + value + '&';
                 });
-                desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=immobile';
-                mobileURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=mobile';
+
                 // alert user
-                if (confirm('----------------------------------------\n' +
-                        'Test the Desktop and Mobile site?\n' +
-                        '----------------------------------------\n' +
-                        'Browser : ' + browserName + '\n' +
-                        'Send Results To : ' + email + '\n' +
-                        '----------------------------------------') === true) {
-                    newTab = openNewTab(desktopURL);
-                    newTab = openNewTab(mobileURL);
+                if (this.isNextGenPlatform) {
+                    desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?nextGen=true';
+
+                    if (confirm('----------------------------------------\n' +
+                            'Test the Desktop and Mobile site?\n' +
+                            '----------------------------------------\n' +
+                            'Browser : ' + browserName + '\n' +
+                            'Send Results To : ' + email + '\n' +
+                            '----------------------------------------') === true) {
+                        newTab = openNewTab(desktopURL);
+                    }
+                } else {
+                    desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=immobile';
+                    mobileURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=mobile';
+
+                    if (confirm('----------------------------------------\n' +
+                            'Test the Desktop and Mobile site?\n' +
+                            '----------------------------------------\n' +
+                            'Browser : ' + browserName + '\n' +
+                            'Send Results To : ' + email + '\n' +
+                            '----------------------------------------') === true) {
+                        newTab = openNewTab(desktopURL);
+                        newTab = openNewTab(mobileURL);
+                    }
                 }
             }
         },
@@ -2495,6 +2519,7 @@
                 this.webID = this.cm.getWebId();
                 this.siteID = this.cm.getSiteId();
                 this.baseURL = this.cm.getUrl();
+                this.host = window.location.hostname;
                 this.wid = this.separateID(this.webID);
                 this.$toolsPanel = jQuery('#mainTools');
                 this.$legendContainer = jQuery('#legendContainer');
@@ -2594,12 +2619,26 @@
                         findThis2 = '/' + this.wid + '/';
                         len = findThis.length + 1;
                         //                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < length)) {
-                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < len)) {
-                            curURL = curURL.replace(findThis, this.baseURL);
-                        }
+                        //                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < len)) {
+                        //                            curURL = curURL.replace(findThis, this.baseURL);
+                        //                        }
                         //                        if ((curURL.indexOf(findThis2) >= 0) && (curURL.indexOf(findThis2) < length)) {
-                        if ((curURL.indexOf(findThis2) >= 0) && (curURL.indexOf(findThis2) < len)) {
-                            curURL = curURL.replace(findThis, this.baseURL);
+                        //                        if ((curURL.indexOf(findThis2) >= 0) && (curURL.indexOf(findThis2) < len)) {
+                        //                            curURL = curURL.replace(findThis, this.baseURL);
+                        //                        }
+
+                        if (curURL.indexOf('/') >= 0) {
+                            curURL = this.host + curURL;
+                            //                            console.log('curURL : ' + curURL);
+                        }
+
+                        // apply nextGen=true
+                        if (curURL.indexOf('?') >= 0) {
+                            curURL += '&nextGen=true';
+                            //                            console.log('curURL : ' + curURL);
+                        } else {
+                            curURL += '?nextGen=true';
+                            //                            console.log('curURL : ' + curURL);
                         }
                     }
                     // check urls for '/'
@@ -2607,7 +2646,9 @@
                         // check URL if it begins with /, signifying the link is a relative path URL
                         curURL = curURL.slice(2, hrefLength);
                     } else if (curURL.indexOf('/') === 0) {
+                        //                        console.log('checked curURL : ' + curURL);
                         curURL = curURL.slice(1, hrefLength);
+                        //                        console.log('fixed curURL : ' + curURL);
                     }
 
                     // test links
@@ -2615,6 +2656,7 @@
                 }
             },
             ajaxTest: function (linkURL, $curLink, totalTests) {
+                console.log('testing this link : ' + linkURL);
                 var hasImage = 0,
                     isImageLink = false,
                     $img,
