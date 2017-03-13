@@ -296,7 +296,7 @@
                 this.buildTool();
                 this.displayData();
                 this.highlightZero();
-                //                this.buildDetails();
+                this.buildDetails();
                 //                this.bindEvents();
                 // return finished tool
                 return this.returnTool();
@@ -393,7 +393,7 @@
                     a = 0;
                     length = hTags.config.hTags[key].length;
                     console.log(hTags.config.hTags[key]);
-                    console.log(length);
+                    //                    console.log(length);
                     for (a; a < length; a += 1) {
                         console.log(hTags.config.hTags[key].text());
                         html += key + '=' + hTags.config.hTags[key].text() + '<br>';
@@ -1778,7 +1778,7 @@
                     .append(speedtestPage.config.$keySelect)
                     .append(speedtestPage.config.$sendButt);
 
-                speedtestPage.config.$emailInput.text(speedtestPage.config.email);
+                speedtestPage.config.$emailInput.val(speedtestPage.config.email);
             },
             addTool: function () {
                 this.$toolsPanel.append(speedtestPage.config.$activateButt);
@@ -3011,7 +3011,8 @@
                             matchesFound.push(false);
                         } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
                             // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                            // do nothing
+                            //                             do nothing
+                            url += '&nextGen=false';
                             matchesFound.push(true);
                         }
 
