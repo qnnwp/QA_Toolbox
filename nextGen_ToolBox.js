@@ -357,10 +357,10 @@
                 for (key in hTags.config.hTags) {
                     a = 0;
                     length = hTags.config.hTags[key].length;
-                    console.log(hTags.config.hTags[key]);
+                    //                    console.log(hTags.config.hTags[key]);
                     //                    console.log(length);
                     for (a; a < length; a += 1) {
-                        console.log(hTags.config.hTags[key].text());
+                        //                        console.log(hTags.config.hTags[key].text());
                         html += key + '=' + hTags.config.hTags[key].text() + '<br>';
                     }
                 }
@@ -1825,8 +1825,6 @@
                     },
                     newTab, desktopURL, mobileURL;
 
-                console.log(selectedKey);
-
                 // build url
                 jQuery.each(params, function (index, value) {
                     speedtestPage.config.testURL += index + '=' + value + '&';
@@ -2196,8 +2194,8 @@
                 });
                 $input.find('style').remove();
                 // remove all style attributes
-                var test = $input.find('*');
-                console.log(test);
+                //                var test = $input.find('*');
+                //                console.log(test);
                 $input.find('*').removeAttr('style');
 
                 // strip all attributes
@@ -2675,7 +2673,7 @@
                 }
             },
             ajaxTest: function (linkURL, $curLink, totalTests) {
-                console.log('testing this link : ' + linkURL);
+                //                console.log('testing this link : ' + linkURL);
                 var hasImage = 0,
                     isImageLink = false,
                     $img,
@@ -2976,7 +2974,7 @@
                     // determine search term is empty
                     // this will mean that the toggle is turned off
                     if (findThis === undefined || findThis === '') {
-                        console.log('value is empty : skip');
+                        //                        console.log('value is empty : skip');
                     } else {
                         // search url for KEY
                         //
@@ -3895,6 +3893,7 @@
                 this.addTool();
                 this.modToolbar();
                 this.bindEvents();
+                this.displayPanel();
             },
             createElements: function () {
                 // main panel container
@@ -3961,6 +3960,7 @@
                     }), // font awesome icon
                     $minimizeIcon: jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse" style="color: #ffffff"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
                         title: 'Click to Hide Toolbox',
+                        id: 'showToolbox'
                     })
                 };
             },
@@ -3981,6 +3981,7 @@
                 this.$toolBoxContainer = jQuery('#toolboxContainer');
                 this.nextGenComment = document.firstChild.data;
                 this.isNextGen = this.checkNextGen(this.nextGenComment);
+                this.variableList = this.programData();
             },
             addTool: function () {
                 // add to main toolbox
@@ -4009,6 +4010,21 @@
                 // click
                 dynamicDisplay.config.$minimizeIcon.on('click', this.toggleTools.bind(this));
                 dynamicDisplay.config.$showToolbox.on('click', this.toggleTools.bind(this));
+                dynamicDisplay.config.$minimizeIcon.on('click', this.saveState);
+                dynamicDisplay.config.$showToolbox.on('click', this.saveState);
+            },
+            displayPanel: function () {
+                // loop through variable list to find the panel title
+                var variables = this.variableList,
+                    state = '',
+                    key = '';
+                for (key in variables) {
+                    if (key === 'showToolbox') {
+                        console.log(key + ' : ' + variables[key]);
+                        state = variables[key] ? 'show' : 'hide';
+                        this.setState(this.$toolBoxContainer, state);
+                    }
+                }
             },
             // ----------------------------------------
             // tier 2
@@ -4019,12 +4035,50 @@
                 }
                 return 'Tetra';
             },
+            programData: function () {
+                var allVariables = programVariables(),
+                    length = allVariables.length,
+                    a = 0,
+                    varList = {},
+                    key = '',
+                    value = '';
+                // add variables to list
+                for (a; a < length; a += 1) {
+                    key = allVariables[a];
+                    value = getValue(key);
+                    varList[key] = value;
+                }
+                return varList;
+            },
             toggleTools: function () {
                 // hide / show main tool box
                 this.toggleBox();
                 // hide / show toggle button
                 dynamicDisplay.config.$showToolbox.toggle('fade', 500);
             },
+            saveState: function (event) {
+                // get current state
+                var vName = jQuery(event.target).parent().attr('id'),
+                    //                console.log(vName);
+                    currState = getValue(vName, false);
+                // sets usingM4 value
+                setValue(vName, !currState);
+            },
+            setState: function ($panel, state) {
+                if (state === 'show') {
+                    $panel.css({
+                        display: 'block'
+                    });
+                } else if (state === 'hide') {
+                    $panel.css({
+                        display: 'none'
+                    });
+                    dynamicDisplay.config.$showToolbox.toggle('fade', 500);
+                }
+            },
+            // ----------------------------------------
+            // tier 3
+            // ----------------------------------------
             toggleBox: function () {
                 this.$toolBoxContainer.toggle('fade', 500);
             }
@@ -4167,7 +4221,7 @@
         isNextGenPlatform;
 
     if (nextGen) {
-        console.log('next gen comment found');
+        //        console.log('next gen comment found');
         isNextGenPlatform = nextGen.indexOf('Next Gen') === -1 ? false : true;
     } else {
         isNextGenPlatform = false;
