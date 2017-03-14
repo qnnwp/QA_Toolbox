@@ -64,7 +64,7 @@
                         rel: 'stylesheet'
                     }),
                     $jQueryUI: jQuery('<link>').attr({
-                        href: 'ttps://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
+                        href: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                         rel: 'stylesheet'
                     })
                 };
@@ -357,10 +357,7 @@
                 for (key in hTags.config.hTags) {
                     a = 0;
                     length = hTags.config.hTags[key].length;
-                    //                    console.log(hTags.config.hTags[key]);
-                    //                    console.log(length);
                     for (a; a < length; a += 1) {
-                        //                        console.log(hTags.config.hTags[key].text());
                         html += key + '=' + hTags.config.hTags[key].text() + '<br>';
                     }
                 }
@@ -369,15 +366,14 @@
             displayData: function () {
                 var html = '',
                     key,
-                    $hContainer = jQuery('<div>').attr({
-                        class: 'hCount'
-                    }),
+                    $hContainer,
                     $hCount = jQuery('<span>').attr({
                         class: 'count'
                     });
 
                 for (key in hTags.config.hTagsTotal) {
-                    $hContainer.attr({
+                    $hContainer = jQuery('<div>').attr({
+                        class: 'hCount',
                         id: key + 'Count'
                     }).text(key + ' : ');
 
@@ -4105,8 +4101,7 @@
                     // ----- other tools ----- //
                     otherTools.init(); // initialize other tools
                     viewMobile.init(); // initialize view mobile tool
-                    seoSimplify.init();
-                    //                    jQuery('#otherTools').append($seo_butt);
+                    seoSimplify.init(); // initialize seo simplify
                     jQuery('#otherTools').append($wo_butt);
 
                     // ----- toggle tools ----- //
@@ -4170,10 +4165,7 @@
 
                     // ----- other tools ----- //
                     otherTools.init(); // initialize other tools
-                    //                    viewMobile.init(); // initialize view mobile tool
-                    seoSimplify.init();
-                    //                    jQuery('#otherTools').append($seo_butt);
-                    //                jQuery('#otherTools').append($wo_butt);
+                    seoSimplify.init(); // initialize seo simplify
 
                     // ----- toggle tools ----- //
                     toggles.init(); // initialize other tools
@@ -4183,7 +4175,6 @@
                     // ----- URL modifier tools ----- //
                     urlModifiers.init(); // initialize page Information tool
                     nextGenToggle.init(); // initialize nextGen toggle
-                    //                m4Check.init(); // initialize milestone 4 module check box
                     autofillToggle.init(); // initialize autofill toggle
 
                     // ----- added features ----- //
