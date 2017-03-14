@@ -1,7 +1,7 @@
 /*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document */
 
 // added 7th key to web page test tool
-
+console.log('v3.3.0');
 (function () {
 
     // ------------------------------------------------------------------------------------------------------------------------
