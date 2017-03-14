@@ -294,13 +294,15 @@
                 this.createElements();
                 this.cacheDOM();
                 this.buildTool();
-                this.displayData();
-                this.highlightZero();
                 this.buildDetails();
-                //                this.bindEvents();
+                this.displayData();
+                this.addStyles();
                 // return finished tool
                 return this.returnTool();
             },
+            // ----------------------------------------
+            // tier 1 functions
+            // ----------------------------------------
             createElements: function () {
                 hTags.config = {
                     $hTagsContainer: jQuery('<div>').attr({
@@ -310,7 +312,6 @@
                         class: 'tbLabel'
                     }).text('h tags'),
                     $hTags: jQuery('<div>').attr({
-                        //                        class: 'tbInfo',
                         title: 'h tags on current page',
                         id: 'hTags'
                     }).css({
@@ -341,47 +342,11 @@
                     total = jQuery(key).length;
                     hTags.config.hTagsTotal[key] = total;
                 }
+                this.$toolbarStyles = jQuery('#qa_toolbox');
             },
             buildTool: function () {
                 hTags.config.$hTagsContainer.append(hTags.config.$hTagsTitle);
                 hTags.config.$hTagsContainer.append(hTags.config.$hTags);
-                //                hTags.config.$hTagsContainer.append(hTags.config.$hTagDetails);
-            },
-            displayData: function () {
-                var html = '',
-                    key,
-                    $hContainer = jQuery('<div>').attr({
-                        class: 'hCount'
-                    }).css({
-                        display: 'block'
-                    }),
-                    $hTag = jQuery('<span>'),
-                    $hCount = jQuery('<span>');
-
-                for (key in hTags.config.hTagsTotal) {
-                    $hTag.attr({
-                        class: key
-                    }).text(key + ' : ');
-
-                    $hCount.attr({
-                        class: key + 'count'
-                    }).text(hTags.config.hTagsTotal[key]);
-
-                    $hContainer.append($hTag);
-                    $hContainer.append($hCount);
-
-                    console.log($hContainer.prop('outerHTML'));
-                    html += $hContainer.prop('outerHTML');
-                }
-                hTags.config.$hTags.html(html);
-            },
-            // ----------------------------------------
-            // FIND COUNTS = 0 and highlight ORANGE
-            // ----------------------------------------
-            highlightZero: function () {
-                var html = hTags.config.$hTags.html(),
-                    newHtml = html.replace('0', '<span style="background: orange;">0</span>');
-                hTags.config.$hTags.html(newHtml);
             },
             buildDetails: function () {
                 var html = '',
@@ -401,15 +366,53 @@
                 }
                 hTags.config.$hTagDetails.html(html);
             },
-            bindEvents: function () {
-                hTags.config.$hTags.on('click', this.showPanel);
+            displayData: function () {
+                var html = '',
+                    key,
+                    $hContainer = jQuery('<div>').attr({
+                        class: 'hCount'
+                    }),
+                    $hCount = jQuery('<span>').attr({
+                        class: 'count'
+                    });
+
+                for (key in hTags.config.hTagsTotal) {
+                    $hContainer.attr({
+                        id: key + 'Count'
+                    }).text(key + ' : ');
+
+                    $hCount.text(hTags.config.hTagsTotal[key]);
+
+                    this.highlightZero($hContainer, $hCount);
+
+                    $hContainer.append($hCount);
+
+                    html += $hContainer.prop('outerHTML');
+                }
+                hTags.config.$hTags.html(html);
             },
-            showPanel: function () {
-                return hTags.config.$hTagDetails.slideToggle(500);
+            addStyles: function () {
+                // apply module styles to main tool bar style tag
+                this.$toolbarStyles
+                    .append('.hCount { display: block; font-size: 12px }')
+                    .append('.count { font-weight: bold; }')
+                    .append('.zeroTotal { background: linear-gradient(to right, #F2994A , #F2C94C); }');
             },
             returnTool: function () {
                 var panel = hTags.config.$hTagsContainer;
                 return panel;
+            },
+            // ----------------------------------------
+            // tier 2 functions
+            // ----------------------------------------
+            highlightZero: function ($hContainer, hCount) {
+                var count = jQuery(hCount).text();
+
+                if (count === '0') {
+                    $hContainer.attr({
+                        class: 'zeroTotal'
+                    });
+                }
             }
         },
 
