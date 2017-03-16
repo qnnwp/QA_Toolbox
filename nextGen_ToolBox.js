@@ -1,7 +1,6 @@
 /*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document */
 
 // added 7th key to web page test tool
-console.log('v3.3.0');
 (function () {
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -18,7 +17,6 @@ console.log('v3.3.0');
     }
 
     function getValue(variable) {
-        //        console.log('"GET" value "' + variable);
         return GM_getValue(variable, false);
     }
 
@@ -72,11 +70,11 @@ console.log('v3.3.0');
             toolbarStyles: function () {
                 QAtoolbox.config.$toolbarStyles
                     // general toolbox styles
-                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; font-size: 9.5px; z-index: 50000; margin: 0 0 5px 0; }')
-                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 9.5px; line-height: 20px; position: fixed; text-transform: lowercase; width: 120px; z-index: 99999999; }')
+                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; z-index: 50000; margin: 0 0 5px 0; }') //font-size: 9.5px;
+                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px !important; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }') //width: 120px;
                     .append('.toolsPanel { display: none; }')
                     // panel title styles // padding: 5px;
-                    .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; font-size: 11px; text-transform: lowercase; }')
+                    .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; text-transform: lowercase; }') //font-size: 11px;
                     // default highlight style
                     .append('#toolboxContainer .highlight { background: linear-gradient(to right, #83a4d4 , #b6fbff) !important; color: #ffffff;}')
                     // even button styles
@@ -84,7 +82,7 @@ console.log('v3.3.0');
                     // off button styles
                     .append('.oddEDObutts {background: linear-gradient(to left, #6190E8 , #A7BFE8);}')
                     // default button styles
-                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 11px; top: 15%; margin: 1px 0px 0px 10px; padding: 4px 0px; position: relative; text-transform: lowercase; width: 120px; }')
+                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; top: 15%; margin: 1px 0px 0px 10px; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }') //font-size: 11px; width: 120px;
                     .append('.myEDOBut.notWorking { background: purple; }')
                     .append('.myEDOBut.offButt { width: 90%; height: 50px; }')
                     .append('.myEDOBut[disabled] { border: 2px outset ButtonFace; background: #ddd; background-color: #ddd; color: grey !important; cursor: not-allowed; }')
@@ -94,9 +92,9 @@ console.log('v3.3.0');
                     .append('.legendTitle { font-weight: bold; }')
                     .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
-                    .append('#legendContainer { font-family: "Montserrat"; font-size: 12px; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }')
+                    .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }') //font-size: 12px;
                     .append('.legend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
-                    .append('.hint { font-size: 10px; font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
+                    .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }') //font-size: 10px;
                     // toggle style
                     .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; } '); // end
             },
@@ -317,7 +315,7 @@ console.log('v3.3.0');
                     }).css({
                         background: 'white',
                         'border-top': '1px solid #000000',
-                        'font-size': '15px'
+                        //                        'font-size': '15px'
                     }),
                     $hTagDetails: jQuery('<div>').attr({
                         class: 'tbInfo',
@@ -390,7 +388,7 @@ console.log('v3.3.0');
             addStyles: function () {
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
-                    .append('.hCount { display: block; font-size: 12px }')
+                    .append('.hCount { display: block; }') //font-size: 12px
                     .append('.count { font-weight: bold; }')
                     .append('.zeroTotal { background: linear-gradient(to right, #F2994A , #F2C94C); }');
             },
@@ -820,22 +818,22 @@ console.log('v3.3.0');
                 // find first case that returns true
                 switch (true) {
                     // if alt is undefined
-                case ($this.attr('alt') === undefined):
-                    this.togClass($this, 'noAlt');
-                    break;
-                    // if alt is empty
-                case ($this.attr('alt') === ''):
-                    this.togClass($this, 'emptyAlt');
-                    break;
-                    // if alt IS NOT empty
-                case ($this.attr('alt') !== ''):
-                    this.togClass($this, 'hasAlt');
-                    break;
-                    // log the image element that breaks the program
-                default:
-                    console.log('image checker failure');
-                    console.log(currentImage);
-                    break;
+                    case ($this.attr('alt') === undefined):
+                        this.togClass($this, 'noAlt');
+                        break;
+                        // if alt is empty
+                    case ($this.attr('alt') === ''):
+                        this.togClass($this, 'emptyAlt');
+                        break;
+                        // if alt IS NOT empty
+                    case ($this.attr('alt') !== ''):
+                        this.togClass($this, 'hasAlt');
+                        break;
+                        // log the image element that breaks the program
+                    default:
+                        console.log('image checker failure');
+                        console.log(currentImage);
+                        break;
                 }
             },
             // ----------------------------------------
@@ -1091,58 +1089,58 @@ console.log('v3.3.0');
                 // find first case that returns true
                 switch (true) {
                     // undefined title or empty title
-                case ($currentLink.attr('title') === undefined || $currentLink.attr('title') === ''):
-                    if (isImageLink) {
-                        this.togClass(this.$divOverlay, 'noTitle');
-                    } else {
-                        this.togClass($currentLink, 'noTitle');
-                    }
-                    break;
-                    // has title
-                case ($currentLink.attr('title') !== ''):
-                    if (isImageLink) {
-                        this.togClass(this.$divOverlay, 'hasTitle');
-                    } else {
-                        this.togClass($currentLink, 'hasTitle');
-                    }
-                    break;
-                    // log the image element that breaks the program
-                default:
-                    console.log('title checker failure');
-                    console.log($currentLink);
-                    break;
+                    case ($currentLink.attr('title') === undefined || $currentLink.attr('title') === ''):
+                        if (isImageLink) {
+                            this.togClass(this.$divOverlay, 'noTitle');
+                        } else {
+                            this.togClass($currentLink, 'noTitle');
+                        }
+                        break;
+                        // has title
+                    case ($currentLink.attr('title') !== ''):
+                        if (isImageLink) {
+                            this.togClass(this.$divOverlay, 'hasTitle');
+                        } else {
+                            this.togClass($currentLink, 'hasTitle');
+                        }
+                        break;
+                        // log the image element that breaks the program
+                    default:
+                        console.log('title checker failure');
+                        console.log($currentLink);
+                        break;
                 }
             },
             checkURL: function ($currentLink, isImageLink) {
                 var href = $currentLink.attr('href');
                 switch (true) {
                     // no href
-                case (href === undefined):
-                    if (isImageLink) {
-                        this.togClass(this.$divOverlay, 'brokenURL');
-                    } else {
-                        this.togClass($currentLink, 'brokenURL');
-                    }
-                    break;
-                    // empty href
-                case (href === ''):
-                    if (isImageLink) {
-                        this.togClass(this.$divOverlay, 'brokenURL');
-                    } else {
-                        this.togClass($currentLink, 'brokenURL');
-                    }
-                    break;
-                    // url issue
-                case (this.checkHref(href)):
-                    if (isImageLink) {
-                        this.togClass(this.$divOverlay, 'urlIssue');
-                    } else {
-                        this.togClass($currentLink, 'urlIssue');
-                    }
-                    break;
-                    // url is good to go
-                default:
-                    break;
+                    case (href === undefined):
+                        if (isImageLink) {
+                            this.togClass(this.$divOverlay, 'brokenURL');
+                        } else {
+                            this.togClass($currentLink, 'brokenURL');
+                        }
+                        break;
+                        // empty href
+                    case (href === ''):
+                        if (isImageLink) {
+                            this.togClass(this.$divOverlay, 'brokenURL');
+                        } else {
+                            this.togClass($currentLink, 'brokenURL');
+                        }
+                        break;
+                        // url issue
+                    case (this.checkHref(href)):
+                        if (isImageLink) {
+                            this.togClass(this.$divOverlay, 'urlIssue');
+                        } else {
+                            this.togClass($currentLink, 'urlIssue');
+                        }
+                        break;
+                        // url is good to go
+                    default:
+                        break;
                 }
             },
             linkChecked: function ($currentLink) {
@@ -1341,7 +1339,6 @@ console.log('v3.3.0');
                 for (z; z < datedPagesLength; z += 1) {
                     currPage = datedPages[z];
                     count = this.highlightDatadPages(currPage);
-                    console.log('matches found for ' + currPage + ' : ' + count);
                 }
             },
             oldPages: function (data) {
@@ -2067,36 +2064,36 @@ console.log('v3.3.0');
                 var filePath = '';
                 jQuery(seoSimplify.config.oems).each(function (index, model) {
                     switch (model) {
-                    case 'Chevrolet':
-                        // vehicles/chevrolet.json
-                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/45858a25d100580860050568bfc31/e2e45858a25d100580860050568bfc31.json';
-                        seoSimplify.loadArray(filePath);
-                        break;
-                    case 'Buick':
-                        // vehicles/buick.json
-                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3cfa0a25d100581330050568b6442/e2e3cfa0a25d100581330050568b6442.json';
-                        seoSimplify.loadArray(filePath);
-                        break;
-                    case 'Cadillac':
-                        // vehicles/cadillac.json
-                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100582540050568ba825/e2e421a8a25d100582540050568ba825.json';
-                        seoSimplify.loadArray(filePath);
-                        break;
-                    case 'GMC':
-                        // vehicles/gmc.json
-                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3a4a8a25d100584040050568b5709/e2e3a4a8a25d100584040050568b5709.json';
-                        seoSimplify.loadArray(filePath);
-                        break;
-                    case 'Hyundai':
-                        // vehicles/hyundai.json
-                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/41208a25d100584040050568b5709/e2e41208a25d100584040050568b5709.json';
-                        seoSimplify.loadArray(filePath);
-                        break;
-                    case 'Volkswagen':
-                        // vehicles/volkswagen.json
-                        filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100584040050568b5709/e2e421a8a25d100584040050568b5709.json';
-                        seoSimplify.loadArray(filePath);
-                        break;
+                        case 'Chevrolet':
+                            // vehicles/chevrolet.json
+                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/45858a25d100580860050568bfc31/e2e45858a25d100580860050568bfc31.json';
+                            seoSimplify.loadArray(filePath);
+                            break;
+                        case 'Buick':
+                            // vehicles/buick.json
+                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3cfa0a25d100581330050568b6442/e2e3cfa0a25d100581330050568b6442.json';
+                            seoSimplify.loadArray(filePath);
+                            break;
+                        case 'Cadillac':
+                            // vehicles/cadillac.json
+                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100582540050568ba825/e2e421a8a25d100582540050568ba825.json';
+                            seoSimplify.loadArray(filePath);
+                            break;
+                        case 'GMC':
+                            // vehicles/gmc.json
+                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3a4a8a25d100584040050568b5709/e2e3a4a8a25d100584040050568b5709.json';
+                            seoSimplify.loadArray(filePath);
+                            break;
+                        case 'Hyundai':
+                            // vehicles/hyundai.json
+                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/41208a25d100584040050568b5709/e2e41208a25d100584040050568b5709.json';
+                            seoSimplify.loadArray(filePath);
+                            break;
+                        case 'Volkswagen':
+                            // vehicles/volkswagen.json
+                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100584040050568b5709/e2e421a8a25d100584040050568b5709.json';
+                            seoSimplify.loadArray(filePath);
+                            break;
                     }
                 });
             },
@@ -2112,7 +2109,7 @@ console.log('v3.3.0');
                     .append('.inputDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
                     .append('#inputContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
                     .append('#removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}')
-                    // end of addStyles
+                // end of addStyles
                 ; // end
             },
             addTool: function () {
@@ -2173,11 +2170,8 @@ console.log('v3.3.0');
                     return '';
                 }
 
-                //                if (input.indexOf('<') === 0) {
-                //                    $input = jQuery(input);
-                //                } else {
                 $input.append(input);
-                //                }
+
                 return $input;
             },
             cleanUpTags: function ($input) { // get rid of repeat functionality
@@ -2190,16 +2184,7 @@ console.log('v3.3.0');
                 });
                 $input.find('style').remove();
                 // remove all style attributes
-                //                var test = $input.find('*');
-                //                console.log(test);
                 $input.find('*').removeAttr('style');
-
-                // strip all attributes
-                //                $input.replaceWith(function () {
-                //                    console.log('fired');
-                //                    return jQuery('<' + this.nodeName + '>').append(jQuery(this).contents());
-                //                });
-                // ----------------------------------------
 
                 // remove all br elements
                 $input.find('br').remove();
@@ -2401,11 +2386,11 @@ console.log('v3.3.0');
     $wo_butt.click(function () {
         var $toolbarStyles = jQuery('#qa_toolbox');
         $toolbarStyles
-        // styles data content
+            // styles data content
             .append('.showWidgetData:after { content: attr(data-content); position: absolute; top: 0; bottom: 0; left: 0; text-align: center; z-index: 100; margin: auto; background: linear-gradient(to right, rgba(80, 201, 195, .85) , rgba(150, 222, 218, .85)); color: black; font-weight: bold; font-size: 15px; }')
             .append('.outlineWidget { border: 1px dotted pink; }')
             .append('.hideColorblock { z - index: -1 !important; }')
-            // end of addStyles
+        // end of addStyles
         ; // end
         // made to you will be able to remove it later
         jQuery('.masonry-brick').addClass('outlineWidget');
@@ -2631,27 +2616,15 @@ console.log('v3.3.0');
                         // VehicleSearchResults?pageContext=VehicleSearch&search=new
                         // /VehicleSearchResults?pageContext=VehicleSearch&search=new
                         // ----------------------------------------
-                        //                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < length)) {
-                        //                        if ((curURL.indexOf(findThis) >= 0) && (curURL.indexOf(findThis) < len)) {
-                        //                            curURL = curURL.replace(findThis, this.baseURL);
-                        //                        }
-                        //                        if ((curURL.indexOf(findThis2) >= 0) && (curURL.indexOf(findThis2) < length)) {
-                        //                        if ((curURL.indexOf(findThis2) >= 0) && (curURL.indexOf(findThis2) < len)) {
-                        //                            curURL = curURL.replace(findThis, this.baseURL);
-                        //                        }
-
                         if (curURL.indexOf('/') >= 0) {
                             curURL = this.host + curURL;
-                            //                            console.log('curURL : ' + curURL);
                         }
 
                         // apply nextGen=true
                         if (curURL.indexOf('?') >= 0) {
                             curURL += '&nextGen=true';
-                            //                            console.log('curURL : ' + curURL);
                         } else {
                             curURL += '?nextGen=true';
-                            //                            console.log('curURL : ' + curURL);
                         }
                     }
                     // check urls for '/'
@@ -2659,9 +2632,7 @@ console.log('v3.3.0');
                         // check URL if it begins with /, signifying the link is a relative path URL
                         curURL = curURL.slice(2, hrefLength);
                     } else if (curURL.indexOf('/') === 0) {
-                        //                        console.log('checked curURL : ' + curURL);
                         curURL = curURL.slice(1, hrefLength);
-                        //                        console.log('fixed curURL : ' + curURL);
                     }
 
                     // test links
@@ -2669,7 +2640,6 @@ console.log('v3.3.0');
                 }
             },
             ajaxTest: function (linkURL, $curLink, totalTests) {
-                //                console.log('testing this link : ' + linkURL);
                 var hasImage = 0,
                     isImageLink = false,
                     $img,
@@ -2951,8 +2921,6 @@ console.log('v3.3.0');
                     key = '',
                     matchesFound = [],
                     foundThis = false;
-                //                console.log(url);
-                //                console.log('----------------------------------------');
                 for (key in urlParameters2) {
                     findThis = key;
                     // this works with current URL
@@ -2969,9 +2937,7 @@ console.log('v3.3.0');
                     }
                     // determine search term is empty
                     // this will mean that the toggle is turned off
-                    if (findThis === undefined || findThis === '') {
-                        //                        console.log('value is empty : skip');
-                    } else {
+                    if (findThis === undefined || findThis === '') {} else {
                         // search url for KEY
                         //
                         foundThis = this.searchURL(key, url);
@@ -3397,7 +3363,6 @@ console.log('v3.3.0');
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                //                this.ifLive();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3427,7 +3392,6 @@ console.log('v3.3.0');
                     .append(autofillToggle.config.$autofillToggleIcon);
             },
             setToggle: function () {
-                //                if (!this.liveSite) { // if 'site is not live'
                 if (this.getChecked()) { // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
@@ -3435,7 +3399,6 @@ console.log('v3.3.0');
                     // set toggle and apply parameters
                     this.toggleOff();
                 }
-                //                }
             },
             cacheDOM: function () {
                 this.$toolsPanel = jQuery('#urlModTools');
@@ -3475,15 +3438,6 @@ console.log('v3.3.0');
                 var $toggle = autofillToggle.config.$FAtoggle;
                 $toggle.removeClass('fa-toggle-off');
                 $toggle.addClass('fa-toggle-on');
-            },
-            reloadPage: function (type, newURL) {
-                if (type === 'reload') {
-                    console.log('reload page');
-                    window.location.href = newURL;
-                } else if (type === 'search') {
-                    console.log('append then reload page');
-                    window.location.search += newURL;
-                }
             },
             toggleOff: function () {
                 // set toggle off image
@@ -3667,9 +3621,9 @@ console.log('v3.3.0');
                         //                        position: 'fixed',
                         position: 'absolute',
                         //                        position: 'relative',
-                        left: '35px',
+                        right: '35px',
                         //                        left: '0px',
-                        top: '-45px',
+                        top: '-55px',
                         //                        top: '60px',
                         'z-index': '500000',
                         display: 'none'
@@ -3905,13 +3859,10 @@ console.log('v3.3.0');
                     // display area
                     $displayArea: jQuery('<div>').attr({
                         id: 'displayArea'
-                    }).css({
-                        'font-size': '12px'
                     }),
                     // toolbox version
-                    $version: jQuery('<div>').css({
-                        'font-size': '12px'
-                    }).text('version: ' + GM_info.script.version),
+                    $version: jQuery('<div>')
+                        .text('version: ' + GM_info.script.version),
                     // hide toolbox button div
                     $hideToolbox: jQuery('<div>').attr({
                         id: 'hideToolbox',
@@ -3941,19 +3892,16 @@ console.log('v3.3.0');
                         'z-index': '99999999'
                     }),
                     // font awesome icon
-                    //                    $icon: jQuery('<i class="fa fa-fort-awesome fa-2x"></i>').css({
                     $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>').css({
                         'margin-left': '12px'
                     }),
                     $hide: jQuery('<div>').attr({
                         id: 'hideContainer'
                     }).css({
-                        'font-size': '12px',
                         position: 'absolute',
-                        //                        right: '-25px',
                         top: '-20px',
                         'z-index': '500000'
-                    }), // font awesome icon
+                    }),
                     $minimizeIcon: jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse" style="color: #ffffff"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
                         title: 'Click to Hide Toolbox',
                         id: 'showToolbox'
@@ -3962,15 +3910,12 @@ console.log('v3.3.0');
             },
             buildPanel: function () {
                 // attach panel elements to container
-                jQuery(dynamicDisplay.config.$displayPanel)
-                    .append(dynamicDisplay.config.$displayArea)
-                    .append(dynamicDisplay.config.$version);
+                dynamicDisplay.config.$displayArea.append(dynamicDisplay.config.$version);
+                dynamicDisplay.config.$displayPanel.append(dynamicDisplay.config.$displayArea);
                 // attach icon to minimize tab
-                jQuery(dynamicDisplay.config.$showToolbox)
-                    .append(dynamicDisplay.config.$icon);
+                dynamicDisplay.config.$showToolbox.append(dynamicDisplay.config.$icon);
                 // attach icon to minimize tab
-                jQuery(dynamicDisplay.config.$hide)
-                    .append(dynamicDisplay.config.$minimizeIcon);
+                dynamicDisplay.config.$hide.append(dynamicDisplay.config.$minimizeIcon);
             },
             cacheDOM: function () {
                 // page info
@@ -3986,7 +3931,7 @@ console.log('v3.3.0');
                 this.$toolBoxContainer.append(dynamicDisplay.config.$hide);
             },
             modToolbar: function () {
-                dynamicDisplay.config.$displayArea.text(this.isNextGen);
+                console.log(this.isNextGen);
 
                 if (this.isNextGen === 'Tetra') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }'); // TETRA color
@@ -4016,7 +3961,6 @@ console.log('v3.3.0');
                     key = '';
                 for (key in variables) {
                     if (key === 'showToolbox') {
-                        console.log(key + ' : ' + variables[key]);
                         state = variables[key] ? 'show' : 'hide';
                         this.setState(this.$toolBoxContainer, state);
                     }
@@ -4055,7 +3999,6 @@ console.log('v3.3.0');
             saveState: function (event) {
                 // get current state
                 var vName = jQuery(event.target).parent().attr('id'),
-                    //                console.log(vName);
                     currState = getValue(vName, false);
                 // sets usingM4 value
                 setValue(vName, !currState);
@@ -4212,7 +4155,6 @@ console.log('v3.3.0');
         isNextGenPlatform;
 
     if (nextGen) {
-        //        console.log('next gen comment found');
         isNextGenPlatform = nextGen.indexOf('Next Gen') === -1 ? false : true;
     } else {
         isNextGenPlatform = false;
