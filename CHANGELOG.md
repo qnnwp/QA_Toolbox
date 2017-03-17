@@ -1,6 +1,6 @@
 # v3.2.3 changes (3/17/2017)
 * Combined TETRA and NEXTGEN toolbars into one. :new:
-  * Toolbar will auto to current site you are viewing, TETRA or NEXTGEN
+  * Toolbar will customize to the current site you are viewing, TETRA or NEXTGEN
     * Color theme will change
     * Position on page will change
     * Overall design has changed
@@ -14,7 +14,7 @@
     * SEO output will now overlay on the page with the text inside.
 ## Misc Changes
 * Toolbar now remembers if you closed the toolbar. :new:
-  * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the user opens a new page.  The toolbar will remain minimized until user chooses to restore the toolbar.<br>
+  * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the user opens a new page.  The toolbar will remain minimized until the user chooses to restore the toolbar.<br>
 * Added minimize function. :new:
   * Click the 'x' at the top
     * The toolbar will stay minimized until restored.
