@@ -15,6 +15,9 @@
 ## Misc Changes
 * Toolbar now remember if you closed the toolbar. :new:
   * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the opens a new page.  The toolbar will remained minimized until user chooses to restore toolbar.<br>
+* Added minimize function. :new:
+  * Click the 'x' at the top
+    * Toolbar will stay minimized until restored.
   
 ## Instructions Update
 * [Coming Soon](https://github.com/cirept/NextGen/blob/master/README.md)<br>
