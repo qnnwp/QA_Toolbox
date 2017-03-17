@@ -17,7 +17,7 @@
   * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the opens a new page.  The toolbar will remained minimized until user chooses to restore toolbar.<br>
   
 ## Instructions Update
-* [Coming Soon](https://github.com/cirept/NextGen/blob/master/README.md)
+* [Coming Soon](https://github.com/cirept/NextGen/blob/master/README.md)<br>
 <br><br>  
 ----------------------------------------
 <br><br>
