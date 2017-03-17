@@ -4,7 +4,7 @@
     * Color theme will change
     * Position on page will change
     * Overall design has changed
-  * Tools will be enabled/disabled, some tools are no longer needed on NEXTGEN
+  * Tools will be enabled/disabled; some tools not needed on NEXTGEN
 ## Tool Changes
 * H Tags Display added to "Page Information" panel :new:
   * Will display all h Tag counts on currently viewed page
@@ -13,11 +13,11 @@
   * Functionality changed
     * SEO output will now overlay on the page with the text inside.
 ## Misc Changes
-* Toolbar now remember if you closed the toolbar. :new:
-  * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the opens a new page.  The toolbar will remained minimized until user chooses to restore toolbar.<br>
+* Toolbar now remembers if you closed the toolbar. :new:
+  * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the user opens a new page.  The toolbar will remain minimized until user chooses to restore the toolbar.<br>
 * Added minimize function. :new:
   * Click the 'x' at the top
-    * Toolbar will stay minimized until restored.
+    * The toolbar will stay minimized until restored.
   
 ## Instructions Update
 * [Coming Soon](https://github.com/cirept/NextGen/blob/master/README.md)<br>
