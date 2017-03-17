@@ -1,15 +1,15 @@
 # v3.2.3 changes (3/17/2017)
-:new: Combined TETRA and NEXTGEN toolbars into one.<br>
+* Combined TETRA and NEXTGEN toolbars into one. :new:<br>
   * Toolbar will auto to current site you are viewing, TETRA or NEXTGEN<br>
     * Color theme will change<br>
     * Position on page will change<br>
 * Tools will be enabled/disabled, some tools are no longer needed on NEXTGEN
 ## Tool Changes
-:new: H Tags Display added to "Page Information" panel<br>
+* H Tags Display added to "Page Information" panel :new:<br>
   * Will display all h Tag counts on currently viewed page<br>
     * Will highlight in orange all h tag counts that equal 0<br>
     
-:cool: SEO Simplify available on NEXTGEN and TETRA
+* SEO Simplify available on NEXTGEN and TETRA :cool:
   * Functionality changed
     * SEO output will now overlay on the page with the text inside.
 ## Misc Changes
