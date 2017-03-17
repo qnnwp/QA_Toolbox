@@ -15,7 +15,7 @@
 * Toolbar now remember if you closed the toolbar.
   * e.g. User minimizes the toolbar (clicking the 'X' at the top of the toolbar), the opens a new page.  The toolbar will remained minimized until user chooses to restore toolbar.
   
-  :end:
+:end:
 
 # v3.2.2 changes (3/7/2017)
 - Added "Choose Key" option
