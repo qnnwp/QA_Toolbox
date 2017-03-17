@@ -9,7 +9,7 @@
   * Will display all h Tag counts on currently viewed page<br>
     * Will highlight in orange all h tag counts that equal 0<br>
     
-* SEO Simplify available on NEXTGEN and TETRA :cool:
+* SEO Simplify available on NEXTGEN and TETRA :exclamation:
   * Functionality changed
     * SEO output will now overlay on the page with the text inside.
 ## Misc Changes
