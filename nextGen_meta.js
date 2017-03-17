@@ -1,16 +1,16 @@
 // ==UserScript==
-// @name NextGen QA Toolbar
+// @name QA Toolbar
 // @namespace www.cobaltgroup.com/
-// @version 3.3.0
+// @version 3.2.3
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
-// @description NextGen Migration Toolbar
+// @description QA Toolbar
 // @downloadURL https://rawgit.com/cirept/NextGen/master/nextGen_meta.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
 // @require https://use.fontawesome.com/3953f47d82.js
-// @require https://cdn.rawgit.com/cirept/NextGen/v3.3.0/nextGen_ToolBox.js
+// @require https://cdn.rawgit.com/cirept/NextGen/v3.2.3/nextGen_ToolBox.js
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard
