@@ -3,7 +3,7 @@
   * Toolbar will auto to current site you are viewing, TETRA or NEXTGEN
     * Color theme will change
     * Position on page will change
-* Tools will be enabled/disabled, some tools are no longer needed on NEXTGEN
+  * Tools will be enabled/disabled, some tools are no longer needed on NEXTGEN
 ## Tool Changes
 * H Tags Display added to "Page Information" panel :new:
   * Will display all h Tag counts on currently viewed page
