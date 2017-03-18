@@ -29,7 +29,6 @@
     }
     
     function getResourceURL(resource) {
-        console.log('resource ' + resource);
         return GM_getResourceURL(resource);
     }
 
