@@ -28,6 +28,11 @@
         console.log('open ' + openThis);
         GM_openInTab(openThis);
     }
+    
+    function getResourceURL(resource) {
+        console.log('resource ' + resource);
+        return GM_getResourceURL(resource);
+    }
 
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- Build container for toolbox ----------------------------------------
@@ -58,15 +63,15 @@
                         type: 'text/css'
                     }),
                     $myFont: jQuery('<link>').attr({
-                        href: 'https://fonts.googleapis.com/css?family=Montserrat',
+                        href: getResourceURL('font'),
                         rel: 'stylesheet'
                     }),
                     $jQueryUI: jQuery('<link>').attr({
-                        href: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
+                        href: getResourceURL('jqueryUI'),
                         rel: 'stylesheet'
                     }),
                     $fontAwe: jQuery('<script>').attr({
-                        src: 'https://use.fontawesome.com/88b14b7726.js'
+                        src: getResourceURL('fontAwe')
                     })
                 };
             },
