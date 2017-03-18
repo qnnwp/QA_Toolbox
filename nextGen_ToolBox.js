@@ -64,6 +64,9 @@
                     $jQueryUI: jQuery('<link>').attr({
                         href: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                         rel: 'stylesheet'
+                    }),
+                    $fontAwe: jQuery('<script>').attr({
+                        src: 'https://use.fontawesome.com/88b14b7726.js'
                     })
                 };
             },
@@ -106,6 +109,7 @@
             attachTools: function () {
                 this.head.append(QAtoolbox.config.$toolbarStyles);
                 this.head.append(QAtoolbox.config.$myFont);
+                this.head.append(QAtoolbox.config.$fontAwe);
                 this.body.before(QAtoolbox.config.$toolbarContainer);
                 this.body.before(QAtoolbox.config.$legendContainer);
             },
