@@ -1,6 +1,5 @@
-/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document */
+/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document */
 
-// added 7th key to web page test tool
 (function () {
 
     // ------------------------------------------------------------------------------------------------------------------------
