@@ -1,3 +1,18 @@
+# v3.2.5 changes (3/20/2017)
+* Fixed issue with'link checker' tool not properly highlighting link that open in a new tab
+  * Custom created NextGen links have a target='custom'.
+    * Added this check to the tool decision structure
+<br><br>  
+----------------------------------------
+<br><br>
+# v3.2.4 changes (3/17/2017)
+* Fixed issue with toolbar not working in FireFox
+  * Web pages no longer have jQuery added to site
+  * Web pages no longer have fontAwesome added to site ([ionIcons](http://ionicons.com/) is now being used)
+    * Modified code to manually add files to site
+<br><br>  
+----------------------------------------
+<br><br>
 # v3.2.3 changes (3/17/2017)
 * Combined TETRA and NEXTGEN toolbars into one. :new:
   * Toolbar will customize to the current site you are viewing, TETRA or NEXTGEN
