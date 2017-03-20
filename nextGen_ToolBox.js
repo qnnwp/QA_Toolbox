@@ -6,12 +6,12 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
-        console.log('"SET" value "' + variable + '" with "' + val + '"');
+        //        console.log('"SET" value "' + variable + '" with "' + val + '"');
         GM_setValue(variable, val);
     }
 
     function clipboardCopy(variable) {
-        console.log('copy clipboard ' + variable);
+        //        console.log('copy clipboard ' + variable);
         GM_setClipboard(variable, 'text');
     }
 
@@ -24,10 +24,10 @@
     }
 
     function openNewTab(openThis) {
-        console.log('open ' + openThis);
+        //        console.log('open ' + openThis);
         GM_openInTab(openThis);
     }
-    
+
     function getResourceURL(resource) {
         return GM_getResourceURL(resource);
     }
@@ -77,7 +77,7 @@
                 QAtoolbox.config.$toolbarStyles
                     // general toolbox styles
                     .append('.toolBox { text-align: center; position: relative; border: 1px solid black; z-index: 50000; margin: 0 0 5px 0; }') //font-size: 9.5px;
-                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px !important; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }') //width: 120px;
+                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }') //width: 120px;
                     .append('.toolsPanel { display: none; }')
                     // panel title styles // padding: 5px;
                     .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; text-transform: lowercase; }') //font-size: 11px;
@@ -88,7 +88,7 @@
                     // off button styles
                     .append('.oddEDObutts {background: linear-gradient(to left, #6190E8 , #A7BFE8);}')
                     // default button styles
-                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; top: 15%; margin: 1px 0px 0px 10px; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }') //font-size: 11px; width: 120px;
+                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 12px; top: 15%; margin: 1px 0px 0px 10px; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }') //width: 120px;
                     .append('.myEDOBut.notWorking { background: purple; }')
                     .append('.myEDOBut.offButt { width: 90%; height: 50px; }')
                     .append('.myEDOBut[disabled] { border: 2px outset ButtonFace; background: #ddd; background-color: #ddd; color: grey !important; cursor: not-allowed; }')
@@ -479,7 +479,7 @@
             addStyles: function () {
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; }')
+                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; font-size: 10px; word-wrap: break-word; }')
                     .append('.tbLabel { font-weight: bold; font-size: inherit; }');
             },
             bindEvents: function () {
@@ -611,7 +611,7 @@
             addStyles: function () {
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; }')
+                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
                     .append('.tbLabel { font-weight: bold; }');
             },
             bindEvents: function () {
@@ -1199,7 +1199,7 @@
                 jQuery($currentImage).before(this.$divOverlay);
             },
             verifyTarget: function ($currentLink) {
-                if (($currentLink.attr('target') === '_blank') || ($currentLink.attr('target') === '_new')) {
+                if (($currentLink.attr('target') === '_blank') || ($currentLink.attr('target') === '_new') || ($currentLink.attr('target') === 'custom')) {
                     return true;
                 }
             },
@@ -1916,7 +1916,7 @@
             addStyles: function () {
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; }')
+                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
                     .append('.tbLabel { font-weight: bold; }');
             },
             bindEvents: function () {
@@ -3107,7 +3107,7 @@
                 // if reloadPage is true reload page
                 if (reloadPage) {
                     window.location.href = url;
-                    console.log('reloading page');
+                    //                    console.log('reloading page');
                 }
             }
         },
@@ -3535,7 +3535,7 @@
             addStyles: function () {
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; }')
+                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
                     .append('.tbLabel { font-weight: bold; }');
             },
             bindEvents: function () {
