@@ -6,12 +6,10 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
-        //        console.log('"SET" value "' + variable + '" with "' + val + '"');
         GM_setValue(variable, val);
     }
 
     function clipboardCopy(variable) {
-        //        console.log('copy clipboard ' + variable);
         GM_setClipboard(variable, 'text');
     }
 
@@ -24,7 +22,6 @@
     }
 
     function openNewTab(openThis) {
-        //        console.log('open ' + openThis);
         GM_openInTab(openThis);
     }
 
@@ -122,7 +119,7 @@
             styleTools: function ($toolPanel) {
                 $toolPanel.children('.myEDOBut:even').addClass('evenEDObutts');
                 $toolPanel.children('.myEDOBut:odd').addClass('oddEDObutts');
-            }
+            },
         },
         /* ************************************************************************************************************************ */
         /* **************************************** PAGE INFO TOOLS **************************************** */
@@ -299,9 +296,10 @@
                 this.createElements();
                 this.cacheDOM();
                 this.buildTool();
-                this.buildDetails();
                 this.displayData();
+                this.tagDetails();
                 this.addStyles();
+                this.bindEvents();
                 // return finished tool
                 return this.returnTool();
             },
@@ -317,62 +315,55 @@
                         class: 'tbLabel'
                     }).text('h tags'),
                     $hTags: jQuery('<div>').attr({
-                        title: 'h tags on current page',
+                        title: 'Click to show hTags on page',
                         id: 'hTags'
-                    }).css({
-                        background: 'white',
-                        'border-top': '1px solid #000000',
-                        //                        'font-size': '15px'
                     }),
-                    $hTagDetails: jQuery('<div>').attr({
-                        class: 'tbInfo',
-                        title: 'h tags on page',
-                        id: 'hTagDetails'
-                    }).css({
-                        display: 'none'
-                    }),
+                    //                    $hTagDetails: jQuery('<div>').attr({
+                    //                        class: 'tbInfo',
+                    //                        title: 'h tags on page',
+                    //                        id: 'hTagDetails'
+                    //                    }).css({
+                    //                        display: 'none'
+                    //                    }),
                     hTagsTotal: {
                         h1: 0,
                         h2: 0,
                         h3: 0,
                         h4: 0
                     },
-                    hTags: {}
+                    hTags: {},
+                    $removeBut: jQuery('<input>').attr({
+                        type: 'button',
+                        class: 'myEDOBut removeDiv',
+                        value: 'REMOVE'
+                    }).css({
+                        background: 'inherit'
+                    }),
+                    $hTagDisplay: jQuery('<div>').attr({
+                        class: 'hTagDisplay'
+                    }),
+                    $hTagDisplayContainer: jQuery('<div>').attr({
+                        id: 'hTagContainer'
+                    }),
                 };
             },
             cacheDOM: function () {
-                var key, key2, total, $hTag;
+                var key, total, tags;
                 for (key in hTags.config.hTagsTotal) {
-                    //                    console.log($hTag);
-                    $hTag = jQuery(key);
-                    hTags.config.hTags[key] = $hTag; // save matches for later
-                    total = $hTag.length;
+                    tags = jQuery(key);
+                    hTags.config.hTags[key] = tags; // save matches for later
+                    total = tags.length;
                     hTags.config.hTagsTotal[key] = total;
                 }
-                //                for (key2 in $hTag) {
-                //                    console.log($hTag[key]);
-                //                }
                 this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$body = jQuery('body');
             },
             buildTool: function () {
                 hTags.config.$hTagsContainer.append(hTags.config.$hTagsTitle);
                 hTags.config.$hTagsContainer.append(hTags.config.$hTags);
-            },
-            buildDetails: function () {
-                var html = '',
-                    key,
-                    a,
-                    length;
 
-                for (key in hTags.config.hTags) {
-                    a = 0;
-                    length = hTags.config.hTags[key].length;
-                    for (a; a < length; a += 1) {
-                        html += key + '=' + hTags.config.hTags[key].text() + '<br>';
-                    }
-                    //                    console.log(hTags.config.hTags[key].text());
-                }
-                hTags.config.$hTagDetails.html(html);
+                hTags.config.$hTagDisplayContainer.append(hTags.config.$hTagDisplay);
+                hTags.config.$hTagDisplayContainer.append(hTags.config.$removeBut);
             },
             displayData: function () {
                 var html = '',
@@ -398,12 +389,33 @@
                 }
                 hTags.config.$hTags.html(html);
             },
+            tagDetails: function () {
+                var key, a = 0,
+                    length, html = '';
+
+                for (key in hTags.config.hTags) {
+                    length = hTags.config.hTags[key].length;
+                    html += '- ' + key + ' -<br>';
+                    for (a; a < length; a += 1) {
+                        html += jQuery(hTags.config.hTags[key][a]).html() + '<br>';
+                    }
+                }
+                hTags.config.$hTagDisplay.html(html);
+            },
             addStyles: function () {
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
-                    .append('.hCount { display: block; }') //font-size: 12px
+                    .append('.hCount { display: block; }')
+                    .append('#hTags { cursor: pointer; background: white; border-top: 1px solid #000000; }')
                     .append('.count { font-weight: bold; }')
-                    .append('.zeroTotal { background: linear-gradient(to right, #F2994A , #F2C94C); }');
+                    .append('.zeroTotal { background: linear-gradient(to right, #F2994A , #F2C94C); }')
+                    .append('.hTagDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
+                    .append('#hTagContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
+                    .append('.removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}'); // end of addStyles
+            },
+            bindEvents: function () {
+                hTags.config.$hTagsContainer.on('click', this.showDetails.bind(this));
+                hTags.config.$removeBut.on('click', this.removeDisplay);
             },
             returnTool: function () {
                 var panel = hTags.config.$hTagsContainer;
@@ -420,7 +432,14 @@
                         class: 'zeroTotal'
                     });
                 }
-            }
+            },
+            showDetails: function () {
+                this.$body.append(hTags.config.$hTagDisplayContainer);
+            },
+            removeDisplay: function () {
+                // remove display container
+                hTags.config.$hTagDisplayContainer.detach();
+            },
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -2052,9 +2071,8 @@
                     }).text('SEO Simplify'),
                     $removeBut: jQuery('<input>').attr({
                         type: 'button',
-                        class: 'myEDOBut',
+                        class: 'myEDOBut removeDiv',
                         value: 'REMOVE',
-                        id: 'removeDiv'
                     }).css({
                         background: 'inherit'
                     }),
@@ -2121,7 +2139,7 @@
                     // styles of colored overlay placed on images
                     .append('.inputDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
                     .append('#inputContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
-                    .append('#removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}')
+                    .append('.removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}')
                 // end of addStyles
                 ; // end
             },
@@ -3944,8 +3962,6 @@
                 this.$toolBoxContainer.append(dynamicDisplay.config.$hide);
             },
             modToolbar: function () {
-                console.log(this.isNextGen);
-
                 if (this.isNextGen === 'Tetra') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }'); // TETRA color
                     QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px 10px; }'); // button position
@@ -4013,6 +4029,7 @@
                 // get current state
                 var vName = jQuery(event.target).parent().attr('id'),
                     currState = getValue(vName, false);
+
                 // sets usingM4 value
                 setValue(vName, !currState);
             },
@@ -4025,7 +4042,7 @@
                     $panel.css({
                         display: 'none'
                     });
-                    dynamicDisplay.config.$showToolbox.toggle('fade', 500);
+                    dynamicDisplay.config.$showToolbox.toggle();
                 }
             },
             // ----------------------------------------
@@ -4035,116 +4052,102 @@
                 this.$toolBoxContainer.toggle('fade', 500);
             }
         },
-
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- tetra toolbox ----------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------------
-        tetraToolbar = {
+        toolbar = {
             init: function () {
-                if (!this.editMode() && this.isCDKsite() && !this.isMobile()) {
-                    QAtoolbox.init(); // initialize toolbox
-                    pageInformation.init(); // initialize page Information tool
-
-                    // ----- main tools ----- //
-                    qaTools.init(); // initialize main qa tools
-                    imageChecker.init(); // initialize image checker tool
-                    linkChecker.init(); // initialize link checker tool
-                    showNavigation.init(); // initialize show navigation tool
-                    spellCheck.init(); // initialize spell check tool
-                    speedtestPage.init(); // initialize page test tool
-                    checkLinks.init(); // initialize 404 checker / check links tool
-
-                    // ----- other tools ----- //
-                    otherTools.init(); // initialize other tools
-                    viewMobile.init(); // initialize view mobile tool
-                    seoSimplify.init(); // initialize seo simplify
-                    jQuery('#otherTools').append($wo_butt);
-
-                    // ----- toggle tools ----- //
-                    toggles.init(); // initialize other tools
-                    refreshPage.init(); // initialize refresh page
-                    previewToolbarToggle.init(); // initialize desktop toggle
-
-                    // ----- URL modifier tools ----- //
-                    urlModifiers.init(); // initialize page Information tool
-                    nextGenToggle.init(); // initialize nextGen toggle
-                    m4Check.init(); // initialize milestone 4 module check box
-                    autofillToggle.init(); // initialize autofill toggle
-
-                    // ----- added features ----- //
-                    dynamicDisplay.init(); // initialize display information tool
-
-                    // style buttons in toolbox
-                    QAtoolbox.styleTools(qaTools.config.$mainToolsPanel);
-                    QAtoolbox.styleTools(otherTools.config.$otherToolsPanel);
+                this.cacheDOM();
+                this.checkEnvironment();
+                this.main();
+                this.pageInfoPanel();
+                this.qaToolsPanel();
+                this.otherToolsPanel();
+                this.togglesPanel();
+                this.urlModPanel();
+                this.dynamicPanel();
+                this.stylePanels();
+            },
+            cacheDOM: function () {
+                this.nextGen = document.firstChild.data;
+                this.isNextGenPlatform = this.nextGenCheck();
+                this.isCDKsite = this.isCDKsite();
+                this.isMobile = this.isMobile();
+                this.editMode = this.editMode();
+            },
+            checkEnvironment: function () {
+                if (this.editMode || this.isCDKsite || this.isMobile) {
+                    // don't run toolbar if in edit mode OR not a CDK site OR is mobile site
+                    return;
                 }
             },
-            isCDKsite: function () {
-                var siteState = unsafeWindow.ContextManager.getVersion();
-                // determines which state of the site you are viewing (this variable should only exist on CDK sites)
-                return ((siteState === 'WIP') || (siteState === 'PROTO') || (siteState === 'LIVE'));
+            main: function () {
+                QAtoolbox.init();
             },
-            isMobile: function () {
-                var phoneWrapper = jQuery('body .phone-wrapper');
-                // determines if the page being viewed is meant for mobile
-                if (phoneWrapper.length > 0) {
-                    return true;
+            pageInfoPanel: function () {
+                pageInformation.init();
+            },
+            qaToolsPanel: function () {
+                qaTools.init();
+                imageChecker.init();
+                linkChecker.init();
+                showNavigation.init();
+                spellCheck.init();
+                speedtestPage.init();
+                checkLinks.init();
+
+                // add nextGen specific tool to panel
+                if (this.isNextGenPlatform) {
+                    outdatedLinks.init();
+                }
+            },
+            otherToolsPanel: function () {
+                otherTools.init();
+                seoSimplify.init();
+
+                // add tetra specific tool to panel
+                if (!this.isNextGenPlatform) {
+                    viewMobile.init();
+                    jQuery('#otherTools').append($wo_butt);
+                }
+            },
+            togglesPanel: function () {
+                toggles.init();
+                refreshPage.init();
+                previewToolbarToggle.init();
+            },
+            urlModPanel: function () {
+                urlModifiers.init();
+                nextGenToggle.init();
+                autofillToggle.init();
+
+                // add tetra specific tool to panel
+                if (!this.isNextGenPlatform) {
+                    m4Check.init();
+                }
+            },
+            dynamicPanel: function () {
+                dynamicDisplay.init();
+            },
+            stylePanels: function () {
+                QAtoolbox.styleTools(qaTools.config.$mainToolsPanel);
+                QAtoolbox.styleTools(otherTools.config.$otherToolsPanel);
+            },
+            // ----------------------------------------
+            // tier 2
+            // ----------------------------------------
+            nextGenCheck: function () {
+                if (this.nextGen) {
+                    return this.nextGen.indexOf('Next Gen') === -1 ? false : true;
                 } else {
                     return false;
                 }
             },
-            editMode: function () {
-                // determines if site is in edit mode in WSM (this variable should only exist on CDK sites)
-                return unsafeWindow.editMode;
-            }
-        },
-
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- next gen toolbox ----------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------------
-        nextgenToolbar = {
-            init: function () {
-                //            if (!this.editMode() && this.isCDKsite() && !this.isMobile()) {
-                if (!this.editMode() && this.isCDKsite()) {
-                    QAtoolbox.init(); // initialize toolbox
-                    pageInformation.init(); // initialize page Information tool
-
-                    // ----- main tools ----- //
-                    qaTools.init(); // initialize main qa tools
-                    imageChecker.init(); // initialize image checker tool
-                    linkChecker.init(); // initialize link checker tool
-                    outdatedLinks.init(); // initialize outdated link checker tool
-                    showNavigation.init(); // initialize show navigation tool
-                    spellCheck.init(); // initialize spell check tool
-                    speedtestPage.init(); // initialize page test tool
-                    checkLinks.init(); // initialize 404 checker / check links tool
-
-                    // ----- other tools ----- //
-                    otherTools.init(); // initialize other tools
-                    seoSimplify.init(); // initialize seo simplify
-
-                    // ----- toggle tools ----- //
-                    toggles.init(); // initialize other tools
-                    refreshPage.init(); // initialize refresh page
-                    previewToolbarToggle.init(); // initialize desktop toggle
-
-                    // ----- URL modifier tools ----- //
-                    urlModifiers.init(); // initialize page Information tool
-                    nextGenToggle.init(); // initialize nextGen toggle
-                    autofillToggle.init(); // initialize autofill toggle
-
-                    // ----- added features ----- //
-                    dynamicDisplay.init(); // initialize display information tool
-
-                    // style buttons in toolbox
-                    QAtoolbox.styleTools(qaTools.config.$mainToolsPanel);
-                    QAtoolbox.styleTools(otherTools.config.$otherToolsPanel);
-                }
-            },
             isCDKsite: function () {
-                var siteState = unsafeWindow.ContextManager.getVersion();
-                // determines which state of the site you are viewing (this variable should only exist on CDK sites)
-                return ((siteState === 'WIP') || (siteState === 'PROTO') || (siteState === 'LIVE'));
+                try {
+                    var siteState = unsafeWindow.ContextManager.getVersion();
+                    // determines which state of the site you are viewing (this variable should only exist on CDK sites)
+                    return ((siteState === 'WIP') || (siteState === 'PROTO') || (siteState === 'LIVE'));
+                } catch (e) {
+                    throw 'Not a CDK site, shutting toolbar down';
+                }
             },
             isMobile: function () {
                 var phoneWrapper = jQuery('body .phone-wrapper');
@@ -4164,20 +4167,6 @@
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- initialize toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
-    var nextGen = document.firstChild.data,
-        isNextGenPlatform;
-
-    if (nextGen) {
-        isNextGenPlatform = nextGen.indexOf('Next Gen') === -1 ? false : true;
-    } else {
-        isNextGenPlatform = false;
-    }
-
-    if (isNextGenPlatform) {
-        nextgenToolbar.init();
-    }
-    if (!isNextGenPlatform) {
-        tetraToolbar.init();
-    }
+    toolbar.init();
 
 })(); // end main function
