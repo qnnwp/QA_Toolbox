@@ -341,12 +341,17 @@
                 };
             },
             cacheDOM: function () {
-                var key, total;
+                var key, key2, total, $hTag;
                 for (key in hTags.config.hTagsTotal) {
-                    hTags.config.hTags[key] = jQuery(key); // save matches for later
-                    total = jQuery(key).length;
+                    //                    console.log($hTag);
+                    $hTag = jQuery(key);
+                    hTags.config.hTags[key] = $hTag; // save matches for later
+                    total = $hTag.length;
                     hTags.config.hTagsTotal[key] = total;
                 }
+                //                for (key2 in $hTag) {
+                //                    console.log($hTag[key]);
+                //                }
                 this.$toolbarStyles = jQuery('#qa_toolbox');
             },
             buildTool: function () {
@@ -365,6 +370,7 @@
                     for (a; a < length; a += 1) {
                         html += key + '=' + hTags.config.hTags[key].text() + '<br>';
                     }
+                    //                    console.log(hTags.config.hTags[key].text());
                 }
                 hTags.config.$hTagDetails.html(html);
             },
@@ -3944,7 +3950,7 @@
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }'); // TETRA color
                     QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px 10px; }'); // button position
                     QAtoolbox.config.$toolbarStyles.append('#hideContainer { right: -25px; }'); // button position
-                    QAtoolbox.config.$toolbarStyles.append('#legendContainer  { right: 115px; }'); // legend position
+                    QAtoolbox.config.$toolbarStyles.append('#legendContainer  { right: 115px; font-size: 11px; }'); // legend position
                 } else if (this.isNextGen === 'Next Gen') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #02AAB0 , #00CDAC) }'); // NEXTGEN color
                     QAtoolbox.config.$toolbarStyles.append('#toolboxContainer { right: 0%; }'); // toolbox location
