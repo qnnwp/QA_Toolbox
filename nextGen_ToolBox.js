@@ -96,7 +96,7 @@
                     .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
                     .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }') //font-size: 12px;
-                    .append('.legend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
+                    .append('.tblegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
                     .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }') //font-size: 10px;
                     // toggle style
                     .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; } '); // end
@@ -318,13 +318,6 @@
                         title: 'Click to show hTags on page',
                         id: 'hTags'
                     }),
-                    //                    $hTagDetails: jQuery('<div>').attr({
-                    //                        class: 'tbInfo',
-                    //                        title: 'h tags on page',
-                    //                        id: 'hTagDetails'
-                    //                    }).css({
-                    //                        display: 'none'
-                    //                    }),
                     hTagsTotal: {
                         h1: 0,
                         h2: 0,
@@ -718,7 +711,7 @@
                         title: 'Image Alt Checker'
                     }).text('Image Alt Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'legend'
+                        class: 'tblegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -846,20 +839,20 @@
                 this.attachToImage(currentImage);
             },
             checkForAltText: function (currentImage) {
-                var $this = jQuery(currentImage);
+                var $image = jQuery(currentImage);
                 // find first case that returns true
                 switch (true) {
                     // if alt is undefined
-                    case ($this.attr('alt') === undefined):
-                        this.togClass($this, 'noAlt');
+                    case ($image.attr('alt') === undefined):
+                        this.togClass($image, 'noAlt');
                         break;
                         // if alt is empty
-                    case ($this.attr('alt') === ''):
-                        this.togClass($this, 'emptyAlt');
+                    case ($image.attr('alt') === ''):
+                        this.togClass($image, 'emptyAlt');
                         break;
                         // if alt IS NOT empty
-                    case ($this.attr('alt') !== ''):
-                        this.togClass($this, 'hasAlt');
+                    case ($image.attr('alt') !== ''):
+                        this.togClass($image, 'hasAlt');
                         break;
                         // log the image element that breaks the program
                     default:
@@ -899,8 +892,8 @@
                 // place div overlay onto image
                 jQuery(currentImage).before(this.$divOverlay);
             },
-            togClass: function ($obj, addClass) {
-                $obj.siblings('.imgOverlay').toggleClass(addClass);
+            togClass: function ($image, addClass) {
+                $image.siblings('.imgOverlay').toggleClass(addClass);
             },
             // ----------------------------------------
             // tier 5
@@ -931,7 +924,7 @@
                         title: 'Check Links'
                     }).text('Link Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'legend'
+                        class: 'tblegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -1098,8 +1091,8 @@
                 }
                 return false;
             },
-            togClass: function ($obj, addClass) {
-                $obj.toggleClass(addClass);
+            togClass: function ($currentLink, addClass) {
+                $currentLink.toggleClass(addClass);
             },
             addDivOverlay: function ($currentLink, $currentImage) {
                 this.cacheDOMOverlayElements($currentLink, $currentImage);
@@ -1279,7 +1272,7 @@
                         value: 'Turn Off'
                     }),
                     $legend: jQuery('<div>').attr({
-                        class: 'legend',
+                        class: 'tblegend',
                         id: 'outdatedLinkLegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
@@ -1492,7 +1485,7 @@
                         value: 'Turn Off'
                     }),
                     $legend: jQuery('<div>').attr({
-                        class: 'legend'
+                        class: 'tblegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -2493,7 +2486,7 @@
                         title: '404 Checker'
                     }).text('404 Link Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'legend'
+                        class: 'tblegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
