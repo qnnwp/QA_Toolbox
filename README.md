@@ -42,8 +42,8 @@ Show Navigation Functionality | Show Navigation Legend
 [Back to Top](#tool-descriptions)
 <br>
 
-===
-===
+---
+---
 
 <br>
 <br>
@@ -88,8 +88,8 @@ Link Checker Functionality | Link Checker Legend
 [Back to Top](#tool-descriptions)
 <br>
 
-===
-===
+---
+---
 
 <br>
 <br>
@@ -107,8 +107,8 @@ Image Checker Functionality | Image Checker Legend
 [Back to Top](#tool-descriptions)
 <br>
 
-===
-===
+---
+---
 
 <br>
 <br>
@@ -132,8 +132,8 @@ Spell Check Results Example |
 [Back to Top](#tool-descriptions)
 <br>
 
-===
-===
+---
+---
 
 <br>
 <br>
@@ -173,8 +173,8 @@ All the links on the page will be tested for validity and highlight the links ac
 [Back to Top](#tool-descriptions)
 <br>
 
-===
-===
+---
+---
 
 <br>
 <br>
