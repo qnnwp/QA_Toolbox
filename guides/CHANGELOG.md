@@ -1,3 +1,10 @@
+# v3.2.5.1 changes (3/24/2017)
+* Fixed issue with search criteria on VSR and modelshowroom pages :exclamation:
+* Added h tag display function to 'H Tags' in Page Information Panel :new:
+  * Click on the H Tag counts in Page Information Panel for additional information.
+<br><br>  
+----------------------------------------
+<br><br>
 # v3.2.5 changes (3/20/2017)
 * Fixed issue with'link checker' tool not properly highlighting link that open in a new tab
   * Custom created NextGen links have a target='custom'.
