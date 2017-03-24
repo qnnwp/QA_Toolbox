@@ -96,7 +96,7 @@
                     .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
                     .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }') //font-size: 12px;
-                    .append('.tblegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
+                    .append('.tbLegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
                     .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }') //font-size: 10px;
                     // toggle style
                     .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; } '); // end
@@ -711,7 +711,7 @@
                         title: 'Image Alt Checker'
                     }).text('Image Alt Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'tblegend'
+                        class: 'tbLegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -924,7 +924,7 @@
                         title: 'Check Links'
                     }).text('Link Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'tblegend'
+                        class: 'tbLegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -1272,7 +1272,7 @@
                         value: 'Turn Off'
                     }),
                     $legend: jQuery('<div>').attr({
-                        class: 'tblegend',
+                        class: 'tbLegend',
                         id: 'outdatedLinkLegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
@@ -1485,7 +1485,7 @@
                         value: 'Turn Off'
                     }),
                     $legend: jQuery('<div>').attr({
-                        class: 'tblegend'
+                        class: 'tbLegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -2279,7 +2279,6 @@
             displayText: function ($input) {
                 // attach input to display
                 seoSimplify.config.$seoDisplay.empty();
-                //                seoSimplify.config.$seoDisplay.append(seoSimplify.config.seoText);
                 seoSimplify.config.$seoDisplay.append($input.html());
             },
             revertDiv: function (event) {
@@ -2486,7 +2485,7 @@
                         title: '404 Checker'
                     }).text('404 Link Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'tblegend'
+                        class: 'tbLegend'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -3140,7 +3139,6 @@
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                //                this.ifLive();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3175,7 +3173,6 @@
                 this.liveSite = this.cm.isLive();
             },
             setToggle: function () {
-                //                if (!this.liveSite) {
                 if (this.getChecked()) { // if 'site is not live'
                     // if 'nextGen is turned on'
                     // set toggle and apply parameters
@@ -3185,7 +3182,6 @@
                     // set toggle and apply parameters
                     this.toggleOff();
                 }
-                //                }
             },
             addTool: function () {
                 // add to main toolbox
@@ -3194,12 +3190,6 @@
             bindEvents: function () {
                 // bind FA toggle with 'flipTheSwitch' action
                 nextGenToggle.config.$nextGenToggleContainer.on('click', this.flipTheSwitch.bind(this));
-            },
-            ifLive: function () {
-                // remove tool if the site is live
-                if (this.liveSite) {
-                    jQuery(this).remove();
-                }
             },
             returnParameters: function () {
                 if (this.getChecked()) {
@@ -3265,7 +3255,6 @@
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                //                this.ifLive();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3295,7 +3284,6 @@
                     .append(m4Check.config.$m4Checkbox);
             },
             setToggle: function () {
-                //                if (!this.liveSite) { // if 'site is not live'
                 if (this.getChecked()) { // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
@@ -3303,7 +3291,6 @@
                     // set toggle and apply parameters
                     this.toggleOff();
                 }
-                //                }
             },
             cacheDOM: function () {
                 this.$toolsPanel = jQuery('#urlModTools');
@@ -3317,11 +3304,6 @@
             bindEvents: function () {
                 // bind FA toggle with 'flipTheSwitch' action
                 m4Check.config.$m4Container.on('click', this.flipTheSwitch.bind(this));
-            },
-            ifLive: function () {
-                if (this.liveSite) { // remove tool if the site is live
-                    jQuery(this).remove();
-                }
             },
             returnParameters: function () {
                 if (this.getChecked()) {
@@ -3642,13 +3624,9 @@
                     }).css({
                         background: 'linear-gradient(to left, #FBD3E9 , #BB377D)',
                         width: '75px',
-                        //                        position: 'fixed',
                         position: 'absolute',
-                        //                        position: 'relative',
                         right: '35px',
-                        //                        left: '0px',
                         top: '-55px',
-                        //                        top: '60px',
                         'z-index': '500000',
                         display: 'none'
                     }).draggable({
@@ -3671,7 +3649,6 @@
             },
             cacheDOM: function () {
                 this.$togglesPanel = jQuery('#toggleTools');
-                //                this.$togglesContainer = jQuery('#togglesContainer');
                 this.$togglesContainer = jQuery('#toolboxContainer');
                 this.$toolbarStyles = jQuery('#qa_toolbox');
             },
