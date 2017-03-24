@@ -4043,9 +4043,9 @@
                 this.editMode = this.editMode();
             },
             checkEnvironment: function () {
-                if (this.editMode || this.isCDKsite || this.isMobile) {
+                if (this.editMode || this.isCDKsite || !this.isMobile) {
                     // don't run toolbar if in edit mode OR not a CDK site OR is mobile site
-                    return;
+                    // error throws will prevent the toolbar from running if environment isn't correct
                 }
             },
             main: function () {
@@ -4123,14 +4123,18 @@
                 var phoneWrapper = jQuery('body .phone-wrapper');
                 // determines if the page being viewed is meant for mobile
                 if (phoneWrapper.length > 0) {
-                    return true;
+                    throw 'mobile site, shutting toolbar down';
+                    //                    return true;
                 } else {
                     return false;
                 }
             },
             editMode: function () {
                 // determines if site is in edit mode in WSM (this variable should only exist on CDK sites)
-                return unsafeWindow.editMode;
+                //                return unsafeWindow.editMode;
+                if (unsafeWindow.editMode === true) {
+                    throw 'Edit Mode, shutting toolbar down';
+                }
             }
         };
 

@@ -26,4 +26,4 @@
 // ==/UserScript==
 
 // link to changelog
-// https://github.com/cirept/NextGen/blob/master/CHANGELOG.md
+// https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md
