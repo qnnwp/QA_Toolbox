@@ -2089,40 +2089,27 @@
                 jQuery(seoSimplify.config.oems).each(function (index, model) {
                     switch (model) {
                         case 'Chevrolet':
-                            // vehicles/chevrolet.json
-                            //                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/45858a25d100580860050568bfc31/e2e45858a25d100580860050568bfc31.json';
-                            filePath = '/resources/chevrolet.json';
+                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Chevrolet.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Buick':
-                            // vehicles/buick.json
-                            //                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3cfa0a25d100581330050568b6442/e2e3cfa0a25d100581330050568b6442.json';
-                            filePath = '/resources/buick.json';
+                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Buick.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Cadillac':
-                            // vehicles/cadillac.json
-                            //                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100582540050568ba825/e2e421a8a25d100582540050568ba825.json';
-                            filePath = '/resources/cadillac.json';
+                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Cadillac.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'GMC':
-                            // vehicles/gmc.json
-                            //                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/3a4a8a25d100584040050568b5709/e2e3a4a8a25d100584040050568b5709.json';
-                            filePath = '/resources/gmc.json';
+                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/GMC.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Hyundai':
-                            // vehicles/hyundai.json
-                            //                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/41208a25d100584040050568b5709/e2e41208a25d100584040050568b5709.json';
-                            filePath = '/resources/hyundai.json
-                                .json ';
+                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Hyundai.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Volkswagen':
-                            // vehicles/volkswagen.json
-                            //                            filePath = 'https://media-dmg.assets-cdk.com/teams/repository/export/e2e/421a8a25d100584040050568b5709/e2e421a8a25d100584040050568b5709.json';
-                            filePath = '/resources/volkswagen.json';
+                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Volkswagen.json';
                             seoSimplify.loadArray(filePath);
                             break;
                     }
