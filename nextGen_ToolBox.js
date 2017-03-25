@@ -909,6 +909,7 @@
         linkChecker = {
             init: function () {
                 this.createElements();
+                this.getData();
                 this.buildLegend();
                 this.addTool();
                 this.bindEvents();
@@ -938,7 +939,8 @@
                         'opensWindow': 'Opens In A New Window',
                         'brokenURL': 'Empty URL',
                         'urlIssue': 'Double Check URL',
-                        'linkChecked': 'Clicked Link'
+                        'linkChecked': 'Clicked Link',
+                        'unsupportedPageLink': 'Page Not Supported'
                     },
                     $offButt: jQuery('<input>').attr({
                         type: 'button',
@@ -949,8 +951,15 @@
                         class: 'hint'
                     }).text('ctrl+left click to open link in a new tab'),
                     $toolsPanel: jQuery('#mainTools'),
-                    $legendContainer: jQuery('#legendContainer')
+                    $legendContainer: jQuery('#legendContainer'),
+                    datedPagesfileURL: 'https://cdn.rawgit.com/cirept/NextGen/a9b9d06f/resources/dated_pages.json',
+                    unsupportedPages: {}
                 };
+            },
+            getData: function () {
+                jQuery.getJSON(linkChecker.config.fileURL, function (data) {
+                    linkChecker.config.unsupportedPages = data.datedPages;
+                });
             },
             buildLegend: function () {
                 linkChecker.config.$legend
@@ -1083,7 +1092,8 @@
                     .append('.emptyTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
                     .append('.brokenURL { background: rgba(255, 55, 60, .75) !important; }')
                     .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
-                    .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)) !important; color: #909090 !important; }'); // end of addStyles
+                    .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)) !important; color: #909090 !important; }')
+                    .append('.unsupportedPageLink { background: linear-gradient(to left, #c0c0aa , #1ce) !important; }'); // end of addStyles
             },
             isImageLink: function ($image) {
                 if ($image.length) {
@@ -1163,6 +1173,13 @@
                             this.togClass($currentLink, 'urlIssue');
                         }
                         break;
+                    case (this.datedURL(href)):
+                        if (isImageLink) {
+                            this.togClass(this.$divOverlay, 'unsupportedPageLink');
+                        } else {
+                            this.togClass($currentLink, 'unsupportedPageLink');
+                        }
+                        break;
                         // url is good to go
                     default:
                         break;
@@ -1228,6 +1245,26 @@
                 }
                 return false;
             },
+            // check if leads to out dated page
+            datedURL: function (elem) {
+                console.log('dated url checks');
+                var datedPages = linkChecker.config.unsupportedPages,
+                    datedPagesLength = datedPages.length,
+                    z = 0,
+                    datedPage;
+                console.log(datedPages);
+
+
+                for (z; z < datedPagesLength; z += 1) {
+                    datedPage = datedPages[z];
+                    console.log('compare : ' + elem);
+                    if (elem.indexOf(datedPage) > -1) {
+                        return true;
+                    }
+                    //                    count = this.highlightLink(datedPage);
+                }
+                return false;
+            },
             // ----------------------------------------
             // tier 5 functions
             // ----------------------------------------
@@ -1247,6 +1284,7 @@
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Outdated Link Checker ----------------------------------------
         //------------------------------------------------------------------------------------------------------------------------
+        /*
         outdatedLinks = {
             init: function () {
                 this.createElements();
@@ -1292,9 +1330,7 @@
             },
             getData: function () {
                 jQuery.getJSON(outdatedLinks.config.fileURL, function (data) {
-                    console.log(data);
-                    console.log(data);
-                    outdatedLinks.config.unsupportedPages = data.unsupportedPages;
+                    outdatedLinks.config.unsupportedPages = data.datedPages;
                 });
             },
             cacheDOM: function () {
@@ -1313,11 +1349,9 @@
             addTool: function () {
                 this.$toolsPanel.append(outdatedLinks.config.$activateButt);
                 this.$legendContainer.append(outdatedLinks.config.$legend);
-                this.datedPagesDoc = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/dated_pages.txt';
             },
             bindEvents: function () {
-                //                outdatedLinks.config.$activateButt.on('click', this.highlightLinks.bind(this));
-                outdatedLinks.config.$activateButt.on('click', this.searchLinks);
+                outdatedLinks.config.$activateButt.on('click', this.searchLinks.bind(this));
                 outdatedLinks.config.$activateButt.on('click', this.toggleFeatures);
                 outdatedLinks.config.$offButt.on('click', this.toggleFeatures);
                 outdatedLinks.config.$offButt.on('click', this.removeDOMelements);
@@ -1344,53 +1378,23 @@
                     outdatedLinks.config.$legendList.append(this.$listItem);
                 }
             },
-            //            highlightLinks: function () {
-            //                var unsupportedPages = this.getData();
-            //            },
-            //            highlightLinks: function () {
-            //                var self = this;
-            //                jQuery.get(this.datedPagesDoc, function (data) {
-            //                    self.searchLinks(data);
-            //                });
-            //            },
             toggleFeatures: function () {
                 outdatedLinks.config.$activateButt.prop('disabled', function (index, value) {
                     return !value;
                 });
                 outdatedLinks.config.$legend.slideToggle(500);
             },
-            //            searchLinkReturn: function (data) {
-            //                this.searchLinks(data);
-            //            },
-            //            searchLinks: function (data) {
             searchLinks: function () {
                 var datedPages = outdatedLinks.config.unsupportedPages,
-                    //                    datedPagesLength = datedPages.length,
+                    datedPagesLength = datedPages.length,
                     count,
                     datedPage,
-                    i,
                     z = 0; // datedPage links for loop counter
-                console.log(datedPages);
-                //                console.log(datedPages[0]);
-                //                console.log(datedPages.length);
 
-                //                datedPages = this.getData();
-                //                datedPages = this.oldPages(data);
-                //                datedPagesLength = datedPages.length;
-
-                //                                for (z; z < datedPagesLength; z += 1) {
-                for (i in datedPages) {
-                    //                    datedPage = datedPages[z];
-                    //                    count = this.highlightLink(datedPage);
-                    console.log(i);
+                for (z; z < datedPagesLength; z += 1) {
+                    datedPage = datedPages[z];
+                    count = this.highlightLink(datedPage);
                 }
-            },
-            oldPages: function (data) {
-                var datedPages;
-                // create array seperating each 'page' by the '-=-='
-                data = data.replace(/\r?\n|\r/g, '');
-                datedPages = data.split('-=-=');
-                return datedPages;
             },
             highlightLink: function (currPage) {
                 var pageLinks = jQuery('body a'),
@@ -1463,19 +1467,21 @@
                 jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
             },
             removeDOMelements: function () {
-                var $pageLinks = jQuery('body a'),
+                var $body = jQuery('body'),
+                    $pageLinks = $body.find('a'),
                     iaLength = $pageLinks.length,
                     a = 0;
-
+                console.log($pageLinks);
                 for (a; a < iaLength; a += 1) {
                     jQuery($pageLinks[a])
                         .removeClass('oldPage')
+                        .removeClass('overlayDiv')
                         .removeClass('supportedPage');
                 }
-                jQuery('body').find('.imgOverlay').remove();
+                $body.find('.linkOverlay').remove();
             }
         },
-
+        */
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Show Navigation (highlight major pages) ----------------------------------------
         //------------------------------------------------------------------------------------------------------------------------
@@ -4078,7 +4084,7 @@
 
                 // add nextGen specific tool to panel
                 if (this.isNextGenPlatform) {
-                    outdatedLinks.init();
+                    //                    outdatedLinks.init();
                 }
             },
             otherToolsPanel: function () {
