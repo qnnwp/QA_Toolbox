@@ -1250,6 +1250,7 @@
         outdatedLinks = {
             init: function () {
                 this.createElements();
+                this.getData();
                 this.cacheDOM();
                 this.buildLegend();
                 this.addTool();
@@ -1284,8 +1285,17 @@
                     $legendContent: {
                         'supportedPage': 'Supported Page',
                         'oldPage': 'Old Page'
-                    }
+                    },
+                    fileURL: 'https://cdn.rawgit.com/cirept/NextGen/a9b9d06f/resources/dated_pages.json',
+                    unsupportedPages: {}
                 };
+            },
+            getData: function () {
+                jQuery.getJSON(outdatedLinks.config.fileURL, function (data) {
+                    console.log(data);
+                    console.log(data);
+                    outdatedLinks.config.unsupportedPages = data.unsupportedPages;
+                });
             },
             cacheDOM: function () {
                 this.$toolbarStyles = jQuery('#qa_toolbox');
@@ -1294,11 +1304,8 @@
             },
             buildLegend: function () {
                 outdatedLinks.config.$legend
-                    // attach legend title
                     .append(outdatedLinks.config.$legendTitle)
-                    // attach list
                     .append(outdatedLinks.config.$legendList)
-                    // attach turn off button
                     .append(outdatedLinks.config.$offButt);
                 // fill list
                 this.buildLegendContent();
@@ -1309,7 +1316,8 @@
                 this.datedPagesDoc = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/dated_pages.txt';
             },
             bindEvents: function () {
-                outdatedLinks.config.$activateButt.on('click', this.highlightLinks.bind(this));
+                //                outdatedLinks.config.$activateButt.on('click', this.highlightLinks.bind(this));
+                outdatedLinks.config.$activateButt.on('click', this.searchLinks);
                 outdatedLinks.config.$activateButt.on('click', this.toggleFeatures);
                 outdatedLinks.config.$offButt.on('click', this.toggleFeatures);
                 outdatedLinks.config.$offButt.on('click', this.removeDOMelements);
@@ -1318,12 +1326,6 @@
                 this.$toolbarStyles
                     .append('.supportedPage { background: rgba(146, 232, 66, .75) !important; color: black !important; }')
                     .append('.oldPage { background: rgba(255, 124, 216, .75) !important; }');
-            },
-            highlightLinks: function () {
-                var self = this;
-                jQuery.get(this.datedPagesDoc, function (data) {
-                    self.searchLinks(data);
-                });
             },
             // ----------------------------------------
             // tier 2 functions
@@ -1342,28 +1344,45 @@
                     outdatedLinks.config.$legendList.append(this.$listItem);
                 }
             },
+            //            highlightLinks: function () {
+            //                var unsupportedPages = this.getData();
+            //            },
+            //            highlightLinks: function () {
+            //                var self = this;
+            //                jQuery.get(this.datedPagesDoc, function (data) {
+            //                    self.searchLinks(data);
+            //                });
+            //            },
             toggleFeatures: function () {
                 outdatedLinks.config.$activateButt.prop('disabled', function (index, value) {
                     return !value;
                 });
                 outdatedLinks.config.$legend.slideToggle(500);
             },
-            searchLinkReturn: function (data) {
-                this.searchLinks(data);
-            },
-            searchLinks: function (data) {
-                var datedPages,
-                    datedPagesLength,
+            //            searchLinkReturn: function (data) {
+            //                this.searchLinks(data);
+            //            },
+            //            searchLinks: function (data) {
+            searchLinks: function () {
+                var datedPages = outdatedLinks.config.unsupportedPages,
+                    //                    datedPagesLength = datedPages.length,
                     count,
-                    currPage,
+                    datedPage,
+                    i,
                     z = 0; // datedPage links for loop counter
+                console.log(datedPages);
+                //                console.log(datedPages[0]);
+                //                console.log(datedPages.length);
 
-                datedPages = this.oldPages(data);
-                datedPagesLength = datedPages.length;
+                //                datedPages = this.getData();
+                //                datedPages = this.oldPages(data);
+                //                datedPagesLength = datedPages.length;
 
-                for (z; z < datedPagesLength; z += 1) {
-                    currPage = datedPages[z];
-                    count = this.highlightDatadPages(currPage);
+                //                                for (z; z < datedPagesLength; z += 1) {
+                for (i in datedPages) {
+                    //                    datedPage = datedPages[z];
+                    //                    count = this.highlightLink(datedPage);
+                    console.log(i);
                 }
             },
             oldPages: function (data) {
@@ -1373,7 +1392,7 @@
                 datedPages = data.split('-=-=');
                 return datedPages;
             },
-            highlightDatadPages: function (currPage) {
+            highlightLink: function (currPage) {
                 var pageLinks = jQuery('body a'),
                     pageLinksLength = pageLinks.length,
                     b = 0, // pageLinks links for loop counter;
@@ -2089,27 +2108,27 @@
                 jQuery(seoSimplify.config.oems).each(function (index, model) {
                     switch (model) {
                         case 'Chevrolet':
-                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Chevrolet.json';
+                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Buick':
-                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Buick.json';
+                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Cadillac':
-                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Cadillac.json';
+                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'GMC':
-                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/GMC.json';
+                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Hyundai':
-                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Hyundai.json';
+                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json';
                             seoSimplify.loadArray(filePath);
                             break;
                         case 'Volkswagen':
-                            filePath = 'https://raw.githubusercontent.com/cirept/NextGen/master/resources/Volkswagen.json';
+                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json';
                             seoSimplify.loadArray(filePath);
                             break;
                     }
@@ -4136,5 +4155,126 @@
     // ---------------------------------------- initialize toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     toolbar.init();
+
+    // NEW TOOL TEST
+
+    // ------------------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------- Show Possible Autofill ----------------------------------------
+    // ------------------------------------------------------------------------------------------------------------------------
+
+    var $haf_butt = jQuery('<button>').attr({
+        class: 'myEDOBut notWorking',
+        id: 'highlightAutofills',
+        title: 'Highlight Autofills (has some bugs)'
+    }).text('highlight autofills');
+
+    var cm = unsafeWindow.ContextManager;
+
+    jQuery('#mainTools').append($haf_butt);
+
+    $haf_butt.click(function () {
+
+        var $search = {
+            dealername: cm.getDealershipName(),
+            city: cm.getCity(),
+            street: cm.getAddressLine1(),
+            address2: cm.getAddressLine2(),
+            collision: cm.getCollisionPhone(),
+            fleet: cm.getFleetPhone(),
+            new: cm.getNewPhone(),
+            parts: cm.getPartsPhone(),
+            primary: cm.getPrimaryPhone(),
+            service: cm.getServicePhone(),
+            used: cm.getUsedPhone(),
+            finance: cm.getFinancePhone(),
+            state: cm.getPreferredState(),
+            zip: cm.getZip(),
+            franchise: cm.getFranchises(),
+        };
+
+
+        var visibleText = jQuery('#content').find('.cell').find('.cblt-container');
+        jQuery.each($search, function (key, searchText) {
+
+            var regexp = '';
+
+            // skip interation if value is null
+            if (searchText === null) {
+                console.log(key + ' value is null');
+                return true;
+            }
+
+            console.log('find this : key : ' + key + ' : ' + searchText);
+            console.log(jQuery.type(searchText));
+            console.log('is array? : ', jQuery.isArray(searchText));
+
+            // regex for phone numbers
+            var phoneNo = /^\(?[0-9]{3}(\-|\)) ?[0-9]{3}-[0-9]{4}$/;
+
+            // special check for the franchises object
+            if (!jQuery.isArray(searchText)) {
+
+                regexp = new RegExp(searchText, "gi");
+
+                // check if value is a phone number
+                if (searchText.match(phoneNo)) {
+                    var leftParen = '\u0028'; // regex match for "("
+                    var rightParen = '\u0029'; // regex match for ")"
+                    console.log('phone number found');
+                    console.log(leftParen);
+                    console.log(rightParen);
+                    //                var newSearchThis = searchText;
+
+                    var newText = searchText;
+
+                    console.log(regexp);
+                    //                jQuery(regexp).text().replace('(', leftParen);
+                    jQuery(regexp).text().replace('(', '\u0028');
+                    //                jQuery(regexp).text().replace(')', rightParen);
+                    jQuery(regexp).text().replace(')', '\u0029');
+                    console.log('replaced parenthesis :', regexp);
+
+                    console.log('checking phone number match');
+                    //                if (jQuery(newText).text() === jQuery(searchText).text()) {
+                    if (newText === searchText) {
+                        console.log('phone number : it matches');
+                    } else {
+                        console.log('phone number : it dont macth');
+                    }
+                    console.log('regex inserted into search string : ', searchText);
+                    //                regexp = new RegExp(searchText, "gi");
+
+                }
+                // if value is NOT a phone number
+            } else {
+
+                regexp = new RegExp(searchText, "gi");
+            }
+
+            // what is the value of the regex
+            console.log('value of regex expressions : ', regexp);
+
+            jQuery.each(visibleText, function (index, element) {
+
+                var text = jQuery(element).children(':visible').text();
+                //            var findMe = '^' + searchText + '$';
+                //            var regexp = new RegExp(searchText, "gi");
+
+
+                jQuery(element).children(':visible').html(function () {
+                    //                return jQuery(this).html().replace(regexp, '<span style="background: yellow;">' + searchText + '</span>');
+                    console.log(regexp);
+                    return jQuery(this).html().replace(regexp, '<span style="background: yellow; color: black;">' + searchText + '</span>');
+                });
+
+                if (text.indexOf(searchText) >= 0) {
+                    console.log('match found');
+                    return false;
+                }
+            });
+        });
+    });
+
+    //
 
 })(); // end main function
