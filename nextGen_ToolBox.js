@@ -29,6 +29,8 @@
         return GM_getResourceURL(resource);
     }
 
+    var report = '{}';
+
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- Build container for toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
@@ -938,9 +940,9 @@
                         'hasTitle': 'Has Title Text',
                         'opensWindow': 'Opens In A New Window',
                         'brokenURL': 'Empty URL',
-                        'urlIssue': 'Double Check URL',
-                        'linkChecked': 'Clicked Link',
-                        'unsupportedPageLink': 'Page Not Supported'
+                        'urlIssue': 'Check URL',
+                        'unsupportedPageLink': 'Page Not Supported',
+                        'linkChecked': 'Clicked Link'
                     },
                     $offButt: jQuery('<input>').attr({
                         type: 'button',
@@ -957,7 +959,7 @@
                 };
             },
             getData: function () {
-                jQuery.getJSON(linkChecker.config.fileURL, function (data) {
+                jQuery.getJSON(linkChecker.config.datedPagesfileURL, function (data) {
                     linkChecker.config.unsupportedPages = data.datedPages;
                 });
             },
@@ -1017,7 +1019,8 @@
                     a = 0,
                     $currentLink,
                     $image,
-                    isImageLink;
+                    isImageLink,
+                    event;
                 // verify all links
                 for (a; a < length; a += 1) {
                     $currentLink = jQuery(this.$allLinks[a]);
@@ -1093,7 +1096,7 @@
                     .append('.brokenURL { background: rgba(255, 55, 60, .75) !important; }')
                     .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
                     .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)) !important; color: #909090 !important; }')
-                    .append('.unsupportedPageLink { background: linear-gradient(to left, #c0c0aa , #1ce) !important; }'); // end of addStyles
+                    .append('.unsupportedPageLink { -moz-box-shadow: inset 0px 0px 0px 3px #00a6ff; -webkit-box-shadow: inset 0px 0px 0px 3px #00a6ff; box-shadow: inset 0px 0px 0px 3px #00a6ff; }'); // end of addStyles  #00a6ff
             },
             isImageLink: function ($image) {
                 if ($image.length) {
@@ -1247,21 +1250,16 @@
             },
             // check if leads to out dated page
             datedURL: function (elem) {
-                console.log('dated url checks');
                 var datedPages = linkChecker.config.unsupportedPages,
                     datedPagesLength = datedPages.length,
                     z = 0,
                     datedPage;
-                console.log(datedPages);
-
 
                 for (z; z < datedPagesLength; z += 1) {
                     datedPage = datedPages[z];
-                    console.log('compare : ' + elem);
                     if (elem.indexOf(datedPage) > -1) {
                         return true;
                     }
-                    //                    count = this.highlightLink(datedPage);
                 }
                 return false;
             },
@@ -1280,208 +1278,6 @@
                 this.$divOverlay.append(this.linkTitle);
             }
         },
-
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- Outdated Link Checker ----------------------------------------
-        //------------------------------------------------------------------------------------------------------------------------
-        /*
-        outdatedLinks = {
-            init: function () {
-                this.createElements();
-                this.getData();
-                this.cacheDOM();
-                this.buildLegend();
-                this.addTool();
-                this.bindEvents();
-                this.addStyles();
-            },
-            // ----------------------------------------
-            // tier 1 functions
-            // ----------------------------------------
-            createElements: function () {
-                outdatedLinks.config = {
-                    $activateButt: jQuery('<button>').attr({
-                        class: 'myEDOBut',
-                        id: 'outdatedLinks',
-                        title: 'Outdated Links'
-                    }).text('Outdated Links'),
-                    $offButt: jQuery('<input>').attr({
-                        type: 'button',
-                        class: 'myEDOBut offButt',
-                        value: 'Turn Off'
-                    }),
-                    $legend: jQuery('<div>').attr({
-                        class: 'tbLegend',
-                        id: 'outdatedLinkLegend'
-                    }),
-                    $legendTitle: jQuery('<div>').attr({
-                        class: 'legendTitle'
-                    }).text('Outdated Link Checker Legend'),
-                    $legendList: jQuery('<ul>').attr({
-                        class: 'legendList'
-                    }),
-                    $legendContent: {
-                        'supportedPage': 'Supported Page',
-                        'oldPage': 'Old Page'
-                    },
-                    fileURL: 'https://cdn.rawgit.com/cirept/NextGen/a9b9d06f/resources/dated_pages.json',
-                    unsupportedPages: {}
-                };
-            },
-            getData: function () {
-                jQuery.getJSON(outdatedLinks.config.fileURL, function (data) {
-                    outdatedLinks.config.unsupportedPages = data.datedPages;
-                });
-            },
-            cacheDOM: function () {
-                this.$toolbarStyles = jQuery('#qa_toolbox');
-                this.$toolsPanel = jQuery('#mainTools');
-                this.$legendContainer = jQuery('#legendContainer');
-            },
-            buildLegend: function () {
-                outdatedLinks.config.$legend
-                    .append(outdatedLinks.config.$legendTitle)
-                    .append(outdatedLinks.config.$legendList)
-                    .append(outdatedLinks.config.$offButt);
-                // fill list
-                this.buildLegendContent();
-            },
-            addTool: function () {
-                this.$toolsPanel.append(outdatedLinks.config.$activateButt);
-                this.$legendContainer.append(outdatedLinks.config.$legend);
-            },
-            bindEvents: function () {
-                outdatedLinks.config.$activateButt.on('click', this.searchLinks.bind(this));
-                outdatedLinks.config.$activateButt.on('click', this.toggleFeatures);
-                outdatedLinks.config.$offButt.on('click', this.toggleFeatures);
-                outdatedLinks.config.$offButt.on('click', this.removeDOMelements);
-            },
-            addStyles: function () {
-                this.$toolbarStyles
-                    .append('.supportedPage { background: rgba(146, 232, 66, .75) !important; color: black !important; }')
-                    .append('.oldPage { background: rgba(255, 124, 216, .75) !important; }');
-            },
-            // ----------------------------------------
-            // tier 2 functions
-            // ----------------------------------------
-            buildLegendContent: function () {
-                var $contentArray = outdatedLinks.config.$legendContent,
-                    key, value;
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    value = $contentArray[key];
-                    // build listing element
-                    this.$listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    outdatedLinks.config.$legendList.append(this.$listItem);
-                }
-            },
-            toggleFeatures: function () {
-                outdatedLinks.config.$activateButt.prop('disabled', function (index, value) {
-                    return !value;
-                });
-                outdatedLinks.config.$legend.slideToggle(500);
-            },
-            searchLinks: function () {
-                var datedPages = outdatedLinks.config.unsupportedPages,
-                    datedPagesLength = datedPages.length,
-                    count,
-                    datedPage,
-                    z = 0; // datedPage links for loop counter
-
-                for (z; z < datedPagesLength; z += 1) {
-                    datedPage = datedPages[z];
-                    count = this.highlightLink(datedPage);
-                }
-            },
-            highlightLink: function (currPage) {
-                var pageLinks = jQuery('body a'),
-                    pageLinksLength = pageLinks.length,
-                    b = 0, // pageLinks links for loop counter;
-                    counter = 0,
-                    isImageLink, currLink, $currLink, h, w, href, findThis;
-
-                // looping through all links on the page
-                for (b; b < pageLinksLength; b += 1) {
-                    isImageLink = false;
-                    currLink = pageLinks[b];
-                    $currLink = jQuery(currLink);
-
-                    if (($currLink.has('img').length)) {
-                        // grab width and height of image
-                        w = $currLink.has('img').width();
-                        h = $currLink.height();
-                        // create a div overlay with the same height and width of the image
-                        this.addLinkDiv(currLink, w, h);
-                        isImageLink = true;
-                    }
-
-                    if (($currLink.attr('href'))) {
-                        href = $currLink.attr('href').toLowerCase();
-                        findThis = currPage.toLowerCase();
-                        // if current link HAS an href
-                        if (href.indexOf(findThis) >= 0) {
-                            // if MATCH IS FOUND
-                            if (isImageLink) {
-                                // if the link has an IMAGE apply class to div overlay
-                                $currLink
-                                    .find('.linkOverlay')
-                                    .addClass('oldPage');
-                                counter += 1;
-                            } else {
-                                // if link does not have an image, apply directly to the link
-                                $currLink.addClass('oldPage');
-                                counter += 1;
-                            }
-                            continue;
-                        } else {
-                            if (isImageLink) {
-                                // if the link has an IMAGE apply class to div overlay
-                                $currLink
-                                    .find('.linkOverlay')
-                                    .addClass('supportedPage');
-                            } else {
-                                // if link does not have an image, apply directly to the link
-                                $currLink.addClass('supportedPage');
-                            }
-                        }
-                    }
-                }
-                return counter;
-            },
-            addLinkDiv: function (elem, width, height) {
-                var $linkOverlay = jQuery('<div>').attr({
-                    class: 'siteLink linkOverlay'
-                }).css({
-                    width: width + 'px',
-                    height: height + 'px',
-                    'text-align': 'center',
-                    'vertical-align': 'middle',
-                    'line-height': height + 'px',
-                    'z-index': '2',
-                    color: '#000000 !important',
-                    'font-weight': 'bold'
-                });
-                jQuery(elem).addClass('overlayDiv').prepend($linkOverlay);
-            },
-            removeDOMelements: function () {
-                var $body = jQuery('body'),
-                    $pageLinks = $body.find('a'),
-                    iaLength = $pageLinks.length,
-                    a = 0;
-                console.log($pageLinks);
-                for (a; a < iaLength; a += 1) {
-                    jQuery($pageLinks[a])
-                        .removeClass('oldPage')
-                        .removeClass('overlayDiv')
-                        .removeClass('supportedPage');
-                }
-                $body.find('.linkOverlay').remove();
-            }
-        },
-        */
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Show Navigation (highlight major pages) ----------------------------------------
         //------------------------------------------------------------------------------------------------------------------------
@@ -1528,6 +1324,32 @@
                 };
             },
             cacheDOM: function () {
+                this.nextGen = document.firstChild.data;
+                this.isNextGenPlatform = this.nextGenVar(this.nextGen);
+                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$toolsPanel = jQuery('#mainTools');
+
+                if (this.nextGenVar(this.nextGen)) {
+                    console.log('next gen navigation');
+                    //                    this.$navTabs = jQuery('li[repeat*="mainNav"]');
+                    //                    this.$subNavMenuContainer = this.$navTabs.find('ul');
+                    //                    this.$navTabsLinks = this.$navTabs.find('a');
+                    //                    this.navItemsLength = this.$navTabsLinks.length;
+                    this.$navItems = jQuery('li[repeat*="mainNav"]');
+                    this.$subNavMenuContainer = this.$navItems.find('ul');
+                    this.$subNavItem = this.$subNavMenuContainer.find('li');
+                    this.$subNavItemLinks = this.$subNavItem.find('a');
+                    this.subNavItemLinks = this.$subNavItemLinks.length;
+                } else {
+                    console.log('tetra navigation');
+                    this.$nav = jQuery('#pmenu');
+                    this.$navTabs = this.$nav.find('ul');
+                    this.$navTabsLinks = this.$navTabs.find('a[href]');
+                    this.navItemsLength = this.$navTabsLinks.length;
+                }
+
+
+
                 this.$nav = jQuery('#pmenu');
                 this.$navTabs = this.$nav.find('ul');
                 this.$navTabsLinks = this.$navTabs.find('a[href]');
@@ -1537,10 +1359,11 @@
                 this.$legendContainer = jQuery('#legendContainer');
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = this.nextGenVar(this.nextGen);
-                this.$navItems = jQuery('.header .menu nav ul li');
-                this.$navItemsLinks = this.$navItems.find('a');
-                this.navItemsLength = this.$navItemsLinks.length;
-                this.$subNavMenuContainer = this.$navItems.find('ul');
+
+                //                this.$navItems = jQuery('.header .menu nav ul li');
+                //                this.$navItemsLinks = this.$navItems.find('a');
+                //                this.navItemsLength = this.$navItemsLinks.length;
+                //                this.$subNavMenuContainer = this.$navItems.find('ul');
             },
             nextGenVar: function (nextGen) {
                 if (nextGen) {
@@ -1580,9 +1403,9 @@
                     // styles of colored overlay placed on images
                     .append('.subNav { background: linear-gradient(to left, #000000 , #434343) !important; color: #ffffff !important; }')
                     .append('.majorPage { color: #ffffff !important; background: linear-gradient(to left, #ffb347 , #ffcc33) !important; }')
-                    .append('.showNav { display: block !important; }')
+                    .append('.tetraShowNav { display: block !important; }')
                     .append('.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)), #ffffff !important; color: #999999 !important; }')
-                    .append('.showNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; }')
+                    .append('.nextgenShowNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; }')
                     .append('.showNavAdd { width: 150px !important; padding: 0 !important; font-size: 15px !important; }'); // end of addStyles
             },
             // ----------------------------------------
@@ -1607,12 +1430,13 @@
 
                 if (isNextGen) {
                     this.$navItems.toggleClass('showNavAdd');
-                    this.$subNavMenuContainer.toggleClass('showNav');
+                    this.$subNavMenuContainer.toggleClass('nextgenShowNav');
+                    this.$subNavItem.toggleClass('showNavAdd');
                 }
                 if (!isNextGen) {
                     this.$navTabsLinks.toggleClass('subNav');
                     this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
-                    this.$navTabs.toggleClass('showNav');
+                    this.$navTabs.toggleClass('tetraShowNav');
                 }
                 showNavigation.config.$legend.slideToggle(500);
             },
@@ -1626,8 +1450,11 @@
                     isNextGen = this.isNextGenPlatform;
 
                 if (isNextGen) {
-                    for (i; i < this.navItemsLength; i += 1) {
-                        jQuery(this.$navItemsLinks[i]).on('mousedown', this.linkChecked(this.$navItemsLinks[i]));
+                    //                    for (i; i < this.navItemsLength; i += 1) {
+                    //                        jQuery(this.$navItemsLinks[i]).on('mousedown', this.linkChecked(this.$navItemsLinks[i]));
+                    //                    }
+                    for (i; i < this.subNavItemLinks; i += 1) {
+                        jQuery(this.$subNavItemLinks[i]).on('mousedown', this.linkChecked(this.$subNavItemLinks[i]));
                     }
                 }
                 if (!isNextGen) {
