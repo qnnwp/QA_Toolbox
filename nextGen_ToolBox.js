@@ -1,4 +1,4 @@
-/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document */
+/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, setInterval */
 
 (function () {
 
@@ -30,6 +30,31 @@
     }
 
     var report = '{}';
+
+    function findText(text) {
+        console.log('entered findThis to look for : ' + text);
+
+        //        if (window.find(text, false, false, false, true, false, false)) {
+        //            //            console.log('match found');
+        //            document.execCommand("HiliteColor", false, "red");
+        //            //            while (window.find(text, false, false, false, true, false, false)){
+        //            //                document.execCommand("hiliteColor", false, "FirstColor");
+        //            //            }
+        //
+        //        }
+
+        //--------
+        //        if (window.find(text, false, true)) {
+        //            document.execCommand("hiliteColor", false, "red");
+        while (window.find(text, false, true)) {
+            console.log('highlighting match');
+            document.execCommand("hiliteColor", false, "yellow");
+        }
+        window.find(text);
+        //        }
+
+        //        alert("String \x22" + text + "\x22 found? " + window.find(text));
+    }
 
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- Build container for toolbox ----------------------------------------
@@ -75,11 +100,11 @@
             toolbarStyles: function () {
                 QAtoolbox.config.$toolbarStyles
                     // general toolbox styles
-                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; z-index: 50000; margin: 0 0 5px 0; }') //font-size: 9.5px;
-                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }') //width: 120px;
+                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; z-index: 50000; margin: 0 0 5px 0; }')
+                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }')
                     .append('.toolsPanel { display: none; }')
-                    // panel title styles // padding: 5px;
-                    .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; text-transform: lowercase; }') //font-size: 11px;
+                    // panel title styles
+                    .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; text-transform: lowercase; }')
                     // default highlight style
                     .append('#toolboxContainer .highlight { background: linear-gradient(to right, #83a4d4 , #b6fbff) !important; color: #ffffff;}')
                     // even button styles
@@ -87,7 +112,7 @@
                     // off button styles
                     .append('.oddEDObutts {background: linear-gradient(to left, #6190E8 , #A7BFE8);}')
                     // default button styles
-                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 12px; top: 15%; margin: 1px 0px 0px 10px; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }') //width: 120px;
+                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 12px; top: 15%; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }')
                     .append('.myEDOBut.notWorking { background: purple; }')
                     .append('.myEDOBut.offButt { width: 90%; height: 50px; }')
                     .append('.myEDOBut[disabled] { border: 2px outset ButtonFace; background: #ddd; background-color: #ddd; color: grey !important; cursor: not-allowed; }')
@@ -97,11 +122,11 @@
                     .append('.legendTitle { font-weight: bold; }')
                     .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
-                    .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }') //font-size: 12px;
+                    .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }')
                     .append('.tbLegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
-                    .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }') //font-size: 10px;
+                    .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
                     // toggle style
-                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; } '); // end
+                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } '); // end
             },
             cacheDOM: function () {
                 this.head = jQuery('head');
@@ -1328,42 +1353,22 @@
                 this.isNextGenPlatform = this.nextGenVar(this.nextGen);
                 this.$toolbarStyles = jQuery('#qa_toolbox');
                 this.$toolsPanel = jQuery('#mainTools');
+                this.$legendContainer = jQuery('#legendContainer');
 
                 if (this.nextGenVar(this.nextGen)) {
-                    console.log('next gen navigation');
-                    //                    this.$navTabs = jQuery('li[repeat*="mainNav"]');
-                    //                    this.$subNavMenuContainer = this.$navTabs.find('ul');
-                    //                    this.$navTabsLinks = this.$navTabs.find('a');
-                    //                    this.navItemsLength = this.$navTabsLinks.length;
-                    this.$navItems = jQuery('li[repeat*="mainNav"]');
-                    this.$subNavMenuContainer = this.$navItems.find('ul');
-                    this.$subNavItem = this.$subNavMenuContainer.find('li');
-                    this.$subNavItemLinks = this.$subNavItem.find('a');
-                    this.subNavItemLinks = this.$subNavItemLinks.length;
+                    this.$navTabs = jQuery('li[repeat*="mainNav"]');
+                    this.$subNavMenuContainer = this.$navTabs.find('ul[if="cards.length"]');
+                    this.$subNavItem = this.$subNavMenuContainer.find('li[repeat="cards"]');
+                    this.$navTabsLinks = this.$subNavItem.find('a');
                 } else {
-                    console.log('tetra navigation');
                     this.$nav = jQuery('#pmenu');
                     this.$navTabs = this.$nav.find('ul');
-                    this.$navTabsLinks = this.$navTabs.find('a[href]');
-                    this.navItemsLength = this.$navTabsLinks.length;
+                    this.$navTabsLinks = this.$navTabs.find('a');
                 }
-
-
 
                 this.$nav = jQuery('#pmenu');
                 this.$navTabs = this.$nav.find('ul');
                 this.$navTabsLinks = this.$navTabs.find('a[href]');
-                this.nlLength = this.$navTabsLinks.length;
-                this.$toolbarStyles = jQuery('#qa_toolbox');
-                this.$toolsPanel = jQuery('#mainTools');
-                this.$legendContainer = jQuery('#legendContainer');
-                this.nextGen = document.firstChild.data;
-                this.isNextGenPlatform = this.nextGenVar(this.nextGen);
-
-                //                this.$navItems = jQuery('.header .menu nav ul li');
-                //                this.$navItemsLinks = this.$navItems.find('a');
-                //                this.navItemsLength = this.$navItemsLinks.length;
-                //                this.$subNavMenuContainer = this.$navItems.find('ul');
             },
             nextGenVar: function (nextGen) {
                 if (nextGen) {
@@ -1401,7 +1406,6 @@
                 // apply module styles to main tool bar style tag
                 this.$toolbarStyles
                     // styles of colored overlay placed on images
-                    .append('.subNav { background: linear-gradient(to left, #000000 , #434343) !important; color: #ffffff !important; }')
                     .append('.majorPage { color: #ffffff !important; background: linear-gradient(to left, #ffb347 , #ffcc33) !important; }')
                     .append('.tetraShowNav { display: block !important; }')
                     .append('.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)), #ffffff !important; color: #999999 !important; }')
@@ -1429,12 +1433,11 @@
                 var isNextGen = this.isNextGenPlatform;
 
                 if (isNextGen) {
-                    this.$navItems.toggleClass('showNavAdd');
-                    this.$subNavMenuContainer.toggleClass('nextgenShowNav');
+                    this.$navTabs.toggleClass('showNavAdd');
                     this.$subNavItem.toggleClass('showNavAdd');
+                    this.$subNavMenuContainer.toggleClass('nextgenShowNav');
                 }
                 if (!isNextGen) {
-                    this.$navTabsLinks.toggleClass('subNav');
                     this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
                     this.$navTabs.toggleClass('tetraShowNav');
                 }
@@ -1447,25 +1450,17 @@
             },
             bindClicks: function () {
                 var i = 0,
-                    isNextGen = this.isNextGenPlatform;
+                    length = this.$navTabsLinks.length;
 
-                if (isNextGen) {
-                    //                    for (i; i < this.navItemsLength; i += 1) {
-                    //                        jQuery(this.$navItemsLinks[i]).on('mousedown', this.linkChecked(this.$navItemsLinks[i]));
-                    //                    }
-                    for (i; i < this.subNavItemLinks; i += 1) {
-                        jQuery(this.$subNavItemLinks[i]).on('mousedown', this.linkChecked(this.$subNavItemLinks[i]));
-                    }
+                for (i; i < length; i += 1) {
+                    jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
                 }
-                if (!isNextGen) {
-                    for (i; i < this.nlLength; i += 1) {
-                        jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
-                    }
-                }
+
             },
             unbindClicks: function () {
-                var i = 0;
-                for (i; i < this.nlLength; i += 1) {
+                var i = 0,
+                    length = this.$navTabsLinks.length;
+                for (i; i < length; i += 1) {
                     jQuery(this.$navTabsLinks[i]).off('click');
                 }
                 // remove link checked class
@@ -3786,7 +3781,7 @@
                 } else if (this.isNextGen === 'Next Gen') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #02AAB0 , #00CDAC) }'); // NEXTGEN color
                     QAtoolbox.config.$toolbarStyles.append('#toolboxContainer { right: 0%; }'); // toolbox location
-                    QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px -10px; }'); // button positions
+                    QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px -20px; }'); // button positions
                     QAtoolbox.config.$toolbarStyles.append('#hideContainer { left: -25px; }'); // button positions
                     QAtoolbox.config.$toolbarStyles.append('#legendContainer  { left: 115px; }'); // legend positions
                     QAtoolbox.config.$toolbarStyles.append('#showToolbox  { right: 0%; }'); // hide/unhide button positions
@@ -3908,11 +3903,6 @@
                 spellCheck.init();
                 speedtestPage.init();
                 checkLinks.init();
-
-                // add nextGen specific tool to panel
-                if (this.isNextGenPlatform) {
-                    //                    outdatedLinks.init();
-                }
             },
             otherToolsPanel: function () {
                 otherTools.init();
@@ -3970,14 +3960,12 @@
                 // determines if the page being viewed is meant for mobile
                 if (phoneWrapper.length > 0) {
                     throw 'mobile site, shutting toolbar down';
-                    //                    return true;
                 } else {
                     return false;
                 }
             },
             editMode: function () {
                 // determines if site is in edit mode in WSM (this variable should only exist on CDK sites)
-                //                return unsafeWindow.editMode;
                 if (unsafeWindow.editMode === true) {
                     throw 'Edit Mode, shutting toolbar down';
                 }
@@ -4008,29 +3996,26 @@
     $haf_butt.click(function () {
 
         var $search = {
-            dealername: cm.getDealershipName(),
+            //            dealername: cm.getDealershipName(),
             city: cm.getCity(),
-            street: cm.getAddressLine1(),
-            address2: cm.getAddressLine2(),
-            collision: cm.getCollisionPhone(),
-            fleet: cm.getFleetPhone(),
-            new: cm.getNewPhone(),
-            parts: cm.getPartsPhone(),
-            primary: cm.getPrimaryPhone(),
-            service: cm.getServicePhone(),
-            used: cm.getUsedPhone(),
-            finance: cm.getFinancePhone(),
-            state: cm.getPreferredState(),
-            zip: cm.getZip(),
-            franchise: cm.getFranchises(),
+            //            street: cm.getAddressLine1(),
+            //            address2: cm.getAddressLine2(),
+            //            collision: cm.getCollisionPhone(),
+            //            fleet: cm.getFleetPhone(),
+            //            new: cm.getNewPhone(),
+            //            parts: cm.getPartsPhone(),
+            //            primary: cm.getPrimaryPhone(),
+            //            service: cm.getServicePhone(),
+            //            used: cm.getUsedPhone(),
+            //            finance: cm.getFinancePhone(),
+            //            state: cm.getPreferredState(),
+            //            zip: cm.getZip(),
+            franchise: cm.getFranchises()
         };
 
+        document.designMode = "on";
 
-        var visibleText = jQuery('#content').find('.cell').find('.cblt-container');
         jQuery.each($search, function (key, searchText) {
-
-            var regexp = '';
-
             // skip interation if value is null
             if (searchText === null) {
                 console.log(key + ' value is null');
@@ -4039,73 +4024,31 @@
 
             console.log('find this : key : ' + key + ' : ' + searchText);
             console.log(jQuery.type(searchText));
-            console.log('is array? : ', jQuery.isArray(searchText));
 
-            // regex for phone numbers
-            var phoneNo = /^\(?[0-9]{3}(\-|\)) ?[0-9]{3}-[0-9]{4}$/;
+            if (jQuery.type(searchText) === 'array') {
+                console.log('search text is an array');
+                var z = 0,
+                    length = searchText.length;
 
-            // special check for the franchises object
-            if (!jQuery.isArray(searchText)) {
-
-                regexp = new RegExp(searchText, "gi");
-
-                // check if value is a phone number
-                if (searchText.match(phoneNo)) {
-                    var leftParen = '\u0028'; // regex match for "("
-                    var rightParen = '\u0029'; // regex match for ")"
-                    console.log('phone number found');
-                    console.log(leftParen);
-                    console.log(rightParen);
-                    //                var newSearchThis = searchText;
-
-                    var newText = searchText;
-
-                    console.log(regexp);
-                    //                jQuery(regexp).text().replace('(', leftParen);
-                    jQuery(regexp).text().replace('(', '\u0028');
-                    //                jQuery(regexp).text().replace(')', rightParen);
-                    jQuery(regexp).text().replace(')', '\u0029');
-                    console.log('replaced parenthesis :', regexp);
-
-                    console.log('checking phone number match');
-                    //                if (jQuery(newText).text() === jQuery(searchText).text()) {
-                    if (newText === searchText) {
-                        console.log('phone number : it matches');
-                    } else {
-                        console.log('phone number : it dont macth');
+                for (z; z < length; z += 1) {
+                    console.log('search this : "' + searchText[z] + '"');
+                    var searchThis = searchText[z];
+                    while (window.find(searchThis, false, true)) {
+                        console.log('highlighting match');
+                        document.execCommand("hiliteColor", false, "yellow");
                     }
-                    console.log('regex inserted into search string : ', searchText);
-                    //                regexp = new RegExp(searchText, "gi");
-
                 }
-                // if value is NOT a phone number
             } else {
-
-                regexp = new RegExp(searchText, "gi");
-            }
-
-            // what is the value of the regex
-            console.log('value of regex expressions : ', regexp);
-
-            jQuery.each(visibleText, function (index, element) {
-
-                var text = jQuery(element).children(':visible').text();
-                //            var findMe = '^' + searchText + '$';
-                //            var regexp = new RegExp(searchText, "gi");
-
-
-                jQuery(element).children(':visible').html(function () {
-                    //                return jQuery(this).html().replace(regexp, '<span style="background: yellow;">' + searchText + '</span>');
-                    console.log(regexp);
-                    return jQuery(this).html().replace(regexp, '<span style="background: yellow; color: black;">' + searchText + '</span>');
-                });
-
-                if (text.indexOf(searchText) >= 0) {
-                    console.log('match found');
-                    return false;
+                console.log('not an array');
+                while (window.find(searchText, false, true)) {
+                    console.log('highlighting match');
+                    document.execCommand("hiliteColor", false, "yellow");
                 }
-            });
+            }
         });
+
+        document.designMode = "off";
+
     });
 
     //
