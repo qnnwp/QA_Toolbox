@@ -29,32 +29,32 @@
         return GM_getResourceURL(resource);
     }
 
-    var report = '{}';
+    //    var report = '{}';
 
-    function findText(text) {
-        console.log('entered findThis to look for : ' + text);
-
-        //        if (window.find(text, false, false, false, true, false, false)) {
-        //            //            console.log('match found');
-        //            document.execCommand("HiliteColor", false, "red");
-        //            //            while (window.find(text, false, false, false, true, false, false)){
-        //            //                document.execCommand("hiliteColor", false, "FirstColor");
-        //            //            }
-        //
-        //        }
-
-        //--------
-        //        if (window.find(text, false, true)) {
-        //            document.execCommand("hiliteColor", false, "red");
-        while (window.find(text, false, true)) {
-            console.log('highlighting match');
-            document.execCommand("hiliteColor", false, "yellow");
-        }
-        window.find(text);
-        //        }
-
-        //        alert("String \x22" + text + "\x22 found? " + window.find(text));
-    }
+    //    function findText(text) {
+    //        console.log('entered findThis to look for : ' + text);
+    //
+    //        //        if (window.find(text, false, false, false, true, false, false)) {
+    //        //            //            console.log('match found');
+    //        //            document.execCommand("HiliteColor", false, "red");
+    //        //            //            while (window.find(text, false, false, false, true, false, false)){
+    //        //            //                document.execCommand("hiliteColor", false, "FirstColor");
+    //        //            //            }
+    //        //
+    //        //        }
+    //
+    //        //--------
+    //        //        if (window.find(text, false, true)) {
+    //        //            document.execCommand("hiliteColor", false, "red");
+    //        while (window.find(text, false, true)) {
+    //            console.log('highlighting match');
+    //            document.execCommand("hiliteColor", false, "yellow");
+    //        }
+    //        window.find(text);
+    //        //        }
+    //
+    //        //        alert("String \x22" + text + "\x22 found? " + window.find(text));
+    //    }
 
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- Build container for toolbox ----------------------------------------
@@ -3903,7 +3903,6 @@
                 showNavigation.init();
                 spellCheck.init();
                 speedtestPage.init();
-<<<<<<< HEAD
 
                 // removed if nextGen
                 if (!this.isNextGenPlatform) {
@@ -3911,13 +3910,10 @@
                 }
 
                 // add nextGen specific tool to panel
-                if (this.isNextGenPlatform) {
-                    outdatedLinks.init();
-                }
+//                if (this.isNextGenPlatform) {
+//                    outdatedLinks.init();
+//                }
 
-=======
-                checkLinks.init();
->>>>>>> origin/master
             },
             otherToolsPanel: function () {
                 otherTools.init();
@@ -3998,73 +3994,73 @@
     // ---------------------------------------- Show Possible Autofill ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
 
-    var $haf_butt = jQuery('<button>').attr({
-        class: 'myEDOBut notWorking',
-        id: 'highlightAutofills',
-        title: 'Highlight Autofills (has some bugs)'
-    }).text('highlight autofills');
-
-    var cm = unsafeWindow.ContextManager;
-
-    jQuery('#mainTools').append($haf_butt);
-
-    $haf_butt.click(function () {
-
-        var $search = {
-            //            dealername: cm.getDealershipName(),
-            city: cm.getCity(),
-            //            street: cm.getAddressLine1(),
-            //            address2: cm.getAddressLine2(),
-            //            collision: cm.getCollisionPhone(),
-            //            fleet: cm.getFleetPhone(),
-            //            new: cm.getNewPhone(),
-            //            parts: cm.getPartsPhone(),
-            //            primary: cm.getPrimaryPhone(),
-            //            service: cm.getServicePhone(),
-            //            used: cm.getUsedPhone(),
-            //            finance: cm.getFinancePhone(),
-            //            state: cm.getPreferredState(),
-            //            zip: cm.getZip(),
-            franchise: cm.getFranchises()
-        };
-
-        document.designMode = "on";
-
-        jQuery.each($search, function (key, searchText) {
-            // skip interation if value is null
-            if (searchText === null) {
-                console.log(key + ' value is null');
-                return true;
-            }
-
-            console.log('find this : key : ' + key + ' : ' + searchText);
-            console.log(jQuery.type(searchText));
-
-            if (jQuery.type(searchText) === 'array') {
-                console.log('search text is an array');
-                var z = 0,
-                    length = searchText.length;
-
-                for (z; z < length; z += 1) {
-                    console.log('search this : "' + searchText[z] + '"');
-                    var searchThis = searchText[z];
-                    while (window.find(searchThis, false, true)) {
-                        console.log('highlighting match');
-                        document.execCommand("hiliteColor", false, "yellow");
-                    }
-                }
-            } else {
-                console.log('not an array');
-                while (window.find(searchText, false, true)) {
-                    console.log('highlighting match');
-                    document.execCommand("hiliteColor", false, "yellow");
-                }
-            }
-        });
-
-        document.designMode = "off";
-
-    });
+    //    var $haf_butt = jQuery('<button>').attr({
+    //        class: 'myEDOBut notWorking',
+    //        id: 'highlightAutofills',
+    //        title: 'Highlight Autofills (has some bugs)'
+    //    }).text('highlight autofills');
+    //
+    //    var cm = unsafeWindow.ContextManager;
+    //
+    //    jQuery('#mainTools').append($haf_butt);
+    //
+    //    $haf_butt.click(function () {
+    //
+    //        var $search = {
+    //            //            dealername: cm.getDealershipName(),
+    //            city: cm.getCity(),
+    //            //            street: cm.getAddressLine1(),
+    //            //            address2: cm.getAddressLine2(),
+    //            //            collision: cm.getCollisionPhone(),
+    //            //            fleet: cm.getFleetPhone(),
+    //            //            new: cm.getNewPhone(),
+    //            //            parts: cm.getPartsPhone(),
+    //            //            primary: cm.getPrimaryPhone(),
+    //            //            service: cm.getServicePhone(),
+    //            //            used: cm.getUsedPhone(),
+    //            //            finance: cm.getFinancePhone(),
+    //            //            state: cm.getPreferredState(),
+    //            //            zip: cm.getZip(),
+    //            franchise: cm.getFranchises()
+    //        };
+    //
+    //        document.designMode = "on";
+    //
+    //        jQuery.each($search, function (key, searchText) {
+    //            // skip interation if value is null
+    //            if (searchText === null) {
+    //                console.log(key + ' value is null');
+    //                return true;
+    //            }
+    //
+    //            console.log('find this : key : ' + key + ' : ' + searchText);
+    //            console.log(jQuery.type(searchText));
+    //
+    //            if (jQuery.type(searchText) === 'array') {
+    //                console.log('search text is an array');
+    //                var z = 0,
+    //                    length = searchText.length;
+    //
+    //                for (z; z < length; z += 1) {
+    //                    console.log('search this : "' + searchText[z] + '"');
+    //                    var searchThis = searchText[z];
+    //                    while (window.find(searchThis, false, true)) {
+    //                        console.log('highlighting match');
+    //                        document.execCommand("hiliteColor", false, "yellow");
+    //                    }
+    //                }
+    //            } else {
+    //                console.log('not an array');
+    //                while (window.find(searchText, false, true)) {
+    //                    console.log('highlighting match');
+    //                    document.execCommand("hiliteColor", false, "yellow");
+    //                }
+    //            }
+    //        });
+    //
+    //        document.designMode = "off";
+    //
+    //    });
 
     //
 
