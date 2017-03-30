@@ -1,3 +1,10 @@
+# v3.2.5.3 changes (3/30/2017)
+* Update v3.2.5.2 has updates not worth mentioning.  :]
+* Disabled 404 link checker for NEXTGEN :exclamation:
+  * The tool was flagging links green even though it lead to a 404 page.  The tool works on TETRA.  Further investigation is needed to resolve the issue.  Removing feature until a fix has been made.
+<br><br>  
+----------------------------------------
+<br><br>
 # v3.2.5.1 changes (3/24/2017)
 * Fixed issue with search criteria on VSR and modelshowroom pages :exclamation:
 * Added h tag display function to 'H Tags' in Page Information Panel :new:
