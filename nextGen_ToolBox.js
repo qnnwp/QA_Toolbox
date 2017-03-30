@@ -2412,6 +2412,7 @@
                     .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
                     .append('.success { background: linear-gradient(to left, rgba(161, 255, 206, 0.75), rgba(250, 255, 209, 0.75)) !important; color: #000000 !important; }')
                     .append('.error { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
+                    //                    .append('.fourOfour { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
                     .append('#checkMessage { margin: 5px auto; padding: 5px; }')
                     .append('#checkContainer { text-align: center; background: white; }'); // end of addStyles
             },
@@ -2517,7 +2518,7 @@
                     type: 'HEAD',
                     crossDomain: false,
                     method: 'get',
-                    success: function () { //pass an anonymous callback function
+                    success: function (data, textStatus, jqXHR) { //pass an anonymous callback function
                         // checks to see if link is an image link
                         // adds a div overlay if is an image link
                         hasImage = $curLink.has('img').length;
@@ -2546,13 +2547,13 @@
                             checkLinks.success($curLink, isImageLink);
                         }
                     },
-                    error: function () {
+                    error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
                         checkLinks.error($curLink, isImageLink);
                     },
                     statusCode: {
                         404: function () {
-                            $curLink.addClass('error');
+                            $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
                         }
                     },
@@ -3902,7 +3903,21 @@
                 showNavigation.init();
                 spellCheck.init();
                 speedtestPage.init();
+<<<<<<< HEAD
+
+                // removed if nextGen
+                if (!this.isNextGenPlatform) {
+                    checkLinks.init();
+                }
+
+                // add nextGen specific tool to panel
+                if (this.isNextGenPlatform) {
+                    outdatedLinks.init();
+                }
+
+=======
                 checkLinks.init();
+>>>>>>> origin/master
             },
             otherToolsPanel: function () {
                 otherTools.init();
