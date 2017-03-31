@@ -2436,7 +2436,6 @@
                     curLink = $pageLinks[j];
                     $curLink = jQuery(curLink);
                     curURL = jQuery.trim($curLink.attr('href'));
-                    hrefLength = curURL.length;
 
                     // skip javascript links
                     if (curURL.indexOf('javascript') >= 0) {
@@ -2481,17 +2480,19 @@
                         // VehicleSearchResults?pageContext=VehicleSearch&search=new
                         // /VehicleSearchResults?pageContext=VehicleSearch&search=new
                         // ----------------------------------------
-                        if (curURL.indexOf('/') >= 0) {
-                            curURL = this.host + curURL;
-                        }
+                        //                        if (curURL.indexOf('/') > -1) {
+                        //                            curURL = this.host + curURL;
+                        //                        }
 
                         // apply nextGen=true
-                        if (curURL.indexOf('?') >= 0) {
-                            curURL += '&nextGen=true';
-                        } else {
+                        if (curURL.indexOf('?') === -1) {
                             curURL += '?nextGen=true';
+                        } else {
+                            curURL += '&nextGen=true';
                         }
                     }
+
+                    hrefLength = curURL.length;
                     // check urls for '/'
                     if (curURL.indexOf('//') === 0) {
                         // check URL if it begins with /, signifying the link is a relative path URL
@@ -2515,19 +2516,18 @@
                 // test each link
                 jQuery.ajax({
                     url: linkURL, //be sure to check the right attribute
-                    type: 'HEAD',
-                    crossDomain: false,
+                    type: 'post',
+                    crossDomain: true,
                     method: 'get',
+                    dataType: 'html',
                     success: function (data, textStatus, jqXHR) { //pass an anonymous callback function
+                        var headText = jQuery(data).text();
+
                         // checks to see if link is an image link
                         // adds a div overlay if is an image link
                         hasImage = $curLink.has('img').length;
                         if (hasImage) {
                             isImageLink = true;
-                        }
-                        // if is an image link add class to div overlay
-                        // else add class to a tag
-                        if (isImageLink) {
                             $img = $curLink.find('img');
                             w = $img.width();
                             h = $img.height();
@@ -2539,20 +2539,40 @@
                                 position: 'absolute',
                                 'z-index': 1
                             });
+                        }
+                        // 404 & not image link
+                        if (headText.indexOf('404 - Page Not Found') !== -1 && !isImageLink) {
+                            $curLink.addClass('fourOfour');
+                            checkLinks.error($curLink, isImageLink);
+                        } else if (headText.indexOf('404 - Page Not Found') !== -1 && isImageLink) {
+                            // 404 & image link
                             $img.attr('style', 'position: relative;');
                             $curLink.prepend($linkOverlay);
-                            checkLinks.success($linkOverlay, isImageLink);
+                            checkLinks.error($curLink, isImageLink);
                         } else {
-                            $curLink.addClass('success');
-                            checkLinks.success($curLink, isImageLink);
+                            // if is an image link add class to div overlay
+                            // else add class to a tag
+                            if (isImageLink) {
+                                $img.attr('style', 'position: relative;');
+                                $curLink.prepend($linkOverlay);
+                                checkLinks.success($linkOverlay, isImageLink);
+                            } else {
+                                $curLink.addClass('success');
+                                checkLinks.success($curLink, isImageLink);
+                            }
                         }
                     },
                     error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
-                        checkLinks.error($curLink, isImageLink);
+                        if (jqXHR.status === 404) {
+                            checkLinks.error($curLink, isImageLink);
+                        }
                     },
                     statusCode: {
-                        404: function () {
+                        404: function (jqXHR, textStatus, error) {
+                            console.log('status : ' + jqXHR.status);
+                            console.log('textStatus : ' + textStatus);
+                            console.log('error : ' + error);
                             $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
                         }
@@ -3905,14 +3925,14 @@
                 speedtestPage.init();
 
                 // removed if nextGen
-                if (!this.isNextGenPlatform) {
-                    checkLinks.init();
-                }
+                //                if (!this.isNextGenPlatform) {
+                checkLinks.init();
+                //                }
 
                 // add nextGen specific tool to panel
-//                if (this.isNextGenPlatform) {
-//                    outdatedLinks.init();
-//                }
+                //                if (this.isNextGenPlatform) {
+                //                    outdatedLinks.init();
+                //                }
 
             },
             otherToolsPanel: function () {
