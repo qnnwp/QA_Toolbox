@@ -1,12 +1,15 @@
 {
     "datedPages": [
         "NewVehicleSearch",
-        "PreOwnedVehicleSearch",
+        "PreownedVehicleSearch",
+        "CombinedVehicleSearch",
         "NewVehicleInfoForm",
-        "PreOwnedVehicleInfoForm",
+        "PreownedVehicleInfoForm",
         "ExtendedProtection",
         "ExtendedProtectionDetails",
         "Affiliate",
-        "AboutSpecials"
+        "AboutSpecials",
+        "LeaseVsFinance",
+        "PaymentCalculator"
     ]
 }
