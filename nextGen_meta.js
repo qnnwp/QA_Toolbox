@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name QA Tool
 // @namespace www.cobaltgroup.com/
-// @version v3.2.6
+// @version 3.2.6
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
