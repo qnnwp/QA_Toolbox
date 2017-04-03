@@ -114,7 +114,7 @@
                     // default button styles
                     .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 12px; top: 15%; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }')
                     .append('.myEDOBut.notWorking { background: purple; }')
-                    .append('.myEDOBut.offButt { width: 90%; height: 50px; }')
+                    .append('.myEDOBut.offButt { width: 90%; height: 50px; margin: 0px; }')
                     .append('.myEDOBut[disabled] { border: 2px outset ButtonFace; background: #ddd; background-color: #ddd; color: grey !important; cursor: not-allowed; }')
                     .append('.offButt { background: linear-gradient(to left, #085078 , #85D8CE) !important; }')
                     .append('.myEDOBut:hover { background: linear-gradient(to left, #141E30 , #243B55) !important; }')
@@ -2336,7 +2336,7 @@
                     }),
                     $legendContent: {
                         'otherDomain': 'Absolute URL*',
-                        'framedIn': 'f_ link',
+                        'framedIn': 'f_link*',
                         'brokenURL': 'Empty URL',
                         'success': 'Link is Real',
                         'error': '404 Link',
@@ -2412,6 +2412,7 @@
                     .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
                     .append('.success { background: linear-gradient(to left, rgba(161, 255, 206, 0.75), rgba(250, 255, 209, 0.75)) !important; color: #000000 !important; }')
                     .append('.error { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
+                    .append('.siteLink { color: black !important; }')
                     //                    .append('.fourOfour { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
                     .append('#checkMessage { margin: 5px auto; padding: 5px; }')
                     .append('#checkContainer { text-align: center; background: white; }'); // end of addStyles
@@ -2437,43 +2438,74 @@
                     $curLink = jQuery(curLink);
                     curURL = jQuery.trim($curLink.attr('href'));
 
-                    // skip javascript links
-                    if (curURL.indexOf('javascript') >= 0) {
-                        continue;
+                    switch (true) {
+                        // test for mobile specific links
+                        case (curURL.indexOf('tel') >= 0):
+                            $curLink.addClass('mobilePhoneLink');
+                            continue;
+                            // test for javascript links
+                        case ((curURL.indexOf('javascript') >= 0) || (curURL.indexOf('#') === 0)):
+                            $curLink.addClass('jsLinkbb');
+                            continue;
+                            // test for undefined or empty URLs
+                        case ((typeof curLink === 'undefined') || (curURL === '')):
+                            $curLink.addClass('brokenURL');
+                            continue;
+                            // test for absolute path URLs
+                        case ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)):
+                            $curLink.addClass('otherDomain');
+                            continue;
+                            // test for other special URLs
+                        case ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)):
+                            $curLink.addClass('framedIn');
+                            continue;
+                        default:
+                            console.log('----------------------------------------');
+                            console.log('Starting URL :: ' + curURL);
+                            break;
                     }
+                    // skip javascript links
+                    //                    if (curURL.indexOf('javascript') >= 0) {
+                    //                        continue;
+                    //                    }
+
                     // test if URL is undefined
                     // skip checking link if not a web link
-                    if (typeof curLink === 'undefined') {
-                        $curLink.addClass('brokenURL');
-                        continue;
-                    } // test if URL is empty
+                    //                    if (typeof curLink === 'undefined') {
+                    //                        $curLink.addClass('brokenURL');
+                    //                        continue;
+                    //                    } // test if URL is empty
+
                     // skip checking link if not a web link
-                    if (curURL === '') {
-                        $curLink.addClass('brokenURL');
-                        continue;
-                    }
+                    //                    if (curURL === '') {
+                    //                        $curLink.addClass('brokenURL');
+                    //                        continue;
+                    //                    }
+
                     // test if link is a complete URL
                     // eg. http://www.blahblah.com/
                     // skip iteration if not correct format
-                    if ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)) {
-                        $curLink.addClass('otherDomain');
-                        continue;
-                    }
+                    //                    if ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)) {
+                    //                        $curLink.addClass('otherDomain');
+                    //                        continue;
+                    //                    }
+
                     // test if link if href contains f_ or //:
                     // f_ will frame in the URL which may cause viewing issues if URL is an interior page.
                     // skip iteration if not correct format
-                    if ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)) {
-                        $curLink.addClass('framedIn');
-                        continue;
-                    }
+                    //                    if ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)) {
+                    //                        $curLink.addClass('framedIn');
+                    //                        continue;
+                    //                    }
+
                     curWindow = window.location.href;
                     if (curWindow.indexOf('nextGen=true') > -1) {
                         // check URL if using relative path
                         // NEXT GEN SPECIFIC
                         // add complete URL for testing purposes
-                        findThis = '/' + this.siteID + '/';
-                        findThis2 = '/' + this.wid + '/';
-                        len = findThis.length + 1;
+                        //                        findThis = '/' + this.siteID + '/';
+                        //                        findThis2 = '/' + this.wid + '/';
+                        //                        len = findThis.length + 1;
 
                         // ----------------------------------------
                         // TEST FOR LINKS CREATED BY HAND
@@ -2492,18 +2524,26 @@
                         }
                     }
 
-                    hrefLength = curURL.length;
-                    // check urls for '/'
-                    if (curURL.indexOf('//') === 0) {
-                        // check URL if it begins with /, signifying the link is a relative path URL
-                        curURL = curURL.slice(2, hrefLength);
-                    } else if (curURL.indexOf('/') === 0) {
-                        curURL = curURL.slice(1, hrefLength);
-                    }
+                    console.log('link after nextGen parameter check :: ' + curURL);
+
+                    //                    hrefLength = curURL.length;
+                    //                    // check urls for '/'
+                    //                    if (curURL.indexOf('//') === 0) {
+                    //                        // check URL if it begins with /, signifying the link is a relative path URL
+                    //                        curURL = curURL.slice(2, hrefLength);
+                    //                    } else if (curURL.indexOf('/') === 0) {
+                    //                        curURL = curURL.slice(1, hrefLength);
+                    //                    }
+
+                    //                    console.log('link after relative path check :: ' + curURL);
 
                     // test links
                     this.ajaxTest(curURL, $curLink, pageLinksLength);
                 }
+
+                // test links  should only test one link
+                //                this.ajaxTest(curURL, $curLink, pageLinksLength);
+
             },
             ajaxTest: function (linkURL, $curLink, totalTests) {
                 var hasImage = 0,
@@ -2521,6 +2561,9 @@
                     method: 'get',
                     dataType: 'html',
                     success: function (data, textStatus, jqXHR) { //pass an anonymous callback function
+
+                        console.log('linkURL :: ' + linkURL);
+
                         var headText = jQuery(data).text();
 
                         // checks to see if link is an image link
@@ -2570,9 +2613,9 @@
                     },
                     statusCode: {
                         404: function (jqXHR, textStatus, error) {
-                            console.log('status : ' + jqXHR.status);
-                            console.log('textStatus : ' + textStatus);
-                            console.log('error : ' + error);
+                            //                            console.log('status : ' + jqXHR.status);
+                            //                            console.log('textStatus : ' + textStatus);
+                            //                            console.log('error : ' + error);
                             $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
                         }
@@ -3794,6 +3837,7 @@
                 this.$toolBoxContainer.append(dynamicDisplay.config.$hide);
             },
             modToolbar: function () {
+                console.log('nextgen platform :: ' + this.isNextGen);
                 if (this.isNextGen === 'Tetra') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }'); // TETRA color
                     QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px 10px; }'); // button position
