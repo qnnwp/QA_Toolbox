@@ -2366,7 +2366,8 @@
                     $hint: jQuery('<div>').attr({
                         class: 'hint'
                     }).text('refresh page before running 404 checker again'),
-                    count: 1
+                    count: 1,
+                    totalTests: 0
                 };
             },
             cacheDOM: function () {
@@ -2425,97 +2426,52 @@
                     curLink,
                     $curLink,
                     curURL,
-                    hrefLength,
-                    findThis,
-                    findThis2,
-                    len,
                     curWindow,
                     $pageLinks = jQuery('a'),
                     pageLinksLength = $pageLinks.length;
+                // set total tests to number of links on page
+                checkLinks.config.totalTests = $pageLinks.length;
 
                 for (j; j < pageLinksLength; j += 1) {
                     curLink = $pageLinks[j];
                     $curLink = jQuery(curLink);
                     curURL = jQuery.trim($curLink.attr('href'));
 
+                    // skip testing of links if it doesn't pass the tests
+                    // subtract 1 from total tests
                     switch (true) {
                         // test for mobile specific links
                         case (curURL.indexOf('tel') >= 0):
                             $curLink.addClass('mobilePhoneLink');
+                            checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for javascript links
                         case ((curURL.indexOf('javascript') >= 0) || (curURL.indexOf('#') === 0)):
                             $curLink.addClass('jsLinkbb');
+                            checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for undefined or empty URLs
                         case ((typeof curLink === 'undefined') || (curURL === '')):
                             $curLink.addClass('brokenURL');
+                            checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for absolute path URLs
                         case ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)):
                             $curLink.addClass('otherDomain');
+                            checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for other special URLs
                         case ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)):
                             $curLink.addClass('framedIn');
+                            checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                         default:
-                            console.log('----------------------------------------');
-                            console.log('Starting URL :: ' + curURL);
+                            // do nothing
                             break;
                     }
-                    // skip javascript links
-                    //                    if (curURL.indexOf('javascript') >= 0) {
-                    //                        continue;
-                    //                    }
-
-                    // test if URL is undefined
-                    // skip checking link if not a web link
-                    //                    if (typeof curLink === 'undefined') {
-                    //                        $curLink.addClass('brokenURL');
-                    //                        continue;
-                    //                    } // test if URL is empty
-
-                    // skip checking link if not a web link
-                    //                    if (curURL === '') {
-                    //                        $curLink.addClass('brokenURL');
-                    //                        continue;
-                    //                    }
-
-                    // test if link is a complete URL
-                    // eg. http://www.blahblah.com/
-                    // skip iteration if not correct format
-                    //                    if ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)) {
-                    //                        $curLink.addClass('otherDomain');
-                    //                        continue;
-                    //                    }
-
-                    // test if link if href contains f_ or //:
-                    // f_ will frame in the URL which may cause viewing issues if URL is an interior page.
-                    // skip iteration if not correct format
-                    //                    if ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)) {
-                    //                        $curLink.addClass('framedIn');
-                    //                        continue;
-                    //                    }
 
                     curWindow = window.location.href;
                     if (curWindow.indexOf('nextGen=true') > -1) {
-                        // check URL if using relative path
-                        // NEXT GEN SPECIFIC
-                        // add complete URL for testing purposes
-                        //                        findThis = '/' + this.siteID + '/';
-                        //                        findThis2 = '/' + this.wid + '/';
-                        //                        len = findThis.length + 1;
-
-                        // ----------------------------------------
-                        // TEST FOR LINKS CREATED BY HAND
-                        // VehicleSearchResults?pageContext=VehicleSearch&search=new
-                        // /VehicleSearchResults?pageContext=VehicleSearch&search=new
-                        // ----------------------------------------
-                        //                        if (curURL.indexOf('/') > -1) {
-                        //                            curURL = this.host + curURL;
-                        //                        }
-
                         // apply nextGen=true
                         if (curURL.indexOf('?') === -1) {
                             curURL += '?nextGen=true';
@@ -2524,28 +2480,13 @@
                         }
                     }
 
-                    console.log('link after nextGen parameter check :: ' + curURL);
-
-                    //                    hrefLength = curURL.length;
-                    //                    // check urls for '/'
-                    //                    if (curURL.indexOf('//') === 0) {
-                    //                        // check URL if it begins with /, signifying the link is a relative path URL
-                    //                        curURL = curURL.slice(2, hrefLength);
-                    //                    } else if (curURL.indexOf('/') === 0) {
-                    //                        curURL = curURL.slice(1, hrefLength);
-                    //                    }
-
-                    //                    console.log('link after relative path check :: ' + curURL);
+                    console.log('total links to test :: ' + checkLinks.config.totalTests);
 
                     // test links
-                    this.ajaxTest(curURL, $curLink, pageLinksLength);
+                    this.ajaxTest(curURL, $curLink);
                 }
-
-                // test links  should only test one link
-                //                this.ajaxTest(curURL, $curLink, pageLinksLength);
-
             },
-            ajaxTest: function (linkURL, $curLink, totalTests) {
+            ajaxTest: function (linkURL, $curLink) {
                 var hasImage = 0,
                     isImageLink = false,
                     $img,
@@ -2561,8 +2502,6 @@
                     method: 'get',
                     dataType: 'html',
                     success: function (data, textStatus, jqXHR) { //pass an anonymous callback function
-
-                        console.log('linkURL :: ' + linkURL);
 
                         var headText = jQuery(data).text();
 
@@ -2587,11 +2526,13 @@
                         if (headText.indexOf('404 - Page Not Found') !== -1 && !isImageLink) {
                             $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
+                            console.log('---link is a 404 :: ' + linkURL);
                         } else if (headText.indexOf('404 - Page Not Found') !== -1 && isImageLink) {
                             // 404 & image link
                             $img.attr('style', 'position: relative;');
                             $curLink.prepend($linkOverlay);
                             checkLinks.error($curLink, isImageLink);
+                            console.log('---link is a 404 :: ' + linkURL);
                         } else {
                             // if is an image link add class to div overlay
                             // else add class to a tag
@@ -2599,9 +2540,11 @@
                                 $img.attr('style', 'position: relative;');
                                 $curLink.prepend($linkOverlay);
                                 checkLinks.success($linkOverlay, isImageLink);
+                                console.log('linkURL :: ' + linkURL);
                             } else {
                                 $curLink.addClass('success');
                                 checkLinks.success($curLink, isImageLink);
+                                console.log('linkURL :: ' + linkURL);
                             }
                         }
                     },
@@ -2613,16 +2556,14 @@
                     },
                     statusCode: {
                         404: function (jqXHR, textStatus, error) {
-                            //                            console.log('status : ' + jqXHR.status);
-                            //                            console.log('textStatus : ' + textStatus);
-                            //                            console.log('error : ' + error);
                             $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
+                            console.log('---link is a 404 :: ' + linkURL);
                         }
                     },
                     complete: function () {
                         checkLinks.config.count += 1;
-                        checkLinks.config.$counter.text(checkLinks.config.count + ' of ' + totalTests);
+                        checkLinks.config.$counter.text(checkLinks.config.count + ' of ' + checkLinks.config.totalTests);
                     }
                 });
             },
@@ -2704,7 +2645,6 @@
                 this.addTool();
                 this.bindEvents();
                 this.displayPanel();
-                //                this.hidePanel();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -2801,11 +2741,6 @@
                         state = variables[key] ? 'show' : 'hide';
                         this.setState(urlModifiers.config.$urlModPanel, state);
                     }
-                }
-            },
-            hidePanel: function () {
-                if (this.isLive) {
-                    urlModifiers.config.$urlModContainer.remove();
                 }
             },
             // ----------------------------------------
