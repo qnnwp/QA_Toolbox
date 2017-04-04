@@ -119,7 +119,7 @@
                     .append('.offButt { background: linear-gradient(to left, #085078 , #85D8CE) !important; }')
                     .append('.myEDOBut:hover { background: linear-gradient(to left, #141E30 , #243B55) !important; }')
                     // legend styles
-                    .append('.legendTitle { font-weight: bold; }')
+                    .append('.legendTitle { font-weight: bold; font-size: 18px; }')
                     .append('.legendContent { padding: 5px; margin: 5px; }')
                     .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
                     .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }')
@@ -721,8 +721,8 @@
         // ---------------------------------------- image checker ----------------------------------------
         // ------------------------------------------------------------------------------------------------------------------------
         imageChecker = {
-            init: function () {
-                this.createElements();
+            init: function (callingPanel) {
+                this.createElements(callingPanel);
                 this.buildLegend();
                 this.addTool();
                 this.bindEvents();
@@ -730,7 +730,7 @@
             // ----------------------------------------
             // tier 1
             // ----------------------------------------
-            createElements: function () {
+            createElements: function (callingPanel) {
                 imageChecker.config = {
                     $activateButt: jQuery('<button>').attr({
                         class: 'myEDOBut',
@@ -755,7 +755,7 @@
                         class: 'myEDOBut offButt',
                         value: 'Turn Off'
                     }),
-                    $toolsPanel: jQuery('#mainTools'),
+                    $toolsPanel: jQuery(callingPanel),
                     $legendContainer: jQuery('#legendContainer')
                 };
             },
@@ -853,7 +853,7 @@
                     // allow proper displaying of color overlay on images
                     .append('.overlaid { position: relative; }')
                     // image overlay styles
-                    .append('.imgOverlay { color: black; font-size: 15px; font-weight: bold; text-align: center; position: absolute; top: 0; left: 0; z-index: 1; }')
+                    .append('.imgOverlay { color: black; font-size: 15px; font-weight: bold; text-align: center; position: absolute; z-index: 1; }') //top: 0; left: 0;
                     // image styles
                     .append('.hasAlt { background: rgba(146, 232, 66, .75) !important; }')
                     .append('.noAlt { background: rgba(255, 124, 216, .75) !important; }')
@@ -885,7 +885,6 @@
                     default:
                         console.log('image checker failure');
                         console.log(currentImage);
-                        break;
                 }
             },
             // ----------------------------------------
@@ -934,8 +933,8 @@
         // ---------------------------------------- link checker ----------------------------------------
         //------------------------------------------------------------------------------------------------------------------------
         linkChecker = {
-            init: function () {
-                this.createElements();
+            init: function (callingPanel) {
+                this.createElements(callingPanel);
                 this.getData();
                 this.buildLegend();
                 this.addTool();
@@ -944,7 +943,7 @@
             // ----------------------------------------
             // tier 1 functions
             // ----------------------------------------
-            createElements: function () {
+            createElements: function (callingPanel) {
                 linkChecker.config = {
                     $activateButt: jQuery('<button>').attr({
                         class: 'myEDOBut',
@@ -977,7 +976,7 @@
                     $hint: jQuery('<div>').attr({
                         class: 'hint'
                     }).text('ctrl+left click to open link in a new tab'),
-                    $toolsPanel: jQuery('#mainTools'),
+                    $toolsPanel: jQuery(callingPanel),
                     $legendContainer: jQuery('#legendContainer'),
                     datedPagesfileURL: 'https://cdn.rawgit.com/cirept/NextGen/a9b9d06f/resources/dated_pages.json',
                     unsupportedPages: {}
@@ -1044,8 +1043,7 @@
                     a = 0,
                     $currentLink,
                     $image,
-                    isImageLink,
-                    event;
+                    isImageLink;
                 // verify all links
                 for (a; a < length; a += 1) {
                     $currentLink = jQuery(this.$allLinks[a]);
@@ -1110,7 +1108,7 @@
                     // allow proper displaying of color overlay on images
                     .append('.overlaid { position: relative; }')
                     // image overlay styles
-                    .append('.imgOverlay { color: black; font-size: 15px; font-weight: bold; text-align: center; position: absolute; top: 0; left: 0; z-index: 1; }')
+                    .append('.imgOverlay { color: black; font-size: 15px; font-weight: bold; text-align: center; position: absolute; z-index: 1; }') //top: 0; left: 0;
                     // link styles
                     .append('.noTitle { background: rgba(255, 124, 216, .75) !important; }')
                     .append('.hasTitle { background: rgba(146, 232, 66, .75) !important; }')
@@ -1118,7 +1116,7 @@
                     .append('.hasTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important; }')
                     .append('.noTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
                     .append('.emptyTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
-                    .append('.brokenURL { background: rgba(255, 55, 60, .75) !important; }')
+                    .append('.brokenURL { linear-gradient(to left, #FFAFBD , #ffc3a0) !important; }')
                     .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
                     .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)) !important; color: #909090 !important; }')
                     .append('.unsupportedPageLink { -moz-box-shadow: inset 0px 0px 0px 3px #00a6ff; -webkit-box-shadow: inset 0px 0px 0px 3px #00a6ff; box-shadow: inset 0px 0px 0px 3px #00a6ff; }'); // end of addStyles  #00a6ff
@@ -1151,66 +1149,66 @@
             checkForTitleText: function ($currentLink, isImageLink) {
                 // find first case that returns true
                 switch (true) {
-                    // undefined title or empty title
-                    case ($currentLink.attr('title') === undefined || $currentLink.attr('title') === ''):
-                        if (isImageLink) {
-                            this.togClass(this.$divOverlay, 'noTitle');
-                        } else {
-                            this.togClass($currentLink, 'noTitle');
-                        }
+                    case (isImageLink && ($currentLink.attr('title') === undefined || $currentLink.attr('title') === '')):
+                        // image link has no title
+                        this.togClass(this.$divOverlay, 'noTitle');
                         break;
-                        // has title
-                    case ($currentLink.attr('title') !== ''):
-                        if (isImageLink) {
-                            this.togClass(this.$divOverlay, 'hasTitle');
-                        } else {
-                            this.togClass($currentLink, 'hasTitle');
-                        }
+                    case (!isImageLink && ($currentLink.attr('title') === undefined || $currentLink.attr('title') === '')):
+                        // link has no title
+                        this.togClass($currentLink, 'noTitle');
                         break;
-                        // log the image element that breaks the program
+                    case (isImageLink && $currentLink.attr('title') !== ''):
+                        // image link has a title
+                        this.togClass(this.$divOverlay, 'hasTitle');
+                        break;
+                    case (!isImageLink && $currentLink.attr('title') !== ''):
+                        // link has a title
+                        this.togClass($currentLink, 'hasTitle');
+                        break;
                     default:
+                        // link is good to go
                         console.log('title checker failure');
                         console.log($currentLink);
-                        break;
                 }
             },
+            // fix this switch statement TODO!
             checkURL: function ($currentLink, isImageLink) {
                 var href = $currentLink.attr('href');
                 switch (true) {
-                    // no href
-                    case (href === undefined):
-                        if (isImageLink) {
-                            this.togClass(this.$divOverlay, 'brokenURL');
-                        } else {
-                            this.togClass($currentLink, 'brokenURL');
-                        }
+                    case (isImageLink && href === undefined):
+                        // image link is undefined
+                        this.togClass(this.$divOverlay, 'brokenURL');
                         break;
-                        // empty href
-                    case (href === ''):
-                        if (isImageLink) {
-                            this.togClass(this.$divOverlay, 'brokenURL');
-                        } else {
-                            this.togClass($currentLink, 'brokenURL');
-                        }
+                    case (!isImageLink && href === undefined):
+                        // link is undefined
+                        this.togClass($currentLink, 'brokenURL');
                         break;
-                        // url issue
-                    case (this.checkHref(href)):
-                        if (isImageLink) {
-                            this.togClass(this.$divOverlay, 'urlIssue');
-                        } else {
-                            this.togClass($currentLink, 'urlIssue');
-                        }
+                    case (isImageLink && href === ''):
+                        // image link has an empty url
+                        this.togClass(this.$divOverlay, 'brokenURL');
                         break;
-                    case (this.datedURL(href)):
-                        if (isImageLink) {
-                            this.togClass(this.$divOverlay, 'unsupportedPageLink');
-                        } else {
-                            this.togClass($currentLink, 'unsupportedPageLink');
-                        }
+                    case (!isImageLink && href === ''):
+                        // link has an empty url
+                        this.togClass($currentLink, 'brokenURL');
                         break;
-                        // url is good to go
+                    case (isImageLink && this.checkHref(href)):
+                        // image link has a fishy url
+                        this.togClass(this.$divOverlay, 'urlIssue');
+                        break;
+                    case (!isImageLink && this.checkHref(href)):
+                        // link has a fishy url
+                        this.togClass($currentLink, 'urlIssue');
+                        break;
+                    case (isImageLink && this.datedURL(href)):
+                        // image link leads to an out dated page
+                        this.togClass(this.$divOverlay, 'unsupportedPageLink');
+                        break;
+                    case (!isImageLink && this.datedURL(href)):
+                        // link leads to an out dated page
+                        this.togClass($currentLink, 'unsupportedPageLink');
+                        break;
                     default:
-                        break;
+                        // url is good to go
                 }
             },
             linkChecked: function ($currentLink) {
@@ -1303,186 +1301,14 @@
                 this.$divOverlay.append(this.linkTitle);
             }
         },
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- Show Navigation (highlight major pages) ----------------------------------------
-        //------------------------------------------------------------------------------------------------------------------------
-        showNavigation = {
-            init: function () {
-                this.createElements();
-                this.cacheDOM();
-                this.buildLegend();
-                this.addTool();
-                this.bindEvents();
-                this.addStyles();
-            },
-            // ----------------------------------------
-            // tier 1 functions
-            // ----------------------------------------
-            createElements: function () {
-                showNavigation.config = {
-                    $activateButt: jQuery('<button>').attr({
-                        class: 'myEDOBut',
-                        id: 'showNavigation',
-                        title: 'Show Navigation (Highlights Major Pages)'
-                    }).text('Show Navigation'),
-                    $offButt: jQuery('<input>').attr({
-                        type: 'button',
-                        class: 'myEDOBut offButt',
-                        value: 'Turn Off'
-                    }),
-                    $legend: jQuery('<div>').attr({
-                        class: 'tbLegend'
-                    }),
-                    $legendTitle: jQuery('<div>').attr({
-                        class: 'legendTitle'
-                    }).text('Show Navigation Legend'),
-                    $legendList: jQuery('<ul>').attr({
-                        class: 'legendList'
-                    }),
-                    $legendContent: {
-                        'majorPage': 'Major Page',
-                        'linkChecked': 'Link Clicked'
-                    },
-                    $hint: jQuery('<div>').attr({
-                        class: 'hint'
-                    }).text('ctrl+left click to open link in a new tab')
-                };
-            },
-            cacheDOM: function () {
-                this.nextGen = document.firstChild.data;
-                this.isNextGenPlatform = this.nextGenVar(this.nextGen);
-                this.$toolbarStyles = jQuery('#qa_toolbox');
-                this.$toolsPanel = jQuery('#mainTools');
-                this.$legendContainer = jQuery('#legendContainer');
-
-                if (this.nextGenVar(this.nextGen)) {
-                    this.$navTabs = jQuery('li[repeat*="mainNav"]');
-                    this.$subNavMenuContainer = this.$navTabs.find('ul[if="cards.length"]');
-                    this.$subNavItem = this.$subNavMenuContainer.find('li[repeat="cards"]');
-                    this.$navTabsLinks = this.$subNavItem.find('a');
-                } else {
-                    this.$nav = jQuery('#pmenu');
-                    this.$navTabs = this.$nav.find('ul');
-                    this.$navTabsLinks = this.$navTabs.find('a');
-                }
-
-                this.$nav = jQuery('#pmenu');
-                this.$navTabs = this.$nav.find('ul');
-                this.$navTabsLinks = this.$navTabs.find('a[href]');
-            },
-            nextGenVar: function (nextGen) {
-                if (nextGen) {
-                    return nextGen.indexOf('Next Gen') === -1 ? false : true;
-                } else {
-                    return false;
-                }
-            },
-            buildLegend: function () {
-                showNavigation.config.$legend
-                    // attach legend title
-                    .append(showNavigation.config.$legendTitle)
-                    // attach list
-                    .append(showNavigation.config.$legendList)
-                    // attach turn off button
-                    .append(showNavigation.config.$offButt)
-                    // attach hint
-                    .append(showNavigation.config.$hint);
-                // fill list
-                this.buildLegendContent();
-            },
-            addTool: function () {
-                this.$toolsPanel.append(showNavigation.config.$activateButt);
-                this.$legendContainer.append(showNavigation.config.$legend);
-            },
-            bindEvents: function () {
-                showNavigation.config.$activateButt.on('click', this.toggleFeatures.bind(this));
-                showNavigation.config.$activateButt.on('click', this.toggleDisable);
-                showNavigation.config.$activateButt.on('click', this.bindClicks.bind(this));
-                showNavigation.config.$offButt.on('click', this.toggleFeatures.bind(this));
-                showNavigation.config.$offButt.on('click', this.toggleDisable);
-                showNavigation.config.$offButt.on('click', this.unbindClicks.bind(this));
-            },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    // styles of colored overlay placed on images
-                    .append('.majorPage { color: #ffffff !important; background: linear-gradient(to left, #ffb347 , #ffcc33) !important; }')
-                    .append('.tetraShowNav { display: block !important; }')
-                    .append('.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)), #ffffff !important; color: #999999 !important; }')
-                    .append('.nextgenShowNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; }')
-                    .append('.showNavAdd { width: 150px !important; padding: 0 !important; font-size: 15px !important; }'); // end of addStyles
-            },
-            // ----------------------------------------
-            // tier 2 functions
-            // ----------------------------------------
-            buildLegendContent: function () {
-                var $contentArray = showNavigation.config.$legendContent,
-                    key, value;
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    value = $contentArray[key];
-                    // build listing element
-                    this.$listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    showNavigation.config.$legendList.append(this.$listItem);
-                }
-            },
-            toggleFeatures: function () {
-                var isNextGen = this.isNextGenPlatform;
-
-                if (isNextGen) {
-                    this.$navTabs.toggleClass('showNavAdd');
-                    this.$subNavItem.toggleClass('showNavAdd');
-                    this.$subNavMenuContainer.toggleClass('nextgenShowNav');
-                }
-                if (!isNextGen) {
-                    this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
-                    this.$navTabs.toggleClass('tetraShowNav');
-                }
-                showNavigation.config.$legend.slideToggle(500);
-            },
-            toggleDisable: function () {
-                showNavigation.config.$activateButt.prop('disabled', function (index, value) {
-                    return !value;
-                });
-            },
-            bindClicks: function () {
-                var i = 0,
-                    length = this.$navTabsLinks.length;
-
-                for (i; i < length; i += 1) {
-                    jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
-                }
-
-            },
-            unbindClicks: function () {
-                var i = 0,
-                    length = this.$navTabsLinks.length;
-                for (i; i < length; i += 1) {
-                    jQuery(this.$navTabsLinks[i]).off('click');
-                }
-                // remove link checked class
-                this.$navTabs.find('.linkChecked').removeClass('linkChecked');
-            },
-            // ----------------------------------------
-            // tier 3 functions
-            // ----------------------------------------
-            linkChecked: function (currentLink) {
-                return function () {
-                    jQuery(currentLink).addClass('linkChecked');
-                };
-            }
-        },
 
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Spell Check ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         spellCheck = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.addTool();
                 this.bindEvents();
             },
@@ -1498,8 +1324,8 @@
                     }).text('Spellcheck Page')
                 };
             },
-            cacheDOM: function () {
-                this.$toolsPanel = jQuery('#mainTools');
+            cacheDOM: function (callingPanel) {
+                this.$toolsPanel = jQuery(callingPanel);
                 this.$cm = unsafeWindow.ContextManager;
                 this.siteURL = this.$cm.getUrl();
                 this.pageName = this.$cm.getPageName();
@@ -1537,9 +1363,9 @@
         // ---------------------------------------- Test WebPage ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         speedtestPage = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.buildOptions();
                 this.buildPanel();
                 this.addTool();
@@ -1607,7 +1433,7 @@
                     testURL: 'http://www.webpagetest.org/runtest.php?',
                     $sendButt: jQuery('<input>').attr({
                         type: 'button',
-                        class: 'myEDOBut',
+                        class: 'myEDOBut offButt',
                         value: 'Send Test'
                     }).css({
                         width: '90%',
@@ -1615,11 +1441,11 @@
                     })
                 };
             },
-            cacheDOM: function () {
+            cacheDOM: function (callingPanel) {
                 this.$cm = unsafeWindow.ContextManager;
                 this.siteURL = this.$cm.getUrl();
                 this.pageName = this.$cm.getPageName();
-                this.$toolsPanel = jQuery('#mainTools');
+                this.$toolsPanel = jQuery(callingPanel);
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = this.nextGenVar(this.nextGen);
             },
@@ -1843,12 +1669,181 @@
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------- Show Navigation (highlight major pages) ----------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------
+        showNavigation = {
+            init: function (callingPanel) {
+                this.createElements();
+                this.cacheDOM(callingPanel);
+                this.buildLegend();
+                this.addTool();
+                this.bindEvents();
+                this.addStyles();
+            },
+            // ----------------------------------------
+            // tier 1 functions
+            // ----------------------------------------
+            createElements: function () {
+                showNavigation.config = {
+                    $activateButt: jQuery('<button>').attr({
+                        class: 'myEDOBut',
+                        id: 'showNavigation',
+                        title: 'Show Navigation (Highlights Major Pages)'
+                    }).text('Show Navigation'),
+                    $offButt: jQuery('<input>').attr({
+                        type: 'button',
+                        class: 'myEDOBut offButt',
+                        value: 'Turn Off'
+                    }),
+                    $legend: jQuery('<div>').attr({
+                        class: 'tbLegend'
+                    }),
+                    $legendTitle: jQuery('<div>').attr({
+                        class: 'legendTitle'
+                    }).text('Show Navigation Legend'),
+                    $legendList: jQuery('<ul>').attr({
+                        class: 'legendList'
+                    }),
+                    $legendContent: {
+                        'majorPage': 'Major Page',
+                        'linkChecked': 'Link Clicked'
+                    },
+                    $hint: jQuery('<div>').attr({
+                        class: 'hint'
+                    }).text('ctrl+left click to open link in a new tab')
+                };
+            },
+            cacheDOM: function (callingPanel) {
+                this.nextGen = document.firstChild.data;
+                this.isNextGenPlatform = this.nextGenVar(this.nextGen);
+                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$toolsPanel = jQuery(callingPanel);
+                this.$legendContainer = jQuery('#legendContainer');
+
+                if (this.nextGenVar(this.nextGen)) {
+                    this.$navTabs = jQuery('li[repeat*="mainNav"]');
+                    this.$subNavMenuContainer = this.$navTabs.find('ul[if="cards.length"]');
+                    this.$subNavItem = this.$subNavMenuContainer.find('li[repeat="cards"]');
+                    this.$navTabsLinks = this.$subNavItem.find('a');
+                } else {
+                    this.$nav = jQuery('#pmenu');
+                    this.$navTabs = this.$nav.find('ul');
+                    this.$navTabsLinks = this.$navTabs.find('a');
+                }
+            },
+            nextGenVar: function (nextGen) {
+                if (nextGen) {
+                    return nextGen.indexOf('Next Gen') === -1 ? false : true;
+                } else {
+                    return false;
+                }
+            },
+            buildLegend: function () {
+                showNavigation.config.$legend
+                    // attach legend title
+                    .append(showNavigation.config.$legendTitle)
+                    // attach list
+                    .append(showNavigation.config.$legendList)
+                    // attach turn off button
+                    .append(showNavigation.config.$offButt)
+                    // attach hint
+                    .append(showNavigation.config.$hint);
+                // fill list
+                this.buildLegendContent();
+            },
+            addTool: function () {
+                this.$toolsPanel.append(showNavigation.config.$activateButt);
+                this.$legendContainer.append(showNavigation.config.$legend);
+            },
+            bindEvents: function () {
+                showNavigation.config.$activateButt.on('click', this.toggleFeatures.bind(this));
+                showNavigation.config.$activateButt.on('click', this.toggleDisable);
+                showNavigation.config.$activateButt.on('click', this.bindClicks.bind(this));
+                showNavigation.config.$offButt.on('click', this.toggleFeatures.bind(this));
+                showNavigation.config.$offButt.on('click', this.toggleDisable);
+                showNavigation.config.$offButt.on('click', this.unbindClicks.bind(this));
+            },
+            addStyles: function () {
+                // apply module styles to main tool bar style tag
+                this.$toolbarStyles
+                    // styles of colored overlay placed on images
+                    .append('.majorPage { color: #ffffff !important; background: linear-gradient(to left, #ffb347 , #ffcc33) !important; }')
+                    .append('.tetraShowNav { display: block !important; }')
+                    .append('.linkChecked { background: linear-gradient(to left, rgba(161, 255, 206, 0.75) , rgba(250, 255, 209, 0.75)), #ffffff !important; color: #999999 !important; }')
+                    .append('.nextgenShowNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; }')
+                    .append('.showNavAdd { width: 150px !important; padding: 0 !important; font-size: 15px !important; }'); // end of addStyles
+            },
+            // ----------------------------------------
+            // tier 2 functions
+            // ----------------------------------------
+            buildLegendContent: function () {
+                var $contentArray = showNavigation.config.$legendContent,
+                    key, value;
+                // loop through Legend Content list
+                for (key in $contentArray) {
+                    value = $contentArray[key];
+                    // build listing element
+                    this.$listItem = jQuery('<li>').attr({
+                        class: 'legendContent ' + key
+                    }).append(value);
+                    // attach to legend list
+                    showNavigation.config.$legendList.append(this.$listItem);
+                }
+            },
+            toggleFeatures: function () {
+                var isNextGen = this.isNextGenPlatform;
+                console.log(this.$navTabs);
+                if (isNextGen) {
+                    this.$navTabs.toggleClass('showNavAdd');
+                    this.$subNavItem.toggleClass('showNavAdd');
+                    this.$subNavMenuContainer.toggleClass('nextgenShowNav');
+                }
+                if (!isNextGen) {
+                    this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
+                    this.$navTabs.toggleClass('tetraShowNav');
+                }
+                showNavigation.config.$legend.slideToggle(500);
+            },
+            toggleDisable: function () {
+                showNavigation.config.$activateButt.prop('disabled', function (index, value) {
+                    return !value;
+                });
+            },
+            bindClicks: function () {
+                var i = 0,
+                    length = this.$navTabsLinks.length;
+
+                for (i; i < length; i += 1) {
+                    jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
+                }
+
+            },
+            unbindClicks: function () {
+                var i = 0,
+                    length = this.$navTabsLinks.length;
+                for (i; i < length; i += 1) {
+                    jQuery(this.$navTabsLinks[i]).off('click');
+                }
+                // remove link checked class
+                this.$navTabs.find('.linkChecked').removeClass('linkChecked');
+            },
+            // ----------------------------------------
+            // tier 3 functions
+            // ----------------------------------------
+            linkChecked: function (currentLink) {
+                return function () {
+                    jQuery(currentLink).addClass('linkChecked');
+                };
+            }
+        },
+
+        // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- View Mobile Site ----------------------------------------
         // ------------------------------------------------------------------------------------------------------------------------
         viewMobile = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.addTool();
                 this.bindEvents();
             },
@@ -1864,8 +1859,8 @@
                     }).text('View Mobile Site')
                 };
             },
-            cacheDOM: function () {
-                this.$otherToolsPanel = jQuery('#otherTools');
+            cacheDOM: function (callingPanel) {
+                this.$otherToolsPanel = jQuery(callingPanel);
                 this.$cm = unsafeWindow.ContextManager;
                 this.siteURL = this.$cm.getUrl();
                 this.pageName = this.$cm.getPageName();
@@ -1890,11 +1885,11 @@
         // ---------------------------------------- SEO Simplify ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         seoSimplify = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
                 this.buildElements();
                 this.getData();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.addStyles();
                 this.addTool();
                 this.bindEvents();
@@ -1962,8 +1957,8 @@
                     }
                 });
             },
-            cacheDOM: function () {
-                this.$otherToolsPanel = jQuery('#otherTools');
+            cacheDOM: function (callingPanel) {
+                this.$otherToolsPanel = jQuery(callingPanel);
                 this.$toolbarStyles = jQuery('#qa_toolbox');
                 this.body = jQuery('body');
             },
@@ -2310,9 +2305,9 @@
     // ---------------------------------------- broken link checker ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     var checkLinks = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.buildLegend();
                 this.addTool();
                 this.bindEvents();
@@ -2330,7 +2325,7 @@
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
-                    }).text('Image Checker Legend'),
+                    }).text('404 Link Checker Legend'),
                     $legendList: jQuery('<ul>').attr({
                         class: 'legendList'
                     }),
@@ -2370,7 +2365,7 @@
                     totalTests: 0
                 };
             },
-            cacheDOM: function () {
+            cacheDOM: function (callingPanel) {
                 this.$toolbarStyles = jQuery('#qa_toolbox');
                 this.cm = unsafeWindow.ContextManager;
                 this.webID = this.cm.getWebId();
@@ -2378,7 +2373,7 @@
                 this.baseURL = this.cm.getUrl();
                 this.host = window.location.hostname;
                 this.wid = this.separateID(this.webID);
-                this.$toolsPanel = jQuery('#mainTools');
+                this.$toolsPanel = jQuery(callingPanel);
                 this.$legendContainer = jQuery('#legendContainer');
             },
             buildLegend: function () {
@@ -2410,8 +2405,8 @@
                     // styles of colored overlay placed on images
                     .append('.otherDomain { background: linear-gradient(to left, #00C9FF , #92FE9D) !important; -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); color: #000000 !important; }')
                     .append('.framedIn { background: linear-gradient(to left, #F7971E , #FFD200) !important; color: #000000 !important; }')
-                    .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
-                    .append('.success { background: linear-gradient(to left, rgba(161, 255, 206, 0.75), rgba(250, 255, 209, 0.75)) !important; color: #000000 !important; }')
+                    .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
+                    .append('.success { background: linear-gradient(to right, #56ab2f , #a8e063) !important; color: #000000 !important; }')
                     .append('.error { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
                     .append('.siteLink { color: black !important; }')
                     //                    .append('.fourOfour { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
@@ -2437,38 +2432,47 @@
                     $curLink = jQuery(curLink);
                     curURL = jQuery.trim($curLink.attr('href'));
 
+                    //                    console.log('curURL : ' + curURL);
+
                     // skip testing of links if it doesn't pass the tests
                     // subtract 1 from total tests
                     switch (true) {
                         // test for mobile specific links
                         case (curURL.indexOf('tel') >= 0):
-                            $curLink.addClass('mobilePhoneLink');
+                            //                            console.log('mobile link : ' + curURL);
+                            $curLink.addClass('brokenURL mobilePhoneLink');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for javascript links
-                        case ((curURL.indexOf('javascript') >= 0) || (curURL.indexOf('#') === 0)):
-                            $curLink.addClass('jsLinkbb');
+                        case ((curURL.indexOf('javascript') >= 0) || (curURL.indexOf('#') === 0) || (curURL.indexOf('#') === 1)):
+                            //                            console.log('javascript or # link : ' + curURL);
+                            $curLink.addClass('brokenURL jsLinkbb');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for undefined or empty URLs
                         case ((typeof curLink === 'undefined') || (curURL === '')):
+                            //                            console.log('undefined or empty link : ' + curURL);
                             $curLink.addClass('brokenURL');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for absolute path URLs
                         case ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)):
+                            //                            console.log('absolute URL link : ' + curURL);
                             $curLink.addClass('otherDomain');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for other special URLs
                         case ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)):
+                            //                            console.log('links opens in a new window : ' + curURL);
                             $curLink.addClass('framedIn');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                         default:
+                            //                            console.log('nothing wrong with this link : ' + curURL);
                             // do nothing
-                            break;
                     }
+
+                    //                    console.log('curURL after switch filtering statement : ' + curURL);
 
                     curWindow = window.location.href;
                     if (curWindow.indexOf('nextGen=true') > -1) {
@@ -2480,7 +2484,7 @@
                         }
                     }
 
-                    console.log('total links to test :: ' + checkLinks.config.totalTests);
+                    //                    console.log('total links to test :: ' + checkLinks.config.totalTests);
 
                     // test links
                     this.ajaxTest(curURL, $curLink);
@@ -2502,12 +2506,10 @@
                     method: 'get',
                     dataType: 'html',
                     success: function (data, textStatus, jqXHR) { //pass an anonymous callback function
-
-                        var headText = jQuery(data).text();
-
                         // checks to see if link is an image link
                         // adds a div overlay if is an image link
                         hasImage = $curLink.has('img').length;
+
                         if (hasImage) {
                             isImageLink = true;
                             $img = $curLink.find('img');
@@ -2523,29 +2525,35 @@
                             });
                         }
                         // 404 & not image link
-                        if (headText.indexOf('404 - Page Not Found') !== -1 && !isImageLink) {
-                            $curLink.addClass('fourOfour');
-                            checkLinks.error($curLink, isImageLink);
-                            console.log('---link is a 404 :: ' + linkURL);
-                        } else if (headText.indexOf('404 - Page Not Found') !== -1 && isImageLink) {
-                            // 404 & image link
-                            $img.attr('style', 'position: relative;');
-                            $curLink.prepend($linkOverlay);
-                            checkLinks.error($curLink, isImageLink);
-                            console.log('---link is a 404 :: ' + linkURL);
-                        } else {
-                            // if is an image link add class to div overlay
-                            // else add class to a tag
-                            if (isImageLink) {
+                        switch (true) {
+                            // if internal page 404 and link IS NOT an image link
+                            case ((data.indexOf('pageNotFound') > -1) && !isImageLink):
+                                $curLink.addClass('fourOfour');
+                                checkLinks.error($curLink, isImageLink);
+                                //                                console.log('---link is a 404 :: ' + linkURL);
+                                break;
+                                // if internal page 404 and link IS an image link
+                            case ((data.indexOf('pageNotFound') > -1) && isImageLink):
+                                $img.attr('style', 'position: relative;');
+                                $curLink.prepend($linkOverlay);
+                                checkLinks.error($curLink, isImageLink);
+                                //                                console.log('---link is a 404 :: ' + linkURL);
+                                break;
+                                // if link IS legit and NOT an image link
+                            case ((data.indexOf('pageNotFound') === -1) && !isImageLink):
+                                $curLink.addClass('success');
+                                checkLinks.success($curLink, isImageLink);
+                                //                                console.log('linkURL :: ' + linkURL);
+                                break;
+                                // if link IS NOT legit and an image link
+                            case ((data.indexOf('pageNotFound') === -1) && isImageLink):
                                 $img.attr('style', 'position: relative;');
                                 $curLink.prepend($linkOverlay);
                                 checkLinks.success($linkOverlay, isImageLink);
-                                console.log('linkURL :: ' + linkURL);
-                            } else {
-                                $curLink.addClass('success');
-                                checkLinks.success($curLink, isImageLink);
-                                console.log('linkURL :: ' + linkURL);
-                            }
+                                //                                console.log('linkURL :: ' + linkURL);
+                                break;
+                            default:
+                                // do nothing
                         }
                     },
                     error: function (jqXHR, textStatus, error) {
@@ -2972,10 +2980,10 @@
         // ---------------------------------------- next gen toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         nextGenToggle = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
@@ -3007,8 +3015,8 @@
                     .append(nextGenToggle.config.$nextGenToggleTitle)
                     .append(nextGenToggle.config.$nextGenToggleIcon);
             },
-            cacheDOM: function () {
-                this.$toolsPanel = jQuery('#urlModTools');
+            cacheDOM: function (callingPanel) {
+                this.$toolsPanel = jQuery(callingPanel);
                 this.cm = unsafeWindow.ContextManager;
                 this.liveSite = this.cm.isLive();
             },
@@ -3088,10 +3096,10 @@
         // ---------------------------------------- m4 checkbox toggle ----------------------------------------
         // ------------------------------------------------------------------------------------------------------------------------
         m4Check = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
@@ -3132,8 +3140,8 @@
                     this.toggleOff();
                 }
             },
-            cacheDOM: function () {
-                this.$toolsPanel = jQuery('#urlModTools');
+            cacheDOM: function (callingPanel) {
+                this.$toolsPanel = jQuery(callingPanel);
                 this.cm = unsafeWindow.ContextManager;
                 this.liveSite = this.cm.isLive();
             },
@@ -3202,10 +3210,10 @@
         // ---------------------------------------- autofill toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         autofillToggle = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
@@ -3246,8 +3254,8 @@
                     this.toggleOff();
                 }
             },
-            cacheDOM: function () {
-                this.$toolsPanel = jQuery('#urlModTools');
+            cacheDOM: function (callingPanel) {
+                this.$toolsPanel = jQuery(callingPanel);
                 this.cm = unsafeWindow.ContextManager;
                 this.liveSite = this.cm.isLive();
             },
@@ -3439,9 +3447,9 @@
         // ---------------------------------------- Refresh Page toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         refreshPage = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.buildTool();
                 this.addTool();
                 this.bindEvents();
@@ -3487,8 +3495,8 @@
                     $FAtoggle: jQuery('<i class="fa fa-toggle-off fa-lg"></i>')
                 };
             },
-            cacheDOM: function () {
-                this.$togglesPanel = jQuery('#toggleTools');
+            cacheDOM: function (callingPanel) {
+                this.$togglesPanel = jQuery(callingPanel);
                 this.$togglesContainer = jQuery('#toolboxContainer');
                 this.$toolbarStyles = jQuery('#qa_toolbox');
             },
@@ -3566,10 +3574,10 @@
         // ---------------------------------------- hide preview toolbar toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         previewToolbarToggle = {
-            init: function () {
+            init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
-                this.cacheDOM();
+                this.cacheDOM(callingPanel);
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
@@ -3616,8 +3624,8 @@
                     this.togglePreviewToolbar();
                 }
             },
-            cacheDOM: function () {
-                this.$toolsPanel = jQuery('#toggleTools');
+            cacheDOM: function (callingPanel) {
+                this.$toolsPanel = jQuery(callingPanel);
                 this.$toolbarStyles = jQuery('#qa_toolbox');
             },
             addTool: function () {
@@ -3863,6 +3871,10 @@
                 this.$toolBoxContainer.toggle('fade', 500);
             }
         },
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------- MAIN ----------------------------------------
+        // ------------------------------------------------------------------------------------------------------------------------
         toolbar = {
             init: function () {
                 this.cacheDOM();
@@ -3896,16 +3908,16 @@
                 pageInformation.init();
             },
             qaToolsPanel: function () {
+                var panelID = '#mainTools';
                 qaTools.init();
-                imageChecker.init();
-                linkChecker.init();
-                showNavigation.init();
-                spellCheck.init();
-                speedtestPage.init();
+                imageChecker.init(panelID);
+                linkChecker.init(panelID);
+                spellCheck.init(panelID);
+                speedtestPage.init(panelID);
 
                 // removed if nextGen
                 //                if (!this.isNextGenPlatform) {
-                checkLinks.init();
+                checkLinks.init(panelID);
                 //                }
 
                 // add nextGen specific tool to panel
@@ -3915,8 +3927,10 @@
 
             },
             otherToolsPanel: function () {
+                var panelID = '#otherTools';
                 otherTools.init();
-                seoSimplify.init();
+                showNavigation.init(panelID);
+                seoSimplify.init(panelID);
 
                 // add tetra specific tool to panel
                 if (!this.isNextGenPlatform) {
@@ -3925,14 +3939,16 @@
                 }
             },
             togglesPanel: function () {
+                var panelID = '#toggleTools';
                 toggles.init();
-                refreshPage.init();
-                previewToolbarToggle.init();
+                refreshPage.init(panelID);
+                previewToolbarToggle.init(panelID);
             },
             urlModPanel: function () {
+                var panelID = '#urlModTools';
                 urlModifiers.init();
-                nextGenToggle.init();
-                autofillToggle.init();
+                nextGenToggle.init(panelID);
+                autofillToggle.init(panelID);
 
                 // add tetra specific tool to panel
                 if (!this.isNextGenPlatform) {
