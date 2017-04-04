@@ -35,6 +35,49 @@
 <br>
 <br>
 
+## Page Information<br>
+
+This panel shows all important information for the current CDK website you are viewing.<br>
+
+***Features***<br>
+Clicking on the info area will copy the text to your clipboard.  There will be no notification.
+
+*gif here
+
+### Dealer Name<br>
+
+This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
+
+*gif here
+
+### Web ID<br>
+
+This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.  This web-id should be the same name as the dealer's "WebID" name in Salesforce.  This is also used to navigate to the dealer's site in WSM for editting.
+
+*gif here
+
+### Page Name<br>
+
+This area will display the current ***PAGE NAME*** of the CDK site you are viewing.  This information is what the 'generic' page name of the page is called.  This will help navigate to a specific page while editting the site in WSM.<br>
+
+*e.g. LandingPage, HoursAndDirections, MiscPage.*
+
+*gif here
+
+### H Tags<br>
+
+This area will display the current dealer's name of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
+
+*gif here
+
+<br>
+<br>
+
+---
+---
+
+<br>
+<br>
 
 ## Show Navigation<br>
 
