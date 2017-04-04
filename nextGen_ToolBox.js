@@ -2362,7 +2362,9 @@
                         class: 'hint'
                     }).text('refresh page before running 404 checker again'),
                     count: 1,
-                    totalTests: 0
+                    totalTests: 0,
+                    totalLinks: 0,
+                    errors: 0
                 };
             },
             cacheDOM: function (callingPanel) {
@@ -2426,6 +2428,7 @@
                     pageLinksLength = $pageLinks.length;
                 // set total tests to number of links on page
                 checkLinks.config.totalTests = $pageLinks.length;
+                checkLinks.config.totalLinks = $pageLinks.length;
 
                 for (j; j < pageLinksLength; j += 1) {
                     curLink = $pageLinks[j];
@@ -2442,27 +2445,30 @@
                             //                            console.log('mobile link : ' + curURL);
                             $curLink.addClass('brokenURL mobilePhoneLink');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
+                            checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                             continue;
                             // test for javascript links
-                        case ((curURL.indexOf('javascript') >= 0) || (curURL.indexOf('#') === 0) || (curURL.indexOf('#') === 1)):
+                        case (curURL.indexOf('javascript') >= 0 || (curURL.indexOf('#') === 0 || curURL.indexOf('#') === 1)):
                             //                            console.log('javascript or # link : ' + curURL);
                             $curLink.addClass('brokenURL jsLinkbb');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
+                            checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                             continue;
                             // test for undefined or empty URLs
-                        case ((typeof curLink === 'undefined') || (curURL === '')):
+                        case (typeof curLink === 'undefined' || curURL === ''):
                             //                            console.log('undefined or empty link : ' + curURL);
                             $curLink.addClass('brokenURL');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for absolute path URLs
-                        case ((curURL.indexOf('www') > -1) || (curURL.indexOf('http') > -1) || (curURL.indexOf('https') > -1)):
+                        case (curURL.indexOf('www') > -1 || (curURL.indexOf('http') > -1 || curURL.indexOf('https') > -1)):
                             //                            console.log('absolute URL link : ' + curURL);
                             $curLink.addClass('otherDomain');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
+                            checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                             continue;
                             // test for other special URLs
-                        case ((curURL.indexOf('f_') > -1) || (curURL.indexOf('//:') > -1)):
+                        case (curURL.indexOf('f_') > -1 || curURL.indexOf('//:') > -1):
                             //                            console.log('links opens in a new window : ' + curURL);
                             $curLink.addClass('framedIn');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
@@ -2524,29 +2530,33 @@
                                 'z-index': 1
                             });
                         }
-                        // 404 & not image link
+                        // unsupported page 404 checker
+                        // had to include two checks for 404 page content to ensure that the page get flagged all the time
                         switch (true) {
                             // if internal page 404 and link IS NOT an image link
-                            case ((data.indexOf('pageNotFound') > -1) && !isImageLink):
+                            case (!isImageLink && (data.indexOf('pageNotFound') > -1 || data.indexOf('not currently a functioning page') > -1)):
                                 $curLink.addClass('fourOfour');
                                 checkLinks.error($curLink, isImageLink);
-                                //                                console.log('---link is a 404 :: ' + linkURL);
+                                console.log(linkURL + ' :: 404 page');
+                                console.log($curLink);
+                                checkLinks.config.errors += 1;
                                 break;
                                 // if internal page 404 and link IS an image link
-                            case ((data.indexOf('pageNotFound') > -1) && isImageLink):
+                            case (isImageLink && (data.indexOf('pageNotFound') > -1 || data.indexOf('not currently a functioning page') > -1)):
                                 $img.attr('style', 'position: relative;');
                                 $curLink.prepend($linkOverlay);
                                 checkLinks.error($curLink, isImageLink);
-                                //                                console.log('---link is a 404 :: ' + linkURL);
+                                console.log(linkURL + ' :: 404 page');
+                                checkLinks.config.errors += 1;
                                 break;
                                 // if link IS legit and NOT an image link
-                            case ((data.indexOf('pageNotFound') === -1) && !isImageLink):
+                            case (!isImageLink && data.indexOf('pageNotFound') === -1):
                                 $curLink.addClass('success');
                                 checkLinks.success($curLink, isImageLink);
                                 //                                console.log('linkURL :: ' + linkURL);
                                 break;
                                 // if link IS NOT legit and an image link
-                            case ((data.indexOf('pageNotFound') === -1) && isImageLink):
+                            case (isImageLink && data.indexOf('pageNotFound') === -1):
                                 $img.attr('style', 'position: relative;');
                                 $curLink.prepend($linkOverlay);
                                 checkLinks.success($linkOverlay, isImageLink);
@@ -2558,15 +2568,19 @@
                     },
                     error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
+                        console.log(linkURL + ' :: error function thrown');
+                        checkLinks.config.errors += 1;
                         if (jqXHR.status === 404) {
                             checkLinks.error($curLink, isImageLink);
                         }
                     },
                     statusCode: {
                         404: function (jqXHR, textStatus, error) {
+                            console.log(linkURL + ' :: 404 function thrown');
                             $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
-                            console.log('---link is a 404 :: ' + linkURL);
+                            checkLinks.config.errors += 1;
+                            //                            console.log('---link is a 404 :: ' + linkURL);
                         }
                     },
                     complete: function () {
@@ -2618,6 +2632,16 @@
                     checkLinks.config.$message.delay(7000).fadeOut(2000, function () {
                         checkLinks.config.$container.remove();
                     });
+
+                    var x = checkLinks.config.totalLinks - checkLinks.config.totalTests + checkLinks.config.errors,
+                        y = x * 100,
+                        z = y / checkLinks.config.totalLinks;
+                    console.log('----------------------------------------');
+                    console.log('number of issue links : ' + x);
+                    console.log('number of total links - (mobile specific links + links leading outside site + links that are anchor links) : ' + x);
+                    console.log('total links = ' + checkLinks.config.totalLinks + ' || total links tested = ' + checkLinks.config.totalTests + ' || 404 errors = ' + checkLinks.config.errors);
+                    console.log(Math.round(z, -1) + '% of links require attention.  :]');
+                    console.log('----------------------------------------');
                 });
             },
             error: function ($this, isImageLink) {
@@ -2625,6 +2649,11 @@
                 if (isImageLink) {
                     curClass = $this.attr('class');
                 }
+                //                console.log('inside error function');
+                //                console.log(curClass);
+                //                console.log($this);
+                // NOT SURE IF THIS DOES WHAT ITS SUPPOSED TO DO
+                // ITS SUPPOSED TO ADD THE ERROR CLASS TO THE DIV OVERLAY IF THE LINK IS AN IMAGE LINK
                 $this.addClass('error');
             },
             success: function ($this, isImageLink) {
@@ -3780,7 +3809,6 @@
                 this.$toolBoxContainer.append(dynamicDisplay.config.$hide);
             },
             modToolbar: function () {
-                console.log('nextgen platform :: ' + this.isNextGen);
                 if (this.isNextGen === 'Tetra') {
                     QAtoolbox.config.$toolbarStyles.append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }'); // TETRA color
                     QAtoolbox.config.$toolbarStyles.append('.myEDOBut { margin: 1px 0px 0px 10px; }'); // button position
