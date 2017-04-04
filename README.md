@@ -3,13 +3,31 @@
 
 # Tool Descriptions<br>
 **Quick Links**<br>
-[Show Navigation](#show-navigation)<br>
-[Link Checker](#link-checker)<br>
-[Image Checker](#image-checker)<br>
-[Spell Checker](#spellcheck-page)<br>
-[404 Link Checker](#404-checker)<br>
-[WebPageTest](#web-page-test)<br>
 
+## Page Information
+[Dealer Name](#dealer-name)<br>
+[Web-ID](#web-id)<br>
+[Page Name](#page-name)<br>
+[H Tags](#h-tags)<br>
+
+## QA Tools
+[Image Checker](#image-checker)<br>
+[Link Checker](#link-checker)<br>
+[Spell Checker](#spellcheck-page)<br>
+[WebPageTest](#web-page-test)<br>
+[404 Link Checker](#404-checker)<br>
+
+## Other Tools
+[Show Navigation](#show-navigation)<br>
+
+## Toggles
+[Refresh Button](#refresh-button)<br>
+[Hide Preview Toolbar](#hide-preview-toolbar)<br>
+
+## URL Modifiers
+[Auto Apply Modifiers](#auto-apply-parameters)<br>
+[NextGen Parameter](#nextgen-parameter)<br>
+[Show Autofill Tags](#show-autofill-tags)<br>
 
 ---
 ---
