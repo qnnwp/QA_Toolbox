@@ -449,11 +449,13 @@ Test Scenario<br>
 
 ## **Nextgen Parameters?**<br>
 
-This tool controls the logic of the 'auto apply modifiers' toggle.  When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.
+This tool controls the logic of the 'auto apply modifiers' toggle.  When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.  **This tool works in both TETRA and NEXTGEN.  **This is also how you control which version of the tool you want touse.**
 
 ### ON position *pic here
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.
+
+
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
  	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
  	- **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true 
@@ -462,6 +464,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true  
 - If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]
 	- **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
+
 <br>
 ### OFF position *pic here
 
@@ -474,3 +477,39 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false 
 - If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]
 	- http://nitra.proof.gmpsdealer.com/content15?nextGen=false
+
+
+<br>
+<br>
+
+
+## Show Autofill Tags?<br>
+
+This tool controls the logic of the 'auto apply modifiers' toggle.  When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.  **This tool works in both TETRA and NEXTGEN.**
+
+### ON position *pic here
+
+This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=true"*** is present in the URL.
+
+
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.
+ 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+ 	- **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true 
+- If ***"disableAutofill=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
+	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true  
+- If  ***"disableAutofill=true"*** is detected in the URL, nothing will happen.  :]
+	- **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
+
+<br>
+### OFF position *pic here
+
+This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.
+	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false 
+- If ***"disableAutofill=true"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
+ 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false 
+- If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
+	- http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
