@@ -203,6 +203,10 @@
 
 - When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
 
+| Show Navigation Legend |
+| --- |
+| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigationLegend.png"></p> |
+| ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 ### **Features**<br>
 
@@ -210,12 +214,6 @@
 | --- |
 | <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigation.png"></p> |
 | When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link.<br>***Added to help keep track of what links you have already checked.*** |
-
-
-| Show Navigation Legend |
-| --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigationLegend.png"></p> |
-| ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
 <br>
