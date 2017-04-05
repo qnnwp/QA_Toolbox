@@ -592,6 +592,23 @@ Test Scenario<br>
 - *new URL* = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
 - These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***<br>
 
+***How To Use***<br>
+1. Switch the toggles on for the URL parameters you want to add to the URL
+    - Nextgen Parameters?  ON or OFF
+    - Show Autofill Tags?  ON or OFF
+2. Turn of 'Auto Apply Modifiers' switch
+
+***How To Change Settings While 'Auto Apply Modifiers' Is Already Active***
+1. Switch the toggles on/off for the URL parameters you want to add/remove to the URL
+    - Nextgen Parameters?  ON or OFF
+    - Show Autofill Tags?  ON or OFF
+2. Refresh the page
+    - Quickly toggle the "Auto Apply Modifiers" switch ON then OFF
+    OR
+    - If you have the "Refresh Button" turned on (in toggles panel), click that button
+    OR
+    - Do a manual refresh of the page
+
 
 <br>
 <br>
@@ -619,9 +636,9 @@ Test Scenario<br>
 
 ---
 ### ON position<br>
----
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenToggleON.png"></p>
+---
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.<br>
 
@@ -634,9 +651,11 @@ Test Scenario<br>
 - If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]<br>
     - **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
 
+---
 ### OFF position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenparameterToggleOFF.png"></p>
+---
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
@@ -668,9 +687,11 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
 **This tool works in both TETRA and NEXTGEN.**
 
+---
 ### ON position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleON.png"></p>
+---
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=true"*** is present in the URL.<br>
 
@@ -684,9 +705,11 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If  ***"disableAutofill=true"*** is detected in the URL, nothing will happen.  :]<br>
     - **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true<br>
 
+---
 ### OFF position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleHighlightOFF.png"></p>
+---
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
