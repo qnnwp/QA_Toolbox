@@ -46,7 +46,7 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 
 *gif here
 
-## Dealer Name <br>
+## Dealer Name<br>
 
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
 
