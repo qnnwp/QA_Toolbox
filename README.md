@@ -19,6 +19,7 @@
 
 ## Other Tools
 [Show Navigation](#show-navigation)<br>
+[SEO Simplify](#seo-simplify)<br>
 
 ## Toggles
 [Refresh Button](#refresh-button)<br>
@@ -38,6 +39,8 @@
 ## Page Information<br>
 
 This panel shows all important information for the current CDK website you are viewing.<br>
+
+*pic of Page Information Panel
 
 ***Features***<br>
 Clicking on the info area will copy the text to your clipboard.  There will be no notification.
@@ -66,9 +69,12 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 ### H Tags<br>
 
-This area will display the current dealer's name of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
+This area will display the current h tags on the current page you are viewing.  Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
-*gif here
+***Click on the area will bring a pop up with all the h tags displayed***
+
+*pic of h tag portion of panel
+*pic of orange highlight
 
 <br>
 <br>
@@ -80,7 +86,6 @@ This area will display the current dealer's name of the CDK site you are viewing
 <br>
 
 ## Show Navigation<br>
-
 
 The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
