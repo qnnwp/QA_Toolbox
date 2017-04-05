@@ -2,6 +2,8 @@
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png"></p>
 
+*** click on the links to jump to the tool descriptions ***<br>
+
 ## Page Information Panel :new:<br>
 [Dealer Name](#dealer-name)<br>
 [Web-ID](#web-id)<br>
@@ -38,7 +40,7 @@
 
 [Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br><br><br>
 
-<a href="#top">&nbsp;</a>
+<a href="#topNavigation">&nbsp;</a>
 
 <br>
 <br>
@@ -67,8 +69,9 @@
 ***There will be no notification.***
 
 <br>
+<br>
 
-[Back to Top](#top)
+[Back to Top](#topNavigation)
 
 ---
 
