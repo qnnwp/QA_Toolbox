@@ -37,16 +37,17 @@
 <br>
 # **Page Information Panel**<br>
 
-This panel shows all important information for the current CDK website you are viewing.<br>
-
 ![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)<br>
 
+This panel shows all important information for the current CDK website you are viewing.<br>
+
 ### Features<br>
+
+![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/gifs/pageInfoHighlight_paste.gif)<br>
 
 Clicking on the info area will copy the text to your clipboard.<br>
 ***There will be no notification.***<br>
 
-![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/gifs/pageInfoHighlight_paste.gif)<br>
 <br>
 <br>
 
@@ -57,10 +58,10 @@ Clicking on the info area will copy the text to your clipboard.<br>
 
 ## **Dealer Name**<br>
 
+![Dealer Name](https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png)<br>
+
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.<br>
 This dealer name should be the same name as the dealer's "Account" name in Salesforce.<br>
-
-![Dealer Name](https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png)<br>
 
 <br>
 <br>
@@ -72,11 +73,11 @@ This dealer name should be the same name as the dealer's "Account" name in Sales
 
 ## **Web ID**<br>
 
+![Web ID](https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png)<br>
+
 This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.<br>
 This web-id should be the same name as the dealer's "WebID" name in Salesforce.<br>
 This is also used to navigate to the dealer's site in WSM for editting.
-
-![Web ID](https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png)<br>
 
 <br>
 <br>
@@ -88,13 +89,13 @@ This is also used to navigate to the dealer's site in WSM for editting.
 
 ## **Page Name**<br>
 
+![Page Name](https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png)<br>
+
 This area will display the current ***PAGE NAME*** of the CDK site you are viewing.<br>
 This information is what the 'generic' page name of the page is called.<br>
 This will help navigate to a specific page while editting the site in WSM.<br>
 
 *e.g. LandingPage, HoursAndDirections, MiscPage.*<br>
-
-![Page Name](https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png)<br>
 
 <br>
 <br>
@@ -106,10 +107,10 @@ This will help navigate to a specific page while editting the site in WSM.<br>
 
 ## **H Tags**<br>
 
+![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)<br>
+
 This area will display the current h tags on the current page you are viewing.<br>
 Any h tags that have a Zero (0) value will be highlighted in orange.<br>
-
-![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)<br>
 
 ***Clicking on the area will bring a pop up with all the h tags displayed***<br>
 
@@ -132,6 +133,8 @@ This panel has the main QA tools for checking the site.<br>
 
 ## **Show Navigation**<br>
 
+![Show Navigation DEMO](https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif)<br>
+
 ### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
@@ -148,19 +151,18 @@ Click the 'show navigation' button inside the 'qa tools' panel.<br>
 
 When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
 
-![Show Navigation DEMO](https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif)<br>
 
 ### **Features**<br>
 
 | Show Navigation Functionality |
 | --- |
-| ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) |
-| When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link. |
-| ***Added to help keep track of what links you have already checked.*** |
-<br>
+| ![Show Navigation Functionality](https://github.com/cirept/NextGen/blob/master/images/showNavigation.png) |
+| When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link.<br>***Added to help keep track of what links you have already checked.*** |
+
+
 | Show Navigation Legend |
-| ---- |
-| ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png) |
+| --- |
+| ![Show Navigation Legend](https://github.com/cirept/NextGen/blob/master/images/showNavigationLegend.png) |
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
@@ -177,6 +179,8 @@ When you are done using the tool, simply click the "turn off" on the legend and 
 
 ## **Link checker**<br>
 
+![Link Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/linkCheckerDEMO.gif)<br>
+
 ### TIP:<br>
 
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
@@ -191,8 +195,6 @@ Click the 'link checker' button inside the 'qa tools' panel.<br>
 ### Turning the tool off:<br>
 
 When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
-
-![Link Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/linkCheckerDEMO.gif)
 
 ### **Features**<br>
 
@@ -211,7 +213,8 @@ When you are done using the tool, simply click the "turn off" on the legend and 
 | All links that have href these values will be flagged<br>&#35;<br>f_<br>>www<br>http |
 | ***'PAGE NOT SUPPORTED'*** |
 | All links that lead to a page that is no longer supported on NEXTGEN will have this border.<br>Please update the link to lead to a related page that is supported on NEXTGEN.<br><br>**Pages No Longer Supported on NEXTGEN**<br>1.	NewVehicleSearch<br>2.	PreOwnedVehicleSearch<br>3.	NewVehicleInfoForm<br>4.	PreOwnedVehicleInfoForm<br>5.	ExtendedProtection<br>6.	ExtendedProtectionDetails<br>7.	Affiliate<br>8.	AboutSpecials<br><br>***additional details to what page the links should be updated too will be coming soon***|
-<br>
+
+
 | Link Checker Functionality |
 | --- |
 | ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) |
@@ -230,6 +233,8 @@ When you are done using the tool, simply click the "turn off" on the legend and 
 
 ## **Image Checker**<br>
 
+![Image Alt Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/imageAltCheckerDEMO.gif)<br>
+
 All images on the page will be highlighted in specific colors that will tell the user what images **have** and **do not have** alt text.<br>
 **If using this tool on a NEXTGEN site**, please scroll all the way to the bottom of the page to allow all images to load before running the tool.<br>
 Due to lazy loading, if the tool is run and some images do not have a box around the image please turn off the tool and rerun the tool with that image in view.<br>
@@ -243,15 +248,14 @@ Click the 'image alt checker' button inside the 'qa tools' panel.<br>
 
 When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
 
-![Image Alt Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/imageAltCheckerDEMO.gif)<br>
-
 ### **Features**<br>
 
 | Image Checker Functionality |
 | ----------------------------- |
-![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png) |
+| ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png) |
 | All images on the page will be highlighted with a green or red/pink box.  These colors will signify if the image **has** and **does not have** an alt text.<br>If the image has a green color on over the image, the ALT of the image will appear at the center. |
-<br>
+
+
 | Image Checker Legend |
 | --- |
 | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png) |
@@ -411,9 +415,9 @@ The navigation menu will display all sub-navigation items.  This will allow for 
 1. When clicking on any subnavigation item, it will turn the link a different color.<br>
    * Added to help keep track of what links you have already checked.
 
-Show Navigation Functionality | Show Navigation Legend
------------------------------ | ----------------------
-![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
+| Show Navigation Functionality | Show Navigation Legend
+| ----------------------------- | ----------------------
+| ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
 
 
 ### TIP:<br>
