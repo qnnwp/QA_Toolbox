@@ -36,11 +36,11 @@
 <br>
 <br>
 
-![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
-
 # **Page Information Panel**<br>
 
 This panel shows all important information for the current CDK website you are viewing.<br>
+
+![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
 
 ### Features<br>
 Clicking on the info area will copy the text to your clipboard.  There will be no notification.
@@ -50,7 +50,6 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 <br>
 <br>
 
----
 ---
 
 <br>
@@ -66,7 +65,6 @@ This area will display the current dealer's ***NAME*** of the CDK site you are v
 <br>
 
 ---
----
 
 <br>
 <br>
@@ -80,7 +78,6 @@ This area will display the current dealer's ***WEB-ID*** of the CDK site you are
 <br>
 <br>
 
----
 ---
 
 <br>
@@ -97,7 +94,6 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 <br>
 <br>
 
----
 ---
 
 <br>
