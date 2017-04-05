@@ -42,7 +42,7 @@ This panel shows all important information for the current CDK website you are v
 
 ![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
 
-***Features***<br>
+### Features<br>
 Clicking on the info area will copy the text to your clipboard.  There will be no notification.
 
 ![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/videos/pageInfoHighlight_paste.gif)
@@ -51,13 +51,13 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
 
-*gif here
+![Dealer Name](https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png)
 
 ## **Web ID**<br>
 
 This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.  This web-id should be the same name as the dealer's "WebID" name in Salesforce.  This is also used to navigate to the dealer's site in WSM for editting.
 
-*gif here
+![Web ID](https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png)
 
 ## **Page Name**<br>
 
@@ -65,7 +65,7 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 *e.g. LandingPage, HoursAndDirections, MiscPage.*
 
-*gif here
+![Page Name](https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png)
 
 ## **H Tags**<br>
 
@@ -73,8 +73,7 @@ This area will display the current h tags on the current page you are viewing.  
 
 ***Clicking on the area will bring a pop up with all the h tags displayed***
 
-*pic of h tag portion of panel
-*pic of orange highlight
+![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)
 
 <br>
 <br>
@@ -96,7 +95,7 @@ This panel has the main QA tools for checking the site.
 The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
 
-**Features**
+### **Features**
 
 1. When clicking on any subnavigation item, it will turn the link a different color.<br>
    * Added to help keep track of what links you have already checked.
