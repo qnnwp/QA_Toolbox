@@ -404,10 +404,73 @@ This tool will allow access to a refresh button that will provide a similar func
 
 *pic here
 
+
 <br>
 <br>
+
 
 ## **Hide Preview Toolbar**<br>
 
 This tool will hide the PCE toolbar that appears at the top of CDK sites.<br>
 **This tool works for both TETRA and NEXTGEN.**
+
+
+<br>
+<br>
+
+----
+----
+
+<br>
+<br>
+
+
+# **URL Modifiers**<br>
+
+
+## **Auto Apply Modifiers**<br>
+
+This tool allows the tool to automatically apply the URL parameters of the URL modifications within this panel.  When switching this toggle on, it will determine if the current page you are viewing has the desired URL parameters added to it.  If the URL is missing a parameter the page will automatically refresh with the URL parameter added to it.
+
+Test Scenario<br>
+- e.g. *current URL* = http://nitra.proof.gmpsdealer.com/content15<br>
+- I want to see the NEXTGEN version of my sandbox TETRA site and also want to make sure that all subsequent windows that I open are also the NEXTGEN version of my sandbox site.<br>
+1.   I switch the **'nextgen parameters?'** toggle **ON**<br>
+2.   Then I switch the **'auto apply modifiers?'** toggle **ON**.
+
+- This will cause the page to refresh and the NEXTGEN version of the site visible.<br>
+- *new URL* = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
+- These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***
+
+
+<br>
+<br>
+
+
+## **Nextgen Parameters?**<br>
+
+This tool controls the logic of the 'auto apply modifiers' toggle.  When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.
+
+### ON position *pic here
+
+This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.
+ 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+ 	- **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true 
+- If ***"nextGen=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
+	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=false~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true  
+- If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]
+	- **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
+<br>
+### OFF position *pic here
+
+This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.
+	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false 
+- If ***"nextGen=true"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
+ 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=true~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false 
+- If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]
+	- http://nitra.proof.gmpsdealer.com/content15?nextGen=false
