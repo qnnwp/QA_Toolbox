@@ -1,7 +1,7 @@
 ![QA Tool](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)
 
 # **Tool Descriptions**<br>
-## Page Information Panel :new:
+## Page Information Panel :new: [Jump To Instructions](#page-information-panel)
 :one: [Dealer Name](#dealer-name)<br>
 :two: [Web-ID](#web-id)<br>
 :three: [Page Name](#page-name)<br>
