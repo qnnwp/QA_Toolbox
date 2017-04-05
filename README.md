@@ -7,26 +7,26 @@
 :three: [Page Name](#page-name)<br>
 :four: [H Tags](#h-tags)<br>
 
-## QA Tools Panel :new:
+## QA Tools Panel :new:<br>
 :one: [Image Checker](#image-checker)<br>
 :two: [Link Checker](#link-checker) :sparkles:<br>
 :three: [Spell Checker](#spellcheck-page)<br>
 :four: [WebPageTest](#web-page-test)<br>
 :five: [404 Link Checker](#404-link-checker) :sparkles:<br>
 
-## Other Tools Panel :new:
+## Other Tools Panel :new:<br>
 :one: [Show Navigation](#show-navigation)<br>
 :two: [SEO Simplify](#seo-simplify)<br>
 
-## Toggles Panel :new:
+## Toggles Panel :new:<br>
 :one: [Refresh Button](#refresh-button)<br>
 :two: [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
-## URL Modifiers Panel :new:
+## URL Modifiers Panel :new:<br>
 :one: [Auto Apply Modifiers](#auto-apply-parameters)<br>
 :two: [NextGen Parameter](#nextgen-parameter)<br>
 :three: [Show Autofill Tags](#show-autofill-tags)<br>
- 
+
 <br>
 <br>
 
@@ -35,18 +35,18 @@
 
 <br>
 <br>
-
 # **Page Information Panel**<br>
 
 This panel shows all important information for the current CDK website you are viewing.<br>
 
-![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
+![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)<br>
 
 ### Features<br>
-Clicking on the info area will copy the text to your clipboard.  *There will be no notification.*
 
-![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/videos/pageInfoHighlight_paste.gif)
+Clicking on the info area will copy the text to your clipboard.<br>
+***There will be no notification.***<br>
 
+![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/gifs/pageInfoHighlight_paste.gif)<br>
 <br>
 <br>
 
@@ -57,9 +57,10 @@ Clicking on the info area will copy the text to your clipboard.  *There will be 
 
 ## **Dealer Name**<br>
 
-This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
+This area will display the current dealer's ***NAME*** of the CDK site you are viewing.<br>
+This dealer name should be the same name as the dealer's "Account" name in Salesforce.<br>
 
-![Dealer Name](https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png)
+![Dealer Name](https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png)<br>
 
 <br>
 <br>
@@ -71,9 +72,11 @@ This area will display the current dealer's ***NAME*** of the CDK site you are v
 
 ## **Web ID**<br>
 
-This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.  This web-id should be the same name as the dealer's "WebID" name in Salesforce.  This is also used to navigate to the dealer's site in WSM for editting.
+This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.<br>
+This web-id should be the same name as the dealer's "WebID" name in Salesforce.<br>
+This is also used to navigate to the dealer's site in WSM for editting.
 
-![Web ID](https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png)
+![Web ID](https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png)<br>
 
 <br>
 <br>
@@ -85,11 +88,13 @@ This area will display the current dealer's ***WEB-ID*** of the CDK site you are
 
 ## **Page Name**<br>
 
-This area will display the current ***PAGE NAME*** of the CDK site you are viewing.  This information is what the 'generic' page name of the page is called.  This will help navigate to a specific page while editting the site in WSM.<br>
+This area will display the current ***PAGE NAME*** of the CDK site you are viewing.<br>
+This information is what the 'generic' page name of the page is called.<br>
+This will help navigate to a specific page while editting the site in WSM.<br>
 
-*e.g. LandingPage, HoursAndDirections, MiscPage.*
+*e.g. LandingPage, HoursAndDirections, MiscPage.*<br>
 
-![Page Name](https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png)
+![Page Name](https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png)<br>
 
 <br>
 <br>
@@ -101,13 +106,14 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 ## **H Tags**<br>
 
-This area will display the current h tags on the current page you are viewing.  Any h tags that have a Zero (0) value will be highlighted in orange.<br>
+This area will display the current h tags on the current page you are viewing.<br>
+Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
-![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)
+![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)<br>
 
-***Clicking on the area will bring a pop up with all the h tags displayed***
+***Clicking on the area will bring a pop up with all the h tags displayed***<br>
 
-![H Tag Display](https://github.com/cirept/NextGen/blob/master/videos/htagdisplay_DEMO.gif)
+![H Tag Display](https://github.com/cirept/NextGen/blob/master/gifs/htagdisplay_DEMO.gif)<br>
 
 <br>
 <br>
@@ -120,27 +126,42 @@ This area will display the current h tags on the current page you are viewing.  
 
 # **QA Tools Panel**<br>
 
-This panel has the main QA tools for checking the site.
+This panel has the main QA tools for checking the site.<br>
 
-*pic of qa tools panel
+![QA Tools Panel](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_qatools.png)<br>
 
 ## **Show Navigation**<br>
 
-The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
-
-
-### **Features**
-
-1. When clicking on any subnavigation item, it will turn the link a different color.<br>
-   * Added to help keep track of what links you have already checked.
-
-Show Navigation Functionality | Show Navigation Legend
------------------------------ | ----------------------
-![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
-
-
 ### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
+
+This tool will allow the user to see all of the navigation menu without having to hover over the main navigation item.<br>
+All subnavigation items will display for easier QA checking.<br>
+When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
+
+### Turning the tool on:<br>
+
+Click the 'show navigation' button inside the 'qa tools' panel.<br>
+
+### Turning the tool off:<br>
+
+When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+
+![Show Navigation DEMO](https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif)<br>
+
+### **Features**<br>
+
+| Show Navigation Functionality |
+| --- |
+| ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) |
+| When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link. |
+| ***Added to help keep track of what links you have already checked.*** |
+<br>
+| Show Navigation Legend |
+| ---- |
+| ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png) |
+| ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
 <br>
@@ -155,39 +176,46 @@ Show Navigation Functionality | Show Navigation Legend
 
 
 ## **Link checker**<br>
-All links on the page will be highlighted with specific colors according to the validity of the link.
-
-**Features**
-
-*'HAS NO title text'*<br>
->All links that DO NOT HAVE title text in the link will be flagged<br>
-
-*'HAS title text'*<br>
->All links that HAVE title text in the html code will be flagged<br>
-
-*'OPENS IN A NEW WINDOW'*<br>
->All links that have 'targets' with these values will be flagged<br>
->_blank<br>
->_new<br>
->custom<br>
-
-*'EMPTY OR UNDEFINED URL'*<br>
->All links that do not contain an href value will be flagged<br>
-
-*'VERIFY URL'*<br>
->All links that have href these values will be flagged<br>
->&#35;<br>
->f_<br>
->www<br>
->http<br>
-
-Link Checker Functionality | Link Checker Legend
------------------------------ | ----------------------
-![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
 
 ### TIP:<br>
+
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
+All links on the page will be highlighted with specific colors according to the validity of the link.  There are various factors that the tool will use to categorize each link.  More detail on those factors are stated below.<br>
+***This tool works for both TETRA and NEXTGEN***
+
+### Turning the tool on:<br>
+
+Click the 'link checker' button inside the 'qa tools' panel.<br>
+
+### Turning the tool off:<br>
+
+When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+
+![Link Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/linkCheckerDEMO.gif)
+
+### **Features**<br>
+
+| Link Checker Legend |
+|---|
+| ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png) |
+| ***'HAS NO title text'*** |
+| All links that DO NOT HAVE title text in the link will be flagged |
+| ***'HAS title text'*** |
+| All links that HAVE title text in the html code will be flagged |
+| ***'OPENS IN A NEW WINDOW'*** |
+| All links that have 'targets' with these values will be flagged<br>_blank<br>_new<br>custom<br> |
+| ***'EMPTY OR UNDEFINED URL'*** |
+| All links that do not contain an href value will be flagged |
+| ***'CHECK URL'*** |
+| All links that have href these values will be flagged<br>&#35;<br>f_<br>>www<br>http |
+| ***'PAGE NOT SUPPORTED'*** |
+| All links that lead to a page that is no longer supported on NEXTGEN will have this border.<br>Please update the link to lead to a related page that is supported on NEXTGEN.<br><br>**Pages No Longer Supported on NEXTGEN**<br>1.	NewVehicleSearch<br>2.	PreOwnedVehicleSearch<br>3.	NewVehicleInfoForm<br>4.	PreOwnedVehicleInfoForm<br>5.	ExtendedProtection<br>6.	ExtendedProtectionDetails<br>7.	Affiliate<br>8.	AboutSpecials<br><br>***additional details to what page the links should be updated too will be coming soon***|
+<br>
+| Link Checker Functionality |
+| --- |
+| ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) |
+| The links will turn a highlighted color to signify that you have checked the link.  Added for ease of use when QA'ing |
 
 <br>
 [Back to Top](#tool-descriptions)
@@ -201,12 +229,32 @@ Link Checker Functionality | Link Checker Legend
 
 
 ## **Image Checker**<br>
-All images on the page will be highlighted in specific colors that tell the user, at a glance, what images have and do not have alt text
 
-Image Checker Functionality | Image Checker Legend
------------------------------ | ----------------------
-![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png)
+All images on the page will be highlighted in specific colors that will tell the user what images **have** and **do not have** alt text.<br>
+**If using this tool on a NEXTGEN site**, please scroll all the way to the bottom of the page to allow all images to load before running the tool.<br>
+Due to lazy loading, if the tool is run and some images do not have a box around the image please turn off the tool and rerun the tool with that image in view.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
 
+### Turning the tool on:<br>
+
+Click the 'image alt checker' button inside the 'qa tools' panel.<br>
+
+### Turning the tool off:<br>
+
+When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+
+![Image Alt Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/imageAltCheckerDEMO.gif)<br>
+
+### **Features**<br>
+
+| Image Checker Functionality |
+| ----------------------------- |
+![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png) |
+| All images on the page will be highlighted with a green or red/pink box.  These colors will signify if the image **has** and **does not have** an alt text.<br>If the image has a green color on over the image, the ALT of the image will appear at the center. |
+<br>
+| Image Checker Legend |
+| --- |
+| ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png) |
 
 <br>
 [Back to Top](#tool-descriptions)
@@ -220,17 +268,20 @@ Image Checker Functionality | Image Checker Legend
 
 
 ## **Spellcheck Page**<br>
-This tool will send the current page to be spell checked via third party website.<br>
 
+This tool will send the current page to be spell checked via third party website, W3.org.<br>
 
-**Functionality**
+### **Features**<br>
 
+**Functionality**<br>
 
-A new tab will open with the page already queued up for spell checking.  Once the spell checking is complete the page will autofill with all the ***possible*** miss-spelled words.
+A new tab will open with the page already queued up for spell checking.### **Features**<br>
+Once the spell checking is complete the page will autofill with all the ***possible*** miss-spelled words.<br>
 
-Spell Check Results Example |
------------------------------ |
-![Spell Check Results](https://cdn.rawgit.com/cirept/NextGen/367ce2a9/images/spellCheck.png) |
+| Spell Check Results Example |
+| --- |
+| ![Spell Check Results](https://cdn.rawgit.com/cirept/NextGen/367ce2a9/images/spellCheck.png) |
+| ***Please verify that all the words on the page is in fact spelt wrong*** |
 
 
 <br>
@@ -245,33 +296,37 @@ Spell Check Results Example |
 
 
 ## **404 Checker**<br>
-All the links on the page will be tested for validity and highlight the links according to the result.
 
+This tool will check every link on the site and highlight the link according to what the results of the test is.<br>
+All the links on the page will be tested for validity and then will be highlighted accordingly.<br>
+For the most part only links that are internal links will be eligible to be flagged as 'Link is Real' due to security restrictions.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
 
-**Functionality**
+### Turning the tool on:<br>
 
+Click the '404 link checker' button inside the 'qa tools' panel.<br>
 
-*'Link to be Tested'*
->All links will initially have this coloring and be subsequently over-written depending the results of validity testing for each link.
+### Turning the tool off:<br>
 
-*'Link is Working'*
->All links that result in a working page will be flagged.
+When you are done using the tool, **please refresh the page** before running any other tool.<br>
 
-*'Verify Link Works'*
->In addition to links that result in a 404 error, these other situations will also be flagged<br>
->
->Links that off of the site, other domains, will be flagged<br>
->e.g. facebook.com, google.com, google map links<br>
->
->Links that do not contain an href
->
->Links that are meant for mobile devices
->e.g. tel:+18009098244
+![404 Link Checker DEMO](404 link checker demo gif here)<br>
 
+### **Features**<br>
 
-404 Checker Functionality | 404 Checker Legend
------------------------------ | ----------------------
-![404 Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/link404checker.png) | ![404 Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/link404checkerLegend.png)
+| 404 Link Checker Legend |
+| --- |
+| ![404 Link Checker Legend](404 link checker legend url here) |
+| ***'Absolute URL*'*** |
+| All links that have a complete URL (e.g. http://nitra.wip.gmpsdealer.com/content15/VehicleSearchResults?search=new) as the link will be flagged.<br> All links that lead outside the site (e.g. https://confluence.cdk.com/display/DEV/CX+Innovation) will be flagged.<br> |
+| ***'f_link'*** |
+| All links that force the page to be framed in.<br>**This is more common on TETRA then in NEXTGEN** |
+| ***'Empty URL'*** |
+| All links that have an *empty* url.<br> All links that begin with a "#". *links are usually related to anchor links OR is meant to bring the user back to the homepage.*<br> All links that are meant for mobile. *phone number links on NEXTGEN that will. *e.g. phone link in the masthead on a NEXTGEN site* |
+| ***'Link is Real'*** |
+| All links that lead to an actual page will be flagged. |
+| ***'404 Link'*** |
+| All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
 
 
 <br>
@@ -287,52 +342,49 @@ All the links on the page will be tested for validity and highlight the links ac
 
 ## **Web Page Test**<br>
 
-This tool Will send in a query to WebPageTest.org of the currently viewed page.  When clicking 'Web Page Test' button, a submenu will appear with advanced settings.  You can set the settings to your liking or leave them alone.  The default settings will result in a typical test.  **This tool works for both TETRA and NEXTGEN.**
+This tool will send in a query to WebPageTest.org of the currently viewed page.<br>
+When clicking 'Web Page Test' button, a submenu will appear with advanced settings. These default settings will result in a typical test and should only be changed under specific circumstances.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
 
-<br>
-### Functionality
+### Turning the tool on:<br>
 
-A new tab will open with the page already queued up for speed testing.  Once the testing has been completed the results of the test will be displayed.
+Click the 'web page test' button inside the 'qa tools' panel.<br>
+
+![Web Page Test DEMO](web page test demo gif here)<br>
+
+### **Features**<br>
+
+###### Enter Email<br>
+
+Filling out this field with your work email (e.g. firstName.lastName@cdk.com) will send you an email when your tests have been completed.<br>
+
+###### Choose Browser<br>
+
+This setting will change the browser that your tests will be conducted in.<br>
+The three (3) major browsers are available to choose from.<br>
+By default IE11 is the ideal test candidate and should always be set as the browser to test in.<br>
+The only scenario that the browser settings should be changed is in the event that the IE11 servers are down, at which point selecting any of the remaining two (2) browsers will be necessary.
+
+###### Choose Key<br>
+
+This setting has been introduced to allow additional users to send in tests using this tool.<br>
+**Each key is alotted a total of 200 tests per day.**<br>
+***Every query request sent by this tool results in a total of three (3) tests*** to be made, so as you can see that reaching that 200 limit per day can be quite easy.<br>
+In the event that you receive an error message upon viewing the results page on WebPageTest.org mentioning the limit has been reached for the day, please choose a different key from the drop down and send in another test.<br>
+
+## Results<br>
+
+Once the setting have been set up, hit the 'send test' button and your test will be sent in.<br>
+A new tab will open with the page already queued up for speed testing.<br>
+Once the testing has been completed the results of the test will be displayed.<br>
+
+![Web Page Test Results](web page test results here)<br>
 
 >
 >The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
 >
 >Benchmark for desktop site = load time < 10 sec.
 >
-
-<br>
-### Features
-###### Enter Email
-
-Filling out this field with your work email (e.g. firstName.lastName@cdk.com) will send you an email when your tests have been completed.  The email will have a link in there that will lead you to the results page.
-
-###### Choose Browser
-
-This setting will change the browser that your tests will be conducted in.  The three (3) major browsers are available to choose from if you so please.  By default IE11 is the ideal test candidate and should always be set as the browser to test in.  The only scenario that the browser settings should be changed is in the event that the IE11 servers are done, at which point selecting any of the remaining two (2) browsers will be necessary.  It is highly unlikely that all three (3) browser servers will be done at once.
-
-###### Choose Key
-
-This setting has been introduced to compensate for the ever increasing number of people that is using this tool.  **Each key is alotted a total of 200 tests per day.**  ***Every query request sent by this tool results in a total of three (3) tests*** to be made, so as you can see that reaching that 200 limit per day can be quite easy.  In the event that you receive an error message upon viewing the results page on WebPageTest.org mentioning the limit has been reached for the day, please choose a different key from the drop down and send in another test.
-
-
-
-
-
-
-In the "Advanced Settings" (below the button) you are able to enter an email address and change the browser you would like to test in.
-
-This email address will recieve an email once the testing has been completed with a link that leads to the results page.  Simply leave it blank if this feature isn't desired.
-
-By default the testing is set to IE11, please do not change this unless necessary.  IE11 would be the best test case as it is commonly the slowest amoungst all the 'popular' browsers.
-
-****update****<br>
-Key Selection, if you ever recieve the error that is along the lines of "limit has been reached for day" please choose a different key and submit another test.
-
-
-WebPageTest Settings | WebPageTest Prompt
------------------------------ | ----------------------
-![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestPrompt.png)
-
 
 <br>
 [Back to Top](#tool-descriptions)
@@ -345,57 +397,16 @@ WebPageTest Settings | WebPageTest Prompt
 <br>
 
 
-## **404 Link Checker**<br>
-Will send in a query to WebPageTest.org of the currently viewed page.  **This tool works for both TETRA and NEXTGEN.**
-
-
-**Functionality**
-
-A new tab will open with the page already queued up for speed testing.  Once the testing has been completed the results of the test will be displayed.
-
->
->The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
->Benchmark for desktop site = load time < 10 sec.
->
-
-**Features**
-
-In the "Advanced Settings" (below the button) you are able to enter an email address and change the browser you would like to test in.
-
-This email address will recieve an email once the testing has been completed with a link that leads to the results page.  Simply leave it blank if this feature isn't desired.
-
-By default the testing is set to IE11, please do not change this unless necessary.  IE11 would be the best test case as it is commonly the slowest amoungst all the 'popular' browsers.
-
-****update****<br>
-Key Selection, if you ever recieve the error that is along the lines of "limit has been reached for day" please choose a different key and submit another test.
-
-
-WebPageTest Settings | WebPageTest Prompt
------------------------------ | ----------------------
-![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestPrompt.png)
-
-
-<br>
-[Back to Top](#tool-descriptions)
-<br>
-
----
----
-
-<br>
-<br>
- 
- 
 # **Other Tools Panel**<br>
 
 
 ## **Show Navigation**<br>
 
-The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.  
+The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 **This tool works for both TETRA and NEXTGEN.**
 
 
-**Features**
+### **Features**
 
 1. When clicking on any subnavigation item, it will turn the link a different color.<br>
    * Added to help keep track of what links you have already checked.
@@ -491,26 +502,26 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
- 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
- 	- **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true 
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
 - If ***"nextGen=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
-	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=false~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true  
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=false~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
 - If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]
-	- **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
+    - **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
 
 <br>
 ### OFF position *pic here
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
-	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false 
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false
 - If ***"nextGen=true"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
- 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=true~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false 
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=true~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false
 - If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]
-	- http://nitra.proof.gmpsdealer.com/content15?nextGen=false
+    - http://nitra.proof.gmpsdealer.com/content15?nextGen=false
 
 
 <br>
@@ -527,23 +538,23 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
- 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
- 	- **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true 
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
 - If ***"disableAutofill=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
-	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true  
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
 - If  ***"disableAutofill=true"*** is detected in the URL, nothing will happen.  :]
-	- **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
+    - **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
 
 <br>
 ### OFF position *pic here
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
-	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false 
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 - If ***"disableAutofill=true"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
- 	- **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false 
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true~~
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 - If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
-	- http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
+    - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
