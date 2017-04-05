@@ -43,7 +43,7 @@ This panel shows all important information for the current CDK website you are v
 ![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
 
 ### Features<br>
-Clicking on the info area will copy the text to your clipboard.  There will be no notification.
+Clicking on the info area will copy the text to your clipboard.  *There will be no notification.*
 
 ![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/videos/pageInfoHighlight_paste.gif)
 
@@ -103,9 +103,11 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 This area will display the current h tags on the current page you are viewing.  Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
+![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)
+
 ***Clicking on the area will bring a pop up with all the h tags displayed***
 
-![H Tag](https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png)
+![H Tag Display](https://github.com/cirept/NextGen/blob/master/videos/pageInfoHighlight_paste.gif)
 
 <br>
 <br>
