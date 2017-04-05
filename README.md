@@ -1,6 +1,9 @@
+# Tool Descriptions<br>
+
 ![QA Tool](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)<br>
 
-# **Tool Descriptions**<br>
+<a href="#top">&nbsp;</a>
+
 ## Page Information Panel :new: [Jump To Instructions](#page-information-panel)
 :one: [Dealer Name](#dealer-name)<br>
 :two: [Web-ID](#web-id)<br>
@@ -118,7 +121,7 @@
 ![H Tag Display](https://github.com/cirept/NextGen/blob/master/gifs/htagdisplay_DEMO.gif)<br>
 
 
-[Back to Top](.#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -170,7 +173,7 @@
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
-[Back to Top](.#tool-descriptions)<br>
+[Back to Top](#tool-descriptions)<br>
 
 <br>
 <br>
@@ -497,7 +500,9 @@
 
 ## **Auto Apply Modifiers**<br>
 
-This tool allows the tool to automatically apply the URL parameters of the URL modifications within this panel.  When switching this toggle on, it will determine if the current page you are viewing has the desired URL parameters added to it.  If the URL is missing a parameter the page will automatically refresh with the URL parameter added to it.
+- This tool allows the tool to automatically apply the URL parameters of the URL modifications within this panel.<br>
+- When switching this toggle on, it will determine if the current page you are viewing has the desired URL parameters added to it.<br>
+- If the URL is missing a parameter the page will automatically refresh with the URL parameter added to it.
 
 Test Scenario<br>
 - e.g. *current URL* = http://nitra.proof.gmpsdealer.com/content15<br>
