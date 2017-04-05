@@ -1,7 +1,7 @@
 ---
 ---
-
-# Tool Descriptions<br>
+<br>
+# **Tool Descriptions**<br>
 
 ## Page Information :new:
 :one: [Dealer Name](#dealer-name)<br>
@@ -29,13 +29,16 @@
 :two: [NextGen Parameter](#nextgen-parameter)<br>
 :three: [Show Autofill Tags](#show-autofill-tags)<br>
 
+<br>
+<br>
+
 ---
 ---
 
 <br>
 <br>
 
-# Page Information<br>
+# **Page Information**<br>
 
 This panel shows all important information for the current CDK website you are viewing.<br>
 
@@ -46,19 +49,19 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 
 *gif here
 
-## Dealer Name<br>
+## **Dealer Name**<br>
 
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
 
 *gif here
 
-## Web ID<br>
+## **Web ID**<br>
 
 This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.  This web-id should be the same name as the dealer's "WebID" name in Salesforce.  This is also used to navigate to the dealer's site in WSM for editting.
 
 *gif here
 
-## Page Name<br>
+## **Page Name**<br>
 
 This area will display the current ***PAGE NAME*** of the CDK site you are viewing.  This information is what the 'generic' page name of the page is called.  This will help navigate to a specific page while editting the site in WSM.<br>
 
@@ -66,7 +69,7 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 *gif here
 
-## H Tags<br>
+## **H Tags**<br>
 
 This area will display the current h tags on the current page you are viewing.  Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
@@ -84,10 +87,13 @@ This area will display the current h tags on the current page you are viewing.  
 <br>
 <br>
 
-# QA Tools<br>
+# **QA Tools**<br>
 
+This panel has the main QA tools for checking the site.
 
-## :one: Show Navigation<br>
+*pic of qa tools panel
+
+## **Show Navigation**<br>
 
 The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
@@ -117,7 +123,7 @@ Show Navigation Functionality | Show Navigation Legend
 <br>
 
 
-## :two: Link checker<br>
+## **Link checker**<br>
 All links on the page will be highlighted with specific colors according to the validity of the link.
 
 **Features**
@@ -163,7 +169,7 @@ Link Checker Functionality | Link Checker Legend
 <br>
 
 
-## :three: Image Checker<br>
+## **Image Checker**<br>
 All images on the page will be highlighted in specific colors that tell the user, at a glance, what images have and do not have alt text
 
 Image Checker Functionality | Image Checker Legend
@@ -182,7 +188,7 @@ Image Checker Functionality | Image Checker Legend
 <br>
 
 
-## :four: Spellcheck Page<br>
+## **Spellcheck Page**<br>
 This tool will send the current page to be spell checked via third party website.<br>
 
 
@@ -207,7 +213,7 @@ Spell Check Results Example |
 <br>
 
 
-## :five: 404 Checker<br>
+## **404 Checker**<br>
 All the links on the page will be tested for validity and highlight the links according to the result.
 
 
@@ -248,19 +254,39 @@ All the links on the page will be tested for validity and highlight the links ac
 <br>
 
 
-## :six: Web Page Test<br>
-Will send in a query to WebPageTest.org of the currently viewed page.
+## **Web Page Test**<br>
 
+This tool Will send in a query to WebPageTest.org of the currently viewed page.  When clicking 'Web Page Test' button, a submenu will appear with advanced settings.  You can set the settings to your liking or leave them alone.  The default settings will result in a typical test.  **This tool works for both TETRA and NEXTGEN.**
 
-**Functionality**
+<br>
+### Functionality
 
 A new tab will open with the page already queued up for speed testing.  Once the testing has been completed the results of the test will be displayed.
 
+>
 >The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
+>
 >Benchmark for desktop site = load time < 10 sec.
+>
+
+<br>
+### Features
+###### Enter Email
+
+Filling out this field with your work email (e.g. firstName.lastName@cdk.com) will send you an email when your tests have been completed.  The email will have a link in there that will lead you to the results page.
+
+###### Choose Browser
+
+This setting will change the browser that your tests will be conducted in.  The three (3) major browsers are available to choose from if you so please.  By default IE11 is the ideal test candidate and should always be set as the browser to test in.  The only scenario that the browser settings should be changed is in the event that the IE11 servers are done, at which point selecting any of the remaining two (2) browsers will be necessary.  It is highly unlikely that all three (3) browser servers will be done at once.
+
+###### Choose Key
+
+This setting has been introduced to compensate for the ever increasing number of people that is using this tool.  **Each key is alotted a total of 200 tests per day.**  ***Every query request sent by this tool results in a total of three (3) tests*** to be made, so as you can see that reaching that 200 limit per day can be quite easy.  In the event that you receive an error message upon viewing the results page on WebPageTest.org mentioning the limit has been reached for the day, please choose a different key from the drop down and send in another test.
 
 
-**Features**
+
+
+
 
 In the "Advanced Settings" (below the button) you are able to enter an email address and change the browser you would like to test in.
 
@@ -288,17 +314,18 @@ WebPageTest Settings | WebPageTest Prompt
 <br>
 
 
-## :seven: 404 Link Checker<br>
-Will send in a query to WebPageTest.org of the currently viewed page.
+## **404 Link Checker**<br>
+Will send in a query to WebPageTest.org of the currently viewed page.  **This tool works for both TETRA and NEXTGEN.**
 
 
 **Functionality**
 
 A new tab will open with the page already queued up for speed testing.  Once the testing has been completed the results of the test will be displayed.
 
+>
 >The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
 >Benchmark for desktop site = load time < 10 sec.
-
+>
 
 **Features**
 
@@ -326,19 +353,15 @@ WebPageTest Settings | WebPageTest Prompt
 
 <br>
 <br>
+ 
+ 
+# **Other Tools**<br>
 
 
-### SEO Simplify<br>
+## **Show Navigation**<br>
 
-<br>
-<br>
-
-# Other Tools<br>
-
-
-## :one: Show Navigation<br>
-
-The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
+The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.  
+**This tool works for both TETRA and NEXTGEN.**
 
 
 **Features**
@@ -362,3 +385,32 @@ Show Navigation Functionality | Show Navigation Legend
 ---
 ---
 
+<br>
+<br>
+
+
+## **SEO Simplify**<br>
+
+This tool will aid in formatting SEO text that is taken from a live site that is formatted using css.  This tool will provide a simplified version of the code you input.  Ready for pasting into a NextGen card.<br>
+**This tool works for both TETRA and NEXTGEN.**
+
+*pic here
+
+<br>
+<br>
+
+# **Toggles**<br>
+
+## **Refresh Button**<br>
+
+This tool will allow access to a refresh button that will provide a similar functionality as using the keyboard shortcut ctrl+f5 on a webpage.
+
+*pic here
+
+<br>
+<br>
+
+## **Hide Preview Toolbar**<br>
+
+This tool will hide the PCE toolbar that appears at the top of CDK sites.<br>
+**This tool works for both TETRA and NEXTGEN.**
