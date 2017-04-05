@@ -107,7 +107,7 @@ This area will display the current h tags on the current page you are viewing.  
 
 ***Clicking on the area will bring a pop up with all the h tags displayed***
 
-![H Tag Display](https://github.com/cirept/NextGen/blob/master/videos/pageInfoHighlight_paste.gif)
+![H Tag Display](https://github.com/cirept/NextGen/blob/master/videos/htagdisplayDEMO.gif)
 
 <br>
 <br>
