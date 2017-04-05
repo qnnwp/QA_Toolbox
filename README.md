@@ -176,50 +176,15 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#qa-tools-panel-new)
 
 ---
 <br><br>
 
-## **Show Navigation**<br>
-
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif"><br>
-</p>
-
-### **TIP:**<br>
->*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
-
-- This tool will allow the user to see all of the navigation menu without having to hover over the main navigation item.<br>
-- All subnavigation items will display for easier QA checking.<br>
-- When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
-***This tool works for both TETRA and NEXTGEN***<br>
-
-### **Turning the tool on:**<br>
-
-- Click the 'show navigation' button inside the 'qa tools' panel.<br>
-
-### **Turning the tool off:**<br>
-
-- When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
-
-| Show Navigation Legend |
-| --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigationLegend.png"></p> |
-| ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
-
-### **Features**<br>
-
-| Show Navigation Functionality |
-| --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigation.png"></p> |
-| When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link.<br>***Added to help keep track of what links you have already checked.*** |
-
-
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#qa-tools-panel-new)
 
 ---
 
@@ -277,7 +242,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#qa-tools-panel-new)
 
 ---
 
@@ -319,7 +284,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#qa-tools-panel-new)
 
 ---
 
@@ -328,7 +293,7 @@
 
 ## **Spellcheck Page**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/seoSimplifyDEMO.gif"></p>
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/spellcheckDEMO.gif"></p>
 
 - This tool will send the current page to be spell checked via third party website, W3.org.<br>
 
@@ -346,14 +311,14 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#qa-tools-panel-new)
 
 ---
 
 <br>
 <br>
 
-## **404 Checker**<br>
+## **404 Link Checker**<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/link404CheckerDEMO.gif"></p>
 
@@ -390,7 +355,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#qa-tools-panel-new)
 
 ---
 
@@ -460,6 +425,61 @@
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_qatools.png"></p>
 
+- These tools are here to ease the process of QA'ing a site.
+
+<br>
+<br>
+
+[Back to Top](#other-tools-panel-new)
+
+---
+<br>
+<br>
+
+## **Show Navigation**<br>
+
+<p align="center"><br>
+<img src="https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif"><br>
+</p>
+
+### **TIP:**<br>
+>*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
+
+- This tool will allow the user to see all of the navigation menu without having to hover over the main navigation item.<br>
+- All subnavigation items will display for easier QA checking.<br>
+- When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
+
+### **Turning the tool on:**<br>
+
+- Click the 'show navigation' button inside the 'qa tools' panel.<br>
+
+### **Turning the tool off:**<br>
+
+- When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+
+| Show Navigation Legend |
+| --- |
+| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigationLegend.png"></p> |
+| ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
+
+### **Features**<br>
+
+| Show Navigation Functionality |
+| --- |
+| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigation.png"></p> |
+| When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link.<br>***Added to help keep track of what links you have already checked.*** |
+
+<br>
+<br>
+
+[Back to Top](#other-tools-panel-new)
+
+---
+
+<br>
+<br>
+
 ## **SEO Simplify**<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/seoSimplifyDEMO.gif"></p>
@@ -485,7 +505,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#other-tools-panel-new)
 
 ---
 
@@ -499,6 +519,12 @@
 
 - These tools are here to make for convenience's sake.<br>
 
+<br><br>
+
+[Back to Top](#toggles-panel-new)
+
+---
+<br><br>
 
 ## **Refresh Button**<br>
 
@@ -512,7 +538,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#toggles-panel-new)
 
 ---
 
@@ -532,7 +558,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#toggles-panel-new)
 
 ---
 ---
@@ -544,6 +570,13 @@
 # **URL Modifiers Panel**<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_urlModifiers.png"></p>
+
+<br><br>
+
+[Back to Top](#url-modifiers-panel)
+
+---
+<br><br>
 
 ## **Auto Apply Modifiers**<br>
 
@@ -567,7 +600,7 @@ Test Scenario<br>
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#url-modifiers-panel)
 
 ---
 
@@ -623,7 +656,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#url-modifiers-panel)
 
 ---
 
@@ -673,7 +706,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#url-modifiers-panel)
 
 ---
 
