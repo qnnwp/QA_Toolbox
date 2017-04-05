@@ -581,7 +581,7 @@ Test Scenario<br>
 
 ### OFF position<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenToggleON.png"></p>
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenparameterToggleOFF.png"></p>
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
@@ -629,7 +629,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 ### OFF position<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenToggleON.png"></p>
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleHighlightOFF.png"></p>
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
