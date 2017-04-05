@@ -1334,8 +1334,8 @@
                 this.$toolsPanel.append(spellCheck.config.$activateButt);
             },
             bindEvents: function () {
-                //                spellCheck.config.$activateButt.on('click', this.spellCheck.bind(this));
-                spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
+                spellCheck.config.$activateButt.on('click', this.spellCheck.bind(this));
+                //                spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
             },
             // ----------------------------------------
             // tier 2 functions
