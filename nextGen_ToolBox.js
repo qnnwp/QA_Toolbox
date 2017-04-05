@@ -29,33 +29,6 @@
         return GM_getResourceURL(resource);
     }
 
-    //    var report = '{}';
-
-    //    function findText(text) {
-    //        console.log('entered findThis to look for : ' + text);
-    //
-    //        //        if (window.find(text, false, false, false, true, false, false)) {
-    //        //            //            console.log('match found');
-    //        //            document.execCommand("HiliteColor", false, "red");
-    //        //            //            while (window.find(text, false, false, false, true, false, false)){
-    //        //            //                document.execCommand("hiliteColor", false, "FirstColor");
-    //        //            //            }
-    //        //
-    //        //        }
-    //
-    //        //--------
-    //        //        if (window.find(text, false, true)) {
-    //        //            document.execCommand("hiliteColor", false, "red");
-    //        while (window.find(text, false, true)) {
-    //            console.log('highlighting match');
-    //            document.execCommand("hiliteColor", false, "yellow");
-    //        }
-    //        window.find(text);
-    //        //        }
-    //
-    //        //        alert("String \x22" + text + "\x22 found? " + window.find(text));
-    //    }
-
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- Build container for toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
@@ -2441,50 +2414,40 @@
                     $curLink = jQuery(curLink);
                     curURL = jQuery.trim($curLink.attr('href'));
 
-                    //                    console.log('curURL : ' + curURL);
-
                     // skip testing of links if it doesn't pass the tests
                     // subtract 1 from total tests
                     switch (true) {
                         // test for mobile specific links
                         case (curURL.indexOf('tel') >= 0):
-                            //                            console.log('mobile link : ' + curURL);
                             $curLink.addClass('brokenURL mobilePhoneLink');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                             continue;
                             // test for javascript links
                         case (curURL.indexOf('javascript') >= 0 || (curURL.indexOf('#') === 0 || curURL.indexOf('#') === 1)):
-                            //                            console.log('javascript or # link : ' + curURL);
                             $curLink.addClass('brokenURL jsLinkbb');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                             continue;
                             // test for undefined or empty URLs
                         case (typeof curLink === 'undefined' || curURL === ''):
-                            //                            console.log('undefined or empty link : ' + curURL);
                             $curLink.addClass('brokenURL');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                             // test for absolute path URLs
                         case (curURL.indexOf('www') > -1 || (curURL.indexOf('http') > -1 || curURL.indexOf('https') > -1)):
-                            //                            console.log('absolute URL link : ' + curURL);
                             $curLink.addClass('otherDomain');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                             continue;
                             // test for other special URLs
                         case (curURL.indexOf('f_') > -1 || curURL.indexOf('//:') > -1):
-                            //                            console.log('links opens in a new window : ' + curURL);
                             $curLink.addClass('framedIn');
                             checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                             continue;
                         default:
-                            //                            console.log('nothing wrong with this link : ' + curURL);
                             // do nothing
                     }
-
-                    //                    console.log('curURL after switch filtering statement : ' + curURL);
 
                     curWindow = window.location.href;
                     if (curWindow.indexOf('nextGen=true') > -1) {
@@ -2495,8 +2458,6 @@
                             curURL += '&nextGen=true';
                         }
                     }
-
-                    //                    console.log('total links to test :: ' + checkLinks.config.totalTests);
 
                     // test links
                     this.ajaxTest(curURL, $curLink);
@@ -2543,8 +2504,6 @@
                             case (!isImageLink && (data.indexOf('pageNotFound') > -1 || data.indexOf('not currently a functioning page') > -1)):
                                 $curLink.addClass('fourOfour');
                                 checkLinks.error($curLink, isImageLink);
-                                console.log(linkURL + ' :: 404 page');
-                                console.log($curLink);
                                 checkLinks.config.errors += 1;
                                 break;
                                 // if internal page 404 and link IS an image link
@@ -2552,21 +2511,18 @@
                                 $img.attr('style', 'position: relative;');
                                 $curLink.prepend($linkOverlay);
                                 checkLinks.error($curLink, isImageLink);
-                                console.log(linkURL + ' :: 404 page');
                                 checkLinks.config.errors += 1;
                                 break;
                                 // if link IS legit and NOT an image link
                             case (!isImageLink && data.indexOf('pageNotFound') === -1):
                                 $curLink.addClass('success');
                                 checkLinks.success($curLink, isImageLink);
-                                //                                console.log('linkURL :: ' + linkURL);
                                 break;
                                 // if link IS NOT legit and an image link
                             case (isImageLink && data.indexOf('pageNotFound') === -1):
                                 $img.attr('style', 'position: relative;');
                                 $curLink.prepend($linkOverlay);
                                 checkLinks.success($linkOverlay, isImageLink);
-                                //                                console.log('linkURL :: ' + linkURL);
                                 break;
                             default:
                                 // do nothing
@@ -2574,7 +2530,6 @@
                     },
                     error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
-                        console.log(linkURL + ' :: error function thrown');
                         checkLinks.config.errors += 1;
                         if (jqXHR.status === 404) {
                             checkLinks.error($curLink, isImageLink);
@@ -2582,11 +2537,9 @@
                     },
                     statusCode: {
                         404: function (jqXHR, textStatus, error) {
-                            console.log(linkURL + ' :: 404 function thrown');
                             $curLink.addClass('fourOfour');
                             checkLinks.error($curLink, isImageLink);
                             checkLinks.config.errors += 1;
-                            //                            console.log('---link is a 404 :: ' + linkURL);
                         }
                     },
                     complete: function () {
@@ -3925,7 +3878,6 @@
             cacheDOM: function () {
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = this.nextGenCheck();
-                console.log(this.isNextGenPlatform);
                 this.isCDKsite = this.isCDKsite();
                 this.isMobile = this.isMobile();
                 this.editMode = this.editMode();
@@ -3953,11 +3905,6 @@
                 // removed if nextGen
                 //                if (!this.isNextGenPlatform) {
                 checkLinks.init(panelID);
-                //                }
-
-                // add nextGen specific tool to panel
-                //                if (this.isNextGenPlatform) {
-                //                    outdatedLinks.init();
                 //                }
 
             },
@@ -4037,81 +3984,5 @@
     // ---------------------------------------- initialize toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     toolbar.init();
-
-    // NEW TOOL TEST
-
-    // ------------------------------------------------------------------------------------------------------------------------
-    // ---------------------------------------- Show Possible Autofill ----------------------------------------
-    // ------------------------------------------------------------------------------------------------------------------------
-
-    //    var $haf_butt = jQuery('<button>').attr({
-    //        class: 'myEDOBut notWorking',
-    //        id: 'highlightAutofills',
-    //        title: 'Highlight Autofills (has some bugs)'
-    //    }).text('highlight autofills');
-    //
-    //    var cm = unsafeWindow.ContextManager;
-    //
-    //    jQuery('#mainTools').append($haf_butt);
-    //
-    //    $haf_butt.click(function () {
-    //
-    //        var $search = {
-    //            //            dealername: cm.getDealershipName(),
-    //            city: cm.getCity(),
-    //            //            street: cm.getAddressLine1(),
-    //            //            address2: cm.getAddressLine2(),
-    //            //            collision: cm.getCollisionPhone(),
-    //            //            fleet: cm.getFleetPhone(),
-    //            //            new: cm.getNewPhone(),
-    //            //            parts: cm.getPartsPhone(),
-    //            //            primary: cm.getPrimaryPhone(),
-    //            //            service: cm.getServicePhone(),
-    //            //            used: cm.getUsedPhone(),
-    //            //            finance: cm.getFinancePhone(),
-    //            //            state: cm.getPreferredState(),
-    //            //            zip: cm.getZip(),
-    //            franchise: cm.getFranchises()
-    //        };
-    //
-    //        document.designMode = "on";
-    //
-    //        jQuery.each($search, function (key, searchText) {
-    //            // skip interation if value is null
-    //            if (searchText === null) {
-    //                console.log(key + ' value is null');
-    //                return true;
-    //            }
-    //
-    //            console.log('find this : key : ' + key + ' : ' + searchText);
-    //            console.log(jQuery.type(searchText));
-    //
-    //            if (jQuery.type(searchText) === 'array') {
-    //                console.log('search text is an array');
-    //                var z = 0,
-    //                    length = searchText.length;
-    //
-    //                for (z; z < length; z += 1) {
-    //                    console.log('search this : "' + searchText[z] + '"');
-    //                    var searchThis = searchText[z];
-    //                    while (window.find(searchThis, false, true)) {
-    //                        console.log('highlighting match');
-    //                        document.execCommand("hiliteColor", false, "yellow");
-    //                    }
-    //                }
-    //            } else {
-    //                console.log('not an array');
-    //                while (window.find(searchText, false, true)) {
-    //                    console.log('highlighting match');
-    //                    document.execCommand("hiliteColor", false, "yellow");
-    //                }
-    //            }
-    //        });
-    //
-    //        document.designMode = "off";
-    //
-    //    });
-
-    //
 
 })(); // end main function
