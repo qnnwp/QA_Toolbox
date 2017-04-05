@@ -537,6 +537,8 @@ Test Scenario<br>
         1.   I switch the **'nextgen parameters?'** toggle **ON**<br>
         2.   Then I switch the **'auto apply modifiers?'** toggle **ON**.<br>
 
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/nextgenToggleDEMO.gif"></p>
+
 - This will cause the page to refresh and the NEXTGEN version of the site visible.<br>
 - *new URL* = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
 - These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***<br>
@@ -555,16 +557,20 @@ Test Scenario<br>
 
 ## **Nextgen Parameters?**<br>
 
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/nextgenToggleDEMO.gif"></p>
+
 - This tool controls the logic of the 'auto apply modifiers' toggle.<br>
 - When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
-- **This tool works in both TETRA and NEXTGEN.<br>
+- ***This tool works in both TETRA and NEXTGEN.***<br>
 - **This is also how you control which version of the tool you want to use.**<br>
 
-### If work is strictly related to NEXTGEN, please have this toggle always on to ensure that every page you view will be the NEXTGEN version of the page.<br>
+***If work is strictly related to NEXTGEN, please have this toggle always on to ensure that every page you view will be the NEXTGEN version of the page.***<br>
 
 * There is an issue when going viewing a NEXTGEN site, you are suddenly shown the TETRA version.  This fixes that issue.<br>
 
+---
 ### ON position<br>
+---
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenToggleON.png"></p>
 
@@ -606,6 +612,8 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 
 ## Show Autofill Tags?<br>
+
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/autofillToggleDEMO.gif"></p>
 
 - This tool controls the logic of the 'auto apply modifiers' toggle.<br>
 - When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
