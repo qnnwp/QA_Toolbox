@@ -64,8 +64,9 @@
 </p>
 
 - Clicking on the info area will copy the text to your clipboard.<br>
-***There will be no notification.***
+***There will be no notification.***<br>
 
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -84,6 +85,8 @@
 - This area will display the current dealer's ***NAME*** of the CDK site you are viewing.<br>
 - This dealer name should be the same name as the dealer's "Account" name in Salesforce.<br>
 
+[Back to Top](#top)<br>
+
 <br>
 <br>
 
@@ -101,6 +104,8 @@
 - This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.<br>
 - This web-id should be the same name as the dealer's "WebID" name in Salesforce.<br>
 - This is also used to navigate to the dealer's site in WSM for editting.
+
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -121,6 +126,8 @@
 - This will help navigate to a specific page while editting the site in WSM.<br>
 
 *e.g. LandingPage, HoursAndDirections, MiscPage.*<br>
+
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -163,6 +170,12 @@
 <p align="center"><br>
 <img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_qatools.png"><br>
 </p>
+
+[Back to Top](#top)<br>
+
+<br><br>
+---
+<br><br>
 
 ## **Show Navigation**<br>
 
