@@ -403,26 +403,26 @@ Once the testing has been completed the results of the test will be displayed.<b
 
 # **Other Tools Panel**<br>
 
+## **SEO Simplify**<br>
 
-## **Show Navigation**<br>
+![Web Page Test DEMO](web page test demo gif here)<br>
 
-The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
-**This tool works for both TETRA and NEXTGEN.**
+This tool will aid in formatting SEO text that is taken from a live site that is formatted using css.<br>
+This tool will provide a simplified version of the code you input.  Ready for pasting into a NextGen card.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
 
+### Turning the tool on:<br>
 
-### **Features**
+Click the 'seo simplify' button inside the 'other tools' panel.<br>
 
-1. When clicking on any subnavigation item, it will turn the link a different color.<br>
-   * Added to help keep track of what links you have already checked.
+### **Features**<br>
 
-| Show Navigation Functionality | Show Navigation Legend
-| ----------------------------- | ----------------------
-| ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
+After raw SEO text has been entered, a pop up will display with the 'simplified' SEO text.<br>
+All styles, italics, bold, center, underline, span tags will be removed.<br>
+The pop up will have display the SEO text according to the styles of the current page you are on.<br>
+Clicking in the text area will allow the user to copy all of the html code of the new SEO text.<br>
 
-
-### TIP:<br>
->*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
-
+To remove the pop up, click on the 'remove' button at the top of the pop up.<br>
 
 <br>
 [Back to Top](#tool-descriptions)
@@ -435,23 +435,17 @@ The navigation menu will display all sub-navigation items.  This will allow for 
 <br>
 
 
-## **SEO Simplify**<br>
-
-This tool will aid in formatting SEO text that is taken from a live site that is formatted using css.  This tool will provide a simplified version of the code you input.  Ready for pasting into a NextGen card.<br>
-**This tool works for both TETRA and NEXTGEN.**
-
-*pic here
-
-<br>
-<br>
-
 # **Toggles Panel**<br>
+
+![Toggles Panel](togglepanelnurlhere)
 
 ## **Refresh Button**<br>
 
-This tool will allow access to a refresh button that will provide a similar functionality as using the keyboard shortcut ctrl+f5 on a webpage.
+![Refresh Button DEMO](refreshbuttonurlhere)
 
-*pic here
+This tool will allow access to a refresh button that will provide a similar functionality as using the keyboard shortcut ctrl+f5 on a webpage.<br>
+To hide/show the button, switch the control on/off.<br>
+**This tool works for both TETRA and NEXTGEN.**
 
 
 <br>
@@ -460,8 +454,11 @@ This tool will allow access to a refresh button that will provide a similar func
 
 ## **Hide Preview Toolbar**<br>
 
+![Hide Preview Toolbar DEMO](hidepreviewtoolbarurlhere)
+
 This tool will hide the PCE toolbar that appears at the top of CDK sites.<br>
-**This tool works for both TETRA and NEXTGEN.**
+To hide/show the button, switch the control on/off.<br>
+**This tool works for both TETRA and NEXTGEN.**<br>
 
 
 <br>
