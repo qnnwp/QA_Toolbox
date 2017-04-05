@@ -2,30 +2,29 @@
 ---
 
 # Tool Descriptions<br>
-**Quick Links**<br>
 
-## Page Information
+## Page Information :new:
 [Dealer Name](#dealer-name)<br>
 [Web-ID](#web-id)<br>
 [Page Name](#page-name)<br>
 [H Tags](#h-tags)<br>
 
-## QA Tools
+## QA Tools :new:
 [Image Checker](#image-checker)<br>
-[Link Checker](#link-checker)<br>
+[Link Checker](#link-checker) :sparkles:<br>
 [Spell Checker](#spellcheck-page)<br>
 [WebPageTest](#web-page-test)<br>
-[404 Link Checker](#404-checker)<br>
+[404 Link Checker](#404-link-checker) :sparkles:<br>
 
-## Other Tools
+## Other Tools :new:
 [Show Navigation](#show-navigation)<br>
 [SEO Simplify](#seo-simplify)<br>
 
-## Toggles
+## Toggles :new:
 [Refresh Button](#refresh-button)<br>
 [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
-## URL Modifiers
+## URL Modifiers :new:
 [Auto Apply Modifiers](#auto-apply-parameters)<br>
 [NextGen Parameter](#nextgen-parameter)<br>
 [Show Autofill Tags](#show-autofill-tags)<br>
@@ -71,7 +70,7 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 This area will display the current h tags on the current page you are viewing.  Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
-***Click on the area will bring a pop up with all the h tags displayed***
+***Clicking on the area will bring a pop up with all the h tags displayed***
 
 *pic of h tag portion of panel
 *pic of orange highlight
@@ -85,7 +84,10 @@ This area will display the current h tags on the current page you are viewing.  
 <br>
 <br>
 
-## Show Navigation<br>
+## QA Tools<br>
+
+
+### Show Navigation<br>
 
 The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
@@ -100,7 +102,7 @@ Show Navigation Functionality | Show Navigation Legend
 ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
 
 
-### TIP:<br>
+#### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
@@ -115,7 +117,7 @@ Show Navigation Functionality | Show Navigation Legend
 <br>
 
 
-## Link checker<br>
+### Link checker<br>
 All links on the page will be highlighted with specific colors according to the validity of the link.
 
 **Features**
@@ -146,7 +148,7 @@ Link Checker Functionality | Link Checker Legend
 ----------------------------- | ----------------------
 ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
 
-### TIP:<br>
+#### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
@@ -161,7 +163,7 @@ Link Checker Functionality | Link Checker Legend
 <br>
 
 
-## Image Checker<br>
+### Image Checker<br>
 All images on the page will be highlighted in specific colors that tell the user, at a glance, what images have and do not have alt text
 
 Image Checker Functionality | Image Checker Legend
@@ -180,7 +182,7 @@ Image Checker Functionality | Image Checker Legend
 <br>
 
 
-## Spellcheck Page<br>
+### Spellcheck Page<br>
 This tool will send the current page to be spell checked via third party website.<br>
 
 
@@ -205,7 +207,7 @@ Spell Check Results Example |
 <br>
 
 
-## 404 Checker<br>
+### 404 Checker<br>
 All the links on the page will be tested for validity and highlight the links according to the result.
 
 
@@ -245,7 +247,8 @@ All the links on the page will be tested for validity and highlight the links ac
 <br>
 <br>
 
-## Web Page Test<br>
+
+### Web Page Test<br>
 Will send in a query to WebPageTest.org of the currently viewed page.
 
 
@@ -277,3 +280,52 @@ WebPageTest Settings | WebPageTest Prompt
 <br>
 [Back to Top](#tool-descriptions)
 <br>
+
+---
+---
+
+<br>
+<br>
+
+
+### 404 Link Checker<br>
+Will send in a query to WebPageTest.org of the currently viewed page.
+
+
+**Functionality**
+
+A new tab will open with the page already queued up for speed testing.  Once the testing has been completed the results of the test will be displayed.
+
+>The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
+>Benchmark for desktop site = load time < 10 sec.
+
+
+**Features**
+
+In the "Advanced Settings" (below the button) you are able to enter an email address and change the browser you would like to test in.
+
+This email address will recieve an email once the testing has been completed with a link that leads to the results page.  Simply leave it blank if this feature isn't desired.
+
+By default the testing is set to IE11, please do not change this unless necessary.  IE11 would be the best test case as it is commonly the slowest amoungst all the 'popular' browsers.
+
+****update****<br>
+Key Selection, if you ever recieve the error that is along the lines of "limit has been reached for day" please choose a different key and submit another test.
+
+
+WebPageTest Settings | WebPageTest Prompt
+----------------------------- | ----------------------
+![WebPageTest Settings](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestSettings.png) | ![WebPageTest Prompt](https://cdn.rawgit.com/cirept/NextGen/e101c74d/images/webPageTestPrompt.png)
+
+
+<br>
+[Back to Top](#tool-descriptions)
+<br>
+
+---
+---
+
+<br>
+<br>
+
+
+### SEO Simplify<br>
