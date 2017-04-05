@@ -1,3 +1,18 @@
+# v3.2.7 changes (4/5/2017)
+* Fixed the 404 Link checker. :exclamation:
+  * It was automatcially fixing the issues that was found by building out a completely new, WORKING link
+* Moved 'Show Navigation' tool into the 'Other Tools' Panel
+<br><br>  
+----------------------------------------
+<br><br>
+# v3.2.6 changes (3/30/2017)
+* Combined outdated link checker into the link checker tool. :exclamation:
+  * Added an additional color to the legend for 'outdated' flagged links.
+  * A teal border will appear around the link. instructions will get updated soon with pictures
+* Disabled the 404 checker tool on NEXTGEN, there are some bugs that broke it during previous updates. Time is needed to discover what caused the issue. :exclamation:
+<br><br>  
+----------------------------------------
+<br><br>
 # v3.2.5.3 changes (3/30/2017)
 * Update v3.2.5.2 has updates not worth mentioning.  :]
 * Disabled 404 link checker for NEXTGEN :exclamation:
