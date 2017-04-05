@@ -34,8 +34,8 @@
 [Jump To Toggles Panel Section](#toggles-panel)<br><br><br>
 
 ## URL Modifiers Panel<br>
-[Auto Apply Modifiers](#auto-apply-parameters)<br>
-[NextGen Parameter](#nextgen-parameter)<br>
+[Auto Apply Modifiers](#auto-apply-modifiers)<br>
+[NextGen Parameter](#nextgen-parameters)<br>
 [Show Autofill Tags](#show-autofill-tags)<br>
 
 [Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br><br><br>
@@ -179,7 +179,42 @@
 [Back to Top](#qa-tools-panel-new)
 
 ---
-<br><br>
+
+
+<br>
+<br>
+
+## **Image Checker**<br>
+
+<p align="center"><br>
+<img src="https://github.com/cirept/NextGen/blob/master/gifs/imageAltCheckerDEMO.gif"><br>
+</p>
+
+- All images on the page will be highlighted in specific colors that will tell the user what images **have** and **do not have** alt text.<br>
+- **If using this tool on a NEXTGEN site**, please scroll all the way to the bottom of the page to allow all images to load before running the tool.<br>
+- Due to lazy loading, if the tool is run and some images do not have a box around the image please turn off the tool and rerun the tool with that image in view.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
+
+### Turning the tool on:<br>
+
+- Click the 'image alt checker' button inside the 'qa tools' panel.<br>
+
+### Turning the tool off:<br>
+
+- When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
+
+### **Features**<br>
+
+| Image Checker Functionality |
+| ----------------------------- |
+| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png"></p> |
+| All images on the page will be highlighted with a green or red/pink box.  These colors will signify if the image **has** and **does not have** an alt text.<br>If the image has a green color on over the image, the ALT of the image will appear at the center. |
+
+
+| Image Checker Legend |
+| --- |
+| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png"></p> |
+
 
 <br>
 <br>
@@ -249,48 +284,6 @@
 <br>
 <br>
 
-## **Image Checker**<br>
-
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/gifs/imageAltCheckerDEMO.gif"><br>
-</p>
-
-- All images on the page will be highlighted in specific colors that will tell the user what images **have** and **do not have** alt text.<br>
-- **If using this tool on a NEXTGEN site**, please scroll all the way to the bottom of the page to allow all images to load before running the tool.<br>
-- Due to lazy loading, if the tool is run and some images do not have a box around the image please turn off the tool and rerun the tool with that image in view.<br>
-***This tool works for both TETRA and NEXTGEN***<br>
-
-### Turning the tool on:<br>
-
-- Click the 'image alt checker' button inside the 'qa tools' panel.<br>
-
-### Turning the tool off:<br>
-
-- When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
-
-### **Features**<br>
-
-| Image Checker Functionality |
-| ----------------------------- |
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png"></p> |
-| All images on the page will be highlighted with a green or red/pink box.  These colors will signify if the image **has** and **does not have** an alt text.<br>If the image has a green color on over the image, the ALT of the image will appear at the center. |
-
-
-| Image Checker Legend |
-| --- |
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png"></p> |
-
-
-<br>
-<br>
-
-[Back to Top](#qa-tools-panel-new)
-
----
-
-<br>
-<br>
-
 ## **Spellcheck Page**<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/spellcheckDEMO.gif"></p>
@@ -306,50 +299,6 @@
 | --- |
 | <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/367ce2a9/images/spellCheck.png"></p> |
 | ***Please verify that all the words on the page is in fact spelt wrong*** |
-
-
-<br>
-<br>
-
-[Back to Top](#qa-tools-panel-new)
-
----
-
-<br>
-<br>
-
-## **404 Link Checker**<br>
-
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/link404CheckerDEMO.gif"></p>
-
-- This tool will check every link on the site and highlight the link according to what the results of the test is.<br>
-- All the links on the page will be tested for validity and then will be highlighted accordingly.<br>
-- For the most part only links that are internal links will be eligible to be flagged as 'Link is Real' due to security restrictions.<br>
-***This tool works for both TETRA and NEXTGEN***<br>
-
-### Turning the tool on:<br>
-
-- Click the '404 link checker' button inside the 'qa tools' panel.<br>
-
-### Turning the tool off:<br>
-
-- When you are done using the tool, **please refresh the page** before running any other tool.<br>
-
-### **Features**<br>
-
-| 404 Link Checker Legend |
-| --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/link404checkerLegend.png"></p> |
-| ***'Absolute URL*'*** |
-| All links that have a complete URL (e.g. http://nitra.wip.gmpsdealer.com/content15/VehicleSearchResults?search=new) as the link will be flagged.<br> All links that lead outside the site (e.g. https://confluence.cdk.com/display/DEV/CX+Innovation) will be flagged.<br> |
-| ***'f_link'*** |
-| All links that force the page to be framed in.<br>**This is more common on TETRA then in NEXTGEN** |
-| ***'Empty URL'*** |
-| All links that have an *empty* url.<br> All links that begin with a "#". *links are usually related to anchor links OR is meant to bring the user back to the homepage.*<br> All links that are meant for mobile. *phone number links on NEXTGEN that will. *e.g. phone link in the masthead on a NEXTGEN site* |
-| ***'Link is Real'*** |
-| All links that lead to an actual page will be flagged. |
-| ***'404 Link'*** |
-| All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
 
 
 <br>
@@ -415,6 +364,50 @@
 [Back to Top](#page-information-panel-new)
 
 ---
+
+<br>
+<br>
+
+## **404 Link Checker**<br>
+
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/link404CheckerDEMO.gif"></p>
+
+- This tool will check every link on the site and highlight the link according to what the results of the test is.<br>
+- All the links on the page will be tested for validity and then will be highlighted accordingly.<br>
+- For the most part only links that are internal links will be eligible to be flagged as 'Link is Real' due to security restrictions.<br>
+***This tool works for both TETRA and NEXTGEN***<br>
+
+### Turning the tool on:<br>
+
+- Click the '404 link checker' button inside the 'qa tools' panel.<br>
+
+### Turning the tool off:<br>
+
+- When you are done using the tool, **please refresh the page** before running any other tool.<br>
+
+### **Features**<br>
+
+| 404 Link Checker Legend |
+| --- |
+| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/link404checkerLegend.png"></p> |
+| ***'Absolute URL*'*** |
+| All links that have a complete URL (e.g. http://nitra.wip.gmpsdealer.com/content15/VehicleSearchResults?search=new) as the link will be flagged.<br> All links that lead outside the site (e.g. https://confluence.cdk.com/display/DEV/CX+Innovation) will be flagged.<br> |
+| ***'f_link'*** |
+| All links that force the page to be framed in.<br>**This is more common on TETRA then in NEXTGEN** |
+| ***'Empty URL'*** |
+| All links that have an *empty* url.<br> All links that begin with a "#". *links are usually related to anchor links OR is meant to bring the user back to the homepage.*<br> All links that are meant for mobile. *phone number links on NEXTGEN that will. *e.g. phone link in the masthead on a NEXTGEN site* |
+| ***'Link is Real'*** |
+| All links that lead to an actual page will be flagged. |
+| ***'404 Link'*** |
+| All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
+
+
+<br>
+<br>
+
+[Back to Top](#qa-tools-panel-new)
+
+---
 ---
 
 <br>
@@ -433,6 +426,7 @@
 [Back to Top](#other-tools-panel-new)
 
 ---
+
 <br>
 <br>
 
@@ -524,6 +518,7 @@
 [Back to Top](#toggles-panel-new)
 
 ---
+
 <br><br>
 
 ## **Refresh Button**<br>
@@ -576,6 +571,7 @@
 [Back to Top](#url-modifiers-panel)
 
 ---
+
 <br><br>
 
 ## **Auto Apply Modifiers**<br>
