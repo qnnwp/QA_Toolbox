@@ -1,5 +1,6 @@
-# **Tool Descriptions**<br>
+![QA Tool](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)
 
+# **Tool Descriptions**<br>
 ## Page Information :new:
 :one: [Dealer Name](#dealer-name)<br>
 :two: [Web-ID](#web-id)<br>
@@ -25,7 +26,7 @@
 :one: [Auto Apply Modifiers](#auto-apply-parameters)<br>
 :two: [NextGen Parameter](#nextgen-parameter)<br>
 :three: [Show Autofill Tags](#show-autofill-tags)<br>
-
+ 
 <br>
 <br>
 
