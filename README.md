@@ -42,9 +42,9 @@
 
 <a href="#page-information-panel-new">&nbsp;</a>
 
-### Other Useful Links
-[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)
-[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)
+### Other Useful Links<br>
+[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
+[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
 
 <br>
 <br>
@@ -737,6 +737,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 <br>
 <br>
 
-### Other Useful Links
-[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)
-[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)
+### Other Useful Links<br>
+[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
+[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
