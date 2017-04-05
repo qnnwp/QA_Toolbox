@@ -117,6 +117,9 @@
 
 ![H Tag Display](https://github.com/cirept/NextGen/blob/master/gifs/htagdisplay_DEMO.gif)<br>
 
+
+[Back to Top](#tool-descriptions)<br>
+
 <br>
 <br>
 
@@ -167,7 +170,7 @@
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
-[Back to Top](#tool-descriptions)<br>
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -223,7 +226,7 @@
 | The links will turn a highlighted color to signify that you have checked the link.  Added for ease of use when QA'ing |
 
 
-[Back to Top](#tool-descriptions)<br>
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -263,7 +266,7 @@
 | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png) |
 
 
-[Back to Top](#tool-descriptions)<br>
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -290,7 +293,7 @@
 | ***Please verify that all the words on the page is in fact spelt wrong*** |
 
 
-[Back to Top](#tool-descriptions)<br>
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -334,7 +337,7 @@
 | All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -391,7 +394,7 @@
 >
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -429,7 +432,7 @@
 - To remove the pop up, click on the 'remove' button at the top of the pop up.<br>
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -456,7 +459,7 @@
 **This tool works for both TETRA and NEXTGEN.**
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -476,7 +479,7 @@
 **This tool works for both TETRA and NEXTGEN.**<br>
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -507,7 +510,7 @@ Test Scenario<br>
 - These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -549,7 +552,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - http://nitra.proof.gmpsdealer.com/content15?nextGen=false
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
@@ -592,7 +595,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
 
-[Back to Top](#tool-descriptions)
+[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
 
 <br>
 <br>
