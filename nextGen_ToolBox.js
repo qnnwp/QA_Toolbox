@@ -1334,7 +1334,8 @@
                 this.$toolsPanel.append(spellCheck.config.$activateButt);
             },
             bindEvents: function () {
-                spellCheck.config.$activateButt.on('click', this.spellCheck.bind(this));
+                //                spellCheck.config.$activateButt.on('click', this.spellCheck.bind(this));
+                spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
             },
             // ----------------------------------------
             // tier 2 functions
@@ -1342,6 +1343,11 @@
             spellCheck: function () {
                 var openThis = this.buildURL();
                 openNewTab(openThis);
+            },
+            spellCheckPage: function () {
+                document.designMode = "on";
+                jQuery('body').focus();
+                document.designMode = "off";
             },
             // ----------------------------------------
             // tier 3 functions
@@ -3919,6 +3925,7 @@
             cacheDOM: function () {
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = this.nextGenCheck();
+                console.log(this.isNextGenPlatform);
                 this.isCDKsite = this.isCDKsite();
                 this.isMobile = this.isMobile();
                 this.editMode = this.editMode();
@@ -3962,8 +3969,8 @@
 
                 // add tetra specific tool to panel
                 if (!this.isNextGenPlatform) {
-                    viewMobile.init();
                     jQuery('#otherTools').append($wo_butt);
+                    viewMobile.init(panelID);
                 }
             },
             togglesPanel: function () {
@@ -3980,7 +3987,7 @@
 
                 // add tetra specific tool to panel
                 if (!this.isNextGenPlatform) {
-                    m4Check.init();
+                    m4Check.init(panelID);
                 }
             },
             dynamicPanel: function () {
