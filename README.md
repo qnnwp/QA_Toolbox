@@ -667,7 +667,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]<br>
     - http://nitra.proof.gmpsdealer.com/content15?nextGen=false<br>
 
----
 
 <br>
 <br>
@@ -723,7 +722,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
----
 
 <br>
 <br>
