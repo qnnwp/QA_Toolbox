@@ -1,28 +1,28 @@
 ![QA Tool](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)
 
 # **Tool Descriptions**<br>
-## Page Information :new:
+## Page Information Panel :new:
 :one: [Dealer Name](#dealer-name)<br>
 :two: [Web-ID](#web-id)<br>
 :three: [Page Name](#page-name)<br>
 :four: [H Tags](#h-tags)<br>
 
-## QA Tools :new:
+## QA Tools Panel :new:
 :one: [Image Checker](#image-checker)<br>
 :two: [Link Checker](#link-checker) :sparkles:<br>
 :three: [Spell Checker](#spellcheck-page)<br>
 :four: [WebPageTest](#web-page-test)<br>
 :five: [404 Link Checker](#404-link-checker) :sparkles:<br>
 
-## Other Tools :new:
+## Other Tools Panel :new:
 :one: [Show Navigation](#show-navigation)<br>
 :two: [SEO Simplify](#seo-simplify)<br>
 
-## Toggles :new:
+## Toggles Panel :new:
 :one: [Refresh Button](#refresh-button)<br>
 :two: [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
-## URL Modifiers :new:
+## URL Modifiers Panel :new:
 :one: [Auto Apply Modifiers](#auto-apply-parameters)<br>
 :two: [NextGen Parameter](#nextgen-parameter)<br>
 :three: [Show Autofill Tags](#show-autofill-tags)<br>
@@ -36,7 +36,7 @@
 <br>
 <br>
 
-# **Page Information**<br>
+# **Page Information Panel**<br>
 
 This panel shows all important information for the current CDK website you are viewing.<br>
 
@@ -47,17 +47,44 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 
 ![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/videos/pageInfoHighlight_paste.gif)
 
+<br>
+<br>
+
+---
+---
+
+<br>
+<br>
+
 ## **Dealer Name**<br>
 
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
 
 ![Dealer Name](https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png)
 
+<br>
+<br>
+
+---
+---
+
+<br>
+<br>
+
 ## **Web ID**<br>
 
 This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.  This web-id should be the same name as the dealer's "WebID" name in Salesforce.  This is also used to navigate to the dealer's site in WSM for editting.
 
 ![Web ID](https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png)
+
+<br>
+<br>
+
+---
+---
+
+<br>
+<br>
 
 ## **Page Name**<br>
 
@@ -66,6 +93,15 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 *e.g. LandingPage, HoursAndDirections, MiscPage.*
 
 ![Page Name](https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png)
+
+<br>
+<br>
+
+---
+---
+
+<br>
+<br>
 
 ## **H Tags**<br>
 
@@ -84,7 +120,7 @@ This area will display the current h tags on the current page you are viewing.  
 <br>
 <br>
 
-# **QA Tools**<br>
+# **QA Tools Panel**<br>
 
 This panel has the main QA tools for checking the site.
 
@@ -352,7 +388,7 @@ WebPageTest Settings | WebPageTest Prompt
 <br>
  
  
-# **Other Tools**<br>
+# **Other Tools Panel**<br>
 
 
 ## **Show Navigation**<br>
@@ -396,7 +432,7 @@ This tool will aid in formatting SEO text that is taken from a live site that is
 <br>
 <br>
 
-# **Toggles**<br>
+# **Toggles Panel**<br>
 
 ## **Refresh Button**<br>
 
@@ -425,7 +461,7 @@ This tool will hide the PCE toolbar that appears at the top of CDK sites.<br>
 <br>
 
 
-# **URL Modifiers**<br>
+# **URL Modifiers Panel**<br>
 
 
 ## **Auto Apply Modifiers**<br>
