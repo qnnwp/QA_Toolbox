@@ -40,7 +40,7 @@
 
 This panel shows all important information for the current CDK website you are viewing.<br>
 
-*pic of Page Information Panel
+![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
 
 ***Features***<br>
 Clicking on the info area will copy the text to your clipboard.  There will be no notification.
