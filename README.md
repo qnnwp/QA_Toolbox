@@ -118,7 +118,7 @@
 ![H Tag Display](https://github.com/cirept/NextGen/blob/master/gifs/htagdisplay_DEMO.gif)<br>
 
 
-[Back to Top](#tool-descriptions)<br>
+[Back to Top](.#tool-descriptions)<br>
 
 <br>
 <br>
@@ -170,7 +170,7 @@
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](.#tool-descriptions)<br>
 
 <br>
 <br>
