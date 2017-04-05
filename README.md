@@ -1,37 +1,42 @@
-![QA Tool](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)<br>
-
 # Tool Descriptions<br>
 
-[Jump To Page Info Section](#page-information-panel)<br>
+<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png"></p>
+
 ## Page Information Panel :new:<br>
-:one: [Dealer Name](#dealer-name)<br>
-:two: [Web-ID](#web-id)<br>
-:three: [Page Name](#page-name)<br>
-:four: [H Tags](#h-tags)<br>
+[Dealer Name](#dealer-name)<br>
+[Web-ID](#web-id)<br>
+[Page Name](#page-name)<br>
+[H Tags](#h-tags)<br>
 
-[Jump To QA Tools Panel Section](#qa-tools-panel)<br>
+[Jump To Page Info Section](#page-information-panel)<br><br><br>
+
 ## QA Tools Panel :new:<br>
-:one: [Image Checker](#image-checker)<br>
-:two: [Link Checker](#link-checker) :sparkles:<br>
-:three: [Spell Checker](#spellcheck-page)<br>
-:four: [WebPageTest](#web-page-test)<br>
-:five: [404 Link Checker](#404-link-checker) :sparkles:<br>
+[Image Checker](#image-checker)<br>
+[Link Checker](#link-checker) :sparkles:<br>
+[Spell Checker](#spellcheck-page)<br>
+[WebPageTest](#web-page-test)<br>
+[404 Link Checker](#404-link-checker) :sparkles:<br>
 
-[Jump To Other Tools Panel Section](#other-tools-panel)<br>
+[Jump To QA Tools Panel Section](#qa-tools-panel)<br><br><br>
+
 ## Other Tools Panel :new:<br>
-:one: [Show Navigation](#show-navigation)<br>
-:two: [SEO Simplify](#seo-simplify)<br>
+[Show Navigation](#show-navigation)<br>
+[SEO Simplify](#seo-simplify)<br>
 
-[Jump To Toggles Panel Section](#toggles-panel)<br>
+[Jump To Other Tools Panel Section](#other-tools-panel)<br><br><br>
+
 ## Toggles Panel :new:<br>
-:one: [Refresh Button](#refresh-button)<br>
-:two: [Hide Preview Toolbar](#hide-preview-toolbar)<br>
+[Refresh Button](#refresh-button)<br>
+[Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
-[Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br>
-## URL Modifiers Panel :new:<br>
-:one: [Auto Apply Modifiers](#auto-apply-parameters)<br>
-:two: [NextGen Parameter](#nextgen-parameter)<br>
-:three: [Show Autofill Tags](#show-autofill-tags)<br>
+[Jump To Toggles Panel Section](#toggles-panel)<br><br><br>
+
+## URL Modifiers Panel<br>
+[Auto Apply Modifiers](#auto-apply-parameters)<br>
+[NextGen Parameter](#nextgen-parameter)<br>
+[Show Autofill Tags](#show-autofill-tags)<br>
+
+[Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br><br><br>
 
 <a href="#top">&nbsp;</a>
 
