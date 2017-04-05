@@ -70,8 +70,6 @@
 
 [Back to Top](#top)
 
-<br>
-
 ---
 
 <br>
