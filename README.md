@@ -1,15 +1,15 @@
-# Tool Descriptions<br>
-
 ![QA Tool](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)<br>
 
-<a href="#top">&nbsp;</a>
+# Tool Descriptions<br>
 
-## Page Information Panel :new: [Jump To Instructions](#page-information-panel)
+[Jump To Page Info Section](#page-information-panel)<br>
+## Page Information Panel :new:<br>
 :one: [Dealer Name](#dealer-name)<br>
 :two: [Web-ID](#web-id)<br>
 :three: [Page Name](#page-name)<br>
 :four: [H Tags](#h-tags)<br>
 
+[Jump To QA Tools Panel Section](#qa-tools-panel)<br>
 ## QA Tools Panel :new:<br>
 :one: [Image Checker](#image-checker)<br>
 :two: [Link Checker](#link-checker) :sparkles:<br>
@@ -17,18 +17,23 @@
 :four: [WebPageTest](#web-page-test)<br>
 :five: [404 Link Checker](#404-link-checker) :sparkles:<br>
 
+[Jump To Other Tools Panel Section](#other-tools-panel)<br>
 ## Other Tools Panel :new:<br>
 :one: [Show Navigation](#show-navigation)<br>
 :two: [SEO Simplify](#seo-simplify)<br>
 
+[Jump To Toggles Panel Section](#toggles-panel)<br>
 ## Toggles Panel :new:<br>
 :one: [Refresh Button](#refresh-button)<br>
 :two: [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
+[Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br>
 ## URL Modifiers Panel :new:<br>
 :one: [Auto Apply Modifiers](#auto-apply-parameters)<br>
 :two: [NextGen Parameter](#nextgen-parameter)<br>
 :three: [Show Autofill Tags](#show-autofill-tags)<br>
+
+<a href="#top">&nbsp;</a>
 
 <br>
 <br>
@@ -173,7 +178,7 @@
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
-[Back to Top](#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -229,7 +234,7 @@
 | The links will turn a highlighted color to signify that you have checked the link.  Added for ease of use when QA'ing |
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -269,7 +274,7 @@
 | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png) |
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -296,7 +301,7 @@
 | ***Please verify that all the words on the page is in fact spelt wrong*** |
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -340,7 +345,7 @@
 | All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -397,7 +402,7 @@
 >
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -435,7 +440,7 @@
 - To remove the pop up, click on the 'remove' button at the top of the pop up.<br>
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -462,7 +467,7 @@
 **This tool works for both TETRA and NEXTGEN.**
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -482,7 +487,7 @@
 **This tool works for both TETRA and NEXTGEN.**<br>
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -502,20 +507,20 @@
 
 - This tool allows the tool to automatically apply the URL parameters of the URL modifications within this panel.<br>
 - When switching this toggle on, it will determine if the current page you are viewing has the desired URL parameters added to it.<br>
-- If the URL is missing a parameter the page will automatically refresh with the URL parameter added to it.
+- If the URL is missing a parameter the page will automatically refresh with the URL parameter added to it.<br>
 
 Test Scenario<br>
 - e.g. *current URL* = http://nitra.proof.gmpsdealer.com/content15<br>
-- I want to see the NEXTGEN version of my sandbox TETRA site and also want to make sure that all subsequent windows that I open are also the NEXTGEN version of my sandbox site.<br>
-1.   I switch the **'nextgen parameters?'** toggle **ON**<br>
-2.   Then I switch the **'auto apply modifiers?'** toggle **ON**.
+    - I want to see the NEXTGEN version of my sandbox TETRA site and also want to make sure that all subsequent windows that I open are also the NEXTGEN version of my sandbox site.<br>
+        1.   I switch the **'nextgen parameters?'** toggle **ON**<br>
+        2.   Then I switch the **'auto apply modifiers?'** toggle **ON**.<br>
 
 - This will cause the page to refresh and the NEXTGEN version of the site visible.<br>
 - *new URL* = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
-- These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***
+- These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***<br>
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -528,36 +533,46 @@ Test Scenario<br>
 
 ## **Nextgen Parameters?**<br>
 
-This tool controls the logic of the 'auto apply modifiers' toggle.  When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.  **This tool works in both TETRA and NEXTGEN.  **This is also how you control which version of the tool you want touse.**
+- This tool controls the logic of the 'auto apply modifiers' toggle.<br>
+- When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
+- **This tool works in both TETRA and NEXTGEN.<br>
+- **This is also how you control which version of the tool you want to use.**<br>
 
-### ON position *pic here
+### If work is strictly related to NEXTGEN, please have this toggle always on to ensure that every page you view will be the NEXTGEN version of the page.<br>
 
-This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.
+* There is an issue when going viewing a NEXTGEN site, you are suddenly shown the TETRA version.  This fixes that issue.<br>
+
+### ON position<br>
+
+*pic here<br>
+
+- This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.<br>
+
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~<br>
+     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
+- If ***"nextGen=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.<br>
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=false~~<br>
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
+- If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]<br>
+    - **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
+
+### OFF position<br>
+
+*pic here<br>
+
+This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.<br>
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~<br>
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false<br>
+- If ***"nextGen=true"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.<br>
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=true~~<br>
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false<br>
+- If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]<br>
+    - http://nitra.proof.gmpsdealer.com/content15?nextGen=false<br>
 
 
-- If the parameter is not detected the tool will refresh the page with the parameter added to it.
-     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
-     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
-- If ***"nextGen=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
-    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=false~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
-- If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]
-    - **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
-
-### OFF position *pic here
-
-This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.
-- If the parameter is not detected the tool will refresh the page with the parameter added to it.
-    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false
-- If ***"nextGen=true"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
-     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?nextGen=true~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=false
-- If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]
-    - http://nitra.proof.gmpsdealer.com/content15?nextGen=false
-
-
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
@@ -570,26 +585,31 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 ## Show Autofill Tags?<br>
 
-This tool controls the logic of the 'auto apply modifiers' toggle.  When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.  **This tool works in both TETRA and NEXTGEN.**
+- This tool controls the logic of the 'auto apply modifiers' toggle.<br>
+- When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
+**This tool works in both TETRA and NEXTGEN.**
 
-### ON position *pic here
+### ON position<br>
 
-This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=true"*** is present in the URL.
+*pic here<br>
+
+- This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=true"*** is present in the URL.<br>
 
 
-- If the parameter is not detected the tool will refresh the page with the parameter added to it.
-     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
-     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
-- If ***"disableAutofill=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.
-    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false~~
-    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
-- If  ***"disableAutofill=true"*** is detected in the URL, nothing will happen.  :]
-    - **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true
+- If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
+     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~<br>
+     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true<br>
+- If ***"disableAutofill=false"*** is detected in the URL, the page will refresh with the parameter now having a ***false*** value.<br>
+    - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false~~<br>
+    - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true<br>
+- If  ***"disableAutofill=true"*** is detected in the URL, nothing will happen.  :]<br>
+    - **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true<br>
 
-<br>
-### OFF position *pic here
+### OFF position<br>
 
-This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.
+*pic here<br>
+
+- This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
     - **OLD URL** = ~~http://nitra.proof.gmpsdealer.com/content15~~
     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
@@ -600,7 +620,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
 
-[Back to Top](https://github.com/cirept/NextGen/blob/master/README.md#tool-descriptions)<br>
+[Back to Top](#top)<br>
 
 <br>
 <br>
