@@ -2,7 +2,7 @@
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png"></p>
 
-*** click on the links to jump to the tool descriptions ***<br>
+***click on the links to jump to the tool descriptions***<br>
 
 ## Page Information Panel :new:<br>
 [Dealer Name](#dealer-name)<br>
@@ -40,7 +40,7 @@
 
 [Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br><br><br>
 
-<a href="#topNavigation">&nbsp;</a>
+<a href="#top">&nbsp;</a>
 
 <br>
 <br>
@@ -71,7 +71,7 @@
 <br>
 <br>
 
-[Back to Top](#topNavigation)
+[Back to Top](#page-information-panel-new)
 
 ---
 
@@ -87,10 +87,10 @@
 - This area will display the current dealer's ***NAME*** of the CDK site you are viewing.<br>
 - This dealer name should be the same name as the dealer's "Account" name in Salesforce.<br>
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -107,10 +107,10 @@
 - This web-id should be the same name as the dealer's "WebID" name in Salesforce.<br>
 - This is also used to navigate to the dealer's site in WSM for editting.
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -129,10 +129,10 @@
 
 *e.g. LandingPage, HoursAndDirections, MiscPage.*<br>
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -154,10 +154,10 @@
 <img src ="https://github.com/cirept/NextGen/blob/master/gifs/htagdisplay_DEMO.gif"><br>
 </p>
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 ---
@@ -173,9 +173,11 @@
 <img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_qatools.png"><br>
 </p>
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br><br>
+[Back to Top](#top)
+
 ---
 <br><br>
 
@@ -216,10 +218,10 @@
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -274,10 +276,10 @@
 | The links will turn a highlighted color to signify that you have checked the link.  Added for ease of use when QA'ing |
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -316,10 +318,10 @@
 | <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png"></p> |
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -343,10 +345,10 @@
 | ***Please verify that all the words on the page is in fact spelt wrong*** |
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -387,10 +389,10 @@
 | All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -444,10 +446,10 @@
 >
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 ---
@@ -482,10 +484,10 @@
 - To remove the pop up, click on the 'remove' button at the top of the pop up.<br>
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -509,10 +511,10 @@
 **This tool works for both TETRA and NEXTGEN.**
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -529,10 +531,10 @@
 **This tool works for both TETRA and NEXTGEN.**<br>
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 ---
@@ -564,10 +566,10 @@ Test Scenario<br>
 - These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***<br>
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -620,10 +622,10 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - http://nitra.proof.gmpsdealer.com/content15?nextGen=false<br>
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
@@ -670,10 +672,10 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
 
-[Back to Top](#top)<br>
+<br>
+<br>
 
-<br>
-<br>
+[Back to Top](#top)
 
 ---
 
