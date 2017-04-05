@@ -42,7 +42,7 @@
 
 - This panel shows all important information for the current CDK website you are viewing.<br>
 
-### Features<br>
+### **Features**<br>
 
 ![Page Information Highlight Feature](https://github.com/cirept/NextGen/blob/master/gifs/pageInfoHighlight_paste.gif)<br>
 
@@ -136,7 +136,7 @@
 
 ![Show Navigation DEMO](https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif)<br>
 
-### TIP:<br>
+### **TIP:**<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 - This tool will allow the user to see all of the navigation menu without having to hover over the main navigation item.<br>
@@ -144,11 +144,11 @@
 - When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
 ***This tool works for both TETRA and NEXTGEN***<br>
 
-### Turning the tool on:<br>
+### **Turning the tool on:**<br>
 
 - Click the 'show navigation' button inside the 'qa tools' panel.<br>
 
-### Turning the tool off:<br>
+### **Turning the tool off:**<br>
 
 - When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
 
@@ -167,22 +167,21 @@
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 
-<br>
 [Back to Top](#tool-descriptions)<br>
+
+<br>
 <br>
 
 ---
----
 
 <br>
 <br>
-
 
 ## **Link checker**<br>
 
 ![Link Checker DEMO](https://github.com/cirept/NextGen/blob/master/gifs/linkCheckerDEMO.gif)<br>
 
-### TIP:<br>
+### **TIP:**<br>
 
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
@@ -191,11 +190,11 @@
 - More detail on those factors are stated below.<br>
 ***This tool works for both TETRA and NEXTGEN***
 
-### Turning the tool on:<br>
+### **Turning the tool on:**<br>
 
 - Click the 'link checker' button inside the 'qa tools' panel.<br>
 
-### Turning the tool off:<br>
+### **Turning the tool off:**<br>
 
 - When you are done using the tool, simply click the "turn off" on the legend and the tool will turn itself off.<br>
 
@@ -223,16 +222,16 @@
 | ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) |
 | The links will turn a highlighted color to signify that you have checked the link.  Added for ease of use when QA'ing |
 
-<br>
+
 [Back to Top](#tool-descriptions)<br>
+
+<br>
 <br>
 
 ---
----
 
 <br>
 <br>
-
 
 ## **Image Checker**<br>
 
@@ -263,16 +262,16 @@
 | --- |
 | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png) |
 
-<br>
+
 [Back to Top](#tool-descriptions)<br>
+
+<br>
 <br>
 
 ---
----
 
 <br>
 <br>
-
 
 ## **Spellcheck Page**<br>
 
@@ -291,16 +290,15 @@
 | ***Please verify that all the words on the page is in fact spelt wrong*** |
 
 
-<br>
 [Back to Top](#tool-descriptions)<br>
+
+<br>
 <br>
 
 ---
----
 
 <br>
 <br>
-
 
 ## **404 Checker**<br>
 
@@ -336,16 +334,15 @@
 | All links that result in a 404 error (link leads to a page that doesn't exist) with be flagged and should be addressed. |
 
 
-<br>
 [Back to Top](#tool-descriptions)
+
+<br>
 <br>
 
 ---
----
 
 <br>
 <br>
-
 
 ## **Web Page Test**<br>
 
@@ -393,8 +390,10 @@
 >Benchmark for desktop site = load time < 10 sec.
 >
 
-<br>
+
 [Back to Top](#tool-descriptions)
+
+<br>
 <br>
 
 ---
@@ -429,11 +428,12 @@
 
 - To remove the pop up, click on the 'remove' button at the top of the pop up.<br>
 
-<br>
+
 [Back to Top](#tool-descriptions)
+
+<br>
 <br>
 
----
 ---
 
 <br>
@@ -446,6 +446,7 @@
 
 - These tools are here to make for convenience's sake.<br>
 
+
 ## **Refresh Button**<br>
 
 ![Refresh Button DEMO](https://github.com/cirept/NextGen/blob/master/gifs/refreshButtonDEMO.gif)
@@ -454,6 +455,13 @@
 - To hide/show the button, switch the control on/off.<br>
 **This tool works for both TETRA and NEXTGEN.**
 
+
+[Back to Top](#tool-descriptions)
+
+<br>
+<br>
+
+---
 
 <br>
 <br>
@@ -468,11 +476,13 @@
 **This tool works for both TETRA and NEXTGEN.**<br>
 
 
+[Back to Top](#tool-descriptions)
+
 <br>
 <br>
 
-----
-----
+---
+---
 
 <br>
 <br>
@@ -497,6 +507,13 @@ Test Scenario<br>
 - These settings will also automatically apply 'nextGen=true' to all windows that I open from now on, until I turn the 'auto apply modifiers?' toggle ***off***
 
 
+[Back to Top](#tool-descriptions)
+
+<br>
+<br>
+
+---
+
 <br>
 <br>
 
@@ -519,7 +536,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If  ***"nextGen=true"*** is detected in the URL, nothing will happen.  :]
     - **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true
 
-<br>
 ### OFF position *pic here
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.
@@ -532,6 +548,13 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]
     - http://nitra.proof.gmpsdealer.com/content15?nextGen=false
 
+
+[Back to Top](#tool-descriptions)
+
+<br>
+<br>
+
+---
 
 <br>
 <br>
@@ -567,3 +590,14 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - **NEW URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 - If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
+
+
+[Back to Top](#tool-descriptions)
+
+<br>
+<br>
+
+---
+
+<br>
+<br>
