@@ -64,11 +64,12 @@
 </p>
 
 - Clicking on the info area will copy the text to your clipboard.<br>
-***There will be no notification.***<br>
-
-[Back to Top](#top)<br>
+***There will be no notification.***
 
 <br>
+
+[Back to Top](#top)
+
 <br>
 
 ---
