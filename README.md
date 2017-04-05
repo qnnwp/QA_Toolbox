@@ -35,7 +35,7 @@
 <br>
 <br>
 
-## Page Information<br>
+# Page Information<br>
 
 This panel shows all important information for the current CDK website you are viewing.<br>
 
@@ -46,19 +46,19 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 
 *gif here
 
-### :one: Dealer Name<br>
+## Dealer Name <br>
 
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
 
 *gif here
 
-### Web ID<br>
+## Web ID<br>
 
 This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.  This web-id should be the same name as the dealer's "WebID" name in Salesforce.  This is also used to navigate to the dealer's site in WSM for editting.
 
 *gif here
 
-### Page Name<br>
+## Page Name<br>
 
 This area will display the current ***PAGE NAME*** of the CDK site you are viewing.  This information is what the 'generic' page name of the page is called.  This will help navigate to a specific page while editting the site in WSM.<br>
 
@@ -66,7 +66,7 @@ This area will display the current ***PAGE NAME*** of the CDK site you are viewi
 
 *gif here
 
-### H Tags<br>
+## H Tags<br>
 
 This area will display the current h tags on the current page you are viewing.  Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
@@ -84,10 +84,10 @@ This area will display the current h tags on the current page you are viewing.  
 <br>
 <br>
 
-## QA Tools<br>
+# QA Tools<br>
 
 
-### :one: Show Navigation<br>
+## :one: Show Navigation<br>
 
 The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
@@ -102,7 +102,7 @@ Show Navigation Functionality | Show Navigation Legend
 ![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
 
 
-#### TIP:<br>
+### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
@@ -117,7 +117,7 @@ Show Navigation Functionality | Show Navigation Legend
 <br>
 
 
-### Link checker<br>
+## :two: Link checker<br>
 All links on the page will be highlighted with specific colors according to the validity of the link.
 
 **Features**
@@ -148,7 +148,7 @@ Link Checker Functionality | Link Checker Legend
 ----------------------------- | ----------------------
 ![Link Checker Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png) | ![Link Checker Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png)
 
-#### TIP:<br>
+### TIP:<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
 
 
@@ -163,7 +163,7 @@ Link Checker Functionality | Link Checker Legend
 <br>
 
 
-### Image Checker<br>
+## :three: Image Checker<br>
 All images on the page will be highlighted in specific colors that tell the user, at a glance, what images have and do not have alt text
 
 Image Checker Functionality | Image Checker Legend
@@ -182,7 +182,7 @@ Image Checker Functionality | Image Checker Legend
 <br>
 
 
-### Spellcheck Page<br>
+## :four: Spellcheck Page<br>
 This tool will send the current page to be spell checked via third party website.<br>
 
 
@@ -207,7 +207,7 @@ Spell Check Results Example |
 <br>
 
 
-### 404 Checker<br>
+## :five: 404 Checker<br>
 All the links on the page will be tested for validity and highlight the links according to the result.
 
 
@@ -248,7 +248,7 @@ All the links on the page will be tested for validity and highlight the links ac
 <br>
 
 
-### Web Page Test<br>
+## :six: Web Page Test<br>
 Will send in a query to WebPageTest.org of the currently viewed page.
 
 
@@ -288,7 +288,7 @@ WebPageTest Settings | WebPageTest Prompt
 <br>
 
 
-### 404 Link Checker<br>
+## :seven: 404 Link Checker<br>
 Will send in a query to WebPageTest.org of the currently viewed page.
 
 
@@ -329,3 +329,36 @@ WebPageTest Settings | WebPageTest Prompt
 
 
 ### SEO Simplify<br>
+
+<br>
+<br>
+
+# Other Tools<br>
+
+
+## :one: Show Navigation<br>
+
+The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
+
+
+**Features**
+
+1. When clicking on any subnavigation item, it will turn the link a different color.<br>
+   * Added to help keep track of what links you have already checked.
+
+Show Navigation Functionality | Show Navigation Legend
+----------------------------- | ----------------------
+![Show Navigation Functionality](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigation.png) | ![Show Navigation Legend](https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/showNavigationLegend.png)
+
+
+### TIP:<br>
+>*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
+
+
+<br>
+[Back to Top](#tool-descriptions)
+<br>
+
+---
+---
+
