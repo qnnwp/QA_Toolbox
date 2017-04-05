@@ -635,11 +635,10 @@ Test Scenario<br>
 * There is an issue when going viewing a NEXTGEN site, you are suddenly shown the TETRA version.  This fixes that issue.<br>
 
 ---
+
 ### ON position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenToggleON.png"></p>
-
----
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.<br>
 
@@ -653,11 +652,10 @@ Test Scenario<br>
     - **URL** = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
 
 ---
+
 ### OFF position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenparameterToggleOFF.png"></p>
-
----
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
@@ -669,6 +667,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"nextGen=false"*** is detected in the URL, nothing will happen. :]<br>
     - http://nitra.proof.gmpsdealer.com/content15?nextGen=false<br>
 
+---
 
 <br>
 <br>
@@ -690,11 +689,10 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 **This tool works in both TETRA and NEXTGEN.**
 
 ---
+
 ### ON position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleON.png"></p>
-
----
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=true"*** is present in the URL.<br>
 
@@ -709,11 +707,11 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
     - **URL** = http://nitra.proof.gmpsdealer.com/content15?disableAutofill=true<br>
 
 ---
+
 ### OFF position<br>
 
 <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleHighlightOFF.png"></p>
 
----
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.
@@ -725,6 +723,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
+---
 
 <br>
 <br>
