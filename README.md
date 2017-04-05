@@ -1,6 +1,3 @@
----
----
-<br>
 # **Tool Descriptions**<br>
 
 ## Page Information :new:
