@@ -4,30 +4,30 @@
 # Tool Descriptions<br>
 
 ## Page Information :new:
-[Dealer Name](#dealer-name)<br>
-[Web-ID](#web-id)<br>
-[Page Name](#page-name)<br>
-[H Tags](#h-tags)<br>
+:one: [Dealer Name](#dealer-name)<br>
+:two: [Web-ID](#web-id)<br>
+:three: [Page Name](#page-name)<br>
+:four: [H Tags](#h-tags)<br>
 
 ## QA Tools :new:
-[Image Checker](#image-checker)<br>
-[Link Checker](#link-checker) :sparkles:<br>
-[Spell Checker](#spellcheck-page)<br>
-[WebPageTest](#web-page-test)<br>
-[404 Link Checker](#404-link-checker) :sparkles:<br>
+:one: [Image Checker](#image-checker)<br>
+:two: [Link Checker](#link-checker) :sparkles:<br>
+:three: [Spell Checker](#spellcheck-page)<br>
+:four: [WebPageTest](#web-page-test)<br>
+:five: [404 Link Checker](#404-link-checker) :sparkles:<br>
 
 ## Other Tools :new:
-[Show Navigation](#show-navigation)<br>
-[SEO Simplify](#seo-simplify)<br>
+:one: [Show Navigation](#show-navigation)<br>
+:two: [SEO Simplify](#seo-simplify)<br>
 
 ## Toggles :new:
-[Refresh Button](#refresh-button)<br>
-[Hide Preview Toolbar](#hide-preview-toolbar)<br>
+:one: [Refresh Button](#refresh-button)<br>
+:two: [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
 ## URL Modifiers :new:
-[Auto Apply Modifiers](#auto-apply-parameters)<br>
-[NextGen Parameter](#nextgen-parameter)<br>
-[Show Autofill Tags](#show-autofill-tags)<br>
+:one: [Auto Apply Modifiers](#auto-apply-parameters)<br>
+:two: [NextGen Parameter](#nextgen-parameter)<br>
+:three: [Show Autofill Tags](#show-autofill-tags)<br>
 
 ---
 ---
@@ -46,7 +46,7 @@ Clicking on the info area will copy the text to your clipboard.  There will be n
 
 *gif here
 
-### Dealer Name<br>
+### :one: Dealer Name<br>
 
 This area will display the current dealer's ***NAME*** of the CDK site you are viewing.  This dealer name should be the same name as the dealer's "Account" name in Salesforce.
 
@@ -87,7 +87,7 @@ This area will display the current h tags on the current page you are viewing.  
 ## QA Tools<br>
 
 
-### Show Navigation<br>
+### :one: Show Navigation<br>
 
 The navigation menu will display all sub-navigation items.  This will allow for users to easily check out each sub-navigation items.
 
