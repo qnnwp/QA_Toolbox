@@ -45,7 +45,7 @@ This panel shows all important information for the current CDK website you are v
 ***Features***<br>
 Clicking on the info area will copy the text to your clipboard.  There will be no notification.
 
-*gif here
+![Page Information Highlight Feature](https://cdn.rawgit.com/cirept/NextGen/3c1a8ea7/videos/pageInfoHighlight.gif)
 
 ## **Dealer Name**<br>
 
