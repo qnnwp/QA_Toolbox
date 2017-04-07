@@ -10,7 +10,6 @@
 <br>
 
 ---
----
 
 <br>
 <br>
@@ -20,6 +19,7 @@
 <p align="center"><br>
 <img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png">
 </p>
+![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
 
 - This panel shows all important information for the current CDK website you are viewing.<br>
 
