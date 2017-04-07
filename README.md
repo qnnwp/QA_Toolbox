@@ -1,10 +1,10 @@
 # Tool Descriptions<br>
 
-<p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/a878528e/images/QA_tool_layout.png"></p>
-
-### Other Useful Links<br>
+## Other Useful Links<br>
 [Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
 [Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
+
+<p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/a878528e/images/QA_tool_layout.png"></p>
 
 <br>
 <br>
