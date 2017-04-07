@@ -4,10 +4,6 @@
 [Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
 [Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
 
-<p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/a878528e/images/QA_tool_layout.png"></p>
-
-markdown here (using raw file path)
-
 ![QA Tool Layout](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout.png)
 
 <br>
@@ -20,26 +16,19 @@ markdown here (using raw file path)
 
 # **Page Information Panel**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png">
-</p>
-![Page Information](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_pageinformation.png)
+![Page Information](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout_pageinformation.png)
 
 - This panel shows all important information for the current CDK website you are viewing.<br>
 
 ### **Features**<br>
 
-<p align="center"><br>
-<img src ="https://github.com/cirept/NextGen/blob/master/gifs/pageInfoHighlight_paste.gif">
-</p>
+![Page Information Highlight](https://github.com/cirept/NextGen/raw/master/gifs/pageInfoHighlight_paste.gif)
 
 - Clicking on the info area will copy the text to your clipboard.<br>
 ***There will be no notification.***
 
 <br>
 <br>
-
-[Back to Top](#page-information-panel)
 
 ---
 
@@ -48,17 +37,13 @@ markdown here (using raw file path)
 
 ## **Dealer Name**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/images/dealerNameFocus.png"><br>
-</p>
+![Dealer Name Focus](https://github.com/cirept/NextGen/raw/master/images/dealerNameFocus.png)
 
 - This area will display the current dealer's ***NAME*** of the CDK site you are viewing.<br>
 - This dealer name should be the same name as the dealer's "Account" name in Salesforce.<br>
 
 <br>
 <br>
-
-[Back to Top](#page-information-panel)
 
 ---
 
@@ -67,9 +52,7 @@ markdown here (using raw file path)
 
 ## **Web ID**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/images/webIDFocus.png"><br>
-</p>
+![Web ID Focus](https://github.com/cirept/NextGen/raw/master/images/webIDFocus.png)
 
 - This area will display the current dealer's ***WEB-ID*** of the CDK site you are viewing.<br>
 - This web-id should be the same name as the dealer's "WebID" name in Salesforce.<br>
@@ -78,8 +61,6 @@ markdown here (using raw file path)
 <br>
 <br>
 
-[Back to Top](#page-information-panel)
-
 ---
 
 <br>
@@ -87,9 +68,7 @@ markdown here (using raw file path)
 
 ## **Page Name**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/images/pageNameFocus.png"><br>
-</p>
+![Page Name Focus](https://github.com/cirept/NextGen/raw/master/images/pageNameFocus.png)
 
 - This area will display the current ***PAGE NAME*** of the CDK site you are viewing.<br>
 - This information is what the 'generic' page name of the page is called.<br>
@@ -100,8 +79,6 @@ markdown here (using raw file path)
 <br>
 <br>
 
-[Back to Top](#page-information-panel)
-
 ---
 
 <br>
@@ -109,23 +86,17 @@ markdown here (using raw file path)
 
 ## **H Tags**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/images/hTagFocus.png"><br>
-</p>
+![H Tag Focus](https://github.com/cirept/NextGen/raw/master/images/hTagFocus.png)
 
 - This area will display the current h tags on the current page you are viewing.<br>
 - Any h tags that have a Zero (0) value will be highlighted in orange.<br>
 
 ### ***Clicking on the area will bring a pop up with all the h tags displayed***<br>
 
-<p align="center"><br>
-<img src ="https://github.com/cirept/NextGen/blob/master/gifs/htagdisplay_DEMO.gif"><br>
-</p>
+![H Tag Display DEMO](https://github.com/cirept/NextGen/raw/master/gifs/htagdisplay_DEMO.gif)
 
 <br>
 <br>
-
-[Back to Top](#page-information-panel)
 
 ---
 ---
@@ -137,14 +108,10 @@ markdown here (using raw file path)
 
 - This panel has the main QA tools for checking the site.<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_qatools.png"><br>
-</p>
+![QA Tools Highlight](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout_qatools.png)
 
 <br>
 <br>
-
-[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -154,9 +121,7 @@ markdown here (using raw file path)
 
 ## **Image Checker**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/gifs/imageAltCheckerDEMO.gif"><br>
-</p>
+![Image Alt Checker DEMO](https://github.com/cirept/NextGen/raw/master/gifs/imageAltCheckerDEMO.gif)
 
 - All images on the page will be highlighted in specific colors that will tell the user what images **have** and **do not have** alt text.<br>
 - **If using this tool on a NEXTGEN site**, please scroll all the way to the bottom of the page to allow all images to load before running the tool.<br>
@@ -175,19 +140,17 @@ markdown here (using raw file path)
 
 | Image Checker Functionality |
 | ----------------------------- |
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageAltChecker.png"></p> |
+| ![Image Alt Checker](https://github.com/cirept/NextGen/raw/master/images/imageAltChecker.png) |
 | All images on the page will be highlighted with a green or red/pink box.  These colors will signify if the image **has** and **does not have** an alt text.<br>If the image has a green color on over the image, the ALT of the image will appear at the center. |
 
 
 | Image Checker Legend |
 | --- |
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/imageCheckerLegend.png"></p> |
+| ![Image Alt Checker Legend](https://github.com/cirept/NextGen/raw/master/images/imageCheckerLegend.png) |
 
 
 <br>
 <br>
-
-[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -196,9 +159,7 @@ markdown here (using raw file path)
 
 ## **Link checker**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/gifs/linkCheckerDEMO.gif"><br>
-</p>
+![Link Checker DEMO](https://github.com/cirept/NextGen/raw/master/gifs/linkCheckerDEMO.gif)
 
 ### **TIP:**<br>
 
@@ -221,7 +182,7 @@ markdown here (using raw file path)
 
 | Link Checker Legend |
 |---|
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkCheckerLegend.png"><br></p> |
+| ![Link Checker DEMO](https://github.com/cirept/NextGen/raw/master/images/linkCheckerLegend.png) |
 | ***'HAS NO title text'*** |
 | All links that DO NOT HAVE title text in the link will be flagged |
 | ***'HAS title text'*** |
@@ -238,14 +199,12 @@ markdown here (using raw file path)
 
 | Link Checker Functionality |
 | --- |
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/5567c3d4/images/linkChecker.png"></p> |
+| ![Link Checker](https://github.com/cirept/NextGen/raw/master/images/linkChecker.png) |
 | The links will turn a highlighted color to signify that you have checked the link.  Added for ease of use when QA'ing |
 
 
 <br>
 <br>
-
-[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -254,7 +213,7 @@ markdown here (using raw file path)
 
 ## **Spellcheck Page**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/spellcheckDEMO.gif"></p>
+![Spell Checker DEMO](https://github.com/cirept/NextGen/raw/master/gifs/spellcheckDEMO.gif)
 
 - This tool will send the current page to be spell checked via third party website, W3.org.<br>
 
@@ -265,14 +224,12 @@ markdown here (using raw file path)
 
 | Spell Check Results Example |
 | --- |
-| <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/367ce2a9/images/spellCheck.png"></p> |
+| ![Spell Checker](https://github.com/cirept/NextGen/raw/master/images/spellCheck.png) |
 | ***Please verify that all the words on the page is in fact spelt wrong*** |
 
 
 <br>
 <br>
-
-[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -281,7 +238,7 @@ markdown here (using raw file path)
 
 ## **Web Page Test**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/webpagetestDEMO.gif"></p>
+![Web Page Test DEMO](https://github.com/cirept/NextGen/raw/master/gifs/webpagetestDEMO.gif)
 
 - This tool will send in a query to WebPageTest.org of the currently viewed page.<br>
 - When clicking 'Web Page Test' button, a submenu will appear with advanced settings. These default settings will result in a typical test and should only be changed under specific circumstances.<br>
@@ -317,7 +274,7 @@ markdown here (using raw file path)
 - A new tab will open with the page already queued up for speed testing.<br>
 - Once the testing has been completed the results of the test will be displayed.<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/webPageTestResults.jpg"></p>
+![Web Page Test Results](https://github.com/cirept/NextGen/raw/master/images/webPageTestResults.jpg)
 
 >
 >The results will show the page load times for the site. The results page will also help with determining what is causing slow load times if necessary.<br>
@@ -329,8 +286,6 @@ markdown here (using raw file path)
 <br>
 <br>
 
-[Back to Top](#page-information-panel)
-
 ---
 
 <br>
@@ -338,7 +293,7 @@ markdown here (using raw file path)
 
 ## **404 Link Checker**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/link404CheckerDEMO.gif"></p>
+![404 Link Checker DEMO](https://github.com/cirept/NextGen/raw/master/gifs/link404CheckerDEMO.gif)
 
 - This tool will check every link on the site and highlight the link according to what the results of the test is.<br>
 - All the links on the page will be tested for validity and then will be highlighted accordingly.<br>
@@ -357,7 +312,7 @@ markdown here (using raw file path)
 
 | 404 Link Checker Legend |
 | --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/link404checkerLegend.png"></p> |
+| ![404 Link Checker Legend](https://github.com/cirept/NextGen/raw/master/images/link404checkerLegend.png) |
 | ***'Absolute URL*'*** |
 | All links that have a complete URL (e.g. http://nitra.wip.gmpsdealer.com/content15/VehicleSearchResults?search=new) as the link will be flagged.<br> All links that lead outside the site (e.g. https://confluence.cdk.com/display/DEV/CX+Innovation) will be flagged.<br> |
 | ***'f_link'*** |
@@ -373,8 +328,6 @@ markdown here (using raw file path)
 <br>
 <br>
 
-[Back to Top](#qa-tools-panel)
-
 ---
 ---
 
@@ -384,14 +337,12 @@ markdown here (using raw file path)
 
 # **Other Tools Panel**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_qatools.png"></p>
+![Other Tools Highlight](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout_othertools.png)
 
 - These tools are here to ease the process of QA'ing a site.
 
 <br>
 <br>
-
-[Back to Top](#other-tools-panel)
 
 ---
 
@@ -400,9 +351,7 @@ markdown here (using raw file path)
 
 ## **Show Navigation**<br>
 
-<p align="center"><br>
-<img src="https://github.com/cirept/NextGen/blob/master/gifs/showNavDEMO.gif"><br>
-</p>
+![Show Navigation DEMO](https://github.com/cirept/NextGen/raw/master/gifs/showNavDEMO.gif)
 
 ### **TIP:**<br>
 >*Show Navigation + Link Checker can and should be used together to verify links in the navigation are correct.*
@@ -422,20 +371,18 @@ markdown here (using raw file path)
 
 | Show Navigation Legend |
 | --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigationLegend.png"></p> |
+| ![Show Navigation Legend](https://github.com/cirept/NextGen/raw/master/images/showNavigationLegend.png) |
 | ***The "major page" color will only be applied when the tool is run on a TETRA site.  NEXTGEN has this feature disabled.*** |
 
 ### **Features**<br>
 
 | Show Navigation Functionality |
 | --- |
-| <p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showNavigation.png"></p> |
+| ![Show Navigation](https://github.com/cirept/NextGen/raw/master/images/showNavigation.png) |
 | When clicking on any subnavigation item, it will turn the link a different color to signify that you have checked the link.<br>***Added to help keep track of what links you have already checked.*** |
 
 <br>
 <br>
-
-[Back to Top](#other-tools-panel)
 
 ---
 
@@ -444,7 +391,7 @@ markdown here (using raw file path)
 
 ## **SEO Simplify**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/seoSimplifyDEMO.gif"></p>
+![SEO Simplify DEMO](https://github.com/cirept/NextGen/raw/master/gifs/seoSimplifyDEMO.gif)
 
 - This tool will aid in formatting SEO text that is taken from a live site that is formatted using css.<br>
 - This tool will provide a simplified version of the code you input.  Ready for pasting into a NextGen card.<br>
@@ -467,8 +414,6 @@ markdown here (using raw file path)
 <br>
 <br>
 
-[Back to Top](#other-tools-panel)
-
 ---
 
 <br>
@@ -477,13 +422,11 @@ markdown here (using raw file path)
 
 # **Toggles Panel**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_toggles.png"></p>
+![Toggle Tools Highlight](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout_toggles.png)
 
 - These tools are here to make for convenience's sake.<br>
 
 <br><br>
-
-[Back to Top](#toggles-panel)
 
 ---
 
@@ -491,7 +434,7 @@ markdown here (using raw file path)
 
 ## **Refresh Button**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/refreshButtonDEMO.gif"></p>
+![Refresh Button DEMO](https://github.com/cirept/NextGen/raw/master/gifs/refreshButtonDEMO.gif)
 
 - This tool will allow access to a refresh button that will provide a similar functionality as using the keyboard shortcut ctrl+f5 on a webpage.<br>
 - To hide/show the button, switch the control on/off.<br>
@@ -501,8 +444,6 @@ markdown here (using raw file path)
 <br>
 <br>
 
-[Back to Top](#toggles-panel)
-
 ---
 
 <br>
@@ -511,7 +452,7 @@ markdown here (using raw file path)
 
 ## **Hide Preview Toolbar**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/hidePreviewToolbarDEMO.gif"></p>
+![Hide Preview DEMO](https://github.com/cirept/NextGen/raw/master/gifs/hidePreviewToolbarDEMO.gif)
 
 - This tool will hide the PCE toolbar that appears at the top of CDK sites.<br>
 - To hide/show the button, switch the control on/off.<br>
@@ -520,8 +461,6 @@ markdown here (using raw file path)
 
 <br>
 <br>
-
-[Back to Top](#toggles-panel)
 
 ---
 ---
@@ -532,11 +471,9 @@ markdown here (using raw file path)
 
 # **URL Modifiers Panel**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout_urlModifiers.png"></p>
+![URL Modifiers Highlight](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout_urlModifiers.png)
 
 <br><br>
-
-[Back to Top](#url-modifiers-panel)
 
 ---
 
@@ -554,7 +491,7 @@ Test Scenario<br>
         1.   I switch the **'nextgen parameters?'** toggle **ON**<br>
         2.   Then I switch the **'auto apply modifiers?'** toggle **ON**.<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/nextgenToggleDEMO.gif"></p>
+![NextGen Toggle DEMO](https://github.com/cirept/NextGen/raw/master/gifs/nextgenToggleDEMO.gif)
 
 - This will cause the page to refresh and the NEXTGEN version of the site visible.<br>
 - *new URL* = http://nitra.proof.gmpsdealer.com/content15?nextGen=true<br>
@@ -581,8 +518,6 @@ Test Scenario<br>
 <br>
 <br>
 
-[Back to Top](#url-modifiers-panel)
-
 ---
 
 <br>
@@ -591,7 +526,7 @@ Test Scenario<br>
 
 ## **Nextgen Parameters?**<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/nextgenToggleDEMO.gif"></p>
+![NextGen Toggle DEMO](https://github.com/cirept/NextGen/raw/master/gifs/nextgenToggleDEMO.gif)
 
 - This tool controls the logic of the 'auto apply modifiers' toggle.<br>
 - When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
@@ -606,7 +541,7 @@ Test Scenario<br>
 
 ### ON position<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenToggleON.png"></p>
+![NextGen Toggle ON](https://github.com/cirept/NextGen/raw/master/images/nextgenToggleON.png)
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=true"*** is present in the URL.<br>
 
@@ -623,7 +558,7 @@ Test Scenario<br>
 
 ### OFF position<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/nextgenparameterToggleOFF.png"></p>
+![NextGen Toggle OFF](https://github.com/cirept/NextGen/raw/master/images/nextgenparameterToggleOFF.png)
 
 This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"nextGen=false"*** is present in the URL.<br>
 - If the parameter is not detected the tool will refresh the page with the parameter added to it.<br>
@@ -639,8 +574,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 <br>
 <br>
 
-[Back to Top](#url-modifiers-panel)
-
 ---
 
 <br>
@@ -649,7 +582,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 ## Show Autofill Tags?<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/gifs/autofillToggleDEMO.gif"></p>
+![Autofill Toggle DEMO](https://github.com/cirept/NextGen/raw/master/gifs/autofillToggleDEMO.gif")
 
 - This tool controls the logic of the 'auto apply modifiers' toggle.<br>
 - When switching this toggle into the **ON** or **OFF** position will cause the main tool to act differently.<br>
@@ -659,7 +592,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 ### ON position<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleON.png"></p>
+![Autofill Toggle ON](https://github.com/cirept/NextGen/raw/master/images/showautofillToggleON.png")
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=true"*** is present in the URL.<br>
 
@@ -677,7 +610,7 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 ### OFF position<br>
 
-<p align="center"><br><img src="https://github.com/cirept/NextGen/blob/master/images/showautofillToggleHighlightOFF.png"></p>
+![Autofill Toggle OFF](https://github.com/cirept/NextGen/raw/master/images/showautofillToggleHighlightOFF.png")
 
 
 - This will cause the 'auto apply modifiers' tool (when switched on) to search the current URL and see if ***"disableAutofill=false"*** is present in the URL.<br>
@@ -693,8 +626,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 
 <br>
 <br>
-
-[Back to Top](#url-modifiers-panel)
 
 ---
 
