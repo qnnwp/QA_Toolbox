@@ -6,6 +6,10 @@
 
 <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/a878528e/images/QA_tool_layout.png"></p>
 
+markdown here
+
+![QA Tool Layout](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)
+
 <br>
 <br>
 
