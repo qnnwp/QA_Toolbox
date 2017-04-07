@@ -4,14 +4,14 @@
 
 ***click on the links to jump to the tool descriptions***<br>
 
-## Page Information Panel :new:<br>
+## Page Information Panel<br>
 [Dealer Name](#dealer-name)<br>
 [Web-ID](#web-id)<br>
 [Page Name](#page-name)<br>
 [H Tags](#h-tags)<br>
 
 
-## QA Tools Panel :new:<br>
+## QA Tools Panel<br>
 [Image Checker](#image-checker)<br>
 [Link Checker](#link-checker) :sparkles:<br>
 [Spell Checker](#spellcheck-page)<br>
@@ -19,12 +19,12 @@
 [404 Link Checker](#404-link-checker) :sparkles:<br>
 
 
-## Other Tools Panel :new:<br>
+## Other Tools Panel<br>
 [Show Navigation](#show-navigation)<br>
 [SEO Simplify](#seo-simplify)<br>
 
 
-## Toggles Panel :new:<br>
+## Toggles Panel<br>
 [Refresh Button](#refresh-button)<br>
 [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
@@ -35,7 +35,7 @@
 [Show Autofill Tags](#show-autofill-tags)<br>
 
 
-<a href="#page-information-panel-new">&nbsp;</a>
+<a href="#page-information-panel">&nbsp;</a>
 
 ### Other Useful Links<br>
 [Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
@@ -70,7 +70,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#page-information-panel)
 
 ---
 
@@ -89,7 +89,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#page-information-panel)
 
 ---
 
@@ -109,7 +109,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#page-information-panel)
 
 ---
 
@@ -131,7 +131,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#page-information-panel)
 
 ---
 
@@ -156,7 +156,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#page-information-panel)
 
 ---
 ---
@@ -175,7 +175,7 @@
 <br>
 <br>
 
-[Back to Top](#qa-tools-panel-new)
+[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -218,7 +218,7 @@
 <br>
 <br>
 
-[Back to Top](#qa-tools-panel-new)
+[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -276,7 +276,7 @@
 <br>
 <br>
 
-[Back to Top](#qa-tools-panel-new)
+[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -303,7 +303,7 @@
 <br>
 <br>
 
-[Back to Top](#qa-tools-panel-new)
+[Back to Top](#qa-tools-panel)
 
 ---
 
@@ -360,7 +360,7 @@
 <br>
 <br>
 
-[Back to Top](#page-information-panel-new)
+[Back to Top](#page-information-panel)
 
 ---
 
@@ -404,7 +404,7 @@
 <br>
 <br>
 
-[Back to Top](#qa-tools-panel-new)
+[Back to Top](#qa-tools-panel)
 
 ---
 ---
@@ -422,7 +422,7 @@
 <br>
 <br>
 
-[Back to Top](#other-tools-panel-new)
+[Back to Top](#other-tools-panel)
 
 ---
 
@@ -466,7 +466,7 @@
 <br>
 <br>
 
-[Back to Top](#other-tools-panel-new)
+[Back to Top](#other-tools-panel)
 
 ---
 
@@ -498,7 +498,7 @@
 <br>
 <br>
 
-[Back to Top](#other-tools-panel-new)
+[Back to Top](#other-tools-panel)
 
 ---
 
@@ -514,7 +514,7 @@
 
 <br><br>
 
-[Back to Top](#toggles-panel-new)
+[Back to Top](#toggles-panel)
 
 ---
 
@@ -532,7 +532,7 @@
 <br>
 <br>
 
-[Back to Top](#toggles-panel-new)
+[Back to Top](#toggles-panel)
 
 ---
 
@@ -552,7 +552,7 @@
 <br>
 <br>
 
-[Back to Top](#toggles-panel-new)
+[Back to Top](#toggles-panel)
 
 ---
 ---
