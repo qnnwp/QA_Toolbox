@@ -268,7 +268,7 @@
 ***Every query request sent by this tool results in a total of three (3) tests*** to be made, so as you can see that reaching that 200 limit per day can be quite easy.<br>
 - In the event that you receive an error message upon viewing the results page on WebPageTest.org mentioning the limit has been reached for the day, please choose a different key from the drop down and send in another test.<br>
 
-### Results<br>
+### Web Page Test Results<br>
 
 - Once the setting have been set up, hit the 'send test' button and your test will be sent in.<br>
 - A new tab will open with the page already queued up for speed testing.<br>
