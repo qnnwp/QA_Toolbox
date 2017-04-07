@@ -2,41 +2,6 @@
 
 <p align="center"><br><img src="https://cdn.rawgit.com/cirept/NextGen/a878528e/images/QA_tool_layout.png"></p>
 
-***click on the links to jump to the tool descriptions***<br>
-
-## Page Information Panel<br>
-[Dealer Name](#dealer-name)<br>
-[Web-ID](#web-id)<br>
-[Page Name](#page-name)<br>
-[H Tags](#h-tags)<br>
-
-
-## QA Tools Panel<br>
-[Image Checker](#image-checker)<br>
-[Link Checker](#link-checker) :sparkles:<br>
-[Spell Checker](#spellcheck-page)<br>
-[WebPageTest](#web-page-test)<br>
-[404 Link Checker](#404-link-checker) :sparkles:<br>
-
-
-## Other Tools Panel<br>
-[Show Navigation](#show-navigation)<br>
-[SEO Simplify](#seo-simplify)<br>
-
-
-## Toggles Panel<br>
-[Refresh Button](#refresh-button)<br>
-[Hide Preview Toolbar](#hide-preview-toolbar)<br>
-
-
-## URL Modifiers Panel<br>
-[Auto Apply Modifiers](#auto-apply-modifiers)<br>
-[NextGen Parameter](#nextgen-parameters)<br>
-[Show Autofill Tags](#show-autofill-tags)<br>
-
-
-<a href="#page-information-panel">&nbsp;</a>
-
 ### Other Useful Links<br>
 [Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
 [Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
