@@ -10,7 +10,6 @@
 [Page Name](#page-name)<br>
 [H Tags](#h-tags)<br>
 
-[Jump To Page Info Section](#page-information-panel)<br><br><br>
 
 ## QA Tools Panel :new:<br>
 [Image Checker](#image-checker)<br>
@@ -19,26 +18,22 @@
 [WebPageTest](#web-page-test)<br>
 [404 Link Checker](#404-link-checker) :sparkles:<br>
 
-[Jump To QA Tools Panel Section](#qa-tools-panel)<br><br><br>
 
 ## Other Tools Panel :new:<br>
 [Show Navigation](#show-navigation)<br>
 [SEO Simplify](#seo-simplify)<br>
 
-[Jump To Other Tools Panel Section](#other-tools-panel)<br><br><br>
 
 ## Toggles Panel :new:<br>
 [Refresh Button](#refresh-button)<br>
 [Hide Preview Toolbar](#hide-preview-toolbar)<br>
 
-[Jump To Toggles Panel Section](#toggles-panel)<br><br><br>
 
 ## URL Modifiers Panel<br>
 [Auto Apply Modifiers](#auto-apply-modifiers)<br>
 [NextGen Parameter](#nextgen-parameters)<br>
 [Show Autofill Tags](#show-autofill-tags)<br>
 
-[Jump To URL Modifiers Panel Section](#url-modifiers-panel)<br><br><br>
 
 <a href="#page-information-panel-new">&nbsp;</a>
 
