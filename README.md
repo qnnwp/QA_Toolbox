@@ -8,7 +8,7 @@
 
 markdown here
 
-![QA Tool Layout](https://github.com/cirept/NextGen/blob/master/images/QA_tool_layout.png)
+![QA Tool Layout](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout.png)
 
 <br>
 <br>
