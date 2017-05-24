@@ -10,11 +10,25 @@ body {
 header { 
   background: #348F50;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #56B4D3, #348F50);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #56B4D3, #348F50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: url(https://octodex.github.com/images/bouncercat.png) 128% 40% no-repeat, linear-gradient(to left, rgb(86, 180, 211), rgb(52, 143, 80)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 header h1 {
   font-family: inherit; 
+  font-size: 200px;
+  font-weight: bold;
+  line-height: 30px;
+  overflow: visible;
+  margin: 40px 0px 15px 0px;
+  position: absolute;
+}
+
+header p {
+  margin: 70px 0px 0px 120px;
+  padding: 0px;
+  font-size: 17px;
+  left: 50%;
+  color: rgb(0, 0, 0);  
 }
 
 .wrapper {
