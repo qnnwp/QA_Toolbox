@@ -2,8 +2,56 @@
 ---
 
 @import "{{ site.theme }}";
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+body {
+  font-family: 'Raleway', sans-serif;
+}
 
-.wrapper footer {
-    margin-left: 340px;
-    text-align: left;
+header { 
+  background: #348F50;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #56B4D3, #348F50);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #56B4D3, #348F50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+header h1 {
+  font-family: inherit; 
+}
+
+.wrapper {
+  width: 790px;
+}
+
+nav {
+  background: #f4f4f4;
+  border: 1px solid #c4c4c4;
+  padding-right: 15px;
+  padding-top: 15px;
+  left: 43%;
+  width: 305px;
+}
+
+section {
+  background: #ECE9E6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 800px;
+}
+
+footer {
+  left: inherit;
+  margin-left: -580px; 
+  right: 9%;
+  text-align: left;
+  width: 300px;
+}
+
+#banner {
+  background: #67B26F;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1px solid #f4f4f4;
+}
+
+#banner .button {
+ display: none; 
 }
