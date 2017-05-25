@@ -1,26 +1,6 @@
----
----
 # Toolbar Install Instructions
----
----
 
-<br>
-<br>
-
-## Table of Contents<br>
-
-Quick Links<br>
-[Tampermonkey Install Instructions](#tampermonkey-install-instructions)
-
-[UserScript Installation Instructions](#userscript-installation-instructions)
-
-<br>
-<br>
-
----
----
 ## Tampermonkey Install Instructions
----
 ---
 
 <br>
@@ -55,10 +35,8 @@ Once the Tampermonkey extension has been installed, please continue to the next 
 <br>
 
 ---
----
+
 ## UserScript Installation Instructions
----
----
 
 <br>
 <br>
