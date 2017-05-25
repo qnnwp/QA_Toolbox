@@ -1,6 +1,6 @@
 # Toolbar Install Instructions
 ---
-<br>
+
 <br>
 
 ## Tampermonkey Install Instructions
@@ -27,18 +27,17 @@ For additiona help installing FireFox Extensions, Please check out this guide : 
 #### *ie11 does not support his extension*<br>
 
 <br>
-<br>
 
 Once the Tampermonkey extension has been installed, please continue to the next set of instructions.
 
 <br>
-<br>
 
 ---
 
+<br>
+
 ## UserScript Installation Instructions
 
-<br>
 <br>
 
 ### 1. Open the link below in a new tab.  Copy all of the code.
@@ -50,6 +49,8 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 <br>
 
 ---
+
+<br>
 
 ### 2. Click the add-on icon in your browser
 
@@ -111,9 +112,12 @@ The icon is located next to "Install userscripts" tab.
 > If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
 Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 
+<br>
+
+---
 
 <br>
-<br>
+
 ## Tool descriptions
 
 click [here](../README.md)
