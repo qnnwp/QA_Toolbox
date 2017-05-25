@@ -1,14 +1,15 @@
 # Toolbar Install Instructions
 
+<br>
+<br>
+
 ## Tampermonkey Install Instructions
----
 
 <br>
 <br>
 
 Tampermonkey is a browser add-on that is used to run the toolbar on the webpage, please install the add-on
 
-<br>
 <br>
 
 ###Links to Browser Add-Ons<br>
@@ -49,7 +50,7 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 
 <br>
 
-===
+---
 
 ### 2. Click the add-on icon in your browser
 
@@ -57,7 +58,7 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 
 <br>
 
-===
+---
 
 <br>
 
@@ -68,7 +69,7 @@ This will open a new tab with the extension dashboard displayed ***(seen in step
 
 <br>
 
-===
+---
 
 <br>
 
@@ -79,7 +80,7 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
-===
+---
 
 <br>
 
@@ -89,7 +90,7 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
-===
+---
 
 <br>
 
@@ -99,7 +100,7 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
-===
+---
 
 <br>
 
@@ -114,4 +115,4 @@ Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 
 <br>
 <br>
-For tool descriptions click [here](https://github.com/cirept/NextGen/blob/master/README.md)
+For tool descriptions click [here](README.md)
