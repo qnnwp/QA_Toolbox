@@ -48,17 +48,9 @@ https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js<br>
 
 <br>
 
----
-
-<br>
-
 ### 2. Click the add-on icon in your browser
 
 ![Click Addon Icon](https://cdn.rawgit.com/cirept/NextGen/master/images/clickIcon.png)
-
-<br>
-
----
 
 <br>
 
@@ -69,18 +61,10 @@ This will open a new tab with the extension dashboard displayed ***(seen in step
 
 <br>
 
----
-
-<br>
-
 ### 4. Click the icon to add a new userscript<br>
 The icon is located next to "Install userscripts" tab.
 
 ![Click New UserScript Icon](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickNewScript.png)
-
-<br>
-
----
 
 <br>
 
@@ -90,17 +74,9 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
----
-
-<br>
-
 ### 6. Click the floppy disk to save your changes
 
 ![Click Floppy Disk](https://cdn.rawgit.com/cirept/NextGen/23d750e3/images/clickSave.png)
-
-<br>
-
----
 
 <br>
 
