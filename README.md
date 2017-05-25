@@ -4,7 +4,7 @@
 
 ## Other Useful Links<br>
 [Installation Instructions](docs/Install.md)<br>
-[Change Log]docs/ChangeLog.md)<br>
+[Change Log](docs/ChangeLog.md)<br>
 
 <br>
 <br>
