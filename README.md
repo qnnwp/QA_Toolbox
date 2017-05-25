@@ -2,18 +2,6 @@
 
 ![QA Tool Layout](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout.png)
 
-## Other Useful Links<br>
-[Installation Instructions](docs/Install.md)<br>
-[Change Log](docs/ChangeLog.md)<br>
-
-<br>
-<br>
-
----
-
-<br>
-<br>
-
 # **Page Information Panel**<br>
 
 ![Page Information](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout_pageinformation.png)
@@ -623,7 +611,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
-
 <br>
 <br>
 
@@ -632,6 +619,6 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 <br>
 <br>
 
-### Other Useful Links<br>
-[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
-[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
+## Other Useful Links<br>
+[Installation Instructions](docs/Install.md)<br>
+[Change Log](docs/ChangeLog.md)<br>
