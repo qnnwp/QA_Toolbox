@@ -1,11 +1,10 @@
 # Toolbar Install Instructions
-
+---
 <br>
 <br>
 
 ## Tampermonkey Install Instructions
 
-<br>
 <br>
 
 Tampermonkey is a browser add-on that is used to run the toolbar on the webpage, please install the add-on
