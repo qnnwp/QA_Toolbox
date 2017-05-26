@@ -10,9 +10,9 @@ body {
 }
 
 header { 
-  background: #348F50;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #56B4D3, #348F50);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, rgb(86, 180, 211), rgb(52, 143, 80)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #C0242B;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #C0242B, #9E222C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #C0242B, #9E222C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 header h1 {
@@ -50,6 +50,14 @@ nav {
 nav ul {
   padding: 0px;
   margin: 0px;
+}
+
+nav ul a {
+  color: #c4c4c4;
+}
+
+nav ul li.tag-h1 a {
+  color: #ffffff;
 }
 
 section {
