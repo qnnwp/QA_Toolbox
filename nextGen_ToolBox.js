@@ -1283,14 +1283,16 @@
                 var length = this.linksArrayLength,
                     a = 0,
                     $currentLink,
-                    $image = null,
-                    isImageLink = false,
-                    isQLPlink = false;
+                    $image, isImageLink, isQLPlink;
                 // ----------------------------------------
                 // TETRA SITE LOGIC
                 // ----------------------------------------
                 // loop through all links on page
                 for (a; a < length; a += 1) {
+                    // reset variables
+                    $image = null;
+                    isImageLink = false;
+                    isQLPlink = false;
                     $currentLink = jQuery(this.$allLinks[a]);
 
                     // ----------------------------------------
@@ -1307,6 +1309,7 @@
                     // ----------------------------------------
                     // ----------------------------------------
                     $image = $currentLink.find('img');
+                    //                    $image = $currentLink.children('img');
                     isImageLink = this.isImageLink($image);
                     // create check for links inside quick links widget
                     if ($currentLink.closest('.cell').attr('data-cell')) {
@@ -1322,7 +1325,8 @@
                                 //                                if ($currentLink.parent().attr('class').indexOf('co-card') > -1) {
                                 if ($currentLink.closest('li').attr('class').indexOf('co-card') > -1) {
                                     //                                    debugger;
-                                                                        isQLPlink = true;
+                                    isQLPlink = true;
+                                    $currentLink.addClass('QLPLink');
                                     $currentLink = $currentLink.closest('li').find('a:first');
                                     isImageLink = false;
                                 }
@@ -1456,7 +1460,8 @@
                     .append('.hasTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important; }')
                     .append('.noTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
                     .append('.emptyTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
-                    .append('.brokenURL { background: linear-gradient(to right, rgba(253, 116, 108, .75), rgba(255, 144, 104, .75)) !important }')
+                    //                    .append('.brokenURL { background: linear-gradient(to right, rgba(253, 116, 108, .75), rgba(255, 144, 104, .75)) !important }')
+                    .append('.brokenURL { background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important; color: white; }')
                     .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
                     .append('.absoluteURL { -moz-box-shadow: inset 0px 0px 0px 3px purple; -webkit-box-shadow: inset 0px 0px 0px 3px purple; box-shadow: inset 0px 0px 0px 3px purple; }')
                     .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to right, rgba(249,255,209,0.75) 0%, rgba(160,255,206,0.75) 100%) !important; color: #909090 !important; }'); // end of addStyles  #00a6ff
@@ -2756,9 +2761,11 @@
                         class: 'legendList'
                     }),
                     $legendContent: {
-                        //                        'otherDomain': 'Absolute URL*',
-                        'otherDomain': 'Leads Off Site',
-                        'framedIn': 'f_link*',
+                        'otherDomain': 'Absolute URL*',
+                        //                        'otherDomain': 'Leads Off Site',
+                        //removing this check from this tool.
+                        // check is already present in the link checker tool
+                        //'framedIn': 'f_link*',
                         //                        'brokenURL': 'URL Broken',
                         'jumpLink': 'Jump Link or "#" URL',
                         'attention': 'URL Empty or Undefined',
@@ -2836,14 +2843,15 @@
             addStyles: function () {
                 this.$toolbarStyles
                     // styles of colored overlay placed on images
-                    .append('.framedIn { background: linear-gradient(to left, #F7971E , #FFD200) !important; color: #000000 !important; }')
+                    //removing this class to keep functionality separate between tools.
+                    //.append('.framedIn { background: linear-gradient(to left, #F7971E , #FFD200) !important; color: #000000 !important; }')
                     .append('.attention { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
                     //                    .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
                     .append('.jumpLink { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
                     .append('.mobilePhoneLink { background: #005588 !important; color: #000000 !important; color: white !important; }')
                     .append('.success { background: linear-gradient(to right, rgba(86, 171, 47, .85) , rgba(168, 224, 99, .85)) !important; color: #000000 !important; }')
                     .append('.siteLink.success { background: linear-gradient(to right, rgba(86, 171, 47, .85) , rgba(168, 224, 99, .85)) !important; color: #000000 !important; }') // tester
-                    .append('.error { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
+                    .append('.error { background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75)) !important; color: #ffffff !important; }')
                     .append('.otherDomain { background: linear-gradient(to left, #00C9FF , #92FE9D) !important; color: #000000 !important; }')
                     .append('.siteLink { color: black !important; border: none !important;}')
                     //                    .append('.fourOfour { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
@@ -2916,14 +2924,14 @@
                 return linkURL;
             },
             testURLs: function ($currentLink) {
-                console.log('testURLS called');
-                console.log('----------------------------------------');
+                //                console.log('testURLS called');
+                //                console.log('----------------------------------------');
                 var linkURL = jQuery.trim($currentLink.attr('href'));
                 // TEST linkURL
                 // Add classes to $currentLink if link url does not pass tests
-                console.log('url testing');
-                console.log(linkURL);
-                console.log($currentLink);
+                //                console.log('url testing');
+                //                console.log(linkURL);
+                //                console.log($currentLink);
                 switch (true) {
                     // test for mobile specific links
                     case (linkURL.indexOf('tel') >= 0):
@@ -2953,14 +2961,19 @@
                         //                        case (linkURL.indexOf('www') > -1 || (linkURL.indexOf('http') > -1 || linkURL.indexOf('https') > -1)):
                     case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
                         $currentLink.addClass('otherDomain');
-                        return false;
+                        //                        return false;
+                        return true; // TESTING.   TEST THE ABSOLUTE URL REGARDLESS
                         //                        break;
                         // test for other special URLs
                         //                        case (linkURL.indexOf('f_') > -1 || linkURL.indexOf('//:') > -1):
+                        /*
+                        // removing this from the broken link to keep functionality separate.
+                        // use the link checker to detect link set up
                     case (linkURL.indexOf('f_') > -1 || linkChecker.verifyTarget($currentLink)):
                         $currentLink.addClass('framedIn');
                         checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                         return false;
+                        */
                         //                            continue;
                         //                        break;
                     default:
@@ -2999,7 +3012,7 @@
                     $image = null,
                     $imagelink = null,
                     isImageLink = false,
-                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, jLength, q, w, j, $currentCard, cardClass, passedChecks;
+                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, jLength, q, w, j, $currentCard, cardClass, passedChecks, $cardDeck;
 
                 // ----------------------------------------
                 // ----------------------------------------
@@ -3010,11 +3023,12 @@
                 j = 0;
                 for (j; j < jLength; j += 1) {
                     $currentLink = jQuery($otherLinks[j]);
+                    $currentLink.addClass('siteLink'); // add default flag class to links
                     // perform checks to link
                     // add flag class, check target, check title, check url
                     //                    this.testLink($currentLink, isImageLink);
 
-                    this.testURLs($currentLink);
+                    //                    this.testURLs($currentLink);
                     passedChecks = this.testURLs($currentLink);
                     if (!passedChecks) {
                         continue;
@@ -3029,7 +3043,7 @@
                 }
                 // ----------------------------------------
                 // ----------------------------------------
-                return;
+                //                return;
                 // FIGURE OUT HOW TO TEST THE REST OF THE LINKS ON NEXT GEN SITES
                 // ----------------------------------------
                 // ----------------------------------------
@@ -3042,6 +3056,7 @@
                     isImageLink = false;
                     $currentCard = jQuery($sections[a]);
                     $currentLink = null;
+                    $cardDeck = null;
 
                     if ($currentCard.attr('class') !== undefined) {
                         cardClass = $currentCard.attr('class');
@@ -3050,12 +3065,29 @@
                     $cardLinkContainer = $currentCard.find('div.link');
                     $cardSEOContainer = $currentCard.find('div.copy');
                     $cardImageContainer = $currentCard.find('div.media');
+                    $cardDeck = $currentCard.find('div.deck');
+
+                    //detect if the section element is a parent container
+                    //check if the section class contains 'branchy'
+                    if (cardClass.indexOf('branchy') > -1) {
+                        continue;
+                    }
+
+                    //detect if the section element is a container
+                    //check if the div.deck contains content
+                    if ($cardDeck.is(':not(:empty)')) {
+                        //                        $currentCard.css({
+                        //                            border: '1px solid #ff00ff'
+                        //                        });
+                        continue;
+                    }
 
                     switch (true) {
                         // ----------------------------------------
                         // ----------------------------------------
                         // card style is set to CTA links
                         case (cardClass.indexOf('link-clickable') > -1):
+                            console.log('clickable = links');
                             // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
                             // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
 
@@ -3065,13 +3097,15 @@
                             $cardLinks = $cardLinkContainer.find('a'); // this is an array
                             myLength = $cardLinks.length;
                             q = 0;
+                            isImageLink = false; // variable for ajax function
 
                             for (q; q < myLength; q += 1) {
                                 $currentLink = jQuery($cardLinks[q]);
+                                $currentLink.addClass('siteLink'); // add default flag class to links
                                 // perform checks to link
                                 // add flag class, check target, check title, check url
                                 //                                this.testLink($currentLink, isImageLink);
-                                this.testURLs($currentLink);
+                                //                                this.testURLs($currentLink);
                                 passedChecks = this.testURLs($currentLink);
                                 if (!passedChecks) {
                                     continue;
@@ -3079,6 +3113,14 @@
 
                                 // send link to ajx testing
                                 this.nextGenAjaxTest($currentLink);
+                                ///////////////////////////////////////////////////////////
+                                //testing if statement
+                                //                                console.log('testing link : is image link = ' + isImageLink);
+                                //                                if (isImageLink) {
+                                //                                    console.log($currentLink);
+                                //                                }
+                                ///////////////////////////////////////////////////////
+                                //                                this.nextGenAjaxTest($currentLink, isImageLink);
                                 // bind click event
                                 // will change the color of link when user clicks
                                 //                                this.bindClickCallback($currentLink, isImageLink);
@@ -3093,19 +3135,109 @@
                                 w = 0;
                                 for (w; w < youLength; w += 1) {
                                     $currentLink = jQuery($copyTextLinks[w]);
+                                    $currentLink.addClass('siteLink'); // add default flag class to links
                                     // perform checks to link
                                     // add flag class, check target, check title, check url
                                     //                                    this.testLink($currentLink, isImageLink);
 
-                                    this.testURLs($currentLink);
+                                    //                                    this.testURLs($currentLink);
                                     passedChecks = this.testURLs($currentLink);
                                     if (!passedChecks) {
                                         continue;
                                     }
 
                                     // send link to ajx testing
+                                    //                                    this.nextGenAjaxTest($currentCard, isImageLink);
                                     this.nextGenAjaxTest($currentLink);
+                                    ///////////////////////////////////////////////////////////
+                                    //testing if statement
+                                    //                                    console.log('testing link : is image link = ' + isImageLink);
+                                    //                                    if (isImageLink) {
+                                    //                                        console.log($currentLink);
+                                    //                                    }
+                                    ///////////////////////////////////////////////////////
+                                    // bind click event
+                                    // will change the color of link when user clicks
+                                    //                                    this.bindClickCallback($currentLink, isImageLink);
+                                }
+                            }
+                            break;
+                            // ----------------------------------------
+                            // ----------------------------------------
 
+                            // ----------------------------------------
+                            // ----------------------------------------
+                            // card style is set to CTA links
+                        case (cardClass.indexOf('none-clickable') > -1):
+                            console.log('clickable = none-clickable');
+                            // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
+                            // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
+
+                            // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                            // get all links defined in card
+                            // should include all primary, secondary, and tenary links
+                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                            myLength = $cardLinks.length;
+                            q = 0;
+                            isImageLink = false; // variable for ajax function
+
+                            for (q; q < myLength; q += 1) {
+                                $currentLink = jQuery($cardLinks[q]);
+                                $currentLink.addClass('siteLink'); // add default flag class to links
+                                // perform checks to link
+                                // add flag class, check target, check title, check url
+                                //                                this.testLink($currentLink, isImageLink);
+                                //                                this.testURLs($currentLink);
+                                passedChecks = this.testURLs($currentLink);
+                                if (!passedChecks) {
+                                    continue;
+                                }
+
+                                // send link to ajx testing
+                                this.nextGenAjaxTest($currentLink);
+                                ///////////////////////////////////////////////////////////
+                                //testing if statement
+                                //                                console.log('testing link : is image link = ' + isImageLink);
+                                //                                if (isImageLink) {
+                                //                                    console.log($currentLink);
+                                //                                }
+                                ///////////////////////////////////////////////////////
+                                //                                this.nextGenAjaxTest($currentLink, isImageLink);
+                                // bind click event
+                                // will change the color of link when user clicks
+                                //                                this.bindClickCallback($currentLink, isImageLink);
+                            }
+
+                            // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                            // get all text links in copy text of card
+                            $copyTextLinks = $cardSEOContainer.find('a');
+                            youLength = $copyTextLinks.length;
+
+                            if (youLength > 0) {
+                                w = 0;
+                                for (w; w < youLength; w += 1) {
+                                    $currentLink = jQuery($copyTextLinks[w]);
+                                    $currentLink.addClass('siteLink'); // add default flag class to links
+                                    // perform checks to link
+                                    // add flag class, check target, check title, check url
+                                    //                                    this.testLink($currentLink, isImageLink);
+
+                                    //                                    this.testURLs($currentLink);
+                                    passedChecks = this.testURLs($currentLink);
+                                    if (!passedChecks) {
+                                        continue;
+                                    }
+
+                                    // send link to ajx testing
+                                    //                                    this.nextGenAjaxTest($currentCard, isImageLink);
+                                    this.nextGenAjaxTest($currentLink);
+                                    ///////////////////////////////////////////////////////////
+                                    //testing if statement
+                                    //                                    console.log('testing link : is image link = ' + isImageLink);
+                                    //                                    if (isImageLink) {
+                                    //                                        console.log($currentLink);
+                                    //                                    }
+                                    ///////////////////////////////////////////////////////
                                     // bind click event
                                     // will change the color of link when user clicks
                                     //                                    this.bindClickCallback($currentLink, isImageLink);
@@ -3120,7 +3252,15 @@
                             // card style is set to whole card is clickable and has CTA links
                             // if card is made clickable text links will not be able to be reached.
                             // should this still be checked?
+
                         case (cardClass.indexOf('card-clickable-v2') > -1):
+                            console.log('clickable = card + link');
+
+                            $cardLinkContainer = $currentCard.find('div.link');
+                            $cardSEOContainer = $currentCard.find('div.copy');
+                            $cardImageContainer = $currentCard.find('div.media');
+                            //                            $cardDeck = $currentCard.find('div.deck');
+
                             // check if card has an image
                             if ($cardImageContainer.is(':empty')) {
                                 // this shouldn't happen as if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
@@ -3130,6 +3270,7 @@
                                 isImageLink = true;
                                 // find FIRST PRIMARY text link
                                 $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                                $currentLink.addClass('siteLink'); // add default flag class to links
                                 $image = $cardImageContainer.find('img');
                                 // add div overlay to image
                                 //                                this.addDivOverlay($currentLink, $image);
@@ -3137,14 +3278,23 @@
                                 // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
                                 // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
 
-                                this.testURLs($currentLink);
+                                //                                this.testURLs($currentLink);
                                 passedChecks = this.testURLs($currentLink);
                                 if (!passedChecks) {
                                     continue;
                                 }
 
                                 // send link to ajx testing
-                                this.nextGenAjaxTest($currentLink);
+                                // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
+                                this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
+                                ///////////////////////////////////////////////////////////
+                                //testing if statement
+                                //                                console.log('testing link : is image link = ' + isImageLink);
+                                //                                if (isImageLink) {
+                                //                                    console.log($currentLink);
+                                //                                }
+                                ///////////////////////////////////////////////////////
+                                //                                this.nextGenAjaxTest($currentCard, isImageLink);
 
                                 // perform checks to link
                                 // add flag class, check target, check title, check url
@@ -3158,34 +3308,89 @@
                                 q = 0;
                                 for (q; q < myLength; q += 1) {
                                     $currentLink = jQuery($cardLinks[q]);
+                                    $currentLink.addClass('siteLink'); // add default flag class to links
                                     // perform checks to link
                                     // add flag class, check target, check title, check url
                                     //                                    this.testLink($currentLink, isImageLink);
 
-                                    this.testURLs($currentLink);
+                                    //                                    this.testURLs($currentLink);
                                     passedChecks = this.testURLs($currentLink);
                                     if (!passedChecks) {
                                         continue;
                                     }
 
                                     // send link to ajx testing
+                                    // DOESN'T NEED TO SEND IN isImageLink AS THESE LINKS WILL ALMOST ALWAYS BE TEXT LINKS
                                     this.nextGenAjaxTest($currentLink);
+                                    //this.nextGenAjaxTest($currentLink, isImageLink);
+                                    ///////////////////////////////////////////////////////////
+                                    //testing if statement
+                                    //                                    console.log('testing link : is image link = ' + isImageLink);
+                                    //                                    if (isImageLink) {
+                                    //                                        console.log($currentLink);
+                                    //                                    }
+                                    ///////////////////////////////////////////////////////
 
                                     // bind click event
                                     // will change the color of link when user clicks
                                     //                                    this.bindClickCallback($currentLink, isImageLink);
                                 }
+
+                                // TEST TEXT LINKS IN THE COPY OF THE CARD
+                                // check copy container and grab all links
+                                $copyTextLinks = $cardSEOContainer.find('a');
+                                youLength = $copyTextLinks.length;
+
+                                if (youLength > 0) {
+                                    w = 0;
+                                    for (w; w < youLength; w += 1) {
+                                        $currentLink = jQuery($copyTextLinks[w]);
+                                        $currentLink.addClass('siteLink'); // add default flag class to links
+                                        // perform checks to link
+                                        // add flag class, check target, check title, check url
+                                        //                                    this.testLink($currentLink, isImageLink);
+
+                                        //                                    this.testURLs($currentLink);
+                                        passedChecks = this.testURLs($currentLink);
+                                        if (!passedChecks) {
+                                            continue;
+                                        }
+
+                                        // send link to ajx testing
+                                        //                                    this.nextGenAjaxTest($currentCard, isImageLink);
+                                        this.nextGenAjaxTest($currentLink);
+                                        ///////////////////////////////////////////////////////////
+                                        //testing if statement
+                                        //                                    console.log('testing link : is image link = ' + isImageLink);
+                                        //                                    if (isImageLink) {
+                                        //                                        console.log($currentLink);
+                                        //                                    }
+                                        ///////////////////////////////////////////////////////
+                                        // bind click event
+                                        // will change the color of link when user clicks
+                                        //                                    this.bindClickCallback($currentLink, isImageLink);
+                                    }
+                                }
                             }
                             break;
+
                             // ----------------------------------------
                             // ----------------------------------------
 
                             // ----------------------------------------
                             // ----------------------------------------
+                            // ----------------------------------------
                             // card style is set to whole card is clickable
                             // if card is made clickable text links will not be able to be reached.
-                            // should this still be checked?
+
                         case (cardClass.indexOf('card-clickable') > -1):
+                            console.log('clickable = card + link');
+
+                            $cardLinkContainer = $currentCard.find('div.link');
+                            $cardSEOContainer = $currentCard.find('div.copy');
+                            $cardImageContainer = $currentCard.find('div.media');
+                            //                            $cardDeck = $currentCard.find('div.deck');
+
                             // check if card has an image
                             if ($cardImageContainer.is(':empty')) {
                                 // this shouldn't happen as if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
@@ -3195,6 +3400,7 @@
                                 isImageLink = true;
                                 // find FIRST PRIMARY text link
                                 $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                                $currentLink.addClass('siteLink'); // add default flag class to links
                                 $image = $cardImageContainer.find('img');
                                 // add div overlay to image
                                 //                                this.addDivOverlay($currentLink, $image);
@@ -3202,29 +3408,235 @@
                                 // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
                                 // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
 
-                                this.testURLs($currentLink);
+                                //                                this.testURLs($currentLink);
                                 passedChecks = this.testURLs($currentLink);
                                 if (!passedChecks) {
                                     continue;
                                 }
 
                                 // send link to ajx testing
-                                this.nextGenAjaxTest($currentLink);
+                                // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
+                                this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
+                                ///////////////////////////////////////////////////////////
+                                //testing if statement
+                                //                                console.log('testing link : is image link = ' + isImageLink);
+                                //                                if (isImageLink) {
+                                //                                    console.log($currentLink);
+                                //                                }
+                                ///////////////////////////////////////////////////////
+                                //                                this.nextGenAjaxTest($currentCard, isImageLink);
 
                                 // perform checks to link
                                 // add flag class, check target, check title, check url
                                 //                                this.testLink($currentLink, isImageLink);
 
-                                // bind click event
-                                // will change the color of link when user clicks
-                                //                                this.bindClickCallback($currentLink, isImageLink);
+                                // TEST other Links defined in card Settings
+                                // get all links defined in card
+                                // should include all primary, secondary, and tenary links
+                                $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                                myLength = $cardLinks.length;
+                                q = 0;
+                                for (q; q < myLength; q += 1) {
+                                    $currentLink = jQuery($cardLinks[q]);
+                                    $currentLink.addClass('siteLink'); // add default flag class to links
+                                    // perform checks to link
+                                    // add flag class, check target, check title, check url
+                                    //                                    this.testLink($currentLink, isImageLink);
+
+                                    //                                    this.testURLs($currentLink);
+                                    passedChecks = this.testURLs($currentLink);
+                                    if (!passedChecks) {
+                                        continue;
+                                    }
+
+                                    // send link to ajx testing
+                                    // DOESN'T NEED TO SEND IN isImageLink AS THESE LINKS WILL ALMOST ALWAYS BE TEXT LINKS
+                                    this.nextGenAjaxTest($currentLink);
+                                    //this.nextGenAjaxTest($currentLink, isImageLink);
+                                    ///////////////////////////////////////////////////////////
+                                    //testing if statement
+                                    //                                    console.log('testing link : is image link = ' + isImageLink);
+                                    //                                    if (isImageLink) {
+                                    //                                        console.log($currentLink);
+                                    //                                    }
+                                    ///////////////////////////////////////////////////////
+
+                                    // bind click event
+                                    // will change the color of link when user clicks
+                                    //                                    this.bindClickCallback($currentLink, isImageLink);
+                                }
+
+                                // TEST TEXT LINKS IN THE COPY OF THE CARD
+                                // check copy container and grab all links
+                                $copyTextLinks = $cardSEOContainer.find('a');
+                                youLength = $copyTextLinks.length;
+
+                                if (youLength > 0) {
+                                    w = 0;
+                                    for (w; w < youLength; w += 1) {
+                                        $currentLink = jQuery($copyTextLinks[w]);
+                                        $currentLink.addClass('siteLink'); // add default flag class to links
+                                        // perform checks to link
+                                        // add flag class, check target, check title, check url
+                                        //                                    this.testLink($currentLink, isImageLink);
+
+                                        //                                    this.testURLs($currentLink);
+                                        passedChecks = this.testURLs($currentLink);
+                                        if (!passedChecks) {
+                                            continue;
+                                        }
+
+                                        // send link to ajx testing
+                                        //                                    this.nextGenAjaxTest($currentCard, isImageLink);
+                                        this.nextGenAjaxTest($currentLink);
+                                        ///////////////////////////////////////////////////////////
+                                        //testing if statement
+                                        //                                    console.log('testing link : is image link = ' + isImageLink);
+                                        //                                    if (isImageLink) {
+                                        //                                        console.log($currentLink);
+                                        //                                    }
+                                        ///////////////////////////////////////////////////////
+                                        // bind click event
+                                        // will change the color of link when user clicks
+                                        //                                    this.bindClickCallback($currentLink, isImageLink);
+                                    }
+                                }
                             }
                             break;
+
                             // ----------------------------------------
                             // ----------------------------------------
 
+                            // ----------------------------------------
+                            // ----------------------------------------
+                            // card style is set to whole card is clickable
+                            // if card is made clickable text links will not be able to be reached.
+                            // should this still be checked?
+                            /*
+                                                    case (cardClass.indexOf('card-clickable') > -1):
+                                                        // check if card has an image
+                                                        if ($cardImageContainer.is(':empty')) {
+                                                            // this shouldn't happen as if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
+                                                            isImageLink = false;
+                                                        } else {
+                                                            // find image in the card and apply a div overlay
+                                                            isImageLink = true;
+                                                            // find FIRST PRIMARY text link
+                                                            $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                                                            $currentLink.addClass('siteLink'); // add default flag class to links
+                                                            $image = $cardImageContainer.find('img');
+                                                            // add div overlay to image
+                                                            //                                this.addDivOverlay($currentLink, $image);
+
+                                                            // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
+                                                            // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
+
+                                                            //                                this.testURLs($currentLink);
+                                                            passedChecks = this.testURLs($currentLink);
+                                                            if (!passedChecks) {
+                                                                continue;
+                                                            }
+
+                                                            // send link to ajx testing
+                                                            this.nextGenAjaxTest($currentLink, isImageLink);
+
+                                                            // perform checks to link
+                                                            // add flag class, check target, check title, check url
+                                                            //                                this.testLink($currentLink, isImageLink);
+
+                                                            // bind click event
+                                                            // will change the color of link when user clicks
+                                                            //                                this.bindClickCallback($currentLink, isImageLink);
+                                                        }
+                                                        break;
+
+                                                        // ----------------------------------------
+                                                        // ----------------------------------------
+
+                                                        // ----------------------------------------
+                                                        // ----------------------------------------
+                                                        // card style is set to CTA links
+                                                    case (cardClass.indexOf('none-clickable') > -1):
+                                                        // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
+                                                        // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
+
+                                                        // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                                                        // get all links defined in card
+                                                        // should include all primary, secondary, and tenary links
+                                                        $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                                                        myLength = $cardLinks.length;
+                                                        q = 0;
+                                                        isImageLink = false; // variable for ajax function
+
+                                                        for (q; q < myLength; q += 1) {
+                                                            $currentLink = jQuery($cardLinks[q]);
+                                                            $currentLink.addClass('siteLink'); // add default flag class to links
+                                                            // perform checks to link
+                                                            // add flag class, check target, check title, check url
+                                                            //                                this.testLink($currentLink, isImageLink);
+                                                            //                                this.testURLs($currentLink);
+                                                            passedChecks = this.testURLs($currentLink);
+                                                            if (!passedChecks) {
+                                                                continue;
+                                                            }
+
+                                                            // send link to ajx testing
+                                                            //this.nextGenAjaxTest($currentLink, isImageLink);
+                                                            ///////////////////////////////////////////////////////////
+                                                            //testing if statement
+                                                            console.log('testing link : is image link = ' + isImageLink);
+                                                            if (isImageLink) {
+                                                                console.log($currentLink);
+                                                            }
+                                                            ///////////////////////////////////////////////////////
+                                                            //                                this.nextGenAjaxTest($currentLink, isImageLink);
+                                                            // bind click event
+                                                            // will change the color of link when user clicks
+                                                            //                                this.bindClickCallback($currentLink, isImageLink);
+                                                        }
+
+                                                        // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                                                        // get all text links in copy text of card
+                                                        $copyTextLinks = $cardSEOContainer.find('a');
+                                                        youLength = $copyTextLinks.length;
+
+                                                        if (youLength > 0) {
+                                                            w = 0;
+                                                            for (w; w < youLength; w += 1) {
+                                                                $currentLink = jQuery($copyTextLinks[w]);
+                                                                $currentLink.addClass('siteLink'); // add default flag class to links
+                                                                // perform checks to link
+                                                                // add flag class, check target, check title, check url
+                                                                //                                    this.testLink($currentLink, isImageLink);
+
+                                                                //                                    this.testURLs($currentLink);
+                                                                passedChecks = this.testURLs($currentLink);
+                                                                if (!passedChecks) {
+                                                                    continue;
+                                                                }
+
+                                                                // send link to ajx testing
+                                                                //                                    this.nextGenAjaxTest($currentCard, isImageLink);
+                                                                //this.nextGenAjaxTest($currentLink, isImageLink);
+                                                                ///////////////////////////////////////////////////////////
+                                                                //testing if statement
+                                                                console.log('testing link : is image link = ' + isImageLink);
+                                                                if (isImageLink) {
+                                                                    console.log($currentLink);
+                                                                }
+                                                                ///////////////////////////////////////////////////////
+                                                                // bind click event
+                                                                // will change the color of link when user clicks
+                                                                //                                    this.bindClickCallback($currentLink, isImageLink);
+                                                            }
+                                                        }
+                                                        break;
+                                                        // ----------------------------------------
+                                                        // ----------------------------------------
+                            */
                         default:
                             console.log('default switch statement reached');
+                            console.log($currentCard);
                     }
 
                     // ----------------------------------------
@@ -3411,14 +3823,23 @@
                     }
                 });
             },
-            nextGenAjaxTest: function ($currentLink, $currentCard) {
+            nextGenAjaxTest: function ($currentLink, isImageLink, $currentCard) {
+                //            nextGenAjaxTest: function ($currentCard, isImageLink) {
                 // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
                 var hasImage = 0,
-                    isImageLink = false,
+                    //                    isImageLink = false,
                     $linkOverlay, pageError404,
                     linkURL = checkLinks.addURLParameter($currentLink),
                     $cardImageContainer,
                     cardClass, $cardLinkContainer, $image;
+
+                //check if isImageLink is empty and check if $currentCard is empty
+                //most likely because the parameter was not mentioned in the calling statement
+                if (!isImageLink) {
+                    isImageLink = false;
+                } else if (!$currentCard) {
+                    $currentCard = null;
+                }
 
                 // test each link
                 jQuery.ajax({
@@ -3429,6 +3850,12 @@
                     dataType: 'html',
                     success: function (data, textStatus, jqXHR) {
 
+                        // 5/23/2017
+                        // check to see if the card has an image prior to startin the ajax testing
+                        if (isImageLink) {
+                            $linkOverlay = checkLinks.addDivOverlay_nextGen($currentLink, $currentCard);
+                        }
+                        /*
                         console.log('ajax test');
                         console.log($currentCard);
                         // check if $currentCard parameter was provided
@@ -3441,10 +3868,14 @@
 
                             // checks to see if card has image
                             $cardImageContainer = $currentCard.find('div.media');
+                        } else {
+                            console.log('$currentCard is null');
                         }
+                        */
 
                         // if media div is not empty
                         //                        $cardImageContainer = $currentCard.find('div.media');
+                        /*
                         if (!$cardImageContainer.is(':empty')) {
                             // ----------------------------------------
                             // ----------------------------------------
@@ -3458,7 +3889,7 @@
                                 $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
                                 $image = $cardImageContainer.find('img');
                                 // add div overlay to image
-                                this.addDivOverlay($currentLink, $image);
+                                this.addDivOverlay_nextGen($currentLink, $image);
 
                             }
 
@@ -3473,11 +3904,13 @@
                                 // find FIRST PRIMARY text link
                                 $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
                                 $image = $cardImageContainer.find('img');
-                                // add div overlay to image
-                                this.addDivOverlay($currentLink, $image);
+
+                                this.addDivOverlay_nextGen($currentLink, $image);
 
                             }
                         }
+                        */
+
 
                         // If value is false all class modifications should be done to the link itself
                         pageError404 = checkLinks.checkFor404(data);
@@ -3490,6 +3923,7 @@
                         } else {
                             checkLinks.addFlagsToElements($currentLink, pageError404);
                         }
+
                     },
                     error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
@@ -3732,24 +4166,43 @@
             // ----------------------------------------
             // Teir 4 -- tester functions
             // ----------------------------------------
-            addDivOverlay: function ($currentLink, $currentImage) {
-                this.cacheDOMOverlayElements($currentLink, $currentImage);
+            addDivOverlay_nextGen: function ($currentLink, $currentCard) {
+                //                this.cacheDOMOverlayElements($currentLink, $currentImage);
+                this.cacheDOMOverlayElements($currentLink);
                 this.createOverlayElements();
                 this.buildOverlayElements();
-                this.attachToImage($currentImage);
+                this.attachToImage($currentCard);
+                return this.$divOverlay;
+                //                this.attachToCard();
                 //                imageChecker.attachToImage($currentImage);  // tester
             },
-            cacheDOMOverlayElements: function ($currentLink, $currentImage) {
-                this.linkTitle = jQuery($currentLink).find('a').attr('title');
-                // gets sizing of images
-                this.widthOfImage = jQuery($currentImage).width();
-                this.heightOfImage = jQuery($currentImage).height();
+            //            cacheDOMOverlayElements: function ($currentLink, $currentImage) {
+            cacheDOMOverlayElements: function ($currentLink) {
+                // IF NEXTGEN SITE
+                if (toolbar.nextGenCheck()) {
+                    this.linkTitle = jQuery($currentLink).find('a').attr('title');
+                }
+                // IF TETRA SITE
+                //                if (!toolbar.nextGenCheck()) {
+                //                    this.linkTitle = jQuery($currentLink).find('a').attr('title');
+                //                    // gets sizing of images
+                //                    this.widthOfImage = jQuery($currentImage).width();
+                //                    this.heightOfImage = jQuery($currentImage).height();
+                //                }
             },
             createOverlayElements: function () {
                 // create div overlay
-                this.$divOverlay = jQuery('<div>').attr({
-                    class: 'imgOverlay'
-                });
+                if (toolbar.nextGenCheck()) {
+                    this.$divOverlay = jQuery('<div>').attr({
+                        class: 'cardOverlay'
+                    });
+                }
+
+                //                if (!toolbar.nextGenCheck()) {
+                //                    this.$divOverlay = jQuery('<div>').attr({
+                //                        class: 'imgOverlay'
+                //                    });
+                //                }
                 //                this.$linkCheckmark = jQuery('<span>').css({
                 //                    position: 'absolute',
                 //                    left: '5px',
@@ -3761,42 +4214,55 @@
             },
             buildOverlayElements: function () {
                 //                this.sizeToImage();
-                // make the div overlay the same dimensions as the image
-                this.$divOverlay.css({
-                    width: this.widthOfImage + 'px',
-                    height: this.heightOfImage + 'px',
-                    //                    'line-height': this.heightOfImage + 'px'
-                });
-
+                if (!toolbar.nextGenCheck()) {
+                    // make the div overlay the same dimensions as the image
+                    this.$divOverlay.css({
+                        width: this.widthOfImage + 'px',
+                        height: this.heightOfImage + 'px',
+                        //                    'line-height': this.heightOfImage + 'px'
+                    });
+                }
                 //                this.addContent();
                 // add content to div
+                // ADD THE LINK TITLE
                 this.$divOverlay.append(this.linkTitle);
                 //                this.$divOverlay.on('mousedown', this.linkChecked(this.$divOverlay));
                 //                this.$divOverlay.on('click', this.linkChecked(this.$divOverlay));
             },
-            attachToImage: function ($currentImage) {
+            attachToImage: function ($currentCard) {
                 // ---------------------------------------- test in TETRA
                 // center div overlay
                 if (toolbar.nextGenCheck()) {
-                    //                    var parent = $currentImage.parent();
-                    var parent = $currentImage.closest('figure');
                     this.$divOverlay.css({
-                        //                        top: parent.height() / 2 - this.$divOverlay.height() / 2 + 'px',
-                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
+                        position: 'absolute',
+                        'z-index': '5',
+                        height: '100%',
+                        width: '100%'
                     });
+                    $currentCard.prepend(this.$divOverlay);
                 }
+                //                if (toolbar.nextGenCheck()) {
+                //                    //                    var parent = $currentImage.parent();
+                //                    var parent = $currentImage.closest('figure');
+                //                    this.$divOverlay.css({
+                //                        //                        top: parent.height() / 2 - this.$divOverlay.height() / 2 + 'px',
+                //                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
+                //                    });
+                //                }
                 // ---------------------------------------- test
 
-                // make parent image relative positionin
-                this.togClass($currentImage, 'overlaid');
-
-                // place div overlay onto image
-                jQuery($currentImage).before(this.$divOverlay);
+                //                if (!toolbar.nextGenCheck()) {
+                //                    // make parent image relative positionin
+                //                    this.togClass($currentImage, 'overlaid');
+                //
+                //                    // place div overlay onto image
+                //                    jQuery($currentImage).before(this.$divOverlay);
+                //                }
 
                 // ---------------------------------------- test
                 //                this.$divOverlay.on('mousedown', this.linkChecked(this.$divOverlay));
                 // ---------------------------------------- test
-            },
+            }
         },
 
         /* ************************************************************************************************************************ */
