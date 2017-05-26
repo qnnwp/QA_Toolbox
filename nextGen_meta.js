@@ -5,7 +5,7 @@
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
-// @description QA Toolbar
+// @description QA Toolbar - TEST - Advanced NextGen Support
 // @downloadURL https://raw.githubusercontent.com/cirept/NextGen/QLP-%26-NextGen-Support/nextGen_meta.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
