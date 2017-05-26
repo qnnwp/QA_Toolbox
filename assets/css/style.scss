@@ -87,12 +87,13 @@ footer {
  display: none; 
 }
 
-@media print, screen and (max-width: 1060px)
-section {
-  background: white;
-}
+@media print, screen and (max-width: 1060px) {
+  section {
+    background: white;
+  }
 
-header p {
-  display: none;
-}
+  header p {
+    display: none;
+  }
 
+}
