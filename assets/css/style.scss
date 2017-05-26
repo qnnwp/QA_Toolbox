@@ -30,7 +30,7 @@ header p {
   padding: 0px;
   font-size: 17px;
   left: 50%;
-  color: rgb(0, 0, 0);  
+  color: #ffffff;  
 }
 
 .wrapper {
@@ -38,7 +38,7 @@ header p {
 }
 
 nav {
-  background: #f4f4f4;
+  background: #065289;
   border: 1px solid #c4c4c4;
   padding-right: 15px;
   padding-top: 15px;
@@ -77,9 +77,9 @@ footer {
 }
 
 #banner {
-  background: #67B26F;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #4ca2cd, #67B26F);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #4ca2cd, #67B26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #C0242B;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #C0242B, #9E222C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #C0242B, #9E222C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border: 1px solid #f4f4f4;
 }
 
