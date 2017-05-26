@@ -86,3 +86,9 @@ footer {
 #banner .button {
  display: none; 
 }
+
+@media print, screen and (max-width: 1060px)
+section {
+  background: white;
+}
+
