@@ -4439,7 +4439,6 @@
                     // this will mean that the toggle is turned off
                     if (findThis === undefined || findThis === '') {} else {
                         // search url for KEY
-                        //
                         foundThis = this.searchURL(key, url);
 
                         //--------------------------------------------------------
@@ -4599,8 +4598,10 @@
 
                 // if reloadPage is true reload page
                 if (reloadPage) {
+                                        console.log('reloading page');
                     window.location.href = url;
-                    //                    console.log('reloading page');
+                } else {
+                    console.log('no reload needed');
                 }
             }
         },
