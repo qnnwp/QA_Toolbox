@@ -1755,9 +1755,51 @@
                 openNewTab(openThis);
             },
             spellCheckPage: function () {
-                document.designMode = "on";
-                jQuery('body').focus();
-                document.designMode = "off";
+                // ----------------------------------------
+                // spell check page test functions
+                // ----------------------------------------
+                var $typo = jQuery('<script>').attr({
+                    src: getResourceURL('typo')
+                });
+                console.log($typo);
+                jQuery('head').prepend($typo);
+
+                var treeWalker = document.createTreeWalker(
+                    document.body,
+                    NodeFilter.SHOW_TEXT, {
+                        acceptNode: function (node) {
+                            // Logic to determine whether to accept, reject or skip node
+                            // In this case, only accept nodes that have content
+                            // other than whitespace
+                            if (!/^\s*$/.test(node.data)) {
+                                return NodeFilter.FILTER_ACCEPT;
+                            }
+                        }
+                    },
+                    false);
+
+                /// creates an array of all the text on the page.
+                var nodeList = [];
+                while (treeWalker.nextNode()) nodeList.push(treeWalker.currentNode);
+
+                console.log(nodeList);
+
+
+                var x = 0;
+                var length = nodeList.length;
+                var count = 0;
+                for (x; x < length; x += 1) {
+                    //                    console.log(nodeList[x].nodeValue);
+                    if (jQuery.trim(nodeList[x].nodeValue) === "") {
+                        console.log('no text');
+                    } else {
+                        count += 1;
+                        console.log(nodeList[x].nodeValue);
+                        if (count == 10) {
+                            break;
+                        }
+                    }
+                }
             },
             // ----------------------------------------
             // tier 3 functions
@@ -1772,12 +1814,6 @@
                     URL += index + '=' + value + '&';
                 });
                 return URL;
-            },
-            // ----------------------------------------
-            // TESTER SPELL CHECK
-            // ----------------------------------------
-            spellCheck: function () {
-
             }
         },
 
@@ -4598,7 +4634,7 @@
 
                 // if reloadPage is true reload page
                 if (reloadPage) {
-                                        console.log('reloading page');
+                    console.log('reloading page');
                     window.location.href = url;
                 } else {
                     console.log('no reload needed');
