@@ -102,9 +102,7 @@
                     .append('.tbLegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
                     .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
                     // toggle style
-                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } ')
-                    // spell check css
-                    .append('.spell-check.misspelled { color: inherit !important; font: inherit; background-position: bottom; background-repeat: repeat-x; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAFVBMVEX////+NQD+NQD+NQD+Sgz+NQD+NQCKU3Z/AAAAB3RSTlMAKVdwqL/ggPdRNgAAABdJREFUCNdjYGRiZGBgYWVhYGBmY2YAAADPAB54rWlqAAAAAElFTkSuQmCC")}'); // end
+                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } '); // end
             },
             cacheDOM: function () {
                 this.head = jQuery('head');
@@ -736,7 +734,7 @@
                         title: 'Image Alt Checker'
                     }).text('Image Alt Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'tbLegend'
+                        class: 'tbLegend imageChecker'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -967,7 +965,7 @@
                         title: 'Check Links'
                     }).text('Link Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'tbLegend'
+                        class: 'tbLegend linkChecker'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -1724,6 +1722,7 @@
         spellCheck = {
             init: function (callingPanel) {
                 this.createElements();
+                this.buildLegend();
                 this.cacheDOM(callingPanel);
                 this.addTool();
                 this.bindEvents();
@@ -1737,25 +1736,86 @@
                         class: 'myEDOBut',
                         id: 'spellCheck',
                         title: 'Check Spelling'
-                    }).text('Spellcheck Page')
+                    }).text('Spellcheck Page'),
+                    $offButt: jQuery('<input>').attr({
+                        type: 'button',
+                        class: 'myEDOBut offButt',
+                        value: 'Turn Off'
+                    }),
+                    $legend: jQuery('<div>').attr({
+                        class: 'tbLegend spellCheck'
+                    }),
+                    $legendTitle: jQuery('<div>').attr({
+                        class: 'legendTitle'
+                    }).text('Spell Check Legend'),
+                    $legendList: jQuery('<ul>').attr({
+                        class: 'legendList'
+                    }),
+                    $legendContent: {
+                        'spell-check misspelled': 'word misspelled'
+                    }
                 };
+            },
+            buildLegend: function () {
+                spellCheck.config.$legend
+                    // attach legend title
+                    .append(spellCheck.config.$legendTitle)
+                    // attach list
+                    .append(spellCheck.config.$legendList)
+                    // attach turn off button
+                    .append(spellCheck.config.$offButt)
+                    // attach hint
+                    .append(spellCheck.config.$hint);
+                // fill list
+                this.buildLegendContent();
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
                 this.$cm = unsafeWindow.ContextManager;
                 this.siteURL = this.$cm.getUrl();
                 this.pageName = this.$cm.getPageName();
+                // DOM elements
+                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$legendContainer = jQuery('#legendContainer');
             },
             addTool: function () {
                 this.$toolsPanel.append(spellCheck.config.$activateButt);
+                this.$legendContainer.append(spellCheck.config.$legend);
             },
             bindEvents: function () {
                 //                spellCheck.config.$activateButt.on('click', this.spellCheck.bind(this));
                 spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
+                spellCheck.config.$activateButt.on('click', this.showLegend);
+                spellCheck.config.$activateButt.on('click', this.toggleDisable);
+                spellCheck.config.$activateButt.on('click', this.addStyles.bind(this));
+                // off button
+                spellCheck.config.$offButt.on('click', this.removeHighlights.bind(this));
+                spellCheck.config.$offButt.on('click', this.showLegend);
+                spellCheck.config.$offButt.on('click', this.toggleDisable);
             },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
+            addStyles: function () {
+                this.$toolbarStyles.append('.spell-check.misspelled { color: inherit !important; font: inherit; background-position: bottom; background-repeat: repeat-x; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAFVBMVEX////+NQD+NQD+NQD+Sgz+NQD+NQCKU3Z/AAAAB3RSTlMAKVdwqL/ggPdRNgAAABdJREFUCNdjYGRiZGBgYWVhYGBmY2YAAADPAB54rWlqAAAAAElFTkSuQmCC")}');
+            },
+            buildLegendContent: function () {
+                var $contentArray = spellCheck.config.$legendContent,
+                    key = '',
+                    value = '',
+                    $listItem;
+                // loop through Legend Content list
+                for (key in $contentArray) {
+                    value = $contentArray[key];
+
+                    // build listing element
+                    $listItem = jQuery('<li>').attr({
+                        class: 'legendContent ' + key
+                    }).append(value);
+                    // attach to legend list
+                    spellCheck.config.$legendList.append($listItem);
+                }
+            },
             spellCheck: function () {
                 var openThis = this.buildURL();
                 openNewTab(openThis);
@@ -1764,7 +1824,6 @@
                 // ----------------------------------------
                 // spell check page test functions
                 // ----------------------------------------
-
                 var treeWalker = document.createTreeWalker(
                     document.body,
                     NodeFilter.SHOW_TEXT, {
@@ -1779,28 +1838,30 @@
                     },
                     false);
                 // dictionary
-//                var dictionary = new Typo('en_US',
-//                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.aff',
-//                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.dic');
-                var dictionary = new Typo("en_US", false, false, { dictionaryPath: "https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/", loadedCallback: function(){console.log('files loaded');} }),
-                /// creates an array of all the text on the page.
-                nodeList = [],
-                self = this,
-                pElm;
+                //                var dictionary = new Typo('en_US',
+                //                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.aff',
+                //                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.dic');
+                var dictionary = new Typo("en_US", false, false, {
+                        dictionaryPath: "https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/"
+                    }),
+                    /// creates an array of all the text on the page.
+                    wordList = [],
+                    self = this,
+                    pElm;
 
                 // create node list
                 while (treeWalker.nextNode()) {
-                    nodeList.push(treeWalker.currentNode);
+                    wordList.push(treeWalker.currentNode);
                 }
 
-                //                console.log(nodeList);
+                //                console.log(wordList);
 
                 // ----------------------------------------
-                nodeList.forEach(function (n) {
+                wordList.forEach(function (n) {
                     var text = n.nodeValue,
-                    words = text.match(/[’'\w]+/g),
-                    elm = n.parentElement,
-                    unmarked;
+                        words = text.match(/[’'\w]+/g),
+                        elm = n.parentElement,
+                        unmarked;
 
                     if (!words /*|| elm.matches(ignore)*/ ) {
                         return;
@@ -1810,7 +1871,7 @@
 
                         // check if word is in the dictionary AND if it IS NOT a number
                         if (!dictionary.check(self.clean(word)) && !/^\d+$/.test(word)) {
-//                                                console.log(text);
+                            //                                                console.log(text);
                             unmarked = new RegExp('\\b' + word + '(?!@##)\\b', 'g');
                             text = text.replace(unmarked, '##@$&@##');
                         }
@@ -1825,7 +1886,15 @@
                         pElm = elm;
                     }
                 });
-//                console.log('spell check function complete');
+                console.log('spell check function complete');
+            },
+            showLegend: function () {
+                spellCheck.config.$legend.slideToggle(500);
+            },
+            toggleDisable: function () {
+                spellCheck.config.$activateButt.prop('disabled', function (index, value) {
+                    return !value;
+                });
             },
             // ----------------------------------------
             // tier 3 functions
@@ -1850,9 +1919,16 @@
                 if (elm) {
                     elm.innerHTML = elm.innerHTML.replace(/##@(.*?)@##/g, '<span class="spell-check misspelled">$1</span>');
                 }
-            }
+            },
+            removeHighlights: function () {
+                // remove highlight overlay
+                jQuery('span.spell-check').each(function () {
+                    jQuery(this).replaceWith(function () {
+                        return this.childNodes[0].nodeValue;
+                    });
+                });
+            },
         },
-
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Test WebPage ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
@@ -2191,7 +2267,7 @@
                         value: 'Turn Off'
                     }),
                     $legend: jQuery('<div>').attr({
-                        class: 'tbLegend'
+                        class: 'tbLegend showNavigation'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
@@ -2824,7 +2900,7 @@
                         title: '404 Checker'
                     }).text('404 Link Checker'),
                     $legend: jQuery('<div>').attr({
-                        class: 'tbLegend'
+                        class: 'tbLegend checkLinks'
                     }),
                     $legendTitle: jQuery('<div>').attr({
                         class: 'legendTitle'
