@@ -1,4 +1,4 @@
-/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, setInterval */
+/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, setInterval, NodeFilter, Typo */
 
 (function () {
 
@@ -67,6 +67,9 @@
                     }),
                     $fontAwe: jQuery('<script>').attr({
                         src: getResourceURL('fontAwe')
+                    }),
+                    $typo: jQuery('<script>').attr({
+                        src: getResourceURL('typo')
                     })
                 };
             },
@@ -99,7 +102,9 @@
                     .append('.tbLegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
                     .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
                     // toggle style
-                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } '); // end
+                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } ')
+                    // spell check css
+                    .append('.spell-check.misspelled { color: inherit !important; font: inherit; background-position: bottom; background-repeat: repeat-x; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAFVBMVEX////+NQD+NQD+NQD+Sgz+NQD+NQCKU3Z/AAAAB3RSTlMAKVdwqL/ggPdRNgAAABdJREFUCNdjYGRiZGBgYWVhYGBmY2YAAADPAB54rWlqAAAAAElFTkSuQmCC")}'); // end
             },
             cacheDOM: function () {
                 this.head = jQuery('head');
@@ -110,6 +115,7 @@
                 this.head.append(QAtoolbox.config.$toolbarStyles);
                 this.head.append(QAtoolbox.config.$myFont);
                 this.head.append(QAtoolbox.config.$fontAwe);
+                this.head.append(QAtoolbox.config.$typo);
                 this.body.before(QAtoolbox.config.$toolbarContainer);
                 this.body.before(QAtoolbox.config.$legendContainer);
             },
@@ -1758,11 +1764,6 @@
                 // ----------------------------------------
                 // spell check page test functions
                 // ----------------------------------------
-                var $typo = jQuery('<script>').attr({
-                    src: getResourceURL('typo')
-                });
-                console.log($typo);
-                jQuery('head').prepend($typo);
 
                 var treeWalker = document.createTreeWalker(
                     document.body,
@@ -1777,29 +1778,54 @@
                         }
                     },
                     false);
-
+                // dictionary
+//                var dictionary = new Typo('en_US',
+//                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.aff',
+//                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.dic');
+                var dictionary = new Typo("en_US", false, false, { dictionaryPath: "https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/", loadedCallback: function(){console.log('files loaded');} }),
                 /// creates an array of all the text on the page.
-                var nodeList = [];
-                while (treeWalker.nextNode()) nodeList.push(treeWalker.currentNode);
+                nodeList = [],
+                self = this,
+                pElm;
 
-                console.log(nodeList);
-
-
-                var x = 0;
-                var length = nodeList.length;
-                var count = 0;
-                for (x; x < length; x += 1) {
-                    //                    console.log(nodeList[x].nodeValue);
-                    if (jQuery.trim(nodeList[x].nodeValue) === "") {
-                        console.log('no text');
-                    } else {
-                        count += 1;
-                        console.log(nodeList[x].nodeValue);
-                        if (count == 10) {
-                            break;
-                        }
-                    }
+                // create node list
+                while (treeWalker.nextNode()) {
+                    nodeList.push(treeWalker.currentNode);
                 }
+
+                //                console.log(nodeList);
+
+                // ----------------------------------------
+                nodeList.forEach(function (n) {
+                    var text = n.nodeValue,
+                    words = text.match(/[’'\w]+/g),
+                    elm = n.parentElement,
+                    unmarked;
+
+                    if (!words /*|| elm.matches(ignore)*/ ) {
+                        return;
+                    }
+
+                    words.forEach(function (word) {
+
+                        // check if word is in the dictionary AND if it IS NOT a number
+                        if (!dictionary.check(self.clean(word)) && !/^\d+$/.test(word)) {
+//                                                console.log(text);
+                            unmarked = new RegExp('\\b' + word + '(?!@##)\\b', 'g');
+                            text = text.replace(unmarked, '##@$&@##');
+                        }
+                    });
+
+                    n.nodeValue = text;
+
+                    if (!pElm) {
+                        pElm = elm;
+                    } else if (!pElm.contains(elm)) {
+                        self.replaceMarkers(pElm);
+                        pElm = elm;
+                    }
+                });
+//                console.log('spell check function complete');
             },
             // ----------------------------------------
             // tier 3 functions
@@ -1814,6 +1840,16 @@
                     URL += index + '=' + value + '&';
                 });
                 return URL;
+            },
+            clean: function (word) {
+                return word.replace('’', '\'')
+                    .replace(/^'*(.*?)'*$/, '$1')
+                    .replace('_', '');
+            },
+            replaceMarkers: function (elm) {
+                if (elm) {
+                    elm.innerHTML = elm.innerHTML.replace(/##@(.*?)@##/g, '<span class="spell-check misspelled">$1</span>');
+                }
             }
         },
 
