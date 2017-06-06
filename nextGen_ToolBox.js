@@ -1797,7 +1797,7 @@
             // tier 2 functions
             // ----------------------------------------
             addStyles: function () {
-                this.$toolbarStyles.append('.spell-check.misspelled { color: inherit !important; font: inherit; background-position: bottom; background-repeat: repeat-x; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAFVBMVEX////+NQD+NQD+NQD+Sgz+NQD+NQCKU3Z/AAAAB3RSTlMAKVdwqL/ggPdRNgAAABdJREFUCNdjYGRiZGBgYWVhYGBmY2YAAADPAB54rWlqAAAAAElFTkSuQmCC")}');
+                this.$toolbarStyles.append('.spell-check.misspelled { display: inline-block; padding: 0; margin: 0; color: inherit !important; font: inherit; background-position: bottom; background-repeat: repeat-x; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAFVBMVEX////+NQD+NQD+NQD+Sgz+NQD+NQCKU3Z/AAAAB3RSTlMAKVdwqL/ggPdRNgAAABdJREFUCNdjYGRiZGBgYWVhYGBmY2YAAADPAB54rWlqAAAAAElFTkSuQmCC")}');
             },
             buildLegendContent: function () {
                 var $contentArray = spellCheck.config.$legendContent,
