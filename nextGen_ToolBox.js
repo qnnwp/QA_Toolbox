@@ -1,6 +1,7 @@
-/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, setInterval, NodeFilter, Typo */
+/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
 
 (function () {
+    "use strict";
 
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
@@ -1813,36 +1814,43 @@
                     spellCheck.config.$legendList.append($listItem);
                 }
             },
+            treeWalk: function () {
+                var treeWalker = document.createTreeWalker(
+                        document.body,
+                        NodeFilter.SHOW_TEXT, {
+                            acceptNode: function (node) {
+                                // Logic to determine whether to accept, reject or skip node
+                                // In this case, only accept nodes that have content
+                                // other than whitespace
+                                if (!/^\s*$/.test(node.data)) {
+                                    return NodeFilter.FILTER_ACCEPT;
+                                }
+                            }
+                        },
+                        false),
+                    wordArray = [];
+
+                // create an array of all the text on the page.
+                // create node list
+                while (treeWalker.nextNode()) {
+                    wordArray.push(treeWalker.currentNode);
+                }
+
+                return wordArray;
+            },
             spellCheckPage: function () {
                 // ----------------------------------------
                 // spell check page test functions
                 // ----------------------------------------
-                var treeWalker = document.createTreeWalker(
-                    document.body,
-                    NodeFilter.SHOW_TEXT, {
-                        acceptNode: function (node) {
-                            // Logic to determine whether to accept, reject or skip node
-                            // In this case, only accept nodes that have content
-                            // other than whitespace
-                            if (!/^\s*$/.test(node.data)) {
-                                return NodeFilter.FILTER_ACCEPT;
-                            }
-                        }
-                    },
-                    false);
                 // dictionary
                 var dictionary = new Typo("en_US", false, false, {
                         dictionaryPath: "https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/"
                     }),
-                    /// creates an array of all the text on the page.
                     wordList = [],
                     self = this,
                     pElm;
 
-                // create node list
-                while (treeWalker.nextNode()) {
-                    wordList.push(treeWalker.currentNode);
-                }
+                wordList = this.treeWalk();
 
                 wordList.forEach(function (n) {
                     var text = n.nodeValue,
@@ -1900,7 +1908,7 @@
                         return this.childNodes[0].nodeValue;
                     });
                 });
-            },
+            }
         },
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- Test WebPage ----------------------------------------
@@ -2993,8 +3001,7 @@
             tetraTestLinks: function () {
                 var j = 0,
                     $currentLink,
-                    currentLinkURL,
-
+//                    currentLinkURL,
                     passedChecks = false,
                     $pageLinks = jQuery('a'),
                     pageLinksLength = $pageLinks.length;
@@ -3890,7 +3897,8 @@
                     crossDomain: true,
                     method: 'get',
                     dataType: 'html',
-                    success: function (data, textStatus, jqXHR) {
+                    success: function (data) {
+//                    success: function (data, textStatus, jqXHR) {
 
                         // checks to see if link is an image link
                         hasImage = $currentLink.has('img').length;
@@ -3912,7 +3920,8 @@
                         }
 
                     },
-                    error: function (jqXHR, textStatus, error) {
+                    error: function (jqXHR) {
+//                    error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
                         checkLinks.config.errors += 1;
                         if (jqXHR.status === 404) {
@@ -3926,7 +3935,8 @@
                         }
                     },
                     statusCode: {
-                        404: function (jqXHR, textStatus, error) {
+                        404: function () {
+//                        404: function (jqXHR, textStatus, error) {
                             $currentLink.addClass('fourOfour');
 
                             if (isImageLink) {
@@ -3947,12 +3957,12 @@
             nextGenAjaxTest: function ($currentLink, isImageLink, $currentCard) {
                 //            nextGenAjaxTest: function ($currentCard, isImageLink) {
                 // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
-                var hasImage = 0,
+                var //hasImage = 0,
                     //                    isImageLink = false,
                     $linkOverlay, pageError404,
-                    linkURL = checkLinks.addURLParameter($currentLink),
-                    $cardImageContainer,
-                    cardClass, $cardLinkContainer, $image;
+                    linkURL = checkLinks.addURLParameter($currentLink);//,
+                    //$cardImageContainer,
+                    //cardClass, $cardLinkContainer, $image;
 
                 //check if isImageLink is empty and check if $currentCard is empty
                 //most likely because the parameter was not mentioned in the calling statement
@@ -3969,7 +3979,8 @@
                     crossDomain: true,
                     method: 'get',
                     dataType: 'html',
-                    success: function (data, textStatus, jqXHR) {
+//                    success: function (data, textStatus, jqXHR) {
+                    success: function (data) {
 
                         // 5/23/2017
                         // check to see if the card has an image prior to startin the ajax testing
@@ -4046,7 +4057,8 @@
                         }
 
                     },
-                    error: function (jqXHR, textStatus, error) {
+                    error: function (jqXHR) {
+//                    error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
                         checkLinks.config.errors += 1;
                         if (jqXHR.status === 404) {
@@ -4060,7 +4072,8 @@
                         }
                     },
                     statusCode: {
-                        404: function (jqXHR, textStatus, error) {
+                        404: function () {
+//                        404: function (jqXHR, textStatus, error) {
                             $currentLink.addClass('fourOfour');
 
                             if (isImageLink) {
@@ -4265,7 +4278,8 @@
                     ---------------------------------------- tester */
                 });
             },
-            error: function ($this, isImageLink) {
+            error: function ($this) {
+//            error: function ($this, isImageLink) {
                 //                var curClass = '';
                 //                if (isImageLink) {
                 //                    curClass = $this.attr('class');
@@ -4277,7 +4291,8 @@
                 // ITS SUPPOSED TO ADD THE ERROR CLASS TO THE DIV OVERLAY IF THE LINK IS AN IMAGE LINK
                 $this.addClass('error');
             },
-            success: function ($this, isImageLink) {
+            success: function ($this) {
+//            success: function ($this, isImageLink) {
                 //                var curClass = '';
                 //                if (isImageLink) {
                 //                    curClass = $this.attr('class');
