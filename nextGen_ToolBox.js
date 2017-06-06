@@ -1771,9 +1771,6 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-//                this.$cm = unsafeWindow.ContextManager;
-//                this.siteURL = this.$cm.getUrl();
-//                this.pageName = this.$cm.getPageName();
                 // DOM elements
                 this.$toolbarStyles = jQuery('#qa_toolbox');
                 this.$legendContainer = jQuery('#legendContainer');
@@ -1816,10 +1813,6 @@
                     spellCheck.config.$legendList.append($listItem);
                 }
             },
-//            spellCheck: function () {
-//                var openThis = this.buildURL();
-//                openNewTab(openThis);
-//            },
             spellCheckPage: function () {
                 // ----------------------------------------
                 // spell check page test functions
@@ -1890,17 +1883,6 @@
             // ----------------------------------------
             // tier 3 functions
             // ----------------------------------------
-//            buildURL: function () {
-//                var URL = 'https://www.w3.org/2002/01/spellchecker?',
-//                    params = {
-//                        uri: encodeURIComponent(this.siteURL + this.pageName),
-//                        lang: 'en_US'
-//                    };
-//                jQuery.each(params, function (index, value) {
-//                    URL += index + '=' + value + '&';
-//                });
-//                return URL;
-//            },
             clean: function (word) {
                 return word.replace('’', '\'')
                     .replace(/^'*(.*?)'*$/, '$1')
