@@ -1771,9 +1771,9 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-                this.$cm = unsafeWindow.ContextManager;
-                this.siteURL = this.$cm.getUrl();
-                this.pageName = this.$cm.getPageName();
+//                this.$cm = unsafeWindow.ContextManager;
+//                this.siteURL = this.$cm.getUrl();
+//                this.pageName = this.$cm.getPageName();
                 // DOM elements
                 this.$toolbarStyles = jQuery('#qa_toolbox');
                 this.$legendContainer = jQuery('#legendContainer');
@@ -1783,7 +1783,7 @@
                 this.$legendContainer.append(spellCheck.config.$legend);
             },
             bindEvents: function () {
-                //                spellCheck.config.$activateButt.on('click', this.spellCheck.bind(this));
+                // activate button
                 spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
                 spellCheck.config.$activateButt.on('click', this.showLegend);
                 spellCheck.config.$activateButt.on('click', this.toggleDisable);
@@ -1816,10 +1816,10 @@
                     spellCheck.config.$legendList.append($listItem);
                 }
             },
-            spellCheck: function () {
-                var openThis = this.buildURL();
-                openNewTab(openThis);
-            },
+//            spellCheck: function () {
+//                var openThis = this.buildURL();
+//                openNewTab(openThis);
+//            },
             spellCheckPage: function () {
                 // ----------------------------------------
                 // spell check page test functions
@@ -1838,9 +1838,6 @@
                     },
                     false);
                 // dictionary
-                //                var dictionary = new Typo('en_US',
-                //                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.aff',
-                //                                         'https://raw.githubusercontent.com/cfinke/Typo.js/master/typo/dictionaries/en_US/en_US.dic');
                 var dictionary = new Typo("en_US", false, false, {
                         dictionaryPath: "https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/"
                     }),
@@ -1854,9 +1851,6 @@
                     wordList.push(treeWalker.currentNode);
                 }
 
-                //                console.log(wordList);
-
-                // ----------------------------------------
                 wordList.forEach(function (n) {
                     var text = n.nodeValue,
                         words = text.match(/[’'\w]+/g),
@@ -1868,12 +1862,10 @@
                     }
 
                     words.forEach(function (word) {
-
                         // check if word is in the dictionary AND if it IS NOT a number
                         if (!dictionary.check(self.clean(word)) && !/^\d+$/.test(word)) {
-                            //                                                console.log(text);
                             unmarked = new RegExp('\\b' + word + '(?!@##)\\b', 'g');
-                            text = text.replace(unmarked, '##@$&@##');
+                            text = text.replace(unmarked, '~@$&@~');
                         }
                     });
 
@@ -1886,7 +1878,6 @@
                         pElm = elm;
                     }
                 });
-                console.log('spell check function complete');
             },
             showLegend: function () {
                 spellCheck.config.$legend.slideToggle(500);
@@ -1899,17 +1890,17 @@
             // ----------------------------------------
             // tier 3 functions
             // ----------------------------------------
-            buildURL: function () {
-                var URL = 'https://www.w3.org/2002/01/spellchecker?',
-                    params = {
-                        uri: encodeURIComponent(this.siteURL + this.pageName),
-                        lang: 'en_US'
-                    };
-                jQuery.each(params, function (index, value) {
-                    URL += index + '=' + value + '&';
-                });
-                return URL;
-            },
+//            buildURL: function () {
+//                var URL = 'https://www.w3.org/2002/01/spellchecker?',
+//                    params = {
+//                        uri: encodeURIComponent(this.siteURL + this.pageName),
+//                        lang: 'en_US'
+//                    };
+//                jQuery.each(params, function (index, value) {
+//                    URL += index + '=' + value + '&';
+//                });
+//                return URL;
+//            },
             clean: function (word) {
                 return word.replace('’', '\'')
                     .replace(/^'*(.*?)'*$/, '$1')
@@ -1917,7 +1908,7 @@
             },
             replaceMarkers: function (elm) {
                 if (elm) {
-                    elm.innerHTML = elm.innerHTML.replace(/##@(.*?)@##/g, '<span class="spell-check misspelled">$1</span>');
+                    elm.innerHTML = elm.innerHTML.replace(/~@(.*?)@~/g, '<span class="spell-check misspelled">$1</span>');
                 }
             },
             removeHighlights: function () {
