@@ -1,6 +1,6 @@
 theme: jekyll-theme-leap-day
 title: [QA Tool]
-description: [Tools to help speed up the QA process.]
+description: [[![GitHub release](https://img.shields.io/github/release/cirept/NextGen.svg)](https://github.com/cirept/NextGen/releases) Tools to help speed up the QA process.]
 ---
 title: QA Tool
 permalink: mypageurl.html
