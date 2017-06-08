@@ -15,6 +15,7 @@
 // @resource jqueryUI https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css
 // @resource typo https://raw.githubusercontent.com/cirept/Typo.js/master/typo/typo.js
 // @resource toolStyles https://raw.githubusercontent.com/cirept/NextGen/separateCss/assets/css/toolbox.css
+// @resource animate https://raw.githubusercontent.com/cirept/animate.css/master/animate.css
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard

@@ -36,7 +36,7 @@
     var QAtoolbox = {
             init: function () {
                 this.createElements();
-//                this.toolbarStyles();
+                //                this.toolbarStyles();
                 this.cacheDOM();
                 this.attachTools();
             },
@@ -76,40 +76,45 @@
                         id: 'toolStyles',
                         href: getResourceURL('toolStyles'),
                         rel: 'stylesheet'
+                    }),
+                    $animate: jQuery('<link>').attr({
+                        id: 'animate',
+                        hred: getResourceURL('animate'),
+                        rel: 'stylesheet'
                     })
                 };
             },
-            toolbarStyles: function () {
-                QAtoolbox.config.$toolbarStyles
-                    // general toolbox styles
-                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; z-index: 50000; margin: 0 0 5px 0; }')
-                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }')
-                    .append('.toolsPanel { display: none; }')
-                    // panel title styles
-                    .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; text-transform: lowercase; }')
-                    // default highlight style
-                    .append('#toolboxContainer .highlight { background: linear-gradient(to right, #83a4d4 , #b6fbff) !important; color: #ffffff;}')
-                    // even button styles
-                    .append('.evenEDObutts {background: linear-gradient(to left, #457fca , #5691c8);}')
-                    // off button styles
-                    .append('.oddEDObutts {background: linear-gradient(to left, #6190E8 , #A7BFE8);}')
-                    // default button styles
-                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 12px; top: 15%; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }')
-                    .append('.myEDOBut.notWorking { background: purple; }')
-                    .append('.myEDOBut.offButt { width: 90%; height: 50px; margin: 0px; }')
-                    .append('.myEDOBut[disabled] { border: 2px outset ButtonFace; background: #ddd; background-color: #ddd; color: grey !important; cursor: not-allowed; }')
-                    .append('.offButt { background: linear-gradient(to left, #085078 , #85D8CE) !important; }')
-                    .append('.myEDOBut:hover { background: linear-gradient(to left, #141E30 , #243B55) !important; border: 2px solid rgb(0,0,0); }')
-                    // legend styles
-                    .append('.legendTitle { font-weight: bold; font-size: 18px; }')
-                    .append('.legendContent { padding: 5px; margin: 5px; }')
-                    .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
-                    .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }')
-                    .append('.tbLegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
-                    .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
-                    // toggle style
-                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } '); // end
-            },
+//            toolbarStyles: function () {
+//                QAtoolbox.config.$toolbarStyles
+//                    // general toolbox styles
+//                    .append('.toolBox { text-align: center; position: relative; border: 1px solid black; z-index: 50000; margin: 0 0 5px 0; }')
+//                    .append('#toolboxContainer { bottom: 20px; font-family: "Montserrat"; font-size: 12px; line-height: 20px; position: fixed; text-transform: lowercase; width: 140px; z-index: 99999999; }')
+//                    .append('.toolsPanel { display: none; }')
+//                    // panel title styles
+//                    .append('.panelTitle { border-bottom: 1px solid #000000; color: white; cursor: pointer; text-transform: lowercase; }')
+//                    // default highlight style
+//                    .append('#toolboxContainer .highlight { background: linear-gradient(to right, #83a4d4 , #b6fbff) !important; color: #ffffff;}')
+//                    // even button styles
+//                    .append('.evenEDObutts {background: linear-gradient(to left, #457fca , #5691c8);}')
+//                    // off button styles
+//                    .append('.oddEDObutts {background: linear-gradient(to left, #6190E8 , #A7BFE8);}')
+//                    // default button styles
+//                    .append('.myEDOBut { border: 2px solid rgb(0,0,0); border-radius: 5px; color: #ffffff !important; cursor: pointer; font-family: "Montserrat"; font-size: 12px; top: 15%; padding: 4px 0px; position: relative; text-transform: lowercase; width: 135px; }')
+//                    .append('.myEDOBut.notWorking { background: purple; }')
+//                    .append('.myEDOBut.offButt { width: 90%; height: 50px; margin: 0px; }')
+//                    .append('.myEDOBut[disabled] { border: 2px outset ButtonFace; background: #ddd; background-color: #ddd; color: grey !important; cursor: not-allowed; }')
+//                    .append('.offButt { background: linear-gradient(to left, #085078 , #85D8CE) !important; }')
+//                    .append('.myEDOBut:hover { background: linear-gradient(to left, #141E30 , #243B55) !important; border: 2px solid rgb(0,0,0); }')
+//                    // legend styles
+//                    .append('.legendTitle { font-weight: bold; font-size: 18px; }')
+//                    .append('.legendContent { padding: 5px; margin: 5px; }')
+//                    .append('.legendList { list-style-type: none; margin: 10px 0px; padding: 0px; }')
+//                    .append('#legendContainer { font-family: "Montserrat"; position: fixed; bottom: 20px; width: 260px; z-index: 99999999; }')
+//                    .append('.tbLegend { background: white; border: 1px solid black; display: none; text-align: center; padding: 5px; margin: 5px 0; }')
+//                    .append('.hint { font-style: italic; line-height: 10px; margin: 10px 0 0 0; }')
+//                    // toggle style
+//                    .append('.toggleTool { background: linear-gradient(to right, rgb(236, 233, 230) , rgb(255, 255, 255)); border-top: 1px solid #999999; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; } '); // end
+//            },
             cacheDOM: function () {
                 this.head = jQuery('head');
                 this.body = jQuery('body');
@@ -121,6 +126,7 @@
                 this.head.append(QAtoolbox.config.$fontAwe);
                 this.head.append(QAtoolbox.config.$typo);
                 this.head.append(QAtoolbox.config.$toolStyles);
+                this.head.append(QAtoolbox.config.$animate);
                 this.body.before(QAtoolbox.config.$toolbarContainer);
                 this.body.before(QAtoolbox.config.$legendContainer);
             },
@@ -309,7 +315,7 @@
                 this.buildTool();
                 this.displayData();
                 this.tagDetails();
-//                this.addStyles();
+                //                this.addStyles();
                 this.bindEvents();
                 // return finished tool
                 return this.returnTool();
@@ -425,17 +431,17 @@
                 }
                 hTags.config.$hTagDisplay.html(html);
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    .append('.hCount { display: block; }')
-                    .append('#hTags { cursor: pointer; background: white; border-top: 1px solid #000000; }')
-                    .append('.count { font-weight: bold; }')
-                    .append('.zeroTotal { background: linear-gradient(to right, #F2994A , #F2C94C); }')
-                    .append('.hTagDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
-                    .append('#hTagContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
-                    .append('.removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}'); // end of addStyles
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    .append('.hCount { display: block; }')
+//                    .append('#hTags { cursor: pointer; background: white; border-top: 1px solid #000000; }')
+//                    .append('.count { font-weight: bold; }')
+//                    .append('.zeroTotal { background: linear-gradient(to right, #F2994A , #F2C94C); }')
+//                    .append('.hTagDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
+//                    .append('#hTagContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
+//                    .append('.removeDiv { position: fixed; top: 15%; left: 25%; height: 5%; width: 50%;}'); // end of addStyles
+//            },
             bindEvents: function () {
                 hTags.config.$hTagsContainer.on('click', this.showDetails.bind(this));
                 hTags.config.$removeBut.on('click', this.removeDisplay);
@@ -475,7 +481,7 @@
                 this.buildPanel();
                 this.cacheDOM();
                 this.addTool();
-//                this.addStyles();
+                //                this.addStyles();
                 this.bindEvents();
                 this.displayPanel();
             },
@@ -524,12 +530,12 @@
                 // add to main toolbox
                 this.$toolBoxContainer.prepend(pageInformation.config.$pageInfoContainer);
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; font-size: 10px; word-wrap: break-word; }')
-                    .append('.tbLabel { font-weight: bold; font-size: inherit; }');
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; font-size: 10px; word-wrap: break-word; }')
+//                    .append('.tbLabel { font-weight: bold; font-size: inherit; }');
+//            },
             bindEvents: function () {
                 // minimize
                 pageInformation.config.$pageInfoTitle.on('click', this.toggleFeature);
@@ -591,13 +597,15 @@
             },
             setState: function ($panel, state) {
                 if (state === 'show') {
-                    $panel.css({
-                        display: 'block'
-                    });
+//                    $panel.css({
+//                        display: 'block'
+//                    });
+                    $panel.addClass('reappear');
                 } else if (state === 'hide') {
-                    $panel.css({
-                        display: 'none'
-                    });
+//                    $panel.css({
+//                        display: 'none'
+//                    });
+                    $panel.addClass('disappear');
                 }
             }
         },
@@ -656,12 +664,12 @@
                 // add to main toolbox
                 this.$toolBoxContainer.append(qaTools.config.$mainToolsContainer);
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
-                    .append('.tbLabel { font-weight: bold; }');
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
+//                    .append('.tbLabel { font-weight: bold; }');
+//            },
             bindEvents: function () {
                 // minimize
                 qaTools.config.$mainToolsTitle.on('click', this.toggleFeature);
@@ -856,20 +864,20 @@
                 this.imageArrayLength = this.$allImages.length;
                 this.$toolbarStyles = jQuery('#qa_toolbox');
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    // styles of colored overlay placed on images
-                    .append('.imageCheckerOverlay { color: #000000 !important; font-weight: bold; text-align: center; vertical-align: middle; }')
-                    // allow proper displaying of color overlay on images
-                    .append('.overlaid { position: relative; }')
-                    // image overlay styles
-                    .append('.imgOverlay { color: black; font-size: 20px; font-weight: bold; text-align: center; position: absolute; z-index: 1; }') //top: 0; left: 0;
-                    // image styles
-                    .append('.hasAlt { background: rgba(146, 232, 66, .75) !important; }')
-                    .append('.noAlt { background: rgba(255, 124, 216, .75) !important; }')
-                    .append('.emptyAlt { background: rgba(255, 124, 216, .75) !important; }'); // end of addStyles
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    // styles of colored overlay placed on images
+//                    .append('.imageCheckerOverlay { color: #000000 !important; font-weight: bold; text-align: center; vertical-align: middle; }')
+//                    // allow proper displaying of color overlay on images
+//                    .append('.overlaid { position: relative; }')
+//                    // image overlay styles
+//                    .append('.imgOverlay { color: black; font-size: 20px; font-weight: bold; text-align: center; position: absolute; z-index: 1; }') //top: 0; left: 0;
+//                    // image styles
+//                    .append('.hasAlt { background: rgba(146, 232, 66, .75) !important; }')
+//                    .append('.noAlt { background: rgba(255, 124, 216, .75) !important; }')
+//                    .append('.emptyAlt { background: rgba(255, 124, 216, .75) !important; }'); // end of addStyles
+//            },
             addDivOverlay: function ($currentImage) {
                 this.cacheDOMOverlayElements($currentImage);
                 this.createOverlayElements();
@@ -1456,26 +1464,26 @@
                 this.$otherLinks = jQuery('header, footer').find('a');
             },
             addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    // styles of colored overlay placed on images
-                    .append('.imageCheckerOverlay { color: #000000 !important; font-weight: bold; text-align: center; vertical-align: middle; }')
-                    // allow proper displaying of color overlay on images
-                    .append('.overlaid { position: relative; }')
-                    // image overlay styles
-                    .append('.imgOverlay { color: black; font-size: 15px; font-weight: bold; text-align: center; position: absolute; z-index: 1; }') //top: 0; left: 0;
-                    // link styles
-                    .append('.noTitle { background: rgba(255, 124, 216, .75) !important; }')
-                    .append('.hasTitle { background: rgba(146, 232, 66, .75) !important; }')
-                    .append('.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%) !important; }')
-                    .append('.hasTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important; }')
-                    .append('.noTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
-                    .append('.emptyTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
-                    //                    .append('.brokenURL { background: linear-gradient(to right, rgba(253, 116, 108, .75), rgba(255, 144, 104, .75)) !important }')
-                    .append('.brokenURL { background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important; color: white; }')
-                    .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
-                    .append('.absoluteURL { -moz-box-shadow: inset 0px 0px 0px 3px purple; -webkit-box-shadow: inset 0px 0px 0px 3px purple; box-shadow: inset 0px 0px 0px 3px purple; }')
-                    .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to right, rgba(249,255,209,0.75) 0%, rgba(160,255,206,0.75) 100%) !important; color: #909090 !important; }'); // end of addStyles  #00a6ff
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    // styles of colored overlay placed on images
+//                    .append('.imageCheckerOverlay { color: #000000 !important; font-weight: bold; text-align: center; vertical-align: middle; }')
+//                    // allow proper displaying of color overlay on images
+//                    .append('.overlaid { position: relative; }')
+//                    // image overlay styles
+//                    .append('.imgOverlay { color: black; font-size: 15px; font-weight: bold; text-align: center; position: absolute; z-index: 1; }') //top: 0; left: 0;
+//                    // link styles
+//                    .append('.noTitle { background: rgba(255, 124, 216, .75) !important; }')
+//                    .append('.hasTitle { background: rgba(146, 232, 66, .75) !important; }')
+//                    .append('.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%) !important; }')
+//                    .append('.hasTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important; }')
+//                    .append('.noTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
+//                    .append('.emptyTitle.opensWindow { background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important; }')
+//                    //                    .append('.brokenURL { background: linear-gradient(to right, rgba(253, 116, 108, .75), rgba(255, 144, 104, .75)) !important }')
+//                    .append('.brokenURL { background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important; color: white; }')
+//                    .append('.urlIssue { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
+//                    .append('.absoluteURL { -moz-box-shadow: inset 0px 0px 0px 3px purple; -webkit-box-shadow: inset 0px 0px 0px 3px purple; box-shadow: inset 0px 0px 0px 3px purple; }')
+//                    .append('.siteLink.linkChecked, .imgOverlay.linkChecked { background: linear-gradient(to right, rgba(249,255,209,0.75) 0%, rgba(160,255,206,0.75) 100%) !important; color: #909090 !important; }'); // end of addStyles  #00a6ff
 
                 // if site is TETRA do not add style
                 if (toolbar.nextGenCheck()) {
@@ -1570,7 +1578,7 @@
                             // link has a fishy url
                             this.togClass($currentLink, 'urlIssue');
                             break;
-                        case (this.datedURL(href)):
+                        case (this.datedURL(href) && toolbar.nextGenCheck()):
                             // link leads to an out dated page
                             this.togClass($currentLink, 'unsupportedPageLink');
                             break;
@@ -2163,12 +2171,12 @@
                 // add to main toolbox
                 this.$toolBoxContainer.append(otherTools.config.$otherToolsContainer);
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
-                    .append('.tbLabel { font-weight: bold; }');
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
+//                    .append('.tbLabel { font-weight: bold; }');
+//            },
             bindEvents: function () {
                 // minimize
                 otherTools.config.$otherToolsTitle.on('click', this.toggleFeature);
@@ -2322,16 +2330,16 @@
                 showNavigation.config.$offButt.on('click', this.toggleDisable);
                 showNavigation.config.$offButt.on('click', this.unbindClicks.bind(this));
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    // styles of colored overlay placed on images
-                    .append('.majorPage { color: #ffffff; background: linear-gradient(to left, rgba(255, 179, 71, .75) , rgba(255, 204, 51, .75)) !important; }')
-                    .append('.tetraShowNav { display: block !important; }')
-                    .append('.linkChecked { background: linear-gradient(to right, rgba(249,255,209,0.75) 0%, rgba(160,255,206,0.75) 100%) !important; color: #999999 !important; }')
-                    .append('.nextgenShowNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; z-index: 100; }')
-                    .append('.showNavAdd { width: 150px !important; padding: 0 !important; font-size: 15px !important; }'); // end of addStyles
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    // styles of colored overlay placed on images
+//                    .append('.majorPage { color: #ffffff; background: linear-gradient(to left, rgba(255, 179, 71, .75) , rgba(255, 204, 51, .75)) !important; }')
+//                    .append('.tetraShowNav { display: block !important; }')
+//                    .append('.linkChecked { background: linear-gradient(to right, rgba(249,255,209,0.75) 0%, rgba(160,255,206,0.75) 100%) !important; color: #999999 !important; }')
+//                    .append('.nextgenShowNav { display: inline-block !important; position: absolute !important; background: white !important; margin: 0 !important; width: 150px !important; z-index: 100; }')
+//                    .append('.showNavAdd { width: 150px !important; padding: 0 !important; font-size: 15px !important; }'); // end of addStyles
+//            },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
@@ -2359,7 +2367,7 @@
             },
             toggleFeatures: function () {
                 var isNextGen = this.isNextGenPlatform;
-                console.log(this.$navTabs);
+//                console.log(this.$navTabs);
                 if (isNextGen) {
                     this.$navTabs.toggleClass('showNavAdd');
                     this.$subNavItem.toggleClass('showNavAdd');
@@ -2811,13 +2819,13 @@
     }).text('Show Widgets');
     $wo_butt.click(function () {
         var $toolbarStyles = jQuery('#qa_toolbox');
-        $toolbarStyles
-            // styles data content
-            .append('.showWidgetData:after { content: attr(data-content); position: absolute; top: 0; bottom: 0; left: 0; text-align: center; z-index: 100; margin: auto; background: linear-gradient(to right, rgba(80, 201, 195, .85) , rgba(150, 222, 218, .85)); color: black; font-weight: bold; font-size: 15px; }')
-            .append('.outlineWidget { border: 1px dotted pink; }')
-            .append('.hideColorblock { z - index: -1 !important; }')
-        // end of addStyles
-        ; // end
+//        $toolbarStyles
+//            // styles data content
+//            .append('.showWidgetData:after { content: attr(data-content); position: absolute; top: 0; bottom: 0; left: 0; text-align: center; z-index: 100; margin: auto; background: linear-gradient(to right, rgba(80, 201, 195, .85) , rgba(150, 222, 218, .85)); color: black; font-weight: bold; font-size: 15px; }')
+//            .append('.outlineWidget { border: 1px dotted pink; }')
+//            .append('.hideColorblock { z - index: -1 !important; }')
+//        // end of addStyles
+//        ; // end
         // made to you will be able to remove it later
         jQuery('.masonry-brick').addClass('outlineWidget');
         // made to you will be able to remove it later
@@ -2976,24 +2984,24 @@
                 //                checkLinks.config.$activateButt.on('click', this.tetraTestLinks.bind(this));
                 checkLinks.config.$offButt.on('click', this.showLegend);
             },
-            addStyles: function () {
-                this.$toolbarStyles
-                    // styles of colored overlay placed on images
-                    //removing this class to keep functionality separate between tools.
-                    //.append('.framedIn { background: linear-gradient(to left, #F7971E , #FFD200) !important; color: #000000 !important; }')
-                    .append('.attention { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
-                    //                    .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
-                    .append('.jumpLink { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
-                    .append('.mobilePhoneLink { background: #005588 !important; color: #000000 !important; color: white !important; }')
-                    .append('.success { background: linear-gradient(to right, rgba(86, 171, 47, .85) , rgba(168, 224, 99, .85)) !important; color: #000000 !important; }')
-                    .append('.siteLink.success { background: linear-gradient(to right, rgba(86, 171, 47, .85) , rgba(168, 224, 99, .85)) !important; color: #000000 !important; }') // tester
-                    .append('.error { background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75)) !important; color: #ffffff !important; }')
-                    .append('.otherDomain { background: linear-gradient(to left, #00C9FF , #92FE9D) !important; color: #000000 !important; }')
-                    .append('.siteLink { color: black !important; border: none !important;}')
-                    //                    .append('.fourOfour { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
-                    .append('#checkMessage { margin: 5px auto; padding: 5px; }')
-                    .append('#checkContainer { text-align: center; background: white; }'); // end of addStyles
-            },
+//            addStyles: function () {
+//                this.$toolbarStyles
+//                    // styles of colored overlay placed on images
+//                    //removing this class to keep functionality separate between tools.
+//                    //.append('.framedIn { background: linear-gradient(to left, #F7971E , #FFD200) !important; color: #000000 !important; }')
+//                    .append('.attention { -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
+//                    //                    .append('.brokenURL { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60); }')
+//                    .append('.jumpLink { background: linear-gradient(to left, #FFAFBD , #ffc3a0) !important; color: #000000 !important; }')
+//                    .append('.mobilePhoneLink { background: #005588 !important; color: #000000 !important; color: white !important; }')
+//                    .append('.success { background: linear-gradient(to right, rgba(86, 171, 47, .85) , rgba(168, 224, 99, .85)) !important; color: #000000 !important; }')
+//                    .append('.siteLink.success { background: linear-gradient(to right, rgba(86, 171, 47, .85) , rgba(168, 224, 99, .85)) !important; color: #000000 !important; }') // tester
+//                    .append('.error { background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75)) !important; color: #ffffff !important; }')
+//                    .append('.otherDomain { background: linear-gradient(to left, #00C9FF , #92FE9D) !important; color: #000000 !important; }')
+//                    .append('.siteLink { color: black !important; border: none !important;}')
+//                    //                    .append('.fourOfour { background: linear-gradient(to left, #F00000 , #DC281E) !important; color: #ffffff !important; }')
+//                    .append('#checkMessage { margin: 5px auto; padding: 5px; }')
+//                    .append('#checkContainer { text-align: center; background: white; }'); // end of addStyles
+//            },
             // ----------------------------------------
             // tier 1 functions
             // ----------------------------------------
@@ -5152,12 +5160,12 @@
                 // add to main toolbox
                 this.$toolBoxContainer.append(toggles.config.$togglesContainer);
             },
-            addStyles: function () {
-                // apply module styles to main tool bar style tag
-                this.$toolbarStyles
-                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
-                    .append('.tbLabel { font-weight: bold; }');
-            },
+//            addStyles: function () {
+//                // apply module styles to main tool bar style tag
+//                this.$toolbarStyles
+//                    .append('.tbInfo { background: linear-gradient(to right, #ECE9E6 , #FFFFFF); color: #000000 !important; clear: both; cursor: pointer; line-height: 15px; padding: 3px 0px; text-transform: none; border-top: 1px solid #000000; border-bottom: 1px solid #000000; word-wrap: break-word; }')
+//                    .append('.tbLabel { font-weight: bold; }');
+//            },
             bindEvents: function () {
                 // minimize
                 toggles.config.$togglesTitle.on('click', this.toggleFeature);
@@ -5290,10 +5298,10 @@
                 refreshPage.config.$refreshButt.on('click', this.reloadPage);
                 refreshPage.config.$refreshContainer.on('click', this.flipTheSwitch.bind(this));
             },
-            addStyles: function () {
-                this.$toolbarStyles
-                    .append('#refreshPage:hover { color: #ffffff !important; background: linear-gradient(to left, #f4c4f3 , #fc67fa) !important; }');
-            },
+//            addStyles: function () {
+//                this.$toolbarStyles
+//                    .append('#refreshPage:hover { color: #ffffff !important; background: linear-gradient(to left, #f4c4f3 , #fc67fa) !important; }');
+//            },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
                 if (this.getChecked()) {
