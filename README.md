@@ -1,4 +1,4 @@
-<div id="tabs">[![GitHub release](https://img.shields.io/github/release/cirept/NextGen.svg)](https://github.com/cirept/NextGen/releases)   [![GitHub issues](https://img.shields.io/github/issues/cirept/NextGen.svg)](https://github.com/cirept/NextGen/issues)</div>
+[![GitHub release](https://img.shields.io/github/release/cirept/NextGen.svg)](https://github.com/cirept/NextGen/releases)   [![GitHub issues](https://img.shields.io/github/issues/cirept/NextGen.svg)](https://github.com/cirept/NextGen/issues)
 
 # Tool Descriptions<br>
 
