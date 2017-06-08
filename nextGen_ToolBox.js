@@ -36,7 +36,7 @@
     var QAtoolbox = {
             init: function () {
                 this.createElements();
-                this.toolbarStyles();
+//                this.toolbarStyles();
                 this.cacheDOM();
                 this.attachTools();
             },
@@ -71,6 +71,11 @@
                     }),
                     $typo: jQuery('<script>').attr({
                         src: getResourceURL('typo')
+                    }),
+                    $toolStyles: jQuery('<link>').attr({
+                        id: 'toolStyles',
+                        href: getResourceURL('toolStyles'),
+                        rel: 'stylesheet'
                     })
                 };
             },
@@ -115,6 +120,7 @@
                 this.head.append(QAtoolbox.config.$myFont);
                 this.head.append(QAtoolbox.config.$fontAwe);
                 this.head.append(QAtoolbox.config.$typo);
+                this.head.append(QAtoolbox.config.$toolStyles);
                 this.body.before(QAtoolbox.config.$toolbarContainer);
                 this.body.before(QAtoolbox.config.$legendContainer);
             },
@@ -303,7 +309,7 @@
                 this.buildTool();
                 this.displayData();
                 this.tagDetails();
-                this.addStyles();
+//                this.addStyles();
                 this.bindEvents();
                 // return finished tool
                 return this.returnTool();
@@ -469,7 +475,7 @@
                 this.buildPanel();
                 this.cacheDOM();
                 this.addTool();
-                this.addStyles();
+//                this.addStyles();
                 this.bindEvents();
                 this.displayPanel();
             },
@@ -610,7 +616,7 @@
                 this.buildPanel();
                 this.cacheDOM();
                 this.addTool();
-                this.addStyles();
+                //                this.addStyles();
                 this.bindEvents();
                 this.displayPanel();
             },
@@ -811,7 +817,7 @@
                 // cache data from page
                 this.cacheDOM();
                 // add tool styles
-                this.addStyles();
+                //                this.addStyles();
                 var iaLength = this.imageArrayLength,
                     a = 0,
                     $this;
@@ -1072,7 +1078,7 @@
                 // dynamic loading of cached elements
                 // have to load here to compensate for lazy loaded widgets
                 this.cacheDOM();
-                this.addStyles();
+                //                this.addStyles();
                 var a = 0,
                     buttons = jQuery('body').find('button'),
                     length = buttons.length;
@@ -2117,7 +2123,7 @@
                 this.buildPanel();
                 this.cacheDOM();
                 this.addTool();
-                this.addStyles();
+                //                this.addStyles();
                 this.bindEvents();
                 this.displayPanel();
             },
@@ -2231,7 +2237,7 @@
                 this.buildLegend();
                 this.addTool();
                 this.bindEvents();
-                this.addStyles();
+                //                this.addStyles();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -2451,7 +2457,7 @@
                 this.buildElements();
                 this.getData();
                 this.cacheDOM(callingPanel);
-                this.addStyles();
+                //                this.addStyles();
                 this.addTool();
                 this.bindEvents();
             },
@@ -2872,7 +2878,7 @@
                 this.buildLegend();
                 this.addTool();
                 this.bindEvents();
-                this.addStyles();
+                //                this.addStyles();
             },
             createElements: function () {
                 checkLinks.config = {
@@ -3002,7 +3008,7 @@
             tetraTestLinks: function () {
                 var j = 0,
                     $currentLink,
-//                    currentLinkURL,
+                    //                    currentLinkURL,
                     passedChecks = false,
                     $pageLinks = jQuery('a'),
                     pageLinksLength = $pageLinks.length;
@@ -3899,7 +3905,7 @@
                     method: 'get',
                     dataType: 'html',
                     success: function (data) {
-//                    success: function (data, textStatus, jqXHR) {
+                        //                    success: function (data, textStatus, jqXHR) {
 
                         // checks to see if link is an image link
                         hasImage = $currentLink.has('img').length;
@@ -3922,7 +3928,7 @@
 
                     },
                     error: function (jqXHR) {
-//                    error: function (jqXHR, textStatus, error) {
+                        //                    error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
                         checkLinks.config.errors += 1;
                         if (jqXHR.status === 404) {
@@ -3937,7 +3943,7 @@
                     },
                     statusCode: {
                         404: function () {
-//                        404: function (jqXHR, textStatus, error) {
+                            //                        404: function (jqXHR, textStatus, error) {
                             $currentLink.addClass('fourOfour');
 
                             if (isImageLink) {
@@ -3961,9 +3967,9 @@
                 var //hasImage = 0,
                     //                    isImageLink = false,
                     $linkOverlay, pageError404,
-                    linkURL = checkLinks.addURLParameter($currentLink);//,
-                    //$cardImageContainer,
-                    //cardClass, $cardLinkContainer, $image;
+                    linkURL = checkLinks.addURLParameter($currentLink); //,
+                //$cardImageContainer,
+                //cardClass, $cardLinkContainer, $image;
 
                 //check if isImageLink is empty and check if $currentCard is empty
                 //most likely because the parameter was not mentioned in the calling statement
@@ -3980,7 +3986,7 @@
                     crossDomain: true,
                     method: 'get',
                     dataType: 'html',
-//                    success: function (data, textStatus, jqXHR) {
+                    //                    success: function (data, textStatus, jqXHR) {
                     success: function (data) {
 
                         // 5/23/2017
@@ -4059,7 +4065,7 @@
 
                     },
                     error: function (jqXHR) {
-//                    error: function (jqXHR, textStatus, error) {
+                        //                    error: function (jqXHR, textStatus, error) {
                         //set link in red if there is any errors with link
                         checkLinks.config.errors += 1;
                         if (jqXHR.status === 404) {
@@ -4074,7 +4080,7 @@
                     },
                     statusCode: {
                         404: function () {
-//                        404: function (jqXHR, textStatus, error) {
+                            //                        404: function (jqXHR, textStatus, error) {
                             $currentLink.addClass('fourOfour');
 
                             if (isImageLink) {
@@ -4280,7 +4286,7 @@
                 });
             },
             error: function ($this) {
-//            error: function ($this, isImageLink) {
+                //            error: function ($this, isImageLink) {
                 //                var curClass = '';
                 //                if (isImageLink) {
                 //                    curClass = $this.attr('class');
@@ -4293,7 +4299,7 @@
                 $this.addClass('error');
             },
             success: function ($this) {
-//            success: function ($this, isImageLink) {
+                //            success: function ($this, isImageLink) {
                 //                var curClass = '';
                 //                if (isImageLink) {
                 //                    curClass = $this.attr('class');
@@ -5106,7 +5112,7 @@
                 this.buildPanel();
                 this.cacheDOM();
                 this.addTool();
-                this.addStyles();
+                //                this.addStyles();
                 this.bindEvents();
                 this.displayPanel();
             },
@@ -5220,7 +5226,7 @@
                 this.buildTool();
                 this.addTool();
                 this.bindEvents();
-                this.addStyles();
+                //                this.addStyles();
                 this.setToggle();
             },
             // ----------------------------------------
