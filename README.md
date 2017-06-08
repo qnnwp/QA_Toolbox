@@ -1,3 +1,5 @@
+[![GitHub release](https://img.shields.io/github/release/daneden/animate.css.svg)](https://github.com/cirept/NextGen/releases)
+
 # Tool Descriptions<br>
 
 ![QA Tool Layout](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout.png)
