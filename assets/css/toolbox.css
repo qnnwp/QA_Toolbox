@@ -186,22 +186,6 @@ default styles
 }
 
 
-/* shared styles */
-
-.linkChecked {
-    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
-    color: #999999 !important;
-}
-
-.removeDiv {
-    position: fixed;
-    top: 15%;
-    left: 25%;
-    height: 5%;
-    width: 50%;
-}
-
-
 /*
 ----------------------------------------
 Page Information Styles
@@ -555,4 +539,19 @@ removing this class to keep functionality separate between tools.*/
 #refreshPage:hover {
     color: #ffffff !important;
     background: linear-gradient(to left, #f4c4f3, #fc67fa) !important;
+}
+
+/* shared styles */
+
+.linkChecked {
+    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
+    color: #999999 !important;
+}
+
+.removeDiv {
+    position: fixed;
+    top: 15%;
+    left: 25%;
+    height: 5%;
+    width: 50%;
 }

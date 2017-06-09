@@ -54,10 +54,10 @@
                     // ----------------------------------------
                     // Toolbar Resources
                     // ----------------------------------------
-                    //                    $toolbarStyles: jQuery('<style>').attr({
-                    //                        id: 'qa_toolbox',
-                    //                        type: 'text/css'
-                    //                    }),
+                    $toolbarStyles: jQuery('<style>').attr({
+                        id: 'qa_toolbox',
+                        type: 'text/css'
+                    }),
                     $myFont: jQuery('<link>').attr({
                         href: getResourceURL('font'),
                         rel: 'stylesheet',
@@ -90,7 +90,7 @@
                 this.phoneWrapper = jQuery('body .phone-wrapper');
             },
             attachTools: function () {
-                //                this.head.append(QAtoolbox.config.$toolbarStyles);
+                this.head.append(QAtoolbox.config.$toolbarStyles);
                 this.head.append(QAtoolbox.config.$myFont);
                 this.head.append(QAtoolbox.config.$fontAwe);
                 this.head.append(QAtoolbox.config.$typo);
@@ -549,14 +549,14 @@
             },
             setState: function ($panel, state) {
                 if (state === 'show') {
-//                    $panel.css({
-//                        display: 'block'
-//                    });
+                    //                    $panel.css({
+                    //                        display: 'block'
+                    //                    });
                     $panel.addClass('reappear');
                 } else if (state === 'hide') {
-//                    $panel.css({
-//                        display: 'none'
-//                    });
+                    //                    $panel.css({
+                    //                        display: 'none'
+                    //                    });
                     $panel.addClass('disappear');
                 }
             }
@@ -1749,6 +1749,8 @@
                                 // In this case, only accept nodes that have content
                                 // other than whitespace
                                 if (!/^\s*$/.test(node.data)) {
+                                                                   console.log(jQuery(node));
+//                                                                   console.log(node.innerText);
                                     return NodeFilter.FILTER_ACCEPT;
                                 }
                             }
@@ -2262,7 +2264,7 @@
             },
             toggleFeatures: function () {
                 var isNextGen = this.isNextGenPlatform;
-//                console.log(this.$navTabs);
+                //                console.log(this.$navTabs);
                 if (isNextGen) {
                     this.$navTabs.toggleClass('showNavAdd');
                     this.$subNavItem.toggleClass('showNavAdd');
