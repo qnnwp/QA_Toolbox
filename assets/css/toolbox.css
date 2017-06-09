@@ -36,7 +36,7 @@ default styles
 }
 
 #toolboxContainer .highlight {
-    background: linear-gradient(to right, #83a4d4, #b6fbff) !important;
+    background: linear-gradient(to right, #83a4d4, #b6fbff);
     color: #ffffff;
 }
 
@@ -65,7 +65,6 @@ default styles
 .myEDOBut {
     border: 2px solid rgb(0, 0, 0);
     border-radius: 5px;
-    color: #ffffff !important;
     cursor: pointer;
     font-family: "Montserrat";
     font-size: 12px;
@@ -74,6 +73,14 @@ default styles
     position: relative;
     text-transform: lowercase;
     width: 135px;
+}
+
+.myEDOBut>span {
+    color: #ffffff;
+}
+
+.myEDOBut[disabled]>span {
+    color: grey;
 }
 
 .myEDOBut.notWorking {
@@ -90,17 +97,16 @@ default styles
     border: 2px outset ButtonFace;
     background: #ddd;
     background-color: #ddd;
-    color: grey !important;
     cursor: not-allowed;
 }
 
 .myEDOBut:hover {
-    background: linear-gradient(to left, #141E30, #243B55) !important;
+    background: linear-gradient(to left, #141E30, #243B55);
     border: 2px solid rgb(0, 0, 0);
 }
 
 .offButt {
-    background: linear-gradient(to left, #085078, #85D8CE) !important;
+    background: linear-gradient(to left, #085078, #85D8CE);
 }
 
 .evenEDObutts {
@@ -122,16 +128,54 @@ default styles
 
 /* hide button */
 
+#hideContainer {
+    position: absolute;
+    top: -20px;
+    z-index: 500000;
+}
+
 #hideContainer.tetra {
     right: -25px;
 }
 
 #hideContainer.nextgen {
     left: -25px;
+    right: initial;
+}
+
+#hideContainer>i {
+    padding: 0px 10px;
 }
 
 #showToolbox.nextgen {
     right: 0%;
+}
+
+
+/* show button */
+
+#showContainer {
+    background: linear-gradient(to right, rgb(168, 224, 99) 0%, rgb(86, 171, 47) 100%);
+    bottom: 30px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 15px;
+    padding: 5px;
+    position: fixed;
+    z-index: 99999999;
+}
+
+#showContainer.tetra {
+    left: 0%;
+}
+
+#showContainer.nextgen {
+    right: 0%;
+}
+
+#showContainer>i {
+    padding: 0px 10px;
 }
 
 
@@ -379,6 +423,41 @@ spell checker styles
 
 /*
 ----------------------------------------
+Web Page Test Styles
+----------------------------------------
+*/
+
+#wptInput {
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+    display: none;
+    text-align: center;
+    padding: 5px;
+    margin: 5px 0px;
+}
+
+#email {
+    margin: 5px 0px;
+    width: 85%;
+}
+
+#bSelect {
+    margin: 5px 0px;
+    width: 90%;
+}
+
+#keySelect {
+    margin: 5px 0px;
+    width: 90%;
+}
+
+#wptInput .myEDOBut {
+    margin: 0px;
+}
+
+
+/*
+----------------------------------------
 show navigation
 ----------------------------------------
 */
@@ -536,10 +615,26 @@ removing this class to keep functionality separate between tools.*/
     user-select: none;
 }
 
-#refreshPage:hover {
-    color: #ffffff !important;
-    background: linear-gradient(to left, #f4c4f3, #fc67fa) !important;
+#refreshPageContainer {
+    /*    padding: 5px 10px 5px 0px;*/
+    position: absolute;
+    right: 35px;
+    top: -55px;
+    /*    width: 75px;*/
+    z-index: 500000;
 }
+
+#refreshButt {
+    background: linear-gradient(to left, rgb(251, 211, 233), rgb(187, 55, 125));
+    width: initial;
+    padding: 5px 20px 5px 15px;
+}
+
+#refreshButt:hover {
+    /*    color: #ffffff !important;*/
+    background: linear-gradient(to left, #f4c4f3, #fc67fa);
+}
+
 
 /* shared styles */
 
@@ -555,3 +650,5 @@ removing this class to keep functionality separate between tools.*/
     height: 5%;
     width: 50%;
 }
+
+.fa-undo {}

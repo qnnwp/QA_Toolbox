@@ -1742,8 +1742,8 @@
                                 // In this case, only accept nodes that have content
                                 // other than whitespace
                                 if (!/^\s*$/.test(node.data)) {
-                                                                   console.log(jQuery(node));
-//                                                                   console.log(node.innerText);
+                                    console.log(jQuery(node));
+                                    //                                                                   console.log(node.innerText);
                                     return NodeFilter.FILTER_ACCEPT;
                                 }
                             }
@@ -1859,20 +1859,22 @@
                         id: 'email',
                         type: 'text',
                         placeholder: 'your.name@cdk.com'
-                    }).css({
-                        margin: '5px 0px',
-                        width: '85%'
                     }),
+                    /*.css({
+                                            margin: '5px 0px',
+                                            width: '85%'
+                                        }),*/
                     $panelContainer: jQuery('<div>').attr({
                         id: 'wptInput'
-                    }).css({
-                        background: 'white',
-                        'border': '1px solid black',
-                        display: 'none',
-                        'text-align': 'center',
-                        'padding': '5px',
-                        margin: '5px 0px'
                     }),
+                    /*.css({
+                                            background: 'white',
+                                            'border': '1px solid black',
+                                            display: 'none',
+                                            'text-align': 'center',
+                                            'padding': '5px',
+                                            margin: '5px 0px'
+                                        }),*/
                     browserOptions: {
                         '_IE11': 'IE11',
                         ':Chrome': 'Chrome',
@@ -1880,17 +1882,19 @@
                     },
                     $browserSelect: jQuery('<select>').attr({
                         id: 'bSelect'
-                    }).css({
-                        margin: '5px 0',
-                        width: '90%'
                     }),
+                    /*.css({
+                                            margin: '5px 0',
+                                            width: '90%'
+                                        }),*/
                     $browserTitle: jQuery('<div>').text('Choose a Browser'),
                     $keySelect: jQuery('<select>').attr({
                         id: 'keySelect'
-                    }).css({
-                        margin: '5px 0',
-                        width: '90%'
                     }),
+                    /*.css({
+                                            margin: '5px 0',
+                                            width: '90%'
+                                        }),*/
                     keyOptions: {
                         key_1: 'A.26fc3fe634ca1277825369f20eb25a90',
                         key_2: 'A.1b40e6dc41916bd77b0541187ac9e74b',
@@ -1907,11 +1911,13 @@
                         type: 'button',
                         class: 'myEDOBut offButt',
                         value: 'Send Test'
-                    }).css({
-                        width: '90%',
-                        height: '50px'
                     })
                 };
+                /*.css({
+                                        width: '90%',
+                                        height: '50px'
+                                    })
+                                };*/
             },
             cacheDOM: function (callingPanel) {
                 this.$cm = unsafeWindow.ContextManager;
@@ -5106,26 +5112,31 @@
                         id: 'refreshMe',
                         class: 'toggleTool'
                     }),
+                    $refreshButtContainer: jQuery('<div>').attr({
+                        id: 'refreshPageContainer'
+                    }),
                     $refreshButt: jQuery('<button>').attr({
                         class: 'myEDOBut draggable ui-widget-content',
-                        id: 'refreshPage',
+                        id: 'refreshButt',
                         title: 'Refresh Page from Server '
-                    }).css({
-                        background: 'linear-gradient(to left, #FBD3E9 , #BB377D)',
-                        width: '75px',
-                        position: 'absolute',
-                        right: '35px',
-                        top: '-55px',
-                        'z-index': '500000',
-                        display: 'none'
-                    }).draggable({
-                        containment: "body",
-                        scroll: false
                     }),
-                    $refresh: jQuery('<i class="fa fa-undo fa-flip-horizontal fa-3x">&nbsp;</i>').css({
-                        'margin-left': '-10px',
-                        color: 'white'
-                    }),
+                    /*.css({
+                                            background: 'linear-gradient(to left, #FBD3E9 , #BB377D)',
+                                            width: '75px',
+                                            position: 'absolute',
+                                            right: '35px',
+                                            top: '-55px',
+                                            'z-index': '500000',
+                                            display: 'none'
+                                        }).draggable({
+                                            containment: "body",
+                                            scroll: false
+                                        }),*/
+                    $refresh: jQuery('<i class="fa fa-undo fa-flip-horizontal fa-3x">&nbsp;</i>'),
+                    /*.css({
+                                            'margin-left': '-10px',
+                                            color: 'white'
+                                        }),*/
                     $refreshTitle: jQuery('<div>').css({
                         color: 'black',
                         'line-height': '15px'
@@ -5144,6 +5155,7 @@
             },
             buildTool: function () {
                 refreshPage.config.$refreshButt.html(refreshPage.config.$refresh);
+                refreshPage.config.$refreshButtContainer.html(refreshPage.config.$refreshButt);
                 // add icon to mock button
                 refreshPage.config.$refreshCheckbox.append(refreshPage.config.$FAtoggle);
                 // add mock button to container
@@ -5153,7 +5165,7 @@
             },
             addTool: function () {
                 this.$togglesPanel.append(refreshPage.config.$refreshContainer);
-                this.$togglesContainer.append(refreshPage.config.$refreshButt);
+                this.$togglesContainer.append(refreshPage.config.$refreshButtContainer);
             },
             bindEvents: function () {
                 refreshPage.config.$refreshButt.on('click', this.reloadPage);
@@ -5163,10 +5175,10 @@
                 // get value of custom variable and set toggles accordingly
                 if (this.getChecked()) {
                     this.toggleOn();
-                    refreshPage.config.$refreshButt.show();
+                    refreshPage.config.$refreshButtContainer.show();
                 } else {
                     this.toggleOff();
-                    refreshPage.config.$refreshButt.hide();
+                    refreshPage.config.$refreshButtContainer.hide();
                 }
             },
             // ----------------------------------------
@@ -5368,34 +5380,33 @@
                     }).text('Hide Toolbox'),
                     // toolbox show button
                     $showToolbox: jQuery('<div>').attr({
-                        id: 'showToolbox',
+                        id: 'showContainer',
                         title: 'Show Toolbox'
-                    }).css({
-                        background: 'linear-gradient(to right, #a8e063 0%, #56ab2f 100%)',
-                        bottom: '30px',
-                        'border-radius': '5px',
-                        color: 'white',
-                        cursor: 'pointer',
-                        display: 'none',
-                        padding: '5px',
-                        position: 'fixed',
-                        width: '50px',
-                        'z-index': '99999999'
                     }),
+                    /*.css({
+                                            background: 'linear-gradient(to right, #a8e063 0%, #56ab2f 100%)',
+                                            bottom: '30px',
+                                            'border-radius': '5px',
+                                            color: 'white',
+                                            cursor: 'pointer',
+                                            display: 'none',
+                                            padding: '5px',
+                                            position: 'fixed',
+                                            width: '50px',
+                                            'z-index': '99999999'
+                                        }),*/
                     // font awesome icon
-                    $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>').css({
-                        'margin-left': '12px'
-                    }),
+                    $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>'),
                     $hide: jQuery('<div>').attr({
                         id: 'hideContainer'
-                    }).css({
-                        position: 'absolute',
-                        top: '-20px',
-                        'z-index': '500000'
                     }),
-                    $minimizeIcon: jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse" style="color: #ffffff"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
-                        title: 'Click to Hide Toolbox',
-                        id: 'showToolbox'
+                    /*.css({
+                                            position: 'absolute',
+                                            top: '-20px',
+                                            'z-index': '500000'
+                                        }),*/
+                    $minimizeIcon: jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
+                        title: 'Click to Hide Toolbox'
                     })
                 };
             },
@@ -5428,6 +5439,7 @@
                 this.$toolBoxContainer.append(dynamicDisplay.config.$displayPanel);
                 this.$toolBoxContainer.before(dynamicDisplay.config.$showToolbox);
                 this.$toolBoxContainer.append(dynamicDisplay.config.$hide);
+                //                this.$toolBoxContainer.before(dynamicDisplay.config.$hide);
             },
             modToolbar: function () {
                 if (this.isNextGen === 'Tetra') {
@@ -5441,6 +5453,7 @@
                     this.edoButts.addClass('tetra');
                     this.lenendContain.addClass('tetra');
                     dynamicDisplay.config.$hide.addClass('tetra');
+                    dynamicDisplay.config.$showToolbox.addClass('tetra');
                     dynamicDisplay.config.$displayPanel.addClass('tetra');
                     //                    this.showTool.addClass('nextgen');
                 } else if (this.isNextGen === 'Next Gen') {
@@ -5462,9 +5475,11 @@
             },
             bindEvents: function () {
                 // click
-                dynamicDisplay.config.$minimizeIcon.on('click', this.toggleTools.bind(this));
+                dynamicDisplay.config.$hide.on('click', this.toggleTools.bind(this));
+                //                dynamicDisplay.config.$minimizeIcon.on('click', this.toggleTools.bind(this));
                 dynamicDisplay.config.$showToolbox.on('click', this.toggleTools.bind(this));
-                dynamicDisplay.config.$minimizeIcon.on('click', this.saveState);
+                dynamicDisplay.config.$hide.on('click', this.saveState);
+                //                dynamicDisplay.config.$minimizeIcon.on('click', this.saveState);
                 dynamicDisplay.config.$showToolbox.on('click', this.saveState);
             },
             displayPanel: function () {
@@ -5510,8 +5525,11 @@
                 dynamicDisplay.config.$showToolbox.toggle('fade', 500);
             },
             saveState: function (event) {
+                //                console.log(event.delegateTarget);
                 // get current state
-                var vName = jQuery(event.target).parent().attr('id'),
+                //                var vName = jQuery(event.target).parent().attr('class'),
+                //                var vName = jQuery(event.delegateTarget).attr('class'),
+                var vName = "showToolbox",
                     currState = getValue(vName, false);
 
                 // sets usingM4 value
@@ -5522,11 +5540,12 @@
                     $panel.css({
                         display: 'block'
                     });
+                    dynamicDisplay.config.$showToolbox.hide();
                 } else if (state === 'hide') {
                     $panel.css({
                         display: 'none'
                     });
-                    dynamicDisplay.config.$showToolbox.toggle();
+                    dynamicDisplay.config.$showToolbox.show();
                 }
             },
             // ----------------------------------------
@@ -5552,7 +5571,7 @@
                 this.urlModPanel();
                 this.dynamicPanel();
                 this.stylePanels();
-//                this.styleButtons();
+                //                this.styleButtons();
             },
             cacheDOM: function () {
                 this.nextGen = document.firstChild.data;
@@ -5624,6 +5643,9 @@
                 this.styleButtons(qaTools.config.$mainToolsPanel);
                 this.styleButtons(otherTools.config.$otherToolsPanel);
                 this.wrapText(QAtoolbox.config.$toolboxContainer);
+                //                this.wrapText(qaTools.config.$mainToolsPanel);
+                //                this.wrapText(otherTools.config.$otherToolsPanel);
+                //                this.wrapText(refreshPage.config.$refreshButtContainer);
             },
             // ----------------------------------------
             // tier 2
@@ -5666,7 +5688,9 @@
                 $toolPanel.children('.myEDOBut:even').addClass('evenEDObutts');
                 $toolPanel.children('.myEDOBut:odd').addClass('oddEDObutts');
             },
-            wrapText: function($toolPanel){
+            wrapText: function ($toolPanel) {
+                console.log('fire wrap text');
+                console.log($toolPanel);
                 $toolPanel.children('.myEDOBut').wrapInner('<span></span>');
             }
         };
