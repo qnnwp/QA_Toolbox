@@ -11,7 +11,7 @@
     }
 
     function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text');
+        GM_setClipboard(variable, "text");
     }
 
     function getValue(variable) {
@@ -46,7 +46,7 @@
             createElements: function () {
                 QAtoolbox.config = {
                     $legendContainer: jQuery('<div>').attr({
-                        id: 'legendContainer'
+                        id: "legendContainer"
                     }),
                     $toolbarContainer: jQuery('<div>').attr({
                         id: 'toolboxContainer'
@@ -54,7 +54,7 @@
                     // ----------------------------------------
                     // Toolbar Resources
                     // ----------------------------------------
-                    $toolbarStyles: jQuery('<style>').attr({
+                    $toolbarStyles: jQuery("<style>").attr({
                         id: 'qa_toolbox',
                         type: 'text/css'
                     }),
@@ -63,13 +63,13 @@
                         rel: 'stylesheet',
                     }),
                     $jQueryUI: jQuery('<link>').attr({
-                        href: getResourceURL('jqueryUI'),
+                        href: getResourceURL("jqueryUI"),
                         rel: 'stylesheet'
                     }),
-                    $fontAwe: jQuery('<script>').attr({
+                    $fontAwe: jQuery("<script>").attr({
                         src: getResourceURL('fontAwe')
                     }),
-                    $typo: jQuery('<script>').attr({
+                    $typo: jQuery("<script>").attr({
                         src: getResourceURL('typo')
                     }),
                     $toolStyles: jQuery('<link>').attr({
