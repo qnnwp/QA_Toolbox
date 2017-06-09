@@ -16,6 +16,7 @@
 // @resource typo https://raw.githubusercontent.com/cirept/Typo.js/master/typo/typo.js
 // @resource toolStyles https://raw.githubusercontent.com/cirept/NextGen/separateCss/assets/css/toolbox.css
 // @resource animate https://raw.githubusercontent.com/cirept/animate.css/master/animate.css
+// @resource localToolStyles file:///C:\Users\tanakae\Documents\GitHub\QA_Toolbox\assets\css\toolbox.css
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard
