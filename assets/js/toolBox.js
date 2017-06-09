@@ -48,13 +48,13 @@
                     $legendContainer: jQuery("<div>").attr({
                         id: "legendContainer"
                     }),
-                    $toolbarContainer: jQuery('<div>').attr({
+                    $toolboxContainer: jQuery('<div>').attr({
                         id: 'toolboxContainer'
                     }),
                     // ----------------------------------------
                     // Toolbar Resources
                     // ----------------------------------------
-                    $toolbarStyles: jQuery("<style>").attr({
+                    $toolboxStyles: jQuery("<style>").attr({
                         id: 'qa_toolbox',
                         type: 'text/css'
                     }),
@@ -90,22 +90,15 @@
                 this.phoneWrapper = jQuery('body .phone-wrapper');
             },
             attachTools: function () {
-                this.head.append(QAtoolbox.config.$toolbarStyles);
+                this.head.append(QAtoolbox.config.$toolboxStyles);
                 this.head.append(QAtoolbox.config.$myFont);
                 this.head.append(QAtoolbox.config.$fontAwe);
                 this.head.append(QAtoolbox.config.$typo);
                 this.head.append(QAtoolbox.config.$toolStyles);
                 this.head.append(QAtoolbox.config.$animate);
-                this.body.before(QAtoolbox.config.$toolbarContainer);
+                this.body.before(QAtoolbox.config.$toolboxContainer);
                 this.body.before(QAtoolbox.config.$legendContainer);
-            },
-            // ----------------------------------------
-            // tier 2 functions
-            // ----------------------------------------
-            styleTools: function ($toolPanel) {
-                $toolPanel.children('.myEDOBut:even').addClass('evenEDObutts');
-                $toolPanel.children('.myEDOBut:odd').addClass('oddEDObutts');
-            },
+            }
         },
         /* ************************************************************************************************************************ */
         /* **************************************** PAGE INFO TOOLS **************************************** */
@@ -334,7 +327,7 @@
                     total = tags.length;
                     hTags.config.hTagsTotal[key] = total;
                 }
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$body = jQuery('body');
             },
             buildTool: function () {
@@ -480,7 +473,7 @@
             },
             cacheDOM: function () {
                 // DOM elements
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$toolBoxContainer = jQuery('#toolboxContainer');
                 this.variableList = this.programData();
             },
@@ -608,7 +601,7 @@
             },
             cacheDOM: function () {
                 // DOM elements
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$toolBoxContainer = jQuery('#toolboxContainer');
                 this.variableList = this.programData();
             },
@@ -1390,7 +1383,7 @@
                 this.$allImageLinks = this.$allLinks.find('img');
                 this.linksArrayLength = this.$allLinks.length;
                 this.imageLinksArrayLength = this.$allImageLinks.length;
-                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$sections = jQuery('main').find('section');
                 this.$otherLinks = jQuery('header, footer').find('a');
             },
@@ -1398,7 +1391,7 @@
             addStyles: function () {
                 // if site is TETRA do not add style
                 if (toolbar.nextGenCheck()) {
-                    this.$toolbarStyles
+                    this.$toolboxStyles
                         .append('.unsupportedPageLink { background: #00a6ff; }')
                         .append('.buttonFlag { background: linear-gradient(to right, #b2fefa, #0ed2f7) !important; color: #000000 !important; }');
                 }
@@ -1698,7 +1691,7 @@
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
                 // DOM elements
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$legendContainer = jQuery('#legendContainer');
             },
             addTool: function () {
@@ -1720,7 +1713,7 @@
             // tier 2 functions
             // ----------------------------------------
             //            addStyles: function () {
-            //                this.$toolbarStyles
+            //                this.$toolboxStyles
             //                    .append('.spell-check.misspelled { display: inline-block !important; vertical-align: initial !important; padding: 0; margin: 0; color: inherit !important; font: inherit; background-color: rgb(255, 182, 193); background-position: bottom; background-repeat: repeat-x; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAMAAACDKl70AAAAFVBMVEX////+NQD+NQD+NQD+Sgz+NQD+NQCKU3Z/AAAAB3RSTlMAKVdwqL/ggPdRNgAAABdJREFUCNdjYGRiZGBgYWVhYGBmY2YAAADPAB54rWlqAAAAAElFTkSuQmCC")}');
             //            },
             buildLegendContent: function () {
@@ -2076,7 +2069,7 @@
             },
             cacheDOM: function () {
                 // DOM elements
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$toolBoxContainer = jQuery('#toolboxContainer');
                 this.variableList = this.programData();
             },
@@ -2190,7 +2183,7 @@
             cacheDOM: function (callingPanel) {
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = this.nextGenVar(this.nextGen);
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$toolsPanel = jQuery(callingPanel);
                 this.$legendContainer = jQuery('#legendContainer');
 
@@ -2431,12 +2424,12 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$otherToolsPanel = jQuery(callingPanel);
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.body = jQuery('body');
             },
             //            addStyles: function () {
             //                // apply module styles to main tool bar style tag
-            //                this.$toolbarStyles
+            //                this.$toolboxStyles
             //                    // styles of colored overlay placed on images
             //                    .append('.inputDisplay { padding: 10px; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; overflow: auto; background: rgb(180, 180, 180);}')
             //                    .append('#inputContainer { background: rgba(0, 0, 0, 0.75); color: rgb(0, 0, 0); z-index: 99999; position: fixed; top: 0%; left: 0%; width: 100%; height: 100%; font-size: 16px;}')
@@ -2716,7 +2709,7 @@
     }).text('Show Widgets');
     $wo_butt.click(function () {
         /* TODO */
-        var $toolbarStyles = jQuery('#qa_toolbox');
+        var $toolboxStyles = jQuery('#qa_toolbox');
         // made to you will be able to remove it later
         jQuery('.masonry-brick').addClass('outlineWidget');
         // made to you will be able to remove it later
@@ -2736,7 +2729,7 @@
                 });
             });
             // dynamically adjust the data content
-            $toolbarStyles
+            $toolboxStyles
                 .append('#' + widgetID + ':after { height: ' + h + 'px; width: ' + w + 'px; }');
         });
         jQuery('body .cell .CobaltWidget').each(function () {
@@ -2754,7 +2747,7 @@
                 });
             });
             // dynamically adjust the data content
-            $toolbarStyles
+            $toolboxStyles
                 .append('#' + widgetID + ':after { height: ' + h + 'px; width: ' + w + 'px; }');
         });
 
@@ -2840,7 +2833,7 @@
                 };
             },
             cacheDOM: function (callingPanel) {
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.cm = unsafeWindow.ContextManager;
                 this.webID = this.cm.getWebId();
                 this.siteID = this.cm.getSiteId();
@@ -5025,7 +5018,7 @@
             },
             cacheDOM: function () {
                 // DOM elements
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$toolBoxContainer = jQuery('#toolboxContainer');
                 this.variableList = this.programData();
             },
@@ -5130,7 +5123,8 @@
                         scroll: false
                     }),
                     $refresh: jQuery('<i class="fa fa-undo fa-flip-horizontal fa-3x">&nbsp;</i>').css({
-                        'margin-left': '-10px'
+                        'margin-left': '-10px',
+                        color: 'white'
                     }),
                     $refreshTitle: jQuery('<div>').css({
                         color: 'black',
@@ -5146,7 +5140,7 @@
             cacheDOM: function (callingPanel) {
                 this.$togglesPanel = jQuery(callingPanel);
                 this.$togglesContainer = jQuery('#toolboxContainer');
-                //                this.$toolbarStyles = jQuery('#qa_toolbox');
+                //                this.$toolboxStyles = jQuery('#qa_toolbox');
             },
             buildTool: function () {
                 refreshPage.config.$refreshButt.html(refreshPage.config.$refresh);
@@ -5270,7 +5264,7 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-                this.$toolbarStyles = jQuery('#qa_toolbox');
+                this.$toolboxStyles = jQuery('#qa_toolbox');
             },
             addTool: function () {
                 // add to main toolbox
@@ -5302,11 +5296,11 @@
 
                 // if 'hidePreviewToolbar is toggled ON'
                 if (hidePreviewToolbar) {
-                    this.$toolbarStyles.append(' #previewToolBarFrame { display: none; }');
-                    this.$toolbarStyles.append(' .preview-wrapper { display: none; }');
+                    this.$toolboxStyles.append(' #previewToolBarFrame { display: none; }');
+                    this.$toolboxStyles.append(' .preview-wrapper { display: none; }');
                 } else {
-                    this.$toolbarStyles.append(' #previewToolBarFrame { display: block; }');
-                    this.$toolbarStyles.append(' .preview-wrapper { display: block; }');
+                    this.$toolboxStyles.append(' #previewToolBarFrame { display: block; }');
+                    this.$toolboxStyles.append(' .preview-wrapper { display: block; }');
                 }
             },
             toggleOff: function () {
@@ -5437,7 +5431,7 @@
             },
             modToolbar: function () {
                 if (this.isNextGen === 'Tetra') {
-                    //                    QAtoolbox.config.$toolbarStyles
+                    //                    QAtoolbox.config.$toolboxStyles
                     //                        .append('.toolBox { background: linear-gradient(to left, #76b852 , #8DC26F) }')
                     //                        .append('.myEDOBut { margin: 1px 0px 0px 10px; }') // button position
                     //                        .append('#hideContainer { right: -25px; }') // button position
@@ -5450,7 +5444,7 @@
                     dynamicDisplay.config.$displayPanel.addClass('tetra');
                     //                    this.showTool.addClass('nextgen');
                 } else if (this.isNextGen === 'Next Gen') {
-                    //                    QAtoolbox.config.$toolbarStyles
+                    //                    QAtoolbox.config.$toolboxStyles
                     //                        .append('.toolBox { background: linear-gradient(to left, #02AAB0 , #00CDAC) }') // NEXTGEN color
                     //                        .append('#toolboxContainer { right: 0%; }') // toolbox location
                     //                        .append('.myEDOBut { margin: 1px 0px 0px -20px; }') // button positions
@@ -5558,6 +5552,7 @@
                 this.urlModPanel();
                 this.dynamicPanel();
                 this.stylePanels();
+//                this.styleButtons();
             },
             cacheDOM: function () {
                 this.nextGen = document.firstChild.data;
@@ -5565,6 +5560,7 @@
                 this.isCDKsite = this.isCDKsite();
                 this.isMobile = this.isMobile();
                 this.editMode = this.editMode();
+                this.edoButts = jQuery('.myEDOBut');
             },
             checkEnvironment: function () {
                 if (this.editMode || this.isCDKsite || !this.isMobile) {
@@ -5625,8 +5621,9 @@
                 dynamicDisplay.init();
             },
             stylePanels: function () {
-                QAtoolbox.styleTools(qaTools.config.$mainToolsPanel);
-                QAtoolbox.styleTools(otherTools.config.$otherToolsPanel);
+                this.styleButtons(qaTools.config.$mainToolsPanel);
+                this.styleButtons(otherTools.config.$otherToolsPanel);
+                this.wrapText(QAtoolbox.config.$toolboxContainer);
             },
             // ----------------------------------------
             // tier 2
@@ -5662,6 +5659,15 @@
                 if (unsafeWindow.editMode === true) {
                     throw 'Edit Mode, shutting toolbar down';
                 }
+            },
+            styleButtons: function ($toolPanel) {
+                // wrapping interior text in order style text.
+                // overrides the !important tags used by CDK bundles.css
+                $toolPanel.children('.myEDOBut:even').addClass('evenEDObutts');
+                $toolPanel.children('.myEDOBut:odd').addClass('oddEDObutts');
+            },
+            wrapText: function($toolPanel){
+                $toolPanel.children('.myEDOBut').wrapInner('<span></span>');
             }
         };
 
