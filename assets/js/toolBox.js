@@ -45,7 +45,7 @@
             // ----------------------------------------
             createElements: function () {
                 QAtoolbox.config = {
-                    $legendContainer: jQuery('<div>').attr({
+                    $legendContainer: jQuery("<div>").attr({
                         id: "legendContainer"
                     }),
                     $toolbarContainer: jQuery('<div>').attr({
@@ -67,7 +67,7 @@
                         rel: 'stylesheet'
                     }),
                     $fontAwe: jQuery("<script>").attr({
-                        src: getResourceURL('fontAwe')
+                        src: getResourceURL("fontAwe")
                     }),
                     $typo: jQuery("<script>").attr({
                         src: getResourceURL('typo')
