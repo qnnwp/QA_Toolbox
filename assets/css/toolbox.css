@@ -40,9 +40,12 @@ default styles
     color: #ffffff;
 }
 
+
+/*
 .toolsPanel {
     display: none;
 }
+*/
 
 .panelTitle {
     border-bottom: 1px solid #000000;
@@ -52,10 +55,10 @@ default styles
 }
 
 .disappear {
-    display: block;
+    display: none;
 }
 
-.reappear {
+.appear {
     display: block
 }
 
@@ -68,6 +71,7 @@ default styles
     cursor: pointer;
     font-family: "Montserrat";
     font-size: 12px;
+    font-weight: normal;
     top: 15%;
     padding: 4px 0px;
     position: relative;
@@ -87,7 +91,19 @@ default styles
     background: purple;
 }
 
+.myEDOBut.nextgen {
+    margin: 1px 0px 0px -20px;
+}
+
+.tetra.myEDOBut {
+    margin: 1px 0px 0px 10px;
+}
+
 .myEDOBut.offButt {
+    background: linear-gradient(to left, #085078, #85D8CE);
+    border: 2px solid #000000;
+    font-weight: normal;
+    color: white;
     width: 90%;
     height: 50px;
     margin: 0px;
@@ -105,9 +121,20 @@ default styles
     border: 2px solid rgb(0, 0, 0);
 }
 
-.offButt {
+
+/*.myEDOBut.offButt {*/
+
+
+/*
+#legendContainer .offButt {
     background: linear-gradient(to left, #085078, #85D8CE);
+    border: none;
+    font-weight: normal;
+    width: 90%;
+    height: 50px;
+    margin: 0px;
 }
+*/
 
 .evenEDObutts {
     background: linear-gradient(to left, #457fca, #5691c8);
@@ -117,33 +144,25 @@ default styles
     background: linear-gradient(to left, #6190E8, #A7BFE8);
 }
 
-.tetra.myEDOBut {
-    margin: 1px 0px 0px 10px;
-}
-
-.myEDOBut.nextgen {
-    margin: 1px 0px 0px -20px;
-}
-
 
 /* hide button */
 
-#hideContainer {
+#hideToolbox {
     position: absolute;
     top: -20px;
     z-index: 500000;
 }
 
-#hideContainer.tetra {
+#hideToolbox.tetra {
     right: -25px;
 }
 
-#hideContainer.nextgen {
+#hideToolbox.nextgen {
     left: -25px;
     right: initial;
 }
 
-#hideContainer>i {
+#hideToolbox>i {
     padding: 0px 10px;
 }
 
@@ -154,7 +173,8 @@ default styles
 
 /* show button */
 
-#showContainer {
+#showToolbox {
+    /*#showContainer {*/
     background: linear-gradient(to right, rgb(168, 224, 99) 0%, rgb(86, 171, 47) 100%);
     bottom: 30px;
     border-radius: 5px;
@@ -166,15 +186,15 @@ default styles
     z-index: 99999999;
 }
 
-#showContainer.tetra {
+#showToolbox.tetra {
     left: 0%;
 }
 
-#showContainer.nextgen {
+#showToolbox.nextgen {
     right: 0%;
 }
 
-#showContainer>i {
+#showToolbox>i {
     padding: 0px 10px;
 }
 
@@ -279,7 +299,7 @@ Page Information Styles
 
 .tbInfo {
     background: linear-gradient(to right, #ECE9E6, #FFFFFF);
-    color: #000000 !important;
+    color: #000000;
     clear: both;
     cursor: pointer;
     line-height: 15px;
@@ -320,15 +340,15 @@ Image checker
 }
 
 .hasAlt {
-    background: rgba(146, 232, 66, .75) !important;
+    background: rgba(146, 232, 66, .75);
 }
 
 .noAlt {
-    background: rgba(255, 124, 216, .75) !important;
+    background: rgba(255, 124, 216, .75);
 }
 
 .emptyAlt {
-    background: rgba(255, 124, 216, .75) !important;
+    background: rgba(255, 124, 216, .75);
 }
 
 
@@ -608,19 +628,27 @@ removing this class to keep functionality separate between tools.*/
 .toggleTool {
     background: linear-gradient(to right, rgb(236, 233, 230), rgb(255, 255, 255));
     border-top: 1px solid #999999;
+    color: rgb(0, 0, 0);
     cursor: pointer;
+    line-height: 15px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
+.autoApply {
+    font-weight: bold;
+}
+
+#autoApplyInput {
+    background: linear-gradient(rgb(255, 255, 255) 0%, rgb(171, 186, 171) 35%, rgb(171, 186, 171) 70%, rgb(255, 255, 255) 100%);
+}
+
 #refreshPageContainer {
-    /*    padding: 5px 10px 5px 0px;*/
     position: absolute;
     right: 35px;
     top: -55px;
-    /*    width: 75px;*/
     z-index: 500000;
 }
 
@@ -631,7 +659,6 @@ removing this class to keep functionality separate between tools.*/
 }
 
 #refreshButt:hover {
-    /*    color: #ffffff !important;*/
     background: linear-gradient(to left, #f4c4f3, #fc67fa);
 }
 
@@ -650,5 +677,3 @@ removing this class to keep functionality separate between tools.*/
     height: 5%;
     width: 50%;
 }
-
-.fa-undo {}

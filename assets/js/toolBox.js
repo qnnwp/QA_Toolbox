@@ -545,7 +545,7 @@
                     //                    $panel.css({
                     //                        display: 'block'
                     //                    });
-                    $panel.addClass('reappear');
+                    $panel.addClass('appear');
                 } else if (state === 'hide') {
                     //                    $panel.css({
                     //                        display: 'none'
@@ -656,13 +656,15 @@
             },
             setState: function ($panel, state) {
                 if (state === 'show') {
-                    $panel.css({
-                        display: 'block'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'block'
+                    //                    });
+                    $panel.addClass('appear');
                 } else if (state === 'hide') {
-                    $panel.css({
-                        display: 'none'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'none'
+                    //                    });
+                    $panel.addClass('disappear');
                 }
             }
         },
@@ -2129,14 +2131,25 @@
                 setValue(vName, !currState);
             },
             setState: function ($panel, state) {
+                //                if (state === 'show') {
+                //                    $panel.css({
+                //                        display: 'block'
+                //                    });
+                //                } else if (state === 'hide') {
+                //                    $panel.css({
+                //                        display: 'none'
+                //                    });
+                //                }
                 if (state === 'show') {
-                    $panel.css({
-                        display: 'block'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'block'
+                    //                    });
+                    $panel.addClass('appear');
                 } else if (state === 'hide') {
-                    $panel.css({
-                        display: 'none'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'none'
+                    //                    });
+                    $panel.addClass('disappear');
                 }
             }
         },
@@ -4329,14 +4342,19 @@
                         id: 'autoApplyInput',
                         class: 'toggleTool',
                         title: 'will auto apply URL modifiers to current URL\n*please reload the page to update the URL to current settings*'
-                    }).css({
-                        background: 'linear-gradient(to bottom, rgb(255,255,255) 0%, rgb(171, 186, 171) 35%, rgb(171, 186, 171) 70%, rgb(255, 255, 255) 100%)'
                     }),
-                    $autoApplyTitle: jQuery('<div>').css({
-                        color: 'black',
-                        'line-height': '15px',
-                        'font-weight': 'bold'
-                    }).text('Auto Apply Modifiers?'),
+                    /*.css({
+                                            background: 'linear-gradient(to bottom, rgb(255,255,255) 0%, rgb(171, 186, 171) 35%, rgb(171, 186, 171) 70%, rgb(255, 255, 255) 100%)'
+                                        }),*/
+                    $autoApplyTitle: jQuery('<div>').attr({
+                            class: 'autoApply'
+                        })
+                        /*.css({
+                                                color: 'black',
+                                                'line-height': '15px',
+                                                'font-weight': 'bold'
+                                            })*/
+                        .text('Auto Apply Modifiers?'),
                     $autoApplyIcon: jQuery('<div>').attr({
                         id: 'autoApplyIcon'
                     }),
@@ -4582,14 +4600,25 @@
                 setValue(vName, !currState);
             },
             setState: function ($panel, state) {
+                //                if (state === 'show') {
+                //                    $panel.css({
+                //                        display: 'block'
+                //                    });
+                //                } else if (state === 'hide') {
+                //                    $panel.css({
+                //                        display: 'none'
+                //                    });
+                //                }
                 if (state === 'show') {
-                    $panel.css({
-                        display: 'block'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'block'
+                    //                    });
+                    $panel.addClass('appear');
                 } else if (state === 'hide') {
-                    $panel.css({
-                        display: 'none'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'none'
+                    //                    });
+                    $panel.addClass('disappear');
                 }
             },
             // ----------------------------------------
@@ -4651,10 +4680,12 @@
                         class: 'toggleTool',
                         title: 'Apply NextGen=true'
                     }),
-                    $nextGenToggleTitle: jQuery('<div>').css({
-                        color: 'black',
-                        'line-height': '15px'
-                    }).text('nextGen parameters?'),
+                    $nextGenToggleTitle: jQuery('<div>')
+                        /*.css({
+                                                color: 'black',
+                                                'line-height': '15px'
+                                            })*/
+                        .text('nextGen parameters?'),
                     $nextGenToggleIcon: jQuery('<div>').attr({
                         id: 'nextGenToggleIcon'
                     }),
@@ -4767,10 +4798,12 @@
                         class: 'toggleTool',
                         title: 'Apply relative and comments parameters'
                     }),
-                    $m4CheckTitle: jQuery('<div>').css({
-                        color: 'black',
-                        'line-height': '15px'
-                    }).text('M4 Parameters?'),
+                    $m4CheckTitle: jQuery('<div>')
+                        /*.css({
+                                                color: 'black',
+                                                'line-height': '15px'
+                                            })*/
+                        .text('M4 Parameters?'),
                     $m4Checkbox: jQuery('<div>').attr({
                         id: 'm4toggle'
                     }),
@@ -4881,10 +4914,12 @@
                         class: 'toggleTool',
                         title: 'Show all autofill tags on page'
                     }),
-                    $autofillToggleTitle: jQuery('<div>').css({
-                        color: 'black',
-                        'line-height': '15px'
-                    }).text('show autofill tags?'),
+                    $autofillToggleTitle: jQuery('<div>')
+                        /*.css({
+                                                color: 'black',
+                                                'line-height': '15px'
+                                            })*/
+                        .text('show autofill tags?'),
                     $autofillToggleIcon: jQuery('<div>').attr({
                         id: 'autofillToggleIcon'
                     }),
@@ -5078,14 +5113,25 @@
                 setValue(vName, !currState);
             },
             setState: function ($panel, state) {
+                //                if (state === 'show') {
+                //                    $panel.css({
+                //                        display: 'block'
+                //                    });
+                //                } else if (state === 'hide') {
+                //                    $panel.css({
+                //                        display: 'none'
+                //                    });
+                //                }
                 if (state === 'show') {
-                    $panel.css({
-                        display: 'block'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'block'
+                    //                    });
+                    $panel.addClass('appear');
                 } else if (state === 'hide') {
-                    $panel.css({
-                        display: 'none'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'none'
+                    //                    });
+                    $panel.addClass('disappear');
                 }
             }
         },
@@ -5137,10 +5183,12 @@
                                             'margin-left': '-10px',
                                             color: 'white'
                                         }),*/
-                    $refreshTitle: jQuery('<div>').css({
-                        color: 'black',
-                        'line-height': '15px'
-                    }).text('Refresh Button'),
+                    $refreshTitle: jQuery('<div>')
+                        /*.css({
+                                                color: 'black',
+                                                'line-height': '15px'
+                                            })*/
+                        .text('Refresh Button'),
                     $refreshCheckbox: jQuery('<div>').attr({
                         id: 'refreshMetoggle',
                         title: 'toggle refresh button'
@@ -5243,10 +5291,12 @@
                         class: 'toggleTool',
                         title: 'hides PCE toolbar'
                     }),
-                    $previewToolbarToggleTitle: jQuery('<div>').css({
-                        color: 'black',
-                        'line-height': '15px'
-                    }).text('hide preview toolbar?'),
+                    $previewToolbarToggleTitle: jQuery('<div>')
+                        /*.css({
+                                                color: 'black',
+                                                'line-height': '15px'
+                                            })*/
+                        .text('hide preview toolbar?'),
                     $previewToolbarToggleIcon: jQuery('<div>').attr({
                         id: 'previewToolbarToggleIcon'
                     }),
@@ -5367,20 +5417,20 @@
                         title: 'The Latest changes will be mentioned here.'
                     }),
                     // hide toolbox button div
-                    $hideToolbox: jQuery('<div>').attr({
-                        id: 'hideToolbox',
-                        title: 'Click to Hide Toolbox'
-                    }).css({
-                        background: 'linear-gradient(to left, #283048 , #859398)',
-                        'border-bottom': '1px solid #000000',
-                        'border-radius': '15px',
-                        color: 'white',
-                        cursor: 'pointer',
-                        'font-weight': 'bold'
-                    }).text('Hide Toolbox'),
+                    //                    $hideToolbox: jQuery('<div>').attr({
+                    //                        id: 'hideToolbox',
+                    //                        title: 'Click to Hide Toolbox'
+                    //                    }).css({
+                    //                        background: 'linear-gradient(to left, #283048 , #859398)',
+                    //                        'border-bottom': '1px solid #000000',
+                    //                        'border-radius': '15px',
+                    //                        color: 'white',
+                    //                        cursor: 'pointer',
+                    //                        'font-weight': 'bold'
+                    //                    }).text('Hide Toolbox'),
                     // toolbox show button
                     $showToolbox: jQuery('<div>').attr({
-                        id: 'showContainer',
+                        id: 'showToolbox',
                         title: 'Show Toolbox'
                     }),
                     /*.css({
@@ -5397,8 +5447,9 @@
                                         }),*/
                     // font awesome icon
                     $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>'),
-                    $hide: jQuery('<div>').attr({
-                        id: 'hideContainer'
+                    $hideToolbox: jQuery('<div>').attr({
+                        //                        id: 'hideContainer'
+                        id: 'hideToolbox',
                     }),
                     /*.css({
                                             position: 'absolute',
@@ -5418,7 +5469,7 @@
                 // attach icon to minimize tab
                 dynamicDisplay.config.$showToolbox.append(dynamicDisplay.config.$icon);
                 // attach icon to minimize tab
-                dynamicDisplay.config.$hide.append(dynamicDisplay.config.$minimizeIcon);
+                dynamicDisplay.config.$hideToolbox.append(dynamicDisplay.config.$minimizeIcon);
             },
             cacheDOM: function () {
                 // page info
@@ -5438,8 +5489,8 @@
                 // add to main toolbox
                 this.$toolBoxContainer.append(dynamicDisplay.config.$displayPanel);
                 this.$toolBoxContainer.before(dynamicDisplay.config.$showToolbox);
-                this.$toolBoxContainer.append(dynamicDisplay.config.$hide);
-                //                this.$toolBoxContainer.before(dynamicDisplay.config.$hide);
+                this.$toolBoxContainer.append(dynamicDisplay.config.$hideToolbox);
+                //                this.$toolBoxContainer.before(dynamicDisplay.config.$hideToolbox);
             },
             modToolbar: function () {
                 if (this.isNextGen === 'Tetra') {
@@ -5452,7 +5503,7 @@
                     //                    this.toolboxContain.addClass('nextgen');
                     this.edoButts.addClass('tetra');
                     this.lenendContain.addClass('tetra');
-                    dynamicDisplay.config.$hide.addClass('tetra');
+                    dynamicDisplay.config.$hideToolbox.addClass('tetra');
                     dynamicDisplay.config.$showToolbox.addClass('tetra');
                     dynamicDisplay.config.$displayPanel.addClass('tetra');
                     //                    this.showTool.addClass('nextgen');
@@ -5468,17 +5519,17 @@
                     this.toolboxContain.addClass('nextgen');
                     this.edoButts.addClass('nextgen');
                     this.lenendContain.addClass('nextgen');
-                    dynamicDisplay.config.$hide.addClass('nextgen');
+                    dynamicDisplay.config.$hideToolbox.addClass('nextgen');
                     dynamicDisplay.config.$showToolbox.addClass('nextgen');
                     dynamicDisplay.config.$displayPanel.addClass('nextgen');
                 }
             },
             bindEvents: function () {
                 // click
-                dynamicDisplay.config.$hide.on('click', this.toggleTools.bind(this));
+                dynamicDisplay.config.$hideToolbox.on('click', this.toggleTools.bind(this));
                 //                dynamicDisplay.config.$minimizeIcon.on('click', this.toggleTools.bind(this));
                 dynamicDisplay.config.$showToolbox.on('click', this.toggleTools.bind(this));
-                dynamicDisplay.config.$hide.on('click', this.saveState);
+                dynamicDisplay.config.$hideToolbox.on('click', this.saveState);
                 //                dynamicDisplay.config.$minimizeIcon.on('click', this.saveState);
                 dynamicDisplay.config.$showToolbox.on('click', this.saveState);
             },
@@ -5491,6 +5542,8 @@
                     if (key === 'showToolbox') {
                         state = variables[key] ? 'show' : 'hide';
                         this.setState(this.$toolBoxContainer, state);
+                        // set display of hide/show button to opposite of main toolbox
+                        this.setState(dynamicDisplay.config.$showToolbox, !state);
                     }
                 }
             },
@@ -5519,12 +5572,16 @@
                 return varList;
             },
             toggleTools: function () {
+                //                var displayToolbox = dynamicDisplay.config.$showToolbox.attr('class').indexOf('appear') > -1 ? "disappear" : "appear",
+                //                    displayButton = this.$toolBoxContainer.attr('class').indexOf('appear') > -1 ? "disappear" : "appear";
                 // hide / show main tool box
                 this.toggleBox();
                 // hide / show toggle button
+                //                this.$toolBoxContainer.addClass(displayButton);
+                //                dynamicDisplay.config.$showToolbox.addClass(displayToolbox);//;.toggle('fade', 500);
                 dynamicDisplay.config.$showToolbox.toggle('fade', 500);
             },
-            saveState: function (event) {
+            saveState: function ( /*event*/ ) {
                 //                console.log(event.delegateTarget);
                 // get current state
                 //                var vName = jQuery(event.target).parent().attr('class'),
@@ -5536,15 +5593,28 @@
                 setValue(vName, !currState);
             },
             setState: function ($panel, state) {
+                //                if (state === 'show') {
+                //                    $panel.css({
+                //                        display: 'block'
+                //                    });
+                //                    dynamicDisplay.config.$showToolbox.hide();
+                //                } else if (state === 'hide') {
+                //                    $panel.css({
+                //                        display: 'none'
+                //                    });
+                //                    dynamicDisplay.config.$showToolbox.show();
+                //                }
                 if (state === 'show') {
-                    $panel.css({
-                        display: 'block'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'block'
+                    //                    });
+                    $panel.addClass('appear');
                     dynamicDisplay.config.$showToolbox.hide();
                 } else if (state === 'hide') {
-                    $panel.css({
-                        display: 'none'
-                    });
+                    //                    $panel.css({
+                    //                        display: 'none'
+                    //                    });
+                    $panel.addClass('disappear');
                     dynamicDisplay.config.$showToolbox.show();
                 }
             },
@@ -5642,6 +5712,7 @@
             stylePanels: function () {
                 this.styleButtons(qaTools.config.$mainToolsPanel);
                 this.styleButtons(otherTools.config.$otherToolsPanel);
+                //                console.log(QAtoolbox.config.$toolboxContainer);
                 this.wrapText(QAtoolbox.config.$toolboxContainer);
                 //                this.wrapText(qaTools.config.$mainToolsPanel);
                 //                this.wrapText(otherTools.config.$otherToolsPanel);
@@ -5689,9 +5760,11 @@
                 $toolPanel.children('.myEDOBut:odd').addClass('oddEDObutts');
             },
             wrapText: function ($toolPanel) {
-                console.log('fire wrap text');
-                console.log($toolPanel);
-                $toolPanel.children('.myEDOBut').wrapInner('<span></span>');
+                //                console.log('fire wrap text');
+                console.log($toolPanel.find('.myEDOBut'));
+                //                console.log($toolPanel.children());
+                $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
+                //                $toolPanel.children('.myEDOBut').wrapInner('<span></span>');
             }
         };
 
