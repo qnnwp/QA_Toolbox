@@ -45,16 +45,16 @@
             // ----------------------------------------
             createElements: function () {
                 QAtoolbox.config = {
-                    $legendContainer: jQuery("<div>").attr({
-                        id: "legendContainer"
+                    $legendContainer: jQuery('<div>').attr({
+                        class: 'legendContainer'
                     }),
                     $toolboxContainer: jQuery('<div>').attr({
-                        id: 'toolboxContainer'
+                        class: 'toolboxContainer'
                     }),
                     // ----------------------------------------
                     // Toolbar Resources
                     // ----------------------------------------
-                    $toolboxStyles: jQuery("<style>").attr({
+                    $toolboxStyles: jQuery('<style>').attr({
                         id: 'qa_toolbox',
                         type: 'text/css'
                     }),
@@ -63,13 +63,13 @@
                         rel: 'stylesheet',
                     }),
                     $jQueryUI: jQuery('<link>').attr({
-                        href: getResourceURL("jqueryUI"),
+                        href: getResourceURL('jqueryUI'),
                         rel: 'stylesheet'
                     }),
-                    $fontAwe: jQuery("<script>").attr({
-                        src: getResourceURL("fontAwe")
+                    $fontAwe: jQuery('<script>').attr({
+                        src: getResourceURL('fontAwe')
                     }),
-                    $typo: jQuery("<script>").attr({
+                    $typo: jQuery('<script>').attr({
                         src: getResourceURL('typo')
                     }),
                     $toolStyles: jQuery('<link>').attr({
@@ -295,7 +295,7 @@
                     }).text('h tags'),
                     $hTags: jQuery('<div>').attr({
                         title: 'Click to show hTags on page',
-                        id: 'hTags'
+                        class: 'hTags'
                     }),
                     hTagsTotal: {
                         h1: 0,
@@ -308,14 +308,15 @@
                         type: 'button',
                         class: 'myEDOBut removeDiv',
                         value: 'REMOVE'
-                    }).css({
-                        background: 'inherit'
                     }),
+                    /*.css({
+                                            background: 'inherit'
+                                        }),*/
                     $hTagDisplay: jQuery('<div>').attr({
                         class: 'hTagDisplay'
                     }),
                     $hTagDisplayContainer: jQuery('<div>').attr({
-                        id: 'hTagContainer'
+                        class: 'hTagContainer'
                     }),
                 };
             },
@@ -474,7 +475,7 @@
             cacheDOM: function () {
                 // DOM elements
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
-                this.$toolBoxContainer = jQuery('#toolboxContainer');
+                this.$toolBoxContainer = jQuery('.toolboxContainer');
                 this.variableList = this.programData();
             },
             addTool: function () {
@@ -602,7 +603,7 @@
             cacheDOM: function () {
                 // DOM elements
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
-                this.$toolBoxContainer = jQuery('#toolboxContainer');
+                this.$toolBoxContainer = jQuery('.toolboxContainer');
                 this.variableList = this.programData();
             },
             addTool: function () {
@@ -708,7 +709,7 @@
                         value: 'Turn Off'
                     }),
                     $toolsPanel: jQuery(callingPanel),
-                    $legendContainer: jQuery('#legendContainer')
+                    $legendContainer: jQuery('.legendContainer')
                 };
             },
             buildLegend: function () {
@@ -935,7 +936,7 @@
                         class: 'hint'
                     }).text('ctrl+left click to open link in a new tab'),
                     $toolsPanel: jQuery(callingPanel),
-                    $legendContainer: jQuery('#legendContainer'),
+                    $legendContainer: jQuery('.legendContainer'),
                     datedPagesfileURL: 'https://cdn.rawgit.com/cirept/NextGen/a9b9d06f/resources/dated_pages.json',
                     unsupportedPages: {}
                 };
@@ -1694,7 +1695,7 @@
                 this.$toolsPanel = jQuery(callingPanel);
                 // DOM elements
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
-                this.$legendContainer = jQuery('#legendContainer');
+                this.$legendContainer = jQuery('.legendContainer');
             },
             addTool: function () {
                 this.$toolsPanel.append(spellCheck.config.$activateButt);
@@ -1766,8 +1767,8 @@
                 // spell check page test functions
                 // ----------------------------------------
                 // dictionary
-                var dictionary = new Typo("en_US", false, false, {
-                        dictionaryPath: "https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/"
+                var dictionary = new Typo('en_US', false, false, {
+                        dictionaryPath: 'https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/'
                     }),
                     wordList = [],
                     self = this,
@@ -1858,7 +1859,7 @@
                     email: GM_getValue('email', 'your.name@cdk.com'),
                     $emailTitle: jQuery('<div>').text('Enter your email'),
                     $emailInput: jQuery('<input>').attr({
-                        id: 'email',
+                        class: 'WPT email',
                         type: 'text',
                         placeholder: 'your.name@cdk.com'
                     }),
@@ -1867,7 +1868,7 @@
                                             width: '85%'
                                         }),*/
                     $panelContainer: jQuery('<div>').attr({
-                        id: 'wptInput'
+                        class: 'WPT input'
                     }),
                     /*.css({
                                             background: 'white',
@@ -1883,7 +1884,7 @@
                         ':FireFox': 'Firefox'
                     },
                     $browserSelect: jQuery('<select>').attr({
-                        id: 'bSelect'
+                        class: 'WPT bSelect'
                     }),
                     /*.css({
                                             margin: '5px 0',
@@ -1891,7 +1892,7 @@
                                         }),*/
                     $browserTitle: jQuery('<div>').text('Choose a Browser'),
                     $keySelect: jQuery('<select>').attr({
-                        id: 'keySelect'
+                        class: 'WPT keySelect'
                     }),
                     /*.css({
                                             margin: '5px 0',
@@ -2078,7 +2079,7 @@
             cacheDOM: function () {
                 // DOM elements
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
-                this.$toolBoxContainer = jQuery('#toolboxContainer');
+                this.$toolBoxContainer = jQuery('.toolboxContainer');
                 this.variableList = this.programData();
             },
             addTool: function () {
@@ -2204,7 +2205,7 @@
                 this.isNextGenPlatform = this.nextGenVar(this.nextGen);
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
                 this.$toolsPanel = jQuery(callingPanel);
-                this.$legendContainer = jQuery('#legendContainer');
+                this.$legendContainer = jQuery('.legendContainer');
 
                 if (this.nextGenVar(this.nextGen)) {
                     this.$navTabs = jQuery('li[repeat*="mainNav"]');
@@ -2392,14 +2393,15 @@
                         type: 'button',
                         class: 'myEDOBut removeDiv',
                         value: 'REMOVE',
-                    }).css({
-                        background: 'inherit'
                     }),
+                    /*.css({
+                                            background: 'inherit'
+                                        }),*/
                     $seoDisplay: jQuery('<div>').attr({
                         class: 'inputDisplay'
                     }),
                     $seoContainer: jQuery('<div>').attr({
-                        id: 'inputContainer'
+                        class: 'inputContainer'
                     }),
                     oems: ['Chevrolet', 'Buick', 'Cadillac', 'GMC', 'Hyundai', 'Volkswagen'],
                     vehicles: []
@@ -2829,10 +2831,10 @@
                         class: 'subText hint'
                     }).text('* Manually Check Link'),
                     $container: jQuery('<div>').attr({
-                        id: 'checkContainer',
+                        class: 'checkContainer',
                     }),
                     $message: jQuery('<div>').attr({
-                        id: 'checkMessage'
+                        class: 'checkMessage'
                     }),
                     $counter: jQuery('<div>').attr({
                         id: 'count404'
@@ -2860,7 +2862,7 @@
                 this.host = window.location.hostname;
                 this.wid = this.separateID(this.webID);
                 this.$toolsPanel = jQuery(callingPanel);
-                this.$legendContainer = jQuery('#legendContainer');
+                this.$legendContainer = jQuery('.legendContainer');
             },
             buildLegend: function () {
                 checkLinks.config.$legend
@@ -4339,8 +4341,8 @@
                         title: 'Click to Minimize / Maximize'
                     }).text('URL Modifiers'),
                     $autoApplyContainer: jQuery('<div>').attr({
-                        id: 'autoApplyInput',
-                        class: 'toggleTool',
+                        //                        id: 'autoApplyInput',
+                        class: 'toggleTool autoApplyInput',
                         title: 'will auto apply URL modifiers to current URL\n*please reload the page to update the URL to current settings*'
                     }),
                     /*.css({
@@ -4382,7 +4384,7 @@
                 this.variableList = this.programData();
                 this.$cm = unsafeWindow.ContextManager;
                 this.isLive = this.$cm.isLive();
-                this.$toolBoxContainer = jQuery('#toolboxContainer');
+                this.$toolBoxContainer = jQuery('.toolboxContainer');
             },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
@@ -5060,7 +5062,7 @@
             cacheDOM: function () {
                 // DOM elements
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
-                this.$toolBoxContainer = jQuery('#toolboxContainer');
+                this.$toolBoxContainer = jQuery('.toolboxContainer');
                 this.variableList = this.programData();
             },
             addTool: function () {
@@ -5159,11 +5161,11 @@
                         class: 'toggleTool'
                     }),
                     $refreshButtContainer: jQuery('<div>').attr({
-                        id: 'refreshPageContainer'
+                        class: 'refreshPageContainer'
                     }),
                     $refreshButt: jQuery('<button>').attr({
-                        class: 'myEDOBut draggable ui-widget-content',
-                        id: 'refreshButt',
+                        class: 'myEDOBut refreshButt draggable ui-widget-content',
+                        //                        id: 'refreshButt',
                         title: 'Refresh Page from Server '
                     }),
                     /*.css({
@@ -5198,7 +5200,7 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$togglesPanel = jQuery(callingPanel);
-                this.$togglesContainer = jQuery('#toolboxContainer');
+                this.$togglesContainer = jQuery('.toolboxContainer');
                 //                this.$toolboxStyles = jQuery('#qa_toolbox');
             },
             buildTool: function () {
@@ -5430,7 +5432,7 @@
                     //                    }).text('Hide Toolbox'),
                     // toolbox show button
                     $showToolbox: jQuery('<div>').attr({
-                        id: 'showToolbox',
+                        class: 'showToolbox',
                         title: 'Show Toolbox'
                     }),
                     /*.css({
@@ -5449,7 +5451,7 @@
                     $icon: jQuery('<i class="fa fa-power-off fa-2x"></i>'),
                     $hideToolbox: jQuery('<div>').attr({
                         //                        id: 'hideContainer'
-                        id: 'hideToolbox',
+                        class: 'hideToolbox',
                     }),
                     /*.css({
                                             position: 'absolute',
@@ -5473,16 +5475,16 @@
             },
             cacheDOM: function () {
                 // page info
-                this.$toolBoxContainer = jQuery('#toolboxContainer');
+                this.$toolBoxContainer = jQuery('.toolboxContainer');
                 this.nextGenComment = document.firstChild.data;
                 this.isNextGen = this.checkNextGen(this.nextGenComment);
                 this.variableList = this.programData();
                 // additions
                 this.toolbox = jQuery('.toolBox');
-                this.toolboxContain = jQuery('#toolboxContainer');
+                this.toolboxContain = jQuery('.toolboxContainer');
                 this.edoButts = jQuery('.myEDOBut');
                 //                this.hideContain = jQuery('#hideContainer');
-                this.lenendContain = jQuery('#legendContainer');
+                this.lenendContainer = jQuery('.legendContainer');
                 //                this.showTool = jQuery('#showToolbox');
             },
             addTool: function () {
@@ -5502,7 +5504,7 @@
                     this.toolbox.addClass('tetra');
                     //                    this.toolboxContain.addClass('nextgen');
                     this.edoButts.addClass('tetra');
-                    this.lenendContain.addClass('tetra');
+                    this.lenendContainer.addClass('tetra');
                     dynamicDisplay.config.$hideToolbox.addClass('tetra');
                     dynamicDisplay.config.$showToolbox.addClass('tetra');
                     dynamicDisplay.config.$displayPanel.addClass('tetra');
@@ -5510,15 +5512,15 @@
                 } else if (this.isNextGen === 'Next Gen') {
                     //                    QAtoolbox.config.$toolboxStyles
                     //                        .append('.toolBox { background: linear-gradient(to left, #02AAB0 , #00CDAC) }') // NEXTGEN color
-                    //                        .append('#toolboxContainer { right: 0%; }') // toolbox location
+                    //                        .append('.toolboxContainer { right: 0%; }') // toolbox location
                     //                        .append('.myEDOBut { margin: 1px 0px 0px -20px; }') // button positions
                     //                        .append('#hideContainer { left: -25px; }') // button positions
                     //                        .append('#legendContainer  { left: 115px; }') // legend positions
                     //                        .append('#showToolbox  { right: 0%; }'); // hide/unhide button positions
                     this.toolbox.addClass('nextgen');
-                    this.toolboxContain.addClass('nextgen');
+                    this.$toolBoxContainer.addClass('nextgen');
                     this.edoButts.addClass('nextgen');
-                    this.lenendContain.addClass('nextgen');
+                    this.lenendContainer.addClass('nextgen');
                     dynamicDisplay.config.$hideToolbox.addClass('nextgen');
                     dynamicDisplay.config.$showToolbox.addClass('nextgen');
                     dynamicDisplay.config.$displayPanel.addClass('nextgen');

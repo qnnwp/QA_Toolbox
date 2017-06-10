@@ -1,4 +1,4 @@
-/*
+/*1
 ----------------------------------------
 default styles
 ----------------------------------------
@@ -20,7 +20,7 @@ default styles
     background: linear-gradient(to left, #02AAB0, #00CDAC)
 }
 
-#toolboxContainer {
+.toolboxContainer {
     bottom: 20px;
     font-family: "Montserrat";
     font-size: 12px;
@@ -31,11 +31,11 @@ default styles
     z-index: 99999999;
 }
 
-#toolboxContainer.nextgen {
+.toolboxContainer.nextgen {
     right: 0%;
 }
 
-#toolboxContainer .highlight {
+.toolboxContainer .highlight {
     background: linear-gradient(to right, #83a4d4, #b6fbff);
     color: #ffffff;
 }
@@ -147,33 +147,36 @@ default styles
 
 /* hide button */
 
-#hideToolbox {
+.hideToolbox {
     position: absolute;
     top: -20px;
     z-index: 500000;
 }
 
-#hideToolbox.tetra {
+.hideToolbox.tetra {
     right: -25px;
 }
 
-#hideToolbox.nextgen {
+.hideToolbox.nextgen {
     left: -25px;
     right: initial;
 }
 
-#hideToolbox>i {
+.hideToolbox>i {
     padding: 0px 10px;
 }
 
-#showToolbox.nextgen {
+
+/*
+.showToolbox.nextgen {
     right: 0%;
 }
+*/
 
 
 /* show button */
 
-#showToolbox {
+.showToolbox {
     /*#showContainer {*/
     background: linear-gradient(to right, rgb(168, 224, 99) 0%, rgb(86, 171, 47) 100%);
     bottom: 30px;
@@ -186,22 +189,22 @@ default styles
     z-index: 99999999;
 }
 
-#showToolbox.tetra {
+.showToolbox.tetra {
     left: 0%;
 }
 
-#showToolbox.nextgen {
+.showToolbox.nextgen {
     right: 0%;
 }
 
-#showToolbox>i {
+.showToolbox>i {
     padding: 0px 10px;
 }
 
 
 /* legend styles */
 
-#legendContainer {
+.legendContainer {
     font-family: "Montserrat";
     position: fixed;
     bottom: 20px;
@@ -209,12 +212,12 @@ default styles
     z-index: 99999999;
 }
 
-#legendContainer.tetra {
+.legendContainer.tetra {
     right: 115px;
     font-size: 11px;
 }
 
-#legendContainer.nextgen {
+.legendContainer.nextgen {
     left: 115px;
 }
 
@@ -260,7 +263,7 @@ Page Information Styles
     display: block;
 }
 
-#hTags {
+.hTags {
     cursor: pointer;
     background: white;
     border-top: 1px solid #000000;
@@ -285,7 +288,7 @@ Page Information Styles
     background: rgb(180, 180, 180);
 }
 
-#hTagContainer {
+.hTagContainer {
     background: rgba(0, 0, 0, 0.75);
     color: rgb(0, 0, 0);
     z-index: 99999;
@@ -447,7 +450,7 @@ Web Page Test Styles
 ----------------------------------------
 */
 
-#wptInput {
+.WPT.input {
     background: rgb(255, 255, 255);
     border: 1px solid rgb(0, 0, 0);
     display: none;
@@ -456,22 +459,22 @@ Web Page Test Styles
     margin: 5px 0px;
 }
 
-#email {
+.WPT.email {
     margin: 5px 0px;
     width: 85%;
 }
 
-#bSelect {
+.WPT.bSelect {
     margin: 5px 0px;
     width: 90%;
 }
 
-#keySelect {
+.WPT.keySelect {
     margin: 5px 0px;
     width: 90%;
 }
 
-#wptInput .myEDOBut {
+.WPT.input .myEDOBut {
     margin: 0px;
 }
 
@@ -524,7 +527,7 @@ SEO Simplify
     background: rgb(180, 180, 180);
 }
 
-#inputContainer {
+.inputContainer {
     background: rgba(0, 0, 0, 0.75);
     color: rgb(0, 0, 0);
     z-index: 99999;
@@ -612,12 +615,12 @@ removing this class to keep functionality separate between tools.*/
     border: none !important;
 }
 
-#checkMessage {
+.checkMessage {
     margin: 5px auto;
     padding: 5px;
 }
 
-#checkContainer {
+.checkContainer {
     text-align: center;
     background: white;
 }
@@ -641,24 +644,24 @@ removing this class to keep functionality separate between tools.*/
     font-weight: bold;
 }
 
-#autoApplyInput {
+.autoApplyInput {
     background: linear-gradient(rgb(255, 255, 255) 0%, rgb(171, 186, 171) 35%, rgb(171, 186, 171) 70%, rgb(255, 255, 255) 100%);
 }
 
-#refreshPageContainer {
+.refreshPageContainer {
     position: absolute;
     right: 35px;
     top: -55px;
     z-index: 500000;
 }
 
-#refreshButt {
+.refreshButt {
     background: linear-gradient(to left, rgb(251, 211, 233), rgb(187, 55, 125));
     width: initial;
     padding: 5px 20px 5px 15px;
 }
 
-#refreshButt:hover {
+.refreshButt:hover {
     background: linear-gradient(to left, #f4c4f3, #fc67fa);
 }
 
@@ -671,6 +674,8 @@ removing this class to keep functionality separate between tools.*/
 }
 
 .removeDiv {
+    background: linear-gradient(to bottom, #6441a5, #2a0845);
+    color: #ffffff;
     position: fixed;
     top: 15%;
     left: 25%;
