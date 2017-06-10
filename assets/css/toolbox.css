@@ -13,10 +13,12 @@ default styles
 }
 
 .tetra.toolBox {
+    background: #76b852;
     background: linear-gradient(to left, #76b852, #8DC26F)
 }
 
 .nextgen.toolBox {
+    background: #02AAB0;
     background: linear-gradient(to left, #02AAB0, #00CDAC)
 }
 
@@ -36,6 +38,7 @@ default styles
 }
 
 .toolboxContainer .highlight {
+    background: #b6fbff;
     background: linear-gradient(to right, #83a4d4, #b6fbff);
     color: #ffffff;
 }
@@ -100,6 +103,7 @@ default styles
 }
 
 .myEDOBut.offButt {
+    background: #85D8CE;
     background: linear-gradient(to left, #085078, #85D8CE);
     border: 2px solid #000000;
     font-weight: normal;
@@ -111,12 +115,13 @@ default styles
 
 .myEDOBut[disabled] {
     border: 2px outset ButtonFace;
-    background: #ddd;
-    background-color: #ddd;
+    background: #dddddd;
+    background-color: #dddddd;
     cursor: not-allowed;
 }
 
 .myEDOBut:hover {
+    background: #243B55;
     background: linear-gradient(to left, #141E30, #243B55);
     border: 2px solid rgb(0, 0, 0);
 }
@@ -137,10 +142,12 @@ default styles
 */
 
 .evenEDObutts {
+    background: #457fca;
     background: linear-gradient(to left, #457fca, #5691c8);
 }
 
 .oddEDObutts {
+    background: #6190E8;
     background: linear-gradient(to left, #6190E8, #A7BFE8);
 }
 
@@ -178,6 +185,7 @@ default styles
 
 .showToolbox {
     /*#showContainer {*/
+    background: rgb(168, 224, 99);
     background: linear-gradient(to right, rgb(168, 224, 99) 0%, rgb(86, 171, 47) 100%);
     bottom: 30px;
     border-radius: 5px;
@@ -274,6 +282,7 @@ Page Information Styles
 }
 
 .zeroTotal {
+    background: #F2C94C;
     background: linear-gradient(to right, #F2994A, #F2C94C);
 }
 
@@ -289,6 +298,7 @@ Page Information Styles
 }
 
 .hTagContainer {
+    background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.75);
     color: rgb(0, 0, 0);
     z-index: 99999;
@@ -301,6 +311,7 @@ Page Information Styles
 }
 
 .tbInfo {
+    background: #ECE9E6;
     background: linear-gradient(to right, #ECE9E6, #FFFFFF);
     color: #000000;
     clear: both;
@@ -342,22 +353,28 @@ Image checker
     position: relative;
 }
 
-.hasAlt {
+.hasAlt,
+body .card .content .hasAlt {
+    background: rgb(146, 232, 66);
     background: rgba(146, 232, 66, .75);
 }
 
-.noAlt {
+.noAlt,
+body .card .content .noAlt {
+    background: rgb(255, 124, 216);
     background: rgba(255, 124, 216, .75);
 }
 
-.emptyAlt {
+.emptyAlt,
+body .card .content .emptyAlt {
+    background: rgb(255, 124, 216);
     background: rgba(255, 124, 216, .75);
 }
 
 
 /*
 .imageCheckerOverlay {
-    color: #000000 !important;
+    color: #000000;
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
@@ -371,56 +388,97 @@ lnk checker styles
 ----------------------------------------
 */
 
-.noTitle {
-    background: rgba(255, 124, 216, .75) !important;
+.noTitle,
+body .card .content .text .copy .siteLink.noTitle,
+body .card .content .text .link .siteLink.noTitle,
+body .card .content .media .imgOverlay.noTitle {
+    background: rgb(255, 124, 216);
+    background: rgba(255, 124, 216, .75);
 }
 
-.hasTitle {
-    background: rgba(146, 232, 66, .75) !important;
+.hasTitle,
+body .card .content .text .copy .siteLink.hasTitle,
+body .card .content .text .link .siteLink.hasTitle,
+body .card .content .media .imgOverlay.hasTitle {
+    background: rgb(146, 232, 66);
+    background: rgba(146, 232, 66, .75);
 }
 
-.opensWindow {
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%) !important;
+.opensWindow,
+body .card .content .text .copy .siteLink.opensWindow,
+body .card .content .text .link .siteLink.opensWindow,
+body .card .content .media .imgOverlay.opensWindow {
+    background: rgb(255, 165, 0);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%);
 }
 
-.hasTitle.opensWindow {
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important;
+.hasTitle.opensWindow,
+body .card .content .text .copy .siteLink.hasTitle.opensWindow,
+body .card .content .text .link .siteLink.hasTitle.opensWindow,
+body .card .content .media .imgOverlay.hasTitle.opensWindow {
+    background: rgb(146, 232, 66);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%);
 }
 
-.noTitle.opensWindow {
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important;
+.noTitle.opensWindow,
+body .card .content .text .copy .siteLink.noTitle.opensWindow,
+body .card .content .text .link .siteLink.noTitle.opensWindow,
+body .card .content .media .imgOverlay.noTitle.opensWindow {
+    background: rgb(255, 124, 216);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%);
 }
 
-.emptyTitle.opensWindow {
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important;
+.emptyTitle.opensWindow,
+body .card .content .text .copy .siteLink.emptyTitle.opensWindow,
+body .card .content .text .link .siteLink.emptyTitle.opensWindow,
+body .card .content .media .imgOverlay.emptyTitle.opensWindow {
+    background: rgb(255, 124, 216);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%);
 }
 
-.brokenURL {
-    background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important;
+.brokenURL,
+body .card .content .text .copy .siteLink.brokenURL,
+body .card .content .text .link .siteLink.brokenURL,
+body .card .content .media .imgOverlay.brokenURL {
+    background: rgb(240, 0, 0);
+    background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30));
     color: white;
 }
 
-.urlIssue {
+.urlIssue,
+body .card .content .text .copy .siteLink.urlIssue,
+body .card .content .text .link .siteLink.urlIssue,
+body .card .content .media .imgOverlay.urlIssue {
     -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
     -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
     box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
 }
 
-.absoluteURL {
+.absoluteURL,
+body .card .content .text .copy .siteLink.absoluteURL,
+body .card .content .text .link .siteLink.absoluteURL,
+body .card .content .media .imgOverlay.absoluteURL {
     -moz-box-shadow: inset 0px 0px 0px 3px purple;
     -webkit-box-shadow: inset 0px 0px 0px 3px purple;
     box-shadow: inset 0px 0px 0px 3px purple;
 }
 
-.buttonFlag {
-    background: linear-gradient(to right, #b2fefa, #0ed2f7) !important;
-    color: #000000 !important;
+.buttonFlag,
+body .card .content .text .link .siteLink.buttonFlag {
+    background: #0ed2f7;
+    background: linear-gradient(to right, #b2fefa, #0ed2f7);
+    color: #000000;
 }
 
-.siteLink.linkChecked,
-.imgOverlay.linkChecked {
-    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
-    color: #909090 !important;
+
+/*covers all text links and image links*/
+
+body .card .content .text .copy .siteLink.linkChecked,
+body .card .content .text .link .siteLink.linkChecked,
+body .card .content .media .imgOverlay.linkChecked {
+    background: rgb(160, 255, 206);
+    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
+    color: #909090;
 }
 
 
@@ -431,11 +489,11 @@ spell checker styles
 */
 
 .spell-check.misspelled {
-    display: inline-block !important;
-    vertical-align: initial !important;
+    display: inline-block;
+    vertical-align: initial;
     padding: 0;
     margin: 0;
-    color: inherit !important;
+    color: inherit;
     font: inherit;
     background-color: rgb(255, 182, 193);
     background-position: bottom;
@@ -487,26 +545,48 @@ show navigation
 
 .majorPage {
     color: #ffffff;
-    background: linear-gradient(to left, rgba(255, 179, 71, .75), rgba(255, 204, 51, .75)) !important;
+    background: rgb(255, 204, 51);
+    background: linear-gradient(to left, rgba(255, 179, 71, .75), rgba(255, 204, 51, .75));
 }
 
-.tetraShowNav {
-    display: block !important;
+body header .menu>nav>ul .showNav.tetraShowNav {
+    display: block;
 }
 
-.nextgenShowNav {
-    display: inline-block !important;
-    position: absolute !important;
-    background: white !important;
-    margin: 0 !important;
-    width: 150px !important;
+body header .menu>nav>ul .showNav.tetraShowNav {}
+
+body header .menu>nav>ul .showNav.nextgenShowNav {
+    /*
+    display: inline-block;
+    position: absolute;
+    background: white;
+    margin: 0;
+    width: 150px;
+    z-index: 100;
+*/
+    display: inline-block;
+    /* display: block; */
+    /* line-height: 100%; */
+    position: absolute;
+    background: white;
+    border: 1px solid #b7b7b7;
+    margin: 1rem 0 0 -1rem;
+    padding: 0;
+    width: 20rem;
     z-index: 100;
 }
 
-.showNavAdd {
-    width: 150px !important;
-    padding: 0 !important;
-    font-size: 15px !important;
+body header .menu>nav>ul .showNav.nextgenShowNav>li {
+    padding: 0;
+}
+
+
+/*body header .menu>nav>ul .showNav.showNavAdd {*/
+
+body header .menu>nav>ul .showNav.customAdd {
+    width: 20rem;
+    padding: 0;
+    font-size: 15px;
 }
 
 
@@ -528,6 +608,7 @@ SEO Simplify
 }
 
 .inputContainer {
+    background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.75);
     color: rgb(0, 0, 0);
     z-index: 99999;
@@ -555,6 +636,7 @@ widget outline
     text-align: center;
     z-index: 100;
     margin: auto;
+    background: rgb(80, 201, 195);
     background: linear-gradient(to right, rgba(80, 201, 195, .85), rgba(150, 222, 218, .85));
     color: black;
     font-weight: bold;
@@ -566,7 +648,7 @@ widget outline
 }
 
 .hideColorblock {
-    z-index: -1 !important;
+    z-index: -1;
 }
 
 
@@ -574,13 +656,15 @@ widget outline
 removing this class to keep functionality separate between tools.*/
 
 .success {
-    background: linear-gradient(to right, rgba(86, 171, 47, .85), rgba(168, 224, 99, .85)) !important;
-    color: #000000 !important;
+    background: rgb(86, 171, 47);
+    background: linear-gradient(to right, rgba(86, 171, 47, .85), rgba(168, 224, 99, .85));
+    color: #000000;
 }
 
 .error {
-    background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75)) !important;
-    color: #ffffff !important;
+    background: rgb(240, 0, 0);
+    background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75));
+    color: #ffffff;
 }
 
 .attention {
@@ -590,29 +674,32 @@ removing this class to keep functionality separate between tools.*/
 }
 
 .jumpLink {
-    background: linear-gradient(to left, #FFAFBD, #ffc3a0) !important;
-    color: #000000 !important;
+    background: #FFAFBD;
+    background: linear-gradient(to left, #FFAFBD, #ffc3a0);
+    color: #000000;
 }
 
 .mobilePhoneLink {
-    background: #005588 !important;
-    color: #000000 !important;
-    color: white !important;
+    background: #005588;
+    color: #000000;
+    color: white;
 }
 
-.siteLink.success {
-    background: linear-gradient(to right, rgba(86, 171, 47, .85), rgba(168, 224, 99, .85)) !important;
-    color: #000000 !important;
+body .card .content .siteLink.success {
+    background: rgb(86, 171, 47);
+    background: linear-gradient(to right, rgba(86, 171, 47, .85), rgba(168, 224, 99, .85));
+    color: #000000;
 }
 
-.otherDomain {
-    background: linear-gradient(to left, #00C9FF, #92FE9D) !important;
-    color: #000000 !important;
+body .card .content .otherDomain {
+    background: #92FE9D;
+    background: linear-gradient(to left, #00C9FF, #92FE9D);
+    color: #000000;
 }
 
-.siteLink {
-    color: black !important;
-    border: none !important;
+body .card .content .siteLink {
+    color: black;
+    border: none;
 }
 
 .checkMessage {
@@ -629,6 +716,7 @@ removing this class to keep functionality separate between tools.*/
 /* toggle tools styles */
 
 .toggleTool {
+    background: rgb(236, 233, 230);
     background: linear-gradient(to right, rgb(236, 233, 230), rgb(255, 255, 255));
     border-top: 1px solid #999999;
     color: rgb(0, 0, 0);
@@ -645,6 +733,7 @@ removing this class to keep functionality separate between tools.*/
 }
 
 .autoApplyInput {
+    background: rgb(255, 255, 255);
     background: linear-gradient(rgb(255, 255, 255) 0%, rgb(171, 186, 171) 35%, rgb(171, 186, 171) 70%, rgb(255, 255, 255) 100%);
 }
 
@@ -656,12 +745,14 @@ removing this class to keep functionality separate between tools.*/
 }
 
 .refreshButt {
+    background: rgb(251, 211, 233);
     background: linear-gradient(to left, rgb(251, 211, 233), rgb(187, 55, 125));
     width: initial;
     padding: 5px 20px 5px 15px;
 }
 
 .refreshButt:hover {
+    background: #f4c4f3;
     background: linear-gradient(to left, #f4c4f3, #fc67fa);
 }
 
@@ -669,11 +760,13 @@ removing this class to keep functionality separate between tools.*/
 /* shared styles */
 
 .linkChecked {
-    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
-    color: #999999 !important;
+    background: rgb(249, 255, 209);
+    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
+    color: #999999;
 }
 
 .removeDiv {
+    background: #2a0845;
     background: linear-gradient(to bottom, #6441a5, #2a0845);
     color: #ffffff;
     position: fixed;

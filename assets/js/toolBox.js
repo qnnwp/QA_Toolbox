@@ -1013,7 +1013,7 @@
                 // dynamic loading of cached elements
                 // have to load here to compensate for lazy loaded widgets
                 this.cacheDOM();
-                //                this.addStyles();
+                this.addStyles();
                 var a = 0,
                     buttons = jQuery('body').find('button'),
                     length = buttons.length;
@@ -1334,9 +1334,9 @@
             bindClickCallback: function ($currentLink, isImageLink) {
                 // bind click event
                 if (isImageLink) {
-                    return $currentLink.on('mousedown', this.linkChecked(this.$divOverlay));
+                    return $currentLink.one('mousedown', this.linkChecked(this.$divOverlay));
                 } else {
-                    return $currentLink.on('mousedown', this.linkChecked($currentLink));
+                    return $currentLink.one('mousedown', this.linkChecked($currentLink));
                 }
             },
             testLink: function ($currentLink, isImageLink) {
@@ -2279,13 +2279,13 @@
                 var isNextGen = this.isNextGenPlatform;
                 //                console.log(this.$navTabs);
                 if (isNextGen) {
-                    this.$navTabs.toggleClass('showNavAdd');
-                    this.$subNavItem.toggleClass('showNavAdd');
-                    this.$subNavMenuContainer.toggleClass('nextgenShowNav');
+                    this.$navTabs.toggleClass('showNav customAdd');
+                    this.$subNavItem.toggleClass('showNav customAdd');
+                    this.$subNavMenuContainer.toggleClass('showNav nextgenShowNav');
                 }
                 if (!isNextGen) {
                     this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
-                    this.$navTabs.toggleClass('tetraShowNav');
+                    this.$navTabs.toggleClass('showNav tetraShowNav');
                 }
                 showNavigation.config.$legend.slideToggle(500);
             },
@@ -2299,7 +2299,7 @@
                     length = this.$navTabsLinks.length;
 
                 for (i; i < length; i += 1) {
-                    jQuery(this.$navTabsLinks[i]).on('mousedown', this.linkChecked(this.$navTabsLinks[i]));
+                    jQuery(this.$navTabsLinks[i]).one('mousedown', this.linkChecked(this.$navTabsLinks[i]));
                 }
 
             },
