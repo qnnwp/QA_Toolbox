@@ -43,13 +43,6 @@ default styles
     color: #ffffff;
 }
 
-
-/*
-.toolsPanel {
-    display: none;
-}
-*/
-
 .panelTitle {
     border-bottom: 1px solid #000000;
     color: white;
@@ -126,21 +119,6 @@ default styles
     border: 2px solid rgb(0, 0, 0);
 }
 
-
-/*.myEDOBut.offButt {*/
-
-
-/*
-#legendContainer .offButt {
-    background: linear-gradient(to left, #085078, #85D8CE);
-    border: none;
-    font-weight: normal;
-    width: 90%;
-    height: 50px;
-    margin: 0px;
-}
-*/
-
 .evenEDObutts {
     background: #457fca;
     background: linear-gradient(to left, #457fca, #5691c8);
@@ -174,17 +152,9 @@ default styles
 }
 
 
-/*
-.showToolbox.nextgen {
-    right: 0%;
-}
-*/
-
-
 /* show button */
 
 .showToolbox {
-    /*#showContainer {*/
     background: rgb(168, 224, 99);
     background: linear-gradient(to right, rgb(168, 224, 99) 0%, rgb(86, 171, 47) 100%);
     bottom: 30px;
@@ -373,20 +343,13 @@ body .card .content .emptyAlt {
 
 
 /*
-.imageCheckerOverlay {
-    color: #000000;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-}
-*/
-
-
-/*
 ----------------------------------------
 lnk checker styles
 ----------------------------------------
 */
+
+
+/* covers all text links and image links */
 
 .noTitle,
 body .card .content .text .copy .siteLink.noTitle,
@@ -470,9 +433,6 @@ body .card .content .text .link .siteLink.buttonFlag {
     color: #000000;
 }
 
-
-/*covers all text links and image links*/
-
 body .card .content .text .copy .siteLink.linkChecked,
 body .card .content .text .link .siteLink.linkChecked,
 body .card .content .media .imgOverlay.linkChecked {
@@ -543,30 +503,25 @@ show navigation
 ----------------------------------------
 */
 
+
+/* used box shadow to color links, no other way around bundle.css styles without using !important or id selectors */
+
 .majorPage {
-    color: #ffffff;
-    background: rgb(255, 204, 51);
-    background: linear-gradient(to left, rgba(255, 179, 71, .75), rgba(255, 204, 51, .75));
+    color: #000000;
+    -moz-box-shadow: inset 0px 0px 0px 500px rgb(255, 204, 51);
+    -webkit-box-shadow: inset 0px 0px 0px 500px rgb(255, 204, 51);
+    box-shadow: inset 0px 0px 0px 500px rgb(255, 204, 51);
 }
 
-body header .menu>nav>ul .showNav.tetraShowNav {
-    display: block;
+.customPage {
+    color: #000000;
+    -moz-box-shadow: inset 0px 0px 0px 500px #fc67fa;
+    -webkit-box-shadow: inset 0px 0px 0px 500px #fc67fa;
+    box-shadow: inset 0px 0px 0px 500px #fc67fa;
 }
-
-body header .menu>nav>ul .showNav.tetraShowNav {}
 
 body header .menu>nav>ul .showNav.nextgenShowNav {
-    /*
     display: inline-block;
-    position: absolute;
-    background: white;
-    margin: 0;
-    width: 150px;
-    z-index: 100;
-*/
-    display: inline-block;
-    /* display: block; */
-    /* line-height: 100%; */
     position: absolute;
     background: white;
     border: 1px solid #b7b7b7;
@@ -579,9 +534,6 @@ body header .menu>nav>ul .showNav.nextgenShowNav {
 body header .menu>nav>ul .showNav.nextgenShowNav>li {
     padding: 0;
 }
-
-
-/*body header .menu>nav>ul .showNav.showNavAdd {*/
 
 body header .menu>nav>ul .showNav.customAdd {
     width: 20rem;
@@ -651,55 +603,63 @@ widget outline
     z-index: -1;
 }
 
-
-/* styles of colored overlay placed on images
-removing this class to keep functionality separate between tools.*/
-
-.success {
-    background: rgb(86, 171, 47);
-    background: linear-gradient(to right, rgba(86, 171, 47, .85), rgba(168, 224, 99, .85));
-    color: #000000;
-}
-
-.error {
+.error,
+body .card .content .text .copy .siteLink.error,
+body .card .content .text .link .siteLink.error,
+body .card .content .media .imgOverlay.error {
     background: rgb(240, 0, 0);
     background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75));
+    border: none;
     color: #ffffff;
 }
 
-.attention {
+.attention,
+body .card .content .text .copy .siteLink.attention,
+body .card .content .text .link .siteLink.attention,
+body .card .content .media .imgOverlay.attention {
+    border: none;
     -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
     -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
     box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
 }
 
-.jumpLink {
+.jumpLink,
+body .card .content .text .copy .siteLink.jumpLink,
+body .card .content .text .link .siteLink.jumpLink,
+body .card .content .media .imgOverlay.jumpLink {
     background: #FFAFBD;
     background: linear-gradient(to left, #FFAFBD, #ffc3a0);
-    color: #000000;
-}
-
-.mobilePhoneLink {
-    background: #005588;
-    color: #000000;
-    color: white;
-}
-
-body .card .content .siteLink.success {
-    background: rgb(86, 171, 47);
-    background: linear-gradient(to right, rgba(86, 171, 47, .85), rgba(168, 224, 99, .85));
-    color: #000000;
-}
-
-body .card .content .otherDomain {
-    background: #92FE9D;
-    background: linear-gradient(to left, #00C9FF, #92FE9D);
-    color: #000000;
-}
-
-body .card .content .siteLink {
-    color: black;
     border: none;
+    color: #000000;
+}
+
+.mobilePhoneLink,
+body .card .content .text .copy .siteLink.mobilePhoneLink,
+body .card .content .text .link .siteLink.mobilePhoneLink,
+body .card .content .media .imgOverlay.mobilePhoneLink {
+    background: #005588;
+    border: none;
+    color: #000000;
+}
+
+.success,
+body .card .content .text .copy .siteLink.success,
+body .card .content .text .link .siteLink.success,
+body .card .content .media .imgOverlay.success {
+    background: rgb(86, 171, 47);
+    background: linear-gradient(to right, rgba(86, 171, 47, .75), rgba(168, 224, 99, .75));
+    border: none;
+    color: #000000;
+}
+
+.otherDomain,
+body .card .content .text .copy .siteLink.otherDomain,
+body .card .content .text .link .siteLink.otherDomain,
+body .card .content .media .imgOverlay.otherDomain {
+    background: #92FE9D;
+    background: linear-gradient(to left, rgba(0, 201, 255, .75), rgba(146, 254, 157, .75));
+    border: none;
+    color: #000000;
 }
 
 .checkMessage {
@@ -713,7 +673,11 @@ body .card .content .siteLink {
 }
 
 
-/* toggle tools styles */
+/*
+----------------------------------------
+toggle tools styles
+----------------------------------------
+*/
 
 .toggleTool {
     background: rgb(236, 233, 230);
@@ -757,7 +721,11 @@ body .card .content .siteLink {
 }
 
 
-/* shared styles */
+/*
+----------------------------------------
+shared styles
+----------------------------------------
+*/
 
 .linkChecked {
     background: rgb(249, 255, 209);

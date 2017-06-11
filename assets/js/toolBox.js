@@ -980,7 +980,7 @@
                 linkChecker.config.$offButt.on('click', this.removeHighlights.bind(this));
                 linkChecker.config.$offButt.on('click', this.showLegend);
                 linkChecker.config.$offButt.on('click', this.toggleDisable);
-                linkChecker.config.$offButt.on('click', this.unbindClicks.bind(this));
+                //                linkChecker.config.$offButt.on('click', this.unbindClicks.bind(this));
             },
             // ----------------------------------------
             // tier 2 functions
@@ -1371,13 +1371,13 @@
                 // turn off custom link class
                 this.removeClass(this.$allLinks, 'siteLink');
             },
-            unbindClicks: function () {
-                var i = 0,
-                    length = this.linksArrayLength;
-                for (i; i < length; i += 1) {
-                    jQuery(this.$allLinks[i]).off('mousedown');
-                }
-            },
+            //            unbindClicks: function () {
+            //                var i = 0,
+            //                    length = this.linksArrayLength;
+            //                for (i; i < length; i += 1) {
+            //                    jQuery(this.$allLinks[i]).off('mousedown');
+            //                }
+            //            },
             // ----------------------------------------
             // tier 3 functions
             // ----------------------------------------
@@ -2165,7 +2165,7 @@
                 this.buildLegend();
                 this.addTool();
                 this.bindEvents();
-                //                this.addStyles();
+                this.addStyles();
             },
             // ----------------------------------------
             // tier 1 functions
@@ -2192,8 +2192,9 @@
                         class: 'legendList'
                     }),
                     $legendContent: {
-                        'majorPage': 'Major Page',
-                        'linkChecked': 'Link Clicked'
+                        majorPage: 'Major Page',
+                        customPage: 'Landing Page',
+                        linkChecked: 'Link Clicked'
                     },
                     $hint: jQuery('<div>').attr({
                         class: 'hint'
@@ -2248,7 +2249,10 @@
                 showNavigation.config.$activateButt.on('click', this.bindClicks.bind(this));
                 showNavigation.config.$offButt.on('click', this.toggleFeatures.bind(this));
                 showNavigation.config.$offButt.on('click', this.toggleDisable);
-                showNavigation.config.$offButt.on('click', this.unbindClicks.bind(this));
+                //                showNavigation.config.$offButt.on('click', this.unbindClicks.bind(this));
+            },
+            addStyles: function () {
+
             },
             // ----------------------------------------
             // tier 2 functions
@@ -2282,12 +2286,27 @@
                     this.$navTabs.toggleClass('showNav customAdd');
                     this.$subNavItem.toggleClass('showNav customAdd');
                     this.$subNavMenuContainer.toggleClass('showNav nextgenShowNav');
+                    this.$navTabs.find('a[href*=LandingPage]').toggleClass('customPage');
                 }
                 if (!isNextGen) {
+                    //                    this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggle(function () {
+                    //                        jQuery(this).css({
+                    //                            color: '#ffffff',
+                    //                            background: 'rgb(255, 204, 51)'
+                    //                        });
+                    //                    }, function () {
+                    //                        jQuery(this).css({
+                    //                            color: 'initial',
+                    //                            background: 'initial'
+                    //                        });
+                    //                    });
                     this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
-                    this.$navTabs.toggleClass('showNav tetraShowNav');
+                    this.$navTabs.find('a[href*=LandingPage]').toggleClass('customPage');
+                    this.$navTabs.toggle();
+                    //                    this.$navTabs.toggleClass('showNav tetraShowNav');
                 }
                 showNavigation.config.$legend.slideToggle(500);
+                this.$navTabs.find('.linkChecked').removeClass('linkChecked');
             },
             toggleDisable: function () {
                 showNavigation.config.$activateButt.prop('disabled', function (index, value) {
@@ -2303,15 +2322,15 @@
                 }
 
             },
-            unbindClicks: function () {
-                var i = 0,
-                    length = this.$navTabsLinks.length;
-                for (i; i < length; i += 1) {
-                    jQuery(this.$navTabsLinks[i]).off('click');
-                }
-                // remove link checked class
-                this.$navTabs.find('.linkChecked').removeClass('linkChecked');
-            },
+            //            unbindClicks: function () {
+            //                var i = 0,
+            //                    length = this.$navTabsLinks.length;
+            //                for (i; i < length; i += 1) {
+            //                    jQuery(this.$navTabsLinks[i]).off('click');
+            //                }
+            //                // remove link checked class
+            //                this.$navTabs.find('.linkChecked').removeClass('linkChecked');
+            //            },
             // ----------------------------------------
             // tier 3 functions
             // ----------------------------------------
@@ -2956,7 +2975,9 @@
             testURLs: function ($currentLink) {
                 //                console.log('testURLS called');
                 //                console.log('----------------------------------------');
-                var linkURL = jQuery.trim($currentLink.attr('href'));
+                var linkURL = jQuery.trim($currentLink.attr('href')),
+                    isImageLink = jQuery(this).find('img') ? true : false,
+                    $linkOverlay;
                 // TEST linkURL
                 // Add classes to $currentLink if link url does not pass tests
                 //                console.log('url testing');
@@ -2965,7 +2986,13 @@
                 switch (true) {
                     // test for mobile specific links
                     case (linkURL.indexOf('tel') >= 0):
-                        $currentLink.addClass('mobilePhoneLink');
+                        if (isImageLink) {
+                            $linkOverlay = checkLinks.addDivOverlaySimple($currentLink);
+                            $linkOverlay.addClass('mobilePhoneLink');
+                        } else {
+                            $currentLink.addClass('mobilePhoneLink');
+                        }
+//                        $currentLink.addClass('mobilePhoneLink');
                         checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                         checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                         //                            continue;
@@ -2990,7 +3017,15 @@
                         // ** highlight for absolute URL but still test **
                         //                        case (linkURL.indexOf('www') > -1 || (linkURL.indexOf('http') > -1 || linkURL.indexOf('https') > -1)):
                     case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
-                        $currentLink.addClass('otherDomain');
+
+                        if (isImageLink) {
+                            $linkOverlay = checkLinks.addDivOverlaySimple($currentLink);
+                            $linkOverlay.addClass('otherDomain');
+                        } else {
+                            $currentLink.addClass('otherDomain');
+                        }
+
+//                        $currentLink.addClass('otherDomain');
                         //                        return false;
                         return true; // TESTING.   TEST THE ABSOLUTE URL REGARDLESS
                         //                        break;
