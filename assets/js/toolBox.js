@@ -3673,8 +3673,7 @@
                             matchesFound.push(false);
                         } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
                             // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                            //                             do nothing
-                            url += '&nextGen=false';
+                            // do nothing
                             matchesFound.push(true);
                         }
 
