@@ -1454,7 +1454,9 @@
             },
             buildOverlayElements: function () {
                 // make the div overlay the same dimensions as the image
-                this.$divOverlay.css({
+                this.$divOverlay.attr({
+                    class: 'imgOverlay'
+                }).css({
                     width: this.widthOfImage + 'px',
                     height: this.heightOfImage + 'px',
                 });
@@ -1762,14 +1764,14 @@
                         class: 'WPT keySelect'
                     }),
                     keyOptions: {
-                        key_1: 'A.26fc3fe634ca1277825369f20eb25a90',
-                        key_2: 'A.1b40e6dc41916bd77b0541187ac9e74b',
-                        key_3: 'A.7389884c8e4af7e491458158a283dc7a',
-                        key_4: 'A.ad231acf8f2888abaff310981eab805f',
-                        key_5: 'A.50f3e84b941c37c0abf2132f3b989196',
-                        key_6: 'A.d78638331b63ece0ee419964818f8e8d',
-                        key_7: 'A.517503243d1253bf66ea52d153905c41',
-                        key_8: 'A.7987f0cf2ec2ac0dc644ec9e6b54f883',
+                        key1: 'A.26fc3fe634ca1277825369f20eb25a90',
+                        key2: 'A.1b40e6dc41916bd77b0541187ac9e74b',
+                        key3: 'A.7389884c8e4af7e491458158a283dc7a',
+                        key4: 'A.ad231acf8f2888abaff310981eab805f',
+                        key5: 'A.50f3e84b941c37c0abf2132f3b989196',
+                        key6: 'A.d78638331b63ece0ee419964818f8e8d',
+                        key7: 'A.517503243d1253bf66ea52d153905c41',
+                        key8: 'A.7987f0cf2ec2ac0dc644ec9e6b54f883',
                     },
                     $keyTitle: jQuery('<div>').text('Choose Key'),
                     testURL: 'http://www.webpagetest.org/runtest.php?',
@@ -2543,12 +2545,12 @@
     // ---------------------------------------- add widget outlines ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     // disable on next gen sites.  dont work
-    var $wo_butt = jQuery('<button>').attr({
+    var $widgetOutlineButton = jQuery('<button>').attr({
         class: 'myEDOBut',
         id: 'widgetOutline',
         title: 'Show Widget Outlines'
     }).text('Show Widgets');
-    $wo_butt.click(function () {
+    $widgetOutlineButton.click(function () {
         var $toolboxStyles = jQuery('#qa_toolbox');
         // made to you will be able to remove it later
         jQuery('.masonry-brick').addClass('outlineWidget');
@@ -3171,8 +3173,6 @@
             // The div will have the same height and width of the image
             // The function returns the DIV OVERLAY
             addDivOverlaySimple: function ($currentLink) {
-                console.log('inside add div overlay simple');
-                console.log($currentLink);
                 var $img, h, w, $linkOverlay;
 
                 $img = $currentLink.find('img');
@@ -3207,7 +3207,7 @@
                     // check if link is within a quick links widget
                     if ($currentLink.closest('.cell').attr('data-cell').indexOf('Quick_Links_Plus') > -1) {
                         // checks if QLP is modified by modules
-                        if ($currentLink.closest('section').attr('class').indexOf('customTemplate') == -1) {
+                        if ($currentLink.closest('section').attr('class').indexOf('customTemplate') === -1) {
                             return false;
                         }
                     }
@@ -3323,7 +3323,7 @@
 
                         // check to see if the card has an image prior to startin the ajax testing
                         if (isImageLink) {
-                            $linkOverlay = checkLinks.addDivOverlay_nextGen($currentLink, $currentCard);
+                            $linkOverlay = checkLinks.addDivOverlayNEXTGEN($currentLink, $currentCard);
                         }
 
                         // If value is false all class modifications should be done to the link itself
@@ -3424,9 +3424,9 @@
                 $this.addClass('success');
             },
             // ----------------------------------------
-            // Teir 4 -- tester functions
+            // Tier 4
             // ----------------------------------------
-            addDivOverlay_nextGen: function ($currentLink, $currentCard) {
+            addDivOverlayNEXTGEN: function ($currentLink, $currentCard) {
                 this.cacheDOMOverlayElements($currentLink);
                 this.createOverlayElements();
                 this.buildOverlayElements();
@@ -3436,7 +3436,7 @@
             cacheDOMOverlayElements: function ($currentLink) {
                 // IF NEXTGEN SITE
                 if (toolbar.nextGenCheck()) {
-                    this.linkTitle = jQuery($currentLink).find('a').attr('title');
+                    this.linkTitle = jQuery($currentLink).attr('title');
                 }
             },
             createOverlayElements: function () {
@@ -3462,11 +3462,8 @@
             attachToImage: function ($currentCard) {
                 // center div overlay
                 if (toolbar.nextGenCheck()) {
-                    this.$divOverlay.css({
-                        position: 'absolute',
-                        'z-index': '5',
-                        height: '100%',
-                        width: '100%'
+                    this.$divOverlay.attr({
+                        class: 'imgOverlay myNextGen'
                     });
                     $currentCard.prepend(this.$divOverlay);
                 }
@@ -4691,7 +4688,7 @@
 
                 // add tetra specific tool to panel
                 if (!this.isNextGenPlatform) {
-                    jQuery('#otherTools').append($wo_butt);
+                    jQuery('#otherTools').append($widgetOutlineButton);
                     viewMobile.init(panelID);
                 }
             },
