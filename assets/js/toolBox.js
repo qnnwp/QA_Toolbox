@@ -2719,8 +2719,10 @@
                     pageLinksLength = $pageLinks.length;
 
                 // set total tests to number of links on page
-                checkLinks.config.totalTests = $pageLinks.length;
-                checkLinks.config.totalLinks = $pageLinks.length;
+                //                checkLinks.config.totalTests = $pageLinks.length;
+                //                checkLinks.config.totalTests = $pageLinks.length;
+                checkLinks.config.totalLinks = pageLinksLength;
+                checkLinks.config.totalLinks = pageLinksLength;
 
                 for (j; j < pageLinksLength; j += 1) {
                     $currentLink = jQuery($pageLinks[j]);
@@ -2763,10 +2765,17 @@
             },
             testURLs: function ($currentLink) {
                 var linkURL = jQuery.trim($currentLink.attr('href')),
-                    isImageLink = jQuery(this).find('img') ? true : false,
-                    $linkOverlay;
-                // TEST linkURL
+                    isImageLink = $currentLink.find('img') ? true : false,
+                    $linkOverlay, $image;
+
+                // check if link contains an image
+                $image = $currentLink.find('img');
+                isImageLink = this.isImageLink($image);
+
+                // ----------------------------------------
+                // TEST link URL
                 // Add classes to $currentLink if link url does not pass tests
+                // ----------------------------------------
                 switch (true) {
                     // test for mobile specific links
                     case (linkURL.indexOf('tel') >= 0):
@@ -2776,12 +2785,16 @@
                         } else {
                             $currentLink.addClass('mobilePhoneLink');
                         }
+                        // these links do not need to be sent to ajax testing,
+                        // so minus this from the running total of links
                         checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                         checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                         return false;
-                        // test for javascript links
+                        // test for javascript links or Jump Links
                     case (linkURL.indexOf('javascript') >= 0 || (linkURL.indexOf('#') === 0 || linkURL.indexOf('#') === 1)):
                         $currentLink.addClass('jumpLink');
+                        // these links do not need to be sent to ajax testing,
+                        // so minus this from the running total of links
                         checkLinks.config.totalTests = checkLinks.config.totalTests - 1;
                         checkLinks.config.totalLinks = checkLinks.config.totalLinks - 1;
                         return false;
@@ -2793,14 +2806,14 @@
                         // test for absolute path URLs
                         // ** highlight for absolute URL but still test **
                     case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
-
+                        //console.log($currentLink);
+                        //console.log(isImageLink);
                         if (isImageLink) {
                             $linkOverlay = checkLinks.addDivOverlaySimple($currentLink);
                             $linkOverlay.addClass('otherDomain');
                         } else {
                             $currentLink.addClass('otherDomain');
                         }
-
                         return true; // TEST THE ABSOLUTE URL REGARDLESS
                     default:
                         // do nothing
@@ -2808,8 +2821,6 @@
                 return true;
             },
             nextgenTestLinks: function () {
-
-
                 // ----------------------------------------
                 // NEXT GEN SITE LOGIC
                 // ----------------------------------------
@@ -2823,7 +2834,10 @@
                     isImageLink = false,
                     $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, jLength, q, w, j, $currentCard, cardClass, passedChecks, $cardDeck;
 
-                // ----------------------------------------
+                // set total tests to number of links on page
+                checkLinks.config.totalTests = $otherLinks.length;
+                checkLinks.config.totalLinks = $otherLinks.length;
+
                 // ----------------------------------------
                 // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
                 // TESTS TO BODY LINKS WILL BE HANDLED DIFFERENTLY
@@ -2845,7 +2859,6 @@
                     this.tetraAjaxTest($currentLink);
 
                 }
-
                 // ----------------------------------------
                 // ----------------------------------------
                 // TEST BODY LINKS
@@ -3146,10 +3159,20 @@
                     }
                 }
             },
+            // checks if $image has length
+            // This is to verify that an image does exists inside the link
+            isImageLink: function ($image) {
+                if ($image.length) {
+                    return true;
+                }
+                return false;
+            },
             // adds a simple div over the image inside the the link
             // The div will have the same height and width of the image
             // The function returns the DIV OVERLAY
             addDivOverlaySimple: function ($currentLink) {
+                console.log('inside add div overlay simple');
+                console.log($currentLink);
                 var $img, h, w, $linkOverlay;
 
                 $img = $currentLink.find('img');

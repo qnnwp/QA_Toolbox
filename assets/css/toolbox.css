@@ -603,7 +603,14 @@ widget outline
     z-index: -1;
 }
 
+/*
+----------------------------------------
+404 link checker
+----------------------------------------
+*/
+
 .error,
+.header.card .menu nav ul li:hover > ul li a.error,
 body .card .content .text .copy .siteLink.error,
 body .card .content .text .link .siteLink.error,
 body .card .content .media .imgOverlay.error {
@@ -614,6 +621,7 @@ body .card .content .media .imgOverlay.error {
 }
 
 .attention,
+.header.card .menu nav ul li:hover > ul li a.attention,
 body .card .content .text .copy .siteLink.attention,
 body .card .content .text .link .siteLink.attention,
 body .card .content .media .imgOverlay.attention {
@@ -624,6 +632,7 @@ body .card .content .media .imgOverlay.attention {
 }
 
 .jumpLink,
+.header.card .menu nav ul li:hover > ul li a.jumpLink,
 body .card .content .text .copy .siteLink.jumpLink,
 body .card .content .text .link .siteLink.jumpLink,
 body .card .content .media .imgOverlay.jumpLink {
@@ -634,15 +643,18 @@ body .card .content .media .imgOverlay.jumpLink {
 }
 
 .mobilePhoneLink,
+.header.card .cta a[href^="tel:"].mobilePhoneLink span,
+.header.card .menu nav ul li:hover > ul li a.mobilePhoneLink,
 body .card .content .text .copy .siteLink.mobilePhoneLink,
 body .card .content .text .link .siteLink.mobilePhoneLink,
 body .card .content .media .imgOverlay.mobilePhoneLink {
     background: #005588;
     border: none;
-    color: #000000;
+    color: #ffffff;
 }
 
 .success,
+.header.card .menu nav ul li:hover > ul li a.success,
 body .card .content .text .copy .siteLink.success,
 body .card .content .text .link .siteLink.success,
 body .card .content .media .imgOverlay.success {
@@ -653,6 +665,7 @@ body .card .content .media .imgOverlay.success {
 }
 
 .otherDomain,
+.header.card .menu nav ul li:hover > ul li a.otherDomain,
 body .card .content .text .copy .siteLink.otherDomain,
 body .card .content .text .link .siteLink.otherDomain,
 body .card .content .media .imgOverlay.otherDomain {
