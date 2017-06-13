@@ -7,27 +7,27 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
-        GM_setValue(variable, val);
+        GM_setValue(variable, val); //jshint ignore:line
     }
 
     function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text');
+        GM_setClipboard(variable, 'text');  //jshint ignore:line
     }
 
     function getValue(variable) {
-        return GM_getValue(variable, false);
+        return GM_getValue(variable, false);    //jshint ignore:line
     }
 
     function programVariables() {
-        return GM_listValues();
+        return GM_listValues(); //jshint ignore:line
     }
 
     function openNewTab(openThis) {
-        GM_openInTab(openThis);
+        GM_openInTab(openThis); //jshint ignore:line
     }
 
     function getResourceURL(resource) {
-        return GM_getResourceURL(resource);
+        return GM_getResourceURL(resource); //jshint ignore:line
     }
 
     // ------------------------------------------------------------------------------------------------------------------------
