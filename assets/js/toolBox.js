@@ -1222,8 +1222,7 @@
 
                         if (height !== 0 && width !== 0) {
                             this.addDivOverlay($currentLink, $image, isQLPlink);
-                            //  MIIGHT NEED CUSOTM LOGIC TO CHECK ALL QLP WIDGET LINKS
-
+                            //  MIIGHT NEED CUSTOM LOGIC TO CHECK ALL QLP WIDGET LINKS
                             // SETTING ISIMAGELINK TO TRUE TO SEE IF I CAN TRICK THE LOGIC TO STILL ADD CLASSES TO THE DIV OVERLAY
                             isImageLink = true;
                         }
@@ -1268,7 +1267,7 @@
                 // removes special overlay class on images
                 for (key in linkChecker.config.$legendContent) {
                     this.removeClass(this.$allLinks, key);
-                    this.removeClass(jQuery('body').find('button'), key); // tester
+                    this.removeClass(jQuery('body').find('button'), key);
                 }
                 // remove div overlay
                 jQuery('.imgOverlay').remove();
@@ -1465,7 +1464,6 @@
                 this.$divOverlay.append(this.linkTitle);
             },
             attachToImage: function ($currentImage, $currentLink, isQLPlink) {
-
                 // ----------------------------------------
                 // CUSTOM LOGIC FOR QLP WIDGET LINKS
                 // IF QLP ATTACH DIV OVERLAY TO BEGINNING OF LINK CONTENTS
@@ -1745,6 +1743,7 @@
                     $emailTitle: jQuery('<div>').text('Enter your email'),
                     $emailInput: jQuery('<input>').attr({
                         class: 'WPT email',
+                        id: 'WPTemail',
                         type: 'text',
                         placeholder: 'your.name@cdk.com'
                     }),
@@ -1757,11 +1756,13 @@
                         ':FireFox': 'Firefox'
                     },
                     $browserSelect: jQuery('<select>').attr({
-                        class: 'WPT bSelect'
+                        class: 'WPT bSelect',
+                        id: 'WPTbSelect'
                     }),
                     $browserTitle: jQuery('<div>').text('Choose a Browser'),
                     $keySelect: jQuery('<select>').attr({
-                        class: 'WPT keySelect'
+                        class: 'WPT keySelect',
+                        id: 'WPTkeySelect'
                     }),
                     keyOptions: {
                         key1: 'A.26fc3fe634ca1277825369f20eb25a90',
@@ -1839,13 +1840,13 @@
             },
             storeData: function () {
                 // save user input
-                var userEmail = jQuery('#email').val();
+                var userEmail = jQuery('#WPTemail').val();
                 setValue('email', userEmail);
             },
             sendPage: function () {
-                var browser = jQuery('#bSelect option:selected').val(),
-                    selectedKey = jQuery('#keySelect option:selected').val(),
-                    browserName = jQuery('#bSelect option:selected').text(),
+                var browser = jQuery('#WPTbSelect option:selected').val(),
+                    selectedKey = jQuery('#WPTkeySelect option:selected').val(),
+                    browserName = jQuery('#WPTbSelect option:selected').text(),
                     email = getValue('email'),
                     params = {
                         k: selectedKey,
@@ -1869,7 +1870,6 @@
                             'Test the Desktop and Mobile site?\n' +
                             '----------------------------------------\n' +
                             'Browser : ' + browserName + '\n' +
-                            'Send Results To : ' + email + '\n' +
                             'Send Results To : ' + email + '\n' +
                             '----------------------------------------') === true) {
                         newTab = openNewTab(desktopURL);
@@ -2695,11 +2695,21 @@
                 this.$toolsPanel.append(checkLinks.config.$activateButt);
             },
             bindEvents: function () {
-                checkLinks.config.$activateButt.on('click', this.toggleDisable);
-                checkLinks.config.$activateButt.on('click', this.showLegend);
-                checkLinks.config.$activateButt.on('click', this.ajaxStart);
-                checkLinks.config.$activateButt.on('click', this.ajaxStop);
-                checkLinks.config.$activateButt.on('click', this.testLinks.bind(this));
+                // main button
+                checkLinks.config.$activateButt.on('click', function () {
+                    jQuery('html, body').scrollTop(0);
+                    jQuery('html, body').animate({
+                        scrollTop: jQuery(document).height()
+                    }, 2000).promise().done(function () {
+                        jQuery('html, body').scrollTop(0);
+                        checkLinks.toggleDisable();
+                        checkLinks.showLegend();
+                        checkLinks.ajaxStart();
+                        checkLinks.ajaxStop();
+                        checkLinks.testLinks();
+                    });
+                });
+
                 checkLinks.config.$offButt.on('click', this.showLegend);
             },
             // ----------------------------------------
@@ -2768,6 +2778,7 @@
             testURLs: function ($currentLink) {
                 var linkURL = jQuery.trim($currentLink.attr('href')),
                     isImageLink = $currentLink.find('img') ? true : false,
+                    isNextGen = toolbar.nextGenCheck(),
                     $linkOverlay, $image;
 
                 // check if link contains an image
@@ -2782,7 +2793,7 @@
                     // test for mobile specific links
                     case (linkURL.indexOf('tel') >= 0):
                         if (isImageLink) {
-                            $linkOverlay = checkLinks.addDivOverlaySimple($currentLink);
+                            $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
                             $linkOverlay.addClass('mobilePhoneLink');
                         } else {
                             $currentLink.addClass('mobilePhoneLink');
@@ -2808,10 +2819,8 @@
                         // test for absolute path URLs
                         // ** highlight for absolute URL but still test **
                     case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
-                        //console.log($currentLink);
-                        //console.log(isImageLink);
                         if (isImageLink) {
-                            $linkOverlay = checkLinks.addDivOverlaySimple($currentLink);
+                            $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
                             $linkOverlay.addClass('otherDomain');
                         } else {
                             $currentLink.addClass('otherDomain');
@@ -3169,26 +3178,6 @@
                 }
                 return false;
             },
-            // adds a simple div over the image inside the the link
-            // The div will have the same height and width of the image
-            // The function returns the DIV OVERLAY
-            addDivOverlaySimple: function ($currentLink) {
-                var $img, h, w, $linkOverlay;
-
-                $img = $currentLink.find('img');
-                w = $img.width();
-                h = $img.height();
-                $linkOverlay = jQuery('<div>').attr({
-                    class: 'siteLink linkOverlay'
-                }).css({
-                    width: w + 'px',
-                    height: h + 'px',
-                    position: 'absolute',
-                    'z-index': 1
-                });
-                $currentLink.prepend($linkOverlay);
-                return $linkOverlay;
-            },
             // checks the data returned for KEY 404 indentifiers
             // will return TRUE if a identifier is found
             // will return FALSE if no identifier is found
@@ -3235,8 +3224,10 @@
             tetraAjaxTest: function ($currentLink) {
                 var hasImage = 0,
                     isImageLink = false,
+                    wrappedContents = false,
                     $linkOverlay, pageError404,
-                    linkURL = checkLinks.addURLParameter($currentLink);
+                    linkURL = checkLinks.addURLParameter($currentLink),
+                    isNextGen = toolbar.nextGenCheck();
 
                 // test each link
                 jQuery.ajax({
@@ -3251,7 +3242,15 @@
                         hasImage = $currentLink.has('img').length;
                         if (hasImage) {
                             isImageLink = true;
-                            $linkOverlay = checkLinks.addDivOverlaySimple($currentLink);
+                            $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
+                        }
+
+                        // checks to see if the link has inline css
+                        // if it does wrap contents in in span tag and add classes to that
+                        wrappedContents = $currentLink.attr('style') ? true : false;
+                        if (wrappedContents && !hasImage) {
+                            $currentLink.wrapInner('<span></span>');
+                            $linkOverlay = jQuery($currentLink.children('span'));
                         }
 
                         // If value is false all class modifications should be done to the link itself
@@ -3260,7 +3259,7 @@
                         // if link is an image link
                         // ADD CLASS FLAGS TO DIV OVERLAY
                         // OTHERWISE ADD CLASS FLAGS TO LINK ELEMENT
-                        if (isImageLink) {
+                        if (isImageLink || wrappedContents) {
                             checkLinks.addFlagsToElements($linkOverlay, pageError404);
                         } else {
                             checkLinks.addFlagsToElements($currentLink, pageError404);
@@ -3302,7 +3301,8 @@
             nextGenAjaxTest: function ($currentLink, isImageLink, $currentCard) {
                 // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
                 var $linkOverlay, pageError404,
-                    linkURL = checkLinks.addURLParameter($currentLink);
+                    linkURL = checkLinks.addURLParameter($currentLink),
+                    isNextGen = toolbar.nextGenCheck();
 
                 //check if isImageLink is empty and check if $currentCard is empty
                 //most likely because the parameter was not mentioned in the calling statement
@@ -3323,7 +3323,7 @@
 
                         // check to see if the card has an image prior to startin the ajax testing
                         if (isImageLink) {
-                            $linkOverlay = checkLinks.addDivOverlayNEXTGEN($currentLink, $currentCard);
+                            $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink, $currentCard);
                         }
 
                         // If value is false all class modifications should be done to the link itself
@@ -3426,29 +3426,35 @@
             // ----------------------------------------
             // Tier 4
             // ----------------------------------------
-            addDivOverlayNEXTGEN: function ($currentLink, $currentCard) {
+            addDivOverlay: function (isNextGen, $currentLink, $currentCard) {
+                // sets $currentCard to null for tetra site checks
+                $currentCard = $currentCard ? $currentCard : null;
                 this.cacheDOMOverlayElements($currentLink);
-                this.createOverlayElements();
-                this.buildOverlayElements();
-                this.attachToImage($currentCard);
+                this.createOverlayElements(isNextGen);
+                this.buildOverlayElements(isNextGen);
+                this.attachToImage(isNextGen, $currentLink, $currentCard);
                 return this.$divOverlay;
             },
-            cacheDOMOverlayElements: function ($currentLink) {
+            cacheDOMOverlayElements: function ($currentLink /*, isNextGen*/ ) {
                 // IF NEXTGEN SITE
-                if (toolbar.nextGenCheck()) {
-                    this.linkTitle = jQuery($currentLink).attr('title');
-                }
+                this.widthOfImage = $currentLink.find('img').width();
+                this.heightOfImage = $currentLink.find('img').height();
+                this.linkTitle = jQuery($currentLink).attr('title');
             },
-            createOverlayElements: function () {
+            createOverlayElements: function (isNextGen) {
                 // create div overlay
-                if (toolbar.nextGenCheck()) {
+                if (isNextGen) {
                     this.$divOverlay = jQuery('<div>').attr({
                         class: 'cardOverlay'
                     });
+                } else {
+                    this.$divOverlay = jQuery('<div>').attr({
+                        class: 'siteLink imgOverlay'
+                    });
                 }
             },
-            buildOverlayElements: function () {
-                if (!toolbar.nextGenCheck()) {
+            buildOverlayElements: function (isNextGen) {
+                if (!isNextGen) {
                     // make the div overlay the same dimensions as the image
                     this.$divOverlay.css({
                         width: this.widthOfImage + 'px',
@@ -3458,14 +3464,17 @@
                 // add content to div
                 // ADD THE LINK TITLE
                 this.$divOverlay.append(this.linkTitle);
+
             },
-            attachToImage: function ($currentCard) {
+            attachToImage: function (isNextGen, $currentLink, $currentCard) {
                 // center div overlay
-                if (toolbar.nextGenCheck()) {
+                if (isNextGen) {
                     this.$divOverlay.attr({
                         class: 'imgOverlay myNextGen'
                     });
                     $currentCard.prepend(this.$divOverlay);
+                } else {
+                    $currentLink.prepend(this.$divOverlay);
                 }
             }
         },
@@ -4610,9 +4619,9 @@
                 // hide / show toggle button
                 dynamicDisplay.config.$showToolbox.toggle('fade', 500);
             },
-            saveState: function ( /*event*/ ) {
+            saveState: function () {
                 // get current state
-                var vName = "showToolbox",
+                var vName = 'showToolbox',
                     currState = getValue(vName, false);
 
                 // sets usingM4 value
