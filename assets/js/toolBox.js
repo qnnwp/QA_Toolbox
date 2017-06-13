@@ -1757,7 +1757,7 @@
                         id: 'testPage',
                         title: 'Queue up a Page Test'
                     }).text('Web Page Test'),
-                    email: GM_getValue('email', 'your.name@cdk.com'),
+                    email: GM_getValue('email', 'your.name@cdk.com'),   //jshint ignore:line
                     $emailTitle: jQuery('<div>').text('Enter your email'),
                     $emailInput: jQuery('<input>').attr({
                         class: 'WPT email',
