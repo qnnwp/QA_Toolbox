@@ -318,10 +318,12 @@
             cacheDOM: function () {
                 var key, total, tags;
                 for (key in hTags.config.hTagsTotal) {
-                    tags = jQuery(key);
-                    hTags.config.hTags[key] = tags; // save matches for later
-                    total = tags.length;
-                    hTags.config.hTagsTotal[key] = total;
+                    if (hTags.config.hTagsTotal.hasOwnProperty(key)) {
+                        tags = jQuery(key);
+                        hTags.config.hTags[key] = tags; // save matches for later
+                        total = tags.length;
+                        hTags.config.hTagsTotal[key] = total;
+                    }
                 }
                 this.$body = jQuery('body');
             },
@@ -341,18 +343,20 @@
                     });
 
                 for (key in hTags.config.hTagsTotal) {
-                    $hContainer = jQuery('<div>').attr({
-                        class: 'hCount',
-                        id: key + 'Count'
-                    }).text(key + ' : ');
+                    if (hTags.config.hTagsTotal.hasOwnProperty(key)) {
+                        $hContainer = jQuery('<div>').attr({
+                            class: 'hCount',
+                            id: key + 'Count'
+                        }).text(key + ' : ');
 
-                    $hCount.text(hTags.config.hTagsTotal[key]);
+                        $hCount.text(hTags.config.hTagsTotal[key]);
 
-                    this.highlightZero($hContainer, $hCount);
+                        this.highlightZero($hContainer, $hCount);
 
-                    $hContainer.append($hCount);
+                        $hContainer.append($hCount);
 
-                    html += $hContainer.prop('outerHTML');
+                        html += $hContainer.prop('outerHTML');
+                    }
                 }
                 hTags.config.$hTags.html(html);
             },
@@ -361,12 +365,14 @@
                     length, html = '';
 
                 for (key in hTags.config.hTags) {
-                    length = hTags.config.hTags[key].length;
-                    html += '- ' + key + ' -<br>';
+                    if (hTags.config.hTags.hasOwnProperty(key)) {
+                        length = hTags.config.hTags[key].length;
+                        html += '- ' + key + ' -<br>';
 
-                    a = 0;
-                    for (a; a < length; a += 1) {
-                        html += hTags.config.hTags[key][a].innerHTML + '<br>';
+                        a = 0;
+                        for (a; a < length; a += 1) {
+                            html += hTags.config.hTags[key][a].innerHTML + '<br>';
+                        }
                     }
                 }
                 hTags.config.$hTagDisplay.html(html);
@@ -472,9 +478,11 @@
                     state = '',
                     key = '';
                 for (key in variables) {
-                    if (key === 'pageInfo') {
-                        state = variables[key] ? 'show' : 'hide';
-                        this.setState(pageInformation.config.$pageInfo, state);
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === 'pageInfo') {
+                            state = variables[key] ? 'show' : 'hide';
+                            this.setState(pageInformation.config.$pageInfo, state);
+                        }
                     }
                 }
             },
@@ -588,9 +596,11 @@
                     state = '',
                     key = '';
                 for (key in variables) {
-                    if (key === 'mainTools') {
-                        state = variables[key] ? 'show' : 'hide';
-                        this.setState(qaTools.config.$mainToolsPanel, state);
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === 'mainTools') {
+                            state = variables[key] ? 'show' : 'hide';
+                            this.setState(qaTools.config.$mainToolsPanel, state);
+                        }
                     }
                 }
             },
@@ -715,13 +725,15 @@
                     value = '';
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    value = $contentArray[key];
-                    // build listing element
-                    this.$listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    imageChecker.config.$legendList.append(this.$listItem);
+                    if ($contentArray.hasOwnProperty(key)) {
+                        value = $contentArray[key];
+                        // build listing element
+                        this.$listItem = jQuery('<li>').attr({
+                            class: 'legendContent ' + key
+                        }).append(value);
+                        // attach to legend list
+                        imageChecker.config.$legendList.append(this.$listItem);
+                    }
                 }
             },
             highlightImages: function () {
@@ -947,21 +959,23 @@
                     $listItem;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    value = $contentArray[key];
+                    if ($contentArray.hasOwnProperty(key)) {
+                        value = $contentArray[key];
 
-                    // if site is TETRA skip adding page not supported legend
-                    if (value === 'Page Not Supported' || value === 'Button Element') {
-                        if (!toolbar.nextGenCheck()) {
-                            continue;
+                        // if site is TETRA skip adding page not supported legend
+                        if (value === 'Page Not Supported' || value === 'Button Element') {
+                            if (!toolbar.nextGenCheck()) {
+                                continue;
+                            }
                         }
-                    }
 
-                    // build listing element
-                    $listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    linkChecker.config.$legendList.append($listItem);
+                        // build listing element
+                        $listItem = jQuery('<li>').attr({
+                            class: 'legendContent ' + key
+                        }).append(value);
+                        // attach to legend list
+                        linkChecker.config.$legendList.append($listItem);
+                    }
                 }
             },
             checkLinks: function () {
@@ -1266,8 +1280,10 @@
                 var key;
                 // removes special overlay class on images
                 for (key in linkChecker.config.$legendContent) {
-                    this.removeClass(this.$allLinks, key);
-                    this.removeClass(jQuery('body').find('button'), key);
+                    if (linkChecker.config.$legendContent.hasOwnProperty(key)) {
+                        this.removeClass(this.$allLinks, key);
+                        this.removeClass(jQuery('body').find('button'), key);
+                    }
                 }
                 // remove div overlay
                 jQuery('.imgOverlay').remove();
@@ -1611,14 +1627,16 @@
                     $listItem;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    value = $contentArray[key];
+                    if ($contentArray.hasOwnProperty(key)) {
+                        value = $contentArray[key];
 
-                    // build listing element
-                    $listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    spellCheck.config.$legendList.append($listItem);
+                        // build listing element
+                        $listItem = jQuery('<li>').attr({
+                            class: 'legendContent ' + key
+                        }).append(value);
+                        // attach to legend list
+                        spellCheck.config.$legendList.append($listItem);
+                    }
                 }
             },
             treeWalk: function () {
@@ -1954,9 +1972,11 @@
                     state = '',
                     key = '';
                 for (key in variables) {
-                    if (key === 'otherTools') {
-                        state = variables[key] ? 'show' : 'hide';
-                        this.setState(otherTools.config.$otherToolsPanel, state);
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === 'otherTools') {
+                            state = variables[key] ? 'show' : 'hide';
+                            this.setState(otherTools.config.$otherToolsPanel, state);
+                        }
                     }
                 }
             },
@@ -2102,21 +2122,23 @@
                     key, value;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    value = $contentArray[key];
-                    // build listing element
+                    if ($contentArray.hasOwnProperty(key)) {
+                        value = $contentArray[key];
+                        // build listing element
 
-                    // if site is NEXTGEN skip adding major page
-                    if (value === 'Major Page') {
-                        if (this.isNextGenPlatform) {
-                            continue;
+                        // if site is NEXTGEN skip adding major page
+                        if (value === 'Major Page') {
+                            if (this.isNextGenPlatform) {
+                                continue;
+                            }
                         }
-                    }
 
-                    this.$listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    showNavigation.config.$legendList.append(this.$listItem);
+                        this.$listItem = jQuery('<li>').attr({
+                            class: 'legendContent ' + key
+                        }).append(value);
+                        // attach to legend list
+                        showNavigation.config.$legendList.append(this.$listItem);
+                    }
                 }
             },
             toggleFeatures: function () {
@@ -3381,13 +3403,15 @@
                     key, value, $listItem;
                 // loop through Legend Content list
                 for (key in $contentArray) {
-                    value = $contentArray[key];
-                    // build listing element
-                    $listItem = jQuery('<li>').attr({
-                        class: 'legendContent ' + key
-                    }).append(value);
-                    // attach to legend list
-                    checkLinks.config.$legendList.append($listItem);
+                    if ($contentArray.hasOwnProperty(key)) {
+                        value = $contentArray[key];
+                        // build listing element
+                        $listItem = jQuery('<li>').attr({
+                            class: 'legendContent ' + key
+                        }).append(value);
+                        // attach to legend list
+                        checkLinks.config.$legendList.append($listItem);
+                    }
                 }
             },
             showLegend: function () {
@@ -3580,9 +3604,11 @@
                     state = '',
                     key = '';
                 for (key in variables) {
-                    if (key === 'urlModTools') {
-                        state = variables[key] ? 'show' : 'hide';
-                        this.setState(urlModifiers.config.$urlModPanel, state);
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === 'urlModTools') {
+                            state = variables[key] ? 'show' : 'hide';
+                            this.setState(urlModifiers.config.$urlModPanel, state);
+                        }
                     }
                 }
             },
@@ -3628,118 +3654,120 @@
                     matchesFound = [],
                     foundThis = false;
                 for (key in urlParameters2) {
-                    findThis = key;
-                    // this works with current URL
-                    // will check to see if current URL has all the variables with it
-                    // ONE DOWNSIDE IS THAT IF THE URL DOESNT ALREADY HAVE A ? IN IT
-                    // AN ERROR WILL BE THROWN
-                    if (url.indexOf('?') === -1) {
-                        url += '?';
-                    }
-                    // force the page to reload in DESKTOP SITE
-                    // no downside to NEXT GEN SITES
-                    if (url.indexOf('device=immobile') === -1) {
-                        url += '&device=immobile';
-                    }
-                    // determine search term is empty
-                    // this will mean that the toggle is turned off
-                    if (findThis === undefined || findThis === '') {} else {
-                        // search url for KEY
-                        foundThis = this.searchURL(key, url);
-
-                        //--------------------------------------------------------
-                        //next gen searches
-                        //--------------------------------------------------------
-                        if (key === 'nextGen=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                            // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is ON'
-                            if (url.indexOf('nextGen=false') >= 0) {
-                                // if 'parameter is set to false'
-                                url = url.replace('nextGen=false', 'nextGen=true');
-                                matchesFound.push(false);
-                            } else if (url.indexOf('nextGen=true') >= 0) {
-                                // if 'parameter is set to true'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
-                        } else if (key === 'nextGen=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                            // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is OFF'
-                            if (url.indexOf('nextGen=true') >= 0) {
-                                // if 'parameter is set to true'
-                                url = url.replace('nextGen=true', 'nextGen=false');
-                                matchesFound.push(false);
-                            } else if (url.indexOf('nextGen=false') >= 0) {
-                                // if 'parameter is set to false'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
-                        } else if (key === 'nextGen=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                            // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is ON'
-                            // Add parameter to url string
-                            url += '&nextGen=true';
-                            matchesFound.push(false);
-                        } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                            // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                            // do nothing
-                            matchesFound.push(true);
+                    if (urlParameters2.hasOwnProperty(key)) {
+                        findThis = key;
+                        // this works with current URL
+                        // will check to see if current URL has all the variables with it
+                        // ONE DOWNSIDE IS THAT IF THE URL DOESNT ALREADY HAVE A ? IN IT
+                        // AN ERROR WILL BE THROWN
+                        if (url.indexOf('?') === -1) {
+                            url += '?';
                         }
-
-                        //--------------------------------------------------------
-                        //autofill searches
-                        //--------------------------------------------------------
-                        if (key === 'disableAutofill=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                            // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is ON'
-                            if (url.indexOf('disableAutofill=false') >= 0) {
-                                // if 'parameter is set to false'
-                                url = url.replace('disableAutofill=false', 'disableAutofill=true');
-                                matchesFound.push(false);
-                            } else if (url.indexOf('disableAutofill=true') >= 0) {
-                                // if 'parameter is set to true'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
-                        } else if (key === 'disableAutofill=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                            // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is OFF'
-                            if (url.indexOf('disableAutofill=true') >= 0) {
-                                // if 'parameter is set to true'
-                                url = url.replace('disableAutofill=true', 'disableAutofill=false');
-                                matchesFound.push(false);
-                            } else if (url.indexOf('disableAutofill=false') >= 0) {
-                                // if 'parameter is set to false'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
-                        } else if (key === 'disableAutofill=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                            // if 'searching for disable autofill' AND 'parameter not found in url' AND 'toggle is ON'
-                            // Add parameter to url string
-                            url += '&disableAutofill=true';
-                            matchesFound.push(false);
-                        } else if (key === 'disableAutofill=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                            // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                            // do nothing
-                            matchesFound.push(true);
+                        // force the page to reload in DESKTOP SITE
+                        // no downside to NEXT GEN SITES
+                        if (url.indexOf('device=immobile') === -1) {
+                            url += '&device=immobile';
                         }
+                        // determine search term is empty
+                        // this will mean that the toggle is turned off
+                        if (findThis === undefined || findThis === '') {} else {
+                            // search url for KEY
+                            foundThis = this.searchURL(key, url);
 
-                        //--------------------------------------------------------
-                        //m4 parameter searches
-                        //--------------------------------------------------------
-                        if (key === 'relative=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                            // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is turned on'
-                            // do nothing
-                            matchesFound.push(true);
-                        } else if (key === 'relative=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                            // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is off'
-                            // remove ADDED parameter from URL
-                            url = url.replace('&comments=true&relative=true', '');
-                            matchesFound.push(false);
-                        } else if (key === 'relative=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                            // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is ON'
-                            // Add parameter to url string
-                            url += '&comments=true&relative=true';
-                            matchesFound.push(false);
-                        } else if (key === 'relative=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                            // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is OFF'
-                            // do nothing
-                            matchesFound.push(true);
+                            //--------------------------------------------------------
+                            //next gen searches
+                            //--------------------------------------------------------
+                            if (key === 'nextGen=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
+                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is ON'
+                                if (url.indexOf('nextGen=false') >= 0) {
+                                    // if 'parameter is set to false'
+                                    url = url.replace('nextGen=false', 'nextGen=true');
+                                    matchesFound.push(false);
+                                } else if (url.indexOf('nextGen=true') >= 0) {
+                                    // if 'parameter is set to true'
+                                    // do nothing
+                                    matchesFound.push(true);
+                                }
+                            } else if (key === 'nextGen=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
+                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is OFF'
+                                if (url.indexOf('nextGen=true') >= 0) {
+                                    // if 'parameter is set to true'
+                                    url = url.replace('nextGen=true', 'nextGen=false');
+                                    matchesFound.push(false);
+                                } else if (url.indexOf('nextGen=false') >= 0) {
+                                    // if 'parameter is set to false'
+                                    // do nothing
+                                    matchesFound.push(true);
+                                }
+                            } else if (key === 'nextGen=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is ON'
+                                // Add parameter to url string
+                                url += '&nextGen=true';
+                                matchesFound.push(false);
+                            } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
+                                // do nothing
+                                matchesFound.push(true);
+                            }
+
+                            //--------------------------------------------------------
+                            //autofill searches
+                            //--------------------------------------------------------
+                            if (key === 'disableAutofill=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
+                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is ON'
+                                if (url.indexOf('disableAutofill=false') >= 0) {
+                                    // if 'parameter is set to false'
+                                    url = url.replace('disableAutofill=false', 'disableAutofill=true');
+                                    matchesFound.push(false);
+                                } else if (url.indexOf('disableAutofill=true') >= 0) {
+                                    // if 'parameter is set to true'
+                                    // do nothing
+                                    matchesFound.push(true);
+                                }
+                            } else if (key === 'disableAutofill=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
+                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is OFF'
+                                if (url.indexOf('disableAutofill=true') >= 0) {
+                                    // if 'parameter is set to true'
+                                    url = url.replace('disableAutofill=true', 'disableAutofill=false');
+                                    matchesFound.push(false);
+                                } else if (url.indexOf('disableAutofill=false') >= 0) {
+                                    // if 'parameter is set to false'
+                                    // do nothing
+                                    matchesFound.push(true);
+                                }
+                            } else if (key === 'disableAutofill=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                                // if 'searching for disable autofill' AND 'parameter not found in url' AND 'toggle is ON'
+                                // Add parameter to url string
+                                url += '&disableAutofill=true';
+                                matchesFound.push(false);
+                            } else if (key === 'disableAutofill=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
+                                // do nothing
+                                matchesFound.push(true);
+                            }
+
+                            //--------------------------------------------------------
+                            //m4 parameter searches
+                            //--------------------------------------------------------
+                            if (key === 'relative=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
+                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is turned on'
+                                // do nothing
+                                matchesFound.push(true);
+                            } else if (key === 'relative=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
+                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is off'
+                                // remove ADDED parameter from URL
+                                url = url.replace('&comments=true&relative=true', '');
+                                matchesFound.push(false);
+                            } else if (key === 'relative=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is ON'
+                                // Add parameter to url string
+                                url += '&comments=true&relative=true';
+                                matchesFound.push(false);
+                            } else if (key === 'relative=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is OFF'
+                                // do nothing
+                                matchesFound.push(true);
+                            }
                         }
                     }
                 }
@@ -4213,9 +4241,11 @@
                     state = '',
                     key = '';
                 for (key in variables) {
-                    if (key === 'toggleTools') {
-                        state = variables[key] ? 'show' : 'hide';
-                        this.setState(toggles.config.$togglesPanel, state);
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === 'toggleTools') {
+                            state = variables[key] ? 'show' : 'hide';
+                            this.setState(toggles.config.$togglesPanel, state);
+                        }
                     }
                 }
             },
@@ -4581,11 +4611,13 @@
                     state = '',
                     key = '';
                 for (key in variables) {
-                    if (key === 'showToolbox') {
-                        state = variables[key] ? 'show' : 'hide';
-                        this.setState(this.$toolBoxContainer, state);
-                        // set display of hide/show button to opposite of main toolbox
-                        this.setState(dynamicDisplay.config.$showToolbox, !state);
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === 'showToolbox') {
+                            state = variables[key] ? 'show' : 'hide';
+                            this.setState(this.$toolBoxContainer, state);
+                            // set display of hide/show button to opposite of main toolbox
+                            this.setState(dynamicDisplay.config.$showToolbox, !state);
+                        }
                     }
                 }
             },
