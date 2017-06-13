@@ -204,7 +204,8 @@
                 this.buildTool();
                 this.cacheDOM();
                 this.displayData();
-                this.hide();
+                this.toggleVisibility();
+//                this.hide();
                 // return finished tool
                 return this.returnTool();
             },
@@ -250,14 +251,16 @@
                 pageName.config.$pageName.html(this.pageName);
                 pageName.config.$pageLabel.html(this.pageLabel);
             },
-            hide: function () {
+            toggleVisibility: function () {
                 // hide pagel label elements if name
                 // is same as page name
                 var name = this.pageName,
                     label = this.pageLabel;
                 if (name === label) {
-                    pageName.config.$pageLabelTitle.hide();
-                    pageName.config.$pageLabel.hide();
+                    pageName.config.$pageLabelTitle.toggle();
+//                    pageName.config.$pageLabelTitle.hide();
+                    pageName.config.$pageLabel.toggle();
+//                    pageName.config.$pageLabel.hide();
                 }
             },
             returnTool: function () {
