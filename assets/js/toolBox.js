@@ -4608,7 +4608,7 @@
                     }),
                     // toolbox version
                     $version: jQuery('<div>')
-                        .text('version: ' + GM_info.script.version),
+                        .text('version: ' + GM_info.script.version),    //jshint ignore:line
                     $changeLog: jQuery('<a>').attr({
                         href: 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
                         title: 'The Latest changes will be mentioned here.'
