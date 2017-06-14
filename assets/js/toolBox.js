@@ -2659,57 +2659,6 @@
                 };
             }
         },
-        //                        return function () {
-        //                    $currentLink.addClass('linkChecked');
-        //                };
-        //    var $widgetOutlineButton = jQuery('<button>').attr({
-        //        class: 'myEDOBut',
-        //        id: 'widgetOutline',
-        //        title: 'Show Widget Outlines'
-        //    }).text('Show Widgets');
-        //
-        //    $widgetOutlineButton.click(function () {
-        //        var $toolboxStyles = jQuery('#qa_toolbox'),
-        //            editableWidgets = jQuery('body .cell .CobaltEditableWidget'),
-        //            cobaltWidgets = jQuery('body .cell .CobaltWidget');
-        //        // made to you will be able to remove it later
-        //        jQuery('.masonry-brick').addClass('outlineWidget');
-        //        // made to you will be able to remove it later
-        //        jQuery('div[class*=colorBlock]').addClass('hideColorblock');
-        //
-        //        // add widget overlays
-        //        addOverlays(editableWidgets);
-        //        addOverlays(cobaltWidgets);
-        //
-        //        function addOverlays(array) {
-        //            jQuery(array).each(function () {
-        //                jQuery(this).addClass('showWidgetData');
-        //                var widgetID = jQuery(this).attr('id');
-        //                var w = jQuery(this).width(),
-        //                    h = jQuery(this).height();
-        //                jQuery(this).on('click', copyWidgetID);
-        //                jQuery(this).attr({
-        //                    title: 'Click to Copy Widget ID'
-        //                });
-        //                jQuery(this).append(function () {
-        //                    jQuery(this).attr({
-        //                        'data-content': widgetID + ' :: ' + w + 'px X ' + h + 'px'
-        //                    });
-        //                });
-        //                // dynamically adjust the data content
-        //                $toolboxStyles
-        //                    .append('#' + widgetID + ':after { height: ' + h + 'px; width: ' + w + 'px; }');
-        //            });
-        //        }
-        //
-        //        function copyWidgetID(event) {
-        //            var $widget = jQuery(event.target),
-        //                widgetID = $widget.attr('id');
-        //            // make element blink for verification purposes
-        //            $widget.fadeIn(300).fadeOut(300).fadeIn(300);
-        //            clipboardCopy(widgetID);
-        //        }
-        //    });
 
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- broken link checker ----------------------------------------
