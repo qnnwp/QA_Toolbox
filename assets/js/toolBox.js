@@ -1061,7 +1061,7 @@
                     $currentCard = jQuery($sections[a]);
                     $currentLink = null;
 
-                    if ($currentCard.attr('class') !== undefined) {
+                    if (typeof $currentCard.attr('class') !== 'undefined') {
                         cardClass = $currentCard.attr('class');
                     }
 
@@ -1209,7 +1209,7 @@
                     $currentLink = jQuery(this.$allLinks[a]);
 
                     // skip main nav menu items
-                    if ($currentLink.attr('class') !== undefined) {
+                    if (typeof $currentLink.attr('class') !== 'undefined') {
                         if ($currentLink.attr('class').indexOf('main') > -1 && $currentLink.attr('class').indexOf('main') > -1) {
                             continue;
                         }
@@ -2476,7 +2476,7 @@
             // tier 4 functions
             // ----------------------------------------
             isUndefined: function (elem, attr) {
-                if (jQuery(elem).attr(attr) !== undefined) {
+                if (typeof jQuery(elem).attr(attr) !== 'undefined') {
                     return false;
                 } else {
                     return true;
@@ -2942,7 +2942,7 @@
                     $currentLink = null;
                     $cardDeck = null;
 
-                    if ($currentCard.attr('class') !== undefined) {
+                    if (typeof $currentCard.attr('class') !== 'undefined') {
                         cardClass = $currentCard.attr('class');
                     }
 
