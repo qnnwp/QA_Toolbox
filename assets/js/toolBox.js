@@ -97,7 +97,14 @@
                 this.head.append(QAtoolbox.config.$animate);
                 this.body.before(QAtoolbox.config.$toolboxContainer);
                 this.body.before(QAtoolbox.config.$legendContainer);
-            }
+            },
+            nextGenCheck: function () {
+                if (this.nextGen) {
+                    return this.nextGen.indexOf('Next Gen') === -1 ? false : true;
+                } else {
+                    return false;
+                }
+            },
         },
         /* ************************************************************************************************************************ */
         /* **************************************** PAGE INFO TOOLS **************************************** */
@@ -791,7 +798,7 @@
                 // find first case that returns true
                 switch (true) {
                     // if alt is undefined
-                    case ($image.attr('alt') === undefined):
+                    case (typeof $image.attr('alt') === 'undefined'):
                         this.togClass($image, 'noAlt');
                         break;
                         // if alt is empty
@@ -838,7 +845,7 @@
                 // place div overlay onto image
                 $currentImage.before(this.$divOverlay);
 
-                if (toolbar.nextGenCheck()) {
+                if (QAtoolbox.nextGenCheck()) {
                     var parent = $currentImage.closest('figure');
                     this.$divOverlay.css({
                         left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
@@ -967,7 +974,7 @@
 
                         // if site is TETRA skip adding page not supported legend
                         if (value === 'Page Not Supported' || value === 'Button Element') {
-                            if (!toolbar.nextGenCheck()) {
+                            if (!QAtoolbox.nextGenCheck()) {
                                 continue;
                             }
                         }
@@ -993,14 +1000,14 @@
                 // ----------------------------------------
                 // NEXT GEN SITE LOGIC
                 // ----------------------------------------
-                if (toolbar.nextGenCheck()) {
+                if (QAtoolbox.nextGenCheck()) {
                     this.nextGenSiteCheck();
                 }
 
                 // ----------------------------------------
                 // TETRA SITE LOGIC
                 // ----------------------------------------
-                if (!toolbar.nextGenCheck()) {
+                if (!QAtoolbox.nextGenCheck()) {
                     this.tetraSiteCheck();
                 }
 
@@ -1309,7 +1316,7 @@
             },
             addStyles: function () {
                 // if site is TETRA do not add style
-                if (toolbar.nextGenCheck()) {
+                if (QAtoolbox.nextGenCheck()) {
                     this.$toolboxStyles
                         .append('.unsupportedPageLink { background: #00a6ff; }')
                         .append('.buttonFlag { background: linear-gradient(to right, #b2fefa, #0ed2f7) !important; color: #000000 !important; }');
@@ -1349,7 +1356,7 @@
                 // text links
                 if (!isImageLink) {
                     switch (true) {
-                        case (($currentLink.attr('title') === undefined || $currentLink.attr('title') === '')):
+                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
                             // link has no title
                             this.togClass($currentLink, 'noTitle');
                             break;
@@ -1367,7 +1374,7 @@
                 // image links
                 if (isImageLink) {
                     switch (true) {
-                        case (($currentLink.attr('title') === undefined || $currentLink.attr('title') === '')):
+                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
                             // image link has no title
                             this.togClass(this.$divOverlay, 'noTitle');
                             break;
@@ -1388,7 +1395,7 @@
                 // regular text links
                 if (!isImageLink) {
                     switch (true) {
-                        case (href === undefined):
+                        case (typeof href === 'undefined'):
                             // link is undefined
                             this.togClass($currentLink, 'brokenURL');
                             break;
@@ -1400,7 +1407,7 @@
                             // link has a fishy url
                             this.togClass($currentLink, 'urlIssue');
                             break;
-                        case (this.datedURL(href) && toolbar.nextGenCheck()):
+                        case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
                             // link leads to an out dated page
                             this.togClass($currentLink, 'unsupportedPageLink');
                             break;
@@ -1416,7 +1423,7 @@
                 // image links
                 if (isImageLink) {
                     switch (true) {
-                        case (href === undefined):
+                        case (typeof href === 'undefined'):
                             // image link is undefined
                             this.togClass(this.$divOverlay, 'brokenURL');
                             break;
@@ -1493,7 +1500,7 @@
                 }
 
                 // center div overlay
-                if (toolbar.nextGenCheck()) {
+                if (QAtoolbox.nextGenCheck()) {
                     var parent = $currentImage.closest('figure');
                     this.$divOverlay.css({
                         left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
@@ -2775,6 +2782,7 @@
                 this.wid = this.separateID(this.webID);
                 this.$toolsPanel = jQuery(callingPanel);
                 this.$legendContainer = jQuery('.legendContainer');
+                this.isNextGen = this.nextGenCheck;
             },
             buildLegend: function () {
                 checkLinks.config.$legend
@@ -2814,7 +2822,7 @@
             // tier 1 functions
             // ----------------------------------------
             testLinks: function () {
-                var isNextGen = toolbar.nextGenCheck();
+                var isNextGen = QAtoolbox.nextGenCheck();
                 if (!isNextGen) {
                     this.tetraTestLinks();
                 } else if (isNextGen) {
@@ -2876,7 +2884,7 @@
             testURLs: function ($currentLink) {
                 var linkURL = jQuery.trim($currentLink.attr('href')),
                     isImageLink = $currentLink.find('img') ? true : false,
-                    isNextGen = toolbar.nextGenCheck(),
+                    isNextGen = QAtoolbox.nextGenCheck(),
                     $linkOverlay, $image;
 
                 // check if link contains an image
@@ -3325,7 +3333,7 @@
                     wrappedContents = false,
                     $linkOverlay, pageError404,
                     linkURL = checkLinks.addURLParameter($currentLink),
-                    isNextGen = toolbar.nextGenCheck();
+                    isNextGen = QAtoolbox.nextGenCheck();
 
                 // test each link
                 jQuery.ajax({
@@ -3400,7 +3408,7 @@
                 // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
                 var $linkOverlay, pageError404,
                     linkURL = checkLinks.addURLParameter($currentLink),
-                    isNextGen = toolbar.nextGenCheck();
+                    isNextGen = QAtoolbox.nextGenCheck();
 
                 //check if isImageLink is empty and check if $currentCard is empty
                 //most likely because the parameter was not mentioned in the calling statement
@@ -3746,7 +3754,7 @@
                         }
                         // determine search term is empty
                         // this will mean that the toggle is turned off
-                        if (findThis === undefined || findThis === '') {} else {
+                        if (typeof findThis === 'undefined' || findThis === '') {} else {
                             // search url for KEY
                             foundThis = this.searchURL(key, url);
 
@@ -4608,7 +4616,7 @@
                     }),
                     // toolbox version
                     $version: jQuery('<div>')
-                        .text('version: ' + GM_info.script.version),    //jshint ignore:line
+                        .text('version: ' + GM_info.script.version), //jshint ignore:line
                     $changeLog: jQuery('<a>').attr({
                         href: 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
                         title: 'The Latest changes will be mentioned here.'
@@ -4770,7 +4778,8 @@
             },
             cacheDOM: function () {
                 this.nextGen = document.firstChild.data;
-                this.isNextGenPlatform = this.nextGenCheck();
+                this.isNextGenPlatform = QAtoolbox.nextGenCheck();
+//                this.isNextGenPlatform = this.nextGenCheck();
                 this.isCDKsite = this.isCDKsite();
                 this.isMobile = this.isMobile();
                 this.editMode = this.editMode();
@@ -4838,13 +4847,13 @@
             // ----------------------------------------
             // tier 2
             // ----------------------------------------
-            nextGenCheck: function () {
-                if (this.nextGen) {
-                    return this.nextGen.indexOf('Next Gen') === -1 ? false : true;
-                } else {
-                    return false;
-                }
-            },
+//            nextGenCheck: function () {
+//                if (this.nextGen) {
+//                    return this.nextGen.indexOf('Next Gen') === -1 ? false : true;
+//                } else {
+//                    return false;
+//                }
+//            },
             isCDKsite: function () {
                 try {
                     var siteState = unsafeWindow.ContextManager.getVersion();
