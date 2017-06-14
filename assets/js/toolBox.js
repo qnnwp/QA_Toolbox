@@ -11,11 +11,11 @@
     }
 
     function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text');  //jshint ignore:line
+        GM_setClipboard(variable, 'text'); //jshint ignore:line
     }
 
     function getValue(variable) {
-        return GM_getValue(variable, false);    //jshint ignore:line
+        return GM_getValue(variable, false); //jshint ignore:line
     }
 
     function programVariables() {
@@ -205,7 +205,7 @@
                 this.cacheDOM();
                 this.displayData();
                 this.toggleVisibility();
-//                this.hide();
+                //                this.hide();
                 // return finished tool
                 return this.returnTool();
             },
@@ -258,9 +258,9 @@
                     label = this.pageLabel;
                 if (name === label) {
                     pageName.config.$pageLabelTitle.toggle();
-//                    pageName.config.$pageLabelTitle.hide();
+                    //                    pageName.config.$pageLabelTitle.hide();
                     pageName.config.$pageLabel.toggle();
-//                    pageName.config.$pageLabel.hide();
+                    //                    pageName.config.$pageLabel.hide();
                 }
             },
             returnTool: function () {
@@ -1760,7 +1760,7 @@
                         id: 'testPage',
                         title: 'Queue up a Page Test'
                     }).text('Web Page Test'),
-                    email: GM_getValue('email', 'your.name@cdk.com'),   //jshint ignore:line
+                    email: GM_getValue('email', 'your.name@cdk.com'), //jshint ignore:line
                     $emailTitle: jQuery('<div>').text('Enter your email'),
                     $emailInput: jQuery('<input>').attr({
                         class: 'WPT email',
@@ -2569,68 +2569,141 @@
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- add widget outlines ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
-    // disable on next gen sites.  dont work
-    var $widgetOutlineButton = jQuery('<button>').attr({
-        class: 'myEDOBut',
-        id: 'widgetOutline',
-        title: 'Show Widget Outlines'
-    }).text('Show Widgets');
-    $widgetOutlineButton.click(function () {
-        var $toolboxStyles = jQuery('#qa_toolbox');
-        // made to you will be able to remove it later
-        jQuery('.masonry-brick').addClass('outlineWidget');
-        // made to you will be able to remove it later
-        jQuery('div[class*=colorBlock]').addClass('hideColorblock');
-        jQuery('body .cell .CobaltEditableWidget').each(function () {
-            jQuery(this).addClass('showWidgetData');
-            var widgetID = jQuery(this).attr('id');
-            var w = jQuery(this).width(),
-                h = jQuery(this).height();
-            jQuery(this).on('click', copyWidgetID);
-            jQuery(this).attr({
-                title: 'Click to Copy Widget ID'
-            });
-            jQuery(this).append(function () {
-                jQuery(this).attr({
-                    'data-content': widgetID + ' ::: ' + w + 'px X ' + h + 'px'
+    // disable on next gen sites.
+    var widgetOutlines = {
+            init: function (callingPanel) {
+                this.createElements();
+                this.cacheDOM(callingPanel);
+                this.addTool();
+                this.bindEvents();
+            },
+            createElements: function () {
+                widgetOutlines.config = {
+                    $activateButt: jQuery('<button>').attr({
+                        class: 'myEDOBut',
+                        id: 'widgetOutline',
+                        title: 'Show Widget Outlines'
+                    }).text('Show Widgets')
+                };
+            },
+            cacheDOM: function (callingPanel) {
+                this.$toolsPanel = jQuery(callingPanel);
+                this.$toolboxStyles = jQuery('#qa_toolbox');
+                this.$editableWidgets = jQuery('body .cell .CobaltEditableWidget');
+                this.$cobaltWidgets = jQuery('body .cell .CobaltWidget');
+                this.overlayStyles = [];
+            },
+            addTool: function () {
+                this.$toolsPanel.append(widgetOutlines.config.$activateButt);
+            },
+            bindEvents: function () {
+                widgetOutlines.config.$activateButt.on('click', this.showWidgets.bind(this));
+            },
+            showWidgets: function () {
+                this.addOverlay(this.$editableWidgets);
+                this.addOverlay(this.$cobaltWidgets);
+                this.addCustomStyles(this);
+            },
+            addCustomStyles: function () {
+                var self = this;
+                jQuery(this.overlayStyles).each(function () {
+                    self.$toolboxStyles.append(this);
                 });
-            });
-            // dynamically adjust the data content
-            $toolboxStyles
-                .append('#' + widgetID + ':after { height: ' + h + 'px; width: ' + w + 'px; }');
-        });
-        jQuery('body .cell .CobaltWidget').each(function () {
-            jQuery(this).addClass('showWidgetData');
-            var widgetID = jQuery(this).attr('id');
-            var w = jQuery(this).width(),
-                h = jQuery(this).height();
-            jQuery(this).on('click', copyWidgetID);
-            jQuery(this).attr({
-                title: 'Click to Copy Widget ID'
-            });
-            jQuery(this).append(function () {
-                jQuery(this).attr({
-                    'data-content': widgetID + ' :: ' + w + 'px X ' + h + 'px'
+            },
+            addOverlay: function (array) {
+                var self = this;
+                jQuery(array).each(function () {
+                    var $currentObject = jQuery(this),
+                        widgetID = $currentObject.attr('id'),
+                        toolClass = 'showWidgetData',
+                        w = $currentObject.width(),
+                        h = $currentObject.height(),
+                        addThis = '#' + widgetID + '.' + toolClass + ':after { height: ' + h + 'px; width: ' + w + 'px; }';
+                    // add tool class
+                    $currentObject.addClass('showWidgetData');
+                    self.bindClickCallback($currentObject, widgetID);
+                    $currentObject.attr({
+                        title: 'Click to Copy Widget ID'
+                    });
+
+                    // add height and width data to widget element
+                    $currentObject.attr({
+                        'data-content': widgetID + ' :: ' + w + 'px X ' + h + 'px'
+                    });
+
+                    // save custom css styles that will be added to the toolbox css styles later
+                    self.overlayStyles.push(addThis);
                 });
-            });
-            // dynamically adjust the data content
-            $toolboxStyles
-                .append('#' + widgetID + ':after { height: ' + h + 'px; width: ' + w + 'px; }');
-        });
+            },
+            bindClickCallback: function ($currentObject, widgetID) {
+                // bind click event
+                return $currentObject.on('click', this.copyWidgetID($currentObject, widgetID));
+            },
+            copyWidgetID: function ($currentObject, widgetID) {
+                // make element blink when user clicks to copy widget ID
+                // for verification purposes
+                return function () {
+                    $currentObject.fadeIn(300).fadeOut(300).fadeIn(300);
+                    clipboardCopy(widgetID);
+                };
+            }
+        },
+        //                        return function () {
+        //                    $currentLink.addClass('linkChecked');
+        //                };
+        //    var $widgetOutlineButton = jQuery('<button>').attr({
+        //        class: 'myEDOBut',
+        //        id: 'widgetOutline',
+        //        title: 'Show Widget Outlines'
+        //    }).text('Show Widgets');
+        //
+        //    $widgetOutlineButton.click(function () {
+        //        var $toolboxStyles = jQuery('#qa_toolbox'),
+        //            editableWidgets = jQuery('body .cell .CobaltEditableWidget'),
+        //            cobaltWidgets = jQuery('body .cell .CobaltWidget');
+        //        // made to you will be able to remove it later
+        //        jQuery('.masonry-brick').addClass('outlineWidget');
+        //        // made to you will be able to remove it later
+        //        jQuery('div[class*=colorBlock]').addClass('hideColorblock');
+        //
+        //        // add widget overlays
+        //        addOverlays(editableWidgets);
+        //        addOverlays(cobaltWidgets);
+        //
+        //        function addOverlays(array) {
+        //            jQuery(array).each(function () {
+        //                jQuery(this).addClass('showWidgetData');
+        //                var widgetID = jQuery(this).attr('id');
+        //                var w = jQuery(this).width(),
+        //                    h = jQuery(this).height();
+        //                jQuery(this).on('click', copyWidgetID);
+        //                jQuery(this).attr({
+        //                    title: 'Click to Copy Widget ID'
+        //                });
+        //                jQuery(this).append(function () {
+        //                    jQuery(this).attr({
+        //                        'data-content': widgetID + ' :: ' + w + 'px X ' + h + 'px'
+        //                    });
+        //                });
+        //                // dynamically adjust the data content
+        //                $toolboxStyles
+        //                    .append('#' + widgetID + ':after { height: ' + h + 'px; width: ' + w + 'px; }');
+        //            });
+        //        }
+        //
+        //        function copyWidgetID(event) {
+        //            var $widget = jQuery(event.target),
+        //                widgetID = $widget.attr('id');
+        //            // make element blink for verification purposes
+        //            $widget.fadeIn(300).fadeOut(300).fadeIn(300);
+        //            clipboardCopy(widgetID);
+        //        }
+        //    });
 
-        function copyWidgetID(event) {
-            var $widget = jQuery(event.target),
-                widgetID = $widget.attr('id');
-            // make element blink for verification purposes
-            $widget.fadeIn(300).fadeOut(300).fadeIn(300);
-            clipboardCopy(widgetID);
-        }
-    });
-
-    // ------------------------------------------------------------------------------------------------------------------------
-    // ---------------------------------------- broken link checker ----------------------------------------
-    // ------------------------------------------------------------------------------------------------------------------------
-    var checkLinks = {
+        // ------------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------- broken link checker ----------------------------------------
+        // ------------------------------------------------------------------------------------------------------------------------
+        checkLinks = {
             init: function (callingPanel) {
                 this.createElements();
                 this.cacheDOM(callingPanel);
@@ -4732,7 +4805,8 @@
 
                 // add tetra specific tool to panel
                 if (!this.isNextGenPlatform) {
-                    jQuery('#otherTools').append($widgetOutlineButton);
+                    //                    jQuery('#otherTools').append($widgetOutlineButton);
+                    widgetOutlines.init(panelID);
                     viewMobile.init(panelID);
                 }
             },
