@@ -329,8 +329,11 @@
                 var key, total, tags;
                 for (key in hTags.config.hTagsTotal) {
                     if (hTags.config.hTagsTotal.hasOwnProperty(key)) {
+                        // takes key from hTagsTotal and does a jquery search on the page for element
                         tags = jQuery(key);
-                        hTags.config.hTags[key] = tags; // save matches for later
+                        // saves the returned array for the display feature
+                        hTags.config.hTags[key] = tags;
+                        // display the amount of h tags
                         total = tags.length;
                         hTags.config.hTagsTotal[key] = total;
                     }
@@ -338,9 +341,10 @@
                 this.$body = jQuery('body');
             },
             buildTool: function () {
+                //fill htag elements container with content
                 hTags.config.$hTagsContainer.append(hTags.config.$hTagsTitle);
                 hTags.config.$hTagsContainer.append(hTags.config.$hTags);
-
+                //fill display container with h tag elements
                 hTags.config.$hTagDisplayContainer.append(hTags.config.$hTagDisplay);
                 hTags.config.$hTagDisplayContainer.append(hTags.config.$removeBut);
             },
@@ -4779,7 +4783,7 @@
             cacheDOM: function () {
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = QAtoolbox.nextGenCheck();
-//                this.isNextGenPlatform = this.nextGenCheck();
+                //                this.isNextGenPlatform = this.nextGenCheck();
                 this.isCDKsite = this.isCDKsite();
                 this.isMobile = this.isMobile();
                 this.editMode = this.editMode();
@@ -4847,13 +4851,13 @@
             // ----------------------------------------
             // tier 2
             // ----------------------------------------
-//            nextGenCheck: function () {
-//                if (this.nextGen) {
-//                    return this.nextGen.indexOf('Next Gen') === -1 ? false : true;
-//                } else {
-//                    return false;
-//                }
-//            },
+            //            nextGenCheck: function () {
+            //                if (this.nextGen) {
+            //                    return this.nextGen.indexOf('Next Gen') === -1 ? false : true;
+            //                } else {
+            //                    return false;
+            //                }
+            //            },
             isCDKsite: function () {
                 try {
                     var siteState = unsafeWindow.ContextManager.getVersion();
