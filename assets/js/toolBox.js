@@ -2856,7 +2856,7 @@
                 var $sections = jQuery('main').find('section'),
                     len = $sections.length,
                     a = 0,
-                    $currentLink, $image, $imagelink, isImageLink, $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, youLength, $currentCard, cardClass, $cardDeck;
+                    $currentLink, $image, $imagelink, isImageLink, $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, youLength, meLength, $currentCard, cardClass, $cardDeck;
 
                 // ----------------------------------------
                 // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
@@ -2905,7 +2905,10 @@
                             // get all links defined in card
                             // should include all primary, secondary, and tenary links
                             $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                            this.testLinks($cardLinks);
+                                meLength = $cardLinks.length;
+                                if (meLength > 0) {
+                                    this.testLinks($cardLinks);
+                                }
 
                             // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
                             // ----------------------------------------
@@ -2921,7 +2924,8 @@
                             // card style is set to whole card is clickable and has CTA links
                             // if card is made clickable text links will not be able to be reached.
                             // should this still be checked?
-                        case (cardClass.indexOf('card-clickable-v2') > -1):
+                        case (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1):
+
                             $cardLinkContainer = $currentCard.find('div.link');
                             $cardSEOContainer = $currentCard.find('div.copy');
                             $cardImageContainer = $currentCard.find('div.media');
@@ -2945,18 +2949,20 @@
                                 this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
 
                                 // TEST other Links defined in card Settings
-                                // get all links defined in card
+                                // check if other links exist, get all links defined in card
                                 // should include all primary, secondary, and tenary links
                                 $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                this.testLinks($cardLinks);
+                                meLength = $cardLinks.length;
+                                if (meLength > 0) {
+                                    this.testLinks($cardLinks);
+                                }
 
                                 // TEST TEXT LINKS IN THE COPY OF THE CARD
                                 // check copy container and grab all links
                                 $copyTextLinks = $cardSEOContainer.find('a');
                                 youLength = $copyTextLinks.length;
-
                                 if (youLength > 0) {
-                                    this.testLinks($cardLinks);
+                                    this.testLinks($copyTextLinks);
                                 }
                             }
                             break;
@@ -2964,6 +2970,7 @@
                             // ----------------------------------------
                             // card style is set to whole card is clickable
                             // if card is made clickable text links will not be able to be reached.
+                            /*
                         case (cardClass.indexOf('card-clickable') > -1):
 
                             $cardLinkContainer = $currentCard.find('div.link');
@@ -2990,17 +2997,21 @@
                                 // get all links defined in card
                                 // should include all primary, secondary, and tenary links
                                 $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                this.testLinks($cardLinks);
+                                meLength = $cardLinks.length;
+                                if (meLength > 0) {
+                                    this.testLinks($cardLinks);
+                                }
 
                                 // TEST TEXT LINKS IN THE COPY OF THE CARD
                                 // check copy container and grab all links
                                 $copyTextLinks = $cardSEOContainer.find('a');
                                 youLength = $copyTextLinks.length;
                                 if (youLength > 0) {
-                                    this.testLinks($cardLinks);
+                                    this.testLinks($copyTextLinks);
                                 }
                             }
                             break;
+                            */
                         default:
                             console.log('default switch statement reached');
                             console.log($currentCard);
@@ -3068,349 +3079,6 @@
                     this.nextGenAjaxTest($currentLink);
                 }
             },
-            /*
-            nextgenTestLinks: function () {
-                // ----------------------------------------
-                // NEXT GEN SITE LOGIC
-                // ----------------------------------------
-                var $sections = jQuery('main').find('section'),
-                    $otherLinks = jQuery('header, footer').find('a'),
-                    len = $sections.length,
-                    a = 0,
-                    $currentLink,
-                    $image = null,
-                    $imagelink = null,
-                    isImageLink = false,
-                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, jLength, q, w, j, $currentCard, cardClass, passedChecks, $cardDeck;
-
-                // set total tests to number of links on page
-                checkLinks.config.totalTests = $otherLinks.length;
-                checkLinks.config.totalLinks = $otherLinks.length;
-
-                // ----------------------------------------
-                // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
-                // TESTS TO BODY LINKS WILL BE HANDLED DIFFERENTLY
-                jLength = $otherLinks.length;
-                j = 0;
-                for (j; j < jLength; j += 1) {
-                    $currentLink = jQuery($otherLinks[j]);
-                    $currentLink.addClass('siteLink'); // add default flag class to links
-                    // perform checks to link
-                    // add flag class, check target, check title, check url
-                    passedChecks = this.testURLs($currentLink);
-                    if (!passedChecks) {
-                        continue;
-                    }
-
-                    // USING TETRA AJAX TESTING BECAUSE ALL LINKS IN THE HEADER AND FOOTER EITHER TEXT LINKS or
-                    // FONT IMAGE LINKS
-                    // send link to ajx testing
-                    this.tetraAjaxTest($currentLink);
-
-                }
-                // ----------------------------------------
-                // ----------------------------------------
-                // TEST BODY LINKS
-                // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
-                for (a; a < len; a += 1) {
-                    // reset variables
-                    $image = null;
-                    $imagelink = null;
-                    isImageLink = false;
-                    $currentCard = jQuery($sections[a]);
-                    $currentLink = null;
-                    $cardDeck = null;
-
-                    if (typeof $currentCard.attr('class') !== 'undefined') {
-                        cardClass = $currentCard.attr('class');
-                    } else {
-                        console.log('card has no class');
-                        console.log($currentCard);
-                    }
-
-                    $cardLinkContainer = $currentCard.find('div.link');
-                    $cardSEOContainer = $currentCard.find('div.copy');
-                    $cardImageContainer = $currentCard.find('div.media');
-                    $cardDeck = $currentCard.find('div.deck');
-
-                    //detect if the section element is a parent container
-                    //check if the section class contains 'branchy'
-                    if (cardClass.indexOf('branchy') > -1) {
-                        continue;
-                    }
-
-                    //detect if the section element is a container
-                    //check if the div.deck contains content
-                    if ($cardDeck.is(':not(:empty)')) {
-                        continue;
-                    }
-
-                    switch (true) {
-                        // ----------------------------------------
-                        // ----------------------------------------
-                        // card style is set to CTA links
-                        case (cardClass.indexOf('link-clickable') > -1):
-                            // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
-                            // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
-
-                            // CHECK ALL LINKS DEFINED IN CARD SETTINGS
-                            // get all links defined in card
-                            // should include all primary, secondary, and tenary links
-                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                            myLength = $cardLinks.length;
-                            q = 0;
-                            isImageLink = false; // variable for ajax function
-
-                            for (q; q < myLength; q += 1) {
-                                $currentLink = jQuery($cardLinks[q]);
-                                $currentLink.addClass('siteLink'); // add default flag class to links
-                                // perform checks to link
-                                // add flag class, check target, check title, check url
-                                passedChecks = this.testURLs($currentLink);
-                                if (!passedChecks) {
-                                    continue;
-                                }
-
-                                // send link to ajx testing
-                                this.nextGenAjaxTest($currentLink);
-                            }
-
-                            // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                            // get all text links in copy text of card
-                            $copyTextLinks = $cardSEOContainer.find('a');
-                            youLength = $copyTextLinks.length;
-
-                            if (youLength > 0) {
-                                w = 0;
-                                for (w; w < youLength; w += 1) {
-                                    $currentLink = jQuery($copyTextLinks[w]);
-                                    $currentLink.addClass('siteLink'); // add default flag class to links
-                                    // perform checks to link
-                                    // add flag class, check target, check title, check url
-                                    passedChecks = this.testURLs($currentLink);
-                                    if (!passedChecks) {
-                                        continue;
-                                    }
-
-                                    // send link to ajx testing
-                                    this.nextGenAjaxTest($currentLink);
-                                }
-                            }
-                            break;
-                            // ----------------------------------------
-                            // ----------------------------------------
-                            // card style is set to CTA links
-                        case (cardClass.indexOf('none-clickable') > -1):
-                            // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
-                            // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
-
-                            // CHECK ALL LINKS DEFINED IN CARD SETTINGS
-                            // get all links defined in card
-                            // should include all primary, secondary, and tenary links
-                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                            myLength = $cardLinks.length;
-                            q = 0;
-                            isImageLink = false; // variable for ajax function
-
-                            for (q; q < myLength; q += 1) {
-                                $currentLink = jQuery($cardLinks[q]);
-                                $currentLink.addClass('siteLink'); // add default flag class to links
-                                // perform checks to link
-                                // add flag class, check target, check title, check url
-                                passedChecks = this.testURLs($currentLink);
-                                if (!passedChecks) {
-                                    continue;
-                                }
-
-                                // send link to ajx testing
-                                this.nextGenAjaxTest($currentLink);
-                            }
-
-                            // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                            // get all text links in copy text of card
-                            $copyTextLinks = $cardSEOContainer.find('a');
-                            youLength = $copyTextLinks.length;
-
-                            if (youLength > 0) {
-                                w = 0;
-                                for (w; w < youLength; w += 1) {
-                                    $currentLink = jQuery($copyTextLinks[w]);
-                                    $currentLink.addClass('siteLink'); // add default flag class to links
-                                    // perform checks to link
-                                    // add flag class, check target, check title, check url
-                                    passedChecks = this.testURLs($currentLink);
-                                    if (!passedChecks) {
-                                        continue;
-                                    }
-
-                                    // send link to ajx testing
-                                    this.nextGenAjaxTest($currentLink);
-                                }
-                            }
-                            break;
-                            // ----------------------------------------
-                            // ----------------------------------------
-                            // card style is set to whole card is clickable and has CTA links
-                            // if card is made clickable text links will not be able to be reached.
-                            // should this still be checked?
-
-                        case (cardClass.indexOf('card-clickable-v2') > -1):
-                            $cardLinkContainer = $currentCard.find('div.link');
-                            $cardSEOContainer = $currentCard.find('div.copy');
-                            $cardImageContainer = $currentCard.find('div.media');
-
-                            // check if card has an image
-                            if ($cardImageContainer.is(':empty')) {
-                                // this shouldn't happen as if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
-                                isImageLink = false;
-                            } else {
-                                // find image in the card and apply a div overlay
-                                isImageLink = true;
-                                // find FIRST PRIMARY text link
-                                $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
-                                $currentLink.addClass('siteLink'); // add default flag class to links
-                                $image = $cardImageContainer.find('img');
-                                // add div overlay to image
-
-                                // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
-                                // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
-                                passedChecks = this.testURLs($currentLink);
-                                if (!passedChecks) {
-                                    continue;
-                                }
-
-                                // send link to ajx testing
-                                // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
-                                this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
-
-                                // TEST other Links defined in card Settings
-                                // get all links defined in card
-                                // should include all primary, secondary, and tenary links
-                                $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                myLength = $cardLinks.length;
-                                q = 0;
-                                for (q; q < myLength; q += 1) {
-                                    $currentLink = jQuery($cardLinks[q]);
-                                    $currentLink.addClass('siteLink'); // add default flag class to links
-                                    // perform checks to link
-                                    // add flag class, check target, check title, check url
-                                    passedChecks = this.testURLs($currentLink);
-                                    if (!passedChecks) {
-                                        continue;
-                                    }
-
-                                    // send link to ajx testing
-                                    // DOESN'T NEED TO SEND IN isImageLink AS THESE LINKS WILL ALMOST ALWAYS BE TEXT LINKS
-                                    this.nextGenAjaxTest($currentLink);
-                                }
-
-                                // TEST TEXT LINKS IN THE COPY OF THE CARD
-                                // check copy container and grab all links
-                                $copyTextLinks = $cardSEOContainer.find('a');
-                                youLength = $copyTextLinks.length;
-
-                                if (youLength > 0) {
-                                    w = 0;
-                                    for (w; w < youLength; w += 1) {
-                                        $currentLink = jQuery($copyTextLinks[w]);
-                                        $currentLink.addClass('siteLink'); // add default flag class to links
-                                        // perform checks to link
-                                        // add flag class, check target, check title, check url
-                                        passedChecks = this.testURLs($currentLink);
-                                        if (!passedChecks) {
-                                            continue;
-                                        }
-
-                                        // send link to ajx testing
-                                        this.nextGenAjaxTest($currentLink);
-                                    }
-                                }
-                            }
-                            break;
-                            // ----------------------------------------
-                            // ----------------------------------------
-                            // card style is set to whole card is clickable
-                            // if card is made clickable text links will not be able to be reached.
-                        case (cardClass.indexOf('card-clickable') > -1):
-                            $cardLinkContainer = $currentCard.find('div.link');
-                            $cardSEOContainer = $currentCard.find('div.copy');
-                            $cardImageContainer = $currentCard.find('div.media');
-
-                            // check if card has an image
-                            if ($cardImageContainer.is(':empty')) {
-                                // this shouldn't happen as if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
-                                isImageLink = false;
-                            } else {
-                                // find image in the card and apply a div overlay
-                                isImageLink = true;
-                                // find FIRST PRIMARY text link
-                                $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
-                                $currentLink.addClass('siteLink'); // add default flag class to links
-                                $image = $cardImageContainer.find('img');
-
-                                // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
-                                // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
-                                passedChecks = this.testURLs($currentLink);
-                                if (!passedChecks) {
-                                    continue;
-                                }
-
-                                // send link to ajx testing
-                                // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
-                                this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
-
-                                // TEST other Links defined in card Settings
-                                // get all links defined in card
-                                // should include all primary, secondary, and tenary links
-                                $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                myLength = $cardLinks.length;
-                                q = 0;
-                                for (q; q < myLength; q += 1) {
-                                    $currentLink = jQuery($cardLinks[q]);
-                                    $currentLink.addClass('siteLink'); // add default flag class to links
-
-                                    // perform checks to link
-                                    // add flag class, check target, check title, check url
-                                    passedChecks = this.testURLs($currentLink);
-                                    if (!passedChecks) {
-                                        continue;
-                                    }
-
-                                    // send link to ajx testing
-                                    // DOESN'T NEED TO SEND IN isImageLink AS THESE LINKS WILL ALMOST ALWAYS BE TEXT LINKS
-                                    this.nextGenAjaxTest($currentLink);
-                                }
-
-                                // TEST TEXT LINKS IN THE COPY OF THE CARD
-                                // check copy container and grab all links
-                                $copyTextLinks = $cardSEOContainer.find('a');
-                                youLength = $copyTextLinks.length;
-
-                                if (youLength > 0) {
-                                    w = 0;
-                                    for (w; w < youLength; w += 1) {
-                                        $currentLink = jQuery($copyTextLinks[w]);
-                                        $currentLink.addClass('siteLink'); // add default flag class to links
-
-                                        // perform checks to link
-                                        // add flag class, check target, check title, check url
-                                        passedChecks = this.testURLs($currentLink);
-                                        if (!passedChecks) {
-                                            continue;
-                                        }
-
-                                        // send link to ajx testing
-                                        this.nextGenAjaxTest($currentLink);
-                                    }
-                                }
-                            }
-                            break;
-                        default:
-                            console.log('default switch statement reached');
-                            console.log($currentCard);
-                    }
-                }
-            },*/
             // checks if $image has length
             // This is to verify that an image does exists inside the link
             isImageLink: function ($image) {
@@ -3545,12 +3213,15 @@
                     linkURL = checkLinks.addURLParameter($currentLink),
                     isNextGen = QAtoolbox.nextGenCheck();
 
+                console.log(isImageLink);
                 //check if isImageLink is empty and check if $currentCard is empty
                 //most likely because the parameter was not mentioned in the calling statement
-                if (!isImageLink) {
+                if (typeof isImageLink === 'undefined') {
                     isImageLink = false;
-                } else if (!$currentCard) {
-                    $currentCard = null;
+                }
+
+                if (typeof $currentCard === 'undefined') {
+                    $currentCard = 'null';
                 }
 
                 // test each link
@@ -3670,6 +3341,7 @@
             // Tier 4
             // ----------------------------------------
             addDivOverlay: function (isNextGen, $currentLink, $currentCard) {
+                console.log('adding div overlay');
                 // sets $currentCard to null for tetra site checks
                 $currentCard = $currentCard ? $currentCard : null;
                 this.cacheDOMOverlayElements($currentLink);
