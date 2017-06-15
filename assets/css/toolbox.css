@@ -364,6 +364,7 @@ body .card .content .text .link .siteLink.noTitle,
 body .card .content .media .imgOverlay.noTitle {
     background: rgb(255, 124, 216);
     background: rgba(255, 124, 216, .75);
+    border: none;
 }
 
 .hasTitle,
@@ -372,6 +373,7 @@ body .card .content .text .link .siteLink.hasTitle,
 body .card .content .media .imgOverlay.hasTitle {
     background: rgb(146, 232, 66);
     background: rgba(146, 232, 66, .75);
+    border: none;
 }
 
 .opensWindow,
@@ -380,6 +382,7 @@ body .card .content .text .link .siteLink.opensWindow,
 body .card .content .media .imgOverlay.opensWindow {
     background: rgb(255, 165, 0);
     background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%);
+    border: none;
 }
 
 .hasTitle.opensWindow,
@@ -388,6 +391,7 @@ body .card .content .text .link .siteLink.hasTitle.opensWindow,
 body .card .content .media .imgOverlay.hasTitle.opensWindow {
     background: rgb(146, 232, 66);
     background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%);
+    border: none;
 }
 
 .noTitle.opensWindow,
@@ -396,6 +400,7 @@ body .card .content .text .link .siteLink.noTitle.opensWindow,
 body .card .content .media .imgOverlay.noTitle.opensWindow {
     background: rgb(255, 124, 216);
     background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%);
+    border: none;
 }
 
 .emptyTitle.opensWindow,
@@ -404,6 +409,7 @@ body .card .content .text .link .siteLink.emptyTitle.opensWindow,
 body .card .content .media .imgOverlay.emptyTitle.opensWindow {
     background: rgb(255, 124, 216);
     background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%);
+    border: none;
 }
 
 .brokenURL,
@@ -412,6 +418,7 @@ body .card .content .text .link .siteLink.brokenURL,
 body .card .content .media .imgOverlay.brokenURL {
     background: rgb(240, 0, 0);
     background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30));
+    border: none;
     color: white;
 }
 
@@ -422,6 +429,7 @@ body .card .content .media .imgOverlay.urlIssue {
     -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
     -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
     box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
+    border: none;
 }
 
 .absoluteURL,
@@ -431,6 +439,7 @@ body .card .content .media .imgOverlay.absoluteURL {
     -moz-box-shadow: inset 0px 0px 0px 3px purple;
     -webkit-box-shadow: inset 0px 0px 0px 3px purple;
     box-shadow: inset 0px 0px 0px 3px purple;
+    border: none;
 }
 
 .buttonFlag,
@@ -438,6 +447,7 @@ body .card .content .text .link .siteLink.buttonFlag {
     background: #0ed2f7;
     background: linear-gradient(to right, #b2fefa, #0ed2f7);
     color: #000000;
+    border: none;
 }
 
 body .card .content .text .copy .siteLink.linkChecked,
@@ -445,6 +455,7 @@ body .card .content .text .link .siteLink.linkChecked,
 body .card .content .media .imgOverlay.linkChecked {
     background: rgb(160, 255, 206);
     background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
+    border: none;
     color: #909090;
 }
 
