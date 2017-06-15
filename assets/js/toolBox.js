@@ -7,11 +7,11 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
-        GM_setValue(variable, val); //jshint ignore:line
+        var setVariable = GM_setValue(variable, val); //jshint ignore:line
     }
 
     function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text'); //jshint ignore:line
+        var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
     }
 
     function getValue(variable) {
@@ -23,7 +23,7 @@
     }
 
     function openNewTab(openThis) {
-        GM_openInTab(openThis); //jshint ignore:line
+        var openTab = GM_openInTab(openThis); //jshint ignore:line
     }
 
     function getResourceURL(resource) {
@@ -105,6 +105,25 @@
                     return false;
                 }
             },
+            toggleFeature: function (e) {
+                var $callingElement = jQuery(e.target).siblings('.toolsPanel');
+
+                return $callingElement.slideToggle(500);
+            },
+            saveState: function (e) {
+                // get current state
+                var vName = jQuery(e.target).siblings('.toolsPanel').attr('id'),
+                    currState = getValue(vName);
+                // sets usingM4 value
+                setValue(vName, !currState);
+            },
+            setState: function ($panel, state) {
+                if (state === 'show') {
+                    $panel.addClass('appear');
+                } else if (state === 'hide') {
+                    $panel.addClass('disappear');
+                }
+            }
         },
         /* ************************************************************************************************************************ */
         /* **************************************** PAGE INFO TOOLS **************************************** */
@@ -212,7 +231,6 @@
                 this.cacheDOM();
                 this.displayData();
                 this.toggleVisibility();
-                //                this.hide();
                 // return finished tool
                 return this.returnTool();
             },
@@ -261,13 +279,9 @@
             toggleVisibility: function () {
                 // hide pagel label elements if name
                 // is same as page name
-                var name = this.pageName,
-                    label = this.pageLabel;
-                if (name === label) {
-                    pageName.config.$pageLabelTitle.toggle();
-                    //                    pageName.config.$pageLabelTitle.hide();
-                    pageName.config.$pageLabel.toggle();
-                    //                    pageName.config.$pageLabel.hide();
+                if (this.pageName === this.pageLabel) {
+                    pageName.config.$pageLabelTitle.addClass('disappear');
+                    pageName.config.$pageLabel.addClass('disappear');
                 }
             },
             returnTool: function () {
@@ -479,8 +493,8 @@
             },
             bindEvents: function () {
                 // minimize
-                pageInformation.config.$pageInfoTitle.on('click', this.toggleFeature);
-                pageInformation.config.$pageInfoTitle.on('click', this.saveState);
+                pageInformation.config.$pageInfoTitle.on('click', QAtoolbox.toggleFeature);
+                pageInformation.config.$pageInfoTitle.on('click', QAtoolbox.saveState);
                 // hover effect
                 pageInformation.config.$pageInfo.on('mouseover mouseleave', '.tbInfo', this.hoverEffect);
                 // click
@@ -495,7 +509,7 @@
                     if (variables.hasOwnProperty(key)) {
                         if (key === 'pageInfo') {
                             state = variables[key] ? 'show' : 'hide';
-                            this.setState(pageInformation.config.$pageInfo, state);
+                            QAtoolbox.setState(pageInformation.config.$pageInfo, state);
                         }
                     }
                 }
@@ -518,16 +532,6 @@
                 }
                 return varList;
             },
-            toggleFeature: function () {
-                return pageInformation.config.$pageInfo.slideToggle(500);
-            },
-            saveState: function (event) {
-                // get current state
-                var vName = jQuery(event.target).siblings('.toolsPanel').attr('id'),
-                    currState = getValue(vName);
-                // sets usingM4 value
-                setValue(vName, !currState);
-            },
             hoverEffect: function (event) {
                 // apply hover effects
                 var element = event.currentTarget;
@@ -537,13 +541,6 @@
                 // copy page info
                 var copyThisText = event.currentTarget.innerHTML;
                 clipboardCopy(copyThisText);
-            },
-            setState: function ($panel, state) {
-                if (state === 'show') {
-                    $panel.addClass('appear');
-                } else if (state === 'hide') {
-                    $panel.addClass('disappear');
-                }
             }
         },
 
@@ -601,8 +598,8 @@
             },
             bindEvents: function () {
                 // minimize
-                qaTools.config.$mainToolsTitle.on('click', this.toggleFeature);
-                qaTools.config.$mainToolsTitle.on('click', this.saveState);
+                qaTools.config.$mainToolsTitle.on('click', QAtoolbox.toggleFeature);
+                qaTools.config.$mainToolsTitle.on('click', QAtoolbox.saveState);
             },
             displayPanel: function () {
                 // loop through variable list to find the panel title
@@ -613,7 +610,7 @@
                     if (variables.hasOwnProperty(key)) {
                         if (key === 'mainTools') {
                             state = variables[key] ? 'show' : 'hide';
-                            this.setState(qaTools.config.$mainToolsPanel, state);
+                            QAtoolbox.setState(qaTools.config.$mainToolsPanel, state);
                         }
                     }
                 }
@@ -635,23 +632,6 @@
                     varList[key] = value;
                 }
                 return varList;
-            },
-            toggleFeature: function () {
-                return qaTools.config.$mainToolsPanel.slideToggle(500);
-            },
-            saveState: function (event) {
-                // get current state
-                var vName = jQuery(event.target).siblings('.toolsPanel').attr('id'),
-                    currState = getValue(vName);
-                // sets usingM4 value
-                setValue(vName, !currState);
-            },
-            setState: function ($panel, state) {
-                if (state === 'show') {
-                    $panel.addClass('appear');
-                } else if (state === 'hide') {
-                    $panel.addClass('disappear');
-                }
             }
         },
 
@@ -1771,6 +1751,7 @@
                         id: 'testPage',
                         title: 'Queue up a Page Test'
                     }).text('Web Page Test'),
+                    // eslint-disable-next-line
                     email: GM_getValue('email', 'your.name@cdk.com'), //jshint ignore:line
                     $emailTitle: jQuery('<div>').text('Enter your email'),
                     $emailInput: jQuery('<input>').attr({
@@ -1852,10 +1833,10 @@
                 this.$toolsPanel.append(speedtestPage.config.$panelContainer);
             },
             bindEvents: function () {
-                speedtestPage.config.$activateButt.on('click', this.toggleFeature);
+                speedtestPage.config.$activateButt.on('click', QAtoolbox.toggleFeature);
                 speedtestPage.config.$sendButt.on('click', this.storeData);
                 speedtestPage.config.$sendButt.on('click', this.sendPage.bind(this));
-                speedtestPage.config.$sendButt.on('click', this.toggleFeature);
+                speedtestPage.config.$sendButt.on('click', QAtoolbox.toggleFeature);
             },
             // ----------------------------------------
             // tier 2 functions
@@ -1866,9 +1847,6 @@
                 } else {
                     return false;
                 }
-            },
-            toggleFeature: function () {
-                speedtestPage.config.$panelContainer.slideToggle(500);
             },
             storeData: function () {
                 // save user input
@@ -1977,8 +1955,8 @@
             },
             bindEvents: function () {
                 // minimize
-                otherTools.config.$otherToolsTitle.on('click', this.toggleFeature);
-                otherTools.config.$otherToolsTitle.on('click', this.saveState);
+                otherTools.config.$otherToolsTitle.on('click', QAtoolbox.toggleFeature);
+                otherTools.config.$otherToolsTitle.on('click', QAtoolbox.saveState);
             },
             displayPanel: function () {
                 // loop through variable list to find the panel title
@@ -1989,7 +1967,7 @@
                     if (variables.hasOwnProperty(key)) {
                         if (key === 'otherTools') {
                             state = variables[key] ? 'show' : 'hide';
-                            this.setState(otherTools.config.$otherToolsPanel, state);
+                            QAtoolbox.setState(otherTools.config.$otherToolsPanel, state);
                         }
                     }
                 }
@@ -2011,23 +1989,6 @@
                     varList[key] = value;
                 }
                 return varList;
-            },
-            toggleFeature: function () {
-                return otherTools.config.$otherToolsPanel.slideToggle(500);
-            },
-            saveState: function (event) {
-                // get current state
-                var vName = jQuery(event.target).siblings('.toolsPanel').attr('id'),
-                    currState = getValue(vName);
-                // sets usingM4 value
-                setValue(vName, !currState);
-            },
-            setState: function ($panel, state) {
-                if (state === 'show') {
-                    $panel.addClass('appear');
-                } else if (state === 'hide') {
-                    $panel.addClass('disappear');
-                }
             }
         },
 
@@ -3852,8 +3813,8 @@
             },
             bindEvents: function () {
                 // minimize
-                urlModifiers.config.$urlModTitle.on('click', this.toggleFeature);
-                urlModifiers.config.$urlModTitle.on('click', this.saveState);
+                urlModifiers.config.$urlModTitle.on('click', QAtoolbox.toggleFeature);
+                urlModifiers.config.$urlModTitle.on('click', QAtoolbox.saveState);
                 urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch.bind(this));
             },
             displayPanel: function () {
@@ -3865,7 +3826,7 @@
                     if (variables.hasOwnProperty(key)) {
                         if (key === 'urlModTools') {
                             state = variables[key] ? 'show' : 'hide';
-                            this.setState(urlModifiers.config.$urlModPanel, state);
+                            QAtoolbox.setState(urlModifiers.config.$urlModPanel, state);
                         }
                     }
                 }
@@ -4038,23 +3999,6 @@
                 setValue('autoApplyParameters', !value);
                 // set toggle
                 this.setToggle();
-            },
-            toggleFeature: function () {
-                return urlModifiers.config.$urlModPanel.slideToggle(500);
-            },
-            saveState: function (event) {
-                // get current state
-                var vName = jQuery(event.target).siblings('.toolsPanel').attr('id'),
-                    currState = getValue(vName, false);
-                // sets usingM4 value
-                setValue(vName, !currState);
-            },
-            setState: function ($panel, state) {
-                if (state === 'show') {
-                    $panel.addClass('appear');
-                } else if (state === 'hide') {
-                    $panel.addClass('disappear');
-                }
             },
             // ----------------------------------------
             // tier 3
@@ -4490,8 +4434,8 @@
             },
             bindEvents: function () {
                 // minimize
-                toggles.config.$togglesTitle.on('click', this.toggleFeature);
-                toggles.config.$togglesTitle.on('click', this.saveState);
+                toggles.config.$togglesTitle.on('click', QAtoolbox.toggleFeature);
+                toggles.config.$togglesTitle.on('click', QAtoolbox.saveState);
             },
             displayPanel: function () {
                 // loop through variable list to find the panel title
@@ -4502,7 +4446,7 @@
                     if (variables.hasOwnProperty(key)) {
                         if (key === 'toggleTools') {
                             state = variables[key] ? 'show' : 'hide';
-                            this.setState(toggles.config.$togglesPanel, state);
+                            QAtoolbox.setState(toggles.config.$togglesPanel, state);
                         }
                     }
                 }
@@ -4524,23 +4468,6 @@
                     varList[key] = value;
                 }
                 return varList;
-            },
-            toggleFeature: function () {
-                return toggles.config.$togglesPanel.slideToggle(500);
-            },
-            saveState: function (event) {
-                // get current state
-                var vName = jQuery(event.target).siblings('.toolsPanel').attr('id'),
-                    currState = getValue(vName);
-                // sets usingM4 value
-                setValue(vName, !currState);
-            },
-            setState: function ($panel, state) {
-                if (state === 'show') {
-                    $panel.addClass('appear');
-                } else if (state === 'hide') {
-                    $panel.addClass('disappear');
-                }
             }
         },
 
@@ -4872,9 +4799,9 @@
                     if (variables.hasOwnProperty(key)) {
                         if (key === 'showToolbox') {
                             state = variables[key] ? 'show' : 'hide';
-                            this.setState(this.$toolBoxContainer, state);
+                            QAtoolbox.setState(this.$toolBoxContainer, state);
                             // set display of hide/show button to opposite of main toolbox
-                            this.setState(dynamicDisplay.config.$showToolbox, !state);
+                            dynamicDisplay.config.$showToolbox.addClass(variables[key] ? 'disappear' : 'appear');
                         }
                     }
                 }
@@ -4916,15 +4843,6 @@
 
                 // sets usingM4 value
                 setValue(vName, !currState);
-            },
-            setState: function ($panel, state) {
-                if (state === 'show') {
-                    $panel.addClass('appear');
-                    dynamicDisplay.config.$showToolbox.hide();
-                } else if (state === 'hide') {
-                    $panel.addClass('disappear');
-                    dynamicDisplay.config.$showToolbox.show();
-                }
             },
             // ----------------------------------------
             // tier 3
