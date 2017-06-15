@@ -84,6 +84,7 @@
                 };
             },
             cacheDOM: function () {
+                this.nextGen = document.firstChild.data;
                 this.head = jQuery('head');
                 this.body = jQuery('body');
                 this.phoneWrapper = jQuery('body .phone-wrapper');
@@ -1003,6 +1004,14 @@
                 }
 
             },
+            toggleDisable: function () {
+                linkChecker.config.$activateButt.prop('disabled', function (index, value) {
+                    return !value;
+                });
+            },
+            showLegend: function () {
+                linkChecker.config.$legend.slideToggle(500);
+            },
             nextGenSiteCheck: function () {
                 // ----------------------------------------
                 // NEXT GEN SITE LOGIC
@@ -1261,14 +1270,6 @@
                 this.checkForTitleText($currentLink, isImageLink);
                 // check url of link
                 this.checkURL($currentLink, isImageLink);
-            },
-            showLegend: function () {
-                linkChecker.config.$legend.slideToggle(500);
-            },
-            toggleDisable: function () {
-                linkChecker.config.$activateButt.prop('disabled', function (index, value) {
-                    return !value;
-                });
             },
             removeHighlights: function () {
                 var key;
@@ -2738,10 +2739,12 @@
             // ----------------------------------------
             platformChooser: function () {
                 var isNextGen = QAtoolbox.nextGenCheck();
-                if (!isNextGen) {
-                    this.tetraTestLinks();
-                } else if (isNextGen) {
+                if (isNextGen) {
+                    console.log('ng');
                     this.nextgenTestLinks();
+                } else {
+                    console.log('tetra');
+                    this.tetraTestLinks();
                 }
             },
             tetraTestLinks: function () {
@@ -2888,7 +2891,7 @@
                     //Part2
                     //detect if the section element is a container
                     //check if the div.deck contains content
-                    if (this.isBranchy(cardClass) || this.isContainer($cardDeck) || !this.testURLs($currentLink)) {
+                    if (this.isBranchy(cardClass) || this.isContainer($cardDeck) /* || !this.testURLs($currentLink)*/ ) {
                         continue;
                     }
 
@@ -2900,15 +2903,16 @@
                         // card style is set to whole card is none-clickable
                         // the CTAs are populated from the card settings
                         case (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1):
+                            console.log('link-clickable || none-clickable');
                             // CHECK ALL LINKS DEFINED IN CARD SETTINGS
                             // ----------------------------------------
                             // get all links defined in card
                             // should include all primary, secondary, and tenary links
                             $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                meLength = $cardLinks.length;
-                                if (meLength > 0) {
-                                    this.testLinks($cardLinks);
-                                }
+                            meLength = $cardLinks.length;
+                            if (meLength > 0) {
+                                this.testLinks($cardLinks);
+                            }
 
                             // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
                             // ----------------------------------------
@@ -2925,7 +2929,7 @@
                             // if card is made clickable text links will not be able to be reached.
                             // should this still be checked?
                         case (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1):
-
+                            console.log('card-clickable-v2 || card-clickable');
                             $cardLinkContainer = $currentCard.find('div.link');
                             $cardSEOContainer = $currentCard.find('div.copy');
                             $cardImageContainer = $currentCard.find('div.media');
@@ -2966,52 +2970,6 @@
                                 }
                             }
                             break;
-                            // ----------------------------------------
-                            // ----------------------------------------
-                            // card style is set to whole card is clickable
-                            // if card is made clickable text links will not be able to be reached.
-                            /*
-                        case (cardClass.indexOf('card-clickable') > -1):
-
-                            $cardLinkContainer = $currentCard.find('div.link');
-                            $cardSEOContainer = $currentCard.find('div.copy');
-                            $cardImageContainer = $currentCard.find('div.media');
-
-                            // check if card has an image
-                            if ($cardImageContainer.is(':empty')) {
-                                // this shouldn't happen as if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
-                                isImageLink = false;
-                            } else {
-                                // find image in the card and apply a div overlay
-                                isImageLink = true;
-                                // find FIRST PRIMARY text link
-                                $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
-                                $currentLink.addClass('siteLink'); // add default flag class to links
-                                $image = $cardImageContainer.find('img');
-
-                                // send link to ajx testing
-                                // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
-                                this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
-
-                                // TEST other Links defined in card Settings
-                                // get all links defined in card
-                                // should include all primary, secondary, and tenary links
-                                $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                meLength = $cardLinks.length;
-                                if (meLength > 0) {
-                                    this.testLinks($cardLinks);
-                                }
-
-                                // TEST TEXT LINKS IN THE COPY OF THE CARD
-                                // check copy container and grab all links
-                                $copyTextLinks = $cardSEOContainer.find('a');
-                                youLength = $copyTextLinks.length;
-                                if (youLength > 0) {
-                                    this.testLinks($copyTextLinks);
-                                }
-                            }
-                            break;
-                            */
                         default:
                             console.log('default switch statement reached');
                             console.log($currentCard);
@@ -3061,7 +3019,7 @@
                 var q = 0,
                     myLength, $currentLink;
 
-                if ($linkArray.constructor === Array) {
+                if ($linkArray.length > 1) {
                     // set limit to for loop
                     myLength = $linkArray.length;
 
@@ -3069,12 +3027,22 @@
                         $currentLink = jQuery($linkArray[q]);
                         // add default flag class to links
                         $currentLink.addClass('siteLink');
+                        // skip check is link does not pass tests
+                        if (!this.testURLs($currentLink)) {
+                            continue;
+                        }
                         // send link to ajax testing
                         this.nextGenAjaxTest($currentLink);
                     }
                 } else {
+                    // coverted variable name for easy reading
+                    $currentLink = $linkArray;
                     // add default flag class to links
                     $currentLink.addClass('siteLink');
+                    // skip check is link does not pass tests
+                    if ($currentLink) {
+                        return;
+                    }
                     // send link to ajax testing
                     this.nextGenAjaxTest($currentLink);
                 }
@@ -3213,7 +3181,7 @@
                     linkURL = checkLinks.addURLParameter($currentLink),
                     isNextGen = QAtoolbox.nextGenCheck();
 
-                console.log(isImageLink);
+                console.log('404 link running');
                 //check if isImageLink is empty and check if $currentCard is empty
                 //most likely because the parameter was not mentioned in the calling statement
                 if (typeof isImageLink === 'undefined') {
@@ -4541,7 +4509,6 @@
                 this.stylePanels();
             },
             cacheDOM: function () {
-                this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = QAtoolbox.nextGenCheck();
                 //                this.isNextGenPlatform = this.nextGenCheck();
                 this.isCDKsite = this.isCDKsite();
