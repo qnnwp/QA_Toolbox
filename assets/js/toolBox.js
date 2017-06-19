@@ -1,4 +1,5 @@
 /* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
+/* eslint-env browser, jquery, greasemonkey */
 
 (function () {
     "use strict";
@@ -7,13 +8,13 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
-        // eslint-disable-next-line
-        var setVariable = GM_setValue(variable, val); //jshint ignore:line
+        GM_setValue(variable, val); //jshint ignore:line
+//        var setVariable = GM_setValue(variable, val); //jshint ignore:line
     }
 
     function clipboardCopy(variable) {
-        // eslint-disable-next-line
-        var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
+        GM_setClipboard(variable, 'text'); //jshint ignore:line
+//        var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
     }
 
     function getValue(variable) {
