@@ -2393,8 +2393,7 @@
             init: function (callingPanel) {
                 this.createElements();
                 this.buildElements();
-                                this.loadData();
-//                this.getData();
+                this.loadData();
                 this.cacheDOM(callingPanel);
                 this.addTool();
                 this.bindEvents();
@@ -2435,38 +2434,6 @@
                 seoSimplify.config.$seoContainer.append(seoSimplify.config.$seoDisplay);
                 seoSimplify.config.$seoContainer.append(seoSimplify.config.$removeBut);
             },
-//            getData: function () {
-//                var filePath = '';
-//                jQuery(seoSimplify.config.oems).each(function (index, model) {
-//                    switch (model) {
-//                        case 'Chevrolet':
-//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json';
-//                            seoSimplify.loadArray(filePath);
-//                            break;
-//                        case 'Buick':
-//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json';
-//                            seoSimplify.loadArray(filePath);
-//                            break;
-//                        case 'Cadillac':
-//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json';
-//                            seoSimplify.loadArray(filePath);
-//                            break;
-//                        case 'GMC':
-//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json';
-//                            seoSimplify.loadArray(filePath);
-//                            break;
-//                        case 'Hyundai':
-//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json';
-//                            seoSimplify.loadArray(filePath);
-//                            break;
-//                        case 'Volkswagen':
-//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json';
-//                            seoSimplify.loadArray(filePath);
-//                            break;
-//                    }
-//                });
-//                console.log(seoSimplify.config.vehicles);
-//            },
             loadData: function () {
                 var x = 0,
                     oems = seoSimplify.config.oemFiles,
@@ -2478,8 +2445,6 @@
                 for (x; x < xLength; x += 1) {
                     this.loadArray(vehicles, oems[x]);
                 }
-
-                console.log(vehicles);
             },
             cacheDOM: function (callingPanel) {
                 this.$otherToolsPanel = jQuery(callingPanel);
@@ -2497,11 +2462,6 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            loadArray: function (filePath) {
-//                jQuery.getJSON(filePath, function (data) {
-//                    seoSimplify.config.vehicles.push(data);
-//                });
-//            },
             loadArray: function (array, filePath) {
                 jQuery.getJSON(filePath, function (data) {
                     array.push(data);
