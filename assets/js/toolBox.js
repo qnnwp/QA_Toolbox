@@ -8,20 +8,22 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
-        GM_setValue(variable, val); //jshint ignore:line
-//        var setVariable = GM_setValue(variable, val); //jshint ignore:line
+        // eslint-disable-next-line
+        var setVariable = GM_setValue(variable, val); //jshint ignore:line
     }
 
     function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text'); //jshint ignore:line
-//        var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
+        // eslint-disable-next-line
+        var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
     }
 
     function getValue(variable) {
+        // eslint-disable-next-line
         return GM_getValue(variable, false); //jshint ignore:line
     }
 
     function programVariables() {
+        // eslint-disable-next-line
         return GM_listValues(); //jshint ignore:line
     }
 
@@ -31,6 +33,7 @@
     }
 
     function getResourceURL(resource) {
+        // eslint-disable-next-line
         return GM_getResourceURL(resource); //jshint ignore:line
     }
 
@@ -4536,6 +4539,7 @@
                     }),
                     // toolbox version
                     $version: jQuery('<div>')
+                    // eslint-disable-next-line
                         .text('version: ' + GM_info.script.version), //jshint ignore:line
                     $changeLog: jQuery('<a>').attr({
                         href: 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
