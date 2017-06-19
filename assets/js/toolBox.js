@@ -347,7 +347,7 @@
                         // takes key from hTagsTotal and does a jquery search on the page for element
                         tags = jQuery(key);
                         // saves the returned array for the display feature
-                        hTags.config.hTags[key] = tags;
+                        hTags.config.hTags[key] = tags; // eslint-disable-line detect-object-injection
                         // display the amount of h tags
                         total = tags.length;
                         hTags.config.hTagsTotal[key] = total;
