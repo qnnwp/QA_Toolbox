@@ -1354,7 +1354,7 @@
                 // check title of link
                 this.checkForTitleTextNextGen($currentLink, isImageLink, $linkOverlay);
                 // check url of link
-                                this.checkURLNextGen($currentLink, isImageLink, $linkOverlay);
+                this.checkURLNextGen($currentLink, isImageLink, $linkOverlay);
             },
             removeHighlights: function () {
                 var key;
@@ -1469,36 +1469,36 @@
             },
             checkForTitleTextNextGen: function ($currentLink, isImageLink, $linkOverlay) {
                 // text links
-//                if (!isImageLink) {
-                    switch (true) {
-                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-                            // link has no title
-                            this.togClass($linkOverlay, 'noTitle');
-                            break;
-                        case ($currentLink.attr('title') !== ''):
-                            // link has a title
-                            this.togClass($linkOverlay, 'hasTitle');
-                            break;
-                        default:
-                            // link is good to go
-                    }
-//                }
+                //                if (!isImageLink) {
+                switch (true) {
+                    case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
+                        // link has no title
+                        this.togClass($linkOverlay, 'noTitle');
+                        break;
+                    case ($currentLink.attr('title') !== ''):
+                        // link has a title
+                        this.togClass($linkOverlay, 'hasTitle');
+                        break;
+                    default:
+                        // link is good to go
+                }
+                //                }
 
                 // image links
-//                if (isImageLink) {
-//                    switch (true) {
-//                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-//                            // image link has no title
-//                            this.togClass(this.$divOverlay, 'noTitle');
-//                            break;
-//                        case ($currentLink.attr('title') !== ''):
-//                            // image link has a title
-//                            this.togClass(this.$divOverlay, 'hasTitle');
-//                            break;
-//                        default:
-//                            // link is good to go
-//                    }
-//                }
+                //                if (isImageLink) {
+                //                    switch (true) {
+                //                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
+                //                            // image link has no title
+                //                            this.togClass(this.$divOverlay, 'noTitle');
+                //                            break;
+                //                        case ($currentLink.attr('title') !== ''):
+                //                            // image link has a title
+                //                            this.togClass(this.$divOverlay, 'hasTitle');
+                //                            break;
+                //                        default:
+                //                            // link is good to go
+                //                    }
+                //                }
             },
             checkURL: function ($currentLink, isImageLink) {
                 var href = $currentLink.attr('href');
@@ -1558,64 +1558,65 @@
                             // url is good to go
                     }
                 }
-            },checkURLNextGen: function ($currentLink, isImageLink, $linkOverlay) {
+            },
+            checkURLNextGen: function ($currentLink, isImageLink, $linkOverlay) {
                 var href = $currentLink.attr('href');
 
                 // regular text links
-//                if (!isImageLink) {
-                    switch (true) {
-                        case (typeof href === 'undefined'):
-                            // link is undefined
-                            this.togClass($linkOverlay, 'brokenURL');
-                            break;
-                        case (href === ''):
-                            // link has an empty url
-                            this.togClass($linkOverlay, 'brokenURL');
-                            break;
-                        case (this.checkHref(href)):
-                            // link has a fishy url
-                            this.togClass($linkOverlay, 'urlIssue');
-                            break;
-                        case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
-                            // link leads to an out dated page
-                            this.togClass($linkOverlay, 'unsupportedPageLink');
-                            break;
-                        case (this.checkAbsoluteURL(href)):
-                            // link has a fishy url
-                            this.togClass($linkOverlay, 'absoluteURL');
-                            break;
-                        default:
-                            // url is good to go
-                    }
-//                }
+                //                if (!isImageLink) {
+                switch (true) {
+                    case (typeof href === 'undefined'):
+                        // link is undefined
+                        this.togClass($linkOverlay, 'brokenURL');
+                        break;
+                    case (href === ''):
+                        // link has an empty url
+                        this.togClass($linkOverlay, 'brokenURL');
+                        break;
+                    case (this.checkHref(href)):
+                        // link has a fishy url
+                        this.togClass($linkOverlay, 'urlIssue');
+                        break;
+                    case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
+                        // link leads to an out dated page
+                        this.togClass($linkOverlay, 'unsupportedPageLink');
+                        break;
+                    case (this.checkAbsoluteURL(href)):
+                        // link has a fishy url
+                        this.togClass($linkOverlay, 'absoluteURL');
+                        break;
+                    default:
+                        // url is good to go
+                }
+                //                }
 
                 // image links
-//                if (isImageLink) {
-//                    switch (true) {
-//                        case (typeof href === 'undefined'):
-//                            // image link is undefined
-//                            this.togClass(this.$divOverlay, 'brokenURL');
-//                            break;
-//                        case (href === ''):
-//                            // image link has an empty url
-//                            this.togClass(this.$divOverlay, 'brokenURL');
-//                            break;
-//                        case (this.checkHref(href)):
-//                            // image link has a fishy url
-//                            this.togClass(this.$divOverlay, 'urlIssue');
-//                            break;
-//                        case (this.datedURL(href)):
-//                            // image link leads to an out dated page
-//                            this.togClass(this.$divOverlay, 'unsupportedPageLink');
-//                            break;
-//                        case (this.checkAbsoluteURL(href)):
-//                            // image link has a fishy url
-//                            this.togClass(this.$divOverlay, 'absoluteURL');
-//                            break;
-//                        default:
-//                            // url is good to go
-//                    }
-//                }
+                //                if (isImageLink) {
+                //                    switch (true) {
+                //                        case (typeof href === 'undefined'):
+                //                            // image link is undefined
+                //                            this.togClass(this.$divOverlay, 'brokenURL');
+                //                            break;
+                //                        case (href === ''):
+                //                            // image link has an empty url
+                //                            this.togClass(this.$divOverlay, 'brokenURL');
+                //                            break;
+                //                        case (this.checkHref(href)):
+                //                            // image link has a fishy url
+                //                            this.togClass(this.$divOverlay, 'urlIssue');
+                //                            break;
+                //                        case (this.datedURL(href)):
+                //                            // image link leads to an out dated page
+                //                            this.togClass(this.$divOverlay, 'unsupportedPageLink');
+                //                            break;
+                //                        case (this.checkAbsoluteURL(href)):
+                //                            // image link has a fishy url
+                //                            this.togClass(this.$divOverlay, 'absoluteURL');
+                //                            break;
+                //                        default:
+                //                            // url is good to go
+                //                    }
+                //                }
             },
             linkChecked: function ($currentLink) {
                 return function () {
@@ -2392,7 +2393,8 @@
             init: function (callingPanel) {
                 this.createElements();
                 this.buildElements();
-                this.getData();
+                                this.loadData();
+//                this.getData();
                 this.cacheDOM(callingPanel);
                 this.addTool();
                 this.bindEvents();
@@ -2419,6 +2421,12 @@
                         class: 'inputContainer'
                     }),
                     oems: ['Chevrolet', 'Buick', 'Cadillac', 'GMC', 'Hyundai', 'Volkswagen'],
+                    oemFiles: ['https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json',
+                             'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json',
+                             'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json',
+                             'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json',
+                             'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json',
+                             'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json'],
                     vehicles: []
                 };
             },
@@ -2427,36 +2435,51 @@
                 seoSimplify.config.$seoContainer.append(seoSimplify.config.$seoDisplay);
                 seoSimplify.config.$seoContainer.append(seoSimplify.config.$removeBut);
             },
-            getData: function () {
-                var filePath = '';
-                jQuery(seoSimplify.config.oems).each(function (index, model) {
-                    switch (model) {
-                        case 'Chevrolet':
-                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json';
-                            seoSimplify.loadArray(filePath);
-                            break;
-                        case 'Buick':
-                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json';
-                            seoSimplify.loadArray(filePath);
-                            break;
-                        case 'Cadillac':
-                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json';
-                            seoSimplify.loadArray(filePath);
-                            break;
-                        case 'GMC':
-                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json';
-                            seoSimplify.loadArray(filePath);
-                            break;
-                        case 'Hyundai':
-                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json';
-                            seoSimplify.loadArray(filePath);
-                            break;
-                        case 'Volkswagen':
-                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json';
-                            seoSimplify.loadArray(filePath);
-                            break;
-                    }
-                });
+//            getData: function () {
+//                var filePath = '';
+//                jQuery(seoSimplify.config.oems).each(function (index, model) {
+//                    switch (model) {
+//                        case 'Chevrolet':
+//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json';
+//                            seoSimplify.loadArray(filePath);
+//                            break;
+//                        case 'Buick':
+//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json';
+//                            seoSimplify.loadArray(filePath);
+//                            break;
+//                        case 'Cadillac':
+//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json';
+//                            seoSimplify.loadArray(filePath);
+//                            break;
+//                        case 'GMC':
+//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json';
+//                            seoSimplify.loadArray(filePath);
+//                            break;
+//                        case 'Hyundai':
+//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json';
+//                            seoSimplify.loadArray(filePath);
+//                            break;
+//                        case 'Volkswagen':
+//                            filePath = 'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json';
+//                            seoSimplify.loadArray(filePath);
+//                            break;
+//                    }
+//                });
+//                console.log(seoSimplify.config.vehicles);
+//            },
+            loadData: function () {
+                var x = 0,
+                    oems = seoSimplify.config.oemFiles,
+                    vehicles = seoSimplify.config.vehicles,
+                    xLength = oems.length;
+
+                // load link URL information from oem files
+                // and save it into local array
+                for (x; x < xLength; x += 1) {
+                    this.loadArray(vehicles, oems[x]);
+                }
+
+                console.log(vehicles);
             },
             cacheDOM: function (callingPanel) {
                 this.$otherToolsPanel = jQuery(callingPanel);
@@ -2474,9 +2497,14 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            loadArray: function (filePath) {
+//            loadArray: function (filePath) {
+//                jQuery.getJSON(filePath, function (data) {
+//                    seoSimplify.config.vehicles.push(data);
+//                });
+//            },
+            loadArray: function (array, filePath) {
                 jQuery.getJSON(filePath, function (data) {
-                    seoSimplify.config.vehicles.push(data);
+                    array.push(data);
                 });
             },
             simplifySEO: function () {
