@@ -1,4 +1,4 @@
-/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
+/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
 
 (function () {
     "use strict";
@@ -7,10 +7,12 @@
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
     function setValue(variable, val) {
+        // eslint-disable-next-line
         var setVariable = GM_setValue(variable, val); //jshint ignore:line
     }
 
     function clipboardCopy(variable) {
+        // eslint-disable-next-line
         var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
     }
 
@@ -23,6 +25,7 @@
     }
 
     function openNewTab(openThis) {
+        // eslint-disable-next-line
         var openTab = GM_openInTab(openThis); //jshint ignore:line
     }
 
@@ -347,7 +350,7 @@
                         // takes key from hTagsTotal and does a jquery search on the page for element
                         tags = jQuery(key);
                         // saves the returned array for the display feature
-                        hTags.config.hTags[key] = tags; // eslint-disable-line detect-object-injection
+                        hTags.config.hTags[key] = tags;
                         // display the amount of h tags
                         total = tags.length;
                         hTags.config.hTagsTotal[key] = total;
