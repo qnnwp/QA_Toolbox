@@ -839,6 +839,9 @@
 
                 if (QAtoolbox.nextGenCheck()) {
                     var parent = $currentImage.closest('figure');
+//                    this.$divOverlay.css({
+//                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
+//                    });
                     this.$divOverlay.css({
                         left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
                     });
