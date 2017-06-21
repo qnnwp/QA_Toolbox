@@ -1,7 +1,7 @@
 /* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
 /* eslint-env browser, jquery, greasemonkey */
 
-(function () {
+var initTool = (function () {
     "use strict";
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -839,9 +839,9 @@
 
                 if (QAtoolbox.nextGenCheck()) {
                     var parent = $currentImage.closest('figure');
-//                    this.$divOverlay.css({
-//                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
-//                    });
+                    //                    this.$divOverlay.css({
+                    //                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
+                    //                    });
                     this.$divOverlay.css({
                         left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
                     });
@@ -1094,14 +1094,14 @@
                 // NEXT GEN SITE LOGIC
                 // ----------------------------------------
                 var $sections = this.$sections,
-                    $otherLinks = this.$otherLinks,
+                    //                    $otherLinks = this.$otherLinks,
                     len = $sections.length,
                     a = 0,
                     $currentLink,
                     $image = null,
                     $imagelink = null,
                     isImageLink = false,
-                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, jLength, q, w, j, $currentCard, cardClass, $cardDeck, $linkOverlay;
+                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, /*jLength, q, w, j,*/ $currentCard, cardClass, $cardDeck, $linkOverlay;
 
                 // ----------------------------------------
                 // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
@@ -3032,10 +3032,13 @@
                 return true;
             },
             nextgenTestLinks: function () {
-                var $sections = jQuery('main').find('section'),
-                    len = $sections.length,
+                var $cardDeck, $cardImageContainer, $cardLinkContainer, $cardLinks, $cardSEOContainer,
+                    $copyTextLinks, $currentCard, $currentLink, $image, $imagelink,
+                    $sections = jQuery('main').find('section'),
                     a = 0,
-                    $currentLink, $image, $imagelink, isImageLink, $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, youLength, meLength, $currentCard, cardClass, $cardDeck;
+                    cardClass, isImageLink,
+                    len = $sections.length,
+                    meLength, youLength;
 
                 // ----------------------------------------
                 // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
@@ -4542,7 +4545,7 @@
                     }),
                     // toolbox version
                     $version: jQuery('<div>')
-                    // eslint-disable-next-line
+                        // eslint-disable-next-line
                         .text('version: ' + GM_info.script.version), //jshint ignore:line
                     $changeLog: jQuery('<a>').attr({
                         href: 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
@@ -4801,3 +4804,5 @@
     toolbar.init();
 
 })(); // end main function
+
+initTool();
