@@ -131,6 +131,21 @@ var initTool = (function () {
                 } else if (state === 'hide') {
                     $panel.addClass('disappear');
                 }
+            },
+            programData: function () {
+                var allVariables = programVariables(),  // global function
+                    length = allVariables.length,
+                    a = 0,
+                    varList = {},
+                    key = '',
+                    value = '';
+                // add variables to list
+                for (a; a < length; a += 1) {
+                    key = allVariables[a];
+                    value = getValue(key);
+                    varList[key] = value;
+                }
+                return varList;
             }
         },
         /* ************************************************************************************************************************ */
@@ -493,7 +508,7 @@ var initTool = (function () {
             cacheDOM: function () {
                 // DOM elements
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
-                this.variableList = this.programData();
+                this.variableList = QAtoolbox.programData();
             },
             addTool: function () {
                 // add to main toolbox
@@ -525,21 +540,21 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            programData: function () {
-                var allVariables = programVariables(),
-                    length = allVariables.length,
-                    a = 0,
-                    varList = {},
-                    key = '',
-                    value = '';
-                // add variables to list
-                for (a; a < length; a += 1) {
-                    key = allVariables[a];
-                    value = getValue(key);
-                    varList[key] = value;
-                }
-                return varList;
-            },
+//            programData: function () {
+//                var allVariables = programVariables(),
+//                    length = allVariables.length,
+//                    a = 0,
+//                    varList = {},
+//                    key = '',
+//                    value = '';
+//                // add variables to list
+//                for (a; a < length; a += 1) {
+//                    key = allVariables[a];
+//                    value = getValue(key);
+//                    varList[key] = value;
+//                }
+//                return varList;
+//            },
             hoverEffect: function (event) {
                 // apply hover effects
                 var element = event.currentTarget;
@@ -598,7 +613,7 @@ var initTool = (function () {
             cacheDOM: function () {
                 // DOM elements
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
-                this.variableList = this.programData();
+                this.variableList = QAtoolbox.programData();
             },
             addTool: function () {
                 // add to main toolbox
@@ -626,21 +641,21 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            programData: function () {
-                var allVariables = programVariables(),
-                    length = allVariables.length,
-                    a = 0,
-                    varList = {},
-                    key = '',
-                    value = '';
-                // add variables to list
-                for (a; a < length; a += 1) {
-                    key = allVariables[a];
-                    value = getValue(key);
-                    varList[key] = value;
-                }
-                return varList;
-            }
+//            programData: function () {
+//                var allVariables = programVariables(),
+//                    length = allVariables.length,
+//                    a = 0,
+//                    varList = {},
+//                    key = '',
+//                    value = '';
+//                // add variables to list
+//                for (a; a < length; a += 1) {
+//                    key = allVariables[a];
+//                    value = getValue(key);
+//                    varList[key] = value;
+//                }
+//                return varList;
+//            }
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -4254,7 +4269,7 @@ var initTool = (function () {
             cacheDOM: function () {
                 // DOM elements
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
-                this.variableList = this.programData();
+                this.variableList = QAtoolbox.programData();
             },
             addTool: function () {
                 // add to main toolbox
@@ -4282,21 +4297,21 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            programData: function () {
-                var allVariables = programVariables(),
-                    length = allVariables.length,
-                    a = 0,
-                    varList = {},
-                    key = '',
-                    value = '';
-                // add variables to list
-                for (a; a < length; a += 1) {
-                    key = allVariables[a];
-                    value = getValue(key);
-                    varList[key] = value;
-                }
-                return varList;
-            }
+//            programData: function () {
+//                var allVariables = programVariables(),
+//                    length = allVariables.length,
+//                    a = 0,
+//                    varList = {},
+//                    key = '',
+//                    value = '';
+//                // add variables to list
+//                for (a; a < length; a += 1) {
+//                    key = allVariables[a];
+//                    value = getValue(key);
+//                    varList[key] = value;
+//                }
+//                return varList;
+//            }
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -4581,7 +4596,7 @@ var initTool = (function () {
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
                 this.nextGenComment = document.firstChild.data;
                 this.isNextGen = this.checkNextGen(this.nextGenComment);
-                this.variableList = this.programData();
+                this.variableList = QAtoolbox.programData();
                 // additions
                 this.toolbox = jQuery('.toolBox');
                 this.toolboxContain = jQuery('.toolboxContainer');
@@ -4644,21 +4659,21 @@ var initTool = (function () {
                 }
                 return 'Tetra';
             },
-            programData: function () {
-                var allVariables = programVariables(),
-                    length = allVariables.length,
-                    a = 0,
-                    varList = {},
-                    key = '',
-                    value = '';
-                // add variables to list
-                for (a; a < length; a += 1) {
-                    key = allVariables[a];
-                    value = getValue(key);
-                    varList[key] = value;
-                }
-                return varList;
-            },
+//            programData: function () {
+//                var allVariables = programVariables(),
+//                    length = allVariables.length,
+//                    a = 0,
+//                    varList = {},
+//                    key = '',
+//                    value = '';
+//                // add variables to list
+//                for (a; a < length; a += 1) {
+//                    key = allVariables[a];
+//                    value = getValue(key);
+//                    varList[key] = value;
+//                }
+//                return varList;
+//            },
             toggleTools: function () {
                 // hide / show main tool box
                 this.toggleBox();
