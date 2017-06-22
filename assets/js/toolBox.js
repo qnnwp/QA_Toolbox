@@ -540,21 +540,6 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            programData: function () {
-//                var allVariables = programVariables(),
-//                    length = allVariables.length,
-//                    a = 0,
-//                    varList = {},
-//                    key = '',
-//                    value = '';
-//                // add variables to list
-//                for (a; a < length; a += 1) {
-//                    key = allVariables[a];
-//                    value = getValue(key);
-//                    varList[key] = value;
-//                }
-//                return varList;
-//            },
             hoverEffect: function (event) {
                 // apply hover effects
                 var element = event.currentTarget;
@@ -637,25 +622,7 @@ var initTool = (function () {
                         }
                     }
                 }
-            },
-            // ----------------------------------------
-            // tier 2 functions
-            // ----------------------------------------
-//            programData: function () {
-//                var allVariables = programVariables(),
-//                    length = allVariables.length,
-//                    a = 0,
-//                    varList = {},
-//                    key = '',
-//                    value = '';
-//                // add variables to list
-//                for (a; a < length; a += 1) {
-//                    key = allVariables[a];
-//                    value = getValue(key);
-//                    varList[key] = value;
-//                }
-//                return varList;
-//            }
+            }
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -2158,7 +2125,7 @@ var initTool = (function () {
             cacheDOM: function () {
                 // DOM elements
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
-                this.variableList = this.programData();
+                this.variableList = QAtoolbox.programData();
             },
             addTool: function () {
                 // add to main toolbox
@@ -2182,24 +2149,6 @@ var initTool = (function () {
                         }
                     }
                 }
-            },
-            // ----------------------------------------
-            // tier 2 functions
-            // ----------------------------------------
-            programData: function () {
-                var allVariables = programVariables(),
-                    length = allVariables.length,
-                    a = 0,
-                    varList = {},
-                    key = '',
-                    value = '';
-                // add variables to list
-                for (a; a < length; a += 1) {
-                    key = allVariables[a];
-                    value = getValue(key);
-                    varList[key] = value;
-                }
-                return varList;
             }
         },
 
@@ -3637,7 +3586,7 @@ var initTool = (function () {
             },
             cacheDOM: function () {
                 // DOM elements
-                this.variableList = this.programData();
+                this.variableList = QAtoolbox.programData();
                 this.$cm = unsafeWindow.ContextManager;
                 this.isLive = this.$cm.isLive();
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
@@ -3680,21 +3629,6 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            programData: function () {
-                var allVariables = programVariables(),
-                    length = allVariables.length,
-                    a = 0,
-                    varList = {},
-                    key = '',
-                    value = '';
-                // add variables to list
-                for (a; a < length; a += 1) {
-                    key = allVariables[a];
-                    value = getValue(key, false);
-                    varList[key] = value;
-                }
-                return varList;
-            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = urlModifiers.config.$FAtoggle;
@@ -4293,25 +4227,7 @@ var initTool = (function () {
                         }
                     }
                 }
-            },
-            // ----------------------------------------
-            // tier 2 functions
-            // ----------------------------------------
-//            programData: function () {
-//                var allVariables = programVariables(),
-//                    length = allVariables.length,
-//                    a = 0,
-//                    varList = {},
-//                    key = '',
-//                    value = '';
-//                // add variables to list
-//                for (a; a < length; a += 1) {
-//                    key = allVariables[a];
-//                    value = getValue(key);
-//                    varList[key] = value;
-//                }
-//                return varList;
-//            }
+            }
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -4659,21 +4575,6 @@ var initTool = (function () {
                 }
                 return 'Tetra';
             },
-//            programData: function () {
-//                var allVariables = programVariables(),
-//                    length = allVariables.length,
-//                    a = 0,
-//                    varList = {},
-//                    key = '',
-//                    value = '';
-//                // add variables to list
-//                for (a; a < length; a += 1) {
-//                    key = allVariables[a];
-//                    value = getValue(key);
-//                    varList[key] = value;
-//                }
-//                return varList;
-//            },
             toggleTools: function () {
                 // hide / show main tool box
                 this.toggleBox();
