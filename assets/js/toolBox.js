@@ -1,6 +1,6 @@
 /* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
 
-var initTool = (function () {
+(function () {
     "use strict";
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,8 @@ var initTool = (function () {
                         class: 'legendContainer'
                     }),
                     $toolboxContainer: jQuery('<div>').attr({
-                        class: 'toolboxContainer'
+                        class: 'toolboxContainer',
+                        id: 'showToolbox'
                     }),
                     // ----------------------------------------
                     // Toolbar Resources
@@ -94,6 +95,8 @@ var initTool = (function () {
                 this.head = jQuery('head');
                 this.body = jQuery('body');
                 this.phoneWrapper = jQuery('body .phone-wrapper');
+                //                this.$showToolbox = jQuery('.showToolbox');
+                //                console.log(this.$showToolbox);
             },
             attachTools: function () {
                 this.head.append(QAtoolbox.config.$toolboxStyles);
@@ -159,11 +162,11 @@ var initTool = (function () {
                             class: 'legendContent ' + key
                         }).append(value);
                         // attach to legend list
-//                        imageChecker.config.$legendList.append(this.$listItem);
+                        //                        imageChecker.config.$legendList.append(this.$listItem);
                         $legendListContainer.append(this.$listItem);
                     }
                 }
-            },
+            }
         },
         /* ************************************************************************************************************************ */
         /* **************************************** PAGE INFO TOOLS **************************************** */
@@ -485,7 +488,7 @@ var initTool = (function () {
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                this.displayPanel();
+                toolbar.displayPanel(pageInformation.config.$pageInfo);
             },
             // ----------------------------------------
             // tier 1 functions
@@ -540,20 +543,6 @@ var initTool = (function () {
                 // click
                 pageInformation.config.$pageInfo.on('click', '.tbInfo', this.copyToClipboard);
             },
-            displayPanel: function () {
-                // loop through variable list to find the panel title
-                var variables = this.variableList,
-                    state = '',
-                    key = '';
-                for (key in variables) {
-                    if (variables.hasOwnProperty(key)) {
-                        if (key === 'pageInfo') {
-                            state = (variables[key]) ? 'show' : 'hide';
-                            QAtoolbox.setState(pageInformation.config.$pageInfo, state);
-                        }
-                    }
-                }
-            },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
@@ -584,7 +573,7 @@ var initTool = (function () {
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                this.displayPanel();
+                toolbar.displayPanel(qaTools.config.$mainToolsPanel);
             },
             createElements: function () {
                 qaTools.config = {
@@ -625,20 +614,6 @@ var initTool = (function () {
                 // minimize
                 qaTools.config.$mainToolsTitle.on('click', QAtoolbox.toggleFeature);
                 qaTools.config.$mainToolsTitle.on('click', QAtoolbox.saveState);
-            },
-            displayPanel: function () {
-                // loop through variable list to find the panel title
-                var variables = this.variableList,
-                    state = '',
-                    key = '';
-                for (key in variables) {
-                    if (variables.hasOwnProperty(key)) {
-                        if (key === 'mainTools') {
-                            state = (variables[key]) ? 'show' : 'hide';
-                            QAtoolbox.setState(qaTools.config.$mainToolsPanel, state);
-                        }
-                    }
-                }
             }
         },
 
@@ -693,7 +668,7 @@ var initTool = (function () {
                     // attach turn off button
                     .append(imageChecker.config.$offButt);
                 // fill list
-//                this.buildLegendContent($legendContent, $legendList);
+                //                this.buildLegendContent($legendContent, $legendList);
                 QAtoolbox.buildLegendContent(imageChecker.config.$legendContent, imageChecker.config.$legendList);
             },
             addTool: function () {
@@ -721,23 +696,23 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2
             // ----------------------------------------
-//            buildLegendContent: function () {
-//                var $contentArray = imageChecker.config.$legendContent,
-//                    key = '',
-//                    value = '';
-//                // loop through Legend Content list
-//                for (key in $contentArray) {
-//                    if ($contentArray.hasOwnProperty(key)) {
-//                        value = $contentArray[key];
-//                        // build listing element
-//                        this.$listItem = jQuery('<li>').attr({
-//                            class: 'legendContent ' + key
-//                        }).append(value);
-//                        // attach to legend list
-//                        imageChecker.config.$legendList.append(this.$listItem);
-//                    }
-//                }
-//            },
+            //            buildLegendContent: function () {
+            //                var $contentArray = imageChecker.config.$legendContent,
+            //                    key = '',
+            //                    value = '';
+            //                // loop through Legend Content list
+            //                for (key in $contentArray) {
+            //                    if ($contentArray.hasOwnProperty(key)) {
+            //                        value = $contentArray[key];
+            //                        // build listing element
+            //                        this.$listItem = jQuery('<li>').attr({
+            //                            class: 'legendContent ' + key
+            //                        }).append(value);
+            //                        // attach to legend list
+            //                        imageChecker.config.$legendList.append(this.$listItem);
+            //                    }
+            //                }
+            //            },
             highlightImages: function () {
                 // cache data from page
                 this.cacheDOM();
@@ -930,7 +905,7 @@ var initTool = (function () {
                     // attach hint
                     .append(linkChecker.config.$hint);
                 // fill list
-//                this.buildLegendContent();
+                //                this.buildLegendContent();
                 QAtoolbox.buildLegendContent(linkChecker.config.$legendContent, linkChecker.config.$legendList);
             },
             addTool: function () {
@@ -958,32 +933,32 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            buildLegendContent: function () {
-//                var $contentArray = linkChecker.config.$legendContent,
-//                    key = '',
-//                    value = '',
-//                    $listItem;
-//                // loop through Legend Content list
-//                for (key in $contentArray) {
-//                    if ($contentArray.hasOwnProperty(key)) {
-//                        value = $contentArray[key];
-//
-//                        // if site is TETRA skip adding page not supported legend
-//                        if (value === 'Page Not Supported' || value === 'Button Element') {
-//                            if (!QAtoolbox.nextGenCheck()) {
-//                                continue;
-//                            }
-//                        }
-//
-//                        // build listing element
-//                        $listItem = jQuery('<li>').attr({
-//                            class: 'legendContent ' + key
-//                        }).append(value);
-//                        // attach to legend list
-//                        linkChecker.config.$legendList.append($listItem);
-//                    }
-//                }
-//            },
+            //            buildLegendContent: function () {
+            //                var $contentArray = linkChecker.config.$legendContent,
+            //                    key = '',
+            //                    value = '',
+            //                    $listItem;
+            //                // loop through Legend Content list
+            //                for (key in $contentArray) {
+            //                    if ($contentArray.hasOwnProperty(key)) {
+            //                        value = $contentArray[key];
+            //
+            //                        // if site is TETRA skip adding page not supported legend
+            //                        if (value === 'Page Not Supported' || value === 'Button Element') {
+            //                            if (!QAtoolbox.nextGenCheck()) {
+            //                                continue;
+            //                            }
+            //                        }
+            //
+            //                        // build listing element
+            //                        $listItem = jQuery('<li>').attr({
+            //                            class: 'legendContent ' + key
+            //                        }).append(value);
+            //                        // attach to legend list
+            //                        linkChecker.config.$legendList.append($listItem);
+            //                    }
+            //                }
+            //            },
             checkLinks: function () {
                 // dynamic loading of cached elements
                 // have to load here to compensate for lazy loaded widgets
@@ -1787,7 +1762,7 @@ var initTool = (function () {
                     // attach hint
                     .append(spellCheck.config.$hint);
                 // fill list
-//                this.buildLegendContent();
+                //                this.buildLegendContent();
                 QAtoolbox.buildLegendContent(spellCheck.config.$legendContent, spellCheck.config.$legendList);
             },
             cacheDOM: function (callingPanel) {
@@ -1812,25 +1787,25 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            buildLegendContent: function () {
-//                var $contentArray = spellCheck.config.$legendContent,
-//                    key = '',
-//                    value = '',
-//                    $listItem;
-//                // loop through Legend Content list
-//                for (key in $contentArray) {
-//                    if ($contentArray.hasOwnProperty(key)) {
-//                        value = $contentArray[key];
-//
-//                        // build listing element
-//                        $listItem = jQuery('<li>').attr({
-//                            class: 'legendContent ' + key
-//                        }).append(value);
-//                        // attach to legend list
-//                        spellCheck.config.$legendList.append($listItem);
-//                    }
-//                }
-//            },
+            //            buildLegendContent: function () {
+            //                var $contentArray = spellCheck.config.$legendContent,
+            //                    key = '',
+            //                    value = '',
+            //                    $listItem;
+            //                // loop through Legend Content list
+            //                for (key in $contentArray) {
+            //                    if ($contentArray.hasOwnProperty(key)) {
+            //                        value = $contentArray[key];
+            //
+            //                        // build listing element
+            //                        $listItem = jQuery('<li>').attr({
+            //                            class: 'legendContent ' + key
+            //                        }).append(value);
+            //                        // attach to legend list
+            //                        spellCheck.config.$legendList.append($listItem);
+            //                    }
+            //                }
+            //            },
             treeWalk: function () {
                 var treeWalker = document.createTreeWalker(
                         document.body,
@@ -2114,7 +2089,7 @@ var initTool = (function () {
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                this.displayPanel();
+                toolbar.displayPanel(otherTools.config.$otherToolsPanel);
             },
             createElements: function () {
                 otherTools.config = {
@@ -2155,20 +2130,6 @@ var initTool = (function () {
                 // minimize
                 otherTools.config.$otherToolsTitle.on('click', QAtoolbox.toggleFeature);
                 otherTools.config.$otherToolsTitle.on('click', QAtoolbox.saveState);
-            },
-            displayPanel: function () {
-                // loop through variable list to find the panel title
-                var variables = this.variableList,
-                    state = '',
-                    key = '';
-                for (key in variables) {
-                    if (variables.hasOwnProperty(key)) {
-                        if (key === 'otherTools') {
-                            state = (variables[key]) ? 'show' : 'hide';
-                            QAtoolbox.setState(otherTools.config.$otherToolsPanel, state);
-                        }
-                    }
-                }
             }
         },
 
@@ -2253,7 +2214,7 @@ var initTool = (function () {
                     // attach hint
                     .append(showNavigation.config.$hint);
                 // fill list
-//                this.buildLegendContent();
+                //                this.buildLegendContent();
                 QAtoolbox.buildLegendContent(showNavigation.config.$legendContent, showNavigation.config.$legendList);
             },
             addTool: function () {
@@ -2273,30 +2234,30 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            buildLegendContent: function () {
-//                var $contentArray = showNavigation.config.$legendContent,
-//                    key, value;
-//                // loop through Legend Content list
-//                for (key in $contentArray) {
-//                    if ($contentArray.hasOwnProperty(key)) {
-//                        value = $contentArray[key];
-//                        // build listing element
-//
-//                        // if site is NEXTGEN skip adding major page
-//                        if (value === 'Major Page') {
-//                            if (this.isNextGenPlatform) {
-//                                continue;
-//                            }
-//                        }
-//
-//                        this.$listItem = jQuery('<li>').attr({
-//                            class: 'legendContent ' + key
-//                        }).append(value);
-//                        // attach to legend list
-//                        showNavigation.config.$legendList.append(this.$listItem);
-//                    }
-//                }
-//            },
+            //            buildLegendContent: function () {
+            //                var $contentArray = showNavigation.config.$legendContent,
+            //                    key, value;
+            //                // loop through Legend Content list
+            //                for (key in $contentArray) {
+            //                    if ($contentArray.hasOwnProperty(key)) {
+            //                        value = $contentArray[key];
+            //                        // build listing element
+            //
+            //                        // if site is NEXTGEN skip adding major page
+            //                        if (value === 'Major Page') {
+            //                            if (this.isNextGenPlatform) {
+            //                                continue;
+            //                            }
+            //                        }
+            //
+            //                        this.$listItem = jQuery('<li>').attr({
+            //                            class: 'legendContent ' + key
+            //                        }).append(value);
+            //                        // attach to legend list
+            //                        showNavigation.config.$legendList.append(this.$listItem);
+            //                    }
+            //                }
+            //            },
             toggleFeatures: function () {
                 var isNextGen = this.isNextGenPlatform;
                 if (isNextGen) {
@@ -2875,7 +2836,7 @@ var initTool = (function () {
                     .append(checkLinks.config.$offButt)
                     .append(checkLinks.config.$hint);
                 // fill list
-//                this.buildLegendContent();
+                //                this.buildLegendContent();
                 QAtoolbox.buildLegendContent(checkLinks.config.$legendContent, checkLinks.config.$legendList);
                 // attach filled list
                 this.$legendContainer.append(checkLinks.config.$legend);
@@ -3434,22 +3395,22 @@ var initTool = (function () {
                     return !value;
                 });
             },
-//            buildLegendContent: function () {
-//                var $contentArray = checkLinks.config.$legendContent,
-//                    key, value, $listItem;
-//                // loop through Legend Content list
-//                for (key in $contentArray) {
-//                    if ($contentArray.hasOwnProperty(key)) {
-//                        value = $contentArray[key];
-//                        // build listing element
-//                        $listItem = jQuery('<li>').attr({
-//                            class: 'legendContent ' + key
-//                        }).append(value);
-//                        // attach to legend list
-//                        checkLinks.config.$legendList.append($listItem);
-//                    }
-//                }
-//            },
+            //            buildLegendContent: function () {
+            //                var $contentArray = checkLinks.config.$legendContent,
+            //                    key, value, $listItem;
+            //                // loop through Legend Content list
+            //                for (key in $contentArray) {
+            //                    if ($contentArray.hasOwnProperty(key)) {
+            //                        value = $contentArray[key];
+            //                        // build listing element
+            //                        $listItem = jQuery('<li>').attr({
+            //                            class: 'legendContent ' + key
+            //                        }).append(value);
+            //                        // attach to legend list
+            //                        checkLinks.config.$legendList.append($listItem);
+            //                    }
+            //                }
+            //            },
             showLegend: function () {
                 checkLinks.config.$legend.slideToggle(500);
             },
@@ -3555,7 +3516,7 @@ var initTool = (function () {
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                this.displayPanel();
+                toolbar.displayPanel(urlModifiers.config.$urlModPanel);
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3633,20 +3594,6 @@ var initTool = (function () {
                 urlModifiers.config.$urlModTitle.on('click', QAtoolbox.toggleFeature);
                 urlModifiers.config.$urlModTitle.on('click', QAtoolbox.saveState);
                 urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch.bind(this));
-            },
-            displayPanel: function () {
-                // loop through variable list to find the panel title
-                var variables = this.variableList,
-                    state = '',
-                    key = '';
-                for (key in variables) {
-                    if (variables.hasOwnProperty(key)) {
-                        if (key === 'urlModTools') {
-                            state = (variables[key]) ? 'show' : 'hide';
-                            QAtoolbox.setState(urlModifiers.config.$urlModPanel, state);
-                        }
-                    }
-                }
             },
             // ----------------------------------------
             // tier 2 functions
@@ -4194,7 +4141,7 @@ var initTool = (function () {
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                this.displayPanel();
+                toolbar.displayPanel(toggles.config.$togglesPanel);
             },
             createElements: function () {
                 toggles.config = {
@@ -4235,20 +4182,6 @@ var initTool = (function () {
                 // minimize
                 toggles.config.$togglesTitle.on('click', QAtoolbox.toggleFeature);
                 toggles.config.$togglesTitle.on('click', QAtoolbox.saveState);
-            },
-            displayPanel: function () {
-                // loop through variable list to find the panel title
-                var variables = this.variableList,
-                    state = '',
-                    key = '';
-                for (key in variables) {
-                    if (variables.hasOwnProperty(key)) {
-                        if (key === 'toggleTools') {
-                            state = (variables[key]) ? 'show' : 'hide';
-                            QAtoolbox.setState(toggles.config.$togglesPanel, state);
-                        }
-                    }
-                }
             }
         },
 
@@ -4480,6 +4413,7 @@ var initTool = (function () {
                 this.modToolbar();
                 this.bindEvents();
                 this.displayPanel();
+                //                toolbar.displayPanel(QAtoolbox.config.$toolboxContainer);
             },
             createElements: function () {
                 // main panel container
@@ -4531,7 +4465,8 @@ var initTool = (function () {
             },
             cacheDOM: function () {
                 // page info
-                this.$toolBoxContainer = jQuery('.toolboxContainer');
+                //                this.$toolBoxContainer = jQuery('.toolboxContainer');
+                this.$toolBoxContainer = jQuery('#showToolbox');
                 this.nextGenComment = document.firstChild.data;
                 this.isNextGen = this.checkNextGen(this.nextGenComment);
                 this.variableList = QAtoolbox.programData();
@@ -4733,6 +4668,21 @@ var initTool = (function () {
             },
             wrapText: function ($toolPanel) {
                 $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
+            },
+            displayPanel: function ($toolPanel) {
+                // loop through variable list to find the panel title
+                var variables = QAtoolbox.programData(),
+                    panelId = $toolPanel.attr('id'),
+                    state = '',
+                    key = '';
+                for (key in variables) {
+                    if (variables.hasOwnProperty(key)) {
+                        if (key === panelId) {
+                            state = (variables[key]) ? 'show' : 'hide';
+                            QAtoolbox.setState($toolPanel, state);
+                        }
+                    }
+                }
             }
         };
 
@@ -4742,5 +4692,3 @@ var initTool = (function () {
     toolbar.init();
 
 })(); // end main function
-
-initTool();
