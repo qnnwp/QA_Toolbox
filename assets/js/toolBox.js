@@ -1,5 +1,4 @@
 /* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
-/* eslint-env browser, jquery, greasemonkey */
 
 var initTool = (function () {
     "use strict";
@@ -133,7 +132,7 @@ var initTool = (function () {
                 }
             },
             programData: function () {
-                var allVariables = programVariables(),  // global function
+                var allVariables = programVariables(), // global function
                     length = allVariables.length,
                     a = 0,
                     varList = {},
@@ -146,7 +145,25 @@ var initTool = (function () {
                     varList[key] = value;
                 }
                 return varList;
-            }
+            },
+            buildLegendContent: function ($legendContent, $legendListContainer) {
+                var //$contentArray = imageChecker.config.$legendContent,
+                    key = '',
+                    value = '';
+                // loop through Legend Content list
+                for (key in $legendContent) {
+                    if ($legendContent.hasOwnProperty(key)) {
+                        value = $legendContent[key];
+                        // build listing element
+                        this.$listItem = jQuery('<li>').attr({
+                            class: 'legendContent ' + key
+                        }).append(value);
+                        // attach to legend list
+//                        imageChecker.config.$legendList.append(this.$listItem);
+                        $legendListContainer.append(this.$listItem);
+                    }
+                }
+            },
         },
         /* ************************************************************************************************************************ */
         /* **************************************** PAGE INFO TOOLS **************************************** */
@@ -676,7 +693,8 @@ var initTool = (function () {
                     // attach turn off button
                     .append(imageChecker.config.$offButt);
                 // fill list
-                this.buildLegendContent();
+//                this.buildLegendContent($legendContent, $legendList);
+                QAtoolbox.buildLegendContent(imageChecker.config.$legendContent, imageChecker.config.$legendList);
             },
             addTool: function () {
                 imageChecker.config.$toolsPanel.append(imageChecker.config.$activateButt);
@@ -703,23 +721,23 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2
             // ----------------------------------------
-            buildLegendContent: function () {
-                var $contentArray = imageChecker.config.$legendContent,
-                    key = '',
-                    value = '';
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    if ($contentArray.hasOwnProperty(key)) {
-                        value = $contentArray[key];
-                        // build listing element
-                        this.$listItem = jQuery('<li>').attr({
-                            class: 'legendContent ' + key
-                        }).append(value);
-                        // attach to legend list
-                        imageChecker.config.$legendList.append(this.$listItem);
-                    }
-                }
-            },
+//            buildLegendContent: function () {
+//                var $contentArray = imageChecker.config.$legendContent,
+//                    key = '',
+//                    value = '';
+//                // loop through Legend Content list
+//                for (key in $contentArray) {
+//                    if ($contentArray.hasOwnProperty(key)) {
+//                        value = $contentArray[key];
+//                        // build listing element
+//                        this.$listItem = jQuery('<li>').attr({
+//                            class: 'legendContent ' + key
+//                        }).append(value);
+//                        // attach to legend list
+//                        imageChecker.config.$legendList.append(this.$listItem);
+//                    }
+//                }
+//            },
             highlightImages: function () {
                 // cache data from page
                 this.cacheDOM();
@@ -912,7 +930,8 @@ var initTool = (function () {
                     // attach hint
                     .append(linkChecker.config.$hint);
                 // fill list
-                this.buildLegendContent();
+//                this.buildLegendContent();
+                QAtoolbox.buildLegendContent(linkChecker.config.$legendContent, linkChecker.config.$legendList);
             },
             addTool: function () {
                 linkChecker.config.$toolsPanel.append(linkChecker.config.$activateButt);
@@ -939,32 +958,32 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            buildLegendContent: function () {
-                var $contentArray = linkChecker.config.$legendContent,
-                    key = '',
-                    value = '',
-                    $listItem;
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    if ($contentArray.hasOwnProperty(key)) {
-                        value = $contentArray[key];
-
-                        // if site is TETRA skip adding page not supported legend
-                        if (value === 'Page Not Supported' || value === 'Button Element') {
-                            if (!QAtoolbox.nextGenCheck()) {
-                                continue;
-                            }
-                        }
-
-                        // build listing element
-                        $listItem = jQuery('<li>').attr({
-                            class: 'legendContent ' + key
-                        }).append(value);
-                        // attach to legend list
-                        linkChecker.config.$legendList.append($listItem);
-                    }
-                }
-            },
+//            buildLegendContent: function () {
+//                var $contentArray = linkChecker.config.$legendContent,
+//                    key = '',
+//                    value = '',
+//                    $listItem;
+//                // loop through Legend Content list
+//                for (key in $contentArray) {
+//                    if ($contentArray.hasOwnProperty(key)) {
+//                        value = $contentArray[key];
+//
+//                        // if site is TETRA skip adding page not supported legend
+//                        if (value === 'Page Not Supported' || value === 'Button Element') {
+//                            if (!QAtoolbox.nextGenCheck()) {
+//                                continue;
+//                            }
+//                        }
+//
+//                        // build listing element
+//                        $listItem = jQuery('<li>').attr({
+//                            class: 'legendContent ' + key
+//                        }).append(value);
+//                        // attach to legend list
+//                        linkChecker.config.$legendList.append($listItem);
+//                    }
+//                }
+//            },
             checkLinks: function () {
                 // dynamic loading of cached elements
                 // have to load here to compensate for lazy loaded widgets
@@ -1768,7 +1787,8 @@ var initTool = (function () {
                     // attach hint
                     .append(spellCheck.config.$hint);
                 // fill list
-                this.buildLegendContent();
+//                this.buildLegendContent();
+                QAtoolbox.buildLegendContent(spellCheck.config.$legendContent, spellCheck.config.$legendList);
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
@@ -1792,25 +1812,25 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            buildLegendContent: function () {
-                var $contentArray = spellCheck.config.$legendContent,
-                    key = '',
-                    value = '',
-                    $listItem;
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    if ($contentArray.hasOwnProperty(key)) {
-                        value = $contentArray[key];
-
-                        // build listing element
-                        $listItem = jQuery('<li>').attr({
-                            class: 'legendContent ' + key
-                        }).append(value);
-                        // attach to legend list
-                        spellCheck.config.$legendList.append($listItem);
-                    }
-                }
-            },
+//            buildLegendContent: function () {
+//                var $contentArray = spellCheck.config.$legendContent,
+//                    key = '',
+//                    value = '',
+//                    $listItem;
+//                // loop through Legend Content list
+//                for (key in $contentArray) {
+//                    if ($contentArray.hasOwnProperty(key)) {
+//                        value = $contentArray[key];
+//
+//                        // build listing element
+//                        $listItem = jQuery('<li>').attr({
+//                            class: 'legendContent ' + key
+//                        }).append(value);
+//                        // attach to legend list
+//                        spellCheck.config.$legendList.append($listItem);
+//                    }
+//                }
+//            },
             treeWalk: function () {
                 var treeWalker = document.createTreeWalker(
                         document.body,
@@ -2233,7 +2253,8 @@ var initTool = (function () {
                     // attach hint
                     .append(showNavigation.config.$hint);
                 // fill list
-                this.buildLegendContent();
+//                this.buildLegendContent();
+                QAtoolbox.buildLegendContent(showNavigation.config.$legendContent, showNavigation.config.$legendList);
             },
             addTool: function () {
                 this.$toolsPanel.append(showNavigation.config.$activateButt);
@@ -2252,30 +2273,30 @@ var initTool = (function () {
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            buildLegendContent: function () {
-                var $contentArray = showNavigation.config.$legendContent,
-                    key, value;
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    if ($contentArray.hasOwnProperty(key)) {
-                        value = $contentArray[key];
-                        // build listing element
-
-                        // if site is NEXTGEN skip adding major page
-                        if (value === 'Major Page') {
-                            if (this.isNextGenPlatform) {
-                                continue;
-                            }
-                        }
-
-                        this.$listItem = jQuery('<li>').attr({
-                            class: 'legendContent ' + key
-                        }).append(value);
-                        // attach to legend list
-                        showNavigation.config.$legendList.append(this.$listItem);
-                    }
-                }
-            },
+//            buildLegendContent: function () {
+//                var $contentArray = showNavigation.config.$legendContent,
+//                    key, value;
+//                // loop through Legend Content list
+//                for (key in $contentArray) {
+//                    if ($contentArray.hasOwnProperty(key)) {
+//                        value = $contentArray[key];
+//                        // build listing element
+//
+//                        // if site is NEXTGEN skip adding major page
+//                        if (value === 'Major Page') {
+//                            if (this.isNextGenPlatform) {
+//                                continue;
+//                            }
+//                        }
+//
+//                        this.$listItem = jQuery('<li>').attr({
+//                            class: 'legendContent ' + key
+//                        }).append(value);
+//                        // attach to legend list
+//                        showNavigation.config.$legendList.append(this.$listItem);
+//                    }
+//                }
+//            },
             toggleFeatures: function () {
                 var isNextGen = this.isNextGenPlatform;
                 if (isNextGen) {
@@ -2854,7 +2875,8 @@ var initTool = (function () {
                     .append(checkLinks.config.$offButt)
                     .append(checkLinks.config.$hint);
                 // fill list
-                this.buildLegendContent();
+//                this.buildLegendContent();
+                QAtoolbox.buildLegendContent(checkLinks.config.$legendContent, checkLinks.config.$legendList);
                 // attach filled list
                 this.$legendContainer.append(checkLinks.config.$legend);
                 checkLinks.config.$legend.prepend(checkLinks.config.$container);
@@ -3412,22 +3434,22 @@ var initTool = (function () {
                     return !value;
                 });
             },
-            buildLegendContent: function () {
-                var $contentArray = checkLinks.config.$legendContent,
-                    key, value, $listItem;
-                // loop through Legend Content list
-                for (key in $contentArray) {
-                    if ($contentArray.hasOwnProperty(key)) {
-                        value = $contentArray[key];
-                        // build listing element
-                        $listItem = jQuery('<li>').attr({
-                            class: 'legendContent ' + key
-                        }).append(value);
-                        // attach to legend list
-                        checkLinks.config.$legendList.append($listItem);
-                    }
-                }
-            },
+//            buildLegendContent: function () {
+//                var $contentArray = checkLinks.config.$legendContent,
+//                    key, value, $listItem;
+//                // loop through Legend Content list
+//                for (key in $contentArray) {
+//                    if ($contentArray.hasOwnProperty(key)) {
+//                        value = $contentArray[key];
+//                        // build listing element
+//                        $listItem = jQuery('<li>').attr({
+//                            class: 'legendContent ' + key
+//                        }).append(value);
+//                        // attach to legend list
+//                        checkLinks.config.$legendList.append($listItem);
+//                    }
+//                }
+//            },
             showLegend: function () {
                 checkLinks.config.$legend.slideToggle(500);
             },
