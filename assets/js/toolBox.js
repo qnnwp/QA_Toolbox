@@ -6,7 +6,7 @@
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- GLOBAL FUNCTIONS ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
-    function setValue(variable, val) {
+    function saveValue(variable, val) {
         // eslint-disable-next-line
         var setVariable = GM_setValue(variable, val); //jshint ignore:line
     }
@@ -125,7 +125,7 @@
                 var vName = jQuery(e.target).siblings('.toolsPanel').attr('id'),
                     currState = getValue(vName);
                 // sets usingM4 value
-                setValue(vName, !currState);
+                saveValue(vName, !currState);
             },
             setState: function ($panel, state) {
                 if (state === 'show') {
@@ -2024,7 +2024,7 @@
             storeData: function () {
                 // save user input
                 var userEmail = jQuery('#WPTemail').val();
-                setValue('email', userEmail);
+                saveValue('email', userEmail);
             },
             sendPage: function () {
                 var browser = jQuery('#WPTbSelect option:selected').val(),
@@ -3571,8 +3571,6 @@
             cacheDOM: function () {
                 // DOM elements
                 this.variableList = QAtoolbox.programData();
-                //                this.contextManager = unsafeWindow.ContextManager;
-                //                this.isLive = this.contextManager.isLive();
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
             },
             setToggle: function () {
@@ -3594,6 +3592,7 @@
                 // minimize
                 urlModifiers.config.$urlModTitle.on('click', QAtoolbox.toggleFeature);
                 urlModifiers.config.$urlModTitle.on('click', QAtoolbox.saveState);
+                //                urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch('autoApplyParameters'));
                 urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch.bind(this));
             },
             // ----------------------------------------
@@ -3744,9 +3743,14 @@
                 this.reloadPage(matchesFound, url);
             },
             flipTheSwitch: function () {
-                var value = getValue('autoApplyParameters', false);
+                //                var value = getValue('autoApplyParameters', false);
                 // set saved variable to opposite of current value
-                setValue('autoApplyParameters', !value);
+                //                saveValue('autoApplyParameters', !value);
+
+                // set saved variable to opposite of current value
+                var toggle = getValue('autoApplyParameters');
+                saveValue('autoApplyParameters', !toggle);
+
                 // set toggle
                 this.setToggle();
             },
@@ -3783,26 +3787,11 @@
                 }
             }
         },
-        // ------------------------------------------------------------------------------------------------------------------------
-        // ---------------------------------------- combining functions ----------------------------------------
-        // ------------------------------------------------------------------------------------------------------------------------
-        //        createToggles = {
-        //            // TODO
-        //            init: function (callingPanel) {
-        //                this.createElements();
-        //                this.buildTool();
-        //                this.cacheDOM(callingPanel);
-        //                this.setToggle();
-        //                this.addTool();
-        //                this.bindEvents();
-        //            }
-        //        },
 
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- next gen toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         nextGenToggle = {
-            // TODO
             init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
@@ -3861,11 +3850,6 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            //            getChecked: function () {
-            //                // grabs isNextGen value
-            //                var a = getValue('isNextGen');
-            //                return a;
-            //            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = nextGenToggle.config.$FAtoggle;
@@ -3880,8 +3864,9 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                //                this.setChecked(!this.getChecked());
-                this.setChecked(!getValue('isNextGen'));
+                var toggle = getValue('isNextGen');
+                saveValue('isNextGen', !toggle);
+
                 // set toggle
                 this.setToggle();
             },
@@ -3902,7 +3887,7 @@
             },
             setChecked: function (bool) {
                 // sets isNextGen value
-                setValue('isNextGen', bool);
+                saveValue('isNextGen', bool);
             },
             // ----------------------------------------
             // other functions
@@ -3950,8 +3935,7 @@
                     .append(m4Check.config.$m4Checkbox);
             },
             setToggle: function () {
-                //                if (this.getChecked()) { // if 'nextGen is turned on'
-                if (getValue('usingM4')) { // if 'nextGen is turned on'
+                if (getValue('usingM4')) { // if 'usingM4 is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
                 } else { // if 'site is not live'
@@ -3973,11 +3957,6 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            //            getChecked: function () {
-            //                // grabs usingM4 value
-            //                var a = getValue('usingM4');
-            //                return a;
-            //            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = m4Check.config.$FAtoggle;
@@ -3992,8 +3971,9 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                //                this.setChecked(!this.getChecked());
-                this.setChecked(!getValue('usingM4'));
+                var toggle = getValue('usingM4');
+                saveValue('usingM4', !toggle);
+
                 // set toggle
                 this.setToggle();
             },
@@ -4012,10 +3992,10 @@
                 // return page variable
                 return unsafeWindow.ContextManager.getVersion();
             },
-            setChecked: function (bool) {
-                // sets usingM4 value
-                setValue('usingM4', bool);
-            },
+            //            setChecked: function (bool) {
+            //                // sets usingM4 value
+            //                saveValue('usingM4', bool);
+            //            },
             // ----------------------------------------
             // other functions
             // ----------------------------------------
@@ -4062,8 +4042,7 @@
                     .append(autofillToggle.config.$autofillToggleIcon);
             },
             setToggle: function () {
-                //                if (this.getChecked()) { // if 'nextGen is turned on'
-                if (getValue('applyAutofill')) { // if 'nextGen is turned on'
+                if (getValue('applyAutofill')) { // if 'applyAutofill is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
                 } else { // if 'site is not live'
@@ -4073,8 +4052,6 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-                //                this.contextManager = unsafeWindow.ContextManager;
-                //                this.liveSite = this.contextManager.isLive();
             },
             addTool: function () {
                 // add to main toolbox
@@ -4084,22 +4061,9 @@
                 // bind FA toggle with 'flipTheSwitch' action
                 autofillToggle.config.$autofillToggleContainer.on('click', this.flipTheSwitch.bind(this));
             },
-            //            ifLive: function () {
-            //                // remove tool if the site is live
-            ////                if (this.liveSite) {
-            //                console.log(main.liveSite);
-            //                if (main.liveSite) {
-            //                    jQuery(this).remove();
-            //                }
-            //            },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            //            getChecked: function () {
-            //                // grabs applyAutofill value
-            //                var a = getValue('applyAutofill');
-            //                return a;
-            //            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = autofillToggle.config.$FAtoggle;
@@ -4114,8 +4078,9 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                //                this.setChecked(!this.getChecked());
-                this.setChecked(!getValue('applyAutofill'));
+                var toggle = getValue('applyAutofill');
+                saveValue('applyAutofill', !toggle);
+
                 // set toggle
                 this.setToggle();
             },
@@ -4133,10 +4098,10 @@
                 // return page variable
                 return unsafeWindow.ContextManager.getVersion();
             },
-            setChecked: function (bool) {
-                // sets applyAutofill value
-                setValue('applyAutofill', bool);
-            },
+            //            setChecked: function (bool) {
+            //                // sets applyAutofill value
+            //                saveValue('applyAutofill', bool);
+            //            },
             // ----------------------------------------
             // other functions
             // ----------------------------------------
@@ -4265,7 +4230,6 @@
             },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
-                //                if (this.getChecked()) {
                 if (getValue('useRefreshButton')) {
                     this.toggleOn();
                     refreshPage.config.$refreshButtContainer.show();
@@ -4282,9 +4246,9 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                //                var toggle = this.getChecked();
                 var toggle = getValue('useRefreshButton');
-                this.setChecked(!toggle);
+                saveValue('useRefreshButton', !toggle);
+
                 // set toggle
                 this.setToggle();
             },
@@ -4299,18 +4263,6 @@
                 var $toggle = refreshPage.config.$FAtoggle;
                 $toggle.removeClass('fa-toggle-on');
                 $toggle.addClass('fa-toggle-off');
-            },
-            // ----------------------------------------
-            // tier 3 functions
-            // ----------------------------------------
-            //            getChecked: function () {
-            //                // grabs useRefreshButton value
-            //                var a = getValue('useRefreshButton');
-            //                return a;
-            //            },
-            setChecked: function (bool) {
-                // sets useRefreshButton value
-                setValue('useRefreshButton', bool);
             }
         },
 
@@ -4318,7 +4270,6 @@
         // ---------------------------------------- hide preview toolbar toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         previewToolbarToggle = {
-            // TODO
             init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
@@ -4417,7 +4368,7 @@
                 var varName = previewToolbarToggle.config.varName,
                     storedValue = getValue(varName);
                 // set saved variable to opposite of current value
-                setValue(varName, !storedValue);
+                saveValue(varName, !storedValue);
                 // set toggle
                 this.setToggle();
             }
@@ -4566,7 +4517,7 @@
                     currState = getValue(vName, false);
 
                 // sets usingM4 value
-                setValue(vName, !currState);
+                saveValue(vName, !currState);
             },
             // ----------------------------------------
             // tier 3
@@ -4705,10 +4656,7 @@
                         }
                     }
                 }
-            },
-            //            isLive: function () {
-            //                return this.contextManager.isLive();
-            //            }
+            }
         };
 
     // ------------------------------------------------------------------------------------------------------------------------
