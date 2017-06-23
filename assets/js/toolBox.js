@@ -940,105 +940,67 @@
                 }
 
             },
+            showLegend: function () {
+                linkChecker.config.$legend.slideToggle(500);
+            },
             toggleDisable: function () {
                 linkChecker.config.$activateButt.prop('disabled', function (index, value) {
                     return !value;
                 });
             },
-            showLegend: function () {
-                linkChecker.config.$legend.slideToggle(500);
-            },
-            testHeaderFooter: function () {
-                // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
-                var jLength = this.$otherLinks.length,
-                    j = 0,
-                    $currentLink, isImageLink;
-
-                // loop through array of links found in header and footer of site
-                for (j; j < jLength; j += 1) {
-                    $currentLink = jQuery(this.$otherLinks[j]);
-                    $currentLink.addClass('siteLink');
-
-                    // checks if link is an image
-                    if ($currentLink.find('img') > 0) {
-                        isImageLink = true;
+            removeHighlights: function () {
+                var key;
+                // removes special overlay class on images
+                for (key in linkChecker.config.$legendContent) {
+                    if (linkChecker.config.$legendContent.hasOwnProperty(key)) {
+                        this.removeClass(this.$allLinks, key);
+                        this.removeClass(jQuery('body').find('button'), key);
                     }
-
-                    this.runTests($currentLink, isImageLink);
-
                 }
+                // remove div overlay
+                jQuery('.imgOverlay').remove();
+                // remove overlaid class
+                this.removeClass(this.$allImageLinks, 'overlaid');
+                // turn off custom link class
+                this.removeClass(this.$allLinks, 'siteLink');
             },
-            testLinks: function ($linkArray, isImageLink) {
-                var q = 0,
-                    myLength = $linkArray.length,
-                    $currentLink;
-
-                if (myLength > 1) {
-                    //                    console.log('testLinks array');
-                    for (q; q < myLength; q += 1) {
-                        //                        console.log('testLink--');
-                        $currentLink = jQuery($linkArray[q]);
-                        $currentLink.addClass('siteLink');
-                        // perform checks to link
-                        // add flag class, check target, check title, check url
-                        this.runTests($currentLink, isImageLink);
-
-                        // bind click event
-                        // will change the color of link when user clicks
-                        this.bindClickCallback($currentLink, isImageLink);
-                    }
-                    //                    console.log('testLinks array end');
-                } else {
-                    //                    console.log('testLinks single');
-                    //                    for (q; q < myLength; q += 1) {
-                    $currentLink = $linkArray;
-                    $currentLink.addClass('siteLink');
-                    // perform checks to link
-                    // add flag class, check target, check title, check url
-                    this.runTests($currentLink, isImageLink);
-
-                    // bind click event
-                    // will change the color of link when user clicks
-                    this.bindClickCallback($currentLink, isImageLink);
-                    //                    }
-                }
+            // ----------------------------------------
+            // tier 3 functions
+            // ----------------------------------------
+            cacheDOM: function () {
+                this.$allLinks = jQuery('body').find('a');
+                this.$allImageLinks = this.$allLinks.find('img');
+                this.linksArrayLength = this.$allLinks.length;
+                this.imageLinksArrayLength = this.$allImageLinks.length;
+                this.$toolboxStyles = jQuery('#qa_toolbox');
+                this.$sections = jQuery('main').find('section');
+                this.$otherLinks = jQuery('header, footer').find('a');
             },
-            //detect if the section element is a parent container
-            //check if the section class contains 'branchy'
-            isBranchy: function (cardClass) {
-                if (cardClass.indexOf('branchy') > -1) {
-                    return true;
-                }
-            },
-            //detect if the section element is a container
-            //check if the div.deck contains content
-            isContainer: function ($cardDeck) {
-                if ($cardDeck.is(':not(:empty)')) {
-                    return true;
+            addStyles: function () {
+                // if site is TETRA do not add style
+                if (QAtoolbox.nextGenCheck()) {
+                    this.$toolboxStyles
+                        .append('.unsupportedPageLink { background: #00a6ff; }')
+                        .append('.buttonFlag { background: linear-gradient(to right, #b2fefa, #0ed2f7) !important; color: #000000 !important; }');
                 }
             },
             nextGenSiteCheck: function () {
-                // ----------------------------------------
-                // NEXT GEN SITE LOGIC
-                // ----------------------------------------
                 var $sections = this.$sections,
                     len = $sections.length,
                     a = 0,
                     $currentLink,
-                    $image = null,
-                    $imagelink = null,
-                    isImageLink = false,
-                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $cardLinks, $copyTextLinks, myLength, youLength, $currentCard, cardClass, $cardDeck, $linkOverlay;
+                    $image, $imagelink,
+                    isImageLink,
+                    $cardLinkContainer, $cardSEOContainer, $cardImageContainer, $currentCard, cardClass, $cardDeck;
 
-                // ----------------------------------------
                 // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
                 // TESTS TO BODY LINKS WILL BE HANDLED DIFFERENTLY
+                // ----------------------------------------
                 this.testHeaderFooter();
-                // ----------------------------------------
 
-                // ----------------------------------------
                 // TEST BODY LINKS
                 // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
+                // ----------------------------------------
                 for (a; a < len; a += 1) {
                     // reset variables
                     $image = null;
@@ -1046,114 +1008,25 @@
                     isImageLink = false;
                     $currentCard = jQuery($sections[a]);
                     $currentLink = null;
-                    /*
-                                        if (typeof $currentCard.attr('class') !== 'undefined') {
-                                            cardClass = $currentCard.attr('class');
-                                        }
-
-                                        $cardLinkContainer = $currentCard.find('div.link');
-                                        $cardSEOContainer = $currentCard.find('div.copy');
-                                        $cardImageContainer = $currentCard.find('div.media');
-                                        */
 
                     // save current card settings
                     // if currentCard has a class save it, if no class make variable equal ''
                     cardClass = ($currentCard.attr('class')) ? $currentCard.attr('class') : '';
+                    $cardDeck = $currentCard.find('div.deck');
+
+                    // move to secondary function
                     $cardLinkContainer = $currentCard.find('div.link');
                     $cardSEOContainer = $currentCard.find('div.copy');
                     $cardImageContainer = $currentCard.find('div.media');
-                    $cardDeck = $currentCard.find('div.deck');
 
-                    //Part1
-                    //detect if the section element is a parent container
-                    //check if the section class contains 'branchy'
-                    //Part2
-                    //detect if the section element is a container
-                    //check if the div.deck contains content
+                    // checks to see if current card is a container card
+                    // skip checks if it is
                     if (this.isBranchy(cardClass) || this.isContainer($cardDeck)) {
                         continue;
                     }
 
-
-                    switch (true) {
-                        // ----------------------------------------
-                        // card style is set to CTA links
-                        case (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1):
-                            // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
-                            // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
-
-                            // CHECK ALL LINKS DEFINED IN CARD SETTINGS
-                            // ----------------------------------------
-                            // get all links defined in card
-                            // should include all primary, secondary, and tenary links
-                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                            myLength = $cardLinks.length;
-                            //                            q = 0;
-                            if (myLength > 0) {
-                                console.log($cardLinks);
-                                this.testLinks($cardLinks);
-                            }
-
-                            // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                            // ----------------------------------------
-                            // get all text links in copy text of card
-                            $copyTextLinks = $cardSEOContainer.find('a');
-                            youLength = $copyTextLinks.length;
-
-                            if (youLength > 0) {
-                                this.testLinks($copyTextLinks);
-                            }
-                            break;
-                            // ----------------------------------------
-                            // card style is set to whole card is clickable and has CTA links
-                            // if card is made clickable text links will not be able to be reached.
-                            // should this still be checked?
-                        case (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1):
-                            // check if card has an image
-                            if ($cardImageContainer.is(':empty')) {
-                                // this shouldn't happen if the card is made to be clickable, it should mean that the card will have an image as a 'best practice'
-                                isImageLink = false;
-                            } else {
-                                // find image in the card and apply a div overlay
-                                isImageLink = true;
-                                // find FIRST PRIMARY text link
-                                $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
-                                $image = $cardImageContainer.find('img');
-                                // add div overlay to image
-                                $linkOverlay = checkLinks.addDivOverlay(true, $currentLink, $currentCard);
-                                // perform checks to link
-                                // add flag class, check target, check title, check url
-                                this.nextgenRunTests($currentLink, isImageLink, $linkOverlay);
-
-                                // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
-                                // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
-                                // BUT IT'LL CHECK ANYWAY
-
-                                // TEST other Links defined in card Settings
-                                // ----------------------------------------
-                                // get all links defined in card
-                                // should include all primary, secondary, and tenary links
-                                $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                                myLength = $cardLinks.length;
-
-                                if (myLength > 0) {
-                                    this.testLinks($cardLinks);
-                                }
-
-                                // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                                // ----------------------------------------
-                                // get all text links in copy text of card
-                                $copyTextLinks = $cardSEOContainer.find('a');
-                                youLength = $copyTextLinks.length;
-
-                                if (youLength > 0) {
-                                    this.testLinks($copyTextLinks);
-                                }
-                            }
-                            break;
-                        default:
-                            console.log('default switch statement reached');
-                    }
+                    // test links inside cards
+                    this.testCard($currentCard, cardClass, isImageLink);
                 }
             },
             tetraSiteCheck: function () {
@@ -1161,9 +1034,7 @@
                     a = 0,
                     $currentLink,
                     $image, isImageLink, isQLPlink;
-                // ----------------------------------------
-                // TETRA SITE LOGIC
-                // ----------------------------------------
+
                 // loop through all links on page
                 for (a; a < length; a += 1) {
                     // reset variables
@@ -1228,68 +1099,135 @@
                     this.bindClickCallback($currentLink, isImageLink);
                 }
             },
-            bindClickCallback: function ($currentLink, isImageLink) {
-                // bind click event
-                if (isImageLink) {
-                    return $currentLink.one('mousedown', this.linkChecked(this.$divOverlay));
-                } else {
-                    return $currentLink.one('mousedown', this.linkChecked($currentLink));
+            removeClass: function (array, removeClass) {
+                var arrlength = array.length,
+                    a = 0,
+                    $obj;
+                for (a; a < arrlength; a += 1) {
+                    $obj = jQuery(array[a]);
+                    $obj.removeClass(removeClass);
                 }
             },
-            runTests: function ($currentLink, isImageLink) {
-                // check to see if isImageLink parameter was passed
-                isImageLink = (typeof isImageLink === 'undefined') ? false : isImageLink;
-                // check target of link
-                this.checkTarget($currentLink, isImageLink);
-                // check title of link
-                this.checkForTitleText($currentLink, isImageLink);
-                // check url of link
-                this.checkURL($currentLink, isImageLink);
-            },
-            nextgenRunTests: function ($currentLink, isImageLink, $linkOverlay) {
-                // check to see if isImageLink parameter was passed
-                isImageLink = (typeof isImageLink === 'undefined') ? false : isImageLink;
-                // check target of link
-                this.checkTargetNextGen($currentLink, isImageLink, $linkOverlay);
-                // check title of link
-                this.checkForTitleTextNextGen($currentLink, isImageLink, $linkOverlay);
-                // check url of link
-                this.checkURLNextGen($currentLink, isImageLink, $linkOverlay);
-            },
-            removeHighlights: function () {
-                var key;
-                // removes special overlay class on images
-                for (key in linkChecker.config.$legendContent) {
-                    if (linkChecker.config.$legendContent.hasOwnProperty(key)) {
-                        this.removeClass(this.$allLinks, key);
-                        this.removeClass(jQuery('body').find('button'), key);
+            // ----------------------------------------
+            // tier 4
+            // ----------------------------------------
+            testHeaderFooter: function () {
+                // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
+                var jLength = this.$otherLinks.length,
+                    j = 0,
+                    $currentLink, isImageLink;
+
+                // loop through array of links found in header and footer of site
+                for (j; j < jLength; j += 1) {
+                    $currentLink = jQuery(this.$otherLinks[j]);
+                    $currentLink.addClass('siteLink');
+
+                    // checks if link is an image
+                    if ($currentLink.find('img') > 0) {
+                        isImageLink = true;
                     }
+
+                    this.runTests($currentLink, isImageLink);
+
                 }
-                // remove div overlay
-                jQuery('.imgOverlay').remove();
-                // remove overlaid class
-                this.removeClass(this.$allImageLinks, 'overlaid');
-                // turn off custom link class
-                this.removeClass(this.$allLinks, 'siteLink');
             },
-            // ----------------------------------------
-            // tier 3 functions
-            // ----------------------------------------
-            cacheDOM: function () {
-                this.$allLinks = jQuery('body').find('a');
-                this.$allImageLinks = this.$allLinks.find('img');
-                this.linksArrayLength = this.$allLinks.length;
-                this.imageLinksArrayLength = this.$allImageLinks.length;
-                this.$toolboxStyles = jQuery('#qa_toolbox');
-                this.$sections = jQuery('main').find('section');
-                this.$otherLinks = jQuery('header, footer').find('a');
+            //detect if the section element is a parent container
+            //check if the section class contains 'branchy'
+            isBranchy: function (cardClass) {
+                if (cardClass.indexOf('branchy') > -1) {
+                    return true;
+                }
             },
-            addStyles: function () {
-                // if site is TETRA do not add style
-                if (QAtoolbox.nextGenCheck()) {
-                    this.$toolboxStyles
-                        .append('.unsupportedPageLink { background: #00a6ff; }')
-                        .append('.buttonFlag { background: linear-gradient(to right, #b2fefa, #0ed2f7) !important; color: #000000 !important; }');
+            //detect if the section element is a container
+            //check if the div.deck contains content
+            isContainer: function ($cardDeck) {
+                if ($cardDeck.is(':not(:empty)')) {
+                    return true;
+                }
+            },
+            testCard: function ($currentCard, cardClass, isImageLink) {
+                var $cardLinkContainer = $currentCard.find('div.link'),
+                    $cardSEOContainer = $currentCard.find('div.copy'),
+                    $cardImageContainer = $currentCard.find('div.media'),
+                    $cardLinks, myLength, $copyTextLinks, youLength, $currentLink, $image, $linkOverlay;
+
+                switch (true) {
+                    // ----------------------------------------
+                    // card style is set to CTA links
+                    case (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1):
+                        // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
+                        // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
+
+                        // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                        // ----------------------------------------
+                        // get all links defined in card
+                        // should include all primary, secondary, and tenary links
+                        $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                        myLength = $cardLinks.length;
+
+                        if (myLength > 0) {
+                            this.testLinks($cardLinks);
+                        }
+
+                        // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                        // ----------------------------------------
+                        // get all text links in copy text of card
+                        $copyTextLinks = $cardSEOContainer.find('a');
+                        youLength = $copyTextLinks.length;
+
+                        if (youLength > 0) {
+                            this.testLinks($copyTextLinks);
+                        }
+                        break;
+                        // ----------------------------------------
+                        // card style is set to whole card is clickable and has CTA links
+                        // if card is made clickable text links will not be able to be reached.
+                        // should this still be checked?
+                    case (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1):
+                        // check if card has an image
+                        if ($cardImageContainer.is(':empty')) {
+                            // this shouldn't happen if the card is made to be clickable, it should mean that the card will have an image as a 'best practice'
+                            isImageLink = false;
+                        } else {
+                            // find image in the card and apply a div overlay
+                            isImageLink = true;
+                            // find FIRST PRIMARY text link
+                            $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                            $image = $cardImageContainer.find('img');
+                            // add div overlay to image
+                            $linkOverlay = checkLinks.addDivOverlay(true, $currentLink, $currentCard);
+                            // perform checks to link
+                            // add flag class, check target, check title, check url
+                            this.nextgenRunTests($currentLink, isImageLink, $linkOverlay);
+
+                            // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
+                            // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
+                            // BUT IT'LL CHECK ANYWAY
+
+                            // TEST other Links defined in card Settings
+                            // ----------------------------------------
+                            // get all links defined in card
+                            // should include all primary, secondary, and tenary links
+                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                            myLength = $cardLinks.length;
+
+                            if (myLength > 0) {
+                                this.testLinks($cardLinks);
+                            }
+
+                            // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                            // ----------------------------------------
+                            // get all text links in copy text of card
+                            $copyTextLinks = $cardSEOContainer.find('a');
+                            youLength = $copyTextLinks.length;
+
+                            if (youLength > 0) {
+                                this.testLinks($copyTextLinks);
+                            }
+                        }
+                        break;
+                    default:
+                        console.log('default switch statement reached');
                 }
             },
             isImageLink: function ($image) {
@@ -1297,9 +1235,6 @@
                     return true;
                 }
                 return false;
-            },
-            togClass: function ($currentLink, addClass) {
-                $currentLink.addClass(addClass);
             },
             addDivOverlay: function ($currentLink, $currentImage, isQLPlink) {
                 this.cacheDOMOverlayElements($currentLink, $currentImage);
@@ -1312,6 +1247,121 @@
                     this.attachToImage($currentImage);
                 }
             },
+            runTests: function ($currentLink, isImageLink) {
+                // check to see if isImageLink parameter was passed
+                isImageLink = (typeof isImageLink === 'undefined') ? false : isImageLink;
+                // check target of link
+                this.checkTarget($currentLink, isImageLink);
+                // check title of link
+                this.checkForTitleText($currentLink, isImageLink);
+                // check url of link
+                this.checkURL($currentLink, isImageLink);
+            },
+            bindClickCallback: function ($currentLink, isImageLink) {
+                // bind click event
+                if (isImageLink) {
+                    return $currentLink.one('mousedown', this.linkChecked(this.$divOverlay));
+                } else {
+                    return $currentLink.one('mousedown', this.linkChecked($currentLink));
+                }
+            },
+            // ----------------------------------------
+            // Tier 5
+            // ----------------------------------------
+            testLinks: function ($linkArray, isImageLink) {
+                var q = 0,
+                    myLength = $linkArray.length,
+                    $currentLink;
+
+                if (myLength > 1) {
+
+                    for (q; q < myLength; q += 1) {
+
+                        $currentLink = jQuery($linkArray[q]);
+                        // add tool custom class
+                        $currentLink.addClass('siteLink');
+
+                        // perform checks to link
+                        // add flag class, check target, check title, check url
+                        this.runTests($currentLink, isImageLink);
+
+                        // bind click event
+                        // will change the color of link when user clicks
+                        this.bindClickCallback($currentLink, isImageLink);
+                    }
+
+                } else {
+
+                    $currentLink = $linkArray;
+                    $currentLink.addClass('siteLink');
+                    // perform checks to link
+                    // add flag class, check target, check title, check url
+                    this.runTests($currentLink, isImageLink);
+
+                    // bind click event
+                    // will change the color of link when user clicks
+                    this.bindClickCallback($currentLink, isImageLink);
+
+                }
+            },
+            nextgenRunTests: function ($currentLink, isImageLink, $linkOverlay) {
+                // check to see if isImageLink parameter was passed
+                isImageLink = (typeof isImageLink === 'undefined') ? false : isImageLink;
+                // check target of link
+                this.checkTargetNextGen($currentLink, isImageLink, $linkOverlay);
+                // check title of link
+                this.checkForTitleTextNextGen($currentLink, isImageLink, $linkOverlay);
+                // check url of link
+                this.checkURLNextGen($currentLink, isImageLink, $linkOverlay);
+            },
+            cacheDOMOverlayElements: function ($currentLink, $currentImage) {
+                this.linkTitle = jQuery($currentLink).find('a').attr('title');
+                // gets sizing of images
+                this.widthOfImage = jQuery($currentImage).width();
+                this.heightOfImage = jQuery($currentImage).height();
+            },
+            createOverlayElements: function () {
+                // create div overlay
+                this.$divOverlay = jQuery('<div>').attr({
+                    class: 'imgOverlay'
+                });
+            },
+            buildOverlayElements: function () {
+                // make the div overlay the same dimensions as the image
+                this.$divOverlay.attr({
+                    class: 'imgOverlay'
+                }).css({
+                    width: this.widthOfImage + 'px',
+                    height: this.heightOfImage + 'px',
+                });
+
+                // add content to div
+                this.$divOverlay.append(this.linkTitle);
+            },
+            attachToImage: function ($currentImage, $currentLink, isQLPlink) {
+                // ----------------------------------------
+                // CUSTOM LOGIC FOR QLP WIDGET LINKS
+                // IF QLP ATTACH DIV OVERLAY TO BEGINNING OF LINK CONTENTS
+                // ----------------------------------------
+                if (isQLPlink) {
+                    $currentLink.prepend(this.$divOverlay);
+                    return;
+                }
+
+                // center div overlay
+                if (QAtoolbox.nextGenCheck()) {
+                    var parent = $currentImage.closest('figure');
+                    this.$divOverlay.css({
+                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
+                    });
+                }
+
+                // make parent image relative positionin
+                this.togClass($currentImage, 'overlaid');
+
+                // place div overlay onto image
+                jQuery($currentImage).before(this.$divOverlay);
+            },
             checkTarget: function ($currentLink, isImageLink) {
                 // check if link opens in a new window
                 if (this.verifyTarget($currentLink)) {
@@ -1320,18 +1370,6 @@
                     } else {
                         this.togClass($currentLink, 'opensWindow');
                     }
-                }
-            },
-            checkTargetNextGen: function ($currentLink, isImageLink, $linkOverlay) {
-                // check if link opens in a new window
-                //                debugger;
-                if (this.verifyTarget($currentLink)) {
-                    //                    if (isImageLink) {
-                    //                        this.togClass(this.$divOverlay, 'opensWindow');
-                    //                    } else {
-                    this.togClass($linkOverlay, 'opensWindow');
-                    //                        this.togClass($currentLink, 'opensWindow');
-                    //                    }
                 }
             },
             checkForTitleText: function ($currentLink, isImageLink) {
@@ -1366,39 +1404,6 @@
                             // link is good to go
                     }
                 }
-            },
-            checkForTitleTextNextGen: function ($currentLink, isImageLink, $linkOverlay) {
-                // text links
-                //                if (!isImageLink) {
-                switch (true) {
-                    case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-                        // link has no title
-                        this.togClass($linkOverlay, 'noTitle');
-                        break;
-                    case ($currentLink.attr('title') !== ''):
-                        // link has a title
-                        this.togClass($linkOverlay, 'hasTitle');
-                        break;
-                    default:
-                        // link is good to go
-                }
-                //                }
-
-                // image links
-                //                if (isImageLink) {
-                //                    switch (true) {
-                //                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-                //                            // image link has no title
-                //                            this.togClass(this.$divOverlay, 'noTitle');
-                //                            break;
-                //                        case ($currentLink.attr('title') !== ''):
-                //                            // image link has a title
-                //                            this.togClass(this.$divOverlay, 'hasTitle');
-                //                            break;
-                //                        default:
-                //                            // link is good to go
-                //                    }
-                //                }
             },
             checkURL: function ($currentLink, isImageLink) {
                 var href = $currentLink.attr('href');
@@ -1459,11 +1464,39 @@
                     }
                 }
             },
+            linkChecked: function ($currentLink) {
+                return function () {
+                    $currentLink.addClass('linkChecked');
+                };
+            },
+            // ----------------------------------------
+            // Tier 6
+            // ----------------------------------------
+            checkTargetNextGen: function ($currentLink, isImageLink, $linkOverlay) {
+                // check if link opens in a new window
+                if (this.verifyTarget($currentLink)) {
+                    this.togClass($linkOverlay, 'opensWindow');
+                }
+            },
+            checkForTitleTextNextGen: function ($currentLink, isImageLink, $linkOverlay) {
+                // text links
+                switch (true) {
+                    case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
+                        // link has no title
+                        this.togClass($linkOverlay, 'noTitle');
+                        break;
+                    case ($currentLink.attr('title') !== ''):
+                        // link has a title
+                        this.togClass($linkOverlay, 'hasTitle');
+                        break;
+                    default:
+                        // link is good to go
+                }
+            },
             checkURLNextGen: function ($currentLink, isImageLink, $linkOverlay) {
                 var href = $currentLink.attr('href');
 
                 // regular text links
-                //                if (!isImageLink) {
                 switch (true) {
                     case (typeof href === 'undefined'):
                         // link is undefined
@@ -1488,106 +1521,18 @@
                     default:
                         // url is good to go
                 }
-                //                }
-
-                // image links
-                //                if (isImageLink) {
-                //                    switch (true) {
-                //                        case (typeof href === 'undefined'):
-                //                            // image link is undefined
-                //                            this.togClass(this.$divOverlay, 'brokenURL');
-                //                            break;
-                //                        case (href === ''):
-                //                            // image link has an empty url
-                //                            this.togClass(this.$divOverlay, 'brokenURL');
-                //                            break;
-                //                        case (this.checkHref(href)):
-                //                            // image link has a fishy url
-                //                            this.togClass(this.$divOverlay, 'urlIssue');
-                //                            break;
-                //                        case (this.datedURL(href)):
-                //                            // image link leads to an out dated page
-                //                            this.togClass(this.$divOverlay, 'unsupportedPageLink');
-                //                            break;
-                //                        case (this.checkAbsoluteURL(href)):
-                //                            // image link has a fishy url
-                //                            this.togClass(this.$divOverlay, 'absoluteURL');
-                //                            break;
-                //                        default:
-                //                            // url is good to go
-                //                    }
-                //                }
             },
-            linkChecked: function ($currentLink) {
-                return function () {
-                    $currentLink.addClass('linkChecked');
-                };
-            },
-            removeClass: function (array, removeClass) {
-                var arrlength = array.length,
-                    a = 0,
-                    $obj;
-                for (a; a < arrlength; a += 1) {
-                    $obj = jQuery(array[a]);
-                    $obj.removeClass(removeClass);
-                }
-            },
-            // ----------------------------------------
-            // tier 4 functions
-            // ----------------------------------------
-            cacheDOMOverlayElements: function ($currentLink, $currentImage) {
-                this.linkTitle = jQuery($currentLink).find('a').attr('title');
-                // gets sizing of images
-                this.widthOfImage = jQuery($currentImage).width();
-                this.heightOfImage = jQuery($currentImage).height();
-            },
-            createOverlayElements: function () {
-                // create div overlay
-                this.$divOverlay = jQuery('<div>').attr({
-                    class: 'imgOverlay'
-                });
-            },
-            buildOverlayElements: function () {
-                // make the div overlay the same dimensions as the image
-                this.$divOverlay.attr({
-                    class: 'imgOverlay'
-                }).css({
-                    width: this.widthOfImage + 'px',
-                    height: this.heightOfImage + 'px',
-                });
-
-                // add content to div
-                this.$divOverlay.append(this.linkTitle);
-            },
-            attachToImage: function ($currentImage, $currentLink, isQLPlink) {
-                // ----------------------------------------
-                // CUSTOM LOGIC FOR QLP WIDGET LINKS
-                // IF QLP ATTACH DIV OVERLAY TO BEGINNING OF LINK CONTENTS
-                // ----------------------------------------
-                if (isQLPlink) {
-                    $currentLink.prepend(this.$divOverlay);
-                    return;
-                }
-
-                // center div overlay
-                if (QAtoolbox.nextGenCheck()) {
-                    var parent = $currentImage.closest('figure');
-                    this.$divOverlay.css({
-                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
-                    });
-                }
-
-                // make parent image relative positionin
-                this.togClass($currentImage, 'overlaid');
-
-                // place div overlay onto image
-                jQuery($currentImage).before(this.$divOverlay);
+            togClass: function ($currentLink, addClass) {
+                $currentLink.addClass(addClass);
             },
             verifyTarget: function ($currentLink) {
                 if (($currentLink.attr('target') === '_blank') || ($currentLink.attr('target') === '_new') || ($currentLink.attr('target') === 'custom')) {
                     return true;
                 }
             },
+            // ----------------------------------------
+            // Tier 7
+            // ----------------------------------------
             // checks URL if its 'special'
             checkHref: function (elem) {
                 if ((elem.indexOf('#') === 0) || (elem.indexOf('f_') === 0) || (elem.indexOf('//:') >= 0)) {
