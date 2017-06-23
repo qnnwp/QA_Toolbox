@@ -3549,6 +3549,7 @@
                         id: 'autoApplyIcon'
                     }),
                     $FAtoggle: jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
+//                    createToggles: ['nextGenToggle', 'm4Check', 'autofillToggle']
                 };
             },
             buildPanel: function () {
@@ -3782,11 +3783,26 @@
                 }
             }
         },
+        // ------------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------- combining functions ----------------------------------------
+        // ------------------------------------------------------------------------------------------------------------------------
+        //        createToggles = {
+        //            // TODO
+        //            init: function (callingPanel) {
+        //                this.createElements();
+        //                this.buildTool();
+        //                this.cacheDOM(callingPanel);
+        //                this.setToggle();
+        //                this.addTool();
+        //                this.bindEvents();
+        //            }
+        //        },
 
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- next gen toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         nextGenToggle = {
+            // TODO
             init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
@@ -3826,7 +3842,8 @@
                 this.liveSite = this.cm.isLive();
             },
             setToggle: function () {
-                if (this.getChecked()) { // if 'site is not live'
+//                if (this.getChecked()) { // if 'site is not live'
+                if (getValue('isNextGen')) { // if 'site is not live'
                     // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
@@ -3844,8 +3861,10 @@
                 // bind FA toggle with 'flipTheSwitch' action
                 nextGenToggle.config.$nextGenToggleContainer.on('click', this.flipTheSwitch.bind(this));
             },
+            // API function
             returnParameters: function () {
-                if (this.getChecked()) {
+//                if (this.getChecked()) {
+                if (getValue('isNextGen')) {
                     return true;
                 }
                 return false;
@@ -3853,11 +3872,11 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            getChecked: function () {
-                // grabs isNextGen value
-                var a = getValue('isNextGen');
-                return a;
-            },
+//            getChecked: function () {
+//                // grabs isNextGen value
+//                var a = getValue('isNextGen');
+//                return a;
+//            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = nextGenToggle.config.$FAtoggle;
@@ -3872,7 +3891,8 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                this.setChecked(!this.getChecked());
+//                this.setChecked(!this.getChecked());
+                this.setChecked(!getValue('isNextGen'));
                 // set toggle
                 this.setToggle();
             },
@@ -3935,7 +3955,8 @@
                     .append(m4Check.config.$m4Checkbox);
             },
             setToggle: function () {
-                if (this.getChecked()) { // if 'nextGen is turned on'
+//                if (this.getChecked()) { // if 'nextGen is turned on'
+                if (getValue('usingM4')) { // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
                 } else { // if 'site is not live'
@@ -3957,7 +3978,8 @@
                 m4Check.config.$m4Container.on('click', this.flipTheSwitch.bind(this));
             },
             returnParameters: function () {
-                if (this.getChecked()) {
+//                if (this.getChecked()) {
+                if (getValue('usingM4')) {
                     return true;
                 }
                 return false;
@@ -3965,11 +3987,11 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            getChecked: function () {
-                // grabs usingM4 value
-                var a = getValue('usingM4');
-                return a;
-            },
+//            getChecked: function () {
+//                // grabs usingM4 value
+//                var a = getValue('usingM4');
+//                return a;
+//            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = m4Check.config.$FAtoggle;
@@ -3984,7 +4006,8 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                this.setChecked(!this.getChecked());
+//                this.setChecked(!this.getChecked());
+                this.setChecked(!getValue('usingM4'));
                 // set toggle
                 this.setToggle();
             },
@@ -4047,7 +4070,8 @@
                     .append(autofillToggle.config.$autofillToggleIcon);
             },
             setToggle: function () {
-                if (this.getChecked()) { // if 'nextGen is turned on'
+//                if (this.getChecked()) { // if 'nextGen is turned on'
+                if (getValue('applyAutofill')) { // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
                 } else { // if 'site is not live'
@@ -4075,7 +4099,8 @@
                 }
             },
             returnParameters: function () {
-                if (this.getChecked()) {
+//                if (this.getChecked()) {
+                if (getValue('applyAutofill')) {
                     return true;
                 }
                 return false;
@@ -4083,11 +4108,11 @@
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-            getChecked: function () {
-                // grabs applyAutofill value
-                var a = getValue('applyAutofill');
-                return a;
-            },
+//            getChecked: function () {
+//                // grabs applyAutofill value
+//                var a = getValue('applyAutofill');
+//                return a;
+//            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = autofillToggle.config.$FAtoggle;
@@ -4102,7 +4127,8 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                this.setChecked(!this.getChecked());
+//                this.setChecked(!this.getChecked());
+                this.setChecked(!getValue('applyAutofill'));
                 // set toggle
                 this.setToggle();
             },
@@ -4246,7 +4272,8 @@
             },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
-                if (this.getChecked()) {
+//                if (this.getChecked()) {
+                if (getValue('useRefreshButton')) {
                     this.toggleOn();
                     refreshPage.config.$refreshButtContainer.show();
                 } else {
@@ -4262,7 +4289,8 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-                var toggle = this.getChecked();
+//                var toggle = this.getChecked();
+                var toggle = getValue('useRefreshButton');
                 this.setChecked(!toggle);
                 // set toggle
                 this.setToggle();
@@ -4282,11 +4310,11 @@
             // ----------------------------------------
             // tier 3 functions
             // ----------------------------------------
-            getChecked: function () {
-                // grabs useRefreshButton value
-                var a = getValue('useRefreshButton');
-                return a;
-            },
+//            getChecked: function () {
+//                // grabs useRefreshButton value
+//                var a = getValue('useRefreshButton');
+//                return a;
+//            },
             setChecked: function (bool) {
                 // sets useRefreshButton value
                 setValue('useRefreshButton', bool);
@@ -4297,6 +4325,7 @@
         // ---------------------------------------- hide preview toolbar toggle ----------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
         previewToolbarToggle = {
+            // TODO
             init: function (callingPanel) {
                 this.createElements();
                 this.buildTool();
