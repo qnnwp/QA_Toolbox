@@ -91,12 +91,9 @@
                 };
             },
             cacheDOM: function () {
-                this.nextGen = document.firstChild.data;
                 this.head = jQuery('head');
                 this.body = jQuery('body');
                 this.phoneWrapper = jQuery('body .phone-wrapper');
-                //                this.$showToolbox = jQuery('.showToolbox');
-                //                console.log(this.$showToolbox);
             },
             attachTools: function () {
                 this.head.append(QAtoolbox.config.$toolboxStyles);
@@ -109,10 +106,12 @@
                 this.body.before(QAtoolbox.config.$legendContainer);
             },
             nextGenCheck: function () {
-                if (this.nextGen) {
-                    return (this.nextGen.indexOf('Next Gen') === -1) ? false : true;
-                } else {
+                var nextGenFlag = jQuery.trim(document.firstChild.data);
+
+                if (typeof nextGenFlag === 'undefined' || nextGenFlag === '') {
                     return false;
+                } else if (nextGenFlag.includes('Next Gen')){
+                    return true;
                 }
             },
             toggleFeature: function (e) {
@@ -1326,10 +1325,8 @@
                 this.$divOverlay.append(this.linkTitle);
             },
             attachToImage: function ($currentImage, $currentLink, isQLPlink) {
-                // ----------------------------------------
                 // CUSTOM LOGIC FOR QLP WIDGET LINKS
                 // IF QLP ATTACH DIV OVERLAY TO BEGINNING OF LINK CONTENTS
-                // ----------------------------------------
                 if (isQLPlink) {
                     $currentLink.prepend(this.$divOverlay);
                     return;
@@ -3402,10 +3399,13 @@
                     url = window.location.href,
                     key = '',
                     matchesFound = [],
-                    foundThis = false;
+                    foundThis = false,
+                    runTool;
+
                 for (key in urlParameters2) {
                     if (urlParameters2.hasOwnProperty(key)) {
                         findThis = key;
+                        //                        debugger;
                         // this works with current URL
                         // will check to see if current URL has all the variables with it
                         // ONE DOWNSIDE IS THAT IF THE URL DOESNT ALREADY HAVE A ? IN IT
@@ -3418,9 +3418,22 @@
                         if (url.indexOf('device=immobile') === -1) {
                             url += '&device=immobile';
                         }
+
                         // determine search term is empty
                         // this will mean that the toggle is turned off
-                        if (typeof findThis === 'undefined' || findThis === '') {} else {
+                        //                        var runTool = false;
+                        if (typeof findThis === 'undefined' || findThis === '') {
+                            runTool = false;
+                            //                            console.log('runTool : '+runTool);
+                            //                            debugger;
+                        } else {
+                            runTool = true;
+                            //                            console.log('runTool : '+runTool);
+                            //                            debugger;
+                        }
+                        // determine search term is empty
+                        // this will mean that the toggle is turned off
+                        if (runTool) {
                             // search url for KEY
                             foundThis = this.searchURL(key, url);
 
@@ -3519,6 +3532,108 @@
                                 matchesFound.push(true);
                             }
                         }
+
+                        //                        if (typeof findThis === 'undefined' || findThis === '') {
+                        //                            // do nothing
+                        //                        } else {
+                        //                            // search url for KEY
+                        //                            foundThis = this.searchURL(key, url);
+                        //
+                        //                            //--------------------------------------------------------
+                        //                            //next gen searches
+                        //                            //--------------------------------------------------------
+                        //                            if (key === 'nextGen=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
+                        //                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is ON'
+                        //                                if (url.indexOf('nextGen=false') >= 0) {
+                        //                                    // if 'parameter is set to false'
+                        //                                    url = url.replace('nextGen=false', 'nextGen=true');
+                        //                                    matchesFound.push(false);
+                        //                                } else if (url.indexOf('nextGen=true') >= 0) {
+                        //                                    // if 'parameter is set to true'
+                        //                                    // do nothing
+                        //                                    matchesFound.push(true);
+                        //                                }
+                        //                            } else if (key === 'nextGen=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
+                        //                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is OFF'
+                        //                                if (url.indexOf('nextGen=true') >= 0) {
+                        //                                    // if 'parameter is set to true'
+                        //                                    url = url.replace('nextGen=true', 'nextGen=false');
+                        //                                    matchesFound.push(false);
+                        //                                } else if (url.indexOf('nextGen=false') >= 0) {
+                        //                                    // if 'parameter is set to false'
+                        //                                    // do nothing
+                        //                                    matchesFound.push(true);
+                        //                                }
+                        //                            } else if (key === 'nextGen=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                        //                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is ON'
+                        //                                // Add parameter to url string
+                        //                                url += '&nextGen=true';
+                        //                                matchesFound.push(false);
+                        //                            } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                        //                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
+                        //                                // do nothing
+                        //                                matchesFound.push(true);
+                        //                            }
+                        //
+                        //                            //--------------------------------------------------------
+                        //                            //autofill searches
+                        //                            //--------------------------------------------------------
+                        //                            if (key === 'disableAutofill=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
+                        //                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is ON'
+                        //                                if (url.indexOf('disableAutofill=false') >= 0) {
+                        //                                    // if 'parameter is set to false'
+                        //                                    url = url.replace('disableAutofill=false', 'disableAutofill=true');
+                        //                                    matchesFound.push(false);
+                        //                                } else if (url.indexOf('disableAutofill=true') >= 0) {
+                        //                                    // if 'parameter is set to true'
+                        //                                    // do nothing
+                        //                                    matchesFound.push(true);
+                        //                                }
+                        //                            } else if (key === 'disableAutofill=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
+                        //                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is OFF'
+                        //                                if (url.indexOf('disableAutofill=true') >= 0) {
+                        //                                    // if 'parameter is set to true'
+                        //                                    url = url.replace('disableAutofill=true', 'disableAutofill=false');
+                        //                                    matchesFound.push(false);
+                        //                                } else if (url.indexOf('disableAutofill=false') >= 0) {
+                        //                                    // if 'parameter is set to false'
+                        //                                    // do nothing
+                        //                                    matchesFound.push(true);
+                        //                                }
+                        //                            } else if (key === 'disableAutofill=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                        //                                // if 'searching for disable autofill' AND 'parameter not found in url' AND 'toggle is ON'
+                        //                                // Add parameter to url string
+                        //                                url += '&disableAutofill=true';
+                        //                                matchesFound.push(false);
+                        //                            } else if (key === 'disableAutofill=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                        //                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
+                        //                                // do nothing
+                        //                                matchesFound.push(true);
+                        //                            }
+                        //
+                        //                            //--------------------------------------------------------
+                        //                            //m4 parameter searches
+                        //                            //--------------------------------------------------------
+                        //                            if (key === 'relative=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
+                        //                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is turned on'
+                        //                                // do nothing
+                        //                                matchesFound.push(true);
+                        //                            } else if (key === 'relative=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
+                        //                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is off'
+                        //                                // remove ADDED parameter from URL
+                        //                                url = url.replace('&comments=true&relative=true', '');
+                        //                                matchesFound.push(false);
+                        //                            } else if (key === 'relative=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                        //                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is ON'
+                        //                                // Add parameter to url string
+                        //                                url += '&comments=true&relative=true';
+                        //                                matchesFound.push(false);
+                        //                            } else if (key === 'relative=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
+                        //                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is OFF'
+                        //                                // do nothing
+                        //                                matchesFound.push(true);
+                        //                            }
+                        //                        }
                     }
                 }
                 // reloadPAge
