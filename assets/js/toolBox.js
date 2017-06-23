@@ -3885,10 +3885,6 @@
                 // return page variable
                 return unsafeWindow.ContextManager.getVersion();
             },
-            setChecked: function (bool) {
-                // sets isNextGen value
-                saveValue('isNextGen', bool);
-            },
             // ----------------------------------------
             // other functions
             // ----------------------------------------
@@ -3992,10 +3988,6 @@
                 // return page variable
                 return unsafeWindow.ContextManager.getVersion();
             },
-            //            setChecked: function (bool) {
-            //                // sets usingM4 value
-            //                saveValue('usingM4', bool);
-            //            },
             // ----------------------------------------
             // other functions
             // ----------------------------------------
@@ -4098,10 +4090,6 @@
                 // return page variable
                 return unsafeWindow.ContextManager.getVersion();
             },
-            //            setChecked: function (bool) {
-            //                // sets applyAutofill value
-            //                saveValue('applyAutofill', bool);
-            //            },
             // ----------------------------------------
             // other functions
             // ----------------------------------------
