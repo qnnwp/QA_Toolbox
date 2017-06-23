@@ -206,8 +206,8 @@
                 dealerName.config.$dealerNameContainer.append(dealerName.config.$dealerName);
             },
             cacheDOM: function () {
-                this.$cm = unsafeWindow.ContextManager;
-                this.dealerName = this.$cm.getDealershipName();
+                this.contextManager = unsafeWindow.ContextManager;
+                this.dealerName = this.contextManager.getDealershipName();
             },
             displayData: function () {
                 dealerName.config.$dealerName.html(this.dealerName);
@@ -252,8 +252,8 @@
                 webID.config.$webIDContainer.append(webID.config.$webID);
             },
             cacheDOM: function () {
-                this.$cm = unsafeWindow.ContextManager;
-                this.webID = this.$cm.getWebId();
+                this.contextManager = unsafeWindow.ContextManager;
+                this.webID = this.contextManager.getWebId();
             },
             displayData: function () {
                 webID.config.$webID.html(this.webID);
@@ -311,9 +311,9 @@
                 pageName.config.$pageNameContainer.append(pageName.config.$pageLabel);
             },
             cacheDOM: function () {
-                this.$cm = unsafeWindow.ContextManager;
-                this.pageName = this.$cm.getPageName();
-                this.pageLabel = this.$cm.getPageLabel();
+                this.contextManager = unsafeWindow.ContextManager;
+                this.pageName = this.contextManager.getPageName();
+                this.pageLabel = this.contextManager.getPageLabel();
             },
             displayData: function () {
                 pageName.config.$pageName.html(this.pageName);
@@ -488,7 +488,7 @@
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                toolbar.displayPanel(pageInformation.config.$pageInfo);
+                main.displayPanel(pageInformation.config.$pageInfo);
             },
             // ----------------------------------------
             // tier 1 functions
@@ -573,7 +573,7 @@
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                toolbar.displayPanel(qaTools.config.$mainToolsPanel);
+                main.displayPanel(qaTools.config.$mainToolsPanel);
             },
             createElements: function () {
                 qaTools.config = {
@@ -1970,9 +1970,9 @@
                 };
             },
             cacheDOM: function (callingPanel) {
-                this.$cm = unsafeWindow.ContextManager;
-                this.siteURL = this.$cm.getUrl();
-                this.pageName = this.$cm.getPageName();
+                this.contextManager = unsafeWindow.ContextManager;
+                this.siteURL = this.contextManager.getUrl();
+                this.pageName = this.contextManager.getPageName();
                 this.$toolsPanel = jQuery(callingPanel);
                 this.nextGen = document.firstChild.data;
                 this.isNextGenPlatform = this.nextGenVar(this.nextGen);
@@ -2089,7 +2089,7 @@
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                toolbar.displayPanel(otherTools.config.$otherToolsPanel);
+                main.displayPanel(otherTools.config.$otherToolsPanel);
             },
             createElements: function () {
                 otherTools.config = {
@@ -2322,9 +2322,9 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$otherToolsPanel = jQuery(callingPanel);
-                this.$cm = unsafeWindow.ContextManager;
-                this.siteURL = this.$cm.getUrl();
-                this.pageName = this.$cm.getPageName();
+                this.contextManager = unsafeWindow.ContextManager;
+                this.siteURL = this.contextManager.getUrl();
+                this.pageName = this.contextManager.getPageName();
             },
             addTool: function () {
                 this.$otherToolsPanel.append(viewMobile.config.$activateButt);
@@ -2817,10 +2817,10 @@
                 };
             },
             cacheDOM: function (callingPanel) {
-                this.cm = unsafeWindow.ContextManager;
-                this.webID = this.cm.getWebId();
-                this.siteID = this.cm.getSiteId();
-                this.baseURL = this.cm.getUrl();
+                this.contextManager = unsafeWindow.ContextManager;
+                this.webID = this.contextManager.getWebId();
+                this.siteID = this.contextManager.getSiteId();
+                this.baseURL = this.contextManager.getUrl();
                 this.host = window.location.hostname;
                 this.wid = this.separateID(this.webID);
                 this.$toolsPanel = jQuery(callingPanel);
@@ -3516,7 +3516,7 @@
                 this.setToggle();
                 this.addTool();
                 this.bindEvents();
-                toolbar.displayPanel(urlModifiers.config.$urlModPanel);
+                main.displayPanel(urlModifiers.config.$urlModPanel);
             },
             // ----------------------------------------
             // tier 1 functions
@@ -3549,7 +3549,7 @@
                         id: 'autoApplyIcon'
                     }),
                     $FAtoggle: jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
-//                    createToggles: ['nextGenToggle', 'm4Check', 'autofillToggle']
+                    //                    createToggles: ['nextGenToggle', 'm4Check', 'autofillToggle']
                 };
             },
             buildPanel: function () {
@@ -3571,8 +3571,8 @@
             cacheDOM: function () {
                 // DOM elements
                 this.variableList = QAtoolbox.programData();
-                this.$cm = unsafeWindow.ContextManager;
-                this.isLive = this.$cm.isLive();
+                //                this.contextManager = unsafeWindow.ContextManager;
+                //                this.isLive = this.contextManager.isLive();
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
             },
             setToggle: function () {
@@ -3613,9 +3613,9 @@
             },
             applyParameters: function () {
                 var urlParameters2 = {
-                        'nextGen=': nextGenToggle.returnParameters(),
-                        'relative=': m4Check.returnParameters(),
-                        'disableAutofill=': autofillToggle.returnParameters()
+                        'nextGen=': nextGenToggle.isToggleOn(),
+                        'relative=': m4Check.isToggleOn(),
+                        'disableAutofill=': autofillToggle.isToggleOn()
                     },
                     findThis = '',
                     url = window.location.href,
@@ -3838,17 +3838,14 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-                this.cm = unsafeWindow.ContextManager;
-                this.liveSite = this.cm.isLive();
             },
             setToggle: function () {
-//                if (this.getChecked()) { // if 'site is not live'
-                if (getValue('isNextGen')) { // if 'site is not live'
-                    // if 'nextGen is turned on'
+                if (getValue('isNextGen')) {
+                    // if 'nextGen' value is true
                     // set toggle and apply parameters
                     this.toggleOn();
                 } else {
-                    // if 'site is not live'
+                    // if 'nextGen' value is false
                     // set toggle and apply parameters
                     this.toggleOff();
                 }
@@ -3861,22 +3858,14 @@
                 // bind FA toggle with 'flipTheSwitch' action
                 nextGenToggle.config.$nextGenToggleContainer.on('click', this.flipTheSwitch.bind(this));
             },
-            // API function
-            returnParameters: function () {
-//                if (this.getChecked()) {
-                if (getValue('isNextGen')) {
-                    return true;
-                }
-                return false;
-            },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            getChecked: function () {
-//                // grabs isNextGen value
-//                var a = getValue('isNextGen');
-//                return a;
-//            },
+            //            getChecked: function () {
+            //                // grabs isNextGen value
+            //                var a = getValue('isNextGen');
+            //                return a;
+            //            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = nextGenToggle.config.$FAtoggle;
@@ -3891,7 +3880,7 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-//                this.setChecked(!this.getChecked());
+                //                this.setChecked(!this.getChecked());
                 this.setChecked(!getValue('isNextGen'));
                 // set toggle
                 this.setToggle();
@@ -3914,7 +3903,13 @@
             setChecked: function (bool) {
                 // sets isNextGen value
                 setValue('isNextGen', bool);
-            }
+            },
+            // ----------------------------------------
+            // other functions
+            // ----------------------------------------
+            isToggleOn: function () {
+                return getValue('isNextGen');
+            },
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -3955,7 +3950,7 @@
                     .append(m4Check.config.$m4Checkbox);
             },
             setToggle: function () {
-//                if (this.getChecked()) { // if 'nextGen is turned on'
+                //                if (this.getChecked()) { // if 'nextGen is turned on'
                 if (getValue('usingM4')) { // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
@@ -3966,8 +3961,6 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-                this.cm = unsafeWindow.ContextManager;
-                this.liveSite = this.cm.isLive();
             },
             addTool: function () {
                 // add to main toolbox
@@ -3977,21 +3970,14 @@
                 // bind FA toggle with 'flipTheSwitch' action
                 m4Check.config.$m4Container.on('click', this.flipTheSwitch.bind(this));
             },
-            returnParameters: function () {
-//                if (this.getChecked()) {
-                if (getValue('usingM4')) {
-                    return true;
-                }
-                return false;
-            },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            getChecked: function () {
-//                // grabs usingM4 value
-//                var a = getValue('usingM4');
-//                return a;
-//            },
+            //            getChecked: function () {
+            //                // grabs usingM4 value
+            //                var a = getValue('usingM4');
+            //                return a;
+            //            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = m4Check.config.$FAtoggle;
@@ -4006,7 +3992,7 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-//                this.setChecked(!this.getChecked());
+                //                this.setChecked(!this.getChecked());
                 this.setChecked(!getValue('usingM4'));
                 // set toggle
                 this.setToggle();
@@ -4029,7 +4015,13 @@
             setChecked: function (bool) {
                 // sets usingM4 value
                 setValue('usingM4', bool);
-            }
+            },
+            // ----------------------------------------
+            // other functions
+            // ----------------------------------------
+            isToggleOn: function () {
+                return getValue('usingM4');
+            },
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -4070,7 +4062,7 @@
                     .append(autofillToggle.config.$autofillToggleIcon);
             },
             setToggle: function () {
-//                if (this.getChecked()) { // if 'nextGen is turned on'
+                //                if (this.getChecked()) { // if 'nextGen is turned on'
                 if (getValue('applyAutofill')) { // if 'nextGen is turned on'
                     // set toggle and apply parameters
                     this.toggleOn();
@@ -4081,8 +4073,8 @@
             },
             cacheDOM: function (callingPanel) {
                 this.$toolsPanel = jQuery(callingPanel);
-                this.cm = unsafeWindow.ContextManager;
-                this.liveSite = this.cm.isLive();
+                //                this.contextManager = unsafeWindow.ContextManager;
+                //                this.liveSite = this.contextManager.isLive();
             },
             addTool: function () {
                 // add to main toolbox
@@ -4092,27 +4084,22 @@
                 // bind FA toggle with 'flipTheSwitch' action
                 autofillToggle.config.$autofillToggleContainer.on('click', this.flipTheSwitch.bind(this));
             },
-            ifLive: function () {
-                // remove tool if the site is live
-                if (this.liveSite) {
-                    jQuery(this).remove();
-                }
-            },
-            returnParameters: function () {
-//                if (this.getChecked()) {
-                if (getValue('applyAutofill')) {
-                    return true;
-                }
-                return false;
-            },
+            //            ifLive: function () {
+            //                // remove tool if the site is live
+            ////                if (this.liveSite) {
+            //                console.log(main.liveSite);
+            //                if (main.liveSite) {
+            //                    jQuery(this).remove();
+            //                }
+            //            },
             // ----------------------------------------
             // tier 2 functions
             // ----------------------------------------
-//            getChecked: function () {
-//                // grabs applyAutofill value
-//                var a = getValue('applyAutofill');
-//                return a;
-//            },
+            //            getChecked: function () {
+            //                // grabs applyAutofill value
+            //                var a = getValue('applyAutofill');
+            //                return a;
+            //            },
             toggleOn: function () {
                 // set toggle on image
                 var $toggle = autofillToggle.config.$FAtoggle;
@@ -4127,7 +4114,7 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-//                this.setChecked(!this.getChecked());
+                //                this.setChecked(!this.getChecked());
                 this.setChecked(!getValue('applyAutofill'));
                 // set toggle
                 this.setToggle();
@@ -4149,7 +4136,13 @@
             setChecked: function (bool) {
                 // sets applyAutofill value
                 setValue('applyAutofill', bool);
-            }
+            },
+            // ----------------------------------------
+            // other functions
+            // ----------------------------------------
+            isToggleOn: function () {
+                return getValue('applyAutofill');
+            },
         },
 
         /* ************************************************************************************************************************ */
@@ -4167,7 +4160,7 @@
                 this.cacheDOM();
                 this.addTool();
                 this.bindEvents();
-                toolbar.displayPanel(toggles.config.$togglesPanel);
+                main.displayPanel(toggles.config.$togglesPanel);
             },
             createElements: function () {
                 toggles.config = {
@@ -4272,7 +4265,7 @@
             },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
-//                if (this.getChecked()) {
+                //                if (this.getChecked()) {
                 if (getValue('useRefreshButton')) {
                     this.toggleOn();
                     refreshPage.config.$refreshButtContainer.show();
@@ -4289,7 +4282,7 @@
             },
             flipTheSwitch: function () {
                 // set saved variable to opposite of current value
-//                var toggle = this.getChecked();
+                //                var toggle = this.getChecked();
                 var toggle = getValue('useRefreshButton');
                 this.setChecked(!toggle);
                 // set toggle
@@ -4310,11 +4303,11 @@
             // ----------------------------------------
             // tier 3 functions
             // ----------------------------------------
-//            getChecked: function () {
-//                // grabs useRefreshButton value
-//                var a = getValue('useRefreshButton');
-//                return a;
-//            },
+            //            getChecked: function () {
+            //                // grabs useRefreshButton value
+            //                var a = getValue('useRefreshButton');
+            //                return a;
+            //            },
             setChecked: function (bool) {
                 // sets useRefreshButton value
                 setValue('useRefreshButton', bool);
@@ -4442,7 +4435,7 @@
                 this.modToolbar();
                 this.bindEvents();
                 this.displayPanel();
-                //                toolbar.displayPanel(QAtoolbox.config.$toolboxContainer);
+                //                main.displayPanel(QAtoolbox.config.$toolboxContainer);
             },
             createElements: function () {
                 // main panel container
@@ -4586,11 +4579,11 @@
         // ------------------------------------------------------------------------------------------------------------------------
         // ---------------------------------------- MAIN ----------------------------------------
         // ------------------------------------------------------------------------------------------------------------------------
-        toolbar = {
+        main = {
             init: function () {
                 this.cacheDOM();
                 this.checkEnvironment();
-                this.main();
+                this.toolContainer();
                 this.pageInfoPanel();
                 this.qaToolsPanel();
                 this.otherToolsPanel();
@@ -4601,19 +4594,16 @@
             },
             cacheDOM: function () {
                 this.isNextGenPlatform = QAtoolbox.nextGenCheck();
-                //                this.isNextGenPlatform = this.nextGenCheck();
-                this.isCDKsite = this.isCDKsite();
-                this.isMobile = this.isMobile();
-                this.editMode = this.editMode();
                 this.edoButts = jQuery('.myEDOBut');
+                this.contextManager = unsafeWindow.ContextManager;
+                this.phoneWrapper = jQuery('body .phone-wrapper');
             },
             checkEnvironment: function () {
-                if (this.editMode || this.isCDKsite || !this.isMobile) {
-                    // don't run toolbar if in edit mode OR not a CDK site OR is mobile site
-                    // error throws will prevent the toolbar from running if environment isn't correct
-                }
+                this.editMode();
+                this.isCDKsite();
+                this.isMobile();
             },
-            main: function () {
+            toolContainer: function () {
                 QAtoolbox.init();
             },
             pageInfoPanel: function () {
@@ -4667,20 +4657,21 @@
             },
             isCDKsite: function () {
                 try {
-                    var siteState = unsafeWindow.ContextManager.getVersion();
-                    // determines which state of the site you are viewing (this variable should only exist on CDK sites)
-                    return ((siteState === 'WIP') || (siteState === 'PROTO') || (siteState === 'LIVE'));
+                    // get version of CDK site
+                    // if value does not exist, shut the toolbar down
+                    if (this.contextManager.getVersion().length === 0) {
+                        throw 'Not a CDK site, shutting toolbar down';
+                    }
                 } catch (e) {
+                    // get version of site
+                    // if contextManager object does not exist, shut the toolbar down
                     throw 'Not a CDK site, shutting toolbar down';
                 }
             },
             isMobile: function () {
-                var phoneWrapper = jQuery('body .phone-wrapper');
                 // determines if the page being viewed is meant for mobile
-                if (phoneWrapper.length > 0) {
+                if (this.phoneWrapper.length > 0) {
                     throw 'mobile site, shutting toolbar down';
-                } else {
-                    return false;
                 }
             },
             editMode: function () {
@@ -4690,20 +4681,22 @@
                 }
             },
             styleButtons: function ($toolPanel) {
-                // wrapping interior text in order style text.
-                // overrides the !important tags used by CDK bundles.css
+                // add class to buttons for styling
                 $toolPanel.children('.myEDOBut:even').addClass('evenEDObutts');
                 $toolPanel.children('.myEDOBut:odd').addClass('oddEDObutts');
             },
             wrapText: function ($toolPanel) {
+                // wrapping interior text in order style text.
+                // allows override of the !important tags used by CDK bundles.css
                 $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
             },
             displayPanel: function ($toolPanel) {
-                // loop through variable list to find the panel title
                 var variables = QAtoolbox.programData(),
                     panelId = $toolPanel.attr('id'),
                     state = '',
                     key = '';
+
+                // loop through variable list to find the panel title
                 for (key in variables) {
                     if (variables.hasOwnProperty(key)) {
                         if (key === panelId) {
@@ -4712,12 +4705,15 @@
                         }
                     }
                 }
-            }
+            },
+            //            isLive: function () {
+            //                return this.contextManager.isLive();
+            //            }
         };
 
     // ------------------------------------------------------------------------------------------------------------------------
     // ---------------------------------------- initialize toolbox ----------------------------------------
     // ------------------------------------------------------------------------------------------------------------------------
-    toolbar.init();
+    main.init();
 
 })(); // end main function
