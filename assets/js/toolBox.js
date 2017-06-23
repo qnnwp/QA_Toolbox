@@ -3548,8 +3548,7 @@
                     $autoApplyIcon: jQuery('<div>').attr({
                         id: 'autoApplyIcon'
                     }),
-                    $FAtoggle: jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
-                    //                    createToggles: ['nextGenToggle', 'm4Check', 'autofillToggle']
+                    $FAtoggle: jQuery('<i class="fa fa-toggle-off fa-lg"></i>')
                 };
             },
             buildPanel: function () {
@@ -3592,7 +3591,6 @@
                 // minimize
                 urlModifiers.config.$urlModTitle.on('click', QAtoolbox.toggleFeature);
                 urlModifiers.config.$urlModTitle.on('click', QAtoolbox.saveState);
-                //                urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch('autoApplyParameters'));
                 urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch.bind(this));
             },
             // ----------------------------------------
@@ -3890,7 +3888,7 @@
             // ----------------------------------------
             isToggleOn: function () {
                 return getValue('isNextGen');
-            },
+            }
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -3993,7 +3991,7 @@
             // ----------------------------------------
             isToggleOn: function () {
                 return getValue('usingM4');
-            },
+            }
         },
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -4095,7 +4093,7 @@
             // ----------------------------------------
             isToggleOn: function () {
                 return getValue('applyAutofill');
-            },
+            }
         },
 
         /* ************************************************************************************************************************ */
