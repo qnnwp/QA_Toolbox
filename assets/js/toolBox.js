@@ -1151,14 +1151,50 @@
                     $cardImageContainer = $currentCard.find('div.media'),
                     $cardLinks, myLength, $copyTextLinks, youLength, $currentLink, $image, $linkOverlay;
 
-                switch (true) {
-                    // ----------------------------------------
-                    // card style is set to CTA links
-                    case (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1):
-                        // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
-                        // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
+                if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
+                    // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
+                    // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
 
-                        // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                    // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                    // get all links defined in card
+                    // should include all primary, secondary, and tenary links
+                    $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                    myLength = $cardLinks.length;
+                    // loop through links if there is any
+                    if (myLength > 0) {
+                        this.testLinks($cardLinks);
+                    }
+
+                    // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                    // get all text links in copy text of card
+                    $copyTextLinks = $cardSEOContainer.find('a');
+                    youLength = $copyTextLinks.length;
+                    // loop through links if there is any
+                    if (youLength > 0) {
+                        this.testLinks($copyTextLinks);
+                    }
+                } else if (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1) {
+                    // check if card has an image
+                    if ($cardImageContainer.is(':empty')) {
+                        // this shouldn't happen if the card is made to be clickable, it should mean that the card will have an image as a 'best practice'
+                        isImageLink = false;
+                    } else {
+                        // find image in the card and apply a div overlay
+                        isImageLink = true;
+                        // find FIRST PRIMARY text link
+                        $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                        $image = $cardImageContainer.find('img');
+                        // add div overlay to image
+                        $linkOverlay = checkLinks.addDivOverlay(true, $currentLink, $currentCard);
+                        // perform checks to link
+                        // add flag class, check target, check title, check url
+                        this.nextgenRunTests($currentLink, isImageLink, $linkOverlay);
+
+                        // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
+                        // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
+                        // BUT IT'LL CHECK ANYWAY
+
+                        // TEST other Links defined in card Settings
                         // ----------------------------------------
                         // get all links defined in card
                         // should include all primary, secondary, and tenary links
@@ -1178,56 +1214,7 @@
                         if (youLength > 0) {
                             this.testLinks($copyTextLinks);
                         }
-                        break;
-                        // ----------------------------------------
-                        // card style is set to whole card is clickable and has CTA links
-                        // if card is made clickable text links will not be able to be reached.
-                        // should this still be checked?
-                    case (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1):
-                        // check if card has an image
-                        if ($cardImageContainer.is(':empty')) {
-                            // this shouldn't happen if the card is made to be clickable, it should mean that the card will have an image as a 'best practice'
-                            isImageLink = false;
-                        } else {
-                            // find image in the card and apply a div overlay
-                            isImageLink = true;
-                            // find FIRST PRIMARY text link
-                            $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
-                            $image = $cardImageContainer.find('img');
-                            // add div overlay to image
-                            $linkOverlay = checkLinks.addDivOverlay(true, $currentLink, $currentCard);
-                            // perform checks to link
-                            // add flag class, check target, check title, check url
-                            this.nextgenRunTests($currentLink, isImageLink, $linkOverlay);
-
-                            // THERE IS NO NEED TO TEST OTHER LINKS AS THEY WON'T MATTER
-                            // THE CARD WILL ONLY LINK TO THE FIRST PRIMARY LINK IN THE CARD
-                            // BUT IT'LL CHECK ANYWAY
-
-                            // TEST other Links defined in card Settings
-                            // ----------------------------------------
-                            // get all links defined in card
-                            // should include all primary, secondary, and tenary links
-                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                            myLength = $cardLinks.length;
-
-                            if (myLength > 0) {
-                                this.testLinks($cardLinks);
-                            }
-
-                            // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                            // ----------------------------------------
-                            // get all text links in copy text of card
-                            $copyTextLinks = $cardSEOContainer.find('a');
-                            youLength = $copyTextLinks.length;
-
-                            if (youLength > 0) {
-                                this.testLinks($copyTextLinks);
-                            }
-                        }
-                        break;
-                    default:
-                        console.log('default switch statement reached');
+                    }
                 }
             },
             isImageLink: function ($image) {
