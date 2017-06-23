@@ -463,7 +463,11 @@ body .card .content .text .link .siteLink.buttonFlag {
 .linkChecked,
 footer .card .content .text .link .siteLink.linkChecked,
 body .card .content .text .copy .siteLink.linkChecked,
+body .card .content .text .copy .siteLink.linkChecked.hasTitle,
+body .card .content .text .copy .siteLink.linkChecked.noTitle,
 body .card .content .text .link .siteLink.linkChecked,
+body .card .content .text .link .siteLink.linkChecked.hasTitle,
+body .card .content .text .link .siteLink.linkChecked.noTitle,
 body .card .content .media .imgOverlay.linkChecked {
     background: rgb(160, 255, 206);
     background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
