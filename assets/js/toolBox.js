@@ -110,7 +110,7 @@
 
                 if (typeof nextGenFlag === 'undefined' || nextGenFlag === '') {
                     return false;
-                } else if (nextGenFlag.includes('Next Gen')){
+                } else if (nextGenFlag.includes('Next Gen')) {
                     return true;
                 }
             },
@@ -3352,6 +3352,7 @@
                 // DOM elements
                 this.variableList = QAtoolbox.programData();
                 this.$toolBoxContainer = jQuery('.toolboxContainer');
+                this.newURL = window.location.href;
             },
             setToggle: function () {
                 // get value of custom variable and set toggles accordingly
@@ -3396,254 +3397,51 @@
                         'disableAutofill=': autofillToggle.isToggleOn()
                     },
                     findThis = '',
-                    url = window.location.href,
                     key = '',
                     matchesFound = [],
-                    foundThis = false,
-                    runTool;
+                    runTool, hasKey, isOn;
 
                 for (key in urlParameters2) {
                     if (urlParameters2.hasOwnProperty(key)) {
                         findThis = key;
-                        //                        debugger;
                         // this works with current URL
                         // will check to see if current URL has all the variables with it
                         // ONE DOWNSIDE IS THAT IF THE URL DOESNT ALREADY HAVE A ? IN IT
                         // AN ERROR WILL BE THROWN
-                        if (url.indexOf('?') === -1) {
-                            url += '?';
+                        if (this.newURL.indexOf('?') === -1) {
+                            this.newURL += '?';
                         }
+
                         // force the page to reload in DESKTOP SITE
                         // no downside to NEXT GEN SITES
-                        if (url.indexOf('device=immobile') === -1) {
-                            url += '&device=immobile';
+                        if (this.newURL.indexOf('device=immobile') === -1) {
+                            this.newURL += '&device=immobile';
                         }
 
                         // determine search term is empty
                         // this will mean that the toggle is turned off
-                        //                        var runTool = false;
                         if (typeof findThis === 'undefined' || findThis === '') {
                             runTool = false;
-                            //                            console.log('runTool : '+runTool);
-                            //                            debugger;
                         } else {
                             runTool = true;
-                            //                            console.log('runTool : '+runTool);
-                            //                            debugger;
                         }
+
                         // determine search term is empty
                         // this will mean that the toggle is turned off
                         if (runTool) {
                             // search url for KEY
-                            foundThis = this.searchURL(key, url);
+                            hasKey = this.newURL.indexOf(findThis) >= 0 ? true : false;
+                            isOn = urlParameters2[key];
 
-                            //--------------------------------------------------------
-                            //next gen searches
-                            //--------------------------------------------------------
-                            if (key === 'nextGen=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is ON'
-                                if (url.indexOf('nextGen=false') >= 0) {
-                                    // if 'parameter is set to false'
-                                    url = url.replace('nextGen=false', 'nextGen=true');
-                                    matchesFound.push(false);
-                                } else if (url.indexOf('nextGen=true') >= 0) {
-                                    // if 'parameter is set to true'
-                                    // do nothing
-                                    matchesFound.push(true);
-                                }
-                            } else if (key === 'nextGen=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is OFF'
-                                if (url.indexOf('nextGen=true') >= 0) {
-                                    // if 'parameter is set to true'
-                                    url = url.replace('nextGen=true', 'nextGen=false');
-                                    matchesFound.push(false);
-                                } else if (url.indexOf('nextGen=false') >= 0) {
-                                    // if 'parameter is set to false'
-                                    // do nothing
-                                    matchesFound.push(true);
-                                }
-                            } else if (key === 'nextGen=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is ON'
-                                // Add parameter to url string
-                                url += '&nextGen=true';
-                                matchesFound.push(false);
-                            } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
-
-                            //--------------------------------------------------------
-                            //autofill searches
-                            //--------------------------------------------------------
-                            if (key === 'disableAutofill=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is ON'
-                                if (url.indexOf('disableAutofill=false') >= 0) {
-                                    // if 'parameter is set to false'
-                                    url = url.replace('disableAutofill=false', 'disableAutofill=true');
-                                    matchesFound.push(false);
-                                } else if (url.indexOf('disableAutofill=true') >= 0) {
-                                    // if 'parameter is set to true'
-                                    // do nothing
-                                    matchesFound.push(true);
-                                }
-                            } else if (key === 'disableAutofill=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is OFF'
-                                if (url.indexOf('disableAutofill=true') >= 0) {
-                                    // if 'parameter is set to true'
-                                    url = url.replace('disableAutofill=true', 'disableAutofill=false');
-                                    matchesFound.push(false);
-                                } else if (url.indexOf('disableAutofill=false') >= 0) {
-                                    // if 'parameter is set to false'
-                                    // do nothing
-                                    matchesFound.push(true);
-                                }
-                            } else if (key === 'disableAutofill=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                                // if 'searching for disable autofill' AND 'parameter not found in url' AND 'toggle is ON'
-                                // Add parameter to url string
-                                url += '&disableAutofill=true';
-                                matchesFound.push(false);
-                            } else if (key === 'disableAutofill=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
-
-                            //--------------------------------------------------------
-                            //m4 parameter searches
-                            //--------------------------------------------------------
-                            if (key === 'relative=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is turned on'
-                                // do nothing
-                                matchesFound.push(true);
-                            } else if (key === 'relative=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is off'
-                                // remove ADDED parameter from URL
-                                url = url.replace('&comments=true&relative=true', '');
-                                matchesFound.push(false);
-                            } else if (key === 'relative=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is ON'
-                                // Add parameter to url string
-                                url += '&comments=true&relative=true';
-                                matchesFound.push(false);
-                            } else if (key === 'relative=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is OFF'
-                                // do nothing
-                                matchesFound.push(true);
-                            }
+                            // check URL for parameters
+                            matchesFound.push(this.modifyURL(hasKey, findThis, isOn));
                         }
-
-                        //                        if (typeof findThis === 'undefined' || findThis === '') {
-                        //                            // do nothing
-                        //                        } else {
-                        //                            // search url for KEY
-                        //                            foundThis = this.searchURL(key, url);
-                        //
-                        //                            //--------------------------------------------------------
-                        //                            //next gen searches
-                        //                            //--------------------------------------------------------
-                        //                            if (key === 'nextGen=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                        //                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is ON'
-                        //                                if (url.indexOf('nextGen=false') >= 0) {
-                        //                                    // if 'parameter is set to false'
-                        //                                    url = url.replace('nextGen=false', 'nextGen=true');
-                        //                                    matchesFound.push(false);
-                        //                                } else if (url.indexOf('nextGen=true') >= 0) {
-                        //                                    // if 'parameter is set to true'
-                        //                                    // do nothing
-                        //                                    matchesFound.push(true);
-                        //                                }
-                        //                            } else if (key === 'nextGen=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                        //                                // if 'searching for nextgen' AND 'found parameter in url' AND 'toggle is OFF'
-                        //                                if (url.indexOf('nextGen=true') >= 0) {
-                        //                                    // if 'parameter is set to true'
-                        //                                    url = url.replace('nextGen=true', 'nextGen=false');
-                        //                                    matchesFound.push(false);
-                        //                                } else if (url.indexOf('nextGen=false') >= 0) {
-                        //                                    // if 'parameter is set to false'
-                        //                                    // do nothing
-                        //                                    matchesFound.push(true);
-                        //                                }
-                        //                            } else if (key === 'nextGen=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                        //                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is ON'
-                        //                                // Add parameter to url string
-                        //                                url += '&nextGen=true';
-                        //                                matchesFound.push(false);
-                        //                            } else if (key === 'nextGen=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                        //                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                        //                                // do nothing
-                        //                                matchesFound.push(true);
-                        //                            }
-                        //
-                        //                            //--------------------------------------------------------
-                        //                            //autofill searches
-                        //                            //--------------------------------------------------------
-                        //                            if (key === 'disableAutofill=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                        //                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is ON'
-                        //                                if (url.indexOf('disableAutofill=false') >= 0) {
-                        //                                    // if 'parameter is set to false'
-                        //                                    url = url.replace('disableAutofill=false', 'disableAutofill=true');
-                        //                                    matchesFound.push(false);
-                        //                                } else if (url.indexOf('disableAutofill=true') >= 0) {
-                        //                                    // if 'parameter is set to true'
-                        //                                    // do nothing
-                        //                                    matchesFound.push(true);
-                        //                                }
-                        //                            } else if (key === 'disableAutofill=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                        //                                // if 'searching for disable autofill' AND 'found parameter in url' AND 'toggle is OFF'
-                        //                                if (url.indexOf('disableAutofill=true') >= 0) {
-                        //                                    // if 'parameter is set to true'
-                        //                                    url = url.replace('disableAutofill=true', 'disableAutofill=false');
-                        //                                    matchesFound.push(false);
-                        //                                } else if (url.indexOf('disableAutofill=false') >= 0) {
-                        //                                    // if 'parameter is set to false'
-                        //                                    // do nothing
-                        //                                    matchesFound.push(true);
-                        //                                }
-                        //                            } else if (key === 'disableAutofill=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                        //                                // if 'searching for disable autofill' AND 'parameter not found in url' AND 'toggle is ON'
-                        //                                // Add parameter to url string
-                        //                                url += '&disableAutofill=true';
-                        //                                matchesFound.push(false);
-                        //                            } else if (key === 'disableAutofill=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                        //                                // if 'searching for nextgen' AND 'parameter not found in url' AND 'toggle is OFF'
-                        //                                // do nothing
-                        //                                matchesFound.push(true);
-                        //                            }
-                        //
-                        //                            //--------------------------------------------------------
-                        //                            //m4 parameter searches
-                        //                            //--------------------------------------------------------
-                        //                            if (key === 'relative=' && foundThis && urlParameters2[key]) { // PARAMETER FOUND IN URL
-                        //                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is turned on'
-                        //                                // do nothing
-                        //                                matchesFound.push(true);
-                        //                            } else if (key === 'relative=' && foundThis && !urlParameters2[key]) { // PARAMETER FOUND IN URL
-                        //                                // if 'searching for m4 parameter' AND 'found parameter in url' AND 'toggle is off'
-                        //                                // remove ADDED parameter from URL
-                        //                                url = url.replace('&comments=true&relative=true', '');
-                        //                                matchesFound.push(false);
-                        //                            } else if (key === 'relative=' && !foundThis && urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                        //                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is ON'
-                        //                                // Add parameter to url string
-                        //                                url += '&comments=true&relative=true';
-                        //                                matchesFound.push(false);
-                        //                            } else if (key === 'relative=' && !foundThis && !urlParameters2[key]) { // PARAMETER NOT FOUND IN URL
-                        //                                // if 'searching for m4 parameter' AND 'parameter not found in url' AND 'toggle is OFF'
-                        //                                // do nothing
-                        //                                matchesFound.push(true);
-                        //                            }
-                        //                        }
                     }
                 }
                 // reloadPAge
-                this.reloadPage(matchesFound, url);
+                this.reloadPage(matchesFound);
             },
             flipTheSwitch: function () {
-                //                var value = getValue('autoApplyParameters', false);
-                // set saved variable to opposite of current value
-                //                saveValue('autoApplyParameters', !value);
-
                 // set saved variable to opposite of current value
                 var toggle = getValue('autoApplyParameters');
                 saveValue('autoApplyParameters', !toggle);
@@ -3660,7 +3458,164 @@
                 }
                 return false;
             },
-            reloadPage: function (matchesFound, url) {
+            modifyURL: function (hasKey, findThis, isOn) {
+                //--------------------------------------------------------
+                // toggle functions
+                //--------------------------------------------------------
+                switch (findThis) {
+                    //--------------------------------------------------------
+                    // NEXTGEN PARAMETER
+                    //--------------------------------------------------------
+                    case ('nextGen='):
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is ON'
+                        if (hasKey && isOn) {
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('nextGen=false') >= 0) {
+                                this.newURL = this.newURL.replace('nextGen=false', 'nextGen=true');
+                                return false;
+                            }
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('nextGen=true') >= 0) {
+                                // do nothing
+                                return true;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is OFF'
+                        if (hasKey && !isOn) {
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('nextGen=true') >= 0) {
+                                this.newURL = this.newURL.replace('nextGen=true', 'nextGen=false');
+                                return false;
+                            }
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('nextGen=false') >= 0) {
+                                // do nothing
+                                return true;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is ON'
+                        if (!hasKey && isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&nextGen=true';
+                            return false;
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is OFF'
+                        if (!hasKey && !isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&nextGen=false';
+                            return false;
+                        }
+                        break;
+                        //--------------------------------------------------------
+                        // DISABLE AUOTFILL PARAMETER
+                        //--------------------------------------------------------
+                    case ('disableAutofill='):
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is ON'
+                        if (hasKey && isOn) {
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('disableAutofill=false') >= 0) {
+                                this.newURL = this.newURL.replace('disableAutofill=false', 'disableAutofill=true');
+                                return false;
+                            }
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('disableAutofill=true') >= 0) {
+                                // do nothing
+                                return true;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is OFF'
+                        if (hasKey && !isOn) {
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('disableAutofill=true') >= 0) {
+                                this.newURL = this.newURL.replace('&disableAutofill=true', '');
+                                return false;
+                            }
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('disableAutofill=false') >= 0) {
+                                // remove parameter from url
+                                this.newURL = this.newURL.replace('&disableAutofill=false', '');
+                                return false;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is ON'
+                        if (!hasKey && isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&disableAutofill=true';
+                            return false;
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is OFF'
+                        if (!hasKey && !isOn) {
+                            // do nothing
+                            return true;
+                        }
+                        break;
+                        //--------------------------------------------------------
+                        // MILESTONE 4 PARAMETERS (TETRA SITES)
+                        //--------------------------------------------------------
+                    case ('relative='):
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is turned on'
+                        if (hasKey && isOn) {
+                            // do nothing
+                            return true;
+                        }
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is off'
+                        if (hasKey && !isOn) {
+                            // remove ADDED parameter from URL
+                            this.newURL = this.newURL.replace('&comments=true&relative=true', '');
+                            return false;
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is ON'
+                        if (!hasKey && isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&comments=true&relative=true';
+                            return false;
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is OFF'
+                        if (!hasKey && !isOn) {
+                            // do nothing
+                            return true;
+                        }
+                        break;
+                    default:
+                }
+            },
+            reloadPage: function (matchesFound) {
                 // determine if all parameters are found in the URL
                 // will stop the page from reloading after initial build.
                 var q = 0,
@@ -3680,7 +3635,7 @@
 
                 // if reloadPage is true reload page
                 if (reloadPage) {
-                    window.location.href = url;
+                    window.location.href = this.newURL;
                 }
             }
         },
