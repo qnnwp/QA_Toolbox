@@ -279,7 +279,11 @@ module.exports = {
         'sort-keys': 0,
         'sort-vars': 0,
         'space-before-blocks': 2,
-        'space-before-function-paren': [2, 'never'],
+        'space-before-function-paren': [2, {
+            "anonymous": "always",
+            "named": "always",
+            "asyncArrow": "always"
+    }],
         'space-in-parens': 0,
         'space-infix-ops': 0,
         'space-unary-ops': 0,
