@@ -8,17 +8,17 @@
     // ------------------------------------------------------------------------------------------------------------------------
     function saveValue(variable, val) {
         // eslint-disable-next-line
-        var setVariable = GM_setValue( variable, val ); //jshint ignore:line
+        var setVariable = GM_setValue(variable, val); //jshint ignore:line
     }
 
     function clipboardCopy(variable) {
         // eslint-disable-next-line
-        var toClipboard = GM_setClipboard( variable, 'text' ); //jshint ignore:line
+        var toClipboard = GM_setClipboard(variable, 'text'); //jshint ignore:line
     }
 
     function getValue(variable) {
         // eslint-disable-next-line
-        return GM_getValue( variable, false ); //jshint ignore:line
+        return GM_getValue(variable, false); //jshint ignore:line
     }
 
     function programVariables() {
@@ -28,12 +28,12 @@
 
     function openNewTab(openThis) {
         // eslint-disable-next-line
-        var openTab = GM_openInTab( openThis ); //jshint ignore:line
+        var openTab = GM_openInTab(openThis); //jshint ignore:line
     }
 
     function getResourceURL(resource) {
         // eslint-disable-next-line
-        return GM_getResourceURL( resource ); //jshint ignore:line
+        return GM_getResourceURL(resource); //jshint ignore:line
     }
 
     // ------------------------------------------------------------------------------------------------------------------------
@@ -746,21 +746,21 @@
                 // find first case that returns true
                 switch (true) {
                     // if alt is undefined
-                case (typeof $image.attr('alt') === 'undefined'):
-                    this.togClass($image, 'noAlt');
-                    break;
-                    // if alt is empty
-                case ($image.attr('alt') === ''):
-                    this.togClass($image, 'emptyAlt');
-                    break;
-                    // if alt IS NOT empty
-                case ($image.attr('alt') !== ''):
-                    this.togClass($image, 'hasAlt');
-                    break;
-                    // log the image element that breaks the program
-                default:
-                    // console.log('image checker failure');
-                    // console.log(currentImage);
+                    case (typeof $image.attr('alt') === 'undefined'):
+                        this.togClass($image, 'noAlt');
+                        break;
+                        // if alt is empty
+                    case ($image.attr('alt') === ''):
+                        this.togClass($image, 'emptyAlt');
+                        break;
+                        // if alt IS NOT empty
+                    case ($image.attr('alt') !== ''):
+                        this.togClass($image, 'hasAlt');
+                        break;
+                        // log the image element that breaks the program
+                    default:
+                        // console.log('image checker failure');
+                        // console.log(currentImage);
                 }
             },
             // ----------------------------------------
@@ -1351,32 +1351,32 @@
                 // text links
                 if (!isImageLink) {
                     switch (true) {
-                    case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-                        // link has no title
-                        this.togClass($currentLink, 'noTitle');
-                        break;
-                    case ($currentLink.attr('title') !== ''):
-                        // link has a title
-                        this.togClass($currentLink, 'hasTitle');
-                        break;
-                    default:
-                        // link is good to go
+                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
+                            // link has no title
+                            this.togClass($currentLink, 'noTitle');
+                            break;
+                        case ($currentLink.attr('title') !== ''):
+                            // link has a title
+                            this.togClass($currentLink, 'hasTitle');
+                            break;
+                        default:
+                            // link is good to go
                     }
                 }
 
                 // image links
                 if (isImageLink) {
                     switch (true) {
-                    case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-                        // image link has no title
-                        this.togClass(this.$divOverlay, 'noTitle');
-                        break;
-                    case ($currentLink.attr('title') !== ''):
-                        // image link has a title
-                        this.togClass(this.$divOverlay, 'hasTitle');
-                        break;
-                    default:
-                        // link is good to go
+                        case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
+                            // image link has no title
+                            this.togClass(this.$divOverlay, 'noTitle');
+                            break;
+                        case ($currentLink.attr('title') !== ''):
+                            // image link has a title
+                            this.togClass(this.$divOverlay, 'hasTitle');
+                            break;
+                        default:
+                            // link is good to go
                     }
                 }
             },
@@ -1386,56 +1386,56 @@
                 // regular text links
                 if (!isImageLink) {
                     switch (true) {
-                    case (typeof href === 'undefined'):
-                        // link is undefined
-                        this.togClass($currentLink, 'brokenURL');
-                        break;
-                    case (href === ''):
-                        // link has an empty url
-                        this.togClass($currentLink, 'brokenURL');
-                        break;
-                    case (this.checkHref(href)):
-                        // link has a fishy url
-                        this.togClass($currentLink, 'urlIssue');
-                        break;
-                    case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
-                        // link leads to an out dated page
-                        this.togClass($currentLink, 'unsupportedPageLink');
-                        break;
-                    case (this.checkAbsoluteURL(href)):
-                        // link has a fishy url
-                        this.togClass($currentLink, 'absoluteURL');
-                        break;
-                    default:
-                        // url is good to go
+                        case (typeof href === 'undefined'):
+                            // link is undefined
+                            this.togClass($currentLink, 'brokenURL');
+                            break;
+                        case (href === ''):
+                            // link has an empty url
+                            this.togClass($currentLink, 'brokenURL');
+                            break;
+                        case (this.checkHref(href)):
+                            // link has a fishy url
+                            this.togClass($currentLink, 'urlIssue');
+                            break;
+                        case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
+                            // link leads to an out dated page
+                            this.togClass($currentLink, 'unsupportedPageLink');
+                            break;
+                        case (this.checkAbsoluteURL(href)):
+                            // link has a fishy url
+                            this.togClass($currentLink, 'absoluteURL');
+                            break;
+                        default:
+                            // url is good to go
                     }
                 }
 
                 // image links
                 if (isImageLink) {
                     switch (true) {
-                    case (typeof href === 'undefined'):
-                        // image link is undefined
-                        this.togClass(this.$divOverlay, 'brokenURL');
-                        break;
-                    case (href === ''):
-                        // image link has an empty url
-                        this.togClass(this.$divOverlay, 'brokenURL');
-                        break;
-                    case (this.checkHref(href)):
-                        // image link has a fishy url
-                        this.togClass(this.$divOverlay, 'urlIssue');
-                        break;
-                    case (this.datedURL(href)):
-                        // image link leads to an out dated page
-                        this.togClass(this.$divOverlay, 'unsupportedPageLink');
-                        break;
-                    case (this.checkAbsoluteURL(href)):
-                        // image link has a fishy url
-                        this.togClass(this.$divOverlay, 'absoluteURL');
-                        break;
-                    default:
-                        // url is good to go
+                        case (typeof href === 'undefined'):
+                            // image link is undefined
+                            this.togClass(this.$divOverlay, 'brokenURL');
+                            break;
+                        case (href === ''):
+                            // image link has an empty url
+                            this.togClass(this.$divOverlay, 'brokenURL');
+                            break;
+                        case (this.checkHref(href)):
+                            // image link has a fishy url
+                            this.togClass(this.$divOverlay, 'urlIssue');
+                            break;
+                        case (this.datedURL(href)):
+                            // image link leads to an out dated page
+                            this.togClass(this.$divOverlay, 'unsupportedPageLink');
+                            break;
+                        case (this.checkAbsoluteURL(href)):
+                            // image link has a fishy url
+                            this.togClass(this.$divOverlay, 'absoluteURL');
+                            break;
+                        default:
+                            // url is good to go
                     }
                 }
             },
@@ -1456,16 +1456,16 @@
             checkForTitleTextNextGen: function ($currentLink, isImageLink, $linkOverlay) {
                 // text links
                 switch (true) {
-                case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
-                    // link has no title
-                    this.togClass($linkOverlay, 'noTitle');
-                    break;
-                case ($currentLink.attr('title') !== ''):
-                    // link has a title
-                    this.togClass($linkOverlay, 'hasTitle');
-                    break;
-                default:
-                    // link is good to go
+                    case (typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === ''):
+                        // link has no title
+                        this.togClass($linkOverlay, 'noTitle');
+                        break;
+                    case ($currentLink.attr('title') !== ''):
+                        // link has a title
+                        this.togClass($linkOverlay, 'hasTitle');
+                        break;
+                    default:
+                        // link is good to go
                 }
             },
             checkURLNextGen: function ($currentLink, isImageLink, $linkOverlay) {
@@ -1473,28 +1473,28 @@
 
                 // regular text links
                 switch (true) {
-                case (typeof href === 'undefined'):
-                    // link is undefined
-                    this.togClass($linkOverlay, 'brokenURL');
-                    break;
-                case (href === ''):
-                    // link has an empty url
-                    this.togClass($linkOverlay, 'brokenURL');
-                    break;
-                case (this.checkHref(href)):
-                    // link has a fishy url
-                    this.togClass($linkOverlay, 'urlIssue');
-                    break;
-                case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
-                    // link leads to an out dated page
-                    this.togClass($linkOverlay, 'unsupportedPageLink');
-                    break;
-                case (this.checkAbsoluteURL(href)):
-                    // link has a fishy url
-                    this.togClass($linkOverlay, 'absoluteURL');
-                    break;
-                default:
-                    // url is good to go
+                    case (typeof href === 'undefined'):
+                        // link is undefined
+                        this.togClass($linkOverlay, 'brokenURL');
+                        break;
+                    case (href === ''):
+                        // link has an empty url
+                        this.togClass($linkOverlay, 'brokenURL');
+                        break;
+                    case (this.checkHref(href)):
+                        // link has a fishy url
+                        this.togClass($linkOverlay, 'urlIssue');
+                        break;
+                    case (this.datedURL(href) && QAtoolbox.nextGenCheck()):
+                        // link leads to an out dated page
+                        this.togClass($linkOverlay, 'unsupportedPageLink');
+                        break;
+                    case (this.checkAbsoluteURL(href)):
+                        // link has a fishy url
+                        this.togClass($linkOverlay, 'absoluteURL');
+                        break;
+                    default:
+                        // url is good to go
                 }
             },
             togClass: function ($currentLink, addClass) {
@@ -1664,15 +1664,15 @@
                         elm = n.parentElement,
                         unmarked;
 
-                    if (!words /*|| elm.matches(ignore)*/) {
+                    if (!words /*|| elm.matches(ignore)*/ ) {
                         return;
                     }
 
                     words.forEach(function (word) {
                         // check if word is in the dictionary AND if it IS NOT a number
                         if (!dictionary.check(self.clean(word)) && !(/^\d+$/).test(word)) {
-                            unmarked = new RegExp('\\b' + word + '(?!@##)\\b', 'g');
-                            text = text.replace(unmarked, '~@$&@~');
+                            unmarked = new RegExp('\\b' + word + '(?!@~~)\\b', 'g');
+                            text = text.replace(unmarked, '~~@$&@~~');
                         }
                     });
 
@@ -1704,7 +1704,7 @@
             },
             replaceMarkers: function (elm) {
                 if (elm) {
-                    elm.innerHTML = elm.innerHTML.replace(/~@(.*?)@~/g, '<span class="spell-check misspelled">$1</span>');
+                    elm.innerHTML = elm.innerHTML.replace(/~~@(.*?)@~~/g, '<span class="spell-check misspelled">$1</span>');
                 }
             },
             removeHighlights: function () {
@@ -1739,7 +1739,7 @@
                         title: 'Queue up a Page Test'
                     }).text('Web Page Test'),
                     // eslint-disable-next-line
-                    email: GM_getValue( 'email', 'your.name@cdk.com' ), //jshint ignore:line
+                    email: GM_getValue('email', 'your.name@cdk.com'), //jshint ignore:line
                     $emailTitle: jQuery('<div>').text('Enter your email'),
                     $emailInput: jQuery('<input>').attr({
                         class: 'WPT email',
@@ -2730,41 +2730,41 @@
                 // ----------------------------------------
                 switch (true) {
                     // test for mobile specific links
-                case (linkURL.indexOf('tel') >= 0):
-                    if (isImageLink) {
-                        $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
-                        $linkOverlay.addClass('mobilePhoneLink');
-                    } else {
-                        $currentLink.addClass('mobilePhoneLink');
-                    }
-                    // these links do not need to be sent to ajax testing,
-                    // so minus this from the running total of links
-                    checkLinks.config.totalTests -= 1;
-                    return false;
-                    // test for javascript links or Jump Links
-                case (linkURL.indexOf('javascript') >= 0 || (linkURL.indexOf('#') === 0 || linkURL.indexOf('#') === 1)):
-                    $currentLink.addClass('jumpLink');
-                    // these links do not need to be sent to ajax testing,
-                    // so minus this from the running total of links
-                    checkLinks.config.totalTests -= 1;
-                    return false;
-                    // test for undefined or empty URLs
-                case (typeof $currentLink === 'undefined' || linkURL === ''):
-                    $currentLink.addClass('attention');
-                    checkLinks.config.totalTests -= 1;
-                    return false;
-                    // test for absolute path URLs
-                    // ** highlight for absolute URL but still test **
-                case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
-                    if (isImageLink) {
-                        $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
-                        $linkOverlay.addClass('otherDomain');
-                    } else {
-                        $currentLink.addClass('otherDomain');
-                    }
-                    return true; // TEST THE ABSOLUTE URL REGARDLESS
-                default:
-                    // do nothing
+                    case (linkURL.indexOf('tel') >= 0):
+                        if (isImageLink) {
+                            $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
+                            $linkOverlay.addClass('mobilePhoneLink');
+                        } else {
+                            $currentLink.addClass('mobilePhoneLink');
+                        }
+                        // these links do not need to be sent to ajax testing,
+                        // so minus this from the running total of links
+                        checkLinks.config.totalTests -= 1;
+                        return false;
+                        // test for javascript links or Jump Links
+                    case (linkURL.indexOf('javascript') >= 0 || (linkURL.indexOf('#') === 0 || linkURL.indexOf('#') === 1)):
+                        $currentLink.addClass('jumpLink');
+                        // these links do not need to be sent to ajax testing,
+                        // so minus this from the running total of links
+                        checkLinks.config.totalTests -= 1;
+                        return false;
+                        // test for undefined or empty URLs
+                    case (typeof $currentLink === 'undefined' || linkURL === ''):
+                        $currentLink.addClass('attention');
+                        checkLinks.config.totalTests -= 1;
+                        return false;
+                        // test for absolute path URLs
+                        // ** highlight for absolute URL but still test **
+                    case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
+                        if (isImageLink) {
+                            $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
+                            $linkOverlay.addClass('otherDomain');
+                        } else {
+                            $currentLink.addClass('otherDomain');
+                        }
+                        return true; // TEST THE ABSOLUTE URL REGARDLESS
+                    default:
+                        // do nothing
                 }
                 return true;
             },
@@ -3262,18 +3262,18 @@
             addFlagsToElements: function ($visualElement, pageError404) {
                 switch (true) {
                     // if internal page 404
-                case (pageError404):
-                    checkLinks.error($visualElement);
-                    checkLinks.config.errors += 1;
-                    break;
+                    case (pageError404):
+                        checkLinks.error($visualElement);
+                        checkLinks.config.errors += 1;
+                        break;
 
-                    // if link IS legit
-                case (!pageError404):
-                    checkLinks.success($visualElement);
-                    break;
+                        // if link IS legit
+                    case (!pageError404):
+                        checkLinks.success($visualElement);
+                        break;
 
-                default:
-                    // do nothing
+                    default:
+                        // do nothing
                 }
             },
             tetraAjaxTest: function ($currentLink) {
@@ -3478,7 +3478,7 @@
                 this.attachToImage(isNextGen, $currentLink, $currentCard);
                 return this.$divOverlay;
             },
-            cacheDOMOverlayElements: function ($currentLink /*, isNextGen*/) {
+            cacheDOMOverlayElements: function ($currentLink /*, isNextGen*/ ) {
                 // IF NEXTGEN SITE
                 this.widthOfImage = $currentLink.find('img').width();
                 this.heightOfImage = $currentLink.find('img').height();
@@ -3571,8 +3571,7 @@
                     }),
                     $autoApplyTitle: jQuery('<div>').attr({
                         class: 'autoApply'
-                    })
-                        .text('Auto Apply Modifiers?'),
+                    }).text('Auto Apply Modifiers?'),
                     $autoApplyIcon: jQuery('<div>').attr({
                         id: 'autoApplyIcon'
                     }),
@@ -3715,153 +3714,153 @@
                     //--------------------------------------------------------
                     // NEXTGEN PARAMETER
                     //--------------------------------------------------------
-                case ('nextGen='):
-                    // ----------------------------------------
-                    // parameter found in url
-                    // ----------------------------------------
-                    // if 'found parameter in url' AND 'toggle is ON'
-                    if (hasKey && isOn) {
-                        // if 'parameter is set to false'
-                        if (this.newURL.indexOf('nextGen=false') >= 0) {
-                            this.newURL = this.newURL.replace('nextGen=false', 'nextGen=true');
+                    case ('nextGen='):
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is ON'
+                        if (hasKey && isOn) {
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('nextGen=false') >= 0) {
+                                this.newURL = this.newURL.replace('nextGen=false', 'nextGen=true');
+                                return false;
+                            }
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('nextGen=true') >= 0) {
+                                // do nothing
+                                return true;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is OFF'
+                        if (hasKey && !isOn) {
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('nextGen=true') >= 0) {
+                                this.newURL = this.newURL.replace('nextGen=true', 'nextGen=false');
+                                return false;
+                            }
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('nextGen=false') >= 0) {
+                                // do nothing
+                                return true;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is ON'
+                        if (!hasKey && isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&nextGen=true';
                             return false;
                         }
-                        // if 'parameter is set to true'
-                        if (this.newURL.indexOf('nextGen=true') >= 0) {
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is OFF'
+                        if (!hasKey && !isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&nextGen=false';
+                            return false;
+                        }
+                        break;
+                        //--------------------------------------------------------
+                        // DISABLE AUOTFILL PARAMETER
+                        //--------------------------------------------------------
+                    case ('disableAutofill='):
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is ON'
+                        if (hasKey && isOn) {
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('disableAutofill=false') >= 0) {
+                                this.newURL = this.newURL.replace('disableAutofill=false', 'disableAutofill=true');
+                                return false;
+                            }
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('disableAutofill=true') >= 0) {
+                                // do nothing
+                                return true;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is OFF'
+                        if (hasKey && !isOn) {
+                            // if 'parameter is set to true'
+                            if (this.newURL.indexOf('disableAutofill=true') >= 0) {
+                                this.newURL = this.newURL.replace('&disableAutofill=true', '');
+                                return false;
+                            }
+                            // if 'parameter is set to false'
+                            if (this.newURL.indexOf('disableAutofill=false') >= 0) {
+                                // remove parameter from url
+                                this.newURL = this.newURL.replace('&disableAutofill=false', '');
+                                return false;
+                            }
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is ON'
+                        if (!hasKey && isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&disableAutofill=true';
+                            return false;
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is OFF'
+                        if (!hasKey && !isOn) {
                             // do nothing
                             return true;
                         }
-                    }
-                    // ----------------------------------------
-                    // parameter found in url
-                    // ----------------------------------------
-                    // if 'found parameter in url' AND 'toggle is OFF'
-                    if (hasKey && !isOn) {
-                        // if 'parameter is set to true'
-                        if (this.newURL.indexOf('nextGen=true') >= 0) {
-                            this.newURL = this.newURL.replace('nextGen=true', 'nextGen=false');
-                            return false;
-                        }
-                        // if 'parameter is set to false'
-                        if (this.newURL.indexOf('nextGen=false') >= 0) {
+                        break;
+                        //--------------------------------------------------------
+                        // MILESTONE 4 PARAMETERS (TETRA SITES)
+                        //--------------------------------------------------------
+                    case ('relative='):
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is turned on'
+                        if (hasKey && isOn) {
                             // do nothing
                             return true;
                         }
-                    }
-                    // ----------------------------------------
-                    // parameter not found in url
-                    // ----------------------------------------
-                    // if 'parameter not found in url' AND 'toggle is ON'
-                    if (!hasKey && isOn) {
-                        // Add parameter to url string
-                        this.newURL += '&nextGen=true';
-                        return false;
-                    }
-                    // ----------------------------------------
-                    // parameter not found in url
-                    // ----------------------------------------
-                    // if 'parameter not found in url' AND 'toggle is OFF'
-                    if (!hasKey && !isOn) {
-                        // Add parameter to url string
-                        this.newURL += '&nextGen=false';
-                        return false;
-                    }
-                    break;
-                    //--------------------------------------------------------
-                    // DISABLE AUOTFILL PARAMETER
-                    //--------------------------------------------------------
-                case ('disableAutofill='):
-                    // ----------------------------------------
-                    // parameter found in url
-                    // ----------------------------------------
-                    // if 'found parameter in url' AND 'toggle is ON'
-                    if (hasKey && isOn) {
-                        // if 'parameter is set to false'
-                        if (this.newURL.indexOf('disableAutofill=false') >= 0) {
-                            this.newURL = this.newURL.replace('disableAutofill=false', 'disableAutofill=true');
+                        // ----------------------------------------
+                        // parameter found in url
+                        // ----------------------------------------
+                        // if 'found parameter in url' AND 'toggle is off'
+                        if (hasKey && !isOn) {
+                            // remove ADDED parameter from URL
+                            this.newURL = this.newURL.replace('&comments=true&relative=true', '');
                             return false;
                         }
-                        // if 'parameter is set to true'
-                        if (this.newURL.indexOf('disableAutofill=true') >= 0) {
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is ON'
+                        if (!hasKey && isOn) {
+                            // Add parameter to url string
+                            this.newURL += '&comments=true&relative=true';
+                            return false;
+                        }
+                        // ----------------------------------------
+                        // parameter not found in url
+                        // ----------------------------------------
+                        // if 'parameter not found in url' AND 'toggle is OFF'
+                        if (!hasKey && !isOn) {
                             // do nothing
                             return true;
                         }
-                    }
-                    // ----------------------------------------
-                    // parameter found in url
-                    // ----------------------------------------
-                    // if 'found parameter in url' AND 'toggle is OFF'
-                    if (hasKey && !isOn) {
-                        // if 'parameter is set to true'
-                        if (this.newURL.indexOf('disableAutofill=true') >= 0) {
-                            this.newURL = this.newURL.replace('&disableAutofill=true', '');
-                            return false;
-                        }
-                        // if 'parameter is set to false'
-                        if (this.newURL.indexOf('disableAutofill=false') >= 0) {
-                            // remove parameter from url
-                            this.newURL = this.newURL.replace('&disableAutofill=false', '');
-                            return false;
-                        }
-                    }
-                    // ----------------------------------------
-                    // parameter not found in url
-                    // ----------------------------------------
-                    // if 'parameter not found in url' AND 'toggle is ON'
-                    if (!hasKey && isOn) {
-                        // Add parameter to url string
-                        this.newURL += '&disableAutofill=true';
-                        return false;
-                    }
-                    // ----------------------------------------
-                    // parameter not found in url
-                    // ----------------------------------------
-                    // if 'parameter not found in url' AND 'toggle is OFF'
-                    if (!hasKey && !isOn) {
-                        // do nothing
-                        return true;
-                    }
-                    break;
-                    //--------------------------------------------------------
-                    // MILESTONE 4 PARAMETERS (TETRA SITES)
-                    //--------------------------------------------------------
-                case ('relative='):
-                    // ----------------------------------------
-                    // parameter found in url
-                    // ----------------------------------------
-                    // if 'found parameter in url' AND 'toggle is turned on'
-                    if (hasKey && isOn) {
-                        // do nothing
-                        return true;
-                    }
-                    // ----------------------------------------
-                    // parameter found in url
-                    // ----------------------------------------
-                    // if 'found parameter in url' AND 'toggle is off'
-                    if (hasKey && !isOn) {
-                        // remove ADDED parameter from URL
-                        this.newURL = this.newURL.replace('&comments=true&relative=true', '');
-                        return false;
-                    }
-                    // ----------------------------------------
-                    // parameter not found in url
-                    // ----------------------------------------
-                    // if 'parameter not found in url' AND 'toggle is ON'
-                    if (!hasKey && isOn) {
-                        // Add parameter to url string
-                        this.newURL += '&comments=true&relative=true';
-                        return false;
-                    }
-                    // ----------------------------------------
-                    // parameter not found in url
-                    // ----------------------------------------
-                    // if 'parameter not found in url' AND 'toggle is OFF'
-                    if (!hasKey && !isOn) {
-                        // do nothing
-                        return true;
-                    }
-                    break;
-                default:
+                        break;
+                    default:
                 }
             },
             reloadPage: function (matchesFound) {
@@ -4495,7 +4494,7 @@
                     // toolbox version
                     $version: jQuery('<div>')
                         // eslint-disable-next-line
-                        .text( 'version: ' + GM_info.script.version ), //jshint ignore:line
+                        .text('version: ' + GM_info.script.version), //jshint ignore:line
                     $changeLog: jQuery('<a>').attr({
                         href: 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
                         title: 'The Latest changes will be mentioned here.'
