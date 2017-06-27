@@ -154,6 +154,11 @@
                 // loop through Legend Content list
                 for (key in $legendContent) {
                     if ($legendContent.hasOwnProperty(key)) {
+
+                        if (key === 'majorPage' && this.nextGenCheck()) {
+                            continue;
+                        }
+
                         value = $legendContent[key];
                         // build listing element
                         this.$listItem = jQuery('<li>').attr({
@@ -2730,7 +2735,7 @@
                 // ----------------------------------------
                 switch (true) {
                     // test for mobile specific links
-                    case (linkURL.indexOf('tel') >= 0):
+                    case (linkURL.indexOf('tel:') >= 0):
                         if (isImageLink) {
                             $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
                             $linkOverlay.addClass('mobilePhoneLink');
