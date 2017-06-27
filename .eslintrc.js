@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-'use strict';
+"use strict";
 
 module.exports = {
-    rules: {
+    'rules': {
         // The rules below are listed in the order they appear on the eslint
         // rules page. All rules are listed to make it easier to keep in sync
         // as new ESLint rules are added.
@@ -60,11 +59,11 @@ module.exports = {
         'no-unsafe-negation': 0,
         'use-isnan': 2, // eslint:recommended
         'valid-jsdoc': [2, {
-            requireParamDescription: false,
-            requireReturnDescription: false,
-            requireReturn: false,
-            prefer: {
-                returns: 'return'
+            'requireParamDescription': false,
+            'requireReturnDescription': false,
+            'requireReturn': false,
+            'prefer': {
+                'returns': 'return',
             },
     }],
         'valid-typeof': 2, // eslint:recommended
@@ -161,7 +160,7 @@ module.exports = {
         'no-undef': 2, // eslint:recommended
         'no-undefined': 0,
         'no-unused-vars': [2, {
-            args: 'none'
+            'args': 'none',
         }], // eslint:recommended
         'no-use-before-define': 0,
 
@@ -187,7 +186,7 @@ module.exports = {
         'block-spacing': 0,
         'brace-style': 2,
         'camelcase': [2, {
-            properties: 'never'
+            'properties': 'never',
         }],
         'comma-dangle': [2, 'always-multiline'],
         'comma-spacing': 2,
@@ -213,10 +212,10 @@ module.exports = {
         'lines-around-directive': 0,
         'max-depth': 0,
         'max-len': [2, {
-            code: 80,
-            tabWidth: 2,
-            ignoreUrls: true,
-            ignorePattern: '^goog\.(module|require)',
+            'code': 80,
+            'tabWidth': 2,
+            'ignoreUrls': true,
+            'ignorePattern': '^goog\.(module|require)',
     }],
         'max-lines': 0,
         'max-nested-callbacks': 0,
@@ -238,7 +237,7 @@ module.exports = {
         'no-mixed-operators': 0,
         'no-mixed-spaces-and-tabs': 2, // eslint:recommended
         'no-multiple-empty-lines': [2, {
-            max: 2
+            'max': 2,
         }],
         'no-negated-condition': 0,
         'no-nested-ternary': 0,
@@ -256,22 +255,23 @@ module.exports = {
         'object-property-newline': 0,
         'one-var-declaration-per-line': 0,
         'one-var': [2, {
-            var: 'never',
-            let: 'never',
-            const: 'never',
+            'var': 'never',
+            'let': 'never',
+            'const': 'never',
     }],
         'operator-assignment': 0,
         'operator-linebreak': 0,
         'padded-blocks': [2, 'never'],
         'quote-props': [2, 'consistent'],
         'quotes': [2, 'single', {
-            allowTemplateLiterals: true
+            'allowTemplateLiterals': true,
+            'avoidEscape': true,
         }],
         'require-jsdoc': [2, {
-            require: {
-                FunctionDeclaration: true,
-                MethodDefinition: true,
-                ClassDeclaration: true,
+            'require': {
+                'FunctionDeclaration': true,
+                'MethodDefinition': true,
+                'ClassDeclaration': true,
             },
     }],
         'semi-spacing': 2,
@@ -280,9 +280,9 @@ module.exports = {
         'sort-vars': 0,
         'space-before-blocks': 2,
         'space-before-function-paren': [2, {
-            "anonymous": "always",
-            "named": "always",
-            "asyncArrow": "always"
+            'anonymous': 'always',
+            'named': 'always',
+            'asyncArrow': 'always',
     }],
         'space-in-parens': 0,
         'space-infix-ops': 0,
