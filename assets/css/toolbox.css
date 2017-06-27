@@ -34,7 +34,7 @@ default styles
 }
 
 .toolboxContainer.nextgen {
-    right: 0%;
+    right: 0;
 }
 
 .toolboxContainer .highlight {
@@ -69,7 +69,7 @@ default styles
     font-size: 12px;
     font-weight: normal;
     top: 15%;
-    padding: 4px 0px;
+    padding: 4px 0;
     position: relative;
     text-transform: lowercase;
     width: 135px;
@@ -88,11 +88,11 @@ default styles
 }
 
 .myEDOBut.nextgen {
-    margin: 1px 0px 0px -20px;
+    margin: 1px 0 0 -20px;
 }
 
 .tetra.myEDOBut {
-    margin: 1px 0px 0px 10px;
+    margin: 1px 0 0 10px;
 }
 
 .myEDOBut.offButt {
@@ -103,7 +103,7 @@ default styles
     color: white;
     width: 90%;
     height: 50px;
-    margin: 0px;
+    margin: 0;
 }
 
 .myEDOBut[disabled] {
@@ -148,7 +148,7 @@ default styles
 }
 
 .hideToolbox>i {
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 
@@ -168,15 +168,15 @@ default styles
 }
 
 .showToolbox.tetra {
-    left: 0%;
+    left: 0;
 }
 
 .showToolbox.nextgen {
-    right: 0%;
+    right: 0;
 }
 
 .showToolbox>i {
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 
@@ -211,8 +211,8 @@ default styles
 
 .legendList {
     list-style-type: none;
-    margin: 10px 0px;
-    padding: 0px;
+    margin: 10px 0;
+    padding: 0;
 }
 
 .tbLegend {
@@ -273,8 +273,8 @@ Page Information Styles
     color: rgb(0, 0, 0);
     z-index: 99999;
     position: fixed;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     font-size: 16px;
@@ -287,7 +287,7 @@ Page Information Styles
     clear: both;
     cursor: pointer;
     line-height: 15px;
-    padding: 3px 0px;
+    padding: 3px 0;
     text-transform: none;
     border-top: 1px solid #000000;
     border-bottom: 1px solid #000000;
@@ -364,7 +364,7 @@ body .card .content .text .copy .siteLink.noTitle,
 body .card .content .text .link .siteLink.noTitle,
 body .card .content .media .imgOverlay.noTitle {
     background: rgb(255, 124, 216);
-    background: rgba(255, 124, 216, .75);
+    background: rgba(255, 124, 216, .75) !important;
     border: none;
 }
 
@@ -374,7 +374,7 @@ body .card .content .text .copy .siteLink.hasTitle,
 body .card .content .text .link .siteLink.hasTitle,
 body .card .content .media .imgOverlay.hasTitle {
     background: rgb(146, 232, 66);
-    background: rgba(146, 232, 66, .75);
+    background: rgba(146, 232, 66, .75) !important;
     border: none;
 }
 
@@ -384,7 +384,7 @@ body .card .content .text .copy .siteLink.opensWindow,
 body .card .content .text .link .siteLink.opensWindow,
 body .card .content .media .imgOverlay.opensWindow {
     background: rgb(255, 165, 0);
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%) !important;
     border: none;
 }
 
@@ -394,7 +394,7 @@ body .card .content .text .copy .siteLink.hasTitle.opensWindow,
 body .card .content .text .link .siteLink.hasTitle.opensWindow,
 body .card .content .media .imgOverlay.hasTitle.opensWindow {
     background: rgb(146, 232, 66);
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important;
     border: none;
 }
 
@@ -404,7 +404,7 @@ body .card .content .text .copy .siteLink.noTitle.opensWindow,
 body .card .content .text .link .siteLink.noTitle.opensWindow,
 body .card .content .media .imgOverlay.noTitle.opensWindow {
     background: rgb(255, 124, 216);
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important;
     border: none;
 }
 
@@ -414,7 +414,7 @@ body .card .content .text .copy .siteLink.emptyTitle.opensWindow,
 body .card .content .text .link .siteLink.emptyTitle.opensWindow,
 body .card .content .media .imgOverlay.emptyTitle.opensWindow {
     background: rgb(255, 124, 216);
-    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important;
     border: none;
 }
 
@@ -424,7 +424,7 @@ body .card .content .text .copy .siteLink.brokenURL,
 body .card .content .text .link .siteLink.brokenURL,
 body .card .content .media .imgOverlay.brokenURL {
     background: rgb(240, 0, 0);
-    background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30));
+    background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important;
     border: none;
     color: white;
 }
@@ -434,9 +434,9 @@ footer .card .content .text .link .siteLink.urlIssue,
 body .card .content .text .copy .siteLink.urlIssue,
 body .card .content .text .link .siteLink.urlIssue,
 body .card .content .media .imgOverlay.urlIssue {
-    -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
-    -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
-    box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
+    -moz-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
+    -webkit-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
+    box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
     border: none;
 }
 
@@ -445,17 +445,18 @@ footer .card .content .text .link .siteLink.absoluteURL,
 body .card .content .text .copy .siteLink.absoluteURL,
 body .card .content .text .link .siteLink.absoluteURL,
 body .card .content .media .imgOverlay.absoluteURL {
-    -moz-box-shadow: inset 0px 0px 0px 3px purple;
-    -webkit-box-shadow: inset 0px 0px 0px 3px purple;
-    box-shadow: inset 0px 0px 0px 3px purple;
+    -moz-box-shadow: inset 0 0 0 3px purple;
+    -webkit-box-shadow: inset 0 0 0 3px purple;
+    box-shadow: inset 0 0 0 3px purple;
     border: none;
 }
 
 .buttonFlag,
 footer .card .content .text .link .siteLink.buttonFlag,
-body .card .content .text .link .siteLink.buttonFlag {
+body .card .content .text .link .siteLink.buttonFlag,
+body .card .content .text .copy .buttonFlag {
     background: #0ed2f7;
-    background: linear-gradient(to right, #b2fefa, #0ed2f7);
+    background: linear-gradient(to right, #b2fefa, #0ed2f7) !important;
     color: #000000;
     border: none;
 }
@@ -470,7 +471,7 @@ body .card .content .text .link .siteLink.linkChecked.hasTitle,
 body .card .content .text .link .siteLink.linkChecked.noTitle,
 body .card .content .media .imgOverlay.linkChecked {
     background: rgb(160, 255, 206);
-    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
+    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
     border: none;
     color: #909090;
 }
@@ -508,26 +509,26 @@ Web Page Test Styles
     display: none;
     text-align: center;
     padding: 5px;
-    margin: 5px 0px;
+    margin: 5px 0;
 }
 
 .WPT.email {
-    margin: 5px 0px;
+    margin: 5px 0;
     width: 85%;
 }
 
 .WPT.bSelect {
-    margin: 5px 0px;
+    margin: 5px 0;
     width: 90%;
 }
 
 .WPT.keySelect {
-    margin: 5px 0px;
+    margin: 5px 0;
     width: 90%;
 }
 
 .WPT.input .myEDOBut {
-    margin: 0px;
+    margin: 0;
 }
 
 
@@ -542,27 +543,28 @@ show navigation
 
 .majorPage {
     color: #000000;
-    -moz-box-shadow: inset 0px 0px 0px 500px rgb(255, 204, 51);
-    -webkit-box-shadow: inset 0px 0px 0px 500px rgb(255, 204, 51);
-    box-shadow: inset 0px 0px 0px 500px rgb(255, 204, 51);
+    -moz-box-shadow: inset 0 0 0 500px rgb(255, 204, 51);
+    -webkit-box-shadow: inset 0 0 0 500px rgb(255, 204, 51);
+    box-shadow: inset 0 0 0 500px rgb(255, 204, 51);
 }
 
 .customPage {
-    color: #000000;
-    -moz-box-shadow: inset 0px 0px 0px 500px #fc67fa;
-    -webkit-box-shadow: inset 0px 0px 0px 500px #fc67fa;
-    box-shadow: inset 0px 0px 0px 500px #fc67fa;
+    color: #ffffff;
+    -moz-box-shadow: inset 0 0 0 500px #fc67fa;
+    -webkit-box-shadow: inset 0 0 0 500px #fc67fa;
+    box-shadow: inset 0 0 0 500px #fc67fa;
 }
 
 body header .menu>nav>ul .showNav.nextgenShowNav {
     display: inline-block;
     position: absolute;
-    background: white;
+    background: rgb(0, 0, 0);
     border: 1px solid #b7b7b7;
+    color: rgb(255, 255, 255);
     margin: 1rem 0 0 -1rem;
     padding: 0;
     width: 20rem;
-    z-index: 100;
+/*    z-index: 100;*/
 }
 
 body header .menu>nav>ul .showNav.nextgenShowNav>li {
@@ -570,8 +572,8 @@ body header .menu>nav>ul .showNav.nextgenShowNav>li {
 }
 
 body header .menu>nav>ul .showNav.customAdd {
-    width: 20rem;
-    padding: 0;
+    width: 15rem;
+    padding: 1rem 0;
     font-size: 15px;
 }
 
@@ -599,8 +601,8 @@ SEO Simplify
     color: rgb(0, 0, 0);
     z-index: 99999;
     position: fixed;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     font-size: 16px;
@@ -661,9 +663,9 @@ body .card .content .text .copy .siteLink.attention,
 body .card .content .text .link .siteLink.attention,
 body .card .content .media .imgOverlay.attention {
     border: none;
-    -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
-    -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
-    box-shadow: inset 0px 0px 0px 3px rgb(255, 55, 60);
+    -moz-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
+    -webkit-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
+    box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
 }
 
 .jumpLink,
