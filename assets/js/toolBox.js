@@ -2795,20 +2795,21 @@
                 // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
                 for (a; a < len; a += 1) {
                     // reset variables
-                    $image = null;
-                    $imagelink = null;
-                    isImageLink = false;
+                    //                    $image = null;
+                    //                    $imagelink = null;
+                    //                    isImageLink = false;
                     $currentCard = jQuery($sections[a]);
-                    $currentLink = null;
+                    //                    $currentLink = null;
                     $cardDeck = null;
 
                     // save current card settings
                     // if currentCard has a class save it, if no class make variable equal ''
                     cardClass = ($currentCard.attr('class')) ? $currentCard.attr('class') : '';
-                    $cardLinkContainer = $currentCard.find('div.link');
-                    $cardSEOContainer = $currentCard.find('div.copy');
-                    $cardImageContainer = $currentCard.find('div.media');
                     $cardDeck = $currentCard.find('div.deck');
+
+                    //                    $cardLinkContainer = $currentCard.find('div.link');
+                    //                    $cardSEOContainer = $currentCard.find('div.copy');
+                    //                    $cardImageContainer = $currentCard.find('div.media');
 
                     //Part1
                     //detect if the section element is a parent container
@@ -2820,6 +2821,169 @@
                         continue;
                     }
 
+                    this.randomFunction($currentCard);
+
+                    //                    if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
+                    //                        // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                    //                        // ----------------------------------------
+                    //                        // get all links defined in card
+                    //                        // should include all primary, secondary, and tenary links
+                    //                        $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                    //                        meLength = $cardLinks.length;
+                    //                        if (meLength > 0) {
+                    //                            // set total tests to number of links on page
+                    //                            checkLinks.config.totalTests = checkLinks.config.totalTests + meLength;
+                    //                            this.testLinks($cardLinks);
+                    //                        }
+                    //
+                    //                        // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                    //                        // ----------------------------------------
+                    //                        // get all text links in copy text of card
+                    //                        $copyTextLinks = $cardSEOContainer.find('a');
+                    //                        youLength = $copyTextLinks.length;
+                    //                        if (youLength > 0) {
+                    //                            // set total tests to number of links on page
+                    //                            checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
+                    //                            this.testLinks($copyTextLinks);
+                    //                        }
+                    //                    } else if (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1) {
+                    //                        $cardLinkContainer = $currentCard.find('div.link');
+                    //                        $cardSEOContainer = $currentCard.find('div.copy');
+                    //                        $cardImageContainer = $currentCard.find('div.media');
+                    //
+                    //                        // check if card has an image
+                    //                        if ($cardImageContainer.is(':empty')) {
+                    //                            // this shouldn't happen; if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
+                    //                            isImageLink = false;
+                    //                        } else {
+                    //                            // find image in the card and apply a div overlay
+                    //                            isImageLink = true;
+                    //                            // find FIRST PRIMARY text link
+                    //                            // This is because the card will be linked to the first primary link
+                    //                            $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                    //                            $currentLink.addClass('siteLink'); // add default flag class to links
+                    //                            $image = $cardImageContainer.find('img');
+                    //                            // add div overlay to image
+                    //
+                    //                            // send link to ajx testing
+                    //                            // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
+                    //                            // set total tests to number of links on page
+                    //                            checkLinks.config.totalTests += 1;
+                    //                            this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
+                    //
+                    //                            // TEST other Links defined in card Settings
+                    //                            // check if other links exist, get all links defined in card
+                    //                            // should include all primary, secondary, and tenary links
+                    //                            $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                    //                            meLength = $cardLinks.length;
+                    //                            if (meLength > 0) {
+                    //                                // set total tests to number of links on page
+                    //                                checkLinks.config.totalTests = checkLinks.config.totalTests + meLength;
+                    //                                this.testLinks($cardLinks);
+                    //                            }
+                    //
+                    //                            // TEST TEXT LINKS IN THE COPY OF THE CARD
+                    //                            // check copy container and grab all links
+                    //                            $copyTextLinks = $cardSEOContainer.find('a');
+                    //                            youLength = $copyTextLinks.length;
+                    //                            if (youLength > 0) {
+                    //                                // set total tests to number of links on page
+                    //                                checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
+                    //                                this.testLinks($copyTextLinks);
+                    //                            }
+                    //                        }
+                    //                    }
+                    /*
+                                        switch (true) {
+                                            // ----------------------------------------
+                                            // card style is set to whole card is link-clickable
+                                            // the CTAs are populated from the card settings
+                                            // OR
+                                            // card style is set to whole card is none-clickable
+                                            // the CTAs are populated from the card settings
+                                            case (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1):
+                                                // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                                                // ----------------------------------------
+                                                // get all links defined in card
+                                                // should include all primary, secondary, and tenary links
+                                                $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                                                meLength = $cardLinks.length;
+                                                if (meLength > 0) {
+                                                    // set total tests to number of links on page
+                                                    checkLinks.config.totalTests = checkLinks.config.totalTests + meLength;
+                                                    this.testLinks($cardLinks);
+                                                }
+
+                                                // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                                                // ----------------------------------------
+                                                // get all text links in copy text of card
+                                                $copyTextLinks = $cardSEOContainer.find('a');
+                                                youLength = $copyTextLinks.length;
+                                                if (youLength > 0) {
+                                                    // set total tests to number of links on page
+                                                    checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
+                                                    this.testLinks($copyTextLinks);
+                                                }
+                                                break;
+                                                // ----------------------------------------
+                                                // ----------------------------------------
+                                                // card style is set to whole card is clickable and has CTA links
+                                                // if card is made clickable text links will not be able to be reached.
+                                                // should this still be checked?
+                                            case (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1):
+                                                $cardLinkContainer = $currentCard.find('div.link');
+                                                $cardSEOContainer = $currentCard.find('div.copy');
+                                                $cardImageContainer = $currentCard.find('div.media');
+
+                                                // check if card has an image
+                                                if ($cardImageContainer.is(':empty')) {
+                                                    // this shouldn't happen; if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
+                                                    isImageLink = false;
+                                                } else {
+                                                    // find image in the card and apply a div overlay
+                                                    isImageLink = true;
+                                                    // find FIRST PRIMARY text link
+                                                    // This is because the card will be linked to the first primary link
+                                                    $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                                                    $currentLink.addClass('siteLink'); // add default flag class to links
+                                                    $image = $cardImageContainer.find('img');
+                                                    // add div overlay to image
+
+                                                    // send link to ajx testing
+                                                    // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
+                                                    // set total tests to number of links on page
+                                                    checkLinks.config.totalTests += 1;
+                                                    this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
+
+                                                    // TEST other Links defined in card Settings
+                                                    // check if other links exist, get all links defined in card
+                                                    // should include all primary, secondary, and tenary links
+                                                    $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                                                    meLength = $cardLinks.length;
+                                                    if (meLength > 0) {
+                                                        // set total tests to number of links on page
+                                                        checkLinks.config.totalTests = checkLinks.config.totalTests + meLength;
+                                                        this.testLinks($cardLinks);
+                                                    }
+
+                                                    // TEST TEXT LINKS IN THE COPY OF THE CARD
+                                                    // check copy container and grab all links
+                                                    $copyTextLinks = $cardSEOContainer.find('a');
+                                                    youLength = $copyTextLinks.length;
+                                                    if (youLength > 0) {
+                                                        // set total tests to number of links on page
+                                                        checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
+                                                        this.testLinks($copyTextLinks);
+                                                    }
+                                                }
+                                                break;
+                                            default:
+                                                // card does not have planned for classes
+                                                // console.log('default switch statement reached');
+                                                // console.log($currentCard);
+                                        }
+                    */
+                    /* ORIGINAL CODE
                     switch (true) {
                         // ----------------------------------------
                         // card style is set to whole card is link-clickable
@@ -2907,6 +3071,86 @@
                             // card does not have planned for classes
                             // console.log('default switch statement reached');
                             // console.log($currentCard);
+                    }
+                    */
+                }
+            },
+            randomFunction: function ($currentCard) {
+                var $cardLinkContainer = $currentCard.find('div.link'),
+                    $cardSEOContainer = $currentCard.find('div.copy'),
+                    $cardImageContainer = $currentCard.find('div.media'),
+                    cardClass = ($currentCard.attr('class')) ? $currentCard.attr('class') : '',
+                    isImageLink = false,
+                    $cardLinks, $copyTextLinks, meLength, youLength, $currentLink, $image;
+
+                if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
+                    // CHECK ALL LINKS DEFINED IN CARD SETTINGS
+                    // ----------------------------------------
+                    // get all links defined in card
+                    // should include all primary, secondary, and tenary links
+                    $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                    meLength = $cardLinks.length;
+                    if (meLength > 0) {
+                        // set total tests to number of links on page
+                        checkLinks.config.totalTests = checkLinks.config.totalTests + meLength;
+                        this.testLinks($cardLinks);
+                    }
+
+                    // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
+                    // ----------------------------------------
+                    // get all text links in copy text of card
+                    $copyTextLinks = $cardSEOContainer.find('a');
+                    youLength = $copyTextLinks.length;
+                    if (youLength > 0) {
+                        // set total tests to number of links on page
+                        checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
+                        this.testLinks($copyTextLinks);
+                    }
+                } else if (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1) {
+                    $cardLinkContainer = $currentCard.find('div.link');
+                    $cardSEOContainer = $currentCard.find('div.copy');
+                    $cardImageContainer = $currentCard.find('div.media');
+
+                    // check if card has an image
+                    if ($cardImageContainer.is(':empty')) {
+                        // this shouldn't happen; if the card is made to be clickable it should mean that the card will have an image as a 'best practice'
+                        isImageLink = false;
+                    } else {
+                        // find image in the card and apply a div overlay
+                        isImageLink = true;
+                        // find FIRST PRIMARY text link
+                        // This is because the card will be linked to the first primary link
+                        $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
+                        $currentLink.addClass('siteLink'); // add default flag class to links
+                        $image = $cardImageContainer.find('img');
+                        // add div overlay to image
+
+                        // send link to ajx testing
+                        // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
+                        // set total tests to number of links on page
+                        checkLinks.config.totalTests += 1;
+                        this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
+
+                        // TEST other Links defined in card Settings
+                        // check if other links exist, get all links defined in card
+                        // should include all primary, secondary, and tenary links
+                        $cardLinks = $cardLinkContainer.find('a'); // this is an array
+                        meLength = $cardLinks.length;
+                        if (meLength > 0) {
+                            // set total tests to number of links on page
+                            checkLinks.config.totalTests = checkLinks.config.totalTests + meLength;
+                            this.testLinks($cardLinks);
+                        }
+
+                        // TEST TEXT LINKS IN THE COPY OF THE CARD
+                        // check copy container and grab all links
+                        $copyTextLinks = $cardSEOContainer.find('a');
+                        youLength = $copyTextLinks.length;
+                        if (youLength > 0) {
+                            // set total tests to number of links on page
+                            checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
+                            this.testLinks($copyTextLinks);
+                        }
                     }
                 }
             },
@@ -3270,13 +3514,19 @@
             },
             attachToImage: function (isNextGen, $currentLink, $currentCard) {
                 // center div overlay
-                if (isNextGen) {
-                    this.$divOverlay.attr({
-                        class: 'imgOverlay myNextGen'
-                    });
-                    $currentCard.prepend(this.$divOverlay);
-                } else {
-                    $currentLink.prepend(this.$divOverlay);
+                try {
+                    if (isNextGen) {
+                        this.$divOverlay.attr({
+                            class: 'imgOverlay myNextGen'
+                        });
+                        $currentCard.prepend(this.$divOverlay);
+                    } else {
+                        $currentLink.prepend(this.$divOverlay);
+                    }
+                } catch (e) {
+                    console.log(e);
+                    console.log($currentCard);
+                    console.log($currentLink);
                 }
             }
         },
@@ -3399,36 +3649,19 @@
                     findThis = '',
                     key = '',
                     matchesFound = [],
-                    runTool, hasKey, isOn;
+                    hasKey, isOn;
 
                 for (key in urlParameters2) {
                     if (urlParameters2.hasOwnProperty(key)) {
                         findThis = key;
-                        // this works with current URL
-                        // will check to see if current URL has all the variables with it
-                        // ONE DOWNSIDE IS THAT IF THE URL DOESNT ALREADY HAVE A ? IN IT
-                        // AN ERROR WILL BE THROWN
-                        if (this.newURL.indexOf('?') === -1) {
-                            this.newURL += '?';
-                        }
 
-                        // force the page to reload in DESKTOP SITE
-                        // no downside to NEXT GEN SITES
-                        if (this.newURL.indexOf('device=immobile') === -1) {
-                            this.newURL += '&device=immobile';
-                        }
+                        this.checkQuestionMark();
+
+                        this.addImmobile();
 
                         // determine search term is empty
                         // this will mean that the toggle is turned off
-                        if (typeof findThis === 'undefined' || findThis === '') {
-                            runTool = false;
-                        } else {
-                            runTool = true;
-                        }
-
-                        // determine search term is empty
-                        // this will mean that the toggle is turned off
-                        if (runTool) {
+                        if (this.runTool(findThis)) {
                             // search url for KEY
                             hasKey = this.newURL.indexOf(findThis) >= 0 ? true : false;
                             isOn = urlParameters2[key];
@@ -3452,11 +3685,30 @@
             // ----------------------------------------
             // tier 3
             // ----------------------------------------
-            searchURL: function (findThis, url) {
-                if (url.indexOf(findThis) >= 0) {
+            checkQuestionMark: function () {
+                // this works with current URL
+                // will check to see if current URL has all the variables with it
+                // ONE DOWNSIDE IS THAT IF THE URL DOESNT ALREADY HAVE A ? IN IT
+                // AN ERROR WILL BE THROWN
+                if (this.newURL.indexOf('?') === -1) {
+                    this.newURL += '?';
+                }
+            },
+            addImmobile: function () {
+                // force the page to reload in DESKTOP SITE
+                // no downside to NEXT GEN SITES
+                if (this.newURL.indexOf('device=immobile') === -1) {
+                    this.newURL += '&device=immobile';
+                }
+            },
+            runTool: function (findThis) {
+                // determine search term is empty
+                // this will mean that the toggle is turned off
+                if (typeof findThis === 'undefined' || findThis === '') {
+                    return false;
+                } else {
                     return true;
                 }
-                return false;
             },
             modifyURL: function (hasKey, findThis, isOn) {
                 //--------------------------------------------------------
