@@ -380,7 +380,7 @@
                 };
             },
             cacheDOM: function () {
-                var key, total, tags;
+                var key, total, tags, apple;
                 for (key in hTags.config.hTagsTotal) {
                     if (hTags.config.hTagsTotal.hasOwnProperty(key)) {
                         // takes key from hTagsTotal and does a jquery search on the page for element
