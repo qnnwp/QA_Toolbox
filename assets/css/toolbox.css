@@ -359,6 +359,7 @@ lnk checker styles
 /* covers all text links and image links */
 
 .noTitle,
+footer .card .content .text .link .siteLink.noTitle,
 body .card .content .text .copy .siteLink.noTitle,
 body .card .content .text .link .siteLink.noTitle,
 body .card .content .media .imgOverlay.noTitle {
@@ -368,6 +369,7 @@ body .card .content .media .imgOverlay.noTitle {
 }
 
 .hasTitle,
+footer .card .content .text .link .siteLink.hasTitle,
 body .card .content .text .copy .siteLink.hasTitle,
 body .card .content .text .link .siteLink.hasTitle,
 body .card .content .media .imgOverlay.hasTitle {
@@ -377,6 +379,7 @@ body .card .content .media .imgOverlay.hasTitle {
 }
 
 .opensWindow,
+footer .card .content .text .link .siteLink.opensWindow,
 body .card .content .text .copy .siteLink.opensWindow,
 body .card .content .text .link .siteLink.opensWindow,
 body .card .content .media .imgOverlay.opensWindow {
@@ -386,6 +389,7 @@ body .card .content .media .imgOverlay.opensWindow {
 }
 
 .hasTitle.opensWindow,
+footer .card .content .text .link .siteLink.hasTitle.opensWindow,
 body .card .content .text .copy .siteLink.hasTitle.opensWindow,
 body .card .content .text .link .siteLink.hasTitle.opensWindow,
 body .card .content .media .imgOverlay.hasTitle.opensWindow {
@@ -395,6 +399,7 @@ body .card .content .media .imgOverlay.hasTitle.opensWindow {
 }
 
 .noTitle.opensWindow,
+footer .card .content .text .link .siteLink.noTitle.opensWindow,
 body .card .content .text .copy .siteLink.noTitle.opensWindow,
 body .card .content .text .link .siteLink.noTitle.opensWindow,
 body .card .content .media .imgOverlay.noTitle.opensWindow {
@@ -404,6 +409,7 @@ body .card .content .media .imgOverlay.noTitle.opensWindow {
 }
 
 .emptyTitle.opensWindow,
+footer .card .content .text .link .siteLink.emptyTitle.opensWindow,
 body .card .content .text .copy .siteLink.emptyTitle.opensWindow,
 body .card .content .text .link .siteLink.emptyTitle.opensWindow,
 body .card .content .media .imgOverlay.emptyTitle.opensWindow {
@@ -413,6 +419,7 @@ body .card .content .media .imgOverlay.emptyTitle.opensWindow {
 }
 
 .brokenURL,
+footer .card .content .text .link .siteLink.brokenURL,
 body .card .content .text .copy .siteLink.brokenURL,
 body .card .content .text .link .siteLink.brokenURL,
 body .card .content .media .imgOverlay.brokenURL {
@@ -423,6 +430,7 @@ body .card .content .media .imgOverlay.brokenURL {
 }
 
 .urlIssue,
+footer .card .content .text .link .siteLink.urlIssue,
 body .card .content .text .copy .siteLink.urlIssue,
 body .card .content .text .link .siteLink.urlIssue,
 body .card .content .media .imgOverlay.urlIssue {
@@ -433,6 +441,7 @@ body .card .content .media .imgOverlay.urlIssue {
 }
 
 .absoluteURL,
+footer .card .content .text .link .siteLink.absoluteURL,
 body .card .content .text .copy .siteLink.absoluteURL,
 body .card .content .text .link .siteLink.absoluteURL,
 body .card .content .media .imgOverlay.absoluteURL {
@@ -443,6 +452,7 @@ body .card .content .media .imgOverlay.absoluteURL {
 }
 
 .buttonFlag,
+footer .card .content .text .link .siteLink.buttonFlag,
 body .card .content .text .link .siteLink.buttonFlag {
     background: #0ed2f7;
     background: linear-gradient(to right, #b2fefa, #0ed2f7);
@@ -450,8 +460,14 @@ body .card .content .text .link .siteLink.buttonFlag {
     border: none;
 }
 
+.linkChecked,
+footer .card .content .text .link .siteLink.linkChecked,
 body .card .content .text .copy .siteLink.linkChecked,
+body .card .content .text .copy .siteLink.linkChecked.hasTitle,
+body .card .content .text .copy .siteLink.linkChecked.noTitle,
 body .card .content .text .link .siteLink.linkChecked,
+body .card .content .text .link .siteLink.linkChecked.hasTitle,
+body .card .content .text .link .siteLink.linkChecked.noTitle,
 body .card .content .media .imgOverlay.linkChecked {
     background: rgb(160, 255, 206);
     background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
