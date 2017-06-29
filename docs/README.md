@@ -5,8 +5,8 @@
 ![QA Tool Layout](https://github.com/cirept/NextGen/raw/master/images/QA_tool_layout.png)
 
 ## Other Useful Links<br>
-[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
-[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
+[Installation Instructions](INSTALL.md)<br>
+[Change Log](CHANGELOG.md)<br>
 
 <br>
 <br>
