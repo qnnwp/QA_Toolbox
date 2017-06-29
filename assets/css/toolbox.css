@@ -539,7 +539,11 @@ show navigation
 */
 
 
-/* used box shadow to color links, no other way around bundle.css styles without using !important or id selectors */
+/*
+used box shadow to color links,
+no other way around bundle.css
+styles without using !important or id selectors
+*/
 
 .majorPage {
     color: #000000;
@@ -559,12 +563,17 @@ body header .menu>nav>ul .showNav.nextgenShowNav {
     display: inline-block;
     position: absolute;
     background: rgb(0, 0, 0);
-    border: 1px solid #b7b7b7;
+    border: none;
     color: rgb(255, 255, 255);
     margin: 1rem 0 0 -1rem;
     padding: 0;
     width: 20rem;
-    /*    z-index: 100;*/
+}
+
+body header .menu>nav>ul .showNavAdd.customAdd>a,
+body header .menu>nav>ul .showNavAdd.customAdd>span,
+body header .menu>nav>ul .showNav.nextgenShowNav>li>a {
+    color: white;
 }
 
 body header .menu>nav>ul .showNav.nextgenShowNav>li {

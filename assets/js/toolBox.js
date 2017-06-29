@@ -2293,7 +2293,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             $input.html($input.html().replace(/&nbsp;/gi, ' '));
 
             // remove all elements from text
-            $input.find('font, span, b, strong, i, center, u, p').contents().unwrap();
+            $input.find('div, font, span, b, strong, i, center, u, p').contents().unwrap();
 
             // return cleaner input
             return $input;
