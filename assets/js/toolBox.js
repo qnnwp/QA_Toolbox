@@ -2281,45 +2281,22 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     jQuery(value).remove();
                 }
             });
-            $input.find('style').remove();
+
             // remove all style attributes
+            $input.find('style').remove();
             $input.find('*').removeAttr('style');
 
             // remove all br elements
             $input.find('br').remove();
-            // remove all font tags
-            $input.find('font').replaceWith(function () {
-                return jQuery(this).html();
-            });
+
             // remove all &nbsp; with ' '
             $input.html($input.html().replace(/&nbsp;/gi, ' '));
-            // remove all span tags
-            $input.find('span').replaceWith(function () {
-                return jQuery(this).html();
-            });
-            // remove all u tags
-            $input.find('u').replaceWith(function () {
-                return jQuery(this).html();
-            });
-            // remove all b tags
-            $input.find('b').replaceWith(function () {
-                return jQuery(this).html();
-            });
-            // remove all strong tags
-            $input.find('strong').replaceWith(function () {
-                return jQuery(this).html();
-            });
-            // remove all i tags
-            $input.find('i').replaceWith(function () {
-                return jQuery(this).html();
-            });
-            // replace all div tags with p tags
-            $input.find('center').replaceWith(function () {
-                return jQuery('<p/>').append(jQuery(this).html());
-            });
+
+            // remove all elements from text
+            $input.find('font, span, b, strong, i, center, u, p').contents().unwrap();
+
             // return cleaner input
             return $input;
-
         },
         'cleanUpLinks': function ($input) {
             var allLinks = $input.find('a');
