@@ -1,4 +1,53 @@
 # Change Log
+## v3.3.0
+**(6/29/2017)**
+* Did major re-work to the tool to support Next Gen support.
+  * Spell Checker
+    * Updated tool to work directly on the page vs. use the third party site.
+    * Directions: The tool will highlight all miss-spelled words on the page in pink.
+    * Information: The dictionary is customizable, so we can add the custom words that we know are spelt correctly to it.  Please visit [Github Issue Submission](https://github.com/cirept/QA_Toolbox/issues) to submit your words.
+  * Link Checker
+    * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
+  * Image Alt Checker
+    * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
+  * 404 Link Checker
+    * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
+  * h Tag display
+    * Fixed issue where some of the h tags would not get displayed in the pop up.
+  * SEO Simplify
+    * Updated code to remove ALL html elements from the user provided input.
+
+<br><br>
+
+---
+
+<br><br>
+
+# Change Log
+## v3.2.9
+**(6/29/2017)**
+* Added additional styles to the Show Navigation tool to compensate for the fix that was applied to address the INFINITI navigation bars. :exclamation:
+  * The subnavigation was being displayed with black text on black background.
+
+<br><br>
+
+---
+
+<br><br>
+
+# Change Log
+## v3.2.8
+**(6/22/2017)**
+* Fixed the Show Navigation tool. :exclamation:
+  * The subnavigation was being displayed with white text on a white background.
+
+<br><br>
+
+---
+
+<br><br>
+
+# Change Log
 ## v3.2.7
 **(4/5/2017)**
 * Fixed the 404 Link checker. :exclamation:
