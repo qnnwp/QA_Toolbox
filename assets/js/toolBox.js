@@ -161,6 +161,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                         continue;
                     }
 
+                    if (key === 'unsupportedPageLink' && !this.nextGenCheck()) {
+                        continue;
+                    }
+
                     value = $legendContent[key];
                     // build listing element
                     this.$listItem = jQuery('<li>').attr({
@@ -169,6 +173,81 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // attach to legend list
                     $legendListContainer.append(this.$listItem);
                 }
+            }
+        },
+        'displayPanel': function ($toolPanel) {
+            var variables = QAtoolbox.programData();
+            var panelId = $toolPanel.attr('id');
+            var state = '';
+            var key = '';
+
+            // loop through variable list to find the panel title
+            for (key in variables) {
+                if (variables.hasOwnProperty(key)) {
+                    if (key === panelId) {
+                        state = (variables[key]) ? 'show' : 'hide';
+                        QAtoolbox.setState($toolPanel, state);
+                    }
+                }
+            }
+        },
+        // ----------------------------------------
+        // Tier 4
+        // ----------------------------------------
+        'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
+            // sets $currentCard to null for tetra site checks
+            // $currentCard = ($currentCard) ? $currentCard : null;
+            this.cacheDOMOverlayElements($currentLink);
+            this.createOverlayElements(isNextGen);
+            this.buildOverlayElements(isNextGen);
+            this.attachToImage(isNextGen, $currentLink, $currentCard);
+            return this.$divOverlay;
+        },
+        'cacheDOMOverlayElements': function ($currentLink /* , isNextGen*/ ) {
+            // IF NEXTGEN SITE
+            this.widthOfImage = $currentLink.find('img').width();
+            this.heightOfImage = $currentLink.find('img').height();
+            this.linkTitle = jQuery($currentLink).attr('title');
+        },
+        'createOverlayElements': function (isNextGen) {
+            // create div overlay
+            if (isNextGen) {
+                this.$divOverlay = jQuery('<div>').attr({
+                    'class': 'cardOverlay',
+                });
+            } else {
+                this.$divOverlay = jQuery('<div>').attr({
+                    'class': 'siteLink imgOverlay',
+                });
+            }
+        },
+        'buildOverlayElements': function (isNextGen) {
+            if (!isNextGen) {
+                // make the div overlay the same dimensions as the image
+                this.$divOverlay.css({
+                    'width': this.widthOfImage + 'px',
+                    'height': this.heightOfImage + 'px',
+                });
+            }
+            // add content to div
+            // ADD THE LINK TITLE
+            this.$divOverlay.append(this.linkTitle);
+        },
+        'attachToImage': function (isNextGen, $currentLink, $currentCard) {
+            // center div overlay
+            try {
+                if (isNextGen) {
+                    this.$divOverlay.attr({
+                        'class': 'imgOverlay myNextGen',
+                    });
+                    $currentCard.prepend(this.$divOverlay);
+                } else {
+                    $currentLink.prepend(this.$divOverlay);
+                }
+            } catch (e) {
+                // console.log(e);
+                // console.log($currentCard);
+                // console.log($currentLink);
             }
         },
     };
@@ -496,7 +575,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            main.displayPanel(pageInformation.config.$pageInfo);
+            QAtoolbox.displayPanel(pageInformation.config.$pageInfo);
         },
         // ----------------------------------------
         // tier 1 functions
@@ -581,7 +660,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            main.displayPanel(qaTools.config.$mainToolsPanel);
+            QAtoolbox.displayPanel(qaTools.config.$mainToolsPanel);
         },
         'createElements': function () {
             qaTools.config = {
@@ -1157,7 +1236,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var youLength;
             var $currentLink;
             var $linkOverlay;
-            var $image;
+            //            var $image;
 
             if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
                 // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
@@ -1191,9 +1270,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     isImageLink = true;
                     // find FIRST PRIMARY text link
                     $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
-                    $image = $cardImageContainer.find('img');
+                    //                    $image = $cardImageContainer.find('img');
                     // add div overlay to image
-                    $linkOverlay = checkLinks.addDivOverlay(true, $currentLink, $currentCard);
+                    $linkOverlay = QAtoolbox.addDivOverlay(true, $currentLink, $currentCard);
                     // perform checks to link
                     // add flag class, check target, check title, check url
                     this.nextgenRunTests($currentLink, isImageLink, $linkOverlay);
@@ -1723,9 +1802,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'removeHighlights': function () {
             // remove highlight overlay
-            jQuery('span.spell-check').each(function () {
-                jQuery(this).replaceWith(function () {
-                    return this.childNodes[0].nodeValue;
+            jQuery('span.spell-check').each(function (index, value) {
+                jQuery(value).replaceWith(function () {
+                    return value.childNodes[0].nodeValue;
                 });
             });
         },
@@ -1833,10 +1912,14 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.$toolsPanel.append(speedtestPage.config.$panelContainer);
         },
         'bindEvents': function () {
-            speedtestPage.config.$activateButt.on('click', QAtoolbox.toggleFeature);
+            speedtestPage.config.$activateButt.on('click', function () {
+                speedtestPage.config.$panelContainer.slideToggle(500);
+            });
             speedtestPage.config.$sendButt.on('click', this.storeData);
             speedtestPage.config.$sendButt.on('click', this.sendPage.bind(this));
-            speedtestPage.config.$sendButt.on('click', QAtoolbox.toggleFeature);
+            speedtestPage.config.$sendButt.on('click', function () {
+                speedtestPage.config.$panelContainer.slideToggle(500);
+            });
         },
         // ----------------------------------------
         // tier 2 functions
@@ -1865,7 +1948,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 'notify': email,
                 'location': 'Dulles' + browser,
             };
-            var newTab;
             var desktopURL;
             var mobileURL;
 
@@ -1876,28 +1958,29 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
             // alert user
             if (this.isNextGenPlatform) {
+                //                 var newTab;
                 desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?nextGen=true';
 
-                if (window.confirm('----------------------------------------\n' +
+                if (confirm('----------------------------------------\n' + // eslint-disable-line no-alert
                         'Test the Desktop and Mobile site?\n' +
                         '----------------------------------------\n' +
                         'Browser : ' + browserName + '\n' +
                         'Send Results To : ' + email + '\n' +
                         '----------------------------------------') === true) {
-                    newTab = openNewTab(desktopURL);
+                    openNewTab(desktopURL);
                 }
             } else {
                 desktopURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=immobile';
                 mobileURL = speedtestPage.config.testURL + 'url=' + this.siteURL + this.pageName + '?device=mobile';
 
-                if (confirm('----------------------------------------\n' +
+                if (confirm('----------------------------------------\n' + // eslint-disable-line no-alert
                         'Test the Desktop and Mobile site?\n' +
                         '----------------------------------------\n' +
                         'Browser : ' + browserName + '\n' +
                         'Send Results To : ' + email + '\n' +
                         '----------------------------------------') === true) {
-                    newTab = openNewTab(desktopURL);
-                    newTab = openNewTab(mobileURL);
+                    openNewTab(desktopURL);
+                    openNewTab(mobileURL);
                 }
             }
         },
@@ -1918,7 +2001,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            main.displayPanel(otherTools.config.$otherToolsPanel);
+            QAtoolbox.displayPanel(otherTools.config.$otherToolsPanel);
         },
         'createElements': function () {
             otherTools.config = {
@@ -1972,7 +2055,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.buildLegend();
             this.addTool();
             this.bindEvents();
-            this.addStyles();
         },
         // ----------------------------------------
         // tier 1 functions
@@ -2055,9 +2137,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             showNavigation.config.$activateButt.on('click', this.bindClicks.bind(this));
             showNavigation.config.$offButt.on('click', this.toggleFeatures.bind(this));
             showNavigation.config.$offButt.on('click', this.toggleDisable);
-        },
-        'addStyles': function () {
-
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2261,7 +2340,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         // tier 3 functions
         // ----------------------------------------
         'getInput': function () {
-            var input = jQuery.trim(prompt('Enter Your SEO Text - HTML format'));
+            var input = jQuery.trim(prompt('Enter Your SEO Text - HTML format')); // eslint-disable-line no-alert
             var $input = jQuery('<div>');
 
             // checks if input is empty
@@ -2440,9 +2519,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             jQuery.each(vehiclesArr, function (index, oemArray) {
                 jQuery.each(oemArray, function (oem, vehiclesArray) {
                     if (oem === make) {
-                        jQuery.each(vehiclesArray, function (index, vehicleArray) {
-                            if (model === vehicleArray.name) {
-                                detailsURL = vehicleArray.url;
+                        jQuery.each(vehiclesArray, function (ind, vArray) {
+                            //                        jQuery.each(vehiclesArray, function (index, vehicleArray) {
+                            if (model === vArray.name) {
+                                detailsURL = vArray.url;
                                 return false; // break out of loop
                             }
                         });
@@ -2493,14 +2573,14 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addCustomStyles': function () {
             var self = this;
-            jQuery(this.overlayStyles).each(function () {
-                self.$toolboxStyles.append(this);
+            jQuery(this.overlayStyles).each(function (index, value) {
+                self.$toolboxStyles.append(value);
             });
         },
         'addOverlay': function (array) {
             var self = this;
-            jQuery(array).each(function () {
-                var $currentObject = jQuery(this);
+            jQuery(array).each(function (index, value) {
+                var $currentObject = jQuery(value);
                 var widgetID = $currentObject.attr('id');
                 var toolClass = 'showWidgetData';
                 var w = $currentObject.width();
@@ -2635,7 +2715,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             checkLinks.config.$activateButt.on('click', function () {
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
-                    scrollTop: jQuery(document).height(),
+                    'scrollTop': jQuery(document).height(),
                 }, 2000).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     checkLinks.toggleDisable();
@@ -2728,7 +2808,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // test for mobile specific links
                 case (linkURL.indexOf('tel:') >= 0):
                     if (isImageLink) {
-                        $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
+                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink);
                         $linkOverlay.addClass('mobilePhoneLink');
                     } else {
                         $currentLink.addClass('mobilePhoneLink');
@@ -2753,7 +2833,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // ** highlight for absolute URL but still test **
                 case (linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1):
                     if (isImageLink) {
-                        $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
+                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink);
                         $linkOverlay.addClass('otherDomain');
                     } else {
                         $currentLink.addClass('otherDomain');
@@ -3081,7 +3161,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var meLength;
             var youLength;
             var $currentLink;
-            var $image;
+            //            var $image;
 
             if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
                 // CHECK ALL LINKS DEFINED IN CARD SETTINGS
@@ -3122,7 +3202,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // This is because the card will be linked to the first primary link
                     $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
                     $currentLink.addClass('siteLink'); // add default flag class to links
-                    $image = $cardImageContainer.find('img');
+                    //                    $image = $cardImageContainer.find('img');
                     // add div overlay to image
 
                     // send link to ajx testing
@@ -3173,9 +3253,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             // ----------------------------------------
             // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
             // TESTS TO BODY LINKS WILL BE HANDLED DIFFERENTLY
-            var jLength = this.$otherLinks.length,
-                j = 0,
-                $currentLink;
+            var jLength = this.$otherLinks.length;
+            var j = 0;
+            var $currentLink;
 
             // set total tests to number of links on page
             checkLinks.config.totalTests = jLength;
@@ -3196,8 +3276,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             }
         },
         'testLinks': function ($linkArray) {
-            var q = 0,
-                myLength, $currentLink;
+            var q = 0;
+            var myLength;
+            var $currentLink;
 
             if ($linkArray.length > 1) {
                 // set limit to for loop
@@ -3279,12 +3360,13 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             }
         },
         'tetraAjaxTest': function ($currentLink) {
-            var hasImage = 0,
-                isImageLink = false,
-                wrappedContents = false,
-                $linkOverlay, pageError404,
-                linkURL = checkLinks.addURLParameter($currentLink),
-                isNextGen = QAtoolbox.nextGenCheck();
+            var hasImage = 0;
+            var isImageLink = false;
+            var wrappedContents = false;
+            var $linkOverlay;
+            var pageError404;
+            var linkURL = checkLinks.addURLParameter($currentLink);
+            var isNextGen = QAtoolbox.nextGenCheck();
 
             // test each link
             jQuery.ajax({
@@ -3298,7 +3380,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     hasImage = $currentLink.has('img').length;
                     if (hasImage) {
                         isImageLink = true;
-                        $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink);
+                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink);
                     }
 
                     // checks to see if the link has inline css
@@ -3353,9 +3435,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'nextGenAjaxTest': function ($currentLink, isImageLink, $currentCard) {
             // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
-            var $linkOverlay, pageError404,
-                linkURL = checkLinks.addURLParameter($currentLink),
-                isNextGen = QAtoolbox.nextGenCheck();
+            var $linkOverlay;
+            var pageError404;
+            var linkURL = checkLinks.addURLParameter($currentLink);
+            var isNextGen = QAtoolbox.nextGenCheck();
 
             // check if isImageLink is empty and check if $currentCard is empty
             // most likely because the parameter was not mentioned in the calling statement
@@ -3377,7 +3460,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 'success': function (data) {
                     // check to see if the card has an image prior to startin the ajax testing
                     if (isImageLink) {
-                        $linkOverlay = checkLinks.addDivOverlay(isNextGen, $currentLink, $currentCard);
+                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink, $currentCard);
                     }
 
                     // If value is false all class modifications should be done to the link itself
@@ -3430,8 +3513,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'showLegend': function () {
             checkLinks.config.$legend.slideToggle(500);
         },
-        'separateID': function (webID) {
-            var split = webID.split('-');
+        'separateID': function (myWebID) {
+            var split = myWebID.split('-');
             return split[1];
         },
         'ajaxStart': function () {
@@ -3463,67 +3546,377 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         // ----------------------------------------
         // Tier 4
         // ----------------------------------------
-        'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
-            // sets $currentCard to null for tetra site checks
-            // $currentCard = ($currentCard) ? $currentCard : null;
-            this.cacheDOMOverlayElements($currentLink);
-            this.createOverlayElements(isNextGen);
-            this.buildOverlayElements(isNextGen);
-            this.attachToImage(isNextGen, $currentLink, $currentCard);
-            return this.$divOverlay;
-        },
-        'cacheDOMOverlayElements': function ($currentLink /* , isNextGen*/ ) {
-            // IF NEXTGEN SITE
-            this.widthOfImage = $currentLink.find('img').width();
-            this.heightOfImage = $currentLink.find('img').height();
-            this.linkTitle = jQuery($currentLink).attr('title');
-        },
-        'createOverlayElements': function (isNextGen) {
-            // create div overlay
-            if (isNextGen) {
-                this.$divOverlay = jQuery('<div>').attr({
-                    'class': 'cardOverlay',
-                });
-            } else {
-                this.$divOverlay = jQuery('<div>').attr({
-                    'class': 'siteLink imgOverlay',
-                });
-            }
-        },
-        'buildOverlayElements': function (isNextGen) {
-            if (!isNextGen) {
-                // make the div overlay the same dimensions as the image
-                this.$divOverlay.css({
-                    'width': this.widthOfImage + 'px',
-                    'height': this.heightOfImage + 'px',
-                });
-            }
-            // add content to div
-            // ADD THE LINK TITLE
-            this.$divOverlay.append(this.linkTitle);
-        },
-        'attachToImage': function (isNextGen, $currentLink, $currentCard) {
-            // center div overlay
-            try {
-                if (isNextGen) {
-                    this.$divOverlay.attr({
-                        'class': 'imgOverlay myNextGen',
-                    });
-                    $currentCard.prepend(this.$divOverlay);
-                } else {
-                    $currentLink.prepend(this.$divOverlay);
-                }
-            } catch (e) {
-                // console.log(e);
-                // console.log($currentCard);
-                // console.log($currentLink);
-            }
-        },
+        //        'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
+        //            // sets $currentCard to null for tetra site checks
+        //            // $currentCard = ($currentCard) ? $currentCard : null;
+        //            this.cacheDOMOverlayElements($currentLink);
+        //            this.createOverlayElements(isNextGen);
+        //            this.buildOverlayElements(isNextGen);
+        //            this.attachToImage(isNextGen, $currentLink, $currentCard);
+        //            return this.$divOverlay;
+        //        },
+        //        'cacheDOMOverlayElements': function ($currentLink /* , isNextGen*/ ) {
+        //            // IF NEXTGEN SITE
+        //            this.widthOfImage = $currentLink.find('img').width();
+        //            this.heightOfImage = $currentLink.find('img').height();
+        //            this.linkTitle = jQuery($currentLink).attr('title');
+        //        },
+        //        'createOverlayElements': function (isNextGen) {
+        //            // create div overlay
+        //            if (isNextGen) {
+        //                this.$divOverlay = jQuery('<div>').attr({
+        //                    'class': 'cardOverlay',
+        //                });
+        //            } else {
+        //                this.$divOverlay = jQuery('<div>').attr({
+        //                    'class': 'siteLink imgOverlay',
+        //                });
+        //            }
+        //        },
+        //        'buildOverlayElements': function (isNextGen) {
+        //            if (!isNextGen) {
+        //                // make the div overlay the same dimensions as the image
+        //                this.$divOverlay.css({
+        //                    'width': this.widthOfImage + 'px',
+        //                    'height': this.heightOfImage + 'px',
+        //                });
+        //            }
+        //            // add content to div
+        //            // ADD THE LINK TITLE
+        //            this.$divOverlay.append(this.linkTitle);
+        //        },
+        //        'attachToImage': function (isNextGen, $currentLink, $currentCard) {
+        //            // center div overlay
+        //            try {
+        //                if (isNextGen) {
+        //                    this.$divOverlay.attr({
+        //                        'class': 'imgOverlay myNextGen',
+        //                    });
+        //                    $currentCard.prepend(this.$divOverlay);
+        //                } else {
+        //                    $currentLink.prepend(this.$divOverlay);
+        //                }
+        //            } catch (e) {
+        //                // console.log(e);
+        //                // console.log($currentCard);
+        //                // console.log($currentLink);
+        //            }
+        //        },
     };
 
     /* ************************************************************************************************************************ */
     /* **************************************** URL MODIFIER TOOLS **************************************** */
     /* ************************************************************************************************************************ */
+
+    // ----------------------------------------
+    // ---------------------------------------- next gen toggle
+    // -----------------------------------------
+    var nextGenToggle = {
+        'init': function (callingPanel) {
+            this.createElements();
+            this.buildTool();
+            this.cacheDOM(callingPanel);
+            this.setToggle();
+            this.addTool();
+            this.bindEvents();
+        },
+        // ----------------------------------------
+        // tier 1 functions
+        // ----------------------------------------
+        'createElements': function () {
+            nextGenToggle.config = {
+                '$nextGenToggleContainer': jQuery('<div>').attr({
+                    'id': 'nextGenToggleInput',
+                    'class': 'toggleTool',
+                    'title': 'Apply NextGen=true',
+                }),
+                '$nextGenToggleTitle': jQuery('<div>')
+                    .text('nextGen parameters?'),
+                '$nextGenToggleIcon': jQuery('<div>').attr({
+                    'id': 'nextGenToggleIcon',
+                }),
+                '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
+            };
+        },
+        'buildTool': function () {
+            nextGenToggle.config.$nextGenToggleIcon
+                .append(nextGenToggle.config.$FAtoggle);
+            nextGenToggle.config.$nextGenToggleContainer
+                .append(nextGenToggle.config.$nextGenToggleTitle)
+                .append(nextGenToggle.config.$nextGenToggleIcon);
+        },
+        'cacheDOM': function (callingPanel) {
+            this.$toolsPanel = jQuery(callingPanel);
+        },
+        'setToggle': function () {
+            if (getValue('isNextGen')) {
+                // if 'nextGen' value is true
+                // set toggle and apply parameters
+                this.toggleOn();
+            } else {
+                // if 'nextGen' value is false
+                // set toggle and apply parameters
+                this.toggleOff();
+            }
+        },
+        'addTool': function () {
+            // add to main toolbox
+            this.$toolsPanel.append(nextGenToggle.config.$nextGenToggleContainer);
+        },
+        'bindEvents': function () {
+            // bind FA toggle with 'flipTheSwitch' action
+            nextGenToggle.config.$nextGenToggleContainer.on('click', this.flipTheSwitch.bind(this));
+        },
+        // ----------------------------------------
+        // tier 2 functions
+        // ----------------------------------------
+        'toggleOn': function () {
+            // set toggle on image
+            var $toggle = nextGenToggle.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-off');
+            $toggle.addClass('fa-toggle-on');
+        },
+        'toggleOff': function () {
+            // set toggle off image
+            var $toggle = nextGenToggle.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-on');
+            $toggle.addClass('fa-toggle-off');
+        },
+        'flipTheSwitch': function () {
+            // set saved variable to opposite of current value
+            var toggle = getValue('isNextGen');
+            saveValue('isNextGen', !toggle);
+
+            // set toggle
+            this.setToggle();
+        },
+        // ----------------------------------------
+        // tier 3 functions
+        // ----------------------------------------
+        'hasParameters': function () {
+            // determine if site URL already has custom parameters
+            if (window.location.href.indexOf('nextGen=') >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        'siteState': function () {
+            // return page variable
+            return unsafeWindow.ContextManager.getVersion();
+        },
+        // ----------------------------------------
+        // other functions
+        // ----------------------------------------
+        'isToggleOn': function () {
+            return getValue('isNextGen');
+        },
+    };
+
+    // ----------------------------------------
+    // ---------------------------------------- m4 checkbox toggle
+    // ----------------------------------------
+    var m4Check = {
+        'init': function (callingPanel) {
+            this.createElements();
+            this.buildTool();
+            this.cacheDOM(callingPanel);
+            this.setToggle();
+            this.addTool();
+            this.bindEvents();
+        },
+        // ----------------------------------------
+        // tier 1 functions
+        // ----------------------------------------
+        'createElements': function () {
+            m4Check.config = {
+                '$m4Container': jQuery('<div>').attr({
+                    'id': 'm4Input',
+                    'class': 'toggleTool',
+                    'title': 'Apply relative and comments parameters',
+                }),
+                '$m4CheckTitle': jQuery('<div>')
+                    .text('M4 Parameters?'),
+                '$m4Checkbox': jQuery('<div>').attr({
+                    'id': 'm4toggle',
+                }),
+                '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
+            };
+        },
+        'buildTool': function () {
+            m4Check.config.$m4Checkbox
+                .append(m4Check.config.$FAtoggle);
+            m4Check.config.$m4Container
+                .append(m4Check.config.$m4CheckTitle)
+                .append(m4Check.config.$m4Checkbox);
+        },
+        'setToggle': function () {
+            if (getValue('usingM4')) { // if 'usingM4 is turned on'
+                // set toggle and apply parameters
+                this.toggleOn();
+            } else { // if 'site is not live'
+                // set toggle and apply parameters
+                this.toggleOff();
+            }
+        },
+        'cacheDOM': function (callingPanel) {
+            this.$toolsPanel = jQuery(callingPanel);
+        },
+        'addTool': function () {
+            // add to main toolbox
+            this.$toolsPanel.append(m4Check.config.$m4Container);
+        },
+        'bindEvents': function () {
+            // bind FA toggle with 'flipTheSwitch' action
+            m4Check.config.$m4Container.on('click', this.flipTheSwitch.bind(this));
+        },
+        // ----------------------------------------
+        // tier 2 functions
+        // ----------------------------------------
+        'toggleOn': function () {
+            // set toggle on image
+            var $toggle = m4Check.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-off');
+            $toggle.addClass('fa-toggle-on');
+        },
+        'toggleOff': function () {
+            // set toggle off image
+            var $toggle = m4Check.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-on');
+            $toggle.addClass('fa-toggle-off');
+        },
+        'flipTheSwitch': function () {
+            // set saved variable to opposite of current value
+            var toggle = getValue('usingM4');
+            saveValue('usingM4', !toggle);
+
+            // set toggle
+            this.setToggle();
+        },
+        // ----------------------------------------
+        // tier 3 functions
+        // ----------------------------------------
+        'hasParameters': function () {
+            // determine if site URL already has custom parameters
+            if (window.location.href.indexOf('&comments=true&relative=true') >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        'siteState': function () {
+            // return page variable
+            return unsafeWindow.ContextManager.getVersion();
+        },
+        // ----------------------------------------
+        // other functions
+        // ----------------------------------------
+        'isToggleOn': function () {
+            return getValue('usingM4');
+        },
+    };
+
+    // ----------------------------------------
+    // ---------------------------------------- autofill toggle
+    // -----------------------------------------
+    var autofillToggle = {
+        'init': function (callingPanel) {
+            this.createElements();
+            this.buildTool();
+            this.cacheDOM(callingPanel);
+            this.setToggle();
+            this.addTool();
+            this.bindEvents();
+        },
+        // ----------------------------------------
+        // tier 1 functions
+        // ----------------------------------------
+        'createElements': function () {
+            autofillToggle.config = {
+                '$autofillToggleContainer': jQuery('<div>').attr({
+                    'id': 'autofillToggleInput',
+                    'class': 'toggleTool',
+                    'title': 'Show all autofill tags on page',
+                }),
+                '$autofillToggleTitle': jQuery('<div>')
+                    .text('show autofill tags?'),
+                '$autofillToggleIcon': jQuery('<div>').attr({
+                    'id': 'autofillToggleIcon',
+                }),
+                '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
+            };
+        },
+        'buildTool': function () {
+            autofillToggle.config.$autofillToggleIcon
+                .append(autofillToggle.config.$FAtoggle);
+            autofillToggle.config.$autofillToggleContainer
+                .append(autofillToggle.config.$autofillToggleTitle)
+                .append(autofillToggle.config.$autofillToggleIcon);
+        },
+        'setToggle': function () {
+            if (getValue('applyAutofill')) { // if 'applyAutofill is turned on'
+                // set toggle and apply parameters
+                this.toggleOn();
+            } else { // if 'site is not live'
+                // set toggle and apply parameters
+                this.toggleOff();
+            }
+        },
+        'cacheDOM': function (callingPanel) {
+            this.$toolsPanel = jQuery(callingPanel);
+        },
+        'addTool': function () {
+            // add to main toolbox
+            this.$toolsPanel.append(autofillToggle.config.$autofillToggleContainer);
+        },
+        'bindEvents': function () {
+            // bind FA toggle with 'flipTheSwitch' action
+            autofillToggle.config.$autofillToggleContainer.on('click', this.flipTheSwitch.bind(this));
+        },
+        // ----------------------------------------
+        // tier 2 functions
+        // ----------------------------------------
+        'toggleOn': function () {
+            // set toggle on image
+            var $toggle = autofillToggle.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-off');
+            $toggle.addClass('fa-toggle-on');
+        },
+        'toggleOff': function () {
+            // set toggle off image
+            var $toggle = autofillToggle.config.$FAtoggle;
+            $toggle.removeClass('fa-toggle-on');
+            $toggle.addClass('fa-toggle-off');
+        },
+        'flipTheSwitch': function () {
+            // set saved variable to opposite of current value
+            var toggle = getValue('applyAutofill');
+            saveValue('applyAutofill', !toggle);
+
+            // set toggle
+            this.setToggle();
+        },
+        // ----------------------------------------
+        // tier 3 functions
+        // ----------------------------------------
+        'hasParameters': function () {
+            if (window.location.href.indexOf('disableAutofill=') >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        'siteState': function () {
+            // return page variable
+            return unsafeWindow.ContextManager.getVersion();
+        },
+        // ----------------------------------------
+        // other functions
+        // ----------------------------------------
+        'isToggleOn': function () {
+            return getValue('applyAutofill');
+        },
+    };
 
     // ----------------------------------------
     // ---------------------------------------- URL MODIFIER Panel
@@ -3537,7 +3930,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.setToggle();
             this.addTool();
             this.bindEvents();
-            main.displayPanel(urlModifiers.config.$urlModPanel);
+            QAtoolbox.displayPanel(urlModifiers.config.$urlModPanel);
         },
         // ----------------------------------------
         // tier 1 functions
@@ -3882,316 +4275,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- next gen toggle
-    // -----------------------------------------
-    var nextGenToggle = {
-        'init': function (callingPanel) {
-            this.createElements();
-            this.buildTool();
-            this.cacheDOM(callingPanel);
-            this.setToggle();
-            this.addTool();
-            this.bindEvents();
-        },
-        // ----------------------------------------
-        // tier 1 functions
-        // ----------------------------------------
-        'createElements': function () {
-            nextGenToggle.config = {
-                '$nextGenToggleContainer': jQuery('<div>').attr({
-                    'id': 'nextGenToggleInput',
-                    'class': 'toggleTool',
-                    'title': 'Apply NextGen=true',
-                }),
-                '$nextGenToggleTitle': jQuery('<div>')
-                    .text('nextGen parameters?'),
-                '$nextGenToggleIcon': jQuery('<div>').attr({
-                    'id': 'nextGenToggleIcon',
-                }),
-                '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
-            };
-        },
-        'buildTool': function () {
-            nextGenToggle.config.$nextGenToggleIcon
-                .append(nextGenToggle.config.$FAtoggle);
-            nextGenToggle.config.$nextGenToggleContainer
-                .append(nextGenToggle.config.$nextGenToggleTitle)
-                .append(nextGenToggle.config.$nextGenToggleIcon);
-        },
-        'cacheDOM': function (callingPanel) {
-            this.$toolsPanel = jQuery(callingPanel);
-        },
-        'setToggle': function () {
-            if (getValue('isNextGen')) {
-                // if 'nextGen' value is true
-                // set toggle and apply parameters
-                this.toggleOn();
-            } else {
-                // if 'nextGen' value is false
-                // set toggle and apply parameters
-                this.toggleOff();
-            }
-        },
-        'addTool': function () {
-            // add to main toolbox
-            this.$toolsPanel.append(nextGenToggle.config.$nextGenToggleContainer);
-        },
-        'bindEvents': function () {
-            // bind FA toggle with 'flipTheSwitch' action
-            nextGenToggle.config.$nextGenToggleContainer.on('click', this.flipTheSwitch.bind(this));
-        },
-        // ----------------------------------------
-        // tier 2 functions
-        // ----------------------------------------
-        'toggleOn': function () {
-            // set toggle on image
-            var $toggle = nextGenToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
-        },
-        'toggleOff': function () {
-            // set toggle off image
-            var $toggle = nextGenToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
-        },
-        'flipTheSwitch': function () {
-            // set saved variable to opposite of current value
-            var toggle = getValue('isNextGen');
-            saveValue('isNextGen', !toggle);
-
-            // set toggle
-            this.setToggle();
-        },
-        // ----------------------------------------
-        // tier 3 functions
-        // ----------------------------------------
-        'hasParameters': function () {
-            // determine if site URL already has custom parameters
-            if (window.location.href.indexOf('nextGen=') >= 0) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        'siteState': function () {
-            // return page variable
-            return unsafeWindow.ContextManager.getVersion();
-        },
-        // ----------------------------------------
-        // other functions
-        // ----------------------------------------
-        'isToggleOn': function () {
-            return getValue('isNextGen');
-        },
-    };
-
-    // ----------------------------------------
-    // ---------------------------------------- m4 checkbox toggle
-    // ----------------------------------------
-    var m4Check = {
-        'init': function (callingPanel) {
-            this.createElements();
-            this.buildTool();
-            this.cacheDOM(callingPanel);
-            this.setToggle();
-            this.addTool();
-            this.bindEvents();
-        },
-        // ----------------------------------------
-        // tier 1 functions
-        // ----------------------------------------
-        'createElements': function () {
-            m4Check.config = {
-                '$m4Container': jQuery('<div>').attr({
-                    'id': 'm4Input',
-                    'class': 'toggleTool',
-                    'title': 'Apply relative and comments parameters',
-                }),
-                '$m4CheckTitle': jQuery('<div>')
-                    .text('M4 Parameters?'),
-                '$m4Checkbox': jQuery('<div>').attr({
-                    'id': 'm4toggle',
-                }),
-                '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
-            };
-        },
-        'buildTool': function () {
-            m4Check.config.$m4Checkbox
-                .append(m4Check.config.$FAtoggle);
-            m4Check.config.$m4Container
-                .append(m4Check.config.$m4CheckTitle)
-                .append(m4Check.config.$m4Checkbox);
-        },
-        'setToggle': function () {
-            if (getValue('usingM4')) { // if 'usingM4 is turned on'
-                // set toggle and apply parameters
-                this.toggleOn();
-            } else { // if 'site is not live'
-                // set toggle and apply parameters
-                this.toggleOff();
-            }
-        },
-        'cacheDOM': function (callingPanel) {
-            this.$toolsPanel = jQuery(callingPanel);
-        },
-        'addTool': function () {
-            // add to main toolbox
-            this.$toolsPanel.append(m4Check.config.$m4Container);
-        },
-        'bindEvents': function () {
-            // bind FA toggle with 'flipTheSwitch' action
-            m4Check.config.$m4Container.on('click', this.flipTheSwitch.bind(this));
-        },
-        // ----------------------------------------
-        // tier 2 functions
-        // ----------------------------------------
-        'toggleOn': function () {
-            // set toggle on image
-            var $toggle = m4Check.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
-        },
-        'toggleOff': function () {
-            // set toggle off image
-            var $toggle = m4Check.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
-        },
-        'flipTheSwitch': function () {
-            // set saved variable to opposite of current value
-            var toggle = getValue('usingM4');
-            saveValue('usingM4', !toggle);
-
-            // set toggle
-            this.setToggle();
-        },
-        // ----------------------------------------
-        // tier 3 functions
-        // ----------------------------------------
-        'hasParameters': function () {
-            // determine if site URL already has custom parameters
-            if (window.location.href.indexOf('&comments=true&relative=true') >= 0) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        'siteState': function () {
-            // return page variable
-            return unsafeWindow.ContextManager.getVersion();
-        },
-        // ----------------------------------------
-        // other functions
-        // ----------------------------------------
-        'isToggleOn': function () {
-            return getValue('usingM4');
-        },
-    };
-
-    // ----------------------------------------
-    // ---------------------------------------- autofill toggle
-    // -----------------------------------------
-    var autofillToggle = {
-        'init': function (callingPanel) {
-            this.createElements();
-            this.buildTool();
-            this.cacheDOM(callingPanel);
-            this.setToggle();
-            this.addTool();
-            this.bindEvents();
-        },
-        // ----------------------------------------
-        // tier 1 functions
-        // ----------------------------------------
-        'createElements': function () {
-            autofillToggle.config = {
-                '$autofillToggleContainer': jQuery('<div>').attr({
-                    'id': 'autofillToggleInput',
-                    'class': 'toggleTool',
-                    'title': 'Show all autofill tags on page',
-                }),
-                '$autofillToggleTitle': jQuery('<div>')
-                    .text('show autofill tags?'),
-                '$autofillToggleIcon': jQuery('<div>').attr({
-                    'id': 'autofillToggleIcon',
-                }),
-                '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
-            };
-        },
-        'buildTool': function () {
-            autofillToggle.config.$autofillToggleIcon
-                .append(autofillToggle.config.$FAtoggle);
-            autofillToggle.config.$autofillToggleContainer
-                .append(autofillToggle.config.$autofillToggleTitle)
-                .append(autofillToggle.config.$autofillToggleIcon);
-        },
-        'setToggle': function () {
-            if (getValue('applyAutofill')) { // if 'applyAutofill is turned on'
-                // set toggle and apply parameters
-                this.toggleOn();
-            } else { // if 'site is not live'
-                // set toggle and apply parameters
-                this.toggleOff();
-            }
-        },
-        'cacheDOM': function (callingPanel) {
-            this.$toolsPanel = jQuery(callingPanel);
-        },
-        'addTool': function () {
-            // add to main toolbox
-            this.$toolsPanel.append(autofillToggle.config.$autofillToggleContainer);
-        },
-        'bindEvents': function () {
-            // bind FA toggle with 'flipTheSwitch' action
-            autofillToggle.config.$autofillToggleContainer.on('click', this.flipTheSwitch.bind(this));
-        },
-        // ----------------------------------------
-        // tier 2 functions
-        // ----------------------------------------
-        'toggleOn': function () {
-            // set toggle on image
-            var $toggle = autofillToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
-        },
-        'toggleOff': function () {
-            // set toggle off image
-            var $toggle = autofillToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
-        },
-        'flipTheSwitch': function () {
-            // set saved variable to opposite of current value
-            var toggle = getValue('applyAutofill');
-            saveValue('applyAutofill', !toggle);
-
-            // set toggle
-            this.setToggle();
-        },
-        // ----------------------------------------
-        // tier 3 functions
-        // ----------------------------------------
-        'hasParameters': function () {
-            if (window.location.href.indexOf('disableAutofill=') >= 0) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        'siteState': function () {
-            // return page variable
-            return unsafeWindow.ContextManager.getVersion();
-        },
-        // ----------------------------------------
-        // other functions
-        // ----------------------------------------
-        'isToggleOn': function () {
-            return getValue('applyAutofill');
-        },
-    };
-
     /* ************************************************************************************************************************ */
     /* **************************************** TOGGLE TOOLS **************************************** */
     /* ************************************************************************************************************************ */
@@ -4207,7 +4290,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            main.displayPanel(toggles.config.$togglesPanel);
+            QAtoolbox.displayPanel(toggles.config.$togglesPanel);
         },
         'createElements': function () {
             toggles.config = {
@@ -4468,7 +4551,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.modToolbar();
             this.bindEvents();
             this.displayPanel();
-            //                main.displayPanel(QAtoolbox.config.$toolboxContainer);
         },
         'createElements': function () {
             // main panel container
@@ -4723,22 +4805,22 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             // allows override of the !important tags used by CDK bundles.css
             $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
         },
-        'displayPanel': function ($toolPanel) {
-            var variables = QAtoolbox.programData();
-            var panelId = $toolPanel.attr('id');
-            var state = '';
-            var key = '';
-
-            // loop through variable list to find the panel title
-            for (key in variables) {
-                if (variables.hasOwnProperty(key)) {
-                    if (key === panelId) {
-                        state = (variables[key]) ? 'show' : 'hide';
-                        QAtoolbox.setState($toolPanel, state);
-                    }
-                }
-            }
-        },
+        //        'displayPanel': function ($toolPanel) {
+        //            var variables = QAtoolbox.programData();
+        //            var panelId = $toolPanel.attr('id');
+        //            var state = '';
+        //            var key = '';
+        //
+        //            // loop through variable list to find the panel title
+        //            for (key in variables) {
+        //                if (variables.hasOwnProperty(key)) {
+        //                    if (key === panelId) {
+        //                        state = (variables[key]) ? 'show' : 'hide';
+        //                        QAtoolbox.setState($toolPanel, state);
+        //                    }
+        //                }
+        //            }
+        //        },
     };
 
     // ----------------------------------------
