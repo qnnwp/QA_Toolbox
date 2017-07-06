@@ -2152,7 +2152,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             if (!isNextGen) {
                 this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
                 this.$navTabs.find('a[href*=LandingPage]').toggleClass('customPage');
-                this.$navTabs.toggle();
+                this.$navTabs.toggleClass('showNav');
             }
             showNavigation.config.$legend.slideToggle(500);
             this.$navTabs.find('.linkChecked').removeClass('linkChecked');
