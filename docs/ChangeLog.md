@@ -4,8 +4,9 @@
 * Did major re-work to the tool to support Next Gen support.
   * Spell Checker
     * Updated tool to work directly on the page vs. use the third party site.
-    * Directions: The tool will highlight all miss-spelled words on the page in pink.
-    * Information: The dictionary is customizable, so we can add the custom words that we know are spelt correctly to it.  Please visit [Github Issue Submission](https://github.com/cirept/QA_Toolbox/issues) to submit your words.
+    * **Directions** : The tool will highlight all miss-spelled words on the page in pink.
+    * **Information** : The dictionary is customizable, so we can add the custom words that we know are spelt correctly to it.  Please visit [Github Issue Submission](https://github.com/cirept/QA_Toolbox/issues) to submit your words.
+    * **NOTE** : **The tool will not take CSS into consideration when checking the text on the page.**  For example: the hours widget on Next Gen will show up as incorrectly spelt because the widget relies on CSS to make the text all uppercase.
   * Link Checker
     * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
   * Image Alt Checker
