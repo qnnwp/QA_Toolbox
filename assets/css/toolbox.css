@@ -559,6 +559,10 @@ styles without using !important or id selectors
     box-shadow: inset 0 0 0 500px #fc67fa;
 }
 
+body .page nav #pmenu .showNav {
+    display: block !important;
+}
+
 body header .menu>nav>ul .showNav.nextgenShowNav {
     display: inline-block;
     position: absolute;
@@ -789,6 +793,9 @@ shared styles
 .linkChecked {
     background: rgb(249, 255, 209);
     background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #999999;
 }
 
