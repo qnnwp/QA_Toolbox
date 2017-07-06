@@ -201,7 +201,7 @@ module.exports = {
         'id-blacklist': 0,
         'id-length': 0,
         'id-match': 0,
-        'indent': 0, // TODO(philipwalton): this rule isn't compatible with
+        'indent': ['error', 4], // TODO(philipwalton): this rule isn't compatible with
         // Google's 4-space indent for line continuations.
         'jsx-quotes': 0,
         'key-spacing': 2,
@@ -304,8 +304,8 @@ module.exports = {
         'generator-star-spacing': [2, 'after'],
         'no-class-assign': 0,
         'no-confusing-arrow': 0,
-        'no-const-assign': 0, // eslint:recommended
-        'no-dupe-class-members': 0, // eslint:recommended
+        'no-const-assign': 2, // eslint:recommended
+        'no-dupe-class-members': 2, // eslint:recommended
         'no-duplicate-imports': 0,
         'no-new-symbol': 2, // eslint:recommended
         'no-restricted-imports': 0,
@@ -313,7 +313,7 @@ module.exports = {
         'no-useless-computed-key': 0,
         'no-useless-constructor': 0,
         'no-useless-rename': 0,
-        'no-var': 2,
+        'no-var': 0,
         'object-shorthand': 0,
         'prefer-arrow-callback': 0,
         'prefer-const': 0,
