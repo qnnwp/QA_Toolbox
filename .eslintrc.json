@@ -36,7 +36,6 @@
         "no-extend-native": 2,
         "no-extra-bind": 2,
         "no-extra-boolean-cast": 2,
-        "no-extra-parens": 0,
         "no-extra-semi": 2,
         "strict": 2,
         "no-fallthrough": 2,
@@ -115,7 +114,8 @@
         "no-with": 2,
         "no-extra-parens": ["error", "all", {
             "returnAssign": false,
-            "nestedBinaryExpressions": false
+            "nestedBinaryExpressions": false,
+            "conditionalAssign": false
         }],
 
         "array-bracket-spacing": [2, "never"],
