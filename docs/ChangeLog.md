@@ -24,7 +24,6 @@
 
 <br><br>
 
-# Change Log
 ## v3.2.9
 **(6/29/2017)**
 * Added additional styles to the Show Navigation tool to compensate for the fix that was applied to address the INFINITI navigation bars. :exclamation:
@@ -36,7 +35,6 @@
 
 <br><br>
 
-# Change Log
 ## v3.2.8
 **(6/22/2017)**
 * Fixed the Show Navigation tool. :exclamation:
@@ -48,7 +46,6 @@
 
 <br><br>
 
-# Change Log
 ## v3.2.7
 **(4/5/2017)**
 * Fixed the 404 Link checker. :exclamation:
