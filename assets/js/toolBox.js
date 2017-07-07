@@ -1105,7 +1105,12 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 // save current card settings
                 // if currentCard has a class save it, if no class make variable equal ''
-                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : '';
+                if ($currentCard.attr('class')) {
+                    cardClass = $currentCard.attr('class');
+                } else {
+                    cardClass = '';
+                }
+
                 $cardDeck = $currentCard.find('div.deck');
 
                 // checks to see if current card is a container card
