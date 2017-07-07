@@ -3574,65 +3574,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 'success': function ($this) {
                     $this.addClass('success');
                 },
-                // ----------------------------------------
-                // Tier 4
-                // ----------------------------------------
-                //        'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
-                //            // sets $currentCard to null for tetra site checks
-                //            // $currentCard = ($currentCard) ? $currentCard : null;
-                //            this.cacheDOMOverlayElements($currentLink);
-                //            this.createOverlayElements(isNextGen);
-                //            this.buildOverlayElements(isNextGen);
-                //            this.attachToImage(isNextGen, $currentLink, $currentCard);
-                //            return this.$divOverlay;
-                //        },
-                //        'cacheDOMOverlayElements': function ($currentLink /* , isNextGen*/ ) {
-                //            // IF NEXTGEN SITE
-                //            this.widthOfImage = $currentLink.find('img').width();
-                //            this.heightOfImage = $currentLink.find('img').height();
-                //            this.linkTitle = jQuery($currentLink).attr('title');
-                //        },
-                //        'createOverlayElements': function (isNextGen) {
-                //            // create div overlay
-                //            if (isNextGen) {
-                //                this.$divOverlay = jQuery('<div>').attr({
-                //                    'class': 'cardOverlay',
-                //                });
-                //            } else {
-                //                this.$divOverlay = jQuery('<div>').attr({
-                //                    'class': 'siteLink imgOverlay',
-                //                });
-                //            }
-                //        },
-                //        'buildOverlayElements': function (isNextGen) {
-                //            if (!isNextGen) {
-                //                // make the div overlay the same dimensions as the image
-                //                this.$divOverlay.css({
-                //                    'width': this.widthOfImage + 'px',
-                //                    'height': this.heightOfImage + 'px',
-                //                });
-                //            }
-                //            // add content to div
-                //            // ADD THE LINK TITLE
-                //            this.$divOverlay.append(this.linkTitle);
-                //        },
-                //        'attachToImage': function (isNextGen, $currentLink, $currentCard) {
-                //            // center div overlay
-                //            try {
-                //                if (isNextGen) {
-                //                    this.$divOverlay.attr({
-                //                        'class': 'imgOverlay myNextGen',
-                //                    });
-                //                    $currentCard.prepend(this.$divOverlay);
-                //                } else {
-                //                    $currentLink.prepend(this.$divOverlay);
-                //                }
-                //            } catch (e) {
-                //                // console.log(e);
-                //                // console.log($currentCard);
-                //                // console.log($currentLink);
-                //            }
-                //        },
             };
 
             /* ************************************************************************************************************************ */
