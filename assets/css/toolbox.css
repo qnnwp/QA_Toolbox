@@ -663,7 +663,8 @@ widget outline
 .header.card .menu nav ul li:hover>ul li a.error,
 body .card .content .text .copy .siteLink.error,
 body .card .content .text .link .siteLink.error,
-body .card .content .media .imgOverlay.error {
+body .card .content .media .imgOverlay.error,
+body .page header #pmenu .error {
     background: rgb(240, 0, 0);
     background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75));
     border: none;
@@ -674,7 +675,8 @@ body .card .content .media .imgOverlay.error {
 .header.card .menu nav ul li:hover>ul li a.attention,
 body .card .content .text .copy .siteLink.attention,
 body .card .content .text .link .siteLink.attention,
-body .card .content .media .imgOverlay.attention {
+body .card .content .media .imgOverlay.attention,
+body .page header #pmenu .attention {
     border: none;
     -moz-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
     -webkit-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
@@ -685,7 +687,8 @@ body .card .content .media .imgOverlay.attention {
 .header.card .menu nav ul li:hover>ul li a.jumpLink,
 body .card .content .text .copy .siteLink.jumpLink,
 body .card .content .text .link .siteLink.jumpLink,
-body .card .content .media .imgOverlay.jumpLink {
+body .card .content .media .imgOverlay.jumpLink,
+body .page header #pmenu .jumpLink {
     background: #FFAFBD;
     background: linear-gradient(to left, #FFAFBD, #ffc3a0);
     border: none;
@@ -697,7 +700,8 @@ body .card .content .media .imgOverlay.jumpLink {
 .header.card .menu nav ul li:hover>ul li a.mobilePhoneLink,
 body .card .content .text .copy .siteLink.mobilePhoneLink,
 body .card .content .text .link .siteLink.mobilePhoneLink,
-body .card .content .media .imgOverlay.mobilePhoneLink {
+body .card .content .media .imgOverlay.mobilePhoneLink,
+body .page header #pmenu .mobilePhoneLink {
     background: #005588;
     border: none;
     color: #ffffff;
@@ -707,7 +711,8 @@ body .card .content .media .imgOverlay.mobilePhoneLink {
 .header.card .menu nav ul li:hover>ul li a.success,
 body .card .content .text .copy .siteLink.success,
 body .card .content .text .link .siteLink.success,
-body .card .content .media .imgOverlay.success {
+body .card .content .media .imgOverlay.success,
+body .page header #pmenu .success {
     background: rgb(86, 171, 47);
     background: linear-gradient(to right, rgba(86, 171, 47, .75), rgba(168, 224, 99, .75));
     border: none;
@@ -718,7 +723,8 @@ body .card .content .media .imgOverlay.success {
 .header.card .menu nav ul li:hover>ul li a.otherDomain,
 body .card .content .text .copy .siteLink.otherDomain,
 body .card .content .text .link .siteLink.otherDomain,
-body .card .content .media .imgOverlay.otherDomain {
+body .card .content .media .imgOverlay.otherDomain,
+body .page header #pmenu .otherDomain {
     background: #92FE9D;
     background: linear-gradient(to left, rgba(0, 201, 255, .75), rgba(146, 254, 157, .75));
     border: none;
