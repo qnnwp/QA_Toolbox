@@ -8,33 +8,39 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     // ----------------------------------------
     // ---------------------------------------- GLOBAL FUNCTIONS
     // ----------------------------------------
-    /* Tampermonkey function to save value to local storage for program to use. */
+    /* Tampermonkey function
+     * to save value to local storage for program to use. */
     function saveValue(variable, val) {
         GM_setValue(variable, val); // eslint-disable-line new-cap
     }
 
-    /* Tampermonkey function to copy text to the clipboard. */
+    /* Tampermonkey function
+     * to copy text to the clipboard. */
     function clipboardCopy(variable) {
         GM_setClipboard(variable, 'text'); // eslint-disable-line new-cap
     }
 
-    /* Tampermonkey function to get value to local storage for program to use. */
+    /* Tampermonkey function
+     * to get value to local storage for program to use. */
     function getValue(variable) {
         return GM_getValue(variable, false); // eslint-disable-line new-cap
     }
 
-    /* Tampermonkey function to retrieve all the program variables from local storage. */
+    /* Tampermonkey function
+     * to retrieve all the program variables from local storage. */
     function programVariables() {
         return GM_listValues(); // eslint-disable-line new-cap
     }
 
-    /* Tampermonkey function to open URL in a new tab. */
+    /* Tampermonkey function
+     * to open URL in a new tab. */
     function openNewTab(openThis) {
         GM_openInTab(openThis); // eslint-disable-line new-cap
     }
 
-    /* Tampermonkey function to get resource files
-    from the meta tag located in the Chrome extension. */
+    /* Tampermonkey function
+     * to get resource files from the meta tag located
+     * in the Chrome extension. */
     function getResourceURL(resource) {
         return GM_getResourceURL(resource); // eslint-disable-line new-cap
     }
@@ -119,7 +125,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'toggleFeature': function (e) {
             var $callingElement = jQuery(e.target).siblings('.toolsPanel');
-
             return $callingElement.slideToggle(500);
         },
         'saveState': function (e) {
@@ -196,7 +201,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         // ----------------------------------------
         'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
             // sets $currentCard to null for tetra site checks
-            // $currentCard = ($currentCard) ? $currentCard : null;
+            $currentCard = ($currentCard) ? $currentCard : null;
             this.cacheDOMOverlayElements($currentLink);
             this.createOverlayElements(isNextGen);
             this.buildOverlayElements(isNextGen);
@@ -285,8 +290,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             };
         },
         'buildTool': function () {
-            dealerName.config.$dealerNameContainer.append(dealerName.config.$dealerNameTitle);
-            dealerName.config.$dealerNameContainer.append(dealerName.config.$dealerName);
+            dealerName.config.$dealerNameContainer
+                .append(dealerName.config.$dealerNameTitle)
+                .append(dealerName.config.$dealerName);
         },
         'cacheDOM': function () {
             this.contextManager = unsafeWindow.ContextManager;
@@ -388,10 +394,11 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             };
         },
         'buildTool': function () {
-            pageName.config.$pageNameContainer.append(pageName.config.$pageNameTitle);
-            pageName.config.$pageNameContainer.append(pageName.config.$pageName);
-            pageName.config.$pageNameContainer.append(pageName.config.$pageLabelTitle);
-            pageName.config.$pageNameContainer.append(pageName.config.$pageLabel);
+            pageName.config.$pageNameContainer
+                .append(pageName.config.$pageNameTitle)
+                .append(pageName.config.$pageName)
+                .append(pageName.config.$pageLabelTitle)
+                .append(pageName.config.$pageLabel);
         },
         'cacheDOM': function () {
             this.contextManager = unsafeWindow.ContextManager;
@@ -471,7 +478,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var tags;
             for (key in hTags.config.hTagsTotal) {
                 if (hTags.config.hTagsTotal.hasOwnProperty(key)) {
-                    // takes key from hTagsTotal and does a jquery search on the page for element
+                    // takes key from hTagsTotal and
+                    // does a jquery search on the page for element
                     tags = jQuery(key);
                     // saves the returned array for the display feature
                     hTags.config.hTags[key] = tags;
@@ -484,11 +492,13 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'buildTool': function () {
             // fill htag elements container with content
-            hTags.config.$hTagsContainer.append(hTags.config.$hTagsTitle);
-            hTags.config.$hTagsContainer.append(hTags.config.$hTags);
+            hTags.config.$hTagsContainer
+                .append(hTags.config.$hTagsTitle)
+                .append(hTags.config.$hTags);
             // fill display container with h tag elements
-            hTags.config.$hTagDisplayContainer.append(hTags.config.$hTagDisplay);
-            hTags.config.$hTagDisplayContainer.append(hTags.config.$removeBut);
+            hTags.config.$hTagDisplayContainer
+                .append(hTags.config.$hTagDisplay)
+                .append(hTags.config.$removeBut);
         },
         'displayData': function () {
             var html = '';
@@ -623,12 +633,13 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            pageInformation.config.$pageInfoTitle.on('click', QAtoolbox.toggleFeature);
-            pageInformation.config.$pageInfoTitle.on('click', QAtoolbox.saveState);
-            // hover effect
-            pageInformation.config.$pageInfo.on('mouseover mouseleave', '.tbInfo', this.hoverEffect);
-            // click
-            pageInformation.config.$pageInfo.on('click', '.tbInfo', this.copyToClipboard);
+            pageInformation.config.$pageInfoTitle
+                .on('click', QAtoolbox.toggleFeature)
+                .on('click', QAtoolbox.saveState);
+            // hover effect & click
+            pageInformation.config.$pageInfo
+                .on('mouseover mouseleave', '.tbInfo', this.hoverEffect)
+                .on('click', '.tbInfo', this.copyToClipboard);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -775,9 +786,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 });
             });
             // off button
-            imageChecker.config.$offButt.on('click', this.removeHighlights.bind(this));
-            imageChecker.config.$offButt.on('click', this.showLegend);
-            imageChecker.config.$offButt.on('click', this.toggleDisable);
+            imageChecker.config.$offButt
+                .on('click', this.removeHighlights.bind(this))
+                .on('click', this.showLegend)
+                .on('click', this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2
@@ -883,9 +895,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
             if (QAtoolbox.nextGenCheck()) {
                 var parent = $currentImage.closest('figure');
-                //                    this.$divOverlay.css({
-                //                        left: parent.width() / 2 - this.$divOverlay.width() / 2 + 'px'
-                //                    });
                 this.$divOverlay.css({
                     'left': ((parent.width() / 2) - (this.$divOverlay.width() / 2)) + 'px',
                 });
@@ -993,9 +1002,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 });
             });
             // off button
-            linkChecker.config.$offButt.on('click', this.removeHighlights.bind(this));
-            linkChecker.config.$offButt.on('click', this.showLegend);
-            linkChecker.config.$offButt.on('click', this.toggleDisable);
+            linkChecker.config.$offButt
+                .on('click', this.removeHighlights.bind(this))
+                .on('click', this.showLegend)
+                .on('click', this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -1095,7 +1105,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 // save current card settings
                 // if currentCard has a class save it, if no class make variable equal ''
-                cardClass = ($currentCard.attr('class')) ? $currentCard.attr('class') : '';
+                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : '';
                 $cardDeck = $currentCard.find('div.deck');
 
                 // checks to see if current card is a container card
@@ -1115,6 +1125,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var $image;
             var isImageLink;
             var isQLPlink;
+            var dataCell;
 
             // loop through all links on page
             for (a; a < length; a += 1) {
@@ -1126,7 +1137,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 // skip main nav menu items
                 if (typeof $currentLink.attr('class') !== 'undefined') {
-                    if ($currentLink.attr('class').indexOf('main') > -1 && $currentLink.attr('class').indexOf('main') > -1) {
+                    if ($currentLink.attr('class').indexOf('main') > -1 &&
+                        $currentLink.attr('class').indexOf('main') > -1) {
                         continue;
                     }
                 }
@@ -1135,8 +1147,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 isImageLink = this.isImageLink($image);
                 // create check for links inside quick links widget
                 if ($currentLink.closest('.cell').attr('data-cell')) {
+                    dataCell = $currentLink.closest('.cell').attr('data-cell');
                     // check if link is within a quick links widget
-                    if ($currentLink.closest('.cell').attr('data-cell').indexOf('Quick_Links_Plus') > -1) {
+                    if (dataCell.indexOf('Quick_Links_Plus') > -1) {
                         // checks if QLP is modified by modules
 
                         // IF LINK IS INSIDE A QUICK LINKS WIDGET MARK IT AS NOT AN IMAGE LINK

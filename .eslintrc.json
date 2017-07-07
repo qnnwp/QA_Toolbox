@@ -157,6 +157,10 @@
         "max-len": [2, {
             "code": 80,
             "tabWidth": 2,
+            "ignoreComments": true,
+            "ignoreTrailingComments": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true,
             "ignoreUrls": true
     }],
         "max-nested-callbacks": [0, 2],
