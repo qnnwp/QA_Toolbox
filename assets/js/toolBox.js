@@ -199,6 +199,29 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // console.log($currentLink);
             }
         },
+        // detect if the section element is a parent container
+        // check if the section class contains 'branchy'
+        'isBranchy': function (cardClass) {
+            if (cardClass.indexOf('branchy') > -1) {
+                return true;
+            }
+            return false;
+        },
+        // detect if the section element is a container
+        // check if the div.deck contains content
+        'isContainer': function ($cardDeck) {
+            if ($cardDeck.is(':not(:empty)')) {
+                return true;
+            }
+            return false;
+        },
+        'centerDiv': function ($currentImage, $divOverlay) {
+            var parent = $currentImage.closest('figure');
+            $divOverlay.css({
+                'left': ((parent.width() / 2) - ($divOverlay.width() / 2)) + 'px',
+            });
+            return $divOverlay;
+        },
     };
 
     // ----------------------------------------
@@ -910,10 +933,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             $currentImage.before(this.$divOverlay);
 
             if (shared.nextGenCheck()) {
-                var parent = $currentImage.closest('figure');
-                this.$divOverlay.css({
-                    'left': ((parent.width() / 2) - (this.$divOverlay.width() / 2)) + 'px',
-                });
+                this.$divOverlay = shared.centerDiv($currentImage, this.$divOverlay);
             }
         },
         'togClass': function ($image, addClass) {
@@ -1131,7 +1151,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 // checks to see if current card is a container card
                 // skip checks if it is
-                if (this.isBranchy(cardClass) || this.isContainer($cardDeck)) {
+                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
                     continue;
                 }
 
@@ -1245,22 +1265,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 this.runTests($currentLink, isImageLink);
             }
-        },
-        // detect if the section element is a parent container
-        // check if the section class contains 'branchy'
-        'isBranchy': function (cardClass) {
-            if (cardClass.indexOf('branchy') > -1) {
-                return true;
-            }
-            return false;
-        },
-        // detect if the section element is a container
-        // check if the div.deck contains content
-        'isContainer': function ($cardDeck) {
-            if ($cardDeck.is(':not(:empty)')) {
-                return true;
-            }
-            return false;
         },
         'testCard': function ($currentCard, cardClass, isImageLink) {
             var $cardLinkContainer = $currentCard.find('div.link');
@@ -1451,12 +1455,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 return;
             }
 
-            // center div overlay
             if (shared.nextGenCheck()) {
-                var parent = $currentImage.closest('figure');
-                this.$divOverlay.css({
-                    'left': ((parent.width() / 2) - (this.$divOverlay.width() / 2)) + 'px',
-                });
+                this.$divOverlay = shared.centerDiv($currentImage, this.$divOverlay);
             }
 
             // make parent image relative positionin
@@ -2798,7 +2798,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 }
 
                 // test links
-                this.tetraAjaxTest($currentLink);
+                //                this.tetraAjaxTest($currentLink);
+                this.ajaxTest($currentLink);
             }
         },
         // checks current window URL and if it contains nextGen parameter
@@ -2910,7 +2911,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 // detect if the section element is a parent container
                 // check if the section class contains 'branchy'
-                if (this.isBranchy(cardClass) || this.isContainer($cardDeck)) {
+                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
                     continue;
                 }
 
@@ -2979,7 +2980,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // PASS $CURRENTCARD FOR OVERLAYING THE DIV PURPOSES.
                     // set total tests to number of links on page
                     checkLinks.config.totalTests += 1;
-                    this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
+                    this.ajaxTest($currentLink, isImageLink, $currentCard);
+                    //                    this.nextGenAjaxTest($currentLink, isImageLink, $currentCard);
 
                     // TEST other Links defined in card Settings
                     // check if other links exist, get all links defined in card
@@ -3003,22 +3005,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     }
                 }
             }
-        },
-        // detect if the section element is a parent container
-        // check if the section class contains 'branchy'
-        'isBranchy': function (cardClass) {
-            if (cardClass.indexOf('branchy') > -1) {
-                return true;
-            }
-            return false;
-        },
-        // detect if the section element is a container
-        // check if the div.deck contains content
-        'isContainer': function ($cardDeck) {
-            if ($cardDeck.is(':not(:empty)')) {
-                return true;
-            }
-            return false;
         },
         'testHeaderFooter': function () {
             //            testHeaderFooter: function (testUrl, isImageLink) {
@@ -3044,7 +3030,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // USING TETRA AJAX TESTING BECAUSE ALL LINKS IN THE HEADER AND FOOTER EITHER TEXT LINKS or
                 // FONT IMAGE LINKS
                 // send link to ajx testing
-                this.tetraAjaxTest($currentLink);
+                //                this.tetraAjaxTest($currentLink);
+                this.ajaxTest($currentLink);
             }
         },
         'testLinks': function ($linkArray) {
@@ -3065,7 +3052,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                         continue;
                     }
                     // send link to ajax testing
-                    this.nextGenAjaxTest($currentLink);
+                    this.ajaxTest($currentLink);
+                    //                    this.nextGenAjaxTest($currentLink);
                 }
             } else {
                 // coverted variable name for easy reading
@@ -3077,7 +3065,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     return;
                 }
                 // send link to ajax testing
-                this.nextGenAjaxTest($currentLink);
+                this.ajaxTest($currentLink);
+                //                this.nextGenAjaxTest($currentLink);
             }
         },
         // checks if $image has length
@@ -3131,6 +3120,108 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // do nothing
             }
         },
+        'ajaxTest': function ($currentLink, isImageLink, $currentCard) {
+            var hasImage = 0;
+            var isImageLink = false;
+            var wrappedContents = false;
+            var $linkOverlay;
+            var pageError404;
+            var linkURL = checkLinks.addURLParameter($currentLink);
+            var isNextGen = shared.nextGenCheck();
+            // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
+            //            var $linkOverlay;
+            //            var pageError404;
+            //            var linkURL = checkLinks.addURLParameter($currentLink);
+            //            var isNextGen = shared.nextGenCheck();
+
+            // test each link
+            jQuery.ajax({
+                'url': linkURL, // be sure to check the right attribute
+                'type': 'post',
+                'crossDomain': true,
+                'method': 'get',
+                'dataType': 'html',
+                'success': function (data) {
+
+                    if (!isNextGen) {
+                        // checks to see if link is an image link
+                        hasImage = $currentLink.has('img').length;
+                        if (hasImage) {
+                            isImageLink = true;
+                            $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink);
+                        }
+
+                        // checks to see if the link has inline css
+                        // if it does wrap contents in in span tag and add classes to that
+                        wrappedContents = Boolean($currentLink.attr('style'));
+                        if (wrappedContents && !hasImage) {
+                            $currentLink.wrapInner('<span></span>');
+                            $linkOverlay = jQuery($currentLink.children('span'));
+                        }
+
+                        // If value is false all class modifications should be done to the link itself
+                        pageError404 = checkLinks.checkFor404(data);
+
+                        // if link is an image link
+                        // ADD CLASS FLAGS TO DIV OVERLAY
+                        // OTHERWISE ADD CLASS FLAGS TO LINK ELEMENT
+                        if (isImageLink || wrappedContents) {
+                            checkLinks.addFlagsToElements($linkOverlay, pageError404);
+                        } else {
+                            checkLinks.addFlagsToElements($currentLink, pageError404);
+                        }
+                    }
+
+                    if (isNextGen) {
+                        // check to see if the card has an image prior to startin the ajax testing
+                        if (isImageLink) {
+                            $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink, $currentCard);
+                        }
+
+                        // If value is false all class modifications should be done to the link itself
+                        pageError404 = checkLinks.checkFor404(data);
+
+                        // if link is an image link
+                        // ADD CLASS FLAGS TO DIV OVERLAY
+                        // OTHERWISE ADD CLASS FLAGS TO LINK ELEMENT
+                        if (isImageLink) {
+                            checkLinks.addFlagsToElements($linkOverlay, pageError404);
+                        } else {
+                            checkLinks.addFlagsToElements($currentLink, pageError404);
+                        }
+                    }
+                },
+                'error': function (jqXHR) {
+                    // set link in red if there is any errors with link
+                    checkLinks.config.errors += 1;
+                    if (jqXHR.status === 404) {
+                        if (isImageLink) {
+                            checkLinks.error($linkOverlay);
+                        } else {
+                            checkLinks.error($currentLink);
+                        }
+                    }
+                },
+                'statusCode': {
+                    '404': function () {
+                        $currentLink.addClass('fourOfour');
+
+                        if (isImageLink) {
+                            checkLinks.error($linkOverlay);
+                        } else {
+                            checkLinks.error($currentLink);
+                        }
+
+                        checkLinks.config.errors += 1;
+                    },
+                },
+                'complete': function () {
+                    checkLinks.config.count += 1;
+                    checkLinks.config.$counter.text(checkLinks.config.count + ' of ' + checkLinks.config.totalTests);
+                },
+            });
+        },
+        /*
         'tetraAjaxTest': function ($currentLink) {
             var hasImage = 0;
             var isImageLink = false;
@@ -3205,6 +3296,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 },
             });
         },
+        */
+        /*
         'nextGenAjaxTest': function ($currentLink, isImageLink, $currentCard) {
             // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
             var $linkOverlay;
@@ -3277,6 +3370,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 },
             });
         },
+        */
         'toggleDisable': function () {
             checkLinks.config.$activateButt.prop('disabled', function (index, value) {
                 return !value;
