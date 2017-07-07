@@ -58,6 +58,150 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     }
 
     // ----------------------------------------
+    // ---------------------------------------- Toolbox Shared Functions
+    // ----------------------------------------
+    var shared = {
+        'nextGenCheck': function () {
+            var nextGenFlag = jQuery.trim(document.firstChild.data);
+
+            if (typeof nextGenFlag === 'undefined' || nextGenFlag === '') {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        'toggleFeature': function (e) {
+            var $callingElement = jQuery(e.target).siblings('.toolsPanel');
+            return $callingElement.slideToggle(500);
+        },
+        'saveState': function (e) {
+            // get current state
+            var vName = jQuery(e.target).siblings('.toolsPanel').attr('id');
+            var currState = getValue(vName);
+            // sets usingM4 value
+            saveValue(vName, !currState);
+        },
+        'setState': function ($panel, state) {
+            if (state === 'show') {
+                $panel.addClass('appear');
+            } else if (state === 'hide') {
+                $panel.addClass('disappear');
+            }
+        },
+        'programData': function () {
+            var allVariables = programVariables(); // global function
+            var length = allVariables.length;
+            var a = 0;
+            var varList = {};
+            var key = '';
+            var value = '';
+            // add variables to list
+            for (a; a < length; a += 1) {
+                key = allVariables[a];
+                value = getValue(key);
+                varList[key] = value;
+            }
+            return varList;
+        },
+        'buildLegendContent': function ($legendContent, $legendListContainer) {
+            var key = '';
+            var value = '';
+            // loop through Legend Content list
+            for (key in $legendContent) {
+                if ($legendContent.hasOwnProperty(key)) {
+                    if (key === 'majorPage' && this.nextGenCheck()) {
+                        continue;
+                    }
+
+                    if (key === 'unsupportedPageLink' && !this.nextGenCheck()) {
+                        continue;
+                    }
+
+                    value = $legendContent[key];
+                    // build listing element
+                    this.$listItem = jQuery('<li>').attr({
+                        'class': 'legendContent ' + key,
+                    }).append(value);
+                    // attach to legend list
+                    $legendListContainer.append(this.$listItem);
+                }
+            }
+        },
+        'displayPanel': function ($toolPanel) {
+            var variables = shared.programData();
+            var panelId = $toolPanel.attr('id');
+            var state = '';
+            var key = '';
+
+            // loop through variable list to find the panel title
+            for (key in variables) {
+                if (variables.hasOwnProperty(key)) {
+                    if (key === panelId) {
+                        state = variables[key] ? 'show' : 'hide';
+                        shared.setState($toolPanel, state);
+                    }
+                }
+            }
+        },
+        'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
+            // sets $currentCard to null for tetra site checks
+            $currentCard = $currentCard ? $currentCard : null;
+            this.cacheDOMOverlayElements($currentLink);
+            this.createOverlayElements(isNextGen);
+            this.buildOverlayElements(isNextGen);
+            this.attachToImage(isNextGen, $currentLink, $currentCard);
+            return this.$divOverlay;
+        },
+        'cacheDOMOverlayElements': function ($currentLink /* , isNextGen*/ ) {
+            // IF NEXTGEN SITE
+            this.widthOfImage = $currentLink.find('img').width();
+            this.heightOfImage = $currentLink.find('img').height();
+            this.linkTitle = jQuery($currentLink).attr('title');
+        },
+        'createOverlayElements': function (isNextGen) {
+            // create div overlay
+            if (isNextGen) {
+                this.$divOverlay = jQuery('<div>').attr({
+                    'class': 'cardOverlay',
+                });
+            } else {
+                this.$divOverlay = jQuery('<div>').attr({
+                    'class': 'siteLink imgOverlay',
+                });
+            }
+        },
+        'buildOverlayElements': function (isNextGen) {
+            if (!isNextGen) {
+                // make the div overlay the same dimensions as the image
+                this.$divOverlay.css({
+                    'width': this.widthOfImage + 'px',
+                    'height': this.heightOfImage + 'px',
+                });
+            }
+            // add content to div
+            // ADD THE LINK TITLE
+            this.$divOverlay.append(this.linkTitle);
+        },
+        'attachToImage': function (isNextGen, $currentLink, $currentCard) {
+            // center div overlay
+            try {
+                if (isNextGen) {
+                    this.$divOverlay.attr({
+                        'class': 'imgOverlay myNextGen',
+                    });
+                    $currentCard.prepend(this.$divOverlay);
+                } else {
+                    $currentLink.prepend(this.$divOverlay);
+                }
+            } catch (e) {
+                // console.log(e);
+                // console.log($currentCard);
+                // console.log($currentLink);
+            }
+        },
+    };
+
+    // ----------------------------------------
     // ---------------------------------------- Build container for toolbox
     // ----------------------------------------
     var QAtoolbox = {
@@ -126,148 +270,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.body.before(QAtoolbox.config.$toolboxContainer);
             this.body.before(QAtoolbox.config.$legendContainer);
         },
-        'nextGenCheck': function () {
-            var nextGenFlag = jQuery.trim(document.firstChild.data);
-
-            if (typeof nextGenFlag === 'undefined' || nextGenFlag === '') {
-                return false;
-            } else {
-                return true;
-            }
-        },
-        'toggleFeature': function (e) {
-            var $callingElement = jQuery(e.target).siblings('.toolsPanel');
-            return $callingElement.slideToggle(500);
-        },
-        'saveState': function (e) {
-            // get current state
-            var vName = jQuery(e.target).siblings('.toolsPanel').attr('id');
-            var currState = getValue(vName);
-            // sets usingM4 value
-            saveValue(vName, !currState);
-        },
-        'setState': function ($panel, state) {
-            if (state === 'show') {
-                $panel.addClass('appear');
-            } else if (state === 'hide') {
-                $panel.addClass('disappear');
-            }
-        },
-        'programData': function () {
-            var allVariables = programVariables(); // global function
-            var length = allVariables.length;
-            var a = 0;
-            var varList = {};
-            var key = '';
-            var value = '';
-            // add variables to list
-            for (a; a < length; a += 1) {
-                key = allVariables[a];
-                value = getValue(key);
-                varList[key] = value;
-            }
-            return varList;
-        },
-        'buildLegendContent': function ($legendContent, $legendListContainer) {
-            var key = '';
-            var value = '';
-            // loop through Legend Content list
-            for (key in $legendContent) {
-                if ($legendContent.hasOwnProperty(key)) {
-                    if (key === 'majorPage' && this.nextGenCheck()) {
-                        continue;
-                    }
-
-                    if (key === 'unsupportedPageLink' && !this.nextGenCheck()) {
-                        continue;
-                    }
-
-                    value = $legendContent[key];
-                    // build listing element
-                    this.$listItem = jQuery('<li>').attr({
-                        'class': 'legendContent ' + key,
-                    }).append(value);
-                    // attach to legend list
-                    $legendListContainer.append(this.$listItem);
-                }
-            }
-        },
-        'displayPanel': function ($toolPanel) {
-            var variables = QAtoolbox.programData();
-            var panelId = $toolPanel.attr('id');
-            var state = '';
-            var key = '';
-
-            // loop through variable list to find the panel title
-            for (key in variables) {
-                if (variables.hasOwnProperty(key)) {
-                    if (key === panelId) {
-                        state = variables[key] ? 'show' : 'hide';
-                        QAtoolbox.setState($toolPanel, state);
-                    }
-                }
-            }
-        },
-        // ----------------------------------------
-        // Tier 4
-        // ----------------------------------------
-        'addDivOverlay': function (isNextGen, $currentLink, $currentCard) {
-            // sets $currentCard to null for tetra site checks
-            $currentCard = $currentCard ? $currentCard : null;
-            this.cacheDOMOverlayElements($currentLink);
-            this.createOverlayElements(isNextGen);
-            this.buildOverlayElements(isNextGen);
-            this.attachToImage(isNextGen, $currentLink, $currentCard);
-            return this.$divOverlay;
-        },
-        'cacheDOMOverlayElements': function ($currentLink /* , isNextGen*/ ) {
-            // IF NEXTGEN SITE
-            this.widthOfImage = $currentLink.find('img').width();
-            this.heightOfImage = $currentLink.find('img').height();
-            this.linkTitle = jQuery($currentLink).attr('title');
-        },
-        'createOverlayElements': function (isNextGen) {
-            // create div overlay
-            if (isNextGen) {
-                this.$divOverlay = jQuery('<div>').attr({
-                    'class': 'cardOverlay',
-                });
-            } else {
-                this.$divOverlay = jQuery('<div>').attr({
-                    'class': 'siteLink imgOverlay',
-                });
-            }
-        },
-        'buildOverlayElements': function (isNextGen) {
-            if (!isNextGen) {
-                // make the div overlay the same dimensions as the image
-                this.$divOverlay.css({
-                    'width': this.widthOfImage + 'px',
-                    'height': this.heightOfImage + 'px',
-                });
-            }
-            // add content to div
-            // ADD THE LINK TITLE
-            this.$divOverlay.append(this.linkTitle);
-        },
-        'attachToImage': function (isNextGen, $currentLink, $currentCard) {
-            // center div overlay
-            try {
-                if (isNextGen) {
-                    this.$divOverlay.attr({
-                        'class': 'imgOverlay myNextGen',
-                    });
-                    $currentCard.prepend(this.$divOverlay);
-                } else {
-                    $currentLink.prepend(this.$divOverlay);
-                }
-            } catch (e) {
-                // console.log(e);
-                // console.log($currentCard);
-                // console.log($currentLink);
-            }
-        },
     };
+
     /* ************************************************************************************************************************ */
     /* **************************************** PAGE INFO TOOLS **************************************** */
     /* ************************************************************************************************************************ */
@@ -597,7 +601,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            QAtoolbox.displayPanel(pageInformation.config.$pageInfo);
+            shared.displayPanel(pageInformation.config.$pageInfo);
         },
         // ----------------------------------------
         // tier 1 functions
@@ -637,7 +641,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'cacheDOM': function () {
             // DOM elements
             this.$toolBoxContainer = jQuery('.toolboxContainer');
-            this.variableList = QAtoolbox.programData();
+            this.variableList = shared.programData();
         },
         'addTool': function () {
             // add to main toolbox
@@ -646,8 +650,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'bindEvents': function () {
             // minimize
             pageInformation.config.$pageInfoTitle
-                .on('click', QAtoolbox.toggleFeature)
-                .on('click', QAtoolbox.saveState);
+                .on('click', shared.toggleFeature)
+                .on('click', shared.saveState);
             // hover effect & click
             pageInformation.config.$pageInfo
                 .on('mouseover mouseleave', '.tbInfo', this.hoverEffect)
@@ -683,7 +687,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            QAtoolbox.displayPanel(qaTools.config.$mainToolsPanel);
+            shared.displayPanel(qaTools.config.$mainToolsPanel);
         },
         'createElements': function () {
             qaTools.config = {
@@ -714,7 +718,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'cacheDOM': function () {
             // DOM elements
             this.$toolBoxContainer = jQuery('.toolboxContainer');
-            this.variableList = QAtoolbox.programData();
+            this.variableList = shared.programData();
         },
         'addTool': function () {
             // add to main toolbox
@@ -722,8 +726,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            qaTools.config.$mainToolsTitle.on('click', QAtoolbox.toggleFeature);
-            qaTools.config.$mainToolsTitle.on('click', QAtoolbox.saveState);
+            qaTools.config.$mainToolsTitle.on('click', shared.toggleFeature);
+            qaTools.config.$mainToolsTitle.on('click', shared.saveState);
         },
     };
 
@@ -778,7 +782,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach turn off button
                 .append(imageChecker.config.$offButt);
             // fill list
-            QAtoolbox.buildLegendContent(imageChecker.config.$legendContent, imageChecker.config.$legendList);
+            shared.buildLegendContent(imageChecker.config.$legendContent, imageChecker.config.$legendList);
         },
         'addTool': function () {
             imageChecker.config.$toolsPanel.append(imageChecker.config.$activateButt);
@@ -905,7 +909,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             // place div overlay onto image
             $currentImage.before(this.$divOverlay);
 
-            if (QAtoolbox.nextGenCheck()) {
+            if (shared.nextGenCheck()) {
                 var parent = $currentImage.closest('figure');
                 this.$divOverlay.css({
                     'left': ((parent.width() / 2) - (this.$divOverlay.width() / 2)) + 'px',
@@ -994,7 +998,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach hint
                 .append(linkChecker.config.$hint);
             // fill list
-            QAtoolbox.buildLegendContent(linkChecker.config.$legendContent, linkChecker.config.$legendList);
+            shared.buildLegendContent(linkChecker.config.$legendContent, linkChecker.config.$legendList);
         },
         'addTool': function () {
             linkChecker.config.$toolsPanel.append(linkChecker.config.$activateButt);
@@ -1033,13 +1037,13 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
             // NEXT GEN SITE LOGIC
             // ----------------------------------------
-            if (QAtoolbox.nextGenCheck()) {
+            if (shared.nextGenCheck()) {
                 this.nextGenSiteCheck();
             }
 
             // TETRA SITE LOGIC
             // ----------------------------------------
-            if (!QAtoolbox.nextGenCheck()) {
+            if (!shared.nextGenCheck()) {
                 this.tetraSiteCheck();
             }
 
@@ -1087,7 +1091,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addStyles': function () {
             // if site is TETRA do not add style
-            if (QAtoolbox.nextGenCheck()) {
+            if (shared.nextGenCheck()) {
                 this.$toolboxStyles
                     .append('.unsupportedPageLink { background: #00a6ff; }')
                     .append('.buttonFlag { background: linear-gradient(to right, #b2fefa, #0ed2f7) !important; color: #000000 !important; }');
@@ -1248,6 +1252,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             if (cardClass.indexOf('branchy') > -1) {
                 return true;
             }
+            return false;
         },
         // detect if the section element is a container
         // check if the div.deck contains content
@@ -1255,6 +1260,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             if ($cardDeck.is(':not(:empty)')) {
                 return true;
             }
+            return false;
         },
         'testCard': function ($currentCard, cardClass, isImageLink) {
             var $cardLinkContainer = $currentCard.find('div.link');
@@ -1302,7 +1308,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     $currentLink = $cardLinkContainer.find('a[class*="primary"]:first');
                     //                    $image = $cardImageContainer.find('img');
                     // add div overlay to image
-                    $linkOverlay = QAtoolbox.addDivOverlay(true, $currentLink, $currentCard);
+                    $linkOverlay = shared.addDivOverlay(true, $currentLink, $currentCard);
                     // perform checks to link
                     // add flag class, check target, check title, check url
                     this.nextgenRunTests($currentLink, isImageLink, $linkOverlay);
@@ -1446,7 +1452,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             }
 
             // center div overlay
-            if (QAtoolbox.nextGenCheck()) {
+            if (shared.nextGenCheck()) {
                 var parent = $currentImage.closest('figure');
                 this.$divOverlay.css({
                     'left': ((parent.width() / 2) - (this.$divOverlay.width() / 2)) + 'px',
@@ -1520,7 +1526,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                         // link has a fishy url
                         this.togClass($currentLink, 'urlIssue');
                         break;
-                    case this.datedURL(href) && QAtoolbox.nextGenCheck():
+                    case this.datedURL(href) && shared.nextGenCheck():
                         // link leads to an out dated page
                         this.togClass($currentLink, 'unsupportedPageLink');
                         break;
@@ -1607,7 +1613,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // link has a fishy url
                     this.togClass($linkOverlay, 'urlIssue');
                     break;
-                case this.datedURL(href) && QAtoolbox.nextGenCheck():
+                case this.datedURL(href) && shared.nextGenCheck():
                     // link leads to an out dated page
                     this.togClass($linkOverlay, 'unsupportedPageLink');
                     break;
@@ -1718,7 +1724,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach hint
                 .append(spellCheck.config.$hint);
             // fill list
-            QAtoolbox.buildLegendContent(spellCheck.config.$legendContent, spellCheck.config.$legendList);
+            shared.buildLegendContent(spellCheck.config.$legendContent, spellCheck.config.$legendList);
         },
         'cacheDOM': function (callingPanel) {
             this.$toolsPanel = jQuery(callingPanel);
@@ -2032,7 +2038,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            QAtoolbox.displayPanel(otherTools.config.$otherToolsPanel);
+            shared.displayPanel(otherTools.config.$otherToolsPanel);
         },
         'createElements': function () {
             otherTools.config = {
@@ -2063,7 +2069,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'cacheDOM': function () {
             // DOM elements
             this.$toolBoxContainer = jQuery('.toolboxContainer');
-            this.variableList = QAtoolbox.programData();
+            this.variableList = shared.programData();
         },
         'addTool': function () {
             // add to main toolbox
@@ -2071,8 +2077,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            otherTools.config.$otherToolsTitle.on('click', QAtoolbox.toggleFeature);
-            otherTools.config.$otherToolsTitle.on('click', QAtoolbox.saveState);
+            otherTools.config.$otherToolsTitle.on('click', shared.toggleFeature);
+            otherTools.config.$otherToolsTitle.on('click', shared.saveState);
         },
     };
 
@@ -2156,7 +2162,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach hint
                 .append(showNavigation.config.$hint);
             // fill list
-            QAtoolbox.buildLegendContent(showNavigation.config.$legendContent, showNavigation.config.$legendList);
+            shared.buildLegendContent(showNavigation.config.$legendContent, showNavigation.config.$legendList);
         },
         'addTool': function () {
             this.$toolsPanel.append(showNavigation.config.$activateButt);
@@ -2733,7 +2739,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(checkLinks.config.$offButt)
                 .append(checkLinks.config.$hint);
             // fill list
-            QAtoolbox.buildLegendContent(checkLinks.config.$legendContent, checkLinks.config.$legendList);
+            shared.buildLegendContent(checkLinks.config.$legendContent, checkLinks.config.$legendList);
             // attach filled list
             this.$legendContainer.append(checkLinks.config.$legend);
             checkLinks.config.$legend.prepend(checkLinks.config.$container);
@@ -2763,7 +2769,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         // tier 1 functions
         // ----------------------------------------
         'platformChooser': function () {
-            var isNextGen = QAtoolbox.nextGenCheck();
+            var isNextGen = shared.nextGenCheck();
             if (isNextGen) {
                 this.nextgenTestLinks();
             } else {
@@ -2823,7 +2829,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var linkURL = jQuery.trim($currentLink.attr('href'));
             // set variable true or false, if image exists inside link
             var isImageLink = ($currentLink.find('img') > 0);
-            var isNextGen = QAtoolbox.nextGenCheck();
+            var isNextGen = shared.nextGenCheck();
             var $linkOverlay;
             var $image;
 
@@ -2839,7 +2845,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // test for mobile specific links
                 case linkURL.indexOf('tel:') >= 0:
                     if (isImageLink) {
-                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink);
+                        $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink);
                         $linkOverlay.addClass('mobilePhoneLink');
                     } else {
                         $currentLink.addClass('mobilePhoneLink');
@@ -2864,7 +2870,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     // ** highlight for absolute URL but still test **
                 case linkURL.indexOf('www') > -1 || linkURL.indexOf('://') > -1:
                     if (isImageLink) {
-                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink);
+                        $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink);
                         $linkOverlay.addClass('otherDomain');
                     } else {
                         $currentLink.addClass('otherDomain');
@@ -3004,6 +3010,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             if (cardClass.indexOf('branchy') > -1) {
                 return true;
             }
+            return false;
         },
         // detect if the section element is a container
         // check if the div.deck contains content
@@ -3011,6 +3018,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             if ($cardDeck.is(':not(:empty)')) {
                 return true;
             }
+            return false;
         },
         'testHeaderFooter': function () {
             //            testHeaderFooter: function (testUrl, isImageLink) {
@@ -3130,7 +3138,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var $linkOverlay;
             var pageError404;
             var linkURL = checkLinks.addURLParameter($currentLink);
-            var isNextGen = QAtoolbox.nextGenCheck();
+            var isNextGen = shared.nextGenCheck();
 
             // test each link
             jQuery.ajax({
@@ -3144,7 +3152,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                     hasImage = $currentLink.has('img').length;
                     if (hasImage) {
                         isImageLink = true;
-                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink);
+                        $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink);
                     }
 
                     // checks to see if the link has inline css
@@ -3202,17 +3210,17 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var $linkOverlay;
             var pageError404;
             var linkURL = checkLinks.addURLParameter($currentLink);
-            var isNextGen = QAtoolbox.nextGenCheck();
+            var isNextGen = shared.nextGenCheck();
 
             // check if isImageLink is empty and check if $currentCard is empty
             // most likely because the parameter was not mentioned in the calling statement
-            // if (typeof isImageLink === 'undefined') {
-            //     isImageLink = false;
-            // }
+            if (typeof isImageLink === 'undefined') {
+                isImageLink = false;
+            }
 
-            // if (typeof $currentCard === 'undefined') {
-            //     $currentCard = 'null';
-            // }
+            if (typeof $currentCard === 'undefined') {
+                $currentCard = 'null';
+            }
 
             // test each link
             jQuery.ajax({
@@ -3224,7 +3232,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 'success': function (data) {
                     // check to see if the card has an image prior to startin the ajax testing
                     if (isImageLink) {
-                        $linkOverlay = QAtoolbox.addDivOverlay(isNextGen, $currentLink, $currentCard);
+                        $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink, $currentCard);
                     }
 
                     // If value is false all class modifications should be done to the link itself
@@ -3635,7 +3643,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.setToggle();
             this.addTool();
             this.bindEvents();
-            QAtoolbox.displayPanel(urlModifiers.config.$urlModPanel);
+            shared.displayPanel(urlModifiers.config.$urlModPanel);
         },
         // ----------------------------------------
         // tier 1 functions
@@ -3687,7 +3695,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'cacheDOM': function () {
             // DOM elements
-            this.variableList = QAtoolbox.programData();
+            this.variableList = shared.programData();
             this.$toolBoxContainer = jQuery('.toolboxContainer');
             this.newURL = window.location.href;
         },
@@ -3708,8 +3716,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            urlModifiers.config.$urlModTitle.on('click', QAtoolbox.toggleFeature);
-            urlModifiers.config.$urlModTitle.on('click', QAtoolbox.saveState);
+            urlModifiers.config.$urlModTitle.on('click', shared.toggleFeature);
+            urlModifiers.config.$urlModTitle.on('click', shared.saveState);
             urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
@@ -3995,7 +4003,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.cacheDOM();
             this.addTool();
             this.bindEvents();
-            QAtoolbox.displayPanel(toggles.config.$togglesPanel);
+            shared.displayPanel(toggles.config.$togglesPanel);
         },
         'createElements': function () {
             toggles.config = {
@@ -4026,7 +4034,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'cacheDOM': function () {
             // DOM elements
             this.$toolBoxContainer = jQuery('.toolboxContainer');
-            this.variableList = QAtoolbox.programData();
+            this.variableList = shared.programData();
         },
         'addTool': function () {
             // add to main toolbox
@@ -4034,8 +4042,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            toggles.config.$togglesTitle.on('click', QAtoolbox.toggleFeature);
-            toggles.config.$togglesTitle.on('click', QAtoolbox.saveState);
+            toggles.config.$togglesTitle.on('click', shared.toggleFeature);
+            toggles.config.$togglesTitle.on('click', shared.saveState);
         },
     };
 
@@ -4310,7 +4318,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.$toolBoxContainer = jQuery('#showToolbox');
             this.nextGenComment = document.firstChild.data;
             this.isNextGen = this.checkNextGen(this.nextGenComment);
-            this.variableList = QAtoolbox.programData();
+            this.variableList = shared.programData();
             // additions
             this.toolbox = jQuery('.toolBox');
             this.toolboxContain = jQuery('.toolboxContainer');
@@ -4357,7 +4365,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 if (variables.hasOwnProperty(key)) {
                     if (key === 'showToolbox') {
                         state = (variables[key]) ? 'show' : 'hide';
-                        QAtoolbox.setState(this.$toolBoxContainer, state);
+                        shared.setState(this.$toolBoxContainer, state);
                         // set display of hide/show button to opposite of main toolbox
                         dynamicDisplay.config.$showToolbox.addClass((variables[key]) ? 'disappear' : 'appear');
                     }
@@ -4412,7 +4420,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.stylePanels();
         },
         'cacheDOM': function () {
-            this.isNextGenPlatform = QAtoolbox.nextGenCheck();
+            this.isNextGenPlatform = shared.nextGenCheck();
             this.edoButts = jQuery('.myEDOBut');
             this.contextManager = unsafeWindow.ContextManager;
             this.phoneWrapper = jQuery('body .phone-wrapper');
@@ -4509,22 +4517,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             // allows override of the !important tags used by CDK bundles.css
             $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
         },
-        //        'displayPanel': function ($toolPanel) {
-        //            var variables = QAtoolbox.programData();
-        //            var panelId = $toolPanel.attr('id');
-        //            var state = '';
-        //            var key = '';
-        //
-        //            // loop through variable list to find the panel title
-        //            for (key in variables) {
-        //                if (variables.hasOwnProperty(key)) {
-        //                    if (key === panelId) {
-        //                        state = (variables[key]) ? 'show' : 'hide';
-        //                        QAtoolbox.setState($toolPanel, state);
-        //                    }
-        //                }
-        //            }
-        //        },
     };
 
     // ----------------------------------------
