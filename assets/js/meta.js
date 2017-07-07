@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name QA Toolbar - TEST - Advanced NextGen Support
+// @name QA Toolbox
 // @namespace www.cobaltgroup.com/
 // @version 3.2.11-TESTER
 // @author Eric Tanaka
