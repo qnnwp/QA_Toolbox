@@ -204,7 +204,7 @@
         "space-in-brackets": [0, "never"],
         "space-in-parens": [0, "never"],
         "space-infix-ops": 2,
-        "space-return-throw-case": ["error", {
+        "keyword-spacing": ["error", {
             "before": true,
             "after": true
         }],
