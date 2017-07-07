@@ -204,7 +204,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     // ----------------------------------------
     // ---------------------------------------- Build container for toolbox
     // ----------------------------------------
-    var QAtoolbox = {
+    var qaToolbox = {
         'init': function () {
             this.createElements();
             this.cacheDOM();
@@ -214,7 +214,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         // tier 1 functions
         // ----------------------------------------
         'createElements': function () {
-            QAtoolbox.config = {
+            qaToolbox.config = {
                 '$legendContainer': jQuery('<div>').attr({
                     'class': 'legendContainer',
                 }),
@@ -261,14 +261,14 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
         'attachTools': function () {
-            this.head.append(QAtoolbox.config.$toolboxStyles);
-            this.head.append(QAtoolbox.config.$myFont);
-            this.head.append(QAtoolbox.config.$fontAwe);
-            this.head.append(QAtoolbox.config.$typo);
-            this.head.append(QAtoolbox.config.$toolStyles);
-            this.head.append(QAtoolbox.config.$animate);
-            this.body.before(QAtoolbox.config.$toolboxContainer);
-            this.body.before(QAtoolbox.config.$legendContainer);
+            this.head.append(qaToolbox.config.$toolboxStyles);
+            this.head.append(qaToolbox.config.$myFont);
+            this.head.append(qaToolbox.config.$fontAwe);
+            this.head.append(qaToolbox.config.$typo);
+            this.head.append(qaToolbox.config.$toolStyles);
+            this.head.append(qaToolbox.config.$animate);
+            this.body.before(qaToolbox.config.$toolboxContainer);
+            this.body.before(qaToolbox.config.$legendContainer);
         },
     };
 
@@ -4431,7 +4431,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.isMobile();
         },
         'toolContainer': function () {
-            QAtoolbox.init();
+            qaToolbox.init();
         },
         'pageInfoPanel': function () {
             pageInformation.init();
@@ -4480,7 +4480,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'stylePanels': function () {
             this.styleButtons(qaTools.config.$mainToolsPanel);
             this.styleButtons(otherTools.config.$otherToolsPanel);
-            this.wrapText(QAtoolbox.config.$toolboxContainer);
+            this.wrapText(qaToolbox.config.$toolboxContainer);
         },
         'isCDKsite': function () {
             try {
