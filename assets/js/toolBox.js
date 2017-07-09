@@ -10,7 +10,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     // ----------------------------------------
     /**
      * Tampermonkey function
-     * to save value to local storage for program to use.
+     * Save value to local storage for program to use.
+     * @param {string} variable The variable that will be looked up.
+     * @param {bool} val The value that the variable will be set too.
      */
     function saveValue(variable, val) {
         GM_setValue(variable, val);
@@ -18,7 +20,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
     /**
      * Tampermonkey function
-     * to copy text to the clipboard.
+     * Copy text to the clipboard.
+     * @param {string} variable The variable that will be copied to the clipboard.
      */
     function clipboardCopy(variable) {
         GM_setClipboard(variable, 'text');
@@ -26,7 +29,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
     /**
      * Tampermonkey function
-     * to get value to local storage for program to use.
+     * Get value to local storage for program to use.
+     * @param {string} variable The variable that will be looked up.
      */
     function getValue(variable) {
         return GM_getValue(variable, false);
@@ -43,6 +47,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     /**
      * Tampermonkey function
      * to open URL in a new tab.
+     * @param {string} openThis A URL that will be opened in a new window.
      */
     function openNewTab(openThis) {
         GM_openInTab(openThis);
@@ -52,6 +57,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
      * Tampermonkey function
      * to get resource files from the meta tag located
      * in the Chrome extension.
+     * @param {string} resource The resource name that is defined in the meta code of the Tampermonkey Script.
      */
     function getResourceURL(resource) {
         return GM_getResourceURL(resource);
@@ -218,7 +224,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'centerDiv': function ($currentImage, $divOverlay) {
             var parent = $currentImage.closest('figure');
             $divOverlay.css({
-                'left': ((parent.width() / 2) - ($divOverlay.width() / 2)) + 'px',
+                'left': ((parent.width() / 2) - ($divOverlay.width() / 2)) +
+                    'px',
             });
             return $divOverlay;
         },
@@ -284,14 +291,16 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
         'attachTools': function () {
-            this.head.append(qaToolbox.config.$toolboxStyles);
-            this.head.append(qaToolbox.config.$myFont);
-            this.head.append(qaToolbox.config.$fontAwe);
-            this.head.append(qaToolbox.config.$typo);
-            this.head.append(qaToolbox.config.$toolStyles);
-            this.head.append(qaToolbox.config.$animate);
-            this.body.before(qaToolbox.config.$toolboxContainer);
-            this.body.before(qaToolbox.config.$legendContainer);
+            this.head
+                .append(qaToolbox.config.$toolboxStyles)
+                .append(qaToolbox.config.$myFont)
+                .append(qaToolbox.config.$fontAwe)
+                .append(qaToolbox.config.$typo)
+                .append(qaToolbox.config.$toolStyles)
+                .append(qaToolbox.config.$animate);
+            this.body
+                .before(qaToolbox.config.$toolboxContainer)
+                .before(qaToolbox.config.$legendContainer);
         },
     };
 
@@ -376,8 +385,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             };
         },
         'buildTool': function () {
-            webID.config.$webIDContainer.append(webID.config.$webIDTitle);
-            webID.config.$webIDContainer.append(webID.config.$webID);
+            webID.config.$webIDContainer
+                .append(webID.config.$webIDTitle);
+            webID.config.$webIDContainer
+                .append(webID.config.$webID);
         },
         'cacheDOM': function () {
             this.contextManager = unsafeWindow.ContextManager;
@@ -611,7 +622,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             }
         },
         'showDetails': function () {
-            this.$body.append(hTags.config.$hTagDisplayContainer);
+            this.$body
+                .append(hTags.config.$hTagDisplayContainer);
         },
         'removeDisplay': function () {
             // remove display container
@@ -761,7 +773,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolBoxContainer.append(qaTools.config.$mainToolsContainer);
+            this.$toolBoxContainer
+                .append(qaTools.config.$mainToolsContainer);
         },
         'bindEvents': function () {
             // minimize
@@ -827,11 +840,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach turn off button
                 .append(imageChecker.config.$offButt);
             // fill list
-            shared.buildLegendContent(imageChecker.config.$legendContent, imageChecker.config.$legendList);
+            shared.buildLegendContent(
+                imageChecker.config.$legendContent,
+                imageChecker.config.$legendList);
         },
         'addTool': function () {
-            imageChecker.config.$toolsPanel.append(imageChecker.config.$activateButt);
-            imageChecker.config.$legendContainer.append(imageChecker.config.$legend);
+            imageChecker.config.$toolsPanel
+                .append(imageChecker.config.$activateButt);
+            imageChecker.config.$legendContainer
+                .append(imageChecker.config.$legend);
         },
         'bindEvents': function () {
             // main button
@@ -1050,11 +1067,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach hint
                 .append(linkChecker.config.$hint);
             // fill list
-            shared.buildLegendContent(linkChecker.config.$legendContent, linkChecker.config.$legendList);
+            shared.buildLegendContent(
+                linkChecker.config.$legendContent,
+                linkChecker.config.$legendList);
         },
         'addTool': function () {
-            linkChecker.config.$toolsPanel.append(linkChecker.config.$activateButt);
-            linkChecker.config.$legendContainer.append(linkChecker.config.$legend);
+            linkChecker.config.$toolsPanel
+                .append(linkChecker.config.$activateButt);
+            linkChecker.config.$legendContainer
+                .append(linkChecker.config.$legend);
         },
         'bindEvents': function () {
             // main button
@@ -1708,9 +1729,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             };
         },
         'buildLegend': function () {
-            //var $legendContent = spellCheck.config.$legendContent;
-            //var $legendList = spellCheck.config.$legendList;
-
             spellCheck.config.$legend
                 // attach legend title
                 .append(spellCheck.config.$legendTitle)
@@ -1722,7 +1740,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(spellCheck.config.$hint);
 
             // fill list
-            //shared.buildLegendContent($legendContent, $legendList);
             shared.buildLegendContent(
                 spellCheck.config.$legendContent,
                 spellCheck.config.$legendList);
@@ -1733,8 +1750,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.$legendContainer = jQuery('.legendContainer');
         },
         'addTool': function () {
-            this.$toolsPanel.append(spellCheck.config.$activateButt);
-            this.$legendContainer.append(spellCheck.config.$legend);
+            this.$toolsPanel
+                .append(spellCheck.config.$activateButt);
+            this.$legendContainer
+                .append(spellCheck.config.$legend);
         },
         'bindEvents': function () {
             // activate button
@@ -1943,12 +1962,14 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
             jQuery.each(speedtestPage.config.browserOptions, function (key, text) {
                 $listItem = jQuery('<option>').val(key).html(text);
-                speedtestPage.config.$browserSelect.append($listItem);
+                speedtestPage.config.$browserSelect
+                    .append($listItem);
             });
 
             jQuery.each(speedtestPage.config.keyOptions, function (key, text) {
                 $listItem = jQuery('<option>').val(text).html(key);
-                speedtestPage.config.$keySelect.append($listItem);
+                speedtestPage.config.$keySelect
+                    .append($listItem);
             });
         },
         'buildPanel': function () {
@@ -1960,11 +1981,13 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(speedtestPage.config.$keyTitle)
                 .append(speedtestPage.config.$keySelect)
                 .append(speedtestPage.config.$sendButt);
-            speedtestPage.config.$emailInput.val(speedtestPage.config.email);
+            speedtestPage.config.$emailInput
+                .val(speedtestPage.config.email);
         },
         'addTool': function () {
-            this.$toolsPanel.append(speedtestPage.config.$activateButt);
-            this.$toolsPanel.append(speedtestPage.config.$panelContainer);
+            this.$toolsPanel
+                .append(speedtestPage.config.$activateButt)
+                .append(speedtestPage.config.$panelContainer);
         },
         'bindEvents': function () {
             speedtestPage.config.$activateButt.on(
@@ -2101,7 +2124,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolBoxContainer.append(otherTools.config.$otherToolsContainer);
+            this.$toolBoxContainer
+                .append(otherTools.config.$otherToolsContainer);
         },
         'bindEvents': function () {
             // minimize
@@ -2195,11 +2219,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 // attach hint
                 .append(showNavigation.config.$hint);
             // fill list
-            shared.buildLegendContent(showNavigation.config.$legendContent, showNavigation.config.$legendList);
+            shared.buildLegendContent(
+                showNavigation.config.$legendContent,
+                showNavigation.config.$legendList);
         },
         'addTool': function () {
-            this.$toolsPanel.append(showNavigation.config.$activateButt);
-            this.$legendContainer.append(showNavigation.config.$legend);
+            this.$toolsPanel
+                .append(showNavigation.config.$activateButt);
+            this.$legendContainer
+                .append(showNavigation.config.$legend);
         },
         'bindEvents': function () {
             showNavigation.config.$activateButt.on(
@@ -2294,7 +2322,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.pageName = this.contextManager.getPageName();
         },
         'addTool': function () {
-            this.$otherToolsPanel.append(viewMobile.config.$activateButt);
+            this.$otherToolsPanel
+                .append(viewMobile.config.$activateButt);
         },
         'bindEvents': function () {
             viewMobile.config.$activateButt.on(
@@ -2359,8 +2388,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'buildElements': function () {
             // attach seo display and remove button to container
-            seoSimplify.config.$seoContainer.append(seoSimplify.config.$seoDisplay);
-            seoSimplify.config.$seoContainer.append(seoSimplify.config.$removeBut);
+            seoSimplify.config.$seoContainer
+                .append(seoSimplify.config.$seoDisplay)
+                .append(seoSimplify.config.$removeBut);
         },
         'loadData': function () {
             var x = 0;
@@ -2379,7 +2409,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.body = jQuery('body');
         },
         'addTool': function () {
-            this.$otherToolsPanel.append(seoSimplify.config.$activateButt);
+            this.$otherToolsPanel
+                .append(seoSimplify.config.$activateButt);
         },
         'bindEvents': function () {
             seoSimplify.config.$activateButt.on(
@@ -2504,12 +2535,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             return $input;
         },
         'attachDisplayArea': function () {
-            this.body.append(seoSimplify.config.$seoContainer);
+            this.body
+                .append(seoSimplify.config.$seoContainer);
         },
         'displayText': function ($input) {
             // attach input to display
-            seoSimplify.config.$seoDisplay.empty();
-            seoSimplify.config.$seoDisplay.append($input.html());
+            seoSimplify.config.$seoDisplay
+                .empty();
+            seoSimplify.config.$seoDisplay
+                .append($input.html());
         },
         'revertDiv': function (event) {
             var $this = jQuery(event.target);
@@ -2658,7 +2692,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.overlayStyles = [];
         },
         'addTool': function () {
-            this.$toolsPanel.append(widgetOutlines.config.$activateButt);
+            this.$toolsPanel
+                .append(widgetOutlines.config.$activateButt);
         },
         'bindEvents': function () {
             widgetOutlines.config.$activateButt.on(
@@ -2674,7 +2709,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'addCustomStyles': function () {
             var self = this;
             jQuery(this.overlayStyles).each(function (index, value) {
-                self.$toolboxStyles.append(value);
+                self.$toolboxStyles
+                    .append(value);
             });
         },
         'addOverlay': function (array) {
@@ -2808,13 +2844,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(checkLinks.config.$offButt)
                 .append(checkLinks.config.$hint);
             // fill list
-            shared.buildLegendContent(checkLinks.config.$legendContent, checkLinks.config.$legendList);
+            shared.buildLegendContent(
+                checkLinks.config.$legendContent,
+                checkLinks.config.$legendList);
             // attach filled list
-            this.$legendContainer.append(checkLinks.config.$legend);
-            checkLinks.config.$legend.prepend(checkLinks.config.$container);
+            this.$legendContainer
+                .append(checkLinks.config.$legend);
+            checkLinks.config.$legend
+                .prepend(checkLinks.config.$container);
         },
         'addTool': function () {
-            this.$toolsPanel.append(checkLinks.config.$activateButt);
+            this.$toolsPanel
+                .append(checkLinks.config.$activateButt);
         },
         'bindEvents': function () {
             // main button
@@ -3311,21 +3352,35 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'ajaxStart': function () {
             jQuery(document).ajaxStart(function () {
-                checkLinks.config.$message.text('checking links').append(checkLinks.config.$counter);
-                checkLinks.config.$message.append(checkLinks.config.$iconContainer).append(checkLinks.config.$thinking);
-                checkLinks.config.$container.append(checkLinks.config.$message);
+                checkLinks.config.$message
+                    .text('checking links')
+                    .append(checkLinks.config.$counter)
+                    //checkLinks.config.$message
+                    .append(checkLinks.config.$iconContainer)
+                    .append(checkLinks.config.$thinking);
+                checkLinks.config.$container
+                    .append(checkLinks.config.$message);
             });
         },
         'ajaxStop': function () {
             jQuery(document).ajaxStop(function () {
-                checkLinks.config.$message.empty();
-                checkLinks.config.$thinking.remove();
-                checkLinks.config.$message.text('all links checked');
-                checkLinks.config.$iconContainer.append(checkLinks.config.$done);
-                checkLinks.config.$message.append(checkLinks.config.$iconContainer);
-                checkLinks.config.$message.delay(7000).fadeOut(2000, function () {
-                    checkLinks.config.$container.remove();
-                });
+                checkLinks.config.$message
+                    .empty();
+                checkLinks.config.$thinking
+                    .remove();
+                checkLinks.config.$message
+                    .text('all links checked');
+                checkLinks.config.$iconContainer
+                    .append(checkLinks.config.$done);
+                checkLinks.config.$message
+                    .append(checkLinks.config.$iconContainer);
+                checkLinks.config.$message
+                    .delay(7000)
+                    .fadeOut(2000,
+                        function () {
+                            checkLinks.config.$container
+                                .remove();
+                        });
             });
         },
         'error': function ($this) {
@@ -3399,10 +3454,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            nextGenToggle.config.$nextGenToggleContainer.on(
-                'click',
-                this.flipTheSwitch.bind(this)
-            );
+            nextGenToggle.config.$nextGenToggleContainer
+                .on('click',
+                    this.flipTheSwitch.bind(this)
+                );
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3410,14 +3465,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'toggleOn': function () {
             // set toggle on image
             var $toggle = nextGenToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
+            $toggle
+                .removeClass('fa-toggle-off')
+                .addClass('fa-toggle-on');
+            //$toggle.addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
             var $toggle = nextGenToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
+            $toggle
+                .removeClass('fa-toggle-on')
+                .addClass('fa-toggle-off');
+            //$toggle.addClass('fa-toggle-off');
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
@@ -3501,7 +3560,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolsPanel.append(m4Check.config.$m4Container);
+            this.$toolsPanel
+                .append(m4Check.config.$m4Container);
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
@@ -3516,14 +3576,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'toggleOn': function () {
             // set toggle on image
             var $toggle = m4Check.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
+            $toggle
+                .removeClass('fa-toggle-off')
+                .addClass('fa-toggle-on');
+            //$toggle.addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
             var $toggle = m4Check.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
+            $toggle
+                .removeClass('fa-toggle-on')
+                .addClass('fa-toggle-off');
+            //$toggle.addClass('fa-toggle-off');
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
@@ -3607,14 +3671,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolsPanel.append(autofillToggle.config.$autofillToggleContainer);
+            this.$toolsPanel
+                .append(autofillToggle.config.$autofillToggleContainer);
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            autofillToggle.config.$autofillToggleContainer.on(
-                'click',
-                this.flipTheSwitch.bind(this)
-            );
+            autofillToggle.config.$autofillToggleContainer
+                .on('click',
+                    this.flipTheSwitch.bind(this)
+                );
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3622,14 +3687,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'toggleOn': function () {
             // set toggle on image
             var $toggle = autofillToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
+            $toggle
+                .removeClass('fa-toggle-off')
+                .addClass('fa-toggle-on');
+            //$toggle.addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
             var $toggle = autofillToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
+            $toggle
+                .removeClass('fa-toggle-on')
+                .addClass('fa-toggle-off');
+            //$toggle.addClass('fa-toggle-off');
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
@@ -3714,14 +3783,20 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(m4Check.init())
                 .append(autofillToggle.init());
 
-            urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyTitle);
-            urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyIcon);
-            urlModifiers.config.$autoApplyIcon.append(urlModifiers.config.$FAtoggle);
-            urlModifiers.config.$urlModPanel.append(urlModifiers.config.$autoApplyContainer);
+            urlModifiers.config.$autoApplyContainer
+                .append(urlModifiers.config.$autoApplyTitle)
+                .append(urlModifiers.config.$autoApplyIcon);
+            //urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyIcon);
+            urlModifiers.config.$autoApplyIcon
+                .append(urlModifiers.config.$FAtoggle);
+            urlModifiers.config.$urlModPanel
+                .append(urlModifiers.config.$autoApplyContainer);
 
             // attach title and URL Mod panel to URL Mod container
-            urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModTitle);
-            urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModPanel);
+            urlModifiers.config.$urlModContainer
+                .append(urlModifiers.config.$urlModTitle)
+                .append(urlModifiers.config.$urlModPanel);
+            //urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModPanel);
         },
         'cacheDOM': function () {
             // DOM elements
@@ -3742,7 +3817,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolBoxContainer.append(urlModifiers.config.$urlModContainer);
+            this.$toolBoxContainer
+                .append(urlModifiers.config.$urlModContainer);
         },
         'bindEvents': function () {
             // minimize
@@ -3765,14 +3841,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'toggleOn': function () {
             // set toggle on image
             var $toggle = urlModifiers.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
+            $toggle
+                .removeClass('fa-toggle-off') //;
+                //$toggle
+                .addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
             var $toggle = urlModifiers.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-on');
-            $toggle.addClass('fa-toggle-off');
+            $toggle
+                .removeClass('fa-toggle-on') //;
+                //$toggle
+                .addClass('fa-toggle-off');
         },
         'applyParameters': function () {
             var urlParameters2 = {
@@ -4077,7 +4157,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolBoxContainer.append(toggles.config.$togglesContainer);
+            this.$toolBoxContainer
+                .append(toggles.config.$togglesContainer);
         },
         'bindEvents': function () {
             // minimize
@@ -4134,18 +4215,23 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             this.$togglesContainer = jQuery('.toolboxContainer');
         },
         'buildTool': function () {
-            refreshPage.config.$refreshButt.html(refreshPage.config.$refresh);
-            refreshPage.config.$refreshButtContainer.html(refreshPage.config.$refreshButt);
+            refreshPage.config.$refreshButt
+                .html(refreshPage.config.$refresh);
+            refreshPage.config.$refreshButtContainer
+                .html(refreshPage.config.$refreshButt);
             // add icon to mock button
-            refreshPage.config.$refreshCheckbox.append(refreshPage.config.$FAtoggle);
+            refreshPage.config.$refreshCheckbox
+                .append(refreshPage.config.$FAtoggle);
             // add mock button to container
             refreshPage.config.$refreshContainer
                 .append(refreshPage.config.$refreshTitle)
                 .append(refreshPage.config.$refreshCheckbox);
         },
         'addTool': function () {
-            this.$togglesPanel.append(refreshPage.config.$refreshContainer);
-            this.$togglesContainer.append(refreshPage.config.$refreshButtContainer);
+            this.$togglesPanel
+                .append(refreshPage.config.$refreshContainer);
+            this.$togglesContainer
+                .append(refreshPage.config.$refreshButtContainer);
         },
         'bindEvents': function () {
             refreshPage.config.$refreshButt.on(
@@ -4252,19 +4338,20 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolsPanel.append(previewBarToggle.config.$previewBarToggleContainer);
+            this.$toolsPanel
+                .append(previewBarToggle.config.$previewBarToggleContainer);
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            previewBarToggle.config.$previewBarToggleContainer.on(
-                'click',
-                this.flipTheSwitch.bind(this)
-            );
-            previewBarToggle.config.$previewBarToggleContainer.on(
-                'click',
-                '#previewToolBarFrame',
-                this.togglePreviewToolbar
-            );
+            previewBarToggle.config.$previewBarToggleContainer
+                .on('click',
+                    this.flipTheSwitch.bind(this)
+                );
+            previewBarToggle.config.$previewBarToggleContainer
+                .on('click',
+                    '#previewToolBarFrame',
+                    this.togglePreviewToolbar
+                );
         },
         'hideFeature': function () {
             // hides feature if viewing live site
@@ -4278,8 +4365,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'toggleOn': function () {
             // set toggle on image
             var $toggle = previewBarToggle.config.$FAtoggle;
-            $toggle.removeClass('fa-toggle-off');
-            $toggle.addClass('fa-toggle-on');
+            $toggle
+                .removeClass('fa-toggle-off') //;
+                //$toggle
+                .addClass('fa-toggle-on');
         },
         'togglePreviewToolbar': function () {
             var varName = previewBarToggle.config.varName;
@@ -4287,11 +4376,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
             // if 'hidePreviewToolbar is toggled ON'
             if (hidePreviewToolbar) {
-                this.$toolboxStyles.append(' #previewToolBarFrame { display: none; }');
-                this.$toolboxStyles.append(' .preview-wrapper { display: none; }');
+                this.$toolboxStyles
+                    .append(' #previewToolBarFrame { display: none; }') //;
+                    //this.$toolboxStyles
+                    .append(' .preview-wrapper { display: none; }');
             } else {
-                this.$toolboxStyles.append(' #previewToolBarFrame { display: block; }');
-                this.$toolboxStyles.append(' .preview-wrapper { display: block; }');
+                this.$toolboxStyles
+                    .append(' #previewToolBarFrame { display: block; }') //;
+                    //this.$toolboxStyles
+                    .append(' .preview-wrapper { display: block; }');
             }
         },
         'toggleOff': function () {
