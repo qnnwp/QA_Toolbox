@@ -152,7 +152,7 @@
         "max-depth": [0, 4],
         "max-len": [2, {
             "code": 80,
-            "tabWidth": 2,
+            "tabWidth": 4,
             "ignoreComments": true,
             "ignoreTrailingComments": true,
             "ignoreTemplateLiterals": true,
