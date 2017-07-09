@@ -1363,7 +1363,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'runTests': function ($currentLink, isImageLink) {
             // check to see if isImageLink parameter was passed
-            isImageLink = (typeof isImageLink === 'undefined') ? false : isImageLink;
+            isImageLink = typeof isImageLink === 'undefined' ? false : isImageLink;
             // check target of link
             this.checkTarget($currentLink, isImageLink);
             // check title of link
@@ -1415,7 +1415,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'nextgenRunTests': function ($currentLink, isImageLink, $linkOverlay) {
             // check to see if isImageLink parameter was passed
-            isImageLink = (typeof isImageLink === 'undefined') ? false : isImageLink;
+            isImageLink = typeof isImageLink === 'undefined' ? false : isImageLink;
             // check target of link
             this.checkTargetNextGen($currentLink, isImageLink, $linkOverlay);
             // check title of link
@@ -2828,7 +2828,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         'testURLs': function ($currentLink) {
             var linkURL = jQuery.trim($currentLink.attr('href'));
             // set variable true or false, if image exists inside link
-            var isImageLink = ($currentLink.find('img') > 0);
+            var isImageLink = $currentLink.find('img') > 0;
             var isNextGen = shared.nextGenCheck();
             var $linkOverlay;
             var $image;
@@ -2905,7 +2905,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
 
                 // save current card settings
                 // if currentCard has a class save it, if no class make variable equal ''
-                cardClass = ($currentCard.attr('class')) ? $currentCard.attr('class') : '';
+                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : '';
                 $cardDeck = $currentCard.find('div.deck');
 
                 // detect if the section element is a parent container
@@ -2924,7 +2924,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             var $cardLinkContainer = $currentCard.find('div.link');
             var $cardSEOContainer = $currentCard.find('div.copy');
             var $cardImageContainer = $currentCard.find('div.media');
-            var cardClass = ($currentCard.attr('class')) ? $currentCard.attr('class') : '';
+            var cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : '';
             var isImageLink = false;
             var $cardLinks;
             var $copyTextLinks;
@@ -4457,7 +4457,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             for (key in variables) {
                 if (variables.hasOwnProperty(key)) {
                     if (key === 'showToolbox') {
-                        state = (variables[key]) ? 'show' : 'hide';
+                        state = variables[key] ? 'show' : 'hide';
                         shared.setState(this.$toolBoxContainer, state);
                         // set display of hide/show button to opposite of main toolbox
                         dynamicDisplay.config.$showToolbox.addClass((variables[key]) ? 'disappear' : 'appear');
