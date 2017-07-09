@@ -1672,6 +1672,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             };
         },
         'buildLegend': function () {
+            //var $legendContent = spellCheck.config.$legendContent;
+            //var $legendList = spellCheck.config.$legendList;
+
             spellCheck.config.$legend
                 // attach legend title
                 .append(spellCheck.config.$legendTitle)
@@ -1681,8 +1684,12 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(spellCheck.config.$offButt)
                 // attach hint
                 .append(spellCheck.config.$hint);
+
             // fill list
-            shared.buildLegendContent(spellCheck.config.$legendContent, spellCheck.config.$legendList);
+            //shared.buildLegendContent($legendContent, $legendList);
+            shared.buildLegendContent(
+                spellCheck.config.$legendContent,
+                spellCheck.config.$legendList);
         },
         'cacheDOM': function (callingPanel) {
             this.$toolsPanel = jQuery(callingPanel);
@@ -3178,156 +3185,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 },
             });
         },
-        /*
-        'tetraAjaxTest': function ($currentLink) {
-            var hasImage = 0;
-            var isImageLink = false;
-            var wrappedContents = false;
-            var $linkOverlay;
-            var pageError404;
-            var linkURL = checkLinks.addURLParameter($currentLink);
-            var isNextGen = shared.nextGenCheck();
-
-            // test each link
-            jQuery.ajax({
-                'url': linkURL, // be sure to check the right attribute
-                'type': 'post',
-                'crossDomain': true,
-                'method': 'get',
-                'dataType': 'html',
-                'success': function (data) {
-                    // checks to see if link is an image link
-                    hasImage = $currentLink.has('img').length;
-                    if (hasImage) {
-                        isImageLink = true;
-                        $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink);
-                    }
-
-                    // checks to see if the link has inline css
-                    // if it does wrap contents in in span tag and add classes to that
-                    wrappedContents = Boolean($currentLink.attr('style'));
-                    if (wrappedContents && !hasImage) {
-                        $currentLink.wrapInner('<span></span>');
-                        $linkOverlay = jQuery($currentLink.children('span'));
-                    }
-
-                    // If value is false all class modifications should be done to the link itself
-                    pageError404 = checkLinks.checkFor404(data);
-
-                    // if link is an image link
-                    // ADD CLASS FLAGS TO DIV OVERLAY
-                    // OTHERWISE ADD CLASS FLAGS TO LINK ELEMENT
-                    if (isImageLink || wrappedContents) {
-                        checkLinks.addFlagsToElements($linkOverlay, pageError404);
-                    } else {
-                        checkLinks.addFlagsToElements($currentLink, pageError404);
-                    }
-                },
-                'error': function (jqXHR) {
-                    // set link in red if there is any errors with link
-                    checkLinks.config.errors += 1;
-                    if (jqXHR.status === 404) {
-                        if (isImageLink) {
-                            checkLinks.error($linkOverlay);
-                        } else {
-                            checkLinks.error($currentLink);
-                        }
-                    }
-                },
-                'statusCode': {
-                    '404': function () {
-                        $currentLink.addClass('fourOfour');
-
-                        if (isImageLink) {
-                            checkLinks.error($linkOverlay);
-                        } else {
-                            checkLinks.error($currentLink);
-                        }
-
-                        checkLinks.config.errors += 1;
-                    },
-                },
-                'complete': function () {
-                    checkLinks.config.count += 1;
-                    checkLinks.config.$counter.text(checkLinks.config.count + ' of ' + checkLinks.config.totalTests);
-                },
-            });
-        },
-        */
-        /*
-        'nextGenAjaxTest': function ($currentLink, isImageLink, $currentCard) {
-            // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
-            var $linkOverlay;
-            var pageError404;
-            var linkURL = checkLinks.addURLParameter($currentLink);
-            var isNextGen = shared.nextGenCheck();
-
-            // check if isImageLink is empty and check if $currentCard is empty
-            // most likely because the parameter was not mentioned in the calling statement
-            if (typeof isImageLink === 'undefined') {
-                isImageLink = false;
-            }
-
-            if (typeof $currentCard === 'undefined') {
-                $currentCard = 'null';
-            }
-
-            // test each link
-            jQuery.ajax({
-                'url': linkURL, // be sure to check the right attribute
-                'type': 'post',
-                'crossDomain': true,
-                'method': 'get',
-                'dataType': 'html',
-                'success': function (data) {
-                    // check to see if the card has an image prior to startin the ajax testing
-                    if (isImageLink) {
-                        $linkOverlay = shared.addDivOverlay(isNextGen, $currentLink, $currentCard);
-                    }
-
-                    // If value is false all class modifications should be done to the link itself
-                    pageError404 = checkLinks.checkFor404(data);
-
-                    // if link is an image link
-                    // ADD CLASS FLAGS TO DIV OVERLAY
-                    // OTHERWISE ADD CLASS FLAGS TO LINK ELEMENT
-                    if (isImageLink) {
-                        checkLinks.addFlagsToElements($linkOverlay, pageError404);
-                    } else {
-                        checkLinks.addFlagsToElements($currentLink, pageError404);
-                    }
-                },
-                'error': function (jqXHR) {
-                    // set link in red if there is any errors with link
-                    checkLinks.config.errors += 1;
-                    if (jqXHR.status === 404) {
-                        if (isImageLink) {
-                            checkLinks.error($linkOverlay);
-                        } else {
-                            checkLinks.error($currentLink);
-                        }
-                    }
-                },
-                'statusCode': {
-                    '404': function () {
-                        $currentLink.addClass('fourOfour');
-
-                        if (isImageLink) {
-                            checkLinks.error($linkOverlay);
-                        } else {
-                            checkLinks.error($currentLink);
-                        }
-
-                        checkLinks.config.errors += 1;
-                    },
-                },
-                'complete': function () {
-                    checkLinks.config.count += 1;
-                    checkLinks.config.$counter.text(checkLinks.config.count + ' of ' + checkLinks.config.totalTests);
-                },
-            });
-        },
-        */
         'toggleDisable': function () {
             checkLinks.config.$activateButt.prop('disabled', function (index, value) {
                 return !value;
