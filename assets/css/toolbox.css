@@ -358,6 +358,23 @@ lnk checker styles
 
 /* covers all text links and image links */
 
+.buttonFlag {
+    background: linear-gradient(to right, #b2fefa, #0ed2f7) !important;
+    color: #000000 !important;
+}
+
+.unsupportedPageLink,
+footer .card .content .text .link .siteLink.unsupportedPageLink,
+body .card .content .text .copy .siteLink.unsupportedPageLink,
+body .card .content .text .link .siteLink.unsupportedPageLink,
+body .card .content .media .imgOverlay.unsupportedPageLink {
+    -moz-box-shadow: inset 0 0 0 903px rgba(13, 149, 232, .80);
+    -webkit-box-shadow: inset 0 0 0 903px rgba(13, 149, 232, .80);
+    box-shadow: inset 0 0 0 903px rgba(13, 149, 232, .80);
+    border: none;
+    color: white;
+}
+
 .noTitle,
 footer .card .content .text .link .siteLink.noTitle,
 body .card .content .text .copy .siteLink.noTitle,
@@ -423,10 +440,16 @@ footer .card .content .text .link .siteLink.brokenURL,
 body .card .content .text .copy .siteLink.brokenURL,
 body .card .content .text .link .siteLink.brokenURL,
 body .card .content .media .imgOverlay.brokenURL {
+    /*
     background: rgb(240, 0, 0);
     background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important;
     border: none;
+    */
     color: white;
+    -moz-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    -webkit-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    border: none;
 }
 
 .urlIssue,
@@ -434,9 +457,15 @@ footer .card .content .text .link .siteLink.urlIssue,
 body .card .content .text .copy .siteLink.urlIssue,
 body .card .content .text .link .siteLink.urlIssue,
 body .card .content .media .imgOverlay.urlIssue {
-    -moz-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
-    -webkit-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
-    box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
+    /*
+    background: rgb(240, 0, 0);
+    background: linear-gradient(to right, rgb(240, 0, 0), rgb(220, 40, 30)) !important;
+    border: none;
+    */
+    color: white;
+    -moz-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    -webkit-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
     border: none;
 }
 
