@@ -1510,61 +1510,19 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'checkURL': function ($currentLink, isImageLink) {
             var href = $currentLink.attr('href');
+            var modElement = isImageLink ? this.$divOverlay : $currentLink;
 
             // regular text links
-            if (!isImageLink) {
-                switch (true) {
-                    case typeof href === 'undefined':
-                        // link is undefined
-                        this.togClass($currentLink, 'brokenURL');
-                        break;
-                    case href === '':
-                        // link has an empty url
-                        this.togClass($currentLink, 'brokenURL');
-                        break;
-                    case this.checkHref(href):
-                        // link has a fishy url
-                        this.togClass($currentLink, 'urlIssue');
-                        break;
-                    case this.datedURL(href) && shared.nextGenCheck():
-                        // link leads to an out dated page
-                        this.togClass($currentLink, 'unsupportedPageLink');
-                        break;
-                    case this.checkAbsoluteURL(href):
-                        // link has a fishy url
-                        this.togClass($currentLink, 'absoluteURL');
-                        break;
-                    default:
-                        // url is good to go
-                }
-            }
-
-            // image links
-            if (isImageLink) {
-                switch (true) {
-                    case typeof href === 'undefined':
-                        // image link is undefined
-                        this.togClass(this.$divOverlay, 'brokenURL');
-                        break;
-                    case href === '':
-                        // image link has an empty url
-                        this.togClass(this.$divOverlay, 'brokenURL');
-                        break;
-                    case this.checkHref(href):
-                        // image link has a fishy url
-                        this.togClass(this.$divOverlay, 'urlIssue');
-                        break;
-                    case this.datedURL(href):
-                        // image link leads to an out dated page
-                        this.togClass(this.$divOverlay, 'unsupportedPageLink');
-                        break;
-                    case this.checkAbsoluteURL(href):
-                        // image link has a fishy url
-                        this.togClass(this.$divOverlay, 'absoluteURL');
-                        break;
-                    default:
-                        // url is good to go
-                }
+            if (typeof href === 'undefined') { // link is undefined
+                this.togClass(modElement, 'brokenURL');
+            } else if (href === '') { // link has an empty url
+                this.togClass(modElement, 'brokenURL');
+            } else if (this.checkHref(href)) { // link has a fishy url
+                this.togClass(modElement, 'urlIssue');
+            } else if (this.datedURL(href) && shared.nextGenCheck()) { // link leads to an out dated page
+                this.togClass(modElement, 'unsupportedPageLink');
+            } else if (this.checkAbsoluteURL(href)) { // link has a fishy url
+                this.togClass(modElement, 'absoluteURL');
             }
         },
         'linkChecked': function ($currentLink) {
