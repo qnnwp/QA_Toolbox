@@ -84,7 +84,7 @@ module.exports = {
         'class-methods-use-this': 0,
         'complexity': 0,
         'consistent-return': 0,
-        'curly': [2, 'multi-line'], // TODO(philipwalton): add an option to enforce
+        'curly': 2, // TODO(philipwalton): add an option to enforce
         // braces with the exception of simple,
         // single-line if statements.
         'default-case': 0,
@@ -221,12 +221,11 @@ module.exports = {
         'linebreak-style': 2,
         'lines-around-comment': 0,
         'lines-around-directive': 0,
-        'max-depth': [0, 4],
+        'max-depth': [2, 4],
         'max-len': [2, {
-            'code': 80,
-            'tabWidth': 2,
+            'code': 100,
+            'tabWidth': 4,
             'ignoreUrls': true,
-            'ignorePattern': '^goog\.(module|require)',
     }],
         'max-lines': 0,
         'max-nested-callbacks': 0,
