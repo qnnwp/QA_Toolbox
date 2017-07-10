@@ -3402,8 +3402,7 @@
             // bind FA toggle with 'flipTheSwitch' action
             nextGenToggle.config.$nextGenToggleContainer
                 .on('click',
-                    this.flipTheSwitch.bind(this)
-                );
+                    this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3623,8 +3622,7 @@
             // bind FA toggle with 'flipTheSwitch' action
             autofillToggle.config.$autofillToggleContainer
                 .on('click',
-                    this.flipTheSwitch.bind(this)
-                );
+                    this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -4283,13 +4281,11 @@
             // bind FA toggle with 'flipTheSwitch' action
             previewBarToggle.config.$previewBarToggleContainer
                 .on('click',
-                    this.flipTheSwitch.bind(this)
-                );
+                    this.flipTheSwitch.bind(this));
             previewBarToggle.config.$previewBarToggleContainer
                 .on('click',
                     '#previewToolBarFrame',
-                    this.togglePreviewToolbar
-                );
+                    this.togglePreviewToolbar);
         },
         'hideFeature': function () {
             // hides feature if viewing live site
