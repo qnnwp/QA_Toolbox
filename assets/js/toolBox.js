@@ -13,7 +13,7 @@
      * @param {bool} val The value that the variable will be set too.
      */
     function saveValue(variable, val) {
-        GM_setValue(variable, val);
+        GM_setValue(variable, val); // eslint-disable-line new-cap
     }
 
     /**
@@ -22,7 +22,7 @@
      * @param {string} variable The variable that will be copied to the clipboard.
      */
     function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text');
+        GM_setClipboard(variable, 'text'); // eslint-disable-line new-cap
     }
 
     /**
@@ -32,7 +32,7 @@
      * @return {bool} The saved value of current variable.
      */
     function getValue(variable) {
-        return GM_getValue(variable, false);
+        return GM_getValue(variable, false); // eslint-disable-line new-cap
     }
 
     /**
@@ -41,7 +41,7 @@
      * @return {object} The list of saved values.
      */
     function programVariables() {
-        return GM_listValues();
+        return GM_listValues(); // eslint-disable-line new-cap
     }
 
     /**
@@ -50,7 +50,7 @@
      * @param {string} openThis A URL that will be opened in a new window.
      */
     function openNewTab(openThis) {
-        GM_openInTab(openThis);
+        GM_openInTab(openThis); // eslint-disable-line new-cap
     }
 
     /**
@@ -61,7 +61,7 @@
      * @return {string}  The url that the files declared in the meta tag.
      */
     function getResourceURL(resource) {
-        return GM_getResourceURL(resource);
+        return GM_getResourceURL(resource); // eslint-disable-line new-cap
     }
 
     // ********************************************************************************
@@ -1859,7 +1859,7 @@
                     'id': 'testPage',
                     'title': 'Queue up a Page Test',
                 }).text('Web Page Test'),
-                'email': GM_getValue('email', 'your.name@cdk.com'),
+                'email': GM_getValue('email', 'your.name@cdk.com'), // eslint-disable-line new-cap
                 '$emailTitle': jQuery('<div>').text('Enter your email'),
                 '$emailInput': jQuery('<input>').attr({
                     'class': 'WPT email',
@@ -4367,7 +4367,7 @@
                 }),
                 // toolbox version
                 '$version': jQuery('<div>')
-                    .text('version: ' + GM_info.script.version),
+                    .text('version: ' + GM_info.script.version), // eslint-disable-line new-cap
                 '$changeLog': jQuery('<a>').attr({
                     'href': 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
                     'title': 'The Latest changes will be mentioned here.',
