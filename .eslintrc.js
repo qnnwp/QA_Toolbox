@@ -35,7 +35,7 @@ module.exports = {
         // Possible Errors
         // http://eslint.org/docs/rules/#possible-errors
         // ---------------------------------------------
-        'no-cond-assign': 0, // eslint:recommended
+        'no-cond-assign': 2, // eslint:recommended
         'no-console': 2, // eslint:recommended
         'no-constant-condition': 2, // eslint:recommended
         'no-control-regex': 2, // eslint:recommended
@@ -87,7 +87,7 @@ module.exports = {
         'curly': 2, // TODO(philipwalton): add an option to enforce
         // braces with the exception of simple,
         // single-line if statements.
-        'default-case': 0,
+        'default-case': 1,
         'dot-location': 0,
         'dot-notation': 0,
         'eqeqeq': 2,
@@ -225,7 +225,11 @@ module.exports = {
         'max-len': [2, {
             'code': 100,
             'tabWidth': 4,
-            'ignoreUrls': true,
+            "ignoreComments": true,
+            "ignoreTrailingComments": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreRegExpLiterals": true,
+            "ignoreUrls": true
     }],
         'max-lines': 0,
         'max-nested-callbacks': 0,
