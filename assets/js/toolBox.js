@@ -1,7 +1,7 @@
 /* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
 
 (function () {
-    "use strict";
+    'use strict';
 
     // ----------------------------------------
     // ---------------------------------------- GLOBAL FUNCTIONS
@@ -1043,7 +1043,8 @@
             };
         },
         'getData': function () {
-            jQuery.getJSON(linkChecker.config.datedPagesfileURL, function (data) {
+            var datedPagesURL = linkChecker.config.datedPagesfileURL;
+            jQuery.getJSON(datedPagesURL, function (data) {
                 linkChecker.config.unsupportedPages = data.datedPages;
             });
         },
@@ -1243,8 +1244,8 @@
                         // PREPEND DIV OVERLAY INSIDE OF LINK.
                         if ($currentLink.parent().attr('class')) {
                             $closestLi = $currentLink.closest('li');
-                            if (closestLi.attr('class').indexOf('co-card') > -1) {
-                            // if ($currentLink.closest('li').attr('class').indexOf('co-card') > -1) {
+                            if ($closestLi.attr('class').indexOf('co-card') > -1) {
+                                // if ($currentLink.closest('li').attr('class').indexOf('co-card') > -1) {
                                 isQLPlink = true;
                                 $currentLink.addClass('QLPLink');
                                 $currentLink = $closestLi.find('a:first');
@@ -1749,8 +1750,6 @@
                         // other than whitespace
                         if (!(/^\s*$/).test(node.data)) {
                             return NodeFilter.FILTER_ACCEPT;
-                        } else {
-                            return;
                         }
                     },
                 },
@@ -2983,7 +2982,6 @@
                 // detect if the section element is a container
                 // check if the div.deck contains content
                 this.checkCard($currentCard);
-
             }
         },
         'checkCard': function ($currentCard) {
