@@ -63,9 +63,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         return GM_getResourceURL(resource);
     }
 
-    // ----------------------------------------
-    // ---------------------------------------- Toolbox Shared Functions
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Toolbox Shared Functions ****************************************
+    // ********************************************************************************
     var shared = {
         'nextGenCheck': function () {
             var nextGenFlag = jQuery.trim(document.firstChild.data);
@@ -231,9 +231,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Build container for toolbox
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Build container for toolbox ****************************************
+    // ********************************************************************************
     var qaToolbox = {
         'init': function () {
             this.createElements();
@@ -308,9 +308,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     /* **************************************** PAGE INFO TOOLS **************************************** */
     /* ************************************************************************************************************************ */
 
-    // ----------------------------------------
-    // ---------------------------------------- Dealership Name
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Dealership Name ****************************************
+    // ********************************************************************************
     var dealerName = {
         'init': function () {
             this.createElements();
@@ -355,9 +355,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Web Id
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Web Id ****************************************
+    // ********************************************************************************
     var webID = {
         'init': function () {
             this.createElements();
@@ -403,9 +403,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Page Name
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Page Name ****************************************
+    // ********************************************************************************
     var pageName = {
         'init': function () {
             this.createElements();
@@ -473,9 +473,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- H Tags
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** H Tags ****************************************
+    // ********************************************************************************
     var hTags = {
         'init': function () {
             this.createElements();
@@ -596,14 +596,12 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             hTags.config.$hTagDisplay.html(html);
         },
         'bindEvents': function () {
-            hTags.config.$hTagsContainer.on(
-                'click',
-                this.showDetails.bind(this)
-            );
-            hTags.config.$removeBut.on(
-                'click',
-                this.removeDisplay
-            );
+            hTags.config.$hTagsContainer
+                .on('click',
+                    this.showDetails.bind(this));
+            hTags.config.$removeBut
+                .on('click',
+                    this.removeDisplay);
         },
         'returnTool': function () {
             var panel = hTags.config.$hTagsContainer;
@@ -631,9 +629,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Page Information Panel
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Page Information Panel ****************************************
+    // ********************************************************************************
     var pageInformation = {
         'init': function () {
             // initialize module
@@ -690,23 +688,19 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            pageInformation.config.$pageInfoTitle.on(
-                'click',
-                shared.toggleFeature
-            ).on(
-                'click',
-                shared.saveState
-            );
+            pageInformation.config.$pageInfoTitle
+                .on('click',
+                    shared.toggleFeature)
+                .on('click',
+                    shared.saveState);
             // hover effect & click
-            pageInformation.config.$pageInfo.on(
-                'mouseover mouseleave',
-                '.tbInfo',
-                this.hoverEffect
-            ).on(
-                'click',
-                '.tbInfo',
-                this.copyToClipboard
-            );
+            pageInformation.config.$pageInfo
+                .on('mouseover mouseleave',
+                    '.tbInfo',
+                    this.hoverEffect)
+                .on('click',
+                    '.tbInfo',
+                    this.copyToClipboard);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -727,9 +721,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     /* **************************************** QA TOOLS **************************************** */
     /* ************************************************************************************************************************ */
 
-    // ----------------------------------------
-    // ---------------------------------------- QA Tools Panel
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** QA Tools Panel ****************************************
+    // ********************************************************************************
     var qaTools = {
         'init': function () {
             // initialize module
@@ -778,20 +772,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            qaTools.config.$mainToolsTitle.on(
-                'click',
-                shared.toggleFeature
-            );
-            qaTools.config.$mainToolsTitle.on(
-                'click',
-                shared.saveState
-            );
+            qaTools.config.$mainToolsTitle
+                .on('click',
+                    shared.toggleFeature);
+            qaTools.config.$mainToolsTitle
+                .on('click',
+                    shared.saveState);
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- image checker
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** image checker ****************************************
+    // ********************************************************************************
     var imageChecker = {
         'init': function (callingPanel) {
             this.createElements(callingPanel);
@@ -852,32 +844,29 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // main button
-            imageChecker.config.$activateButt.on(
-                'click',
-                function () {
-                    jQuery('html, body').scrollTop(0);
-                    jQuery('html, body').animate({
-                            'scrollTop': jQuery(document).height(),
-                        }, 2000)
-                        .promise()
-                        .done(function () {
-                            jQuery('html, body').scrollTop(0);
-                            imageChecker.highlightImages();
-                            imageChecker.showLegend();
-                            imageChecker.toggleDisable();
-                        });
-                });
+            imageChecker.config.$activateButt
+                .on('click',
+                    function () {
+                        jQuery('html, body').scrollTop(0);
+                        jQuery('html, body').animate({
+                                'scrollTop': jQuery(document).height(),
+                            }, 2000)
+                            .promise()
+                            .done(function () {
+                                jQuery('html, body').scrollTop(0);
+                                imageChecker.highlightImages();
+                                imageChecker.showLegend();
+                                imageChecker.toggleDisable();
+                            });
+                    });
             // off button
-            imageChecker.config.$offButt.on(
-                'click',
-                this.removeHighlights.bind(this)
-            ).on(
-                'click',
-                this.showLegend
-            ).on(
-                'click',
-                this.toggleDisable
-            );
+            imageChecker.config.$offButt
+                .on('click',
+                    this.removeHighlights.bind(this))
+                .on('click',
+                    this.showLegend)
+                .on('click',
+                    this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2
@@ -902,9 +891,10 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             imageChecker.config.$legend.slideToggle(500);
         },
         'toggleDisable': function () {
-            imageChecker.config.$activateButt.prop('disabled', function (index, value) {
-                return !value;
-            });
+            imageChecker.config.$activateButt
+                .prop('disabled', function (index, value) {
+                    return !value;
+                });
         },
         'removeHighlights': function () {
             var iaLength = this.imageArrayLength;
@@ -973,32 +963,36 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 'height': this.heightOfImage + 'px',
             });
             // add image alt as text to div
-            this.$divOverlay.append(this.imageAlt);
+            this.$divOverlay
+                .append(this.imageAlt);
         },
         'attachToImage': function ($currentImage) {
             // make parent image relative positioning
             this.toggleOverlayClass($currentImage);
             // place div overlay onto image
-            $currentImage.before(this.$divOverlay);
+            $currentImage
+                .before(this.$divOverlay);
 
             if (shared.nextGenCheck()) {
                 this.$divOverlay = shared.centerDiv($currentImage, this.$divOverlay);
             }
         },
         'togClass': function ($image, addClass) {
-            $image.siblings('.imgOverlay').toggleClass(addClass);
+            $image.siblings('.imgOverlay')
+                .toggleClass(addClass);
         },
         // ----------------------------------------
         // tier 5
         // ----------------------------------------
         'toggleOverlayClass': function (currentImage) {
-            jQuery(currentImage).toggleClass('overlaid');
+            jQuery(currentImage)
+                .toggleClass('overlaid');
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- link checker
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** link checker ****************************************
+    // ********************************************************************************
     var linkChecker = {
         'init': function (callingPanel) {
             this.createElements(callingPanel);
@@ -1079,33 +1073,30 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // main button
-            linkChecker.config.$activateButt.on(
-                'click',
-                function () {
-                    jQuery('html, body').scrollTop(0);
-                    jQuery('html, body').animate({
-                            'scrollTop': jQuery(document).height(),
-                        }, 2000)
-                        .promise()
-                        .done(
-                            function () {
-                                jQuery('html, body').scrollTop(0);
-                                linkChecker.checkLinks();
-                                linkChecker.showLegend();
-                                linkChecker.toggleDisable();
-                            });
-                });
+            linkChecker.config.$activateButt
+                .on('click',
+                    function () {
+                        jQuery('html, body').scrollTop(0);
+                        jQuery('html, body').animate({
+                                'scrollTop': jQuery(document).height(),
+                            }, 2000)
+                            .promise()
+                            .done(
+                                function () {
+                                    jQuery('html, body').scrollTop(0);
+                                    linkChecker.checkLinks();
+                                    linkChecker.showLegend();
+                                    linkChecker.toggleDisable();
+                                });
+                    });
             // off button
-            linkChecker.config.$offButt.on(
-                'click',
-                this.removeHighlights.bind(this)
-            ).on(
-                'click',
-                this.showLegend
-            ).on(
-                'click',
-                this.toggleDisable
-            );
+            linkChecker.config.$offButt
+                .on('click',
+                    this.removeHighlights.bind(this))
+                .on('click',
+                    this.showLegend)
+                .on('click',
+                    this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -1596,53 +1587,76 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'checkForTitleTextNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             // text links
-            switch (true) {
-                case typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === '':
-                    // link has no title
-                    this.apdClass($linkOverlay, 'noTitle');
-                    break;
-                case $currentLink.attr('title') !== '':
-                    // link has a title
-                    this.apdClass($linkOverlay, 'hasTitle');
-                    break;
-                default:
-                    // link is good to go
+            //switch (true) {
+            //    case typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === '':
+            //        // link has no title
+            //        this.apdClass($linkOverlay, 'noTitle');
+            //        break;
+            //    case $currentLink.attr('title') !== '':
+            //        // link has a title
+            //        this.apdClass($linkOverlay, 'hasTitle');
+            //        break;
+            //    default:
+            //        // link is good to go
+            //}
+
+            if (typeof $currentLink.attr('title') === 'undefined' ||
+                $currentLink.attr('title') === '') { // link has no title
+                this.apdClass($linkOverlay, 'noTitle');
+            } else if ($currentLink.attr('title') !== '') { // link has a title
+                this.apdClass($linkOverlay, 'hasTitle');
             }
         },
         'checkURLNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             var href = $currentLink.attr('href');
+            /*
+                        // regular text links
+                        switch (true) {
+                            case typeof href === 'undefined':
+                                // link is undefined
+                                this.apdClass($linkOverlay, 'brokenURL');
+                                break;
+                            case href === '':
+                                // link has an empty url
+                                this.apdClass($linkOverlay, 'brokenURL');
+                                break;
+                            case this.checkHref(href):
+                                // link has a fishy url
+                                this.apdClass($linkOverlay, 'urlIssue');
+                                break;
+                            case this.datedURL(href) && shared.nextGenCheck():
+                                // link leads to an out dated page
+                                this.apdClass($linkOverlay, 'unsupportedPageLink');
+                                break;
+                            case this.checkAbsoluteURL(href):
+                                // link has a fishy url
+                                this.apdClass($linkOverlay, 'absoluteURL');
+                                break;
+                            default:
+                                // url is good to go
+                        }
+                        */
 
-            // regular text links
-            switch (true) {
-                case typeof href === 'undefined':
-                    // link is undefined
-                    this.apdClass($linkOverlay, 'brokenURL');
-                    break;
-                case href === '':
-                    // link has an empty url
-                    this.apdClass($linkOverlay, 'brokenURL');
-                    break;
-                case this.checkHref(href):
-                    // link has a fishy url
-                    this.apdClass($linkOverlay, 'urlIssue');
-                    break;
-                case this.datedURL(href) && shared.nextGenCheck():
-                    // link leads to an out dated page
-                    this.apdClass($linkOverlay, 'unsupportedPageLink');
-                    break;
-                case this.checkAbsoluteURL(href):
-                    // link has a fishy url
-                    this.apdClass($linkOverlay, 'absoluteURL');
-                    break;
-                default:
-                    // url is good to go
+            if (typeof href === 'undefined') { // link is undefined
+                this.apdClass($linkOverlay, 'brokenURL');
+            } else if (href === '') { // link has an empty url
+                this.apdClass($linkOverlay, 'brokenURL');
+            } else if (this.checkHref(href)) { // link has a fishy url
+                this.apdClass($linkOverlay, 'urlIssue');
+            } else if (this.datedURL(href) && shared.nextGenCheck()) { // link leads to an out dated page
+                this.apdClass($linkOverlay, 'unsupportedPageLink');
+            } else if (this.checkAbsoluteURL(href)) { // link has a fishy url
+                this.apdClass($linkOverlay, 'absoluteURL');
             }
+
         },
         'apdClass': function ($currentLink, addClass) {
             $currentLink.addClass(addClass);
         },
         'verifyTarget': function ($currentLink) {
-            if (($currentLink.attr('target') === '_blank') || ($currentLink.attr('target') === '_new') || ($currentLink.attr('target') === 'custom')) {
+            if (($currentLink.attr('target') === '_blank') ||
+                ($currentLink.attr('target') === '_new') ||
+                ($currentLink.attr('target') === 'custom')) {
                 return true;
             }
         },
@@ -1688,9 +1702,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Spell Check
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Spell Check ****************************************
+    // ********************************************************************************
     var spellCheck = {
         'init': function (callingPanel) {
             this.createElements();
@@ -1757,31 +1771,25 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // activate button
-            spellCheck.config.$activateButt.on(
-                'click',
-                this.spellCheckPage.bind(this)
-            );
-            spellCheck.config.$activateButt.on(
-                'click',
-                this.showLegend
-            );
-            spellCheck.config.$activateButt.on(
-                'click',
-                this.toggleDisable
-            );
+            spellCheck.config.$activateButt
+                .on('click',
+                    this.spellCheckPage.bind(this));
+            spellCheck.config.$activateButt
+                .on('click',
+                    this.showLegend);
+            spellCheck.config.$activateButt
+                .on('click',
+                    this.toggleDisable);
             // off button
-            spellCheck.config.$offButt.on(
-                'click',
-                this.removeHighlights.bind(this)
-            );
-            spellCheck.config.$offButt.on(
-                'click',
-                this.showLegend
-            );
-            spellCheck.config.$offButt.on(
-                'click',
-                this.toggleDisable
-            );
+            spellCheck.config.$offButt
+                .on('click',
+                    this.removeHighlights.bind(this));
+            spellCheck.config.$offButt
+                .on('click',
+                    this.showLegend);
+            spellCheck.config.$offButt
+                .on('click',
+                    this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -1883,9 +1891,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
             });
         },
     };
-    // ----------------------------------------
-    // ---------------------------------------- Test WebPage
-    // -----------------------------------------
+    // ********************************************************************************
+    // **************************************** Test WebPage ****************************************
+    // ********************************************************************************
     var speedtestPage = {
         'init': function (callingPanel) {
             this.createElements();
@@ -1990,24 +1998,22 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(speedtestPage.config.$panelContainer);
         },
         'bindEvents': function () {
-            speedtestPage.config.$activateButt.on(
-                'click',
-                function () {
-                    speedtestPage.config.$panelContainer.slideToggle(500);
-                });
-            speedtestPage.config.$sendButt.on(
-                'click',
-                this.storeData
-            );
-            speedtestPage.config.$sendButt.on(
-                'click',
-                this.sendPage.bind(this)
-            );
-            speedtestPage.config.$sendButt.on(
-                'click',
-                function () {
-                    speedtestPage.config.$panelContainer.slideToggle(500);
-                });
+            speedtestPage.config.$activateButt
+                .on('click',
+                    function () {
+                        speedtestPage.config.$panelContainer.slideToggle(500);
+                    });
+            speedtestPage.config.$sendButt
+                .on('click',
+                    this.storeData);
+            speedtestPage.config.$sendButt
+                .on('click',
+                    this.sendPage.bind(this));
+            speedtestPage.config.$sendButt
+                .on('click',
+                    function () {
+                        speedtestPage.config.$panelContainer.slideToggle(500);
+                    });
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2078,9 +2084,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     /* **************************************** OTHER TOOLS **************************************** */
     /* ************************************************************************************************************************ */
 
-    // ----------------------------------------
-    // ---------------------------------------- Other Tools Panel
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Other Tools Panel ****************************************
+    // ********************************************************************************
     var otherTools = {
         'init': function () {
             // initialize module
@@ -2129,19 +2135,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            otherTools.config.$otherToolsTitle.on(
-                'click',
-                shared.toggleFeature
-            );
-            otherTools.config.$otherToolsTitle.on(
-                'click',
-                shared.saveState);
+            otherTools.config.$otherToolsTitle
+                .on('click',
+                    shared.toggleFeature);
+            otherTools.config.$otherToolsTitle
+                .on('click',
+                    shared.saveState);
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Show Navigation (highlight major pages)
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Show Navigation ****************************************
+    // ********************************************************************************
     var showNavigation = {
         'init': function (callingPanel) {
             this.createElements();
@@ -2230,26 +2235,21 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(showNavigation.config.$legend);
         },
         'bindEvents': function () {
-            showNavigation.config.$activateButt.on(
-                'click',
-                this.toggleFeatures.bind(this)
-            );
-            showNavigation.config.$activateButt.on(
-                'click',
-                this.toggleDisable
-            );
-            showNavigation.config.$activateButt.on(
-                'click',
-                this.bindClicks.bind(this)
-            );
-            showNavigation.config.$offButt.on(
-                'click',
-                this.toggleFeatures.bind(this)
-            );
-            showNavigation.config.$offButt.on(
-                'click',
-                this.toggleDisable
-            );
+            showNavigation.config.$activateButt
+                .on('click',
+                    this.toggleFeatures.bind(this));
+            showNavigation.config.$activateButt
+                .on('click',
+                    this.toggleDisable);
+            showNavigation.config.$activateButt
+                .on('click',
+                    this.bindClicks.bind(this));
+            showNavigation.config.$offButt
+                .on('click',
+                    this.toggleFeatures.bind(this));
+            showNavigation.config.$offButt
+                .on('click',
+                    this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2263,24 +2263,32 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 this.$navTabs.find('a[href*=LandingPage]').toggleClass('customPage');
             }
             if (!isNextGen) {
-                this.$navTabs.find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]').toggleClass('majorPage');
-                this.$navTabs.find('a[href*=LandingPage]').toggleClass('customPage');
+                this.$navTabs
+                    .find('a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]')
+                    .toggleClass('majorPage');
+                this.$navTabs
+                    .find('a[href*=LandingPage]')
+                    .toggleClass('customPage');
                 this.$navTabs.toggleClass('showNav');
             }
             showNavigation.config.$legend.slideToggle(500);
             this.$navTabs.find('.linkChecked').removeClass('linkChecked');
         },
         'toggleDisable': function () {
-            showNavigation.config.$activateButt.prop('disabled', function (index, value) {
-                return !value;
-            });
+            showNavigation.config.$activateButt
+                .prop('disabled',
+                    function (index, value) {
+                        return !value;
+                    });
         },
         'bindClicks': function () {
             var i = 0;
             var length = this.$navTabsLinks.length;
 
             for (i; i < length; i += 1) {
-                jQuery(this.$navTabsLinks[i]).one('mousedown', this.linkChecked(this.$navTabsLinks[i]));
+                jQuery(this.$navTabsLinks[i])
+                    .one('mousedown',
+                        this.linkChecked(this.$navTabsLinks[i]));
             }
         },
         // ----------------------------------------
@@ -2293,9 +2301,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- View Mobile Site
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** View Mobile Site ****************************************
+    // ********************************************************************************
     var viewMobile = {
         'init': function (callingPanel) {
             this.createElements();
@@ -2326,10 +2334,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(viewMobile.config.$activateButt);
         },
         'bindEvents': function () {
-            viewMobile.config.$activateButt.on(
-                'click',
-                this.viewMobile.bind(this)
-            );
+            viewMobile.config.$activateButt
+                .on('click',
+                    this.viewMobile.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2341,9 +2348,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- SEO Simplify
-    // -----------------------------------------
+    // ********************************************************************************
+    // **************************************** SEO Simplify ****************************************
+    // ********************************************************************************
     var seoSimplify = {
         'init': function (callingPanel) {
             this.createElements();
@@ -2413,19 +2420,16 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(seoSimplify.config.$activateButt);
         },
         'bindEvents': function () {
-            seoSimplify.config.$activateButt.on(
-                'click',
-                this.simplifySEO.bind(this)
-            );
-            seoSimplify.config.$removeBut.on(
-                'click',
-                this.removeDisplay.bind(this)
-            );
+            seoSimplify.config.$activateButt
+                .on('click',
+                    this.simplifySEO.bind(this));
+            seoSimplify.config.$removeBut
+                .on('click',
+                    this.removeDisplay.bind(this));
             // add change to text area function
-            seoSimplify.config.$seoDisplay.on(
-                'click',
-                this.changeToTextarea.bind(this)
-            );
+            seoSimplify.config.$seoDisplay
+                .on('click',
+                    this.changeToTextarea.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2664,10 +2668,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- add widget outlines
-    // ----------------------------------------
-    // disable on next gen sites.
+    // ********************************************************************************
+    // **************************************** add widget outlines ****************************************
+    // ********************************************************************************
     var widgetOutlines = {
         'init': function (callingPanel) {
             this.createElements();
@@ -2696,10 +2699,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(widgetOutlines.config.$activateButt);
         },
         'bindEvents': function () {
-            widgetOutlines.config.$activateButt.on(
-                'click',
-                this.showWidgets.bind(this)
-            );
+            widgetOutlines.config.$activateButt
+                .on('click',
+                    this.showWidgets.bind(this));
         },
         'showWidgets': function () {
             this.addOverlay(this.$editableWidgets);
@@ -2740,10 +2742,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindClickCallback': function ($currentObject, widgetID) {
             // bind click event
-            return $currentObject.on(
-                'click',
-                this.copyWidgetID($currentObject, widgetID)
-            );
+            return $currentObject
+                .on('click',
+                    this.copyWidgetID($currentObject, widgetID));
         },
         'copyWidgetID': function ($currentObject, widgetID) {
             // make element blink when user clicks to copy widget ID
@@ -2758,9 +2759,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- broken link checker
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** broken link checker ****************************************
+    // ********************************************************************************
     var checkLinks = {
         'init': function (callingPanel) {
             this.createElements();
@@ -2859,28 +2860,27 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // main button
-            checkLinks.config.$activateButt.on(
-                'click',
-                function () {
-                    jQuery('html, body').scrollTop(0);
-                    jQuery('html, body').animate({
-                            'scrollTop': jQuery(document).height(),
-                        }, 2000)
-                        .promise()
-                        .done(function () {
-                            jQuery('html, body').scrollTop(0);
-                            checkLinks.toggleDisable();
-                            checkLinks.showLegend();
-                            checkLinks.ajaxStart();
-                            checkLinks.ajaxStop();
-                            checkLinks.platformChooser();
-                        });
-                });
+            checkLinks.config.$activateButt
+                .on('click',
+                    function () {
+                        jQuery('html, body').scrollTop(0);
+                        jQuery('html, body').animate({
+                                'scrollTop': jQuery(document).height(),
+                            }, 2000)
+                            .promise()
+                            .done(function () {
+                                jQuery('html, body').scrollTop(0);
+                                checkLinks.toggleDisable();
+                                checkLinks.showLegend();
+                                checkLinks.ajaxStart();
+                                checkLinks.ajaxStop();
+                                checkLinks.platformChooser();
+                            });
+                    });
 
-            checkLinks.config.$offButt.on(
-                'click',
-                this.showLegend
-            );
+            checkLinks.config.$offButt
+                .on('click',
+                    this.showLegend);
         },
         // ----------------------------------------
         // tier 1 functions
@@ -3396,9 +3396,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     /* **************************************** URL MODIFIER TOOLS **************************************** */
     /* ************************************************************************************************************************ */
 
-    // ----------------------------------------
-    // ---------------------------------------- next gen toggle
-    // -----------------------------------------
+    // ********************************************************************************
+    // **************************************** next gen toggle ****************************************
+    // ********************************************************************************
     var nextGenToggle = {
         'init': function (callingPanel) {
             this.createElements();
@@ -3509,9 +3509,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- m4 checkbox toggle
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** m4 checkbox toggle ****************************************
+    // ********************************************************************************
     var m4Check = {
         'init': function (callingPanel) {
             this.createElements();
@@ -3565,10 +3565,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            m4Check.config.$m4Container.on(
-                'click',
-                this.flipTheSwitch.bind(this)
-            );
+            m4Check.config.$m4Container
+                .on('click',
+                    this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3620,9 +3619,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- autofill toggle
-    // -----------------------------------------
+    // ********************************************************************************
+    // **************************************** autofill toggle ****************************************
+    // ********************************************************************************
     var autofillToggle = {
         'init': function (callingPanel) {
             this.createElements();
@@ -3730,9 +3729,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- URL MODIFIER Panel
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** URL MODIFIER Panel ****************************************
+    // ********************************************************************************
     var urlModifiers = {
         'init': function () {
             // initialize module
@@ -3822,18 +3821,15 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            urlModifiers.config.$urlModTitle.on(
-                'click',
-                shared.toggleFeature
-            );
-            urlModifiers.config.$urlModTitle.on(
-                'click',
-                shared.saveState
-            );
-            urlModifiers.config.$autoApplyContainer.on(
-                'click',
-                this.flipTheSwitch.bind(this)
-            );
+            urlModifiers.config.$urlModTitle
+                .on('click',
+                    shared.toggleFeature);
+            urlModifiers.config.$urlModTitle
+                .on('click',
+                    shared.saveState);
+            urlModifiers.config.$autoApplyContainer
+                .on('click',
+                    this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -4111,9 +4107,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     /* **************************************** TOGGLE TOOLS **************************************** */
     /* ************************************************************************************************************************ */
 
-    // ----------------------------------------
-    // ---------------------------------------- Toggle Tools Panel
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** Toggle Tools Panel ****************************************
+    // ********************************************************************************
     var toggles = {
         'init': function () {
             // initialize module
@@ -4162,20 +4158,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // minimize
-            toggles.config.$togglesTitle.on(
-                'click',
-                shared.toggleFeature
-            );
-            toggles.config.$togglesTitle.on(
-                'click',
-                shared.saveState
-            );
+            toggles.config.$togglesTitle
+                .on('click',
+                    shared.toggleFeature);
+            toggles.config.$togglesTitle
+                .on('click',
+                    shared.saveState);
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- Refresh Page toggle
-    // -----------------------------------------
+    // ********************************************************************************
+    // **************************************** Refresh Page toggle ****************************************
+    // ********************************************************************************
     var refreshPage = {
         'init': function (callingPanel) {
             this.createElements();
@@ -4234,14 +4228,12 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
                 .append(refreshPage.config.$refreshButtContainer);
         },
         'bindEvents': function () {
-            refreshPage.config.$refreshButt.on(
-                'click',
-                this.reloadPage
-            );
-            refreshPage.config.$refreshContainer.on(
-                'click',
-                this.flipTheSwitch.bind(this)
-            );
+            refreshPage.config.$refreshButt
+                .on('click',
+                    this.reloadPage);
+            refreshPage.config.$refreshContainer
+                .on('click',
+                    this.flipTheSwitch.bind(this));
         },
         'setToggle': function () {
             // get value of custom variable and set toggles accordingly
@@ -4281,9 +4273,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- hide preview toolbar toggle
-    // -----------------------------------------
+    // ********************************************************************************
+    // **************************************** hide preview toolbar toggle ****************************************
+    // ********************************************************************************
     var previewBarToggle = {
         'init': function (callingPanel) {
             this.createElements();
@@ -4403,9 +4395,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- dynamic panel
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** dynamic panel ****************************************
+    // ********************************************************************************
     var dynamicDisplay = {
         'init': function () {
             this.createElements();
@@ -4502,22 +4494,18 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'bindEvents': function () {
             // click
-            dynamicDisplay.config.$hideToolbox.on(
-                'click',
-                this.toggleTools.bind(this)
-            );
-            dynamicDisplay.config.$showToolbox.on(
-                'click',
-                this.toggleTools.bind(this)
-            );
-            dynamicDisplay.config.$hideToolbox.on(
-                'click',
-                this.saveState
-            );
-            dynamicDisplay.config.$showToolbox.on(
-                'click',
-                this.saveState
-            );
+            dynamicDisplay.config.$hideToolbox
+                .on('click',
+                    this.toggleTools.bind(this));
+            dynamicDisplay.config.$showToolbox
+                .on('click',
+                    this.toggleTools.bind(this));
+            dynamicDisplay.config.$hideToolbox
+                .on('click',
+                    this.saveState);
+            dynamicDisplay.config.$showToolbox
+                .on('click',
+                    this.saveState);
         },
         'displayPanel': function () {
             // loop through variable list to find the panel title
@@ -4566,9 +4554,9 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- MAIN
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** MAIN ****************************************
+    // ********************************************************************************
     var main = {
         'init': function () {
             this.cacheDOM();
@@ -4682,8 +4670,8 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
     };
 
-    // ----------------------------------------
-    // ---------------------------------------- initialize toolbox
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** initialize toolbox ****************************************
+    // ********************************************************************************
     main.init();
 })(); // end main function
