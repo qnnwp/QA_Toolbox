@@ -1507,7 +1507,7 @@
             }
 
             // make parent image relative positionin
-            this.apdClass($currentImage, 'overlaid');
+            this.apndClass($currentImage, 'overlaid');
 
             // place div overlay onto image
             jQuery($currentImage).before(this.$divOverlay);
@@ -1516,43 +1516,21 @@
             // check if link opens in a new window
             if (this.verifyTarget($currentLink)) {
                 if (isImageLink) {
-                    this.apdClass(this.$divOverlay, 'opensWindow');
+                    this.apndClass(this.$divOverlay, 'opensWindow');
                 } else {
-                    this.apdClass($currentLink, 'opensWindow');
+                    this.apndClass($currentLink, 'opensWindow');
                 }
             }
         },
         'checkForTitleText': function ($currentLink, isImageLink) {
             // text links
-            if (!isImageLink) {
-                switch (true) {
-                    case typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === '':
-                        // link has no title
-                        this.apdClass($currentLink, 'noTitle');
-                        break;
-                    case $currentLink.attr('title') !== '':
-                        // link has a title
-                        this.apdClass($currentLink, 'hasTitle');
-                        break;
-                    default:
-                        // link is good to go
-                }
-            }
+            var $obj = isImageLink ? this.$divOverlay : $currentLink;
 
-            // image links
-            if (isImageLink) {
-                switch (true) {
-                    case typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === '':
-                        // image link has no title
-                        this.apdClass(this.$divOverlay, 'noTitle');
-                        break;
-                    case $currentLink.attr('title') !== '':
-                        // image link has a title
-                        this.apdClass(this.$divOverlay, 'hasTitle');
-                        break;
-                    default:
-                        // link is good to go
-                }
+            if (typeof $currentLink.attr('title') === 'undefined' ||
+                $currentLink.attr('title') === '') { // link has no title
+                this.apndClass($obj, 'noTitle');
+            } else if ($currentLink.attr('title') !== '') { // link has a title
+                this.apndClass($obj, 'hasTitle');
             }
         },
         'checkURL': function ($currentLink, isImageLink) {
@@ -1561,15 +1539,15 @@
 
             // regular text links
             if (typeof href === 'undefined') { // link is undefined
-                this.apdClass(modElement, 'brokenURL');
+                this.apndClass(modElement, 'brokenURL');
             } else if (href === '') { // link has an empty url
-                this.apdClass(modElement, 'brokenURL');
+                this.apndClass(modElement, 'brokenURL');
             } else if (this.checkHref(href)) { // link has a fishy url
-                this.apdClass(modElement, 'urlIssue');
+                this.apndClass(modElement, 'urlIssue');
             } else if (this.datedURL(href) && shared.nextGenCheck()) { // link leads to an out dated page
-                this.apdClass(modElement, 'unsupportedPageLink');
+                this.apndClass(modElement, 'unsupportedPageLink');
             } else if (this.checkAbsoluteURL(href)) { // link has a fishy url
-                this.apdClass(modElement, 'absoluteURL');
+                this.apndClass(modElement, 'absoluteURL');
             }
         },
         'linkChecked': function ($currentLink) {
@@ -1583,35 +1561,35 @@
         'checkTargetNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             // check if link opens in a new window
             if (this.verifyTarget($currentLink)) {
-                this.apdClass($linkOverlay, 'opensWindow');
+                this.apndClass($linkOverlay, 'opensWindow');
             }
         },
         'checkForTitleTextNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             // text links
             if (typeof $currentLink.attr('title') === 'undefined' ||
                 $currentLink.attr('title') === '') { // link has no title
-                this.apdClass($linkOverlay, 'noTitle');
+                this.apndClass($linkOverlay, 'noTitle');
             } else if ($currentLink.attr('title') !== '') { // link has a title
-                this.apdClass($linkOverlay, 'hasTitle');
+                this.apndClass($linkOverlay, 'hasTitle');
             }
         },
         'checkURLNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             var href = $currentLink.attr('href');
 
             if (typeof href === 'undefined') { // link is undefined
-                this.apdClass($linkOverlay, 'brokenURL');
+                this.apndClass($linkOverlay, 'brokenURL');
             } else if (href === '') { // link has an empty url
-                this.apdClass($linkOverlay, 'brokenURL');
+                this.apndClass($linkOverlay, 'brokenURL');
             } else if (this.checkHref(href)) { // link has a fishy url
-                this.apdClass($linkOverlay, 'urlIssue');
+                this.apndClass($linkOverlay, 'urlIssue');
             } else if (this.datedURL(href) && shared.nextGenCheck()) { // link leads to an out dated page
-                this.apdClass($linkOverlay, 'unsupportedPageLink');
+                this.apndClass($linkOverlay, 'unsupportedPageLink');
             } else if (this.checkAbsoluteURL(href)) { // link has a fishy url
-                this.apdClass($linkOverlay, 'absoluteURL');
+                this.apndClass($linkOverlay, 'absoluteURL');
             }
 
         },
-        'apdClass': function ($currentLink, addClass) {
+        'apndClass': function ($currentLink, addClass) {
             $currentLink.addClass(addClass);
         },
         'verifyTarget': function ($currentLink) {
