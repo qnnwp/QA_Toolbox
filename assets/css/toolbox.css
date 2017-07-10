@@ -358,11 +358,6 @@ lnk checker styles
 
 /* covers all text links and image links */
 
-.buttonFlag {
-    background: linear-gradient(to right, #b2fefa, #0ed2f7) !important;
-    color: #000000 !important;
-}
-
 .unsupportedPageLink,
 footer .card .content .text .link .siteLink.unsupportedPageLink,
 body .card .content .text .copy .siteLink.unsupportedPageLink,
@@ -484,9 +479,10 @@ body .card .content .media .imgOverlay.absoluteURL {
 footer .card .content .text .link .siteLink.buttonFlag,
 body .card .content .text .link .siteLink.buttonFlag,
 body .card .content .text .copy .buttonFlag {
-    background: #0ed2f7;
-    background: linear-gradient(to right, #b2fefa, #0ed2f7) !important;
-    color: #000000;
+    background: #4568DC !important;
+    background: -webkit-linear-gradient(to right, #B06AB3, #4568DC) !important;
+    background: linear-gradient(to right, #B06AB3, #4568DC) !important;
+    color: #ffffff;
     border: none;
 }
 
