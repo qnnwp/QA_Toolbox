@@ -1,6 +1,4 @@
-/* global jQuery, unsafeWindow, GM_getValue, GM_setValue,
-GM_setClipboard, GM_openInTab, GM_info, GM_listValues,
-GM_getResourceURL, window, document, NodeFilter, Typo */
+/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
 
 (function () {
     'use strict';
@@ -9,7 +7,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     // ---------------------------------------- GLOBAL FUNCTIONS
     // ----------------------------------------
     /**
-     * Tampermonkey function
+     * Tampermonkey function.
      * Save value to local storage for program to use.
      * @param {string} variable The variable that will be looked up.
      * @param {bool} val The value that the variable will be set too.
@@ -19,7 +17,7 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     }
 
     /**
-     * Tampermonkey function
+     * Tampermonkey function.
      * Copy text to the clipboard.
      * @param {string} variable The variable that will be copied to the clipboard.
      */
@@ -28,24 +26,26 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     }
 
     /**
-     * Tampermonkey function
+     * Tampermonkey function.
      * Get value to local storage for program to use.
      * @param {string} variable The variable that will be looked up.
+     * @return {bool} The saved value of current variable.
      */
     function getValue(variable) {
         return GM_getValue(variable, false);
     }
 
     /**
-     * Tampermonkey function
+     * Tampermonkey function.
      * to retrieve all the program variables from local storage.
+     * @return {object} The list of saved values.
      */
     function programVariables() {
         return GM_listValues();
     }
 
     /**
-     * Tampermonkey function
+     * Tampermonkey function.
      * to open URL in a new tab.
      * @param {string} openThis A URL that will be opened in a new window.
      */
@@ -54,10 +54,11 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
     }
 
     /**
-     * Tampermonkey function
-     * to get resource files from the meta tag located
+     * Tampermonkey function.
+     * to get resource files from the meta tag located.
      * in the Chrome extension.
      * @param {string} resource The resource name that is defined in the meta code of the Tampermonkey Script.
+     * @return {string}  The url that the files declared in the meta tag.
      */
     function getResourceURL(resource) {
         return GM_getResourceURL(resource);
@@ -1587,19 +1588,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'checkForTitleTextNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             // text links
-            //switch (true) {
-            //    case typeof $currentLink.attr('title') === 'undefined' || $currentLink.attr('title') === '':
-            //        // link has no title
-            //        this.apdClass($linkOverlay, 'noTitle');
-            //        break;
-            //    case $currentLink.attr('title') !== '':
-            //        // link has a title
-            //        this.apdClass($linkOverlay, 'hasTitle');
-            //        break;
-            //    default:
-            //        // link is good to go
-            //}
-
             if (typeof $currentLink.attr('title') === 'undefined' ||
                 $currentLink.attr('title') === '') { // link has no title
                 this.apdClass($linkOverlay, 'noTitle');
@@ -1609,33 +1597,6 @@ GM_getResourceURL, window, document, NodeFilter, Typo */
         },
         'checkURLNextGen': function ($currentLink, isImageLink, $linkOverlay) {
             var href = $currentLink.attr('href');
-            /*
-                        // regular text links
-                        switch (true) {
-                            case typeof href === 'undefined':
-                                // link is undefined
-                                this.apdClass($linkOverlay, 'brokenURL');
-                                break;
-                            case href === '':
-                                // link has an empty url
-                                this.apdClass($linkOverlay, 'brokenURL');
-                                break;
-                            case this.checkHref(href):
-                                // link has a fishy url
-                                this.apdClass($linkOverlay, 'urlIssue');
-                                break;
-                            case this.datedURL(href) && shared.nextGenCheck():
-                                // link leads to an out dated page
-                                this.apdClass($linkOverlay, 'unsupportedPageLink');
-                                break;
-                            case this.checkAbsoluteURL(href):
-                                // link has a fishy url
-                                this.apdClass($linkOverlay, 'absoluteURL');
-                                break;
-                            default:
-                                // url is good to go
-                        }
-                        */
 
             if (typeof href === 'undefined') { // link is undefined
                 this.apdClass($linkOverlay, 'brokenURL');
