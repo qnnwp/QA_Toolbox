@@ -3,9 +3,9 @@
 (function () {
     'use strict';
 
-    // ----------------------------------------
-    // ---------------------------------------- GLOBAL FUNCTIONS
-    // ----------------------------------------
+    // ********************************************************************************
+    // **************************************** GLOBAL FUNCTIONS ****************************************
+    // ********************************************************************************
     /**
      * Tampermonkey function.
      * Save value to local storage for program to use.
@@ -233,6 +233,18 @@
                     'px',
             });
             return $divOverlay;
+        },
+        // FLAG ALL BUTTONS AS A BUTTON ELEMENT
+        'flagButtons': function () {
+            //            var buttons = jQuery('button, input[type="button"]');
+            //                        var buttons = jQuery(':button');
+            var buttons = jQuery('body').find(':button');
+            var length = buttons.length;
+            var a = 0;
+
+            for (a; a < length; a += 1) {
+                jQuery(buttons[a]).addClass('buttonFlag');
+            }
         },
     };
 
@@ -1082,6 +1094,7 @@
                             .done(
                                 function () {
                                     jQuery('html, body').scrollTop(0);
+                                    shared.flagButtons();
                                     linkChecker.checkLinks();
                                     linkChecker.showLegend();
                                     linkChecker.toggleDisable();
@@ -1104,8 +1117,9 @@
             // have to load here to compensate for lazy loaded widgets
             this.cacheDOM();
             var a = 0;
-            var buttons = jQuery('body').find(':button');
-            var length = buttons.length;
+            //            var buttons = jQuery('body').find(':button');
+            //            var length = buttons.length;
+            //            shared.flagButtons;
 
             // NEXT GEN SITE LOGIC
             // ----------------------------------------
@@ -1119,11 +1133,11 @@
                 this.tetraSiteCheck();
             }
 
-            // FLAG ALL BUTTONS AS A BUTTON ELEMENT
-            // ----------------------------------------
-            for (a; a < length; a += 1) {
-                jQuery(buttons[a]).addClass('buttonFlag');
-            }
+            //            // FLAG ALL BUTTONS AS A BUTTON ELEMENT
+            //            // ----------------------------------------
+            //            for (a; a < length; a += 1) {
+            //                jQuery(buttons[a]).addClass('buttonFlag');
+            //            }
         },
         'showLegend': function () {
             linkChecker.config.$legend.slideToggle(500);
@@ -2755,6 +2769,7 @@
                     'jumpLink': 'Jump Link or "#" URL',
                     'attention': 'URL Empty or Undefined',
                     'mobilePhoneLink': 'Mobile Link',
+                    'buttonFlag': 'Button Element',
                     'success': 'Link is Real',
                     'error': '404 Link',
                 },
@@ -2834,6 +2849,7 @@
                             .promise()
                             .done(function () {
                                 jQuery('html, body').scrollTop(0);
+                                shared.flagButtons();
                                 checkLinks.toggleDisable();
                                 checkLinks.showLegend();
                                 checkLinks.ajaxStart();
