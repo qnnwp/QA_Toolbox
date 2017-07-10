@@ -613,12 +613,8 @@
             hTags.config.$hTagDisplay.html(html);
         },
         'bindEvents': function () {
-            hTags.config.$hTagsContainer
-                .on('click',
-                    this.showDetails.bind(this));
-            hTags.config.$removeBut
-                .on('click',
-                    this.removeDisplay);
+            hTags.config.$hTagsContainer.on('click', this.showDetails.bind(this));
+            hTags.config.$removeBut.on('click', this.removeDisplay);
         },
         'returnTool': function () {
             var panel = hTags.config.$hTagsContainer;
@@ -707,18 +703,12 @@
         'bindEvents': function () {
             // minimize
             pageInformation.config.$pageInfoTitle
-                .on('click',
-                    shared.toggleFeature)
-                .on('click',
-                    shared.saveState);
+                .on('click', shared.toggleFeature)
+                .on('click', shared.saveState);
             // hover effect & click
             pageInformation.config.$pageInfo
-                .on('mouseover mouseleave',
-                    '.tbInfo',
-                    this.hoverEffect)
-                .on('click',
-                    '.tbInfo',
-                    this.copyToClipboard);
+                .on('mouseover mouseleave', '.tbInfo', this.hoverEffect)
+                .on('click', '.tbInfo', this.copyToClipboard);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -790,12 +780,12 @@
         },
         'bindEvents': function () {
             // minimize
+            //            qaTools.config.$mainToolsTitle.on('click', shared.toggleFeature);
+            //            qaTools.config.$mainToolsTitle.on('click', shared.saveState);
+
             qaTools.config.$mainToolsTitle
-                .on('click',
-                    shared.toggleFeature);
-            qaTools.config.$mainToolsTitle
-                .on('click',
-                    shared.saveState);
+                .on('click', shared.toggleFeature)
+                .on('click', shared.saveState);
         },
     };
 
@@ -862,29 +852,22 @@
         },
         'bindEvents': function () {
             // main button
-            imageChecker.config.$activateButt
-                .on('click',
-                    function () {
-                        jQuery('html, body').scrollTop(0);
-                        jQuery('html, body').animate({
-                                'scrollTop': jQuery(document).height(),
-                            }, 2000)
-                            .promise()
-                            .done(function () {
-                                jQuery('html, body').scrollTop(0);
-                                imageChecker.highlightImages();
-                                imageChecker.showLegend();
-                                imageChecker.toggleDisable();
-                            });
-                    });
+            imageChecker.config.$activateButt.on('click', function () {
+                jQuery('html, body').scrollTop(0);
+                jQuery('html, body').animate({
+                    'scrollTop': jQuery(document).height(),
+                }, 2000).promise().done(function () {
+                    jQuery('html, body').scrollTop(0);
+                    imageChecker.highlightImages();
+                    imageChecker.showLegend();
+                    imageChecker.toggleDisable();
+                });
+            });
             // off button
             imageChecker.config.$offButt
-                .on('click',
-                    this.removeHighlights.bind(this))
-                .on('click',
-                    this.showLegend)
-                .on('click',
-                    this.toggleDisable);
+                .on('click', this.removeHighlights.bind(this))
+                .on('click', this.showLegend)
+                .on('click', this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2
@@ -1083,31 +1066,23 @@
         },
         'bindEvents': function () {
             // main button
-            linkChecker.config.$activateButt
-                .on('click',
-                    function () {
-                        jQuery('html, body').scrollTop(0);
-                        jQuery('html, body').animate({
-                                'scrollTop': jQuery(document).height(),
-                            }, 2000)
-                            .promise()
-                            .done(
-                                function () {
-                                    jQuery('html, body').scrollTop(0);
-                                    shared.flagButtons();
-                                    linkChecker.checkLinks();
-                                    linkChecker.showLegend();
-                                    linkChecker.toggleDisable();
-                                });
-                    });
+            linkChecker.config.$activateButt.on('click', function () {
+                jQuery('html, body').scrollTop(0);
+                jQuery('html, body').animate({
+                    'scrollTop': jQuery(document).height(),
+                }, 2000).promise().done(function () {
+                    jQuery('html, body').scrollTop(0);
+                    shared.flagButtons();
+                    linkChecker.checkLinks();
+                    linkChecker.showLegend();
+                    linkChecker.toggleDisable();
+                });
+            });
             // off button
             linkChecker.config.$offButt
-                .on('click',
-                    this.removeHighlights.bind(this))
-                .on('click',
-                    this.showLegend)
-                .on('click',
-                    this.toggleDisable);
+                .on('click', this.removeHighlights.bind(this))
+                .on('click', this.showLegend)
+                .on('click', this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -1434,13 +1409,9 @@
         'bindClickCallback': function ($currentLink, isImageLink) {
             // bind click event
             if (isImageLink) {
-                return $currentLink
-                    .one('mousedown',
-                        this.linkChecked(this.$divOverlay));
+                return $currentLink.one('mousedown', this.linkChecked(this.$divOverlay));
             } else {
-                return $currentLink
-                    .one('mousedown',
-                        this.linkChecked($currentLink));
+                return $currentLink.one('mousedown', this.linkChecked($currentLink));
             }
         },
         // ----------------------------------------
@@ -1731,25 +1702,23 @@
         },
         'bindEvents': function () {
             // activate button
+            //            spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
+            //            spellCheck.config.$activateButt.on('click', this.showLegend);
+            //            spellCheck.config.$activateButt.on('click', this.toggleDisable);
+
             spellCheck.config.$activateButt
-                .on('click',
-                    this.spellCheckPage.bind(this));
-            spellCheck.config.$activateButt
-                .on('click',
-                    this.showLegend);
-            spellCheck.config.$activateButt
-                .on('click',
-                    this.toggleDisable);
+                .on('click', this.spellCheckPage.bind(this))
+                .on('click', this.showLegend)
+                .on('click', this.toggleDisable);
             // off button
+            //            spellCheck.config.$offButt.on('click', this.removeHighlights.bind(this));
+            //            spellCheck.config.$offButt.on('click', this.showLegend);
+            //            spellCheck.config.$offButt.on('click', this.toggleDisable);
+
             spellCheck.config.$offButt
-                .on('click',
-                    this.removeHighlights.bind(this));
-            spellCheck.config.$offButt
-                .on('click',
-                    this.showLegend);
-            spellCheck.config.$offButt
-                .on('click',
-                    this.toggleDisable);
+                .on('click', this.removeHighlights.bind(this))
+                .on('click', this.showLegend)
+                .on('click', this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -1958,22 +1927,20 @@
                 .append(speedtestPage.config.$panelContainer);
         },
         'bindEvents': function () {
-            speedtestPage.config.$activateButt
-                .on('click',
-                    function () {
-                        speedtestPage.config.$panelContainer.slideToggle(500);
-                    });
+            speedtestPage.config.$activateButt.on('click', function () {
+                speedtestPage.config.$panelContainer.slideToggle(500);
+            });
+            //            speedtestPage.config.$sendButt.on('click', this.storeData);
+            //            speedtestPage.config.$sendButt.on('click', this.sendPage.bind(this));
+            //            speedtestPage.config.$sendButt.on('click', function () {
+            //                speedtestPage.config.$panelContainer.slideToggle(500);
+            //            });
             speedtestPage.config.$sendButt
-                .on('click',
-                    this.storeData);
-            speedtestPage.config.$sendButt
-                .on('click',
-                    this.sendPage.bind(this));
-            speedtestPage.config.$sendButt
-                .on('click',
-                    function () {
-                        speedtestPage.config.$panelContainer.slideToggle(500);
-                    });
+                .on('click', this.storeData)
+                .on('click', this.sendPage.bind(this))
+                .on('click', function () {
+                    speedtestPage.config.$panelContainer.slideToggle(500);
+                });
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2100,12 +2067,11 @@
         },
         'bindEvents': function () {
             // minimize
+            //            otherTools.config.$otherToolsTitle.on('click', shared.toggleFeature);
+            //            otherTools.config.$otherToolsTitle.on('click', shared.saveState);
             otherTools.config.$otherToolsTitle
-                .on('click',
-                    shared.toggleFeature);
-            otherTools.config.$otherToolsTitle
-                .on('click',
-                    shared.saveState);
+                .on('click', shared.toggleFeature)
+                .on('click', shared.saveState);
         },
     };
 
@@ -2200,21 +2166,19 @@
                 .append(showNavigation.config.$legend);
         },
         'bindEvents': function () {
+            //            showNavigation.config.$activateButt.on('click', this.toggleFeatures.bind(this));
+            //            showNavigation.config.$activateButt.on('click', this.toggleDisable);
+            //            showNavigation.config.$activateButt.on('click', this.bindClicks.bind(this));
+            //            showNavigation.config.$offButt.on('click', this.toggleFeatures.bind(this));
+            //            showNavigation.config.$offButt.on('click', this.toggleDisable);
+
             showNavigation.config.$activateButt
-                .on('click',
-                    this.toggleFeatures.bind(this));
-            showNavigation.config.$activateButt
-                .on('click',
-                    this.toggleDisable);
-            showNavigation.config.$activateButt
-                .on('click',
-                    this.bindClicks.bind(this));
+                .on('click', this.toggleFeatures.bind(this))
+                .on('click', this.toggleDisable)
+                .on('click', this.bindClicks.bind(this));
             showNavigation.config.$offButt
-                .on('click',
-                    this.toggleFeatures.bind(this));
-            showNavigation.config.$offButt
-                .on('click',
-                    this.toggleDisable);
+                .on('click', this.toggleFeatures.bind(this))
+                .on('click', this.toggleDisable);
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2257,8 +2221,7 @@
 
             for (i; i < length; i += 1) {
                 jQuery(this.$navTabsLinks[i])
-                    .one('mousedown',
-                        this.linkChecked(this.$navTabsLinks[i]));
+                    .one('mousedown', this.linkChecked(this.$navTabsLinks[i]));
             }
         },
         // ----------------------------------------
@@ -2304,9 +2267,7 @@
                 .append(viewMobile.config.$activateButt);
         },
         'bindEvents': function () {
-            viewMobile.config.$activateButt
-                .on('click',
-                    this.viewMobile.bind(this));
+            viewMobile.config.$activateButt.on('click', this.viewMobile.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2390,16 +2351,10 @@
                 .append(seoSimplify.config.$activateButt);
         },
         'bindEvents': function () {
-            seoSimplify.config.$activateButt
-                .on('click',
-                    this.simplifySEO.bind(this));
-            seoSimplify.config.$removeBut
-                .on('click',
-                    this.removeDisplay.bind(this));
+            seoSimplify.config.$activateButt.on('click', this.simplifySEO.bind(this));
+            seoSimplify.config.$removeBut.on('click', this.removeDisplay.bind(this));
             // add change to text area function
-            seoSimplify.config.$seoDisplay
-                .on('click',
-                    this.changeToTextarea.bind(this));
+            seoSimplify.config.$seoDisplay.on('click', this.changeToTextarea.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -2677,9 +2632,7 @@
                 .append(widgetOutlines.config.$activateButt);
         },
         'bindEvents': function () {
-            widgetOutlines.config.$activateButt
-                .on('click',
-                    this.showWidgets.bind(this));
+            widgetOutlines.config.$activateButt.on('click', this.showWidgets.bind(this));
         },
         'showWidgets': function () {
             this.addOverlay(this.$editableWidgets);
@@ -2720,9 +2673,7 @@
         },
         'bindClickCallback': function ($currentObject, widgetID) {
             // bind click event
-            return $currentObject
-                .on('click',
-                    this.copyWidgetID($currentObject, widgetID));
+            return $currentObject.on('click', this.copyWidgetID($currentObject, widgetID));
         },
         'copyWidgetID': function ($currentObject, widgetID) {
             // make element blink when user clicks to copy widget ID
@@ -2839,28 +2790,22 @@
         },
         'bindEvents': function () {
             // main button
-            checkLinks.config.$activateButt
-                .on('click',
-                    function () {
-                        jQuery('html, body').scrollTop(0);
-                        jQuery('html, body').animate({
-                                'scrollTop': jQuery(document).height(),
-                            }, 2000)
-                            .promise()
-                            .done(function () {
-                                jQuery('html, body').scrollTop(0);
-                                shared.flagButtons();
-                                checkLinks.toggleDisable();
-                                checkLinks.showLegend();
-                                checkLinks.ajaxStart();
-                                checkLinks.ajaxStop();
-                                checkLinks.platformChooser();
-                            });
-                    });
+            checkLinks.config.$activateButt.on('click', function () {
+                jQuery('html, body').scrollTop(0);
+                jQuery('html, body').animate({
+                    'scrollTop': jQuery(document).height(),
+                }, 2000).promise().done(function () {
+                    jQuery('html, body').scrollTop(0);
+                    shared.flagButtons();
+                    checkLinks.toggleDisable();
+                    checkLinks.showLegend();
+                    checkLinks.ajaxStart();
+                    checkLinks.ajaxStop();
+                    checkLinks.platformChooser();
+                });
+            });
 
-            checkLinks.config.$offButt
-                .on('click',
-                    this.showLegend);
+            checkLinks.config.$offButt.on('click', this.showLegend);
         },
         // ----------------------------------------
         // tier 1 functions
@@ -3375,25 +3320,24 @@
         // ----------------------------------------
         'createElements': function () {
             nextGenToggle.config = {
-                '$nextGenToggleContainer': jQuery('<div>').attr({
+                '$nextGenTogContainer': jQuery('<div>').attr({
                     'id': 'nextGenToggleInput',
                     'class': 'toggleTool',
                     'title': 'Apply NextGen=true',
                 }),
-                '$nextGenToggleTitle': jQuery('<div>')
+                '$nextGenTogTitle': jQuery('<div>')
                     .text('nextGen parameters?'),
-                '$nextGenToggleIcon': jQuery('<div>').attr({
+                '$nextGenTogIcon': jQuery('<div>').attr({
                     'id': 'nextGenToggleIcon',
                 }),
                 '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
             };
         },
         'buildTool': function () {
-            nextGenToggle.config.$nextGenToggleIcon
-                .append(nextGenToggle.config.$FAtoggle);
-            nextGenToggle.config.$nextGenToggleContainer
-                .append(nextGenToggle.config.$nextGenToggleTitle)
-                .append(nextGenToggle.config.$nextGenToggleIcon);
+            nextGenToggle.config.$nextGenTogIcon.append(nextGenToggle.config.$FAtoggle);
+            nextGenToggle.config.$nextGenTogContainer
+                .append(nextGenToggle.config.$nextGenTogTitle)
+                .append(nextGenToggle.config.$nextGenTogIcon);
         },
         'cacheDOM': function (callingPanel) {
             this.$toolsPanel = jQuery(callingPanel);
@@ -3411,14 +3355,11 @@
         },
         'addTool': function () {
             // add to main toolbox
-            this.$toolsPanel
-                .append(nextGenToggle.config.$nextGenToggleContainer);
+            this.$toolsPanel.append(nextGenToggle.config.$nextGenTogContainer);
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            nextGenToggle.config.$nextGenToggleContainer
-                .on('click',
-                    this.flipTheSwitch.bind(this));
+            nextGenToggle.config.$nextGenTogContainer.on('click', this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3526,9 +3467,7 @@
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            m4Check.config.$m4Container
-                .on('click',
-                    this.flipTheSwitch.bind(this));
+            m4Check.config.$m4Container.on('click', this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3597,25 +3536,25 @@
         // ----------------------------------------
         'createElements': function () {
             autofillToggle.config = {
-                '$autofillToggleContainer': jQuery('<div>').attr({
+                '$autofillTogContainer': jQuery('<div>').attr({
                     'id': 'autofillToggleInput',
                     'class': 'toggleTool',
                     'title': 'Show all autofill tags on page',
                 }),
-                '$autofillToggleTitle': jQuery('<div>')
+                '$autofillTogTitle': jQuery('<div>')
                     .text('show autofill tags?'),
-                '$autofillToggleIcon': jQuery('<div>').attr({
+                '$autofillTogIcon': jQuery('<div>').attr({
                     'id': 'autofillToggleIcon',
                 }),
                 '$FAtoggle': jQuery('<i class="fa fa-toggle-off fa-lg"></i>'),
             };
         },
         'buildTool': function () {
-            autofillToggle.config.$autofillToggleIcon
+            autofillToggle.config.$autofillTogIcon
                 .append(autofillToggle.config.$FAtoggle);
-            autofillToggle.config.$autofillToggleContainer
-                .append(autofillToggle.config.$autofillToggleTitle)
-                .append(autofillToggle.config.$autofillToggleIcon);
+            autofillToggle.config.$autofillTogContainer
+                .append(autofillToggle.config.$autofillTogTitle)
+                .append(autofillToggle.config.$autofillTogIcon);
         },
         'setToggle': function () {
             if (getValue('applyAutofill')) { // if 'applyAutofill is turned on'
@@ -3632,13 +3571,11 @@
         'addTool': function () {
             // add to main toolbox
             this.$toolsPanel
-                .append(autofillToggle.config.$autofillToggleContainer);
+                .append(autofillToggle.config.$autofillTogContainer);
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            autofillToggle.config.$autofillToggleContainer
-                .on('click',
-                    this.flipTheSwitch.bind(this));
+            autofillToggle.config.$autofillTogContainer.on('click', this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3781,15 +3718,15 @@
         },
         'bindEvents': function () {
             // minimize
+            //            urlModifiers.config.$urlModTitle
+            //                .on('click', shared.toggleFeature);
+            //            urlModifiers.config.$urlModTitle
+            //                .on('click', shared.saveState);
+
             urlModifiers.config.$urlModTitle
-                .on('click',
-                    shared.toggleFeature);
-            urlModifiers.config.$urlModTitle
-                .on('click',
-                    shared.saveState);
-            urlModifiers.config.$autoApplyContainer
-                .on('click',
-                    this.flipTheSwitch.bind(this));
+                .on('click', shared.toggleFeature)
+                .on('click', shared.saveState);
+            urlModifiers.config.$autoApplyContainer.on('click', this.flipTheSwitch.bind(this));
         },
         // ----------------------------------------
         // tier 2 functions
@@ -4118,12 +4055,14 @@
         },
         'bindEvents': function () {
             // minimize
+            //            toggles.config.$togglesTitle
+            //                .on('click', shared.toggleFeature);
+            //            toggles.config.$togglesTitle
+            //                .on('click', shared.saveState);
+
             toggles.config.$togglesTitle
-                .on('click',
-                    shared.toggleFeature);
-            toggles.config.$togglesTitle
-                .on('click',
-                    shared.saveState);
+                .on('click', shared.toggleFeature)
+                .on('click', shared.saveState);
         },
     };
 
@@ -4188,12 +4127,8 @@
                 .append(refreshPage.config.$refreshButtContainer);
         },
         'bindEvents': function () {
-            refreshPage.config.$refreshButt
-                .on('click',
-                    this.reloadPage);
-            refreshPage.config.$refreshContainer
-                .on('click',
-                    this.flipTheSwitch.bind(this));
+            refreshPage.config.$refreshButt.on('click', this.reloadPage);
+            refreshPage.config.$refreshContainer.on('click', this.flipTheSwitch.bind(this));
         },
         'setToggle': function () {
             // get value of custom variable and set toggles accordingly
@@ -4295,13 +4230,14 @@
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
+            //            previewBarToggle.config.$previewBarToggleContainer
+            //                .on('click', this.flipTheSwitch.bind(this));
+            //            previewBarToggle.config.$previewBarToggleContainer
+            //                .on('click', '#previewToolBarFrame', this.togglePreviewToolbar);
+
             previewBarToggle.config.$previewBarToggleContainer
-                .on('click',
-                    this.flipTheSwitch.bind(this));
-            previewBarToggle.config.$previewBarToggleContainer
-                .on('click',
-                    '#previewToolBarFrame',
-                    this.togglePreviewToolbar);
+                .on('click', this.flipTheSwitch.bind(this))
+                .on('click', '#previewToolBarFrame', this.togglePreviewToolbar);
         },
         'hideFeature': function () {
             // hides feature if viewing live site
@@ -4452,18 +4388,21 @@
         },
         'bindEvents': function () {
             // click
+            //            dynamicDisplay.config.$hideToolbox
+            //                .on('click', this.toggleTools.bind(this));
+            //            dynamicDisplay.config.$hideToolbox
+            //                .on('click', this.saveState);
+            //            dynamicDisplay.config.$showToolbox
+            //                .on('click', this.toggleTools.bind(this));
+            //            dynamicDisplay.config.$showToolbox
+            //                .on('click', this.saveState);
+
             dynamicDisplay.config.$hideToolbox
-                .on('click',
-                    this.toggleTools.bind(this));
+                .on('click', this.toggleTools.bind(this))
+                .on('click', this.saveState);
             dynamicDisplay.config.$showToolbox
-                .on('click',
-                    this.toggleTools.bind(this));
-            dynamicDisplay.config.$hideToolbox
-                .on('click',
-                    this.saveState);
-            dynamicDisplay.config.$showToolbox
-                .on('click',
-                    this.saveState);
+                .on('click', this.toggleTools.bind(this))
+                .on('click', this.saveState);
         },
         'displayPanel': function () {
             // loop through variable list to find the panel title
