@@ -923,23 +923,13 @@
         'checkForAltText': function (currentImage) {
             var $image = jQuery(currentImage);
             // find first case that returns true
-            switch (true) {
-                // if alt is undefined
-                case typeof $image.attr('alt') === 'undefined':
-                    this.togClass($image, 'noAlt');
-                    break;
-                    // if alt is empty
-                case $image.attr('alt') === '':
-                    this.togClass($image, 'emptyAlt');
-                    break;
-                    // if alt IS NOT empty
-                case $image.attr('alt') !== '':
-                    this.togClass($image, 'hasAlt');
-                    break;
-                    // log the image element that breaks the program
-                default:
-                    // console.log('image checker failure');
-                    // console.log(currentImage);
+
+            if (typeof $image.attr('alt') === 'undefined') { // if alt is undefined
+                this.togClass($image, 'noAlt');
+            } else if ($image.attr('alt') === '') { // if alt is empty
+                this.togClass($image, 'emptyAlt');
+            } else if ($image.attr('alt') !== '') { // if alt IS NOT empty
+                this.togClass($image, 'hasAlt');
             }
         },
         // ----------------------------------------
