@@ -145,7 +145,7 @@ module.exports = {
         }],
         'no-with': 2,
         'radix': 0,
-        'vars-on-top': 2,
+        'vars-on-top': 1,
         'wrap-iife': 0,
         'yoda': [2, 'never'],
 
@@ -298,9 +298,9 @@ module.exports = {
         'sort-keys': 0,
         'sort-vars': 0,
         'space-before-blocks': 2,
-        'space-before-function-paren': [2, {
+        'space-before-function-paren': ["error", {
             'anonymous': 'always',
-            'named': 'always',
+            'named': 'never',
             'asyncArrow': 'always',
     }],
         'space-in-parens': [0, 'never'],
