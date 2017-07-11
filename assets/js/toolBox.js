@@ -294,6 +294,7 @@
                     'id': 'toolStyles',
                     'href': getResourceURL('toolStyles'),
                     'rel': 'stylesheet',
+                    'type': 'text/css',
                 }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
