@@ -116,9 +116,9 @@
             // loop through Legend Content list
             for (key in $legendContent) {
                 if ($legendContent.hasOwnProperty(key)) {
-                    if (key === 'majorPage' && this.nextGenCheck()) {
-                        continue;
-                    }
+//                    if (key === 'majorPage' && this.nextGenCheck()) {
+//                        continue;
+//                    }
 
                     if (key === 'unsupportedPageLink' && !this.nextGenCheck()) {
                         continue;
@@ -2196,6 +2196,9 @@
                     .toggleClass('showNav nextgenShowNav');
                 this.$navTabs.find('a[href*=LandingPage]')
                     .toggleClass('customPage');
+                this.$navTabs
+                    .find(majorPages)
+                    .toggleClass('majorPage');
             }
             if (!isNextGen) {
                 this.$navTabs
@@ -4573,4 +4576,3 @@
     // ********************************************************************************
     main.init();
 })();
-
