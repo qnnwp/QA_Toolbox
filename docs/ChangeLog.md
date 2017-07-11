@@ -1,7 +1,7 @@
 # Change Log
 ## v3.3.0
-**(6/29/2017)**
-* Did major re-work to the tool to support Next Gen support.
+**(7/11/2017)**
+* Did major re-work to the tool to support Next Gen support.<br>***The tool instructions will be updated at a later date***
   * Spell Checker
     * Updated tool to work directly on the page vs. use the third party site.
     * **Directions** : The tool will highlight all miss-spelled words on the page in pink.
