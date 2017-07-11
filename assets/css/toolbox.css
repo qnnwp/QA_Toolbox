@@ -601,11 +601,11 @@ body header .menu>nav>ul .showNav.nextgenShowNav {
 
 body header .menu>nav>ul .showNavAdd.customAdd>a,
 body header .menu>nav>ul .showNavAdd.customAdd>span,
-body header .menu>nav>ul .showNav.nextgenShowNav>li>a {
+body header .menu>nav>ul .showNav.nextgenShowNav>.showNav.customAdd>a {
     color: white;
 }
 
-body header .menu>nav>ul .showNav.nextgenShowNav>li {
+body header .menu>nav>ul .showNav.nextgenShowNav>.showNav.customAdd {
     padding: 0;
 }
 
