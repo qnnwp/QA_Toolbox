@@ -9,14 +9,14 @@ body {
   background: rgb(255, 255, 255) url('https://octodex.github.com/images/spidertocat.png') 105% 105% no-repeat fixed;
 }
 
-header { 
+header {
   background: #C0242B;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #C0242B, #9E222C);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #C0242B, #9E222C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 header h1 {
-  font-family: inherit; 
+  font-family: inherit;
   font-size: 200px;
   font-weight: bold;
   line-height: 30px;
@@ -26,11 +26,11 @@ header h1 {
 }
 
 header p {
-  margin: 70px 0px 0px 50px;
+  margin: 70px 0px 0px 145px;
   padding: 0px;
   font-size: 17px;
   left: 50%;
-  color: #ffffff;  
+  color: #ffffff;
 }
 
 .wrapper {
@@ -73,7 +73,7 @@ section {
 
 footer {
   left: inherit;
-  margin-left: -580px; 
+  margin-left: -580px;
   right: 260px;
   text-align: center;
   width: 300px;
@@ -87,7 +87,7 @@ footer {
 }
 
 #banner .button {
- display: none; 
+ display: none;
 }
 
 @media print, screen and (max-width: 1060px) {
