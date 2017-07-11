@@ -625,15 +625,3 @@ This will cause the 'auto apply modifiers' tool (when switched on) to search the
 - If ***"disableAutofill=false"*** is detected in the URL, nothing will happen. :]
     - http://nitra.proof.gmpsdealer.com/content15?disableAutofill=false
 
-
-<br>
-<br>
-
----
-
-<br>
-<br>
-
-### Other Useful Links<br>
-[Installation Instructions](https://github.com/cirept/NextGen/blob/master/guides/INSTALL.md)<br>
-[Change Log](https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md)<br>
