@@ -277,12 +277,12 @@
                     'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                     'rel': 'stylesheet',
                 }),
-                '$toolStyles': jQuery('<link>').attr({
-                    'id': 'toolStyles',
-                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-                    'rel': 'stylesheet',
-                    'type': 'text/css',
-                }),
+//                '$toolStyles': jQuery('<link>').attr({
+//                    'id': 'toolStyles',
+//                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
+//                    'rel': 'stylesheet',
+//                    'type': 'text/css',
+//                }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
                     'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
@@ -309,7 +309,7 @@
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
                 .append(qaToolbox.config.$jQueryUIcss)
-                .append(qaToolbox.config.$toolStyles)
+//                .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$animate);
             this.body
                 .before(qaToolbox.config.$toolboxContainer)

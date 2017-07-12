@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name QA Toolbox
+// @name QA Toolbox v3.3.1
 // @namespace www.cobaltgroup.com/
 // @version 3.3.1
 // @author Eric Tanaka
