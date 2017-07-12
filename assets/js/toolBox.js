@@ -72,7 +72,9 @@
         'setState': function ($panel, state) {
             if (state === 'show') {
                 $panel.addClass('appear');
-            } else if (state === 'hide') {
+            }
+
+            if (state === 'hide') {
                 $panel.addClass('disappear');
             }
         },
@@ -1984,7 +1986,7 @@
                         'Browser : ' + browserName + '\n' +
                         'Send Results To : ' + email + '\n' +
                         '----------------------------------------') === true) {
-                    openNewTab(desktopURL);
+                    shared.openNewTab(desktopURL);
                 }
             } else {
                 desktopURL = testURL + 'url=' + this.siteURL +
@@ -4375,7 +4377,6 @@
             dynamicDisplay.config.$showToolbox
                 .on('click', this.toggleTools.bind(this))
                 .on('click', this.saveState);
-
             dynamicDisplay.config.$changeLog
                 .on('click', main.showChangeLog);
         },
@@ -4511,24 +4512,24 @@
                 // get version of CDK site
                 // if value does not exist, shut the toolbar down
                 if (this.contextManager.getVersion().length === 0) {
-                    throw new Error('Not a CDK site, shutting toolbar down');
+                    throw new Error('Shutting toolbox down');
                 }
             } catch (e) {
                 // get version of site
                 // if contextManager object does not exist, shut the toolbar down
-                throw new Error('Not a CDK site, shutting toolbar down');
+                throw new Error('Shutting toolbox down');
             }
         },
         'isMobile': function () {
             // determines if the page being viewed is meant for mobile
             if (this.phoneWrapper.length > 0) {
-                throw new Error('mobile site, shutting toolbar down');
+                throw new Error('Shutting toolbox down');
             }
         },
         'editMode': function () {
             // determines if site is in edit mode in WSM (this variable should only exist on CDK sites)
             if (unsafeWindow.editMode === true) {
-                throw new Error('Edit Mode, shutting toolbar down');
+                throw new Error('Shutting toolbox down');
             }
         },
         'styleButtons': function ($toolPanel) {
