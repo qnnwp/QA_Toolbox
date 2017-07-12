@@ -312,11 +312,6 @@
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
-
-            //            console.log('am I showing the change log? : ' +shared.getValue('showChangeLog'));
-            //            if (shared.getValue('showChangeLog')) {
-            //                this.body.before(qaToolbox.config.$changeLogUpdateContainer)
-            //            }
         },
     };
 
