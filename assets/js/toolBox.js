@@ -1,4 +1,4 @@
-/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, GM_getResourceURL, window, document, NodeFilter, Typo */
+/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo */
 
 (function () {
     'use strict';
