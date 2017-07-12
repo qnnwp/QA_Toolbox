@@ -65,9 +65,9 @@
         'saveState': function (e) {
             // get current state
             var vName = jQuery(e.target).siblings('.toolsPanel').attr('id');
-            var currState = this.getValue(vName);
+            var currState = shared.getValue(vName);
             // sets usingM4 value
-            this.saveValue(vName, !currState);
+            shared.saveValue(vName, !currState);
         },
         'setState': function ($panel, state) {
             if (state === 'show') {
@@ -77,7 +77,7 @@
             }
         },
         'programData': function () {
-            var allVariables = this.programVariables(); // global function
+            var allVariables = shared.programVariables(); // global function
             var length = allVariables.length;
             var a = 0;
             var varList = {};
@@ -86,7 +86,7 @@
             // add variables to list
             for (a; a < length; a += 1) {
                 key = allVariables[a];
-                value = this.getValue(key);
+                value = shared.getValue(key);
                 varList[key] = value;
             }
             return varList;
@@ -101,7 +101,7 @@
                     //                        continue;
                     //                    }
 
-                    if (key === 'unsupportedPageLink' && !this.nextGenCheck()) {
+                    if (key === 'unsupportedPageLink' && !shared.nextGenCheck()) {
                         continue;
                     }
 
