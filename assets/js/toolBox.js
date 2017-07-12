@@ -3367,7 +3367,6 @@
             $toggle
                 .removeClass('fa-toggle-off')
                 .addClass('fa-toggle-on');
-            //$toggle.addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
@@ -3375,7 +3374,6 @@
             $toggle
                 .removeClass('fa-toggle-on')
                 .addClass('fa-toggle-off');
-            //$toggle.addClass('fa-toggle-off');
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
@@ -3475,7 +3473,6 @@
             $toggle
                 .removeClass('fa-toggle-off')
                 .addClass('fa-toggle-on');
-            //$toggle.addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
@@ -3483,7 +3480,6 @@
             $toggle
                 .removeClass('fa-toggle-on')
                 .addClass('fa-toggle-off');
-            //$toggle.addClass('fa-toggle-off');
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
@@ -3583,7 +3579,6 @@
             $toggle
                 .removeClass('fa-toggle-off')
                 .addClass('fa-toggle-on');
-            //$toggle.addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
@@ -3591,7 +3586,6 @@
             $toggle
                 .removeClass('fa-toggle-on')
                 .addClass('fa-toggle-off');
-            //$toggle.addClass('fa-toggle-off');
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
@@ -3715,11 +3709,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            urlModifiers.config.$urlModTitle
-            //                .on('click', shared.toggleFeature);
-            //            urlModifiers.config.$urlModTitle
-            //                .on('click', shared.saveState);
-
             urlModifiers.config.$urlModTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -3732,16 +3721,14 @@
             // set toggle on image
             var $toggle = urlModifiers.config.$FAtoggle;
             $toggle
-                .removeClass('fa-toggle-off') //;
-                //$toggle
+                .removeClass('fa-toggle-off')
                 .addClass('fa-toggle-on');
         },
         'toggleOff': function () {
             // set toggle off image
             var $toggle = urlModifiers.config.$FAtoggle;
             $toggle
-                .removeClass('fa-toggle-on') //;
-                //$toggle
+                .removeClass('fa-toggle-on')
                 .addClass('fa-toggle-off');
         },
         'applyParameters': function () {
@@ -4052,11 +4039,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            toggles.config.$togglesTitle
-            //                .on('click', shared.toggleFeature);
-            //            toggles.config.$togglesTitle
-            //                .on('click', shared.saveState);
-
             toggles.config.$togglesTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -4227,11 +4209,6 @@
         },
         'bindEvents': function () {
             // bind FA toggle with 'flipTheSwitch' action
-            //            previewBarToggle.config.$previewBarToggleContainer
-            //                .on('click', this.flipTheSwitch.bind(this));
-            //            previewBarToggle.config.$previewBarToggleContainer
-            //                .on('click', '#previewToolBarFrame', this.togglePreviewToolbar);
-
             previewBarToggle.config.$previewBarToggleContainer
                 .on('click', this.flipTheSwitch.bind(this))
                 .on('click', '#previewToolBarFrame', this.togglePreviewToolbar);
@@ -4249,8 +4226,7 @@
             // set toggle on image
             var $toggle = previewBarToggle.config.$FAtoggle;
             $toggle
-                .removeClass('fa-toggle-off') //;
-                //$toggle
+                .removeClass('fa-toggle-off')
                 .addClass('fa-toggle-on');
         },
         'togglePreviewToolbar': function () {
@@ -4313,15 +4289,18 @@
                 // display area
                 '$displayArea': jQuery('<div>').attr({
                     'id': 'displayArea',
-                    'title': 'Show Change Log',
                 }),
                 // toolbox version
-                '$version': jQuery('<div>')
-                    .text('version: ' + GM_info.script.version), // eslint-disable-line new-cap
-                '$changeLog': jQuery('<a>').attr({
-                    'href': 'https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md',
-                    'title': 'The Latest changes will be mentioned here.',
+                '$version': jQuery('<div>').attr({
+                    'id': 'version',
+                }).text('version: ' + GM_info.script.version), // eslint-disable-line new-cap
+                '$changeLog': jQuery('<div>').attr({
+                    'id': 'changeLog',
                 }),
+                '$changeLogLink': jQuery('<a>').attr({
+                    'href': '#',
+                    'title': 'View latest changes',
+                }).text('Change Log'),
                 // toolbox show button
                 '$showToolbox': jQuery('<div>').attr({
                     'class': 'showToolbox',
@@ -4339,8 +4318,13 @@
         },
         'buildPanel': function () {
             // attach panel elements to container
-            dynamicDisplay.config.$version.append(dynamicDisplay.config.$changeLog);
-            dynamicDisplay.config.$displayArea.append(dynamicDisplay.config.$version);
+            dynamicDisplay.config.$changeLog
+                .append(dynamicDisplay.config.$changeLogLink);
+
+            dynamicDisplay.config.$displayArea
+                .append(dynamicDisplay.config.$version)
+                .append(dynamicDisplay.config.$changeLog);
+
             dynamicDisplay.config.$displayPanel.append(dynamicDisplay.config.$displayArea);
             // attach icon to minimize tab
             dynamicDisplay.config.$showToolbox.append(dynamicDisplay.config.$icon);
@@ -4349,7 +4333,6 @@
         },
         'cacheDOM': function () {
             // page info
-            //                this.$toolBoxContainer = jQuery('.toolboxContainer');
             this.$toolBoxContainer = jQuery('#showToolbox');
             this.nextGenComment = document.firstChild.data;
             this.isNextGen = this.checkNextGen(this.nextGenComment);
@@ -4386,15 +4369,6 @@
         },
         'bindEvents': function () {
             // click
-            //            dynamicDisplay.config.$hideToolbox
-            //                .on('click', this.toggleTools.bind(this));
-            //            dynamicDisplay.config.$hideToolbox
-            //                .on('click', this.saveState);
-            //            dynamicDisplay.config.$showToolbox
-            //                .on('click', this.toggleTools.bind(this));
-            //            dynamicDisplay.config.$showToolbox
-            //                .on('click', this.saveState);
-
             dynamicDisplay.config.$hideToolbox
                 .on('click', this.toggleTools.bind(this))
                 .on('click', this.saveState);
@@ -4402,7 +4376,7 @@
                 .on('click', this.toggleTools.bind(this))
                 .on('click', this.saveState);
 
-            dynamicDisplay.config.$displayArea
+            dynamicDisplay.config.$changeLog
                 .on('click', main.showChangeLog);
         },
         'displayPanel': function () {
@@ -4570,11 +4544,15 @@
         'jQueryUIedits': function () {
             qaToolbox.config.$legendContainer.draggable();
 
+            this.checkHideChangeLog();
             // should only show the changelog when the user first uses program
             // should also show when the user updates.
-            if (shared.getValue('showChangeLog')) {
-                this.showChangeLog;
+            if (!shared.getValue('hideChangeLog')) {
+                this.showChangeLog();
             }
+        },
+        'checkHideChangeLog': function () {
+            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
         },
         'showChangeLog': function () {
             qaToolbox.config.$changeLogDisplay.dialog({
@@ -4584,7 +4562,7 @@
                     text: "Close",
                     icon: "ui-icon-heart",
                     click: function () {
-                        shared.saveValue('showChangeLog', false);
+                        shared.saveValue('hideChangeLog', true);
                         $(this).dialog("close");
                     },
                 }],
