@@ -4,6 +4,47 @@ default styles
 ----------------------------------------
 */
 
+#displayArea {
+    cursor: pointer;
+}
+
+.ui-dialog-titlebar .ui-dialog-titlebar-close {
+    display: none;
+}
+
+#changeLog {
+    font-size: 13px;
+}
+
+#changeLog h1 {
+    display: none;
+}
+
+#changeLog h2 {
+    font-size: 15px;
+    background: grey;
+    padding: 15px;
+    margin: 15px 0;
+    color: white;
+}
+
+#changeLog h3 {
+    font-size: 15px;
+    color: rgb(85, 107, 47);
+    padding: 10px 0 10px 15px;
+    margin: 15px 0;
+    background: rgb(244, 244, 244);
+}
+
+#changeLog ul {
+    padding: 0 0 0 30px;
+}
+
+#changeLog li {
+    margin: 0;
+    padding: 5px 0 0 0;
+}
+
 .ui-draggable {
     position: fixed !important;
 }
@@ -271,7 +312,7 @@ Page Information Styles
     background: rgb(180, 180, 180);
 }
 
-.hTagContainer {
+.hTagDisplayContainer {
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.75);
     color: rgb(0, 0, 0);
