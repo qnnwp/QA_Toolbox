@@ -49,19 +49,6 @@
         'openNewTab': function (openThis) {
             GM_openInTab(openThis); // eslint-disable-line new-cap
         },
-        /**
-         * Tampermonkey function.
-         * to get resource files from the meta tag located.
-         * in the Chrome extension.
-         * @param {string} resource The resource name that is defined in the meta code of the Tampermonkey Script.
-         * @return {string}  The url that the files declared in the meta tag.
-         */
-        'getResourceURL': function (resource) {
-            //            return (function () {
-            //                GM_getResourceURL(resource); // eslint-disable-line new-cap});
-            GM_getResourceURL(resource); // eslint-disable-line new-cap
-            //            });
-        },
         'nextGenCheck': function () {
             var nextGenFlag = jQuery.trim(document.firstChild.data);
 
@@ -230,8 +217,6 @@
         },
         // FLAG ALL BUTTONS AS A BUTTON ELEMENT
         'flagButtons': function () {
-            //            var buttons = jQuery('button, input[type="button"]');
-            //                        var buttons = jQuery(':button');
             var buttons = jQuery('body').find(':button');
             var length = buttons.length;
             var a = 0;
@@ -257,7 +242,7 @@
         'createElements': function () {
             qaToolbox.config = {
                 '$legendContainer': jQuery('<div>').attr({
-                    'class': 'legendContainer',
+                    'class': 'legendContainer ',
                 }),
                 '$toolboxContainer': jQuery('<div>').attr({
                     'class': 'toolboxContainer',
@@ -271,22 +256,24 @@
                     'type': 'text/css',
                 }),
                 '$myFont': jQuery('<link>').attr({
-                    'href': shared.getResourceURL('font'),
+                    'id': 'toolFont',
+                    'href': 'https://fonts.googleapis.com/css?family=Montserrat',
                     'rel': 'stylesheet',
                 }),
-                '$jQueryUI': jQuery('<link>').attr({
-                    'href': shared.getResourceURL('jqueryUI'),
+                '$jQueryUIcss': jQuery('<link>').attr({
+                    'id': 'jqueryUI',
+                    'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                     'rel': 'stylesheet',
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    'href': shared.getResourceURL('toolStyles'),
+                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/v' + GM_info.script.version + '/assets/css/toolbox.css',
                     'rel': 'stylesheet',
                     'type': 'text/css',
                 }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
-                    'hred': shared.getResourceURL('animate'),
+                    'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
             };
@@ -300,6 +287,7 @@
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
+                .append(qaToolbox.config.$jQueryUIcss)
                 .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$animate);
             this.body
@@ -4456,6 +4444,7 @@
             this.urlModPanel();
             this.dynamicPanel();
             this.stylePanels();
+            this.makeDraggable();
         },
         'cacheDOM': function () {
             this.isNextGenPlatform = shared.nextGenCheck();
@@ -4555,10 +4544,14 @@
             // allows override of the !important tags used by CDK bundles.css
             $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
         },
+        'makeDraggable': function () {
+            qaToolbox.config.$legendContainer.draggable();
+        },
     };
 
     // ********************************************************************************
     // **************************************** initialize toolbox ****************************************
     // ********************************************************************************
     main.init();
+
 })();
