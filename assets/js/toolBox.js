@@ -277,7 +277,7 @@
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/v' + GM_info.script.version + '/assets/css/toolbox.css',
+                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
                     'rel': 'stylesheet',
                     'type': 'text/css',
                 }),
