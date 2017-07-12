@@ -25,6 +25,7 @@
     * Fixed issue where some of the h tags would not get displayed in the pop up.
   * SEO Simplify
     * Updated code to remove ALL html elements from the user provided input except links.
+  * The legend(s) can now be dragged across the screen to prevent it from blocking any content that needs to be QA'd.
 
 <br><br>
 
