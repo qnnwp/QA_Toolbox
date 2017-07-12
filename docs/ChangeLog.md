@@ -5,6 +5,8 @@
 * Did major re-work to the tool to support Next Gen support.
   * ***The tool instructions will be updated at a later date***
 * ***The legend(s) can now be dragged*** across the screen to prevent it from blocking any content that needs to be QA'd.
+* **Included a change log pop-up**
+  * ***Scroll all the way to the bottom to close the pop up.***
 
 ### Spell Checker
   * Updated tool to work directly on the page vs. use the third party site.
