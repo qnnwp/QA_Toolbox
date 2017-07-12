@@ -9,10 +9,10 @@
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
 // @require https://raw.githubusercontent.com/cirept/QA_Toolbox/v3.3.0/toolBox.js
-// @resource fontAwe https://use.fontawesome.com/3953f47d82.js
+// @required https://use.fontawesome.com/3953f47d82.js
+// @required https://raw.githubusercontent.com/cirept/Typo.js/master/typo/typo.js
 // @resource font https://fonts.googleapis.com/css?family=Montserrat
 // @resource jqueryUI https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css
-// @resource typo https://raw.githubusercontent.com/cirept/Typo.js/master/typo/typo.js
 // @resource toolStyles https://raw.githubusercontent.com/cirept/QA_Toolbox/separateCss/assets/css/toolbox.css
 // @resource animate https://raw.githubusercontent.com/cirept/animate.css/master/animate.css
 // @resource localToolStyles file:///C:\Users\tanakae\Documents\GitHub\QA_Toolbox\assets\css\toolbox.css
@@ -30,3 +30,5 @@
 
 // link to changelog
 // https://github.com/cirept/NextGen/blob/master/guides/CHANGELOG.md
+//// @resource fontAwe https://use.fontawesome.com/3953f47d82.js
+//// @resource typo https://raw.githubusercontent.com/cirept/Typo.js/master/typo/typo.js
