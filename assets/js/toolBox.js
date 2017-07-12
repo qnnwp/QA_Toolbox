@@ -4,70 +4,64 @@
     'use strict';
 
     // ********************************************************************************
-    // **************************************** GLOBAL FUNCTIONS ****************************************
-    // ********************************************************************************
-    /**
-     * Tampermonkey function.
-     * Save value to local storage for program to use.
-     * @param {string} variable The variable that will be looked up.
-     * @param {bool} val The value that the variable will be set too.
-     */
-    function saveValue(variable, val) {
-        GM_setValue(variable, val); // eslint-disable-line new-cap
-    }
-
-    /**
-     * Tampermonkey function.
-     * Copy text to the clipboard.
-     * @param {string} variable The variable that will be copied to the clipboard.
-     */
-    function clipboardCopy(variable) {
-        GM_setClipboard(variable, 'text'); // eslint-disable-line new-cap
-    }
-
-    /**
-     * Tampermonkey function.
-     * Get value to local storage for program to use.
-     * @param {string} variable The variable that will be looked up.
-     * @return {bool} The saved value of current variable.
-     */
-    function getValue(variable) {
-        return GM_getValue(variable, false); // eslint-disable-line new-cap
-    }
-
-    /**
-     * Tampermonkey function.
-     * to retrieve all the program variables from local storage.
-     * @return {object} The list of saved values.
-     */
-    function programVariables() {
-        return GM_listValues(); // eslint-disable-line new-cap
-    }
-
-    /**
-     * Tampermonkey function.
-     * to open URL in a new tab.
-     * @param {string} openThis A URL that will be opened in a new window.
-     */
-    function openNewTab(openThis) {
-        GM_openInTab(openThis); // eslint-disable-line new-cap
-    }
-
-    /**
-     * Tampermonkey function.
-     * to get resource files from the meta tag located.
-     * in the Chrome extension.
-     * @param {string} resource The resource name that is defined in the meta code of the Tampermonkey Script.
-     * @return {string}  The url that the files declared in the meta tag.
-     */
-    function getResourceURL(resource) {
-        return GM_getResourceURL(resource); // eslint-disable-line new-cap
-    }
-
-    // ********************************************************************************
     // **************************************** Toolbox Shared Functions ****************************************
     // ********************************************************************************
     var shared = {
+        /**
+         * Tampermonkey function.
+         * Save value to local storage for program to use.
+         * @param {string} variable The variable that will be looked up.
+         * @param {bool} val The value that the variable will be set too.
+         */
+        'saveValue': function (variable, val) {
+            GM_setValue(variable, val); // eslint-disable-line new-cap
+        },
+        /**
+         * Tampermonkey function.
+         * Copy text to the clipboard.
+         * @param {string} variable The variable that will be copied to the clipboard.
+         */
+        'clipboardCopy': function (variable) {
+            GM_setClipboard(variable, 'text'); // eslint-disable-line new-cap
+        },
+        /**
+         * Tampermonkey function.
+         * Get value to local storage for program to use.
+         * @param {string} variable The variable that will be looked up.
+         * @return {bool} The saved value of current variable.
+         */
+        'getValue': function (variable) {
+            return GM_getValue(variable, false); // eslint-disable-line new-cap
+        },
+        /**
+         * Tampermonkey function.
+         * to retrieve all the program variables from local storage.
+         * @return {object} The list of saved values.
+         */
+        'programVariables': function () {
+            return GM_listValues(); // eslint-disable-line new-cap
+        },
+        /**
+         * Tampermonkey function.
+         * to open URL in a new tab.
+         * @param {string} openThis A URL that will be opened in a new window.
+         */
+        'openNewTab': function (openThis) {
+            GM_openInTab(openThis); // eslint-disable-line new-cap
+        },
+        /**
+         * Tampermonkey function.
+         * to get resource files from the meta tag located.
+         * in the Chrome extension.
+         * @param {string} resource The resource name that is defined in the meta code of the Tampermonkey Script.
+         * @return {string}  The url that the files declared in the meta tag.
+         */
+        'getResourceURL': function (resource) {
+            //            return (function () {
+            //                GM_getResourceURL(resource); // eslint-disable-line new-cap});
+            GM_getResourceURL(resource); // eslint-disable-line new-cap
+            //            });
+        },
         'nextGenCheck': function () {
             var nextGenFlag = jQuery.trim(document.firstChild.data);
 
@@ -84,9 +78,9 @@
         'saveState': function (e) {
             // get current state
             var vName = jQuery(e.target).siblings('.toolsPanel').attr('id');
-            var currState = getValue(vName);
+            var currState = this.getValue(vName);
             // sets usingM4 value
-            saveValue(vName, !currState);
+            this.saveValue(vName, !currState);
         },
         'setState': function ($panel, state) {
             if (state === 'show') {
@@ -96,7 +90,7 @@
             }
         },
         'programData': function () {
-            var allVariables = programVariables(); // global function
+            var allVariables = this.programVariables(); // global function
             var length = allVariables.length;
             var a = 0;
             var varList = {};
@@ -105,7 +99,7 @@
             // add variables to list
             for (a; a < length; a += 1) {
                 key = allVariables[a];
-                value = getValue(key);
+                value = this.getValue(key);
                 varList[key] = value;
             }
             return varList;
@@ -116,9 +110,9 @@
             // loop through Legend Content list
             for (key in $legendContent) {
                 if ($legendContent.hasOwnProperty(key)) {
-//                    if (key === 'majorPage' && this.nextGenCheck()) {
-//                        continue;
-//                    }
+                    //                    if (key === 'majorPage' && this.nextGenCheck()) {
+                    //                        continue;
+                    //                    }
 
                     if (key === 'unsupportedPageLink' && !this.nextGenCheck()) {
                         continue;
@@ -135,7 +129,7 @@
             }
         },
         'displayPanel': function ($toolPanel) {
-            var variables = shared.programData();
+            var variables = this.programData();
             var panelId = $toolPanel.attr('id');
             var state = '';
             var key = '';
@@ -277,28 +271,22 @@
                     'type': 'text/css',
                 }),
                 '$myFont': jQuery('<link>').attr({
-                    'href': getResourceURL('font'),
+                    'href': shared.getResourceURL('font'),
                     'rel': 'stylesheet',
                 }),
                 '$jQueryUI': jQuery('<link>').attr({
-                    'href': getResourceURL('jqueryUI'),
+                    'href': shared.getResourceURL('jqueryUI'),
                     'rel': 'stylesheet',
-                }),
-                '$fontAwe': jQuery('<script>').attr({
-                    'src': getResourceURL('fontAwe'),
-                }),
-                '$typo': jQuery('<script>').attr({
-                    'src': getResourceURL('typo'),
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    'href': getResourceURL('toolStyles'),
+                    'href': shared.getResourceURL('toolStyles'),
                     'rel': 'stylesheet',
                     'type': 'text/css',
                 }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
-                    'hred': getResourceURL('animate'),
+                    'hred': shared.getResourceURL('animate'),
                     'rel': 'stylesheet',
                 }),
             };
@@ -312,8 +300,6 @@
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
-                .append(qaToolbox.config.$fontAwe)
-                .append(qaToolbox.config.$typo)
                 .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$animate);
             this.body
@@ -722,7 +708,7 @@
         'copyToClipboard': function (event) {
             // copy page info
             var copyThisText = event.currentTarget.innerHTML;
-            clipboardCopy(copyThisText);
+            shared.clipboardCopy(copyThisText);
         },
     };
 
@@ -1956,13 +1942,13 @@
         'storeData': function () {
             // save user input
             var userEmail = jQuery('#WPTemail').val();
-            saveValue('email', userEmail);
+            shared.saveValue('email', userEmail);
         },
         'sendPage': function () {
             var browser = jQuery('#WPTbSelect option:selected').val();
             var selectedKey = jQuery('#WPTkeySelect option:selected').val();
             var browserName = jQuery('#WPTbSelect option:selected').text();
-            var email = getValue('email');
+            var email = shared.getValue('email');
             var params = {
                 'k': selectedKey,
                 'runs': '3',
@@ -2006,8 +1992,8 @@
                         'Browser : ' + browserName + '\n' +
                         'Send Results To : ' + email + '\n' +
                         '----------------------------------------') === true) {
-                    openNewTab(desktopURL);
-                    openNewTab(mobileURL);
+                    shared.openNewTab(desktopURL);
+                    shared.openNewTab(mobileURL);
                 }
             }
         },
@@ -2279,7 +2265,7 @@
         'viewMobile': function () {
             var auto = '?device=mobile&nextGen=false';
             var openThis = this.siteURL + this.pageName + auto;
-            openNewTab(openThis);
+            shared.openNewTab(openThis);
         },
     };
 
@@ -2687,7 +2673,7 @@
                     .fadeIn(300)
                     .fadeOut(300)
                     .fadeIn(300);
-                clipboardCopy(widgetID);
+                shared.clipboardCopy(widgetID);
             };
         },
     };
@@ -3347,7 +3333,7 @@
             this.$toolsPanel = jQuery(callingPanel);
         },
         'setToggle': function () {
-            if (getValue('isNextGen')) {
+            if (shared.getValue('isNextGen')) {
                 // if 'nextGen' value is true
                 // set toggle and apply parameters
                 this.toggleOn();
@@ -3386,8 +3372,8 @@
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
-            var toggle = getValue('isNextGen');
-            saveValue('isNextGen', !toggle);
+            var toggle = shared.getValue('isNextGen');
+            shared.saveValue('isNextGen', !toggle);
 
             // set toggle
             this.setToggle();
@@ -3411,7 +3397,7 @@
         // other functions
         // ----------------------------------------
         'isToggleOn': function () {
-            return getValue('isNextGen');
+            return shared.getValue('isNextGen');
         },
     };
 
@@ -3453,7 +3439,7 @@
                 .append(m4Check.config.$m4Checkbox);
         },
         'setToggle': function () {
-            if (getValue('usingM4')) { // if 'usingM4 is turned on'
+            if (shared.getValue('usingM4')) { // if 'usingM4 is turned on'
                 // set toggle and apply parameters
                 this.toggleOn();
             } else { // if 'site is not live'
@@ -3494,8 +3480,8 @@
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
-            var toggle = getValue('usingM4');
-            saveValue('usingM4', !toggle);
+            var toggle = shared.getValue('usingM4');
+            shared.saveValue('usingM4', !toggle);
 
             // set toggle
             this.setToggle();
@@ -3519,7 +3505,7 @@
         // other functions
         // ----------------------------------------
         'isToggleOn': function () {
-            return getValue('usingM4');
+            return shared.getValue('usingM4');
         },
     };
 
@@ -3561,7 +3547,7 @@
                 .append(autofillToggle.config.$autofillTogIcon);
         },
         'setToggle': function () {
-            if (getValue('applyAutofill')) { // if 'applyAutofill is turned on'
+            if (shared.getValue('applyAutofill')) { // if 'applyAutofill is turned on'
                 // set toggle and apply parameters
                 this.toggleOn();
             } else { // if 'site is not live'
@@ -3602,8 +3588,8 @@
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
-            var toggle = getValue('applyAutofill');
-            saveValue('applyAutofill', !toggle);
+            var toggle = shared.getValue('applyAutofill');
+            shared.saveValue('applyAutofill', !toggle);
 
             // set toggle
             this.setToggle();
@@ -3626,7 +3612,7 @@
         // other functions
         // ----------------------------------------
         'isToggleOn': function () {
-            return getValue('applyAutofill');
+            return shared.getValue('applyAutofill');
         },
     };
 
@@ -3706,7 +3692,7 @@
         },
         'setToggle': function () {
             // get value of custom variable and set toggles accordingly
-            var currentToggle = getValue('autoApplyParameters');
+            var currentToggle = shared.getValue('autoApplyParameters');
 
             if (currentToggle) {
                 this.toggleOn();
@@ -3788,8 +3774,8 @@
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
-            var toggle = getValue('autoApplyParameters');
-            saveValue('autoApplyParameters', !toggle);
+            var toggle = shared.getValue('autoApplyParameters');
+            shared.saveValue('autoApplyParameters', !toggle);
 
             // set toggle
             this.setToggle();
@@ -4136,7 +4122,7 @@
         },
         'setToggle': function () {
             // get value of custom variable and set toggles accordingly
-            if (getValue('useRefreshButton')) {
+            if (shared.getValue('useRefreshButton')) {
                 this.toggleOn();
                 refreshPage.config.$refreshButtContainer.show();
             } else {
@@ -4152,8 +4138,8 @@
         },
         'flipTheSwitch': function () {
             // set saved variable to opposite of current value
-            var toggle = getValue('useRefreshButton');
-            saveValue('useRefreshButton', !toggle);
+            var toggle = shared.getValue('useRefreshButton');
+            shared.saveValue('useRefreshButton', !toggle);
 
             // set toggle
             this.setToggle();
@@ -4213,7 +4199,7 @@
         'setToggle': function () {
             // get value of custom variable and set toggles accordingly
             var varName = previewBarToggle.config.varName;
-            var storedValue = getValue(varName);
+            var storedValue = shared.getValue(varName);
 
             if (storedValue) {
                 this.toggleOn();
@@ -4262,7 +4248,7 @@
         },
         'togglePreviewToolbar': function () {
             var varName = previewBarToggle.config.varName;
-            var hidePreviewToolbar = getValue(varName);
+            var hidePreviewToolbar = shared.getValue(varName);
 
             // if 'hidePreviewToolbar is toggled ON'
             if (hidePreviewToolbar) {
@@ -4285,9 +4271,9 @@
         },
         'flipTheSwitch': function () {
             var varName = previewBarToggle.config.varName;
-            var storedValue = getValue(varName);
+            var storedValue = shared.getValue(varName);
             // set saved variable to opposite of current value
-            saveValue(varName, !storedValue);
+            shared.saveValue(varName, !storedValue);
             // set toggle
             this.setToggle();
         },
@@ -4442,10 +4428,10 @@
         'saveState': function () {
             // get current state
             var vName = 'showToolbox';
-            var currState = getValue(vName, false);
+            var currState = shared.getValue(vName, false);
 
             // sets usingM4 value
-            saveValue(vName, !currState);
+            shared.saveValue(vName, !currState);
         },
         // ----------------------------------------
         // tier 3
