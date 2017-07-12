@@ -4,18 +4,27 @@
   * Spell Checker
     * Updated tool to work directly on the page vs. use the third party site.
     * **Directions** : The tool will highlight all miss-spelled words on the page in pink.
-    * **Information** : The dictionary is customizable, so we can add the custom words that we know are spelt correctly to it.  Please visit [Github Issue Submission](https://github.com/cirept/QA_Toolbox/issues) to submit your words.
-    * **NOTE** : **The tool will not take CSS into consideration when checking the text on the page.**  For example: the hours widget on Next Gen will show up as incorrectly spelt because the widget relies on CSS to make the text all uppercase.
+    * **Information** : The dictionary is customizable, so we can add the custom words that we know are spelled correctly to it.  Please visit [Github Issue Submission](https://github.com/cirept/QA_Toolbox/issues) to submit your words.
+    * **Words already added to dictionary**
+        * All GMC vehicles
+        * All Buick vehicles
+        * All INFINITI vehicles
+        * All Chevrolet vehicles
+        * All Nissan vehicles
+        * All Hyundai vehicles
+        * All Volkswagen vehicles
+            * ***All OEMs listed also have their brand name added to the dictionary.***
+    * **NOTE** : **The tool will not take CSS into consideration when checking the text on the page.**  For example: the hours widget on Next Gen will show up as incorrectly spelled because the widget relies on CSS to make the text all uppercase.  **Capitalization is taken into consideration when the tool checks text on the page.**
   * Link Checker
-    * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
+    * Tool will now automatically scroll down the page in order to properly load all the content before running the tool.
   * Image Alt Checker
-    * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
+    * Tool will now automatically scroll down the page in order to properly load all the content before running the tool.
   * 404 Link Checker
-    * Tool will now automatically scroll down the page in order to properly load all the content, before running the tool.
+    * Tool will now automatically scroll down the page in order to properly load all the content before running the tool.
   * h Tag display
     * Fixed issue where some of the h tags would not get displayed in the pop up.
   * SEO Simplify
-    * Updated code to remove ALL html elements from the user provided input.
+    * Updated code to remove ALL html elements from the user provided input except links.
 
 <br><br>
 
