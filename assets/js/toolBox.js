@@ -869,12 +869,16 @@
         // tier 2
         // ----------------------------------------
         'highlightImages': function () {
-            // cache data from page
-            this.cacheDOM();
             // add tool styles
-            var iaLength = this.imageArrayLength;
+            var iaLength;
             var a = 0;
             var $this;
+
+            // cache data from page
+            this.cacheDOM();
+
+            iaLength = this.imageArrayLength;
+
             // loop through allImages and check for alt text
             for (a; a < iaLength; a += 1) {
                 $this = jQuery(this.$allImages[a]);
