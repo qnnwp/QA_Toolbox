@@ -234,6 +234,7 @@
         'init': function () {
             this.createElements();
             this.cacheDOM();
+            this.buildElements();
             this.attachTools();
         },
         // ----------------------------------------
@@ -242,11 +243,20 @@
         'createElements': function () {
             qaToolbox.config = {
                 '$legendContainer': jQuery('<div>').attr({
-                    'class': 'legendContainer ',
+                    'class': 'legendContainer',
                 }),
                 '$toolboxContainer': jQuery('<div>').attr({
                     'class': 'toolboxContainer',
                     'id': 'showToolbox',
+                }),
+                '$changeLogUpdateContainer': jQuery('<div>').attr({
+                    'id': 'overlayContainer',
+                }),
+                '$changeLogDisplayContainer': jQuery('<div>').attr({
+                    //                    'id': 'overlayContainer',
+                }),
+                '$changeLogDisplay': jQuery('<div>').attr({
+                    'id': 'changeLog',
                 }),
                 // ----------------------------------------
                 // Toolbar Resources
@@ -283,6 +293,15 @@
             this.body = jQuery('body');
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
+        'buildElements': function () {
+            qaToolbox.config.$changeLogDisplayContainer
+                .append(qaToolbox.config.$changeLogDisplay);
+
+            qaToolbox.config.$changeLogUpdateContainer
+                .append(qaToolbox.config.$changeLogDisplayContainer);
+
+            qaToolbox.config.$changeLogDisplay.load('https://cirept.github.io/QA_Toolbox/ChangeLog section');
+        },
         'attachTools': function () {
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
@@ -293,6 +312,11 @@
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
+
+            //            console.log('am I showing the change log? : ' +shared.getValue('showChangeLog'));
+            //            if (shared.getValue('showChangeLog')) {
+            //                this.body.before(qaToolbox.config.$changeLogUpdateContainer)
+            //            }
         },
     };
 
@@ -510,7 +534,7 @@
                     'class': 'hTagDisplay',
                 }),
                 '$hTagDisplayContainer': jQuery('<div>').attr({
-                    'class': 'hTagContainer',
+                    'class': 'hTagDisplayContainer',
                 }),
             };
         },
@@ -4294,6 +4318,7 @@
                 // display area
                 '$displayArea': jQuery('<div>').attr({
                     'id': 'displayArea',
+                    'title': 'Show Change Log',
                 }),
                 // toolbox version
                 '$version': jQuery('<div>')
@@ -4381,6 +4406,9 @@
             dynamicDisplay.config.$showToolbox
                 .on('click', this.toggleTools.bind(this))
                 .on('click', this.saveState);
+
+            dynamicDisplay.config.$displayArea
+                .on('click', main.showChangeLog);
         },
         'displayPanel': function () {
             // loop through variable list to find the panel title
@@ -4444,7 +4472,7 @@
             this.urlModPanel();
             this.dynamicPanel();
             this.stylePanels();
-            this.makeDraggable();
+            this.jQueryUIedits();
         },
         'cacheDOM': function () {
             this.isNextGenPlatform = shared.nextGenCheck();
@@ -4544,8 +4572,28 @@
             // allows override of the !important tags used by CDK bundles.css
             $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
         },
-        'makeDraggable': function () {
+        'jQueryUIedits': function () {
             qaToolbox.config.$legendContainer.draggable();
+
+            // should only show the changelog when the user first uses program
+            // should also show when the user updates.
+            if (shared.getValue('showChangeLog')) {
+                this.showChangeLog;
+            }
+        },
+        'showChangeLog': function () {
+            qaToolbox.config.$changeLogDisplay.dialog({
+                'width': 1000,
+                'title': 'Change Log',
+                buttons: [{
+                    text: "Close",
+                    icon: "ui-icon-heart",
+                    click: function () {
+                        shared.saveValue('showChangeLog', false);
+                        $(this).dialog("close");
+                    },
+                }],
+            });
         },
     };
 
@@ -4555,3 +4603,5 @@
     main.init();
 
 })();
+
+// extra line
