@@ -4,10 +4,6 @@ default styles
 ----------------------------------------
 */
 
-#displayArea {
-    cursor: pointer;
-}
-
 .ui-dialog-titlebar .ui-dialog-titlebar-close {
     display: none;
 }
