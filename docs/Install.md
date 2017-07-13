@@ -43,7 +43,7 @@ Once the Tampermonkey extension has been installed, please continue to the next 
 ### 1. Open the link below in a new tab.  Copy all of the code.
 
 Link to Latest Toolbar Code:<br>
-[Latest Code](https://raw.githubusercontent.com/cirept/NextGen/master/nextGen_meta.js)<br>
+[Latest Code](/assets/js/meta.js)<br>
 *open in a new tab*
 
 <br>
