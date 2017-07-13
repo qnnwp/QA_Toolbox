@@ -50,33 +50,33 @@ Link to Latest Toolbar Code:<br>
 
 ### 2. Click the add-on icon in your browser
 
-![Click Addon Icon](../images/clickIcon.png)
+![Click Addon Icon](images/clickIcon.png)
 
 <br>
 
 ### 3. Click on 'Dashboard' menu item<br>
 This will open a new tab with the extension dashboard displayed ***(seen in step 3)***
 
-![Click Dashboard](../images/clickDashboard.png)
+![Click Dashboard](images/clickDashboard.png)
 
 <br>
 
 ### 4. Click the icon to add a new userscript<br>
 The icon is located next to "Install userscripts" tab.
 
-![Click New UserScript Icon](../images/clickNewScript.png)
+![Click New UserScript Icon](images/clickNewScript.png)
 
 <br>
 
 ### 5. Select all text in textarea and paste the code you copied in the 1st step.
 
-![Paste JS Code](../images/pasteCode.png)
+![Paste JS Code](images/pasteCode.png)
 
 <br>
 
 ### 6. Click the floppy disk to save your changes
 
-![Click Floppy Disk](../images/clickSave.png)
+![Click Floppy Disk](images/clickSave.png)
 
 <br>
 
