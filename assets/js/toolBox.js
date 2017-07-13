@@ -254,9 +254,9 @@
                 '$changeLogUpdateContainer': jQuery('<div>').attr({
                     'id': 'overlayContainer',
                 }),
-                '$changeLogDisplayContainer': jQuery('<div>').attr({
-                    //                    'id': 'overlayContainer',
-                }),
+                //                '$changeLogDisplayContainer': jQuery('<div>').attr({
+                //                    //                    'id': 'overlayContainer',
+                //                }),
                 '$changeLogDisplay': jQuery('<div>').attr({
                     'id': 'changeLog',
                 }),
@@ -277,12 +277,12 @@
                     'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                     'rel': 'stylesheet',
                 }),
-//                '$toolStyles': jQuery('<link>').attr({
-//                    'id': 'toolStyles',
-//                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-//                    'rel': 'stylesheet',
-//                    'type': 'text/css',
-//                }),
+                //                '$toolStyles': jQuery('<link>').attr({
+                //                    'id': 'toolStyles',
+                //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
+                //                    'rel': 'stylesheet',
+                //                    'type': 'text/css',
+                //                }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
                     'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
@@ -296,11 +296,13 @@
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
         'buildElements': function () {
-            qaToolbox.config.$changeLogDisplayContainer
-                .append(qaToolbox.config.$changeLogDisplay);
+            //            qaToolbox.config.$changeLogDisplayContainer
+            //                .append(qaToolbox.config.$changeLogDisplay);
 
             qaToolbox.config.$changeLogUpdateContainer
-                .append(qaToolbox.config.$changeLogDisplayContainer);
+                //                .append(qaToolbox.config.$changeLogDisplayContainer);
+                //                .append(qaToolbox.config.$changeLogDisplayContainer);
+                .append(qaToolbox.config.$changeLogDisplay);
 
             qaToolbox.config.$changeLogDisplay.load('https://cirept.github.io/QA_Toolbox/ChangeLog section');
         },
@@ -309,7 +311,7 @@
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
                 .append(qaToolbox.config.$jQueryUIcss)
-//                .append(qaToolbox.config.$toolStyles)
+                //                .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$animate);
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
@@ -4572,6 +4574,11 @@
                     },
                 }],
             });
+
+            // set max height for TETRA sites
+            if (!shared.nextGenCheck()) {
+                qaToolbox.config.$changeLogDisplay.dialog("option", "maxHeight", 800);
+            }
         },
     };
 
@@ -4582,4 +4589,5 @@
 
 })();
 
+// extra line
 // extra line
