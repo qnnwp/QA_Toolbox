@@ -45,6 +45,10 @@ default styles
     padding: 5px 0 0 0;
 }
 
+.ui-dialog-buttonset .ui-button {
+    color: black !important;
+}
+
 .ui-draggable {
     position: fixed !important;
 }
