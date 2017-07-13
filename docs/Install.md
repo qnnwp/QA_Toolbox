@@ -96,4 +96,4 @@ Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 
 # Tool descriptions
 
-click [here](README)
+click [here](index)
