@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/release/cirept/NextGen.svg)](https://github.com/cirept/NextGen/releases)
+[![GitHub release](https://img.shields.io/github/release/cirept/QA_Toolbox.svg)](https://github.com/cirept/QA_Toolbox/releases)
 
 # Tool Descriptions<br>
 
