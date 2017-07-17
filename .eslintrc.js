@@ -47,7 +47,11 @@ module.exports = {
         'no-empty': 2, // eslint:recommended
         'no-ex-assign': 2, // eslint:recommended
         'no-extra-boolean-cast': 2, // eslint:recommended
-        'no-extra-parens': 0,
+        'no-extra-parens': [2, 'all', {
+            'conditionalAssign': false,
+            'returnAssign': false,
+            'nestedBinaryExpressions': false,
+        }],
         'no-extra-semi': 2, // eslint:recommended
         'no-func-assign': 2, // eslint:recommended
         'no-inner-declarations': 2, // eslint:recommended
@@ -225,11 +229,11 @@ module.exports = {
         'max-len': [2, {
             'code': 100,
             'tabWidth': 4,
-            "ignoreComments": true,
-            "ignoreTrailingComments": true,
-            "ignoreTemplateLiterals": true,
-            "ignoreRegExpLiterals": true,
-            "ignoreUrls": true
+            'ignoreComments': true,
+            'ignoreTrailingComments': true,
+            'ignoreTemplateLiterals': true,
+            'ignoreRegExpLiterals': true,
+            'ignoreUrls': true,
     }],
         'max-lines': 0,
         'max-nested-callbacks': 0,
@@ -298,7 +302,7 @@ module.exports = {
         'sort-keys': 0,
         'sort-vars': 0,
         'space-before-blocks': 2,
-        'space-before-function-paren': ["error", {
+        'space-before-function-paren': ['error', {
             'anonymous': 'always',
             'named': 'never',
             'asyncArrow': 'always',
