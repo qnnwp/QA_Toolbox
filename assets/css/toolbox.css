@@ -533,11 +533,19 @@ body .card .content .text .copy .siteLink.linkChecked.noTitle,
 body .card .content .text .link .siteLink.linkChecked,
 body .card .content .text .link .siteLink.linkChecked.hasTitle,
 body .card .content .text .link .siteLink.linkChecked.noTitle,
-body .card .content .media .imgOverlay.linkChecked {
+body .card .content .media .imgOverlay.linkChecked,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.linkChecked,
+body header .menu>nav>ul li.showNav.customAdd:hover ul.showNav.nextgenShowNav>li.showNav.customAdd>.linkChecked {
     background: rgb(160, 255, 206);
     background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
     border: none;
-    color: #909090;
+    color: #000000;
+    /*        background: rgb(249, 255, 209);*/
+    /*    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);*/
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    /*    color: #999999;*/
 }
 
 
@@ -723,6 +731,7 @@ widget outline
 */
 
 .error,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.error,
 .header.card .menu nav ul li:hover>ul li a.error,
 body .card .content .text .copy .siteLink.error,
 body .card .content .text .link .siteLink.error,
@@ -731,10 +740,14 @@ body .page header #pmenu .error {
     background: rgb(240, 0, 0);
     background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75));
     border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #ffffff;
 }
 
 .attention,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.attention,
 .header.card .menu nav ul li:hover>ul li a.attention,
 body .card .content .text .copy .siteLink.attention,
 body .card .content .text .link .siteLink.attention,
@@ -747,6 +760,7 @@ body .page header #pmenu .attention {
 }
 
 .jumpLink,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.jumpLink,
 .header.card .menu nav ul li:hover>ul li a.jumpLink,
 body .card .content .text .copy .siteLink.jumpLink,
 body .card .content .text .link .siteLink.jumpLink,
@@ -755,10 +769,14 @@ body .page header #pmenu .jumpLink {
     background: #FFAFBD;
     background: linear-gradient(to left, #FFAFBD, #ffc3a0);
     border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #000000;
 }
 
 .mobilePhoneLink,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.mobilePhoneLink,
 .header.card .cta a[href^="tel:"].mobilePhoneLink span,
 .header.card .menu nav ul li:hover>ul li a.mobilePhoneLink,
 body .card .content .text .copy .siteLink.mobilePhoneLink,
@@ -767,10 +785,14 @@ body .card .content .media .imgOverlay.mobilePhoneLink,
 body .page header #pmenu .mobilePhoneLink {
     background: #005588;
     border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #ffffff;
 }
 
 .success,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.success,
 .header.card .menu nav ul li:hover>ul li a.success,
 body .card .content .text .copy .siteLink.success,
 body .card .content .text .link .siteLink.success,
@@ -779,10 +801,14 @@ body .page header #pmenu .success {
     background: rgb(86, 171, 47);
     background: linear-gradient(to right, rgba(86, 171, 47, .75), rgba(168, 224, 99, .75));
     border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #000000;
 }
 
 .otherDomain,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.otherDomain,
 .header.card .menu nav ul li:hover>ul li a.otherDomain,
 body .card .content .text .copy .siteLink.otherDomain,
 body .card .content .text .link .siteLink.otherDomain,
@@ -791,6 +817,9 @@ body .page header #pmenu .otherDomain {
     background: #92FE9D;
     background: linear-gradient(to left, rgba(0, 201, 255, .75), rgba(146, 254, 157, .75));
     border: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
     color: #000000;
 }
 
@@ -859,6 +888,8 @@ shared styles
 ----------------------------------------
 */
 
+
+/*
 .linkChecked {
     background: rgb(249, 255, 209);
     background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);
@@ -867,6 +898,7 @@ shared styles
     box-shadow: none;
     color: #999999;
 }
+*/
 
 .removeDiv {
     background: #2a0845;
