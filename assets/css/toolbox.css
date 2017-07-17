@@ -625,21 +625,22 @@ body .page nav #pmenu .showNav {
     display: block !important;
 }
 
-body header .menu>nav>ul .showNav.nextgenShowNav {
+body header .menu>nav>ul .showNav.nextgenShowNav,
+body header .menu>nav>ul .showNav.nextgenShowNav:hover {
     display: inline-block;
     position: absolute;
-    background: rgb(0, 0, 0);
     border: none;
-    color: rgb(255, 255, 255);
     margin: 1rem 0 0 -1rem;
     padding: 0;
     width: 20rem;
 }
 
-body header .menu>nav>ul .showNavAdd.customAdd>a,
-body header .menu>nav>ul .showNavAdd.customAdd>span,
-body header .menu>nav>ul .showNav.nextgenShowNav>.showNav.customAdd>a {
+body header .menu>nav>ul li.showNavAdd.customAdd>span,
+body header .menu>nav>ul li:hover ul.showNav.nextgenShowNav>li.showNav.customAdd>a,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>a,
+body header .menu>nav>ul ul.showNav.nextgenShowNav {
     color: white;
+    background: black;
 }
 
 body header .menu>nav>ul .showNav.nextgenShowNav>.showNav.customAdd {
