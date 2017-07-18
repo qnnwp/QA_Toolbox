@@ -2705,8 +2705,7 @@
         'addCustomStyles': function () {
             var self = this;
             jQuery(this.overlayStyles).each(function (index, value) {
-                self.$toolboxStyles
-                    .append(value);
+                self.$toolboxStyles.append(value);
             });
         },
         'addOverlay': function (array) {
