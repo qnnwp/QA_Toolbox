@@ -2993,11 +2993,11 @@
             }
         },
         'nextgenTestLinks': function () {
-            var $cardDeck;
-            var $currentCard;
+//            var $cardDeck;
+//            var $currentCard;
             var $sections = jQuery('main').find('section');
             var a = 0;
-            var cardClass;
+//            var cardClass;
             var len = $sections.length;
 
             this.testHeaderFooter();
@@ -3005,10 +3005,10 @@
             // TEST BODY LINKS
             // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
             for (a; a < len; a += 1) {
-                $currentCard = jQuery($sections[a]);
-                $cardDeck = null;
-                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : ''; // if currentCard has a class save it, if no class make variable equal ''
-                $cardDeck = $currentCard.find('div.deck');
+//                $currentCard = jQuery($sections[a]);
+//                $cardDeck = null;
+//                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : ''; // if currentCard has a class save it, if no class make variable equal ''
+//                $cardDeck = $currentCard.find('div.deck');
 
                 // detect if the section element is a parent container
                 // check if the section class contains 'branchy'
@@ -3018,7 +3018,8 @@
 
                 // detect if the section element is a container
                 // check if the div.deck contains content
-                this.checkCard($currentCard);
+                this.checkCard(jQuery($sections[a]));
+//                this.checkCard($currentCard);
             }
         },
         'checkCard': function ($currentCard) {
