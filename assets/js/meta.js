@@ -1,14 +1,14 @@
 // ==UserScript==
-// @name QA Toolbox v3.3.1.2-testing
+// @name QA Toolbox v3.3.1.1
 // @namespace www.cobaltgroup.com/
-// @version 3.3.1.2-testing
+// @version 3.3.1.1
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
 // @downloadURL https://rawgit.com/cirept/QA_Toolbox/master/assets/js/meta.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
-// @require https://rawgit.com/cirept/QA_Toolbox/3.3.1.2-testing/assets/js/toolBox.js
+// @require https://rawgit.com/cirept/QA_Toolbox/3.3.1.1/assets/js/toolBox.js
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard
