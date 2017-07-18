@@ -1,4 +1,4 @@
-/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo */
+/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo, GM_getResourceText */
 
 (function () {
     'use strict';
@@ -110,7 +110,8 @@
                     value = $legendContent[key];
                     // build listing element
                     this.$listItem = jQuery('<li>').attr({
-                        'class': 'legendContent ' + key,
+                        'class': key,
+                        //                        'class': 'legendContent ' + key,
                     }).append(value);
                     // attach to legend list
                     $legendListContainer.append(this.$listItem);
@@ -212,8 +213,7 @@
         'centerDiv': function ($currentImage, $divOverlay) {
             var parent = $currentImage.closest('figure');
             $divOverlay.css({
-                'left': ((parent.width() / 2) - ($divOverlay.width() / 2)) +
-                    'px',
+                'left': parent.width() / 2 - $divOverlay.width() / 2 + 'px',
             });
             return $divOverlay;
         },
@@ -263,10 +263,15 @@
                 // ----------------------------------------
                 // Toolbar Resources
                 // ----------------------------------------
-                '$toolboxStyles': jQuery('<style>').attr({
+                '$toolboxStyles': jQuery('<style></style>').attr({
                     'id': 'qa_toolbox',
                     'type': 'text/css',
                 }),
+                '$externalToolboxStyles': jQuery('<style/>').attr({
+                    'id': 'toolboxStyles',
+                    'type': 'text/css',
+                    //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
+                }).html(GM_getResourceText('toolStyles')), // eslint-disable-line new-cap
                 '$myFont': jQuery('<link>').attr({
                     'id': 'toolFont',
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
@@ -287,6 +292,16 @@
                     'id': 'animate',
                     'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
+                }),
+                $fontAw: jQuery('<script></script>').attr({
+                    id: 'fontAwe',
+                    type: 'text/javascript',
+                    src: 'https://use.fontawesome.com/3953f47d82.js',
+                }),
+                $typoJs: jQuery('<script></script>').attr({
+                    id: 'typoJs',
+                    type: 'text/javascript',
+                    src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
                 }),
             };
         },
@@ -309,13 +324,23 @@
         'attachTools': function () {
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
+                .append(qaToolbox.config.$externalToolboxStyles)
                 .append(qaToolbox.config.$myFont)
                 .append(qaToolbox.config.$jQueryUIcss)
+                .append(qaToolbox.config.$typoJs)
                 //                .append(qaToolbox.config.$toolStyles)
+                .append(qaToolbox.config.$fontAw)
                 .append(qaToolbox.config.$animate);
+
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
+
+            //            $('<link/>', {
+            //                rel: 'stylesheet',
+            //                type: 'text/css',
+            //                href: 'https://cdn.rawgit.com/cirept/QA_Toolbox/3.3.1.1/assets/css/toolbox.css'
+            //            }).appendTo('head');
         },
     };
 
@@ -1093,7 +1118,7 @@
             // dynamic loading of cached elements
             // have to load here to compensate for lazy loaded widgets
             this.cacheDOM();
-            var a = 0;
+            //            var a = 0;
             //            var buttons = jQuery('body').find(':button');
             //            var length = buttons.length;
             //            shared.flagButtons;
@@ -1587,9 +1612,9 @@
             $currentLink.addClass(addClass);
         },
         'verifyTarget': function ($currentLink) {
-            if (($currentLink.attr('target') === '_blank') ||
-                ($currentLink.attr('target') === '_new') ||
-                ($currentLink.attr('target') === 'custom')) {
+            if ($currentLink.attr('target') === '_blank' ||
+                $currentLink.attr('target') === '_new' ||
+                $currentLink.attr('target') === 'custom') {
                 return true;
             }
         },
@@ -1600,7 +1625,7 @@
         'checkHref': function (elem) {
             // # will mean that the link is more than likely a button that will be used for JS
             // f_ will only show the content of the page, removing the header and footer of the page
-            if ((elem.indexOf('#') === 0) || (elem.indexOf('f_') === 0)) {
+            if (elem.indexOf('#') === 0 || elem.indexOf('f_') === 0) {
                 return true;
             }
             return false;
@@ -2177,10 +2202,43 @@
             showNavigation.config.$activateButt
                 .on('click', this.toggleFeatures.bind(this))
                 .on('click', this.toggleDisable)
-                .on('click', this.bindClicks.bind(this));
+                .on('click', this.bindClicks.bind(this)) //;
+                .on('click', this.bindLegendElements); // test function
             showNavigation.config.$offButt
                 .on('click', this.toggleFeatures.bind(this))
                 .on('click', this.toggleDisable);
+
+        },
+        'bindLegendElements': function () {
+            var $myMenu = jQuery('nav');
+            var findThis;
+            var flaggedMajorPages;
+            var flaggedCustomPages;
+            var flaggedCheckedLinks;
+
+            showNavigation.config.$legendList.children().each(function (index, value) {
+                findThis = jQuery(value).attr('class');
+                switch (findThis) {
+                    case 'majorPage':
+                        flaggedMajorPages = $myMenu.find('.' + findThis);
+                        jQuery(value).on('click', function () {
+                            flaggedMajorPages.toggleClass('majorPage');
+                        });
+                        break;
+                    case 'customPage':
+                        flaggedCustomPages = $myMenu.find('.' + findThis);
+                        jQuery(value).on('click', function () {
+                            flaggedCustomPages.toggleClass('customPage');
+                        });
+                        break;
+                    case 'linkChecked':
+                        flaggedCheckedLinks = $myMenu.find('.' + findThis);
+                        jQuery(value).on('click', function () {
+                            flaggedCheckedLinks.toggleClass('linkChecked');
+                        });
+                        break;
+                }
+            });
         },
         // ----------------------------------------
         // tier 2 functions
@@ -3151,12 +3209,17 @@
         },
         'ajaxTest': function ($currentLink, isImageLink, $currentCard) {
             var hasImage = 0;
-            var isImageLink = false;
             var wrappedContents = false;
             var $linkOverlay;
             var pageError404;
             var linkURL = checkLinks.addURLParameter($currentLink);
             var isNextGen = shared.nextGenCheck();
+
+            if (isImageLink) {
+                isImageLink = isImageLink;
+            } else {
+                isImageLink = false;
+            }
             // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
             //            var $linkOverlay;
             //            var pageError404;
@@ -4078,7 +4141,7 @@
                     'class': 'refreshPageContainer',
                 }),
                 '$refreshButt': jQuery('<button>').attr({
-                    'class': 'myEDOBut refreshButt draggable ui-widget-content',
+                    'class': 'myEDOBut refreshButt',
                     'title': 'Refresh Page from Server ',
                 }),
                 '$refresh': jQuery('<i class="fa fa-undo fa-flip-horizontal fa-3x">&nbsp;</i>'),
@@ -4397,7 +4460,7 @@
                         state = variables[key] ? 'show' : 'hide';
                         shared.setState(this.$toolBoxContainer, state);
                         // set display of hide/show button to opposite of main toolbox
-                        dynamicDisplay.config.$showToolbox.addClass((variables[key]) ? 'disappear' : 'appear');
+                        dynamicDisplay.config.$showToolbox.addClass(variables[key] ? 'disappear' : 'appear');
                     }
                 }
             }
@@ -4407,7 +4470,7 @@
         // ----------------------------------------
         'checkNextGen': function (nextGenComment) {
             if (nextGenComment) {
-                return (nextGenComment.indexOf('Next Gen') === -1) ? 'Tetra' : 'Next Gen';
+                return nextGenComment.indexOf('Next Gen') === -1 ? 'Tetra' : 'Next Gen';
             }
             return 'Tetra';
         },
@@ -4566,18 +4629,18 @@
                 'width': 1000,
                 'title': 'Change Log',
                 buttons: [{
-                    text: "Close",
-                    icon: "ui-icon-heart",
+                    text: 'Close',
+                    icon: 'ui-icon-heart',
                     click: function () {
                         shared.saveValue('hideChangeLog', true);
-                        $(this).dialog("close");
+                        jQuery(this).dialog('close');
                     },
                 }],
             });
 
             // set max height for TETRA sites
             if (!shared.nextGenCheck()) {
-                qaToolbox.config.$changeLogDisplay.dialog("option", "maxHeight", 800);
+                qaToolbox.config.$changeLogDisplay.dialog('option', 'maxHeight', 800);
             }
         },
     };
