@@ -193,6 +193,8 @@
         /**
          * detect if the section element is a parent container
          * check if the section class contains 'branchy'
+         * @param {string} cardClass is the current record/card class
+         * @return {bool} does the class contain 'branchy'
          */
         'isBranchy': function (cardClass) {
             if (cardClass.indexOf('branchy') > -1) {
@@ -203,6 +205,8 @@
         /**
          * detect if the section element is a container
          * check if the div.deck contains content
+         * @param {object} $cardDeck is the current cards deck element usually only full if it is a container
+         * @return {bool} if the cardDeck does not contain children cards
          */
         'isContainer': function ($cardDeck) {
             if ($cardDeck.is(':not(:empty)')) {
@@ -254,9 +258,6 @@
                 '$changeLogUpdateContainer': jQuery('<div>').attr({
                     'id': 'overlayContainer',
                 }),
-                //                '$changeLogDisplayContainer': jQuery('<div>').attr({
-                //                    //                    'id': 'overlayContainer',
-                //                }),
                 '$changeLogDisplay': jQuery('<div>').attr({
                     'id': 'changeLog',
                 }),
@@ -270,7 +271,6 @@
                 '$externalToolboxStyles': jQuery('<style/>').attr({
                     'id': 'toolboxStyles',
                     'type': 'text/css',
-                    //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
                 }).html(GM_getResourceText('toolStyles')), // eslint-disable-line new-cap
                 '$myFont': jQuery('<link>').attr({
                     'id': 'toolFont',
@@ -282,26 +282,20 @@
                     'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                     'rel': 'stylesheet',
                 }),
-                //                '$toolStyles': jQuery('<link>').attr({
-                //                    'id': 'toolStyles',
-                //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-                //                    'rel': 'stylesheet',
-                //                    'type': 'text/css',
-                //                }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
                     'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
-                $fontAw: jQuery('<script></script>').attr({
-                    id: 'fontAwe',
-                    type: 'text/javascript',
-                    src: 'https://use.fontawesome.com/3953f47d82.js',
+                '$fontAw': jQuery('<script></script>').attr({
+                    'id': 'fontAwe',
+                    'type': 'text/javascript',
+                    'src': 'https://use.fontawesome.com/3953f47d82.js',
                 }),
-                $typoJs: jQuery('<script></script>').attr({
-                    id: 'typoJs',
-                    type: 'text/javascript',
-                    src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
+                '$typoJs': jQuery('<script></script>').attr({
+                    'id': 'typoJs',
+                    'type': 'text/javascript',
+                    'src': 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
                 }),
             };
         },
@@ -311,12 +305,7 @@
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
         'buildElements': function () {
-            //            qaToolbox.config.$changeLogDisplayContainer
-            //                .append(qaToolbox.config.$changeLogDisplay);
-
             qaToolbox.config.$changeLogUpdateContainer
-                //                .append(qaToolbox.config.$changeLogDisplayContainer);
-                //                .append(qaToolbox.config.$changeLogDisplayContainer);
                 .append(qaToolbox.config.$changeLogDisplay);
 
             qaToolbox.config.$changeLogDisplay.load('https://cirept.github.io/QA_Toolbox/ChangeLog section');
@@ -328,19 +317,31 @@
                 .append(qaToolbox.config.$myFont)
                 .append(qaToolbox.config.$jQueryUIcss)
                 .append(qaToolbox.config.$typoJs)
-                //                .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$fontAw)
                 .append(qaToolbox.config.$animate);
 
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
+        },
+        'showChangeLog': function () {
+            qaToolbox.config.$changeLogDisplay.dialog({
+                'width': 1000,
+                'title': 'Change Log',
+                'buttons': [{
+                    'text': 'Close',
+                    'icon': 'ui-icon-heart',
+                    'click': function () {
+                        shared.saveValue('hideChangeLog', true);
+                        jQuery(this).dialog('close');
+                    },
+                }],
+            });
 
-            //            $('<link/>', {
-            //                rel: 'stylesheet',
-            //                type: 'text/css',
-            //                href: 'https://cdn.rawgit.com/cirept/QA_Toolbox/3.3.1.1/assets/css/toolbox.css'
-            //            }).appendTo('head');
+            // set max height for TETRA sites
+            if (!shared.nextGenCheck()) {
+                qaToolbox.config.$changeLogDisplay.dialog('option', 'maxHeight', 800);
+            }
         },
     };
 
@@ -803,9 +804,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            qaTools.config.$mainToolsTitle.on('click', shared.toggleFeature);
-            //            qaTools.config.$mainToolsTitle.on('click', shared.saveState);
-
             qaTools.config.$mainToolsTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -1043,7 +1041,6 @@
                     'noTitle': 'No Title Text',
                     'hasTitle': 'Has Title Text',
                     'opensWindow': 'Opens In A New Window',
-                    // 'brokenURL': 'Empty URL',
                     'urlIssue': 'Check URL',
                     'absoluteURL': 'Absolute URL',
                     'unsupportedPageLink': 'Page Not Supported',
@@ -1118,10 +1115,6 @@
             // dynamic loading of cached elements
             // have to load here to compensate for lazy loaded widgets
             this.cacheDOM();
-            //            var a = 0;
-            //            var buttons = jQuery('body').find(':button');
-            //            var length = buttons.length;
-            //            shared.flagButtons;
 
             // NEXT GEN SITE LOGIC
             // ----------------------------------------
@@ -1134,12 +1127,6 @@
             if (!shared.nextGenCheck()) {
                 this.tetraSiteCheck();
             }
-
-            //            // FLAG ALL BUTTONS AS A BUTTON ELEMENT
-            //            // ----------------------------------------
-            //            for (a; a < length; a += 1) {
-            //                jQuery(buttons[a]).addClass('buttonFlag');
-            //            }
         },
         'showLegend': function () {
             linkChecker.config.$legend.slideToggle(500);
@@ -1230,6 +1217,8 @@
             var isQLPlink;
             var dataCell;
             var $closestLi;
+            var myHeight;
+            var myWidth;
 
             // loop through all links on page
             for (a; a < length; a += 1) {
@@ -1239,16 +1228,13 @@
                 isQLPlink = false;
                 $currentLink = jQuery(this.$allLinks[a]);
 
-                // skip main nav menu items
-                if (typeof $currentLink.attr('class') !== 'undefined') {
-                    if ($currentLink.attr('class').indexOf('main') > -1 &&
-                        $currentLink.attr('class').indexOf('main') > -1) {
-                        continue;
-                    }
+                if (this.isNavigation($currentLink)) {
+                    continue;
                 }
 
                 $image = $currentLink.find('img');
                 isImageLink = this.isImageLink($image);
+
                 // create check for links inside quick links widget
                 if ($currentLink.closest('.cell').attr('data-cell')) {
                     dataCell = $currentLink.closest('.cell').attr('data-cell');
@@ -1281,10 +1267,10 @@
                 if (isQLPlink) {
                     // Only apply the div overlay if the image contained inside the QLP card has a width and a height
                     // if the width and height is 0 that means that there is no image
-                    var height = jQuery($image).height();
-                    var width = jQuery($image).width();
+                    myHeight = jQuery($image).height();
+                    myWidth = jQuery($image).width();
 
-                    if (height !== 0 && width !== 0) {
+                    if (myHeight !== 0 && myWidth !== 0) {
                         this.addDivOverlay($currentLink, $image, isQLPlink);
                         //  MIIGHT NEED CUSTOM LOGIC TO CHECK ALL QLP WIDGET LINKS
                         // SETTING ISIMAGELINK TO TRUE TO SEE IF I CAN TRICK THE LOGIC TO STILL ADD CLASSES TO THE DIV OVERLAY
@@ -1312,6 +1298,16 @@
         // ----------------------------------------
         // tier 4
         // ----------------------------------------
+        'isNavigation': function ($currentLink) {
+            if (typeof $currentLink.attr('class') !== 'undefined') {
+                if ($currentLink.attr('class').indexOf('main') > -1 &&
+                    $currentLink.attr('class').indexOf('main') > -1) {
+                    //continue;
+                    return true;
+                }
+            }
+            return false;
+        },
         'testHeaderFooter': function () {
             // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
             var jLength = this.$otherLinks.length;
@@ -1345,27 +1341,11 @@
 
             if (cardClass.indexOf('link-clickable') > -1 ||
                 cardClass.indexOf('none-clickable') > -1) {
-                // THERE SHOULD BE NO NEED TO CHECK FOR IMAGES IN THIS STYLE OF CARD
-                // THE IMAGE WILL NEVER BE A LINK THUS NOT NEEDING TO BE CHECKED
-
                 // CHECK ALL LINKS DEFINED IN CARD SETTINGS
-                // get all links defined in card
-                // should include all primary, secondary, and tenary links
-                $cardLinks = $cardLinkContainer.find('a'); // this is an array
-                myLength = $cardLinks.length;
-                // loop through links if there is any
-                if (myLength > 0) {
-                    this.testLinks($cardLinks);
-                }
+                this.testCardLinks($cardLinkContainer);
 
                 // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                // get all text links in copy text of card
-                $copyTextLinks = $cardSEOContainer.find('a');
-                youLength = $copyTextLinks.length;
-                // loop through links if there is any
-                if (youLength > 0) {
-                    this.testLinks($copyTextLinks);
-                }
+                this.textCopyLinks($cardSEOContainer);
             } else if (cardClass.indexOf('card-clickable-v2') > -1 ||
                 cardClass.indexOf('card-clickable') > -1) {
                 // check if card has an image
@@ -1444,6 +1424,28 @@
         // ----------------------------------------
         // Tier 5
         // ----------------------------------------
+        /**
+         * get all links defined in card
+         * should include all primary, secondary, and tenary links
+         * @param {object} $cardLinkContainer is the CTA link container of the current card
+         */
+        'testCardLinks': function ($cardLinkContainer) {
+            var $cardLinks = $cardLinkContainer.find('a'); // this is an array
+            var myLength = $cardLinks.length;
+            // loop through links if there is any
+            if (myLength > 0) {
+                this.testLinks($cardLinks);
+            }
+        },
+        'testCopyLinks': function ($cardSEOContainer) {
+            // get all text links in copy text of card
+            $copyTextLinks = $cardSEOContainer.find('a');
+            youLength = $copyTextLinks.length;
+            // loop through links if there is any
+            if (youLength > 0) {
+                this.testLinks($copyTextLinks);
+            }
+        },
         'testLinks': function ($linkArray, isImageLink) {
             var q = 0;
             var myLength = $linkArray.length;
@@ -1479,8 +1481,6 @@
             // check to see if isImageLink parameter was passed
             if (typeof isImageLink === 'undefined') {
                 isImageLink = false;
-            } else {
-                isImageLink = isImageLink;
             }
             // check target of link
             this.checkTargetNextGen($currentLink, $linkOverlay);
@@ -2007,7 +2007,6 @@
 
             // alert user
             if (this.isNextGenPlatform) {
-
                 desktopURL = testURL + 'url=' + this.siteURL +
                     this.pageName + '?nextGen=true';
 
@@ -2202,12 +2201,11 @@
             showNavigation.config.$activateButt
                 .on('click', this.toggleFeatures.bind(this))
                 .on('click', this.toggleDisable)
-                .on('click', this.bindClicks.bind(this)) //;
+                .on('click', this.bindClicks.bind(this)) // ;
                 .on('click', this.bindLegendElements); // test function
             showNavigation.config.$offButt
                 .on('click', this.toggleFeatures.bind(this))
                 .on('click', this.toggleDisable);
-
         },
         'bindLegendElements': function () {
             var $myMenu = jQuery('nav');
@@ -2237,6 +2235,7 @@
                             flaggedCheckedLinks.toggleClass('linkChecked');
                         });
                         break;
+                    default:
                 }
             });
         },
@@ -2245,7 +2244,8 @@
         // ----------------------------------------
         'toggleFeatures': function () {
             var isNextGen = this.isNextGenPlatform;
-            var majorPages = 'a[href*=Form], a[href*=ContactUs], a[href=HoursAndDirections], a[href*=VehicleSearchResults]';
+            var majorPages = 'a[href*=Form], a[href*=ContactUs], ' +
+                'a[href=HoursAndDirections], a[href*=VehicleSearchResults]';
             if (isNextGen) {
                 this.$navTabs
                     .toggleClass('showNav customAdd');
@@ -2377,13 +2377,13 @@
                 }),
                 'oems': ['Chevrolet', 'Buick', 'Cadillac', 'GMC', 'Hyundai', 'Volkswagen'],
                 'oemFiles': [
-                        'https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json',
-                        'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json',
-                        'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json',
-                        'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json',
-                        'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json',
-                        'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json',
-                    ],
+                    'https://cdn.rawgit.com/cirept/NextGen/master/resources/Chevrolet.json',
+                    'https://cdn.rawgit.com/cirept/NextGen/master/resources/Buick.json',
+                    'https://cdn.rawgit.com/cirept/NextGen/master/resources/Cadillac.json',
+                    'https://cdn.rawgit.com/cirept/NextGen/master/resources/GMC.json',
+                    'https://cdn.rawgit.com/cirept/NextGen/master/resources/Hyundai.json',
+                    'https://cdn.rawgit.com/cirept/NextGen/master/resources/Volkswagen.json',
+                ],
                 'vehicles': [],
             };
         },
@@ -2717,7 +2717,8 @@
                 var toolClass = 'showWidgetData';
                 var w = $currentObject.width();
                 var h = $currentObject.height();
-                var addThis = '#' + widgetID + '.' + toolClass + ':after { height: ' + h + 'px; width: ' + w + 'px; }';
+                var addThis = '#' + widgetID + '.' + toolClass +
+                    ':after { height: ' + h + 'px; width: ' + w + 'px; }';
                 // add tool class
                 $currentObject.addClass('showWidgetData');
                 self.bindClickCallback($currentObject, widgetID);
@@ -2757,6 +2758,7 @@
     var checkLinks = {
         'init': function (callingPanel) {
             this.createElements();
+            this.buildElements();
             this.cacheDOM(callingPanel);
             this.buildLegend();
             this.addTool();
@@ -2807,7 +2809,15 @@
                 '$iconContainer': jQuery('<div>').attr({
                     'id': 'iconContainer',
                 }),
-                '$thinking': jQuery('<i id="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'),
+                '$thinking': jQuery('<i>').attr({
+                    'id': 'loading',
+                    'class': 'fa fa-spinner fa-pulse fa-3x fa-fw',
+                }),
+                '$loading': jQuery('<span>').attr({
+                    'class': 'sr-only',
+                }),
+                // id="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'),
+                // '$thinking': jQuery('<i id="loading" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'),
                 '$done': jQuery('<i class="fa fa-check-circle fa-3x fa-fw"></i>'),
                 '$hint': jQuery('<div>').attr({
                     'class': 'hint',
@@ -2817,6 +2827,10 @@
                 'totalLinks': 0, // for future error reporting
                 'errors': 0, // for future error reporting
             };
+        },
+        'buildElements': function () {
+            checkLinks.config.$thinking
+                .after(checkLinks.config.$loading);
         },
         'cacheDOM': function (callingPanel) {
             this.contextManager = unsafeWindow.ContextManager;
@@ -2932,8 +2946,10 @@
             return linkURL;
         },
         /**
-         * Test link URL.
+         * Test link URLs.
          * Add classes to $currentLink if link url does not pass tests
+         * @param {object} $currentLink is the currentlink that is being tested
+         * @return {bool} return true if the links passes all tests
          */
         'testURLs': function ($currentLink) {
             var linkURL = jQuery.trim($currentLink.attr('href'));
@@ -3021,7 +3037,8 @@
             var $currentLink;
             //            var $image;
 
-            if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
+            if (cardClass.indexOf('link-clickable') > -1 ||
+                cardClass.indexOf('none-clickable') > -1) {
                 // CHECK ALL LINKS DEFINED IN CARD SETTINGS
                 // ----------------------------------------
                 // get all links defined in card
@@ -3044,7 +3061,8 @@
                     checkLinks.config.totalTests = checkLinks.config.totalTests + youLength;
                     this.testLinks($copyTextLinks);
                 }
-            } else if (cardClass.indexOf('card-clickable-v2') > -1 || cardClass.indexOf('card-clickable') > -1) {
+            } else if (cardClass.indexOf('card-clickable-v2') > -1 ||
+                cardClass.indexOf('card-clickable') > -1) {
                 $cardLinkContainer = $currentCard.find('div.link');
                 $cardSEOContainer = $currentCard.find('div.copy');
                 $cardImageContainer = $currentCard.find('div.media');
@@ -3169,7 +3187,8 @@
         // will return FALSE if no identifier is found
         'checkFor404': function (data) {
             // checks the returned page for key 404 identifiers
-            if (data.indexOf('pageNotFound') > -1 || data.indexOf('not currently a functioning page') > -1) {
+            if (data.indexOf('pageNotFound') > -1 ||
+                data.indexOf('not currently a functioning page') > -1) {
                 return true;
             }
             return false;
@@ -3177,12 +3196,14 @@
         // checks if the current link is within a QUICK LINKS PLUS WIDGET modified by EDO modules
         // Will return false if link is inside a QLP widget
         'checkForQuickLinksWidget': function ($currentLink) {
+            var $curDataCell = $currentLink.closest('.cell').attr('data-cell');
+            var $curSection = $currentLink.closest('section');
             // create check for links inside quick links widget
-            if ($currentLink.closest('.cell').attr('data-cell')) {
+            if ($curDataCell) {
                 // check if link is within a quick links widget
-                if ($currentLink.closest('.cell').attr('data-cell').indexOf('Quick_Links_Plus') > -1) {
+                if ($curDataCell.indexOf('Quick_Links_Plus') > -1) {
                     // checks if QLP is modified by modules
-                    if ($currentLink.closest('section').attr('class').indexOf('customTemplate') === -1) {
+                    if ($curSection.attr('class').indexOf('customTemplate') === -1) {
                         return false;
                     }
                 }
@@ -3215,9 +3236,7 @@
             var linkURL = checkLinks.addURLParameter($currentLink);
             var isNextGen = shared.nextGenCheck();
 
-            if (isImageLink) {
-                isImageLink = isImageLink;
-            } else {
+            if (!isImageLink) {
                 isImageLink = false;
             }
             // NEXT GEN NEEDS LINK AND PARENT CARD TO OVERLAY IMAGE
@@ -3234,7 +3253,6 @@
                 'method': 'get',
                 'dataType': 'html',
                 'success': function (data) {
-
                     if (!isNextGen) {
                         // checks to see if link is an image link
                         hasImage = $currentLink.has('img').length;
@@ -3309,7 +3327,8 @@
                 },
                 'complete': function () {
                     checkLinks.config.count += 1;
-                    checkLinks.config.$counter.text(checkLinks.config.count + ' of ' + checkLinks.config.totalTests);
+                    checkLinks.config.$counter
+                        .text(checkLinks.config.count + ' of ' + checkLinks.config.totalTests);
                 },
             });
         },
@@ -3330,7 +3349,7 @@
                 checkLinks.config.$message
                     .text('checking links')
                     .append(checkLinks.config.$counter)
-                    //checkLinks.config.$message
+                    // checkLinks.config.$message
                     .append(checkLinks.config.$iconContainer)
                     .append(checkLinks.config.$thinking);
                 checkLinks.config.$container
@@ -3723,7 +3742,8 @@
                 }).text('URL Modifiers'),
                 '$autoApplyContainer': jQuery('<div>').attr({
                     'class': 'toggleTool autoApplyInput',
-                    'title': 'will auto apply URL modifiers to current URL\n*please reload the page to update the URL to current settings*',
+                    'title': 'Will auto apply URL modifiers to current URL\n' +
+                        '*please reload the page to update the URL to current settings*',
                 }),
                 '$autoApplyTitle': jQuery('<div>').attr({
                     'class': 'autoApply',
@@ -3744,7 +3764,7 @@
             urlModifiers.config.$autoApplyContainer
                 .append(urlModifiers.config.$autoApplyTitle)
                 .append(urlModifiers.config.$autoApplyIcon);
-            //urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyIcon);
+            // urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyIcon);
             urlModifiers.config.$autoApplyIcon
                 .append(urlModifiers.config.$FAtoggle);
             urlModifiers.config.$urlModPanel
@@ -3754,7 +3774,7 @@
             urlModifiers.config.$urlModContainer
                 .append(urlModifiers.config.$urlModTitle)
                 .append(urlModifiers.config.$urlModPanel);
-            //urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModPanel);
+            // urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModPanel);
         },
         'cacheDOM': function () {
             // DOM elements
@@ -3944,7 +3964,8 @@
                     if (hasKey && isOn) {
                         // if 'parameter is set to false'
                         if (this.newURL.indexOf('disableAutofill=false') >= 0) {
-                            this.newURL = this.newURL.replace('disableAutofill=false', 'disableAutofill=true');
+                            this.newURL = this.newURL
+                                .replace('disableAutofill=false', 'disableAutofill=true');
                             return false;
                         }
                         // if 'parameter is set to true'
@@ -4307,13 +4328,13 @@
             // if 'hidePreviewToolbar is toggled ON'
             if (hidePreviewToolbar) {
                 this.$toolboxStyles
-                    .append(' #previewToolBarFrame { display: none; }') //;
-                    //this.$toolboxStyles
+                    .append(' #previewToolBarFrame { display: none; }') // ;
+                    // this.$toolboxStyles
                     .append(' .preview-wrapper { display: none; }');
             } else {
                 this.$toolboxStyles
-                    .append(' #previewToolBarFrame { display: block; }') //;
-                    //this.$toolboxStyles
+                    .append(' #previewToolBarFrame { display: block; }') // ;
+                    // this.$toolboxStyles
                     .append(' .preview-wrapper { display: block; }');
             }
         },
@@ -4382,9 +4403,19 @@
                 '$hideToolbox': jQuery('<div>').attr({
                     'class': 'hideToolbox',
                 }),
-                '$minimizeIcon': jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
+                '$minimizeIcon': jQuery('<span>').attr({
+                    'class': 'fa-stack fa-2x',
                     'title': 'Click to Hide Toolbox',
                 }),
+                '$faCircleIcon': jQuery('<i>').attr({
+                    'class': 'fa fa-circle fa-stack-1x fa-inverse',
+                }),
+                '$timesIcon': jQuery('<i>').attr({
+                    'class': 'fa fa-times-circle fa-stack-1x',
+                }),
+                // '$minimizeIcon': jQuery('<span class="fa-stack fa-2x"><i class="fa fa-circle fa-stack-1x fa-inverse"></i><i class="fa fa-times-circle fa-stack-1x"></i></span>').attr({
+                //    'title': 'Click to Hide Toolbox',
+                // }),
             };
         },
         'buildPanel': function () {
@@ -4395,6 +4426,10 @@
             dynamicDisplay.config.$displayArea
                 .append(dynamicDisplay.config.$version)
                 .append(dynamicDisplay.config.$changeLog);
+
+            dynamicDisplay.config.$minimizeIcon
+                .append(dynamicDisplay.config.$faCircleIcon)
+                .append(dynamicDisplay.config.$timesIcon);
 
             dynamicDisplay.config.$displayPanel.append(dynamicDisplay.config.$displayArea);
             // attach icon to minimize tab
@@ -4447,7 +4482,7 @@
                 .on('click', this.toggleTools.bind(this))
                 .on('click', this.saveState);
             dynamicDisplay.config.$changeLog
-                .on('click', main.showChangeLog);
+                .on('click', shared.showChangeLog);
         },
         'displayPanel': function () {
             // loop through variable list to find the panel title
@@ -4460,7 +4495,8 @@
                         state = variables[key] ? 'show' : 'hide';
                         shared.setState(this.$toolBoxContainer, state);
                         // set display of hide/show button to opposite of main toolbox
-                        dynamicDisplay.config.$showToolbox.addClass(variables[key] ? 'disappear' : 'appear');
+                        dynamicDisplay.config.$showToolbox
+                            .addClass(variables[key] ? 'disappear' : 'appear');
                     }
                 }
             }
@@ -4624,33 +4660,10 @@
         'checkHideChangeLog': function () {
             var test = 'hide change log? ' + shared.getValue('hideChangeLog');
         },
-        'showChangeLog': function () {
-            qaToolbox.config.$changeLogDisplay.dialog({
-                'width': 1000,
-                'title': 'Change Log',
-                buttons: [{
-                    text: 'Close',
-                    icon: 'ui-icon-heart',
-                    click: function () {
-                        shared.saveValue('hideChangeLog', true);
-                        jQuery(this).dialog('close');
-                    },
-                }],
-            });
-
-            // set max height for TETRA sites
-            if (!shared.nextGenCheck()) {
-                qaToolbox.config.$changeLogDisplay.dialog('option', 'maxHeight', 800);
-            }
-        },
     };
 
     // ********************************************************************************
     // **************************************** initialize toolbox ****************************************
     // ********************************************************************************
     main.init();
-
 })();
-
-// extra line
-// extra line
