@@ -1199,10 +1199,9 @@
 
                 // checks to see if current card is a container card
                 // skip checks if it is
-                if (shared.isBranchy(cardClass) ||
-                    shared.isContainer($cardDeck)) {
-                    continue;
-                }
+//                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
+//                    continue;
+//                }
 
                 // test links inside cards
                 this.testCard($currentCard, cardClass, isImageLink);
@@ -1345,7 +1344,7 @@
                 this.testCardLinks($cardLinkContainer);
 
                 // CHECK ALL LINKS DEFINED IN SEO TEXT in COPY of RECORD
-                this.textCopyLinks($cardSEOContainer);
+                this.testCopyLinks($cardSEOContainer);
             } else if (cardClass.indexOf('card-clickable-v2') > -1 ||
                 cardClass.indexOf('card-clickable') > -1) {
                 // check if card has an image
@@ -1439,8 +1438,8 @@
         },
         'testCopyLinks': function ($cardSEOContainer) {
             // get all text links in copy text of card
-            $copyTextLinks = $cardSEOContainer.find('a');
-            youLength = $copyTextLinks.length;
+            var $copyTextLinks = $cardSEOContainer.find('a');
+            var youLength = $copyTextLinks.length;
             // loop through links if there is any
             if (youLength > 0) {
                 this.testLinks($copyTextLinks);
@@ -3013,10 +3012,9 @@
 
                 // detect if the section element is a parent container
                 // check if the section class contains 'branchy'
-                if (shared.isBranchy(cardClass) ||
-                    shared.isContainer($cardDeck)) {
-                    continue;
-                }
+//                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
+//                    continue;
+//                }
 
                 // detect if the section element is a container
                 // check if the div.deck contains content
