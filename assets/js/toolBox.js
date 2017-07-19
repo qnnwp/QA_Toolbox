@@ -1199,9 +1199,9 @@
 
                 // checks to see if current card is a container card
                 // skip checks if it is
-//                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
-//                    continue;
-//                }
+                //                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
+                //                    continue;
+                //                }
 
                 // test links inside cards
                 this.testCard($currentCard, cardClass, isImageLink);
@@ -2992,12 +2992,13 @@
                 return true;
             }
         },
+        /**
+         * Next Gen Specific function
+         * Tests all the links in a card, both CTA links and copy text links
+         */
         'nextgenTestLinks': function () {
-//            var $cardDeck;
-//            var $currentCard;
             var $sections = jQuery('main').find('section');
             var a = 0;
-//            var cardClass;
             var len = $sections.length;
 
             this.testHeaderFooter();
@@ -3005,23 +3006,17 @@
             // TEST BODY LINKS
             // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
             for (a; a < len; a += 1) {
-//                $currentCard = jQuery($sections[a]);
-//                $cardDeck = null;
-//                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : ''; // if currentCard has a class save it, if no class make variable equal ''
-//                $cardDeck = $currentCard.find('div.deck');
-
-                // detect if the section element is a parent container
-                // check if the section class contains 'branchy'
-//                if (shared.isBranchy(cardClass) || shared.isContainer($cardDeck)) {
-//                    continue;
-//                }
-
                 // detect if the section element is a container
                 // check if the div.deck contains content
                 this.checkCard(jQuery($sections[a]));
-//                this.checkCard($currentCard);
             }
         },
+        /**
+         * Next Gen Specific function
+         * Tests card for type which will determine what checks it will need to do.
+         * Checks card for type vs. check links first to reduce the iterations between checking
+         * CTA link and Copy text links.
+         */
         'checkCard': function ($currentCard) {
             var $cardLinkContainer = $currentCard.find('div.link');
             var $cardSEOContainer = $currentCard.find('div.copy');
@@ -3035,8 +3030,7 @@
             var $currentLink;
             //            var $image;
 
-            if (cardClass.indexOf('link-clickable') > -1 ||
-                cardClass.indexOf('none-clickable') > -1) {
+            if (cardClass.indexOf('link-clickable') > -1 || cardClass.indexOf('none-clickable') > -1) {
                 // CHECK ALL LINKS DEFINED IN CARD SETTINGS
                 // ----------------------------------------
                 // get all links defined in card
