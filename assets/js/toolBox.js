@@ -1004,8 +1004,7 @@
         // tier 5
         // ----------------------------------------
         'toggleOverlayClass': function (currentImage) {
-            jQuery(currentImage)
-                .toggleClass('overlaid');
+            jQuery(currentImage).toggleClass('overlaid');
         },
     };
 
@@ -1185,7 +1184,6 @@
             var isImageLink;
             var $currentCard;
             var cardClass;
-            var $cardDeck;
 
             // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
             // TESTS TO BODY LINKS WILL BE HANDLED DIFFERENTLY
@@ -1202,20 +1200,7 @@
 
                 // save current card settings
                 // if currentCard has a class save it, if no class make variable equal ''
-                if ($currentCard.attr('class')) {
-                    cardClass = $currentCard.attr('class');
-                } else {
-                    cardClass = '';
-                }
-
-                $cardDeck = $currentCard.find('div.deck');
-
-                // checks to see if current card is a container card
-                // skip checks if it is
-                if (shared.isBranchy(cardClass) ||
-                    shared.isContainer($cardDeck)) {
-                    continue;
-                }
+                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : '';
 
                 // test links inside cards
                 this.testCard($currentCard, cardClass, isImageLink);
@@ -2978,11 +2963,9 @@
             }
         },
         'nextgenTestLinks': function () {
-            var $cardDeck;
             var $currentCard;
             var $sections = jQuery('main').find('section');
             var a = 0;
-            var cardClass;
             var len = $sections.length;
 
             this.testHeaderFooter();
@@ -2991,16 +2974,6 @@
             // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
             for (a; a < len; a += 1) {
                 $currentCard = jQuery($sections[a]);
-                $cardDeck = null;
-                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : ''; // if currentCard has a class save it, if no class make variable equal ''
-                $cardDeck = $currentCard.find('div.deck');
-
-                // detect if the section element is a parent container
-                // check if the section class contains 'branchy'
-                if (shared.isBranchy(cardClass) ||
-                    shared.isContainer($cardDeck)) {
-                    continue;
-                }
 
                 // detect if the section element is a container
                 // check if the div.deck contains content
