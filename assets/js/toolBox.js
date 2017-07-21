@@ -1,4 +1,4 @@
-/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo, GM_getResourceText */
+/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo */
 
 (function () {
     'use strict';
@@ -7,6 +7,9 @@
     // **************************************** Toolbox Shared Functions ****************************************
     // ********************************************************************************
     var shared = {
+        'branchName': function () {
+            return 'testOutNewMetaTag';
+        },
         /**
          * Tampermonkey function.
          * Save value to local storage for program to use.
@@ -99,10 +102,6 @@
             // loop through Legend Content list
             for (key in $legendContent) {
                 if ($legendContent.hasOwnProperty(key)) {
-                    //                    if (key === 'majorPage' && this.nextGenCheck()) {
-                    //                        continue;
-                    //                    }
-
                     if (key === 'unsupportedPageLink' && !shared.nextGenCheck()) {
                         continue;
                     }
@@ -111,7 +110,6 @@
                     // build listing element
                     this.$listItem = jQuery('<li>').attr({
                         'class': key,
-                        //                        'class': 'legendContent ' + key,
                     }).append(value);
                     // attach to legend list
                     $legendListContainer.append(this.$listItem);
@@ -190,26 +188,6 @@
                 // console.log($currentLink);
             }
         },
-        /**
-         * detect if the section element is a parent container
-         * check if the section class contains 'branchy'
-         */
-        'isBranchy': function (cardClass) {
-            if (cardClass.indexOf('branchy') > -1) {
-                return true;
-            }
-            return false;
-        },
-        /**
-         * detect if the section element is a container
-         * check if the div.deck contains content
-         */
-        'isContainer': function ($cardDeck) {
-            if ($cardDeck.is(':not(:empty)')) {
-                return true;
-            }
-            return false;
-        },
         'centerDiv': function ($currentImage, $divOverlay) {
             var parent = $currentImage.closest('figure');
             $divOverlay.css({
@@ -254,9 +232,6 @@
                 '$changeLogUpdateContainer': jQuery('<div>').attr({
                     'id': 'overlayContainer',
                 }),
-                //                '$changeLogDisplayContainer': jQuery('<div>').attr({
-                //                    //                    'id': 'overlayContainer',
-                //                }),
                 '$changeLogDisplay': jQuery('<div>').attr({
                     'id': 'changeLog',
                 }),
@@ -267,11 +242,6 @@
                     'id': 'qa_toolbox',
                     'type': 'text/css',
                 }),
-                '$externalToolboxStyles': jQuery('<style/>').attr({
-                    'id': 'toolboxStyles',
-                    'type': 'text/css',
-                    //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-                }).html(GM_getResourceText('toolStyles')), // eslint-disable-line new-cap
                 '$myFont': jQuery('<link>').attr({
                     'id': 'toolFont',
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
@@ -282,15 +252,16 @@
                     'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
                     'rel': 'stylesheet',
                 }),
-                //                '$toolStyles': jQuery('<link>').attr({
-                //                    'id': 'toolStyles',
-                //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-                //                    'rel': 'stylesheet',
-                //                    'type': 'text/css',
-                //                }),
+                '$toolStyles': jQuery('<link>').attr({
+                    'id': 'toolStyles',
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + shared.branchName() + '/assets/css/toolbox.css',
+                    //                                                        'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'rel': 'stylesheet',
+                    'type': 'text/css',
+                }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
-                    'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
+                    'hred': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
                 $fontAw: jQuery('<script></script>').attr({
@@ -311,12 +282,7 @@
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
         'buildElements': function () {
-            //            qaToolbox.config.$changeLogDisplayContainer
-            //                .append(qaToolbox.config.$changeLogDisplay);
-
             qaToolbox.config.$changeLogUpdateContainer
-                //                .append(qaToolbox.config.$changeLogDisplayContainer);
-                //                .append(qaToolbox.config.$changeLogDisplayContainer);
                 .append(qaToolbox.config.$changeLogDisplay);
 
             qaToolbox.config.$changeLogDisplay.load('https://cirept.github.io/QA_Toolbox/ChangeLog section');
@@ -324,23 +290,16 @@
         'attachTools': function () {
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
-                .append(qaToolbox.config.$externalToolboxStyles)
                 .append(qaToolbox.config.$myFont)
                 .append(qaToolbox.config.$jQueryUIcss)
                 .append(qaToolbox.config.$typoJs)
-                //                .append(qaToolbox.config.$toolStyles)
+                .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$fontAw)
                 .append(qaToolbox.config.$animate);
 
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
-
-            //            $('<link/>', {
-            //                rel: 'stylesheet',
-            //                type: 'text/css',
-            //                href: 'https://cdn.rawgit.com/cirept/QA_Toolbox/3.3.1.1/assets/css/toolbox.css'
-            //            }).appendTo('head');
         },
     };
 
@@ -4587,7 +4546,7 @@
         'jQueryUIedits': function () {
             qaToolbox.config.$legendContainer.draggable();
 
-//            this.checkHideChangeLog();
+            //            this.checkHideChangeLog();
             // should only show the changelog when the user first uses program
             // should also show when the user updates.
             if (!shared.getValue('hideChangeLog')) {
