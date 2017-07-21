@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name QA Toolbox v3.3.1.2-testing
+// @name QA Toolbox 3.3.1.2-testOutNewMetaTag
 // @namespace www.cobaltgroup.com/
-// @version 3.3.1.2-testing
+// @version 3.3.1.2-testOutNewMetaTag
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
@@ -18,7 +18,6 @@
 // @grant GM_info
 // @grant GM_listValues
 // @grant GM_addStyle
-// @grant GM_getResourceText
 // @grant resource
 // @noframes
 // ==/UserScript==
