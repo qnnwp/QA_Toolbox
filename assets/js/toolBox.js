@@ -1632,6 +1632,7 @@
             for (z; z < datedPagesLength; z += 1) {
                 datedPage = datedPages[z];
 
+                // TODO create exception json for the specials pages on Hyundai.
                 // exception for Tire Basic Page
                 if (elem.indexOf('AboutSpecials?p=cca-tire-tips') > -1) {
                     continue;
@@ -4586,7 +4587,7 @@
         'jQueryUIedits': function () {
             qaToolbox.config.$legendContainer.draggable();
 
-            this.checkHideChangeLog();
+//            this.checkHideChangeLog();
             // should only show the changelog when the user first uses program
             // should also show when the user updates.
             if (!shared.getValue('hideChangeLog')) {
