@@ -252,6 +252,11 @@
                     type: 'text/javascript',
                     src: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
                 }),
+                '$fontAw': jQuery('<link>').attr({
+                    'id': 'fontAwe',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/font-awesome-4.7.0/css/font-awesome.css',
+                    'rel': 'stylesheet',
+                }),
                 '$jQueryUIcss': jQuery('<link>').attr({
                     'id': 'jqueryUI',
                     'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
@@ -269,11 +274,11 @@
                     'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
-                '$fontAw': jQuery('<script></script>').attr({
-                    id: 'fontAwe',
-                    type: 'text/javascript',
-                    src: 'https://use.fontawesome.com/3953f47d82.js',
-                }),
+                //                '$fontAw': jQuery('<script></script>').attr({
+                //                    id: 'fontAwe',
+                //                    type: 'text/javascript',
+                //                    src: 'https://use.fontawesome.com/3953f47d82.js',
+                //                }),
                 '$typoJs': jQuery('<script></script>').attr({
                     id: 'typoJs',
                     type: 'text/javascript',
@@ -290,7 +295,11 @@
             qaToolbox.config.$changeLogUpdateContainer
                 .append(qaToolbox.config.$changeLogDisplay);
 
+            // load change log details
             qaToolbox.config.$changeLogDisplay.load('https://cirept.github.io/QA_Toolbox/ChangeLog section');
+
+            // make legend container draggable
+            qaToolbox.config.$legendContainer.draggable();
         },
         'attachTools': function () {
             this.head
@@ -4550,8 +4559,6 @@
             $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
         },
         'jQueryUIedits': function () {
-            qaToolbox.config.$legendContainer.draggable();
-
             //            this.checkHideChangeLog();
             // should only show the changelog when the user first uses program
             // should also show when the user updates.
