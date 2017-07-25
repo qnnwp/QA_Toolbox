@@ -247,6 +247,11 @@
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
                     'rel': 'stylesheet',
                 }),
+                $jQueryUIjs: jQuery('<script></script>').attr({
+                    id: 'jqueriUIjs',
+                    type: 'text/javascript',
+                    src: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
+                }),
                 '$jQueryUIcss': jQuery('<link>').attr({
                     'id': 'jqueryUI',
                     'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
@@ -255,7 +260,7 @@
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
                     'href': 'https://rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/assets/css/toolbox.css', // eslint-disable-line new-cap
-//                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
                     'rel': 'stylesheet',
                     'type': 'text/css',
                 }),
@@ -291,6 +296,7 @@
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
+                .append(qaToolbox.config.$jQueryUIjs)
                 .append(qaToolbox.config.$jQueryUIcss)
                 .append(qaToolbox.config.$typoJs)
                 .append(qaToolbox.config.$toolStyles)
