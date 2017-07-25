@@ -266,7 +266,7 @@
                 }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
-                    'hred': 'https://rawgit.com/cirept/animate.css/master/animate.css',
+                    'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
                 $fontAw: jQuery('<script></script>').attr({
