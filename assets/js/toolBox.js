@@ -250,7 +250,7 @@
                 '$jQueryUIjs': jQuery('<script></script>').attr({
                     id: 'jqueriUIjs',
                     type: 'text/javascript',
-                    src: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
+                    src: 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js',
                 }),
                 '$fontAw': jQuery('<link>').attr({
                     'id': 'fontAwe',
@@ -259,7 +259,7 @@
                 }),
                 '$jQueryUIcss': jQuery('<link>').attr({
                     'id': 'jqueryUI',
-                    'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.css',
                     'rel': 'stylesheet',
                 }),
                 '$toolStyles': jQuery('<link>').attr({
