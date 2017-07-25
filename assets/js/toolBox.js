@@ -247,7 +247,7 @@
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
                     'rel': 'stylesheet',
                 }),
-                $jQueryUIjs: jQuery('<script></script>').attr({
+                '$jQueryUIjs': jQuery('<script></script>').attr({
                     id: 'jqueriUIjs',
                     type: 'text/javascript',
                     src: 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js',
@@ -259,7 +259,7 @@
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    'href': 'https://rawgit.com/cirept/QA_Toolbox/newMetaTag/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
                     //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
                     'rel': 'stylesheet',
                     'type': 'text/css',
@@ -269,12 +269,12 @@
                     'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
-                $fontAw: jQuery('<script></script>').attr({
+                '$fontAw': jQuery('<script></script>').attr({
                     id: 'fontAwe',
                     type: 'text/javascript',
                     src: 'https://use.fontawesome.com/3953f47d82.js',
                 }),
-                $typoJs: jQuery('<script></script>').attr({
+                '$typoJs': jQuery('<script></script>').attr({
                     id: 'typoJs',
                     type: 'text/javascript',
                     src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
