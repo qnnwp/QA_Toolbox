@@ -259,7 +259,7 @@
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    'href': 'https://rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/newMetaTag/assets/css/toolbox.css', // eslint-disable-line new-cap
                     //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
                     'rel': 'stylesheet',
                     'type': 'text/css',
