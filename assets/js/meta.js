@@ -5,8 +5,8 @@
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
-// @downloadURL https://rawgit.com/cirept/QA_Toolbox/newMetaTag/assets/js/meta.js
-// @require https://rawgit.com/cirept/QA_Toolbox/newMetaTag/assets/js/toolBox.js
+// @downloadURL https://raw.githubusercontent.com/cirept/QA_Toolbox/newMetaTag/assets/js/meta.js
+// @require https://raw.githubusercontent.com/cirept/QA_Toolbox/newMetaTag/assets/js/toolBox.js
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @run-at document-end
 // @grant GM_openInTab

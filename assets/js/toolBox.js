@@ -274,11 +274,6 @@
                     'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
-                //                '$fontAw': jQuery('<script></script>').attr({
-                //                    id: 'fontAwe',
-                //                    type: 'text/javascript',
-                //                    src: 'https://use.fontawesome.com/3953f47d82.js',
-                //                }),
                 '$typoJs': jQuery('<script></script>').attr({
                     id: 'typoJs',
                     type: 'text/javascript',
@@ -4566,9 +4561,9 @@
                 this.showChangeLog();
             }
         },
-        'checkHideChangeLog': function () {
-            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
-        },
+//        'checkHideChangeLog': function () {
+//            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
+//        },
         'showChangeLog': function () {
             qaToolbox.config.$changeLogDisplay.dialog({
                 'width': 1000,
