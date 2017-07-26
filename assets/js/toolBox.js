@@ -250,16 +250,16 @@
 //                '$jQueryUIjs': jQuery('<script></script>').attr({
 //                    id: 'jqueriUIjs',
 //                    type: 'text/javascript',
-//                    src: 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js',
+//                    src: 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js',
 //                }),
                 '$fontAw': jQuery('<link>').attr({
                     'id': 'fontAwe',
-                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/font-awesome-4.7.0/css/font-awesome.css',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/font-awesome-4.7.0/css/font-awesome.css',
                     'rel': 'stylesheet',
                 }),
                 '$jQueryUIcss': jQuery('<link>').attr({
                     'id': 'jqueryUI',
-                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.css',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.css',
                     'rel': 'stylesheet',
                 }),
                 '$toolStyles': jQuery('<link>').attr({
