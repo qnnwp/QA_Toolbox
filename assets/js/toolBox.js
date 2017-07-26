@@ -247,11 +247,6 @@
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
                     'rel': 'stylesheet',
                 }),
-//                '$jQueryUIjs': jQuery('<script></script>').attr({
-//                    id: 'jqueriUIjs',
-//                    type: 'text/javascript',
-//                    src: 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js',
-//                }),
                 '$fontAw': jQuery('<link>').attr({
                     'id': 'fontAwe',
                     'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/font-awesome-4.7.0/css/font-awesome.css',
@@ -264,8 +259,8 @@
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
-                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
                     'rel': 'stylesheet',
                     'type': 'text/css',
                 }),
@@ -274,11 +269,6 @@
                     'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
-//                '$typoJs': jQuery('<script></script>').attr({
-//                    id: 'typoJs',
-//                    type: 'text/javascript',
-//                    src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
-//                }),
             };
         },
         'cacheDOM': function () {
@@ -300,9 +290,7 @@
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
-//                .append(qaToolbox.config.$jQueryUIjs)
                 .append(qaToolbox.config.$jQueryUIcss)
-//                .append(qaToolbox.config.$typoJs)
                 .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$fontAw)
                 .append(qaToolbox.config.$animate);
@@ -772,9 +760,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            qaTools.config.$mainToolsTitle.on('click', shared.toggleFeature);
-            //            qaTools.config.$mainToolsTitle.on('click', shared.saveState);
-
             qaTools.config.$mainToolsTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -1086,10 +1071,6 @@
             // dynamic loading of cached elements
             // have to load here to compensate for lazy loaded widgets
             this.cacheDOM();
-            //            var a = 0;
-            //            var buttons = jQuery('body').find(':button');
-            //            var length = buttons.length;
-            //            shared.flagButtons;
 
             // NEXT GEN SITE LOGIC
             // ----------------------------------------
@@ -1102,12 +1083,6 @@
             if (!shared.nextGenCheck()) {
                 this.tetraSiteCheck();
             }
-
-            //            // FLAG ALL BUTTONS AS A BUTTON ELEMENT
-            //            // ----------------------------------------
-            //            for (a; a < length; a += 1) {
-            //                jQuery(buttons[a]).addClass('buttonFlag');
-            //            }
         },
         'showLegend': function () {
             linkChecker.config.$legend.slideToggle(500);
@@ -1684,19 +1659,11 @@
         },
         'bindEvents': function () {
             // activate button
-            //            spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
-            //            spellCheck.config.$activateButt.on('click', this.showLegend);
-            //            spellCheck.config.$activateButt.on('click', this.toggleDisable);
-
             spellCheck.config.$activateButt
                 .on('click', this.spellCheckPage.bind(this))
                 .on('click', this.showLegend)
                 .on('click', this.toggleDisable);
             // off button
-            //            spellCheck.config.$offButt.on('click', this.removeHighlights.bind(this));
-            //            spellCheck.config.$offButt.on('click', this.showLegend);
-            //            spellCheck.config.$offButt.on('click', this.toggleDisable);
-
             spellCheck.config.$offButt
                 .on('click', this.removeHighlights.bind(this))
                 .on('click', this.showLegend)
@@ -1912,11 +1879,7 @@
             speedtestPage.config.$activateButt.on('click', function () {
                 speedtestPage.config.$panelContainer.slideToggle(500);
             });
-            //            speedtestPage.config.$sendButt.on('click', this.storeData);
-            //            speedtestPage.config.$sendButt.on('click', this.sendPage.bind(this));
-            //            speedtestPage.config.$sendButt.on('click', function () {
-            //                speedtestPage.config.$panelContainer.slideToggle(500);
-            //            });
+
             speedtestPage.config.$sendButt
                 .on('click', this.storeData)
                 .on('click', this.sendPage.bind(this))
@@ -2049,8 +2012,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            otherTools.config.$otherToolsTitle.on('click', shared.toggleFeature);
-            //            otherTools.config.$otherToolsTitle.on('click', shared.saveState);
             otherTools.config.$otherToolsTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -2099,7 +2060,7 @@
                 },
                 '$hint': jQuery('<div>').attr({
                     'class': 'hint',
-                }).text('ctrl+left click to open link in a new tab'),
+                }).html('ctrl+left click to open link in a new tab.'),
             };
         },
         'cacheDOM': function (callingPanel) {
@@ -4561,9 +4522,9 @@
                 this.showChangeLog();
             }
         },
-//        'checkHideChangeLog': function () {
-//            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
-//        },
+        //        'checkHideChangeLog': function () {
+        //            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
+        //        },
         'showChangeLog': function () {
             qaToolbox.config.$changeLogDisplay.dialog({
                 'width': 1000,
