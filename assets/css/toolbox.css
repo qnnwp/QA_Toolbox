@@ -234,18 +234,19 @@ default styles
 .legendContainer {
     font-family: "Montserrat";
     position: fixed;
-    bottom: 20px;
+    bottom: 15%;
     width: 260px;
+/*    height: 140px;*/
     z-index: 99999999;
 }
 
 .legendContainer.tetra {
-    right: 115px;
+    right: 15%;
     font-size: 11px;
 }
 
 .legendContainer.nextgen {
-    left: 115px;
+    left: 15%;
 }
 
 .legendContainer .legendTitle {
@@ -656,7 +657,11 @@ body header .menu>nav>ul .showNav.nextgenShowNav>.showNav.customAdd {
     padding: 0;
 }
 
-body header .menu>nav>ul .showNav.customAdd {
+body header .menu>nav>ul .showNav.nextgenShowNav>li.showNav.customAdd>a {
+    padding: 1rem 0;
+}
+
+html body header.header div.menu>nav>ul li.showNav.customAdd {
     width: 15rem;
     padding: 1rem 0;
     font-size: 15px;

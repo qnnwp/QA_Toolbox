@@ -1,4 +1,4 @@
-/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo, GM_getResourceText */
+/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo */
 
 (function () {
     'use strict';
@@ -7,6 +7,9 @@
     // **************************************** Toolbox Shared Functions ****************************************
     // ********************************************************************************
     var shared = {
+        'branchName': function () {
+            return 'testOutNewMetaTag';
+        },
         /**
          * Tampermonkey function.
          * Save value to local storage for program to use.
@@ -99,10 +102,6 @@
             // loop through Legend Content list
             for (key in $legendContent) {
                 if ($legendContent.hasOwnProperty(key)) {
-                    //                    if (key === 'majorPage' && this.nextGenCheck()) {
-                    //                        continue;
-                    //                    }
-
                     if (key === 'unsupportedPageLink' && !shared.nextGenCheck()) {
                         continue;
                     }
@@ -111,7 +110,6 @@
                     // build listing element
                     this.$listItem = jQuery('<li>').attr({
                         'class': key,
-                        //                        'class': 'legendContent ' + key,
                     }).append(value);
                     // attach to legend list
                     $legendListContainer.append(this.$listItem);
@@ -190,26 +188,6 @@
                 // console.log($currentLink);
             }
         },
-        /**
-         * detect if the section element is a parent container
-         * check if the section class contains 'branchy'
-         */
-        'isBranchy': function (cardClass) {
-            if (cardClass.indexOf('branchy') > -1) {
-                return true;
-            }
-            return false;
-        },
-        /**
-         * detect if the section element is a container
-         * check if the div.deck contains content
-         */
-        'isContainer': function ($cardDeck) {
-            if ($cardDeck.is(':not(:empty)')) {
-                return true;
-            }
-            return false;
-        },
         'centerDiv': function ($currentImage, $divOverlay) {
             var parent = $currentImage.closest('figure');
             $divOverlay.css({
@@ -254,9 +232,6 @@
                 '$changeLogUpdateContainer': jQuery('<div>').attr({
                     'id': 'overlayContainer',
                 }),
-                //                '$changeLogDisplayContainer': jQuery('<div>').attr({
-                //                    //                    'id': 'overlayContainer',
-                //                }),
                 '$changeLogDisplay': jQuery('<div>').attr({
                     'id': 'changeLog',
                 }),
@@ -267,41 +242,32 @@
                     'id': 'qa_toolbox',
                     'type': 'text/css',
                 }),
-                '$externalToolboxStyles': jQuery('<style/>').attr({
-                    'id': 'toolboxStyles',
-                    'type': 'text/css',
-                    //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-                }).html(GM_getResourceText('toolStyles')), // eslint-disable-line new-cap
                 '$myFont': jQuery('<link>').attr({
                     'id': 'toolFont',
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
                     'rel': 'stylesheet',
                 }),
+                '$fontAw': jQuery('<link>').attr({
+                    'id': 'fontAwe',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/font-awesome-4.7.0/css/font-awesome.css',
+                    'rel': 'stylesheet',
+                }),
                 '$jQueryUIcss': jQuery('<link>').attr({
                     'id': 'jqueryUI',
-                    'href': 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/testOutNewMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.css',
                     'rel': 'stylesheet',
                 }),
-                //                '$toolStyles': jQuery('<link>').attr({
-                //                    'id': 'toolStyles',
-                //                    'href': 'https://raw.githubusercontent.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css',
-                //                    'rel': 'stylesheet',
-                //                    'type': 'text/css',
-                //                }),
+                '$toolStyles': jQuery('<link>').attr({
+                    'id': 'toolStyles',
+                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'rel': 'stylesheet',
+                    'type': 'text/css',
+                }),
                 '$animate': jQuery('<link>').attr({
                     'id': 'animate',
-                    'hred': 'https://raw.githubusercontent.com/cirept/animate.css/master/animate.css',
+                    'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
-                }),
-                $fontAw: jQuery('<script></script>').attr({
-                    id: 'fontAwe',
-                    type: 'text/javascript',
-                    src: 'https://use.fontawesome.com/3953f47d82.js',
-                }),
-                $typoJs: jQuery('<script></script>').attr({
-                    id: 'typoJs',
-                    type: 'text/javascript',
-                    src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
                 }),
             };
         },
@@ -311,36 +277,27 @@
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
         'buildElements': function () {
-            //            qaToolbox.config.$changeLogDisplayContainer
-            //                .append(qaToolbox.config.$changeLogDisplay);
-
             qaToolbox.config.$changeLogUpdateContainer
-                //                .append(qaToolbox.config.$changeLogDisplayContainer);
-                //                .append(qaToolbox.config.$changeLogDisplayContainer);
                 .append(qaToolbox.config.$changeLogDisplay);
 
+            // load change log details
             qaToolbox.config.$changeLogDisplay.load('https://cirept.github.io/QA_Toolbox/ChangeLog section');
+
+            // make legend container draggable
+            qaToolbox.config.$legendContainer.draggable();
         },
         'attachTools': function () {
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
-                .append(qaToolbox.config.$externalToolboxStyles)
                 .append(qaToolbox.config.$myFont)
                 .append(qaToolbox.config.$jQueryUIcss)
-                .append(qaToolbox.config.$typoJs)
-                //                .append(qaToolbox.config.$toolStyles)
+                .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$fontAw)
                 .append(qaToolbox.config.$animate);
 
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
-
-            //            $('<link/>', {
-            //                rel: 'stylesheet',
-            //                type: 'text/css',
-            //                href: 'https://cdn.rawgit.com/cirept/QA_Toolbox/3.3.1.1/assets/css/toolbox.css'
-            //            }).appendTo('head');
         },
     };
 
@@ -803,9 +760,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            qaTools.config.$mainToolsTitle.on('click', shared.toggleFeature);
-            //            qaTools.config.$mainToolsTitle.on('click', shared.saveState);
-
             qaTools.config.$mainToolsTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -1004,8 +958,7 @@
         // tier 5
         // ----------------------------------------
         'toggleOverlayClass': function (currentImage) {
-            jQuery(currentImage)
-                .toggleClass('overlaid');
+            jQuery(currentImage).toggleClass('overlaid');
         },
     };
 
@@ -1118,10 +1071,6 @@
             // dynamic loading of cached elements
             // have to load here to compensate for lazy loaded widgets
             this.cacheDOM();
-            //            var a = 0;
-            //            var buttons = jQuery('body').find(':button');
-            //            var length = buttons.length;
-            //            shared.flagButtons;
 
             // NEXT GEN SITE LOGIC
             // ----------------------------------------
@@ -1134,12 +1083,6 @@
             if (!shared.nextGenCheck()) {
                 this.tetraSiteCheck();
             }
-
-            //            // FLAG ALL BUTTONS AS A BUTTON ELEMENT
-            //            // ----------------------------------------
-            //            for (a; a < length; a += 1) {
-            //                jQuery(buttons[a]).addClass('buttonFlag');
-            //            }
         },
         'showLegend': function () {
             linkChecker.config.$legend.slideToggle(500);
@@ -1185,7 +1128,6 @@
             var isImageLink;
             var $currentCard;
             var cardClass;
-            var $cardDeck;
 
             // TEST LINKS FOUND IN HEADER AND FOOTER OF SITE
             // TESTS TO BODY LINKS WILL BE HANDLED DIFFERENTLY
@@ -1202,20 +1144,7 @@
 
                 // save current card settings
                 // if currentCard has a class save it, if no class make variable equal ''
-                if ($currentCard.attr('class')) {
-                    cardClass = $currentCard.attr('class');
-                } else {
-                    cardClass = '';
-                }
-
-                $cardDeck = $currentCard.find('div.deck');
-
-                // checks to see if current card is a container card
-                // skip checks if it is
-                if (shared.isBranchy(cardClass) ||
-                    shared.isContainer($cardDeck)) {
-                    continue;
-                }
+                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : '';
 
                 // test links inside cards
                 this.testCard($currentCard, cardClass, isImageLink);
@@ -1647,6 +1576,7 @@
             for (z; z < datedPagesLength; z += 1) {
                 datedPage = datedPages[z];
 
+                // TODO create exception json for the specials pages on Hyundai.
                 // exception for Tire Basic Page
                 if (elem.indexOf('AboutSpecials?p=cca-tire-tips') > -1) {
                     continue;
@@ -1729,19 +1659,11 @@
         },
         'bindEvents': function () {
             // activate button
-            //            spellCheck.config.$activateButt.on('click', this.spellCheckPage.bind(this));
-            //            spellCheck.config.$activateButt.on('click', this.showLegend);
-            //            spellCheck.config.$activateButt.on('click', this.toggleDisable);
-
             spellCheck.config.$activateButt
                 .on('click', this.spellCheckPage.bind(this))
                 .on('click', this.showLegend)
                 .on('click', this.toggleDisable);
             // off button
-            //            spellCheck.config.$offButt.on('click', this.removeHighlights.bind(this));
-            //            spellCheck.config.$offButt.on('click', this.showLegend);
-            //            spellCheck.config.$offButt.on('click', this.toggleDisable);
-
             spellCheck.config.$offButt
                 .on('click', this.removeHighlights.bind(this))
                 .on('click', this.showLegend)
@@ -1957,11 +1879,7 @@
             speedtestPage.config.$activateButt.on('click', function () {
                 speedtestPage.config.$panelContainer.slideToggle(500);
             });
-            //            speedtestPage.config.$sendButt.on('click', this.storeData);
-            //            speedtestPage.config.$sendButt.on('click', this.sendPage.bind(this));
-            //            speedtestPage.config.$sendButt.on('click', function () {
-            //                speedtestPage.config.$panelContainer.slideToggle(500);
-            //            });
+
             speedtestPage.config.$sendButt
                 .on('click', this.storeData)
                 .on('click', this.sendPage.bind(this))
@@ -2094,8 +2012,6 @@
         },
         'bindEvents': function () {
             // minimize
-            //            otherTools.config.$otherToolsTitle.on('click', shared.toggleFeature);
-            //            otherTools.config.$otherToolsTitle.on('click', shared.saveState);
             otherTools.config.$otherToolsTitle
                 .on('click', shared.toggleFeature)
                 .on('click', shared.saveState);
@@ -2144,7 +2060,7 @@
                 },
                 '$hint': jQuery('<div>').attr({
                     'class': 'hint',
-                }).text('ctrl+left click to open link in a new tab'),
+                }).html('ctrl+left click to open link in a new tab.'),
             };
         },
         'cacheDOM': function (callingPanel) {
@@ -2978,11 +2894,9 @@
             }
         },
         'nextgenTestLinks': function () {
-            var $cardDeck;
             var $currentCard;
             var $sections = jQuery('main').find('section');
             var a = 0;
-            var cardClass;
             var len = $sections.length;
 
             this.testHeaderFooter();
@@ -2991,16 +2905,6 @@
             // ASSUMPTION THAT ALL BODY LINKS WILL BE LOCATED INSIDE CARDS
             for (a; a < len; a += 1) {
                 $currentCard = jQuery($sections[a]);
-                $cardDeck = null;
-                cardClass = $currentCard.attr('class') ? $currentCard.attr('class') : ''; // if currentCard has a class save it, if no class make variable equal ''
-                $cardDeck = $currentCard.find('div.deck');
-
-                // detect if the section element is a parent container
-                // check if the section class contains 'branchy'
-                if (shared.isBranchy(cardClass) ||
-                    shared.isContainer($cardDeck)) {
-                    continue;
-                }
 
                 // detect if the section element is a container
                 // check if the div.deck contains content
@@ -4611,18 +4515,16 @@
             $toolPanel.find('.myEDOBut').wrapInner('<span></span>');
         },
         'jQueryUIedits': function () {
-            qaToolbox.config.$legendContainer.draggable();
-
-            this.checkHideChangeLog();
+            //            this.checkHideChangeLog();
             // should only show the changelog when the user first uses program
             // should also show when the user updates.
             if (!shared.getValue('hideChangeLog')) {
                 this.showChangeLog();
             }
         },
-        'checkHideChangeLog': function () {
-            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
-        },
+        //        'checkHideChangeLog': function () {
+        //            var test = 'hide change log? ' + shared.getValue('hideChangeLog');
+        //        },
         'showChangeLog': function () {
             qaToolbox.config.$changeLogDisplay.dialog({
                 'width': 1000,
