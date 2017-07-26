@@ -247,11 +247,11 @@
                     'href': 'https://fonts.googleapis.com/css?family=Montserrat',
                     'rel': 'stylesheet',
                 }),
-                '$jQueryUIjs': jQuery('<script></script>').attr({
-                    id: 'jqueriUIjs',
-                    type: 'text/javascript',
-                    src: 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js',
-                }),
+//                '$jQueryUIjs': jQuery('<script></script>').attr({
+//                    id: 'jqueriUIjs',
+//                    type: 'text/javascript',
+//                    src: 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js',
+//                }),
                 '$fontAw': jQuery('<link>').attr({
                     'id': 'fontAwe',
                     'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/newMetaTag/resources/font-awesome-4.7.0/css/font-awesome.css',
@@ -274,11 +274,11 @@
                     'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
                     'rel': 'stylesheet',
                 }),
-                '$typoJs': jQuery('<script></script>').attr({
-                    id: 'typoJs',
-                    type: 'text/javascript',
-                    src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
-                }),
+//                '$typoJs': jQuery('<script></script>').attr({
+//                    id: 'typoJs',
+//                    type: 'text/javascript',
+//                    src: 'https://rawgit.com/cirept/Typo.js/master/typo/typo.js',
+//                }),
             };
         },
         'cacheDOM': function () {
@@ -300,9 +300,9 @@
             this.head
                 .append(qaToolbox.config.$toolboxStyles)
                 .append(qaToolbox.config.$myFont)
-                .append(qaToolbox.config.$jQueryUIjs)
+//                .append(qaToolbox.config.$jQueryUIjs)
                 .append(qaToolbox.config.$jQueryUIcss)
-                .append(qaToolbox.config.$typoJs)
+//                .append(qaToolbox.config.$typoJs)
                 .append(qaToolbox.config.$toolStyles)
                 .append(qaToolbox.config.$fontAw)
                 .append(qaToolbox.config.$animate);
