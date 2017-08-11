@@ -1,4 +1,4 @@
-/* global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo */
+/*global jQuery, unsafeWindow, GM_getValue, GM_setValue, GM_setClipboard, GM_openInTab, GM_info, GM_listValues, window, document, NodeFilter, Typo*/
 
 (function () {
     'use strict';
@@ -257,7 +257,7 @@
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
                     //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
-                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line camelcase
                     'rel': 'stylesheet',
                     'type': 'text/css',
                 }),
@@ -1156,6 +1156,8 @@
             var isQLPlink;
             var dataCell;
             var $closestLi;
+            var height;
+            var width;
 
             // loop through all links on page
             for (a; a < length; a += 1) {
@@ -1207,8 +1209,8 @@
                 if (isQLPlink) {
                     // Only apply the div overlay if the image contained inside the QLP card has a width and a height
                     // if the width and height is 0 that means that there is no image
-                    var height = jQuery($image).height();
-                    var width = jQuery($image).width();
+                    height = jQuery($image).height();
+                    width = jQuery($image).width();
 
                     if (height !== 0 && width !== 0) {
                         this.addDivOverlay($currentLink, $image, isQLPlink);
@@ -1766,6 +1768,7 @@
             });
         },
     };
+
     // ********************************************************************************
     // **************************************** Test WebPage ****************************************
     // ********************************************************************************
@@ -2115,7 +2118,7 @@
             showNavigation.config.$activateButt
                 .on('click', this.toggleFeatures.bind(this))
                 .on('click', this.toggleDisable)
-                .on('click', this.bindClicks.bind(this)) //;
+                .on('click', this.bindClicks.bind(this))
                 .on('click', this.bindLegendElements); // test function
             showNavigation.config.$offButt
                 .on('click', this.toggleFeatures.bind(this))
@@ -3230,7 +3233,6 @@
                 checkLinks.config.$message
                     .text('checking links')
                     .append(checkLinks.config.$counter)
-                    //checkLinks.config.$message
                     .append(checkLinks.config.$iconContainer)
                     .append(checkLinks.config.$thinking);
                 checkLinks.config.$container
@@ -3644,7 +3646,7 @@
             urlModifiers.config.$autoApplyContainer
                 .append(urlModifiers.config.$autoApplyTitle)
                 .append(urlModifiers.config.$autoApplyIcon);
-            //urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyIcon);
+            // urlModifiers.config.$autoApplyContainer.append(urlModifiers.config.$autoApplyIcon);
             urlModifiers.config.$autoApplyIcon
                 .append(urlModifiers.config.$FAtoggle);
             urlModifiers.config.$urlModPanel
@@ -3654,7 +3656,7 @@
             urlModifiers.config.$urlModContainer
                 .append(urlModifiers.config.$urlModTitle)
                 .append(urlModifiers.config.$urlModPanel);
-            //urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModPanel);
+            // urlModifiers.config.$urlModContainer.append(urlModifiers.config.$urlModPanel);
         },
         'cacheDOM': function () {
             // DOM elements
@@ -4207,13 +4209,13 @@
             // if 'hidePreviewToolbar is toggled ON'
             if (hidePreviewToolbar) {
                 this.$toolboxStyles
-                    .append(' #previewToolBarFrame { display: none; }') //;
-                    //this.$toolboxStyles
+                    .append(' #previewToolBarFrame { display: none; }') // ;
+                    // this.$toolboxStyles
                     .append(' .preview-wrapper { display: none; }');
             } else {
                 this.$toolboxStyles
-                    .append(' #previewToolBarFrame { display: block; }') //;
-                    //this.$toolboxStyles
+                    .append(' #previewToolBarFrame { display: block; }') // ;
+                    // this.$toolboxStyles
                     .append(' .preview-wrapper { display: block; }');
             }
         },
@@ -4264,7 +4266,7 @@
                 // toolbox version
                 '$version': jQuery('<div>').attr({
                     'id': 'version',
-                }).text('version: ' + GM_info.script.version), // eslint-disable-line new-cap
+                }).text('version: ' + GM_info.script.version), // eslint-disable-line camelcase
                 '$changeLog': jQuery('<div>').attr({
                     'id': 'changeLog',
                 }),
@@ -4526,10 +4528,10 @@
             qaToolbox.config.$changeLogDisplay.dialog({
                 'width': 1000,
                 'title': 'Change Log',
-                buttons: [{
-                    text: 'Close',
-                    icon: 'ui-icon-heart',
-                    click: function () {
+                'buttons': [{
+                    'text': 'Close',
+                    'icon': 'ui-icon-heart',
+                    'click': function () {
                         shared.saveValue('hideChangeLog', true);
                         jQuery(this).dialog('close');
                     },
