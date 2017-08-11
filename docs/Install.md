@@ -108,7 +108,7 @@ Link to Latest Toolbar Code:<br>
 
 <br>
 
-### 2. Click the down arrow next to the Greasemoney icon in your browser
+### 2. Click the down arrow next to the Greasemonkey icon in your browser
 
 ![Click Addon Icon](images/firefox-greasemonkey.png)
 
@@ -122,7 +122,7 @@ This will open a new tab with the extension dashboard displayed ***(seen in step
 <br>
 
 ### 4. A new window will pop up, click the 'Use Script From Clipboard' button<br>
-This will qucikly create a new user script from what you copied in step 1.
+This will quickly create a new user script from what you copied in step 1.
 
 ![Click New UserScript Icon](images/clickUseScriptFromClipboard-firefox.png)
 
