@@ -3,11 +3,11 @@
 
 <br>
 
-## Tampermonkey Install Instructions
+## Browser Extension Install Instructions
 
 <br>
 
-Tampermonkey is a browser add-on that is used to run the toolbar on the webpage, please install the add-on
+Tampermonkey/Greasemonkey is a browser add-on that is used to run the toolbar web app, please install the add-on.
 
 <br>
 
@@ -89,12 +89,6 @@ The icon is located next to "Install userscripts" tab.
 
 <br>
 
-#### TIP:<br>
-> If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
-Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
-
-<br>
-
 ---
 
 <br>
@@ -103,54 +97,50 @@ Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
 
 <br>
 
-### 1. Open the link below in a new tab.  Copy all of the code.
+### 1. Open the link below in a new tab and copy all of the code.
 
 Link to Latest Toolbar Code:<br>
+*open this link in a new tab*
 [Latest Code](https://raw.githubusercontent.com/cirept/QA_Toolbox/master/assets/js/meta.js)<br>
-*open in a new tab*
+
+
+![Select All and Copy](images/selectAllCopy.jpg)
 
 <br>
 
 ### 2. Click the down arrow next to the Greasemoney icon in your browser
 
-![Click Addon Icon](images/clickIcon.png)
+![Click Addon Icon](images/firefox-greasemonkey.png)
 
 <br>
 
 ### 3. Click on 'New User Script' menu item<br>
 This will open a new tab with the extension dashboard displayed ***(seen in step 3)***
 
-![Click Dashboard](images/clickDashboard.png)
+![Click Dashboard](images/selectNewUserScript-firefox.png)
 
 <br>
 
 ### 4. A new window will pop up, click the 'Use Script From Clipboard' button<br>
-This will qucikyl create a new user script from what you copied in step 1.
+This will qucikly create a new user script from what you copied in step 1.
 
-![Click New UserScript Icon](images/clickNewScript.png)
+![Click New UserScript Icon](images/clickUseScriptFromClipboard-firefox.png)
 
 <br>
 
 ### 5. A new window will pop up, Choose 'Save' to save the userscript.
 The script comes ready for use.  No changes are needed.
 
-![Paste JS Code](images/pasteCode.png)
+![Save Script](images/saveScript-firefox.png)
 
 <br>
 
-### 6. Close out the new window.
-
-![Click Floppy Disk](images/clickSave.png)
+### 6. Close out the window.
 
 <br>
 
-**7. Done.  The toolbar will show up on any Proof/Live CDK site** :thumbsup:
-
-<br>
-
-#### TIP:<br>
-> If using the TETRA toolbar, you will need to turn it off as most of the features are not compatible with the Next Gen platform.
-Features from the TETRA toolbar will rewritten for the NEXTGEN platform slowly.
+### 7. Done.
+**The toolbar will show up on any Proof/Live CDK site** :thumbsup:
 
 <br>
 
