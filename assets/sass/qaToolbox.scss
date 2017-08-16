@@ -1,0 +1,574 @@
+// variables
+$dark-font-color: black;
+$light-font-color: white;
+$change-log-subheadings: white;
+$base-font-size: 15px;
+$saturate-amount: 20%;
+$darken-amount: 10%;
+$font-stack: 'Montserrat',
+sans-serif;
+$tetra-toolbox-color: #76b852;
+$nextgen-toolbox-color: #02AAB0;
+$tetra-toolbox-gradient-style: #76b852,
+to left,
+#8DC26F;
+$nextgen-toolbox-gradient-style: #02AAB0,
+to left,
+#00CDAC;
+$button-hover-color: #243B55;
+$fade-out-value: .25;
+
+// ---------------- mixins
+@mixin tetra($color1) {
+    @include linear-gradient($color1);
+}
+
+/// @param {color} $color1 - will serve as the base color of the gradient
+/// @param {string} $direction - the direction in which the the gradient will flow
+/// @param {color} $color2 - is optional, the 2nd color that the gradient will fade to
+@mixin linear-gradient($color1, $direction: to right, $color2: darken($color1, $darken-amount)) {
+    background: $color1;
+    background: -webkit-linear-gradient($direction, $color1, $color2);
+    background: linear-gradient($direction, $color1, $color2);
+}
+
+@mixin faded-background($color){
+    background: $color;
+    background: fade-out($color, $fade-out-value);
+}
+
+@mixin box-shadow($values){
+    -moz-box-shadow: $values;
+    -webkit-box-shadow: $values;
+    box-shadow: $values;
+}
+#changeLog {
+    font-size: 13px;
+    h1 {
+        display: none;
+    }
+    h2 {
+        font-size: $base-font-size;
+        background: complement($change-log-subheadings);
+        padding: $base-font-size;
+        margin: 15px 0;
+        color: $change-log-subheadings;
+    }
+    h3 {
+        font-size: $base-font-size;
+        color: rgb(85, 107, 47);
+        padding: 10px 0 10px 15px;
+        margin: 15px 0;
+        background: complement(rgb(244, 244, 244));
+    }
+    ul {
+        padding: 0 0 0 30px;
+    }
+    li {
+        margin: 0;
+        padding: 5px 0 0 0;
+    }
+}
+
+.toolBox {
+    text-align: center;
+    position: relative;
+    border: 1px solid $dark-font-color;
+    z-index: 50000;
+    margin: 0 0 5px 0;
+}
+
+
+.tetra.toolBox {
+    @include linear-gradient($tetra-toolbox-gradient-style...);
+}
+
+
+.nextgen.toolBox {
+    @include linear-gradient($nextgen-toolbox-gradient-style...);
+}
+
+$toolbox-container-highlight-color: #b6fbff;
+.toolboxContainer {
+    bottom: 20px;
+    font-family: $font-stack;
+    font-size: 12px;
+    line-height: 20px;
+    position: fixed;
+    text-transform: lowercase;
+    width: 140px;
+    z-index: 99999999;
+    &.nextgen {
+        right: 0;
+    }
+    .highlight {
+        @include linear-gradient($toolbox-container-highlight-color);
+        color: complement($toolbox-container-highlight-color);
+    }
+}
+
+.panelTitle {
+    border-bottom: 1px solid #000000;
+    color: $light-font-color;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+.disappear {
+    display: none;
+}
+
+.appear {
+    display: block;
+}
+
+$odd-button-color: #74ebd5;
+$even-button-color: #457fca;
+$off-button-color: #ACB6E5;
+.myEDOBut {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Montserrat";
+    font-size: 12px;
+    font-weight: normal;
+    top: 15%;
+    padding: 4px 0;
+    position: relative;
+    text-transform: lowercase;
+    width: 135px;
+    span:first-child {
+        color: $light-font-color;
+    }
+    &[disabled] {
+        border: 2px outset ButtonFace;
+        background: #dddddd;
+        background-color: #dddddd;
+        cursor: not-allowed;
+    }
+    &[disabled] {
+        span:first-child {
+            color: $light-font-color;
+        }
+    }
+    &.nextgen {
+        margin: 1px 0 0 -20px;
+    }
+    &.tetra {
+        margin: 1px 0 0 10px;
+    }
+    &.offButt {
+        @include linear-gradient($off-button-color, to left);
+        border: 2px solid #000000;
+        font-weight: normal;
+        color: $light-font-color;
+        width: 90%;
+        height: 50px;
+        margin: 0;
+    }
+    &:hover {
+        @include linear-gradient($button-hover-color, to left);
+        border: 2px solid complement($button-hover-color);
+    }
+    &.evenEDObutts {
+        @include linear-gradient($even-button-color, to left, lighten($even-button-color, 20));
+    }
+    &.oddEDObutts {
+        @include linear-gradient(adjust-hue($even-button-color, 5), to left);
+    }
+}
+
+.hideToolbox {
+    position: absolute;
+    top: -20px;
+    z-index: 500000;
+    &.tetra {
+        right: -25px;
+    }
+    &.nextgen {
+        left: -25px;
+        right: initial;
+    }
+    i:first-of-type {
+        padding: 0 10px;
+    }
+}
+
+
+/* show button */
+
+.showToolbox {
+    background: rgb(168, 224, 99);
+    background: linear-gradient(to right, rgb(168, 224, 99) 0%, rgb(86, 171, 47) 100%);
+    bottom: 30px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 10px;
+    padding: 5px;
+    position: fixed;
+    z-index: 99999999;
+    &.tetra {
+        left: 0;
+    }
+    &.nextgen {
+        right: 0;
+    }
+    i:first-of-type {
+        padding: 0 10px;
+    }
+}
+
+//.showToolbox.tetra {
+//    left: 0;
+//}
+//
+//.showToolbox.nextgen {
+//    right: 0;
+//}
+//
+//.showToolbox>i {
+//    padding: 0 10px;
+//}
+
+/* legend styles */
+
+.legendContainer {
+    font-family: "Montserrat";
+    position: fixed;
+    bottom: 20px;
+    width: 260px;
+    z-index: 99999999;
+    &.tetra {
+        right: 115px;
+        font-size: 11px;
+    }
+    &.nextgen {
+        left: 115px;
+    }
+    .legendTitle {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .legendList {
+        list-style-type: none;
+        margin: 10px 0;
+        padding: 0;
+        li {
+            padding: 5px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    }
+}
+
+.tbLegend {
+    background: white;
+    border: 1px solid black;
+    display: none;
+    text-align: center;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.hint {
+    font-style: italic;
+    line-height: 10px;
+    margin: 10px 0 0 0;
+}
+
+/*
+----------------------------------------
+Page Information Styles
+----------------------------------------
+*/
+
+.hCount {
+    display: block;
+}
+
+.hTags {
+    cursor: pointer;
+    background: white;
+    border-top: 1px solid #000000;
+}
+
+.count {
+    font-weight: bold;
+}
+
+$zero-hTag-total-highlight: #F2C94C;
+.zeroTotal {
+    @include linear-gradient($zero-hTag-total-highlight, to right, lighten($zero-hTag-total-highlight, 20));
+}
+
+.hTagDisplay {
+    padding: 10px;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    background: rgb(180, 180, 180);
+}
+
+.hTagDisplayContainer {
+    @include faded-background(black);
+    color: rgb(0, 0, 0);
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+}
+
+.tbInfo {
+    background: #ECE9E6;
+    background: linear-gradient(to right, #ECE9E6, #FFFFFF);
+    color: #000000;
+    clear: both;
+    cursor: pointer;
+    line-height: 15px;
+    padding: 3px 0;
+    text-transform: none;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    font-size: 10px;
+    word-wrap: break-word;
+}
+
+.tbLabel {
+    font-weight: bold;
+    font-size: inherit;
+}
+
+/*
+----------------------------------------
+Image checker
+----------------------------------------
+*/
+
+.imgOverlay {
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+    &.myNextGen {
+    z-index: 5;
+    height: 100%;
+    width: 100%;
+}
+}
+
+//.imgOverlay.myNextGen {
+//    z-index: 5;
+//    height: 100%;
+//    width: 100%;
+//}
+
+
+/* allow proper displaying of color overlay on images */
+
+.overlaid {
+    position: relative;
+}
+
+$has-alt-text-background: rgb(146, 232, 66);
+.hasAlt,
+body .card .content .hasAlt {
+    @include faded-background($has-alt-text-background);
+}
+
+$has-no-alt-background: rgb(255, 124, 216);
+.noAlt,
+body .card .content .noAlt {
+    @include faded-background($has-no-alt-background);
+}
+
+.emptyAlt,
+body .card .content .emptyAlt {
+    @include faded-background($has-no-alt-background);
+}
+
+/*
+----------------------------------------
+lnk checker styles
+----------------------------------------
+*/
+
+
+/* covers all text links and image links */
+
+.unsupportedPageLink,
+footer .card .content .text .link .siteLink.unsupportedPageLink,
+body .card .content .text .copy .siteLink.unsupportedPageLink,
+body .card .content .text .link .siteLink.unsupportedPageLink,
+body .card .content .media .imgOverlay.unsupportedPageLink {
+    @include box-shadow(inset 0 0 0 903px rgba(13, 149, 232, .80));
+    //-moz-box-shadow: inset 0 0 0 903px rgba(13, 149, 232, .80);
+    //-webkit-box-shadow: inset 0 0 0 903px rgba(13, 149, 232, .80);
+    //box-shadow: inset 0 0 0 903px rgba(13, 149, 232, .80);
+    border: none;
+    color: white;
+}
+
+$no-title-background: rgb(255, 124, 216);
+.noTitle,
+footer .card .content .text .link .siteLink.noTitle,
+body .card .content .text .copy .siteLink.noTitle,
+body .card .content .text .link .siteLink.noTitle,
+body .card .content .media .imgOverlay.noTitle {
+    @include faded-background($no-title-background);
+    //background: rgb(255, 124, 216);
+    //background: rgba(255, 124, 216, .75) !important;
+    border: none;
+}
+
+$has-title-background: rgb(146, 232, 66);
+.hasTitle,
+footer .card .content .text .link .siteLink.hasTitle,
+body .card .content .text .copy .siteLink.hasTitle,
+body .card .content .text .link .siteLink.hasTitle,
+body .card .content .media .imgOverlay.hasTitle {
+    @include faded-background($has-title-background);
+    //background: rgb(146, 232, 66);
+    //background: rgba(146, 232, 66, .75) !important;
+    border: none;
+}
+
+.opensWindow,
+footer .card .content .text .link .siteLink.opensWindow,
+body .card .content .text .copy .siteLink.opensWindow,
+body .card .content .text .link .siteLink.opensWindow,
+body .card .content .media .imgOverlay.opensWindow {
+    background: rgb(255, 165, 0);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 255, 255, 0) 26%, rgba(146, 232, 66, 0) 100%) !important;
+    border: none;
+}
+
+.hasTitle.opensWindow,
+footer .card .content .text .link .siteLink.hasTitle.opensWindow,
+body .card .content .text .copy .siteLink.hasTitle.opensWindow,
+body .card .content .text .link .siteLink.hasTitle.opensWindow,
+body .card .content .media .imgOverlay.hasTitle.opensWindow {
+    background: rgb(146, 232, 66);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(146, 232, 66, 0.75) 26%, rgba(146, 232, 66, 0.75) 99%, rgba(146, 232, 66, 0.75) 100%) !important;
+    border: none;
+}
+
+.noTitle.opensWindow,
+footer .card .content .text .link .siteLink.noTitle.opensWindow,
+body .card .content .text .copy .siteLink.noTitle.opensWindow,
+body .card .content .text .link .siteLink.noTitle.opensWindow,
+body .card .content .media .imgOverlay.noTitle.opensWindow {
+    background: rgb(255, 124, 216);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important;
+    border: none;
+}
+
+.emptyTitle.opensWindow,
+footer .card .content .text .link .siteLink.emptyTitle.opensWindow,
+body .card .content .text .copy .siteLink.emptyTitle.opensWindow,
+body .card .content .text .link .siteLink.emptyTitle.opensWindow,
+body .card .content .media .imgOverlay.emptyTitle.opensWindow {
+    background: rgb(255, 124, 216);
+    background: linear-gradient(to right, rgba(255, 165, 0, 0.75) 0%, rgba(255, 165, 0, 0.75) 25%, rgba(255, 124, 216, 0.75) 26%, rgba(255, 124, 216, 0.75) 100%) !important;
+    border: none;
+}
+
+.brokenURL,
+footer .card .content .text .link .siteLink.brokenURL,
+body .card .content .text .copy .siteLink.brokenURL,
+body .card .content .text .link .siteLink.brokenURL,
+body .card .content .media .imgOverlay.brokenURL {
+    color: white;
+    -moz-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    -webkit-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    border: none;
+}
+
+.urlIssue,
+footer .card .content .text .link .siteLink.urlIssue,
+body .card .content .text .copy .siteLink.urlIssue,
+body .card .content .text .link .siteLink.urlIssue,
+body .card .content .media .imgOverlay.urlIssue {
+    color: white;
+    -moz-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    -webkit-box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    box-shadow: inset 0 0 0 903px rgba(255, 55, 60, .90);
+    border: none;
+}
+
+.absoluteURL,
+footer .card .content .text .link .siteLink.absoluteURL,
+body .card .content .text .copy .siteLink.absoluteURL,
+body .card .content .text .link .siteLink.absoluteURL,
+body .card .content .media .imgOverlay.absoluteURL {
+    -moz-box-shadow: inset 0 0 0 3px purple;
+    -webkit-box-shadow: inset 0 0 0 3px purple;
+    box-shadow: inset 0 0 0 3px purple;
+    border: none;
+}
+
+.buttonFlag,
+footer .card .content .text .link .siteLink.buttonFlag,
+body .card .content .text .link .siteLink.buttonFlag,
+body .card .content .text .copy .buttonFlag {
+    background: #4568DC !important;
+    background: -webkit-linear-gradient(to right, #B06AB3, #4568DC) !important;
+    background: linear-gradient(to right, #B06AB3, #4568DC) !important;
+    color: #ffffff;
+    border: none;
+}
+
+.linkChecked,
+footer .card .content .text .link .siteLink.linkChecked,
+body .card .content .text .copy .siteLink.linkChecked,
+body .card .content .text .copy .siteLink.linkChecked.hasTitle,
+body .card .content .text .copy .siteLink.linkChecked.noTitle,
+body .card .content .text .link .siteLink.linkChecked,
+body .card .content .text .link .siteLink.linkChecked.hasTitle,
+body .card .content .text .link .siteLink.linkChecked.noTitle,
+body .card .content .media .imgOverlay.linkChecked,
+body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.linkChecked,
+body header .menu>nav>ul li.showNav.customAdd:hover ul.showNav.nextgenShowNav>li.showNav.customAdd>.linkChecked {
+    background: rgb(160, 255, 206);
+    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%) !important;
+    border: none;
+    color: #000000;
+    /*        background: rgb(249, 255, 209);*/
+    /*    background: linear-gradient(to right, rgba(249, 255, 209, 0.75) 0%, rgba(160, 255, 206, 0.75) 100%);*/
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    /*    color: #999999;*/
+}
+
+/**
+* jQuery UI styles
+*/
+
+.ui-dialog-titlebar {
+    .ui-dialog-titlebar-close {
+        display: none;
+    }
+}
+
+.ui-widget.ui-widget-content {
+    background: rgb(169, 169, 169);
+}
+
+.ui-dialog-buttonset .ui-button {
+    color: $dark-font-color !important;
+}
+
+.ui-draggable {
+    position: fixed !important;
+}
