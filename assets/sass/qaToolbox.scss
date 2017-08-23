@@ -866,9 +866,11 @@ $show-widget-color: rgb(80, 201, 195);
 
 /*
 ----------------------------------------
-404 link checker  --- TODO
+404 link checker
 ----------------------------------------
 */
+
+$error-highlight: rgb(240, 0, 0);
 
 .error,
 body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.error,
@@ -877,14 +879,13 @@ body .card .content .text .copy .siteLink.error,
 body .card .content .text .link .siteLink.error,
 body .card .content .media .imgOverlay.error,
 body .page header #pmenu .error {
-    background: rgb(240, 0, 0);
-    background: linear-gradient(to left, rgba(240, 0, 0, .75), rgba(220, 40, 30, .75));
+    @include linear-gradient(to left, $error-highlight, $error-highlight);
+    @include box-shadow(none);
     border: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
     color: #ffffff;
 }
+
+$error-shadow-highlight: inset 0 0 0 3px rgb(255, 55, 60);
 
 .attention,
 body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.attention,
@@ -894,10 +895,10 @@ body .card .content .text .link .siteLink.attention,
 body .card .content .media .imgOverlay.attention,
 body .page header #pmenu .attention {
     border: none;
-    -moz-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
-    -webkit-box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
-    box-shadow: inset 0 0 0 3px rgb(255, 55, 60);
+    @include box-shadow($error-shadow-highlight);
 }
+
+$jump-link-highlight: #FFAFBD;
 
 .jumpLink,
 body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.jumpLink,
@@ -906,14 +907,13 @@ body .card .content .text .copy .siteLink.jumpLink,
 body .card .content .text .link .siteLink.jumpLink,
 body .card .content .media .imgOverlay.jumpLink,
 body .page header #pmenu .jumpLink {
-    background: #FFAFBD;
-    background: linear-gradient(to left, #FFAFBD, #ffc3a0);
+    @include linear-gradient(to left, $jump-link-highlight);
     border: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    @include box-shadow(none);
     color: #000000;
 }
+
+$mobile-phone-link-highlight: #005588;
 
 .mobilePhoneLink,
 body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.mobilePhoneLink,
@@ -923,13 +923,13 @@ body .card .content .text .copy .siteLink.mobilePhoneLink,
 body .card .content .text .link .siteLink.mobilePhoneLink,
 body .card .content .media .imgOverlay.mobilePhoneLink,
 body .page header #pmenu .mobilePhoneLink {
-    background: #005588;
+    background: $mobile-phone-link-highlight;
     border: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    @include box-shadow(none);
     color: #ffffff;
 }
+
+$success-link-highlight: rgb(86, 171, 47);
 
 .success,
 body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.success,
@@ -938,14 +938,13 @@ body .card .content .text .copy .siteLink.success,
 body .card .content .text .link .siteLink.success,
 body .card .content .media .imgOverlay.success,
 body .page header #pmenu .success {
-    background: rgb(86, 171, 47);
-    background: linear-gradient(to right, rgba(86, 171, 47, .75), rgba(168, 224, 99, .75));
+    @include linear-gradient(to right, $success-link-highlight);
     border: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    @include box-shadow(none);
     color: #000000;
 }
+
+$other-domain-link-highlight: rgb(0, 201, 255);
 
 .otherDomain,
 body header .menu>nav>ul ul.showNav.nextgenShowNav>li.showNav.customAdd>.otherDomain,
@@ -954,12 +953,9 @@ body .card .content .text .copy .siteLink.otherDomain,
 body .card .content .text .link .siteLink.otherDomain,
 body .card .content .media .imgOverlay.otherDomain,
 body .page header #pmenu .otherDomain {
-    background: #92FE9D;
-    background: linear-gradient(to left, rgba(0, 201, 255, .75), rgba(146, 254, 157, .75));
+    @include linear-gradient(to left, $other-domain-link-highlight);
     border: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    @include box-shadow(none);
     color: #000000;
 }
 
@@ -971,6 +967,54 @@ body .page header #pmenu .otherDomain {
 .checkContainer {
     text-align: center;
     background: white;
+}
+
+
+/*
+----------------------------------------
+toggle tools styles -- todo
+----------------------------------------
+*/
+
+.toggleTool {
+    background: rgb(236, 233, 230);
+    background: linear-gradient(to right, rgb(236, 233, 230), rgb(255, 255, 255));
+    border-top: 1px solid #999999;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    line-height: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.autoApply {
+    font-weight: bold;
+}
+
+.autoApplyInput {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(rgb(255, 255, 255) 0%, rgb(171, 186, 171) 35%, rgb(171, 186, 171) 70%, rgb(255, 255, 255) 100%);
+}
+
+.refreshPageContainer {
+    position: absolute;
+    right: 35px;
+    top: -55px;
+    z-index: 500000;
+}
+
+.refreshButt {
+    background: rgb(251, 211, 233);
+    background: linear-gradient(to left, rgb(251, 211, 233), rgb(187, 55, 125));
+    width: initial;
+    padding: 5px 20px 5px 15px;
+}
+
+.refreshButt:hover {
+    background: #f4c4f3;
+    background: linear-gradient(to left, #f4c4f3, #fc67fa);
 }
 
 /**

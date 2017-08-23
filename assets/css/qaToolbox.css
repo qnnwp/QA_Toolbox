@@ -559,7 +559,7 @@ widget outline
 
 /*
 ----------------------------------------
-404 link checker  --- TODO
+404 link checker
 ----------------------------------------
 */
 .error,
@@ -570,11 +570,12 @@ body .card .content .text .link .siteLink.error,
 body .card .content .media .imgOverlay.error,
 body .page header #pmenu .error {
   background: #f00000;
-  background: linear-gradient(to left, rgba(240, 0, 0, 0.75), rgba(220, 40, 30, 0.75));
-  border: none;
+  background: -webkit-linear-gradient(to left, #f00000, #f00000);
+  background: linear-gradient(to left, #f00000, #f00000);
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  border: none;
   color: #ffffff; }
 
 .attention,
@@ -597,7 +598,8 @@ body .card .content .text .link .siteLink.jumpLink,
 body .card .content .media .imgOverlay.jumpLink,
 body .page header #pmenu .jumpLink {
   background: #FFAFBD;
-  background: linear-gradient(to left, #FFAFBD, #ffc3a0);
+  background: -webkit-linear-gradient(to left, #FFAFBD, #ff7c93);
+  background: linear-gradient(to left, #FFAFBD, #ff7c93);
   border: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
@@ -627,7 +629,8 @@ body .card .content .text .link .siteLink.success,
 body .card .content .media .imgOverlay.success,
 body .page header #pmenu .success {
   background: #56ab2f;
-  background: linear-gradient(to right, rgba(86, 171, 47, 0.75), rgba(168, 224, 99, 0.75));
+  background: -webkit-linear-gradient(to right, #56ab2f, #428324);
+  background: linear-gradient(to right, #56ab2f, #428324);
   border: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
@@ -641,8 +644,9 @@ body .card .content .text .copy .siteLink.otherDomain,
 body .card .content .text .link .siteLink.otherDomain,
 body .card .content .media .imgOverlay.otherDomain,
 body .page header #pmenu .otherDomain {
-  background: #92FE9D;
-  background: linear-gradient(to left, rgba(0, 201, 255, 0.75), rgba(146, 254, 157, 0.75));
+  background: #00c9ff;
+  background: -webkit-linear-gradient(to left, #00c9ff, #00a1cc);
+  background: linear-gradient(to left, #00c9ff, #00a1cc);
   border: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
@@ -656,6 +660,46 @@ body .page header #pmenu .otherDomain {
 .checkContainer {
   text-align: center;
   background: white; }
+
+/*
+----------------------------------------
+toggle tools styles -- todo
+----------------------------------------
+*/
+.toggleTool {
+  background: #ece9e6;
+  background: linear-gradient(to right, #ece9e6, white);
+  border-top: 1px solid #999999;
+  color: black;
+  cursor: pointer;
+  line-height: 15px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.autoApply {
+  font-weight: bold; }
+
+.autoApplyInput {
+  background: white;
+  background: linear-gradient(white 0%, #abbaab 35%, #abbaab 70%, white 100%); }
+
+.refreshPageContainer {
+  position: absolute;
+  right: 35px;
+  top: -55px;
+  z-index: 500000; }
+
+.refreshButt {
+  background: #fbd3e9;
+  background: linear-gradient(to left, #fbd3e9, #bb377d);
+  width: initial;
+  padding: 5px 20px 5px 15px; }
+
+.refreshButt:hover {
+  background: #f4c4f3;
+  background: linear-gradient(to left, #f4c4f3, #fc67fa); }
 
 /**
 * jQuery UI styles
