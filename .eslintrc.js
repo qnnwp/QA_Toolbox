@@ -19,7 +19,8 @@ module.exports = {
     'env': {
         'browser': true,
         'greasemonkey': true,
-        'jquery': true
+        'jquery': true,
+        'es6': true,
     },
     'rules': {
         // The rules below are listed in the order they appear on the eslint
@@ -313,7 +314,9 @@ module.exports = {
             'words': true,
             'nonwords': false,
         }],
-        'spaced-comment': [2, 'always'],
+        'spaced-comment': [2, 'always', {
+            'markers': ['global'],
+        }],
         'unicode-bom': 0,
         'wrap-regex': 0,
 
