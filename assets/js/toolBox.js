@@ -830,7 +830,7 @@
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
                     'scrollTop': jQuery(document).height(),
-                }, 3000).promise().done(function () {
+                }, 4000).delay(1750).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     imageChecker.highlightImages();
                     imageChecker.showLegend();
@@ -1047,7 +1047,7 @@
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
                     'scrollTop': jQuery(document).height(),
-                }, 3000).promise().done(function () {
+                }, 4000).delay(1750).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     shared.flagButtons();
                     linkChecker.checkLinks();
@@ -2794,7 +2794,7 @@
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
                     'scrollTop': jQuery(document).height(),
-                }, 3000).promise().done(function () {
+                }, 4000).delay(1750).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     shared.flagButtons();
                     checkLinks.toggleDisable();
