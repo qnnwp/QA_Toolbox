@@ -830,7 +830,7 @@
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
                     'scrollTop': jQuery(document).height(),
-                }, 2000).promise().done(function () {
+                }, 4000).delay(1750).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     imageChecker.highlightImages();
                     imageChecker.showLegend();
@@ -1047,7 +1047,7 @@
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
                     'scrollTop': jQuery(document).height(),
-                }, 2000).promise().done(function () {
+                }, 4000).delay(1750).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     shared.flagButtons();
                     linkChecker.checkLinks();
@@ -1603,6 +1603,9 @@
         // ----------------------------------------
         // tier 1 functions
         // ----------------------------------------
+        /**
+         * Create all the module DOM elements
+         */
         'createElements': function () {
             spellCheck.config = {
                 '$activateButt': jQuery('<button>').attr({
@@ -1629,6 +1632,9 @@
                 },
             };
         },
+        /**
+         * Build the legend for the tool
+         */
         'buildLegend': function () {
             spellCheck.config.$legend
                 // attach legend title
@@ -1645,23 +1651,35 @@
                 spellCheck.config.$legendContent,
                 spellCheck.config.$legendList);
         },
+        /**
+         * Grab all the information/element references from the DOM
+         * that the tool needs to run.
+         */
         'cacheDOM': function (callingPanel) {
             this.$toolsPanel = jQuery(callingPanel);
             // DOM elements
             this.$legendContainer = jQuery('.legendContainer');
         },
+        /**
+         * Add the tool to the QA toolbox
+         * Will add the tool to the MAIN TOOLS panel
+         */
         'addTool': function () {
             this.$toolsPanel
                 .append(spellCheck.config.$activateButt);
             this.$legendContainer
                 .append(spellCheck.config.$legend);
         },
+        /**
+         * binds all the Activate and Off
+         */
         'bindEvents': function () {
             // activate button
             spellCheck.config.$activateButt
                 .on('click', this.spellCheckPage.bind(this))
                 .on('click', this.showLegend)
                 .on('click', this.toggleDisable);
+
             // off button
             spellCheck.config.$offButt
                 .on('click', this.removeHighlights.bind(this))
@@ -1671,54 +1689,51 @@
         // ----------------------------------------
         // tier 2 functions
         // ----------------------------------------
+        /**
+         * traverses the DOM and grabs all visible text
+         * @return {(object:array)} All the visible text on the page
+         */
         'treeWalk': function () {
-            var treeWalker = document.createTreeWalker(
-                document.body,
-                NodeFilter.SHOW_TEXT, {
-                    'acceptNode': function (node) {
-                        // Logic to determine whether to accept, reject or skip node
-                        // In this case, only accept nodes that have content
-                        // other than whitespace
-                        if (!(/^\s*$/).test(node.data)) {
-                            return NodeFilter.FILTER_ACCEPT;
-                        }
-                    },
-                },
-                false);
+            var treeWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
             var wordArray = [];
 
-            // create an array of all the text on the page.
-            // create node list
             while (treeWalker.nextNode()) {
-                wordArray.push(treeWalker.currentNode);
+                if (treeWalker.currentNode.nodeType === 3) {
+                    wordArray.push(treeWalker.currentNode);
+                }
             }
-
             return wordArray;
         },
+        /**
+         * Gets all text on page and tests words against custom dictionary
+         */
         'spellCheckPage': function () {
-            // ----------------------------------------
-            // spell check page test functions
-            // ----------------------------------------
-            // dictionary
             var dictionary = new Typo('en_US', false, false, {
                 'dictionaryPath': 'https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/',
             });
             var wordList = [];
             var self = this;
             var pElm;
+            var text;
+            var words;
+            var elm;
+            var unmarked;
 
+            // get all visible text on page
             wordList = this.treeWalk();
 
             wordList.forEach(function (n) {
-                var text = n.nodeValue;
-                var words = text.match(/[’'\w]+/g);
-                var elm = n.parentElement;
-                var unmarked;
+                text = n.nodeValue;
+                words = text.match(/[’'\w]+/g);
+                elm = n.parentElement;
 
-                if (!words /* || elm.matches(ignore)*/ ) {
+                // skip iteration if no words are found
+                if (!words) {
                     return;
                 }
 
+                // search each word in array for dictionary match
+                // flag word if not found in dictionary
                 words.forEach(function (word) {
                     // check if word is in the dictionary AND if it IS NOT a number
                     if (!dictionary.check(self.clean(word)) && !(/^\d+$/).test(word)) {
@@ -1737,9 +1752,16 @@
                 }
             });
         },
+        /**
+         * Toggle the tools legend
+         */
         'showLegend': function () {
             spellCheck.config.$legend.slideToggle(500);
         },
+        /**
+         * Toggle the 'activate' button from being clicked multiple time
+         * @return {bool} return the opposite of what the current state is
+         */
         'toggleDisable': function () {
             spellCheck.config.$activateButt.prop('disabled', function (index, value) {
                 return !value;
@@ -2772,7 +2794,7 @@
                 jQuery('html, body').scrollTop(0);
                 jQuery('html, body').animate({
                     'scrollTop': jQuery(document).height(),
-                }, 2000).promise().done(function () {
+                }, 4000).delay(1750).promise().done(function () {
                     jQuery('html, body').scrollTop(0);
                     shared.flagButtons();
                     checkLinks.toggleDisable();
