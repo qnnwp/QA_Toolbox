@@ -1,5 +1,20 @@
 # Change Log
 
+## v3.3.1.3 - **(8/28/2017)**
+
+### Image Alt, Link Title, and 404 Link checker tools
+* Increased scroll duration to allow adeqate time for images to fully load before running tool
+
+### Spell Checker
+* Added words to custom dictionary
+  * GMC, smartphone, fundraiser, AWD, V6, v8, QX56, moonroof, keyless, M36, M37, oversteer, understeer, Craigslist, CarMax, Creve Coeur, Ballwin, GoodYear, Michelin, Bridgestone, Pirelli, Kumho, BFGoodrich, Dunlop, infinitiusa, CARFAX, SiriusXM, JX35, reimagine, G25, G37, eyewear
+
+<br><br>
+
+---
+
+<br><br>
+
 ## v3.3.0 - **(7/11/2017)**
 
 * Did major re-work to the tool to support Next Gen support.
