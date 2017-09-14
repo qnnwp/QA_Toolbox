@@ -232,44 +232,9 @@
                 '$changeLogDisplay': jQuery('<div>').attr({
                     'id': 'changeLog',
                 }),
-                // ----------------------------------------
-                // Toolbar Resources
-                // ----------------------------------------
-                '$toolboxStyles': jQuery('<style></style>').attr({
-                    'id': 'qa_toolbox',
-                    'type': 'text/css',
-                }),
-                '$myFont': jQuery('<link>').attr({
-                    'id': 'toolFont',
-                    'href': 'https://fonts.googleapis.com/css?family=Montserrat',
-                    'rel': 'stylesheet',
-                }),
-                '$fontAw': jQuery('<link>').attr({
-                    'id': 'fontAwe',
-                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/master/resources/font-awesome-4.7.0/css/font-awesome.css',
-                    'rel': 'stylesheet',
-                }),
-                '$jQueryUIcss': jQuery('<link>').attr({
-                    'id': 'jqueryUI',
-                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/master/resources/jquery-ui-1.12.1.custom/jquery-ui.min.css',
-                    'rel': 'stylesheet',
-                }),
-                '$toolStyles': jQuery('<link>').attr({
-                    'id': 'toolStyles',
-                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
-                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line camelcase
-                    'rel': 'stylesheet',
-                    'type': 'text/css',
-                }),
-                '$animate': jQuery('<link>').attr({
-                    'id': 'animate',
-                    'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
-                    'rel': 'stylesheet',
-                }),
             };
         },
         'cacheDOM': function () {
-            this.head = jQuery('head');
             this.body = jQuery('body');
             this.phoneWrapper = jQuery('body .phone-wrapper');
         },
@@ -284,14 +249,6 @@
             qaToolbox.config.$legendContainer.draggable();
         },
         'attachTools': function () {
-            this.head
-                .append(qaToolbox.config.$toolboxStyles)
-                .append(qaToolbox.config.$myFont)
-                .append(qaToolbox.config.$jQueryUIcss)
-                .append(qaToolbox.config.$toolStyles)
-                .append(qaToolbox.config.$fontAw)
-                .append(qaToolbox.config.$animate);
-
             this.body
                 .before(qaToolbox.config.$toolboxContainer)
                 .before(qaToolbox.config.$legendContainer);
@@ -4427,6 +4384,8 @@
         'init': function () {
             this.cacheDOM();
             this.checkEnvironment();
+            this.createElements();
+            this.attachResources();
             this.toolContainer();
             this.pageInfoPanel();
             this.qaToolsPanel();
@@ -4442,11 +4401,56 @@
             this.edoButts = jQuery('.myEDOBut');
             this.contextManager = unsafeWindow.ContextManager;
             this.phoneWrapper = jQuery('body .phone-wrapper');
+            this.head = jQuery('head');
         },
         'checkEnvironment': function () {
             this.editMode();
             this.isCDKsite();
             this.isMobile();
+        },
+        'createElements': function () {
+            main.config = {
+                '$toolboxStyles': jQuery('<style></style>').attr({
+                    'id': 'qa_toolbox',
+                    'type': 'text/css',
+                }),
+                '$myFont': jQuery('<link>').attr({
+                    'id': 'toolFont',
+                    'href': 'https://fonts.googleapis.com/css?family=Montserrat',
+                    'rel': 'stylesheet',
+                }),
+                '$fontAw': jQuery('<link>').attr({
+                    'id': 'fontAwe',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/master/resources/font-awesome-4.7.0/css/font-awesome.css',
+                    'rel': 'stylesheet',
+                }),
+                '$jQueryUIcss': jQuery('<link>').attr({
+                    'id': 'jqueryUI',
+                    'href': 'https://cdn.rawgit.com/cirept/QA_Toolbox/master/resources/jquery-ui-1.12.1.custom/jquery-ui.min.css',
+                    'rel': 'stylesheet',
+                }),
+                '$toolStyles': jQuery('<link>').attr({
+                    'id': 'toolStyles',
+                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
+                    'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line camelcase
+                    'rel': 'stylesheet',
+                    'type': 'text/css',
+                }),
+                '$animate': jQuery('<link>').attr({
+                    'id': 'animate',
+                    'href': 'https://rawgit.com/cirept/animate.css/master/animate.css',
+                    'rel': 'stylesheet',
+                }),
+            };
+        },
+        'attachResources': function () {
+            this.head
+                .append(main.config.$toolboxStyles)
+                .append(main.config.$myFont)
+                .append(main.config.$jQueryUIcss)
+                .append(main.config.$toolStyles)
+                .append(main.config.$fontAw)
+                .append(main.config.$animate);
         },
         'toolContainer': function () {
             qaToolbox.init();
