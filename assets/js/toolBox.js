@@ -250,8 +250,8 @@
         },
         'attachTools': function () {
             this.body
-                .before(qaToolbox.config.$toolboxContainer)
-                .before(qaToolbox.config.$legendContainer);
+                .after(qaToolbox.config.$toolboxContainer)
+                .after(qaToolbox.config.$legendContainer);
         },
     };
 
@@ -1071,7 +1071,7 @@
             this.$allImageLinks = this.$allLinks.find('img');
             this.linksArrayLength = this.$allLinks.length;
             this.imageLinksArrayLength = this.$allImageLinks.length;
-            this.$toolboxStyles = jQuery('#qa_toolbox');
+            //            this.$toolboxStyles = jQuery('#qa_toolbox');
             this.$sections = jQuery('main').find('section');
             this.$otherLinks = jQuery('header, footer').find('a');
         },
@@ -4398,7 +4398,6 @@
         },
         'cacheDOM': function () {
             this.isNextGenPlatform = shared.nextGenCheck();
-            this.edoButts = jQuery('.myEDOBut');
             this.contextManager = unsafeWindow.ContextManager;
             this.phoneWrapper = jQuery('body .phone-wrapper');
             this.head = jQuery('head');
@@ -4431,7 +4430,6 @@
                 }),
                 '$toolStyles': jQuery('<link>').attr({
                     'id': 'toolStyles',
-                    //                    'href': 'https://rawgit.com/cirept/QA_Toolbox/master/assets/css/toolbox.css', // eslint-disable-line new-cap
                     'href': 'https://rawgit.com/cirept/QA_Toolbox/' + GM_info.script.version + '/assets/css/toolbox.css', // eslint-disable-line camelcase
                     'rel': 'stylesheet',
                     'type': 'text/css',
