@@ -1,5 +1,15 @@
 # Change Log
 
+## v3.3.1.4 - **(10/5/2017)**
+
+### Just some back end fixes.
+
+<br><br>
+
+---
+
+<br><br>
+
 ## v3.3.1.3 - **(8/28/2017)**
 
 ### Image Alt, Link Title, and 404 Link checker tools
