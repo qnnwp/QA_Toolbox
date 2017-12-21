@@ -1,8 +1,23 @@
 # Change Log
 
-## v3.3.1.4 - **(10/5/2017)**
+## v3.3.1.4 - **(12/20/2017)**
 
-### Just some back end fixes.
+### Modified spell check tool
+* Autofill tages will now register as words, if added to the custom dictionary word list.
+    * This should address issues where autofill tags are being combined with other words and not being properly flagged as spelled incorrectly.
+    * eg. **%DEALER_NAME%hello**  <==>  **will now be flagged as incorrectly spelled.**
+* Added words to dictionary
+    * doorjamb
+    * %FRANCHISES%
+    * %STREET%
+    * %CITY%
+    * %STATE%
+    * %ZIP%
+    * %PHONE%
+    * %NEW_PHONE%
+    * %USED_PHONE%
+    * %SERVICE_PHONE%
+    * %PARTS_PHONE%
 
 <br><br>
 
