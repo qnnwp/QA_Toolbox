@@ -1666,7 +1666,8 @@
          */
         'spellCheckPage': function () {
             var dictionary = new Typo('en_US', false, false, {
-                'dictionaryPath': 'https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/',
+                'dictionaryPath': 'https://raw.githubusercontent.com/cirept/Typo.js/addingAutofillTags/typo/dictionaries/',
+                //                'dictionaryPath': 'https://raw.githubusercontent.com/cirept/Typo.js/master/typo/dictionaries/',
             });
             var wordList = [];
             var self = this;
@@ -1680,8 +1681,12 @@
             wordList = this.treeWalk();
 
             wordList.forEach(function (n) {
+                // get all text on the page
                 text = n.nodeValue;
-                words = text.match(/[’'\w]+/g);
+
+                // create an array of seperated words from text string
+                words = text.match(/[%’'\w]+/g);
+
                 elm = n.parentElement;
 
                 // skip iteration if no words are found
@@ -1692,9 +1697,12 @@
                 // search each word in array for dictionary match
                 // flag word if not found in dictionary
                 words.forEach(function (word) {
-                    // check if word is in the dictionary AND if it IS NOT a number
+
+                    // is word NOT in the dictionary AND NOT a number
                     if (!dictionary.check(self.clean(word)) && !(/^\d+$/).test(word)) {
-                        unmarked = new RegExp('\\b' + word + '(?!@~~)\\b', 'g');
+                        // create regex expression to find word in string
+                        // Included (?!@~~) to skip already replaced word in string
+                        unmarked = new RegExp('\(' + word + '\)(?!@~~)', 'g');
                         text = text.replace(unmarked, '~~@$&@~~');
                     }
                 });
@@ -1730,7 +1738,7 @@
         'clean': function (word) {
             return word.replace('’', '\'')
                 .replace(/^'*(.*?)'*$/, '$1')
-                .replace('_', '');
+                .replace('%', '\%');
         },
         'replaceMarkers': function (elm) {
             if (elm) {
@@ -4576,5 +4584,6 @@
 
 })();
 
+console.log('my local files');
 // extra line
 // extra line
