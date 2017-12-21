@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name QA Toolbox 3.3.1.3
+// @name QA Toolbox 3.3.1.4
 // @namespace www.cobaltgroup.com/
-// @version 3.3.1.3
+// @version 3.3.1.4
 // @author Eric Tanaka
 // @include http:*
 // @include https:*
@@ -9,7 +9,7 @@
 // @require https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
 // @require https://cdn.rawgit.com/cirept/Typo.js/master/typo/typo.js
-// @require https://cdn.rawgit.com/cirept/QA_Toolbox/5ec004678223a93af90c0e1e23babbf5fe408869/assets/js/toolBox.js
+// @require https://cdn.rawgit.com/cirept/QA_Toolbox/3.3.1.4-spellcheck-update/assets/js/toolBox.js
 // @run-at document-end
 // @grant GM_openInTab
 // @grant GM_setClipboard
